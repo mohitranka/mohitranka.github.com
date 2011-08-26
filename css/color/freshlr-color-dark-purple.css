@@ -1,0 +1,26 @@
+a {
+    color: #180a2b;
+}
+
+.sidecon {
+    color: #180a2b;
+}
+
+.arrow-left {
+    border-right:10px solid #180a2b !important;
+    *border-right: none;
+}
+
+.page_title {
+    color: #180a2b;
+}
+
+#bottom_column { 
+    background: #180a2b;
+}
+
+#bottom_icon {
+    background: url("../../images/icons/crystal-project/256x256/actions/editcut.png") no-repeat;
+    height: 256px;
+    width: 256px;
+}

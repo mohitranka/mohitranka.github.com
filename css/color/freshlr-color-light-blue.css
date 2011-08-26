@@ -1,0 +1,26 @@
+a {
+    color: #4985b9;
+}
+
+.sidecon {
+    color: #4985b9;
+}
+
+.arrow-left {
+    border-right:10px solid #4985b9 !important;
+    *border-right: none;
+}
+
+.page_title {
+    color: #4985b9;
+}
+
+#bottom_column { 
+    background: #4985b9;
+}
+
+#bottom_icon {
+    background: url("../../images/icons/crystal-project/256x256/apps/lphoto.png") no-repeat;
+    height: 256px;
+    width: 256px;
+}

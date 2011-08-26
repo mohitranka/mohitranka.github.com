@@ -1,0 +1,26 @@
+a {
+    color: #6d0a05;
+}
+
+.sidecon {
+    color: #6d0a05;
+}
+
+.arrow-left {
+    border-right:10px solid #6d0a05 !important;
+    *border-right: none;
+}
+
+.page_title {
+    color: #6d0a05;
+}
+
+#bottom_column { 
+    background: #6d0a05;
+}
+
+#bottom_icon {
+    background: url("../../images/icons/crystal-project/256x256/apps/bug.png") no-repeat;
+    height: 256px;
+    width: 256px;
+}

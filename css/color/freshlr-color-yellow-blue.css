@@ -1,0 +1,26 @@
+a {
+    color: #206c5f;
+}
+
+.sidecon {
+    color: #206c5f;
+}
+
+.arrow-left {
+    border-right:10px solid #206c5f !important;
+    *border-right: none;
+}
+
+.page_title {
+    color: #206c5f;
+}
+
+#bottom_column { 
+    background: #206c5f;
+}
+
+#bottom_icon {
+    background: url("../../images/icons/crystal-project/256x256/apps/kaddressbook.png") no-repeat;
+    height: 256px;
+    width: 256px;
+}

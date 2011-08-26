@@ -1,0 +1,43 @@
+/*
+	jQuery Coda-Slider v2.0 - http://www.ndoherty.biz/coda-slider
+	Copyright (c) 2009 Niall Doherty
+	This plugin available for use in all personal or commercial projects under both MIT and GPL licenses.
+*/
+
+/* Most common stuff you'll need to change */
+
+.coda-slider-wrapper { padding: 0 }
+.coda-slider { background: #f7f7f7; border-left: 1px solid #eee; padding: 0; margin: 0 0 0 200px !important; *margin: 0; }
+
+/* Use this to keep the slider content contained in a box even when JavaScript is disabled */
+.coda-slider-no-js .coda-slider { height: 200px; overflow: auto !important; padding-right: 20px }
+
+/* Change the width of the entire slider (without dynamic arrows) */
+.coda-slider, .coda-slider .panel { width: 760px !important; *width: 759px; } 
+
+/* Change margin and width of the slider (with dynamic arrows) */
+.coda-slider-wrapper.arrows .coda-slider, .coda-slider-wrapper.arrows .coda-slider .panel {  }
+.coda-slider-wrapper.arrows .coda-slider { margin: 0 10px }
+
+/* Arrow styling */
+.coda-nav-left a, .coda-nav-right a { background: #000; color: #fff; padding: 5px; width: 100px }
+
+/* Tab nav */
+.coda-nav ul li a.current { }
+
+/* Panel padding */
+.coda-slider .panel-wrapper {padding: 20px 0px 0px 20px !important; *padding: 0 10px 0 10px;}
+
+/* Preloader */
+.coda-slider p.loading { padding: 20px; text-align: center }
+
+/* Tabbed nav */
+.coda-nav ul {  }
+.coda-nav ul li {  }
+.coda-nav ul li a {  }
+
+/* Miscellaneous */
+.coda-slider-wrapper { clear: both; }
+.coda-slider { float: left; overflow: hidden; position: relative }
+.coda-slider .panel { display: block; float: left }
+.coda-slider .panel-container { position: relative }

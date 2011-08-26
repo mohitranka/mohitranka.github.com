@@ -1,0 +1,6 @@
+@import url('../../fonts/Droid-Sans-fontfacekit/stylesheet.css');
+
+blockquote, p, form, fieldset, table, ol, ul, pre {
+    font-size: 0.85em;
+    line-height: 1.5em;
+}

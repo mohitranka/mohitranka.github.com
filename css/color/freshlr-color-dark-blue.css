@@ -1,0 +1,26 @@
+a {
+    color: #08538c;
+}
+
+.sidecon {
+    color: #08538c;
+}
+
+.arrow-left {
+    border-right:10px solid #08538c !important;
+    *border-right: none;
+}
+
+.page_title {
+    color: #08538c;
+}
+
+#bottom_column { 
+    background: #08538c;
+}
+
+#bottom_icon {
+    background: url("../../images/icons/crystal-project/256x256/apps/kedit.png") no-repeat;
+    height: 256px;
+    width: 256px;
+}

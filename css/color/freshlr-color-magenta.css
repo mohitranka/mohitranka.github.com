@@ -1,0 +1,26 @@
+a {
+    color: #ff0090;
+}
+
+.sidecon {
+    color: #ff0090;
+}
+
+.arrow-left {
+    border-right:10px solid #ff0090 !important;
+    *border-right: none;
+}
+
+.page_title {
+    color: #ff0090;
+}
+
+#bottom_column { 
+    background: #ff0090;
+}
+
+#bottom_icon {
+    background: url("../../images/icons/crystal-project/256x256/apps/package_graphics.png") no-repeat;
+    height: 256px;
+    width: 256px;
+}

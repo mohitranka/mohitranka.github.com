@@ -1,0 +1,227 @@
+body {
+    background: #111;
+    color: #aaa;
+    text-shadow: 1px 1px 1px #000;
+}
+
+a {
+    color: #e0e0e0;
+}
+
+a:hover {
+    color: #ffbf00;
+}
+
+h1, 
+h2, 
+h3, 
+h4, 
+h5, 
+h6 {
+    color: #ffbf00;
+}
+
+h1 a {
+    color: #f0f0f0;
+}
+
+#aside a {
+    color: #f7f7f7;
+}
+
+h1 a:hover{
+    color: #ffbf00;
+}
+
+#aside a:hover {
+    color: #ffbf00;
+}
+
+input, textarea, select, button {
+    background: #222;
+    border: solid 1px #070707;
+    color: #a0a0a0;
+}
+
+button, input[type="submit"] {
+    box-shadow: #333 0px 0px 2px;
+    -moz-box-shadow: #333 0px 0px 2px;
+    -webkit-box-shadow: #333 0px 0px 2px; 
+    color: #aaa;
+    background: #0f0f0f;
+}
+
+button:focus, 
+input[type="submit"]:focus, 
+input[type="text"]:focus, 
+input[type="password"]:focus,
+input[type="radio"]:focus, 
+input[type="checkbox"]:focus,  
+textarea:focus {
+    box-shadow: inset #ffbf00 0px 0px 5px;
+    -moz-box-shadow: inset #ffbf00 0px 0px 5px;
+    -webkit-box-shadow: inset #ffbf00 0px 0px 5px;    
+}
+
+button, input[type="submit"] {
+    background: #555;
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgb(51, 51, 51)), to(rgb(30, 30, 30)));
+}
+
+button:hover, input[type="submit"]:hover {
+    background: #111;
+}
+
+fieldset { 
+    border: 1px dashed #333;
+}
+
+input[type="text"], 
+input[type="password"],
+textarea {
+    box-shadow: inset #111 0px 0px 5px;
+    -moz-box-shadow: inset #111 0px 0px 5px;
+    -webkit-box-shadow: inset #111 0px 0px 5px;    
+}
+
+img {
+    border: 5px solid #000;
+    box-shadow: #666 0px 0px 5px;
+    -moz-box-shadow: #666 0px 0px 5px;
+    -webkit-box-shadow: #666 0px 0px 5px;
+}
+
+table {
+    border: 0;
+	border-collapse:collapse;
+	border-spacing: 0;
+	margin: 15px auto;
+}
+
+th, tr, td {
+	border: 0;
+	padding: 7px;
+}
+
+th {
+	border: 0;
+}
+
+th a {
+	font-weight: bold;
+}
+
+th:nth-child(even), th:nth-child(even) a {
+	background-color: transparent;
+	color: #eee;
+	text-shadow: 1px 1px 1px #111;
+}
+
+th:nth-child(odd), th:nth-child(odd) a {
+	background-color: transparent;
+	color: #ccc;
+	text-shadow: 1px 1px 1px #111;
+}
+
+tr {
+    border-bottom: 1px dashed #000;
+}
+
+tr:nth-child(even) {
+	background-color: transparent;
+	color: #aaa;
+	text-shadow: 1px 1px 1px #111;
+}
+
+tr:nth-child(odd) {
+	background-color: transparent;
+	color: #999;
+	text-shadow: 1px 1px 1px #111;
+}
+
+tr:nth-child(even):hover {
+	background-color: #171717;
+}
+
+tr:nth-child(odd):hover {
+	background-color: #202020;
+}
+
+tr:first-child:hover {
+    background-color: transparent;
+}
+
+.coda-slider {
+    background: #0a0a0a;
+    border-left: 0;
+    border-right: 1px solid #333;
+    border-bottom: 1px solid #070707;
+}
+
+#wrapper {
+    background: #0f0f0f;
+    border: 1px solid #333;
+    box-shadow: #000 0px 0px 5px;
+    -moz-box-shadow: #000 0px 0px 5px;
+    -webkit-box-shadow: #000 0px 0px 5px;
+    box-shadow: 0 0 7px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0 0 7px rgba(0, 0, 0, 0.5);
+    -webkit-box-shadow: 0 0 7px rgba(0, 0, 0, 0.5);
+}
+
+#header {
+    border-bottom: 1px solid #111;
+    border-left: 0;
+    background: #000 url("../../images/freshlr-bg-content-dark.jpg") repeat;
+    color: #ccc;
+    padding-bottom: 15px;
+}
+
+#tagline {
+    color: #f7f7f7;
+}
+
+#aside {
+    top: 240px;
+}
+
+.arrow-left {
+    border-right:10px solid #f7f7f7 !important;
+    *border-right: none;
+}
+
+#bottom_column { 
+    background: #111;
+    border-top: 1px solid #474747;
+    border-left: 1px solid #171717;
+    color: #aaa;
+}
+
+#bottom_column a {
+    color: #999;
+}
+
+#bottom_column a:hover {
+    color: #fff;
+}
+
+#footer p {
+    color: #fff;
+    text-shadow: #000 0px 0px 5px;
+}
+
+#footer a {
+    color: #eee;
+}
+
+#twitter-feed ul li {
+    border-bottom: 1px dashed #222;
+}
+
+.tweet-date {
+    color: #444;
+}
+
+#map {
+    border: 5px solid #000;
+}

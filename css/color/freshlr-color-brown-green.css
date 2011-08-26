@@ -1,0 +1,26 @@
+a {
+    color: #8f7a00;
+}
+
+.sidecon {
+    color: #8f7a00;
+}
+
+.arrow-left {
+    border-right:10px solid #8f7a00 !important;
+    *border-right: none;
+}
+
+.page_title {
+    color: #8f7a00;
+}
+
+#bottom_column { 
+    background: #8f7a00;
+}
+
+#bottom_icon {
+    background: url("../../images/icons/crystal-project/256x256/filesystems/trashcan_full.png") no-repeat;
+    height: 256px;
+    width: 256px;
+}

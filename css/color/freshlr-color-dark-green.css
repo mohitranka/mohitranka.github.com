@@ -1,0 +1,26 @@
+a {
+    color: #26310f;
+}
+
+.sidecon {
+    color: #26310f;
+}
+
+.arrow-left {
+    border-right:10px solid #26310f !important;
+    *border-right: none;
+}
+
+.page_title {
+    color: #26310f;
+}
+
+#bottom_column { 
+    background: #26310f;
+}
+
+#bottom_icon {
+    background: url("../../images/icons/crystal-project/256x256/actions/money.png") no-repeat;
+    height: 256px;
+    width: 256px;
+}
