@@ -69,7 +69,7 @@ ul>li>a{display:block;position:relative;}
 img{margin:5px;border:5px solid #fff;box-shadow:#999 0px 0px 5px;-moz-box-shadow:#999 0px 0px 5px;-webkit-box-shadow:#999 0px 0px 5px;float:left;margin:5px 20px 10px 0;}
 img.rightpic{float:right;margin:5px 0 10px 20px;}
 img.centerpic{clear:both;float:none;margin:10px;}
-#wrapper{background:#fff url("../images/fade-y.png") repeat-y;border:1px solid #fff;box-shadow:#444 0px 0px 7px;-moz-box-shadow:#444 0px 0px 7px;-webkit-box-shadow:#444 0px 0px 7px;box-shadow:0 0 7px rgba(0, 0, 0, 0.5);-moz-box-shadow:0 0 7px rgba(0, 0, 0, 0.5);-webkit-box-shadow:0 0 7px rgba(0, 0, 0, 0.5);margin-top:50px;margin-left:auto;margin-right:auto;padding:0;position:relative;width:960px;}
+#wrapper{background:#fff url("../images/fade-y.png") repeat-y;box-shadow:#444 0px 0px 7px;-moz-box-shadow:#444 0px 0px 7px;-webkit-box-shadow:#444 0px 0px 7px;box-shadow:0 0 7px rgba(0, 0, 0, 0.5);-moz-box-shadow:0 0 7px rgba(0, 0, 0, 0.5);-webkit-box-shadow:0 0 7px rgba(0, 0, 0, 0.5);margin-top:50px;margin-left:auto;margin-right:auto;padding:0;position:relative;width:960px;}
 ul#social_icons{background:transparent;position:absolute;margin:10px 10px 0 0;right:0;width:180px;z-index:10;}
 ul#social_icons li{display:inline;}
 .social16{display:block;float:right;margin:5px 3px;height:16px;width:16px;}
