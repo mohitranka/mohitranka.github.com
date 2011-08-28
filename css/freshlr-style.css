@@ -1,5 +1,5 @@
-body{background:#999 url("../images/freshlr-bg-blue-white.jpg") repeat;color:#555;cursor:default;font-family:'NewsCycleRegular', 'DroidSansRegular', 'GoudyBookletter1911Regular', Helvetica, 'Lucida Grande', 'Trebuchet MS', Arial, sans-serif;font-size:0.9em;-webkit-font-smoothing:antialiased;}
-a{color:#8d131e;text-decoration:none;}
+body{background:#999 url("../images/background.jpg");cursor:default;font-family:'NewsCycleRegular', 'DroidSansRegular', 'GoudyBookletter1911Regular', Helvetica, 'Lucida Grande', 'Trebuchet MS', Arial, sans-serif;font-size:0.9em;-webkit-font-smoothing:antialiased;}
+a{color:#ffffff;text-decoration:none;}
 a:hover{color:#a7a7a7;}
 ul{list-style-type:square;}
 ul>li>a{display:block;position:relative;}
