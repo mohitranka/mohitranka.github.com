@@ -1,4 +1,4 @@
 User-agent: *
-Disallow: 
+Disallow:/hire 
 
 Sitemap: http://mohitranka.github.io/sitemap.xml 
