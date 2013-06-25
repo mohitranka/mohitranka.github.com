@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[]]></title>
-  <link href="http://mohitranka.github.io/atom.xml" rel="self"/>
-  <link href="http://mohitranka.github.io/"/>
-  <updated>2013-06-26T01:04:32+05:30</updated>
-  <id>http://mohitranka.github.io/</id>
+  <link href="http://mohitranka.com/atom.xml" rel="self"/>
+  <link href="http://mohitranka.com/"/>
+  <updated>2013-06-26T01:25:24+05:30</updated>
+  <id>http://mohitranka.com/</id>
   <author>
     <name><![CDATA[Mohit Ranka]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[One click website deployment with octopress]]></title>
-    <link href="http://mohitranka.github.io/blog/one-click-website-deployment-with-octopress/"/>
+    <link href="http://mohitranka.com/blog/one-click-website-deployment-with-octopress/"/>
     <updated>2013-06-20T00:13:00+05:30</updated>
-    <id>http://mohitranka.github.io/blog/one-click-website-deployment-with-octopress</id>
+    <id>http://mohitranka.com/blog/one-click-website-deployment-with-octopress</id>
     <content type="html"><![CDATA[<p>I have been thinking to revamp the site for quite sometime and finally got around it. The old version was hosted on github, courtesy github pages which was a fairly simple one page setup, with links to my blog, github repository etc. For the new site, I needed to have one place to maintain the blogposts and webpages, so I started looking for jekyll style static page generators so that I can keep using github for hosting (for free! :D ) and really liked what <a href="http://octopress.org/">Octopress</a> had to offer.</p>
 
 <p>I have the website hosted on mohitranka.github.com (see <a href="https://help.github.com/articles/creating-pages-with-the-automatic-generator">here</a> on how to do it and mohitranka.com is merely a CNAME for it).</p>
@@ -165,9 +165,9 @@
   
   <entry>
     <title type="html"><![CDATA[The curse of the gifted]]></title>
-    <link href="http://mohitranka.github.io/blog/the-curse-of-the-gifted/"/>
+    <link href="http://mohitranka.com/blog/the-curse-of-the-gifted/"/>
     <updated>2011-04-05T00:00:00+05:30</updated>
-    <id>http://mohitranka.github.io/blog/the-curse-of-the-gifted</id>
+    <id>http://mohitranka.com/blog/the-curse-of-the-gifted</id>
     <content type="html"><![CDATA[<blockquote>&#8220;See, we&#8217;ve seen the curse of the gifted before.  Some of us were those kids in college.  We learned the hard way that the bill always comes due &#8211; the scale of the problems always increases to a point where your native talent alone doesn&#8217;t cut it any more.  The smarter you are, the longer it takes to hit that crunch point &#8211; and the harder the adjustment when you finally do.  And we can see that *you*, poor damn genius that you are, are cruising for a serious bruising.&#8221;</blockquote>
 - Eric S. Raymond to Linus Torvalds in his essay &#8220;The curse of the gifted programmer&#8221;
 
@@ -177,9 +177,9 @@
   
   <entry>
     <title type="html"><![CDATA[What it means to work for a startup.]]></title>
-    <link href="http://mohitranka.github.io/blog/what-it-means-to-work-for-a-startup/"/>
+    <link href="http://mohitranka.com/blog/what-it-means-to-work-for-a-startup/"/>
     <updated>2009-08-23T00:00:00+05:30</updated>
-    <id>http://mohitranka.github.io/blog/what-it-means-to-work-for-a-startup</id>
+    <id>http://mohitranka.com/blog/what-it-means-to-work-for-a-startup</id>
     <content type="html"><![CDATA[    <p>Someone much smarter, much experienced than me, told me this once. This is something I think contains immense wisdom and real world experience, which I feel needs to be shared with other too.</p>
 <blockquote>
 <p><span style="font-family:arial;border-collapse:collapse;font-style:italic;">Working at a start-up requires an irrational amount of commitment. This either comes from the love of the vision, or love of the team, or love of the work you&#8217;re doing, or all of the above, or something more irrational than any of the above. A start-up does not pay well, cannot manage well, and has process gaps that are inanely obvious, and other things that one rationally expects. Start-ups do not lack the understanding or appreciation to solve these problems, but lack the luxury to spend time on those important things because of other more important things. Only when you dissolve yourself in the start-up as an owner (not an employee) does it start making sense, and every problem is seen as one you need to fix and not something that the company needs to fix for you.</span></p>
@@ -190,9 +190,9 @@
   
   <entry>
     <title type="html"><![CDATA[On being a champion]]></title>
-    <link href="http://mohitranka.github.io/blog/on-being-a-champion/"/>
+    <link href="http://mohitranka.com/blog/on-being-a-champion/"/>
     <updated>2009-06-28T00:00:00+05:30</updated>
-    <id>http://mohitranka.github.io/blog/on-being-a-champion</id>
+    <id>http://mohitranka.com/blog/on-being-a-champion</id>
     <content type="html"><![CDATA[    <p>Its 2.00 in the moring right now and my boss is going to rip me apart if I am late for office another day. I am just off from watching one of the most dramatic football final, you would ever see, and cannot resist the complusion to write something about it.</p>
 <p>The confenderation cup 2009, South Africa final between Brzail and United States just ended with brazil snatching a 3 - 2 Victory, after being 0-2 down after the first half. It made me wonder how many teams in the world would be able to do that? Coming from being after being favoriates , bogged down by the minnows in the big match final. What would Dunga (Brazil coach) had said to them&nbsp; in the locker room, in the break, and how&nbsp; well the players responded.</p>
 <p>Being a champion is something much more different than having the skills, the talent and putting the acts together.</p>
@@ -205,9 +205,9 @@
   
   <entry>
     <title type="html"><![CDATA[Just another day in the office]]></title>
-    <link href="http://mohitranka.github.io/blog/just-another-day-in-the-office/"/>
+    <link href="http://mohitranka.com/blog/just-another-day-in-the-office/"/>
     <updated>2009-05-30T00:00:00+05:30</updated>
-    <id>http://mohitranka.github.io/blog/just-another-day-in-the-office</id>
+    <id>http://mohitranka.com/blog/just-another-day-in-the-office</id>
     <content type="html"><![CDATA[    <p>Had a WTF moment yesterday after spending around 2 hours debugging a UI bug very-very late in the night, only to realize just before rewriting the entire UI component it was due to a minor typo, resulting in very wierd behaviour,just before the deadline.</p>
 <p>The day ended with me fixing the bug with removing one character, down 200 bucks on dinner in the office, tired with just 2 hours of sleep in last 48 hours and a laptop that does not boot&#8230;.. yet with a positive feeling, something which I dont seem to have much nowadays and few questions to myself, about which I better find answers soon.</p>
 <p>All in a work&#8217;s day!</p>
@@ -217,9 +217,9 @@
   
   <entry>
     <title type="html"><![CDATA[The best XKCD ever?]]></title>
-    <link href="http://mohitranka.github.io/blog/the-best-xkcd-ever/"/>
+    <link href="http://mohitranka.com/blog/the-best-xkcd-ever/"/>
     <updated>2009-05-19T00:00:00+05:30</updated>
-    <id>http://mohitranka.github.io/blog/the-best-xkcd-ever</id>
+    <id>http://mohitranka.com/blog/the-best-xkcd-ever</id>
     <content type="html"><![CDATA[    <div>
       <a href="http://www.xkcd.com/583/"><img src="http://imgs.xkcd.com/comics/cnr.png" border="0" height="" width="500" /></a>
 
@@ -231,9 +231,9 @@
   
   <entry>
     <title type="html"><![CDATA[Guest blogged at twistedgenes.com]]></title>
-    <link href="http://mohitranka.github.io/blog/guest-blogged-at-twistedgenescom/"/>
+    <link href="http://mohitranka.com/blog/guest-blogged-at-twistedgenescom/"/>
     <updated>2008-10-27T00:00:00+05:30</updated>
-    <id>http://mohitranka.github.io/blog/guest-blogged-at-twistedgenescom</id>
+    <id>http://mohitranka.com/blog/guest-blogged-at-twistedgenescom</id>
     <content type="html"><![CDATA[I posted at rakesh&#8217;s <a href="http://www.twistedgenes.com/" target="_blank">blog</a> about 2 of my favorite topics, python and philosophy.(after a good break from blogging for almost a year) Actually its a philosopical discussion of life worthness in pythonic manner.
 
 Read it <a href="http://www.twistedgenes.com/?p=71" target="_blank">here</a>.
@@ -244,18 +244,18 @@ so, whats your life_worthiness_quotient? :-)
   
   <entry>
     <title type="html"><![CDATA[Nerds!]]></title>
-    <link href="http://mohitranka.github.io/blog/nerds/"/>
+    <link href="http://mohitranka.com/blog/nerds/"/>
     <updated>2007-11-05T00:00:00+05:30</updated>
-    <id>http://mohitranka.github.io/blog/nerds</id>
+    <id>http://mohitranka.com/blog/nerds</id>
     <content type="html"><![CDATA[<img src="http://imgs.xkcd.com/comics/shopping_teams.png" align="absmiddle" height="554" width="659" />
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[and I feel lucky....]]></title>
-    <link href="http://mohitranka.github.io/blog/and-i-feel-lucky/"/>
+    <link href="http://mohitranka.com/blog/and-i-feel-lucky/"/>
     <updated>2007-10-26T00:00:00+05:30</updated>
-    <id>http://mohitranka.github.io/blog/and-i-feel-lucky</id>
+    <id>http://mohitranka.com/blog/and-i-feel-lucky</id>
     <content type="html"><![CDATA[The importance of meeting and interacting with smart people is highly understated. One get immense influence of such people&#8217;s with their tiniest interaction.
 
 I recently get the opportunity to have a conversation with such, one of the <em>more</em> enlightened person. We came up discussing about the some business process, and I got some information from him, in which I saw an exciting opportunity and idea and as he said, &#8220;Its all about capitalizing on the opportunity, as it present itself&#8221;
@@ -268,9 +268,9 @@ Till then&#8230;.. So long :)
   
   <entry>
     <title type="html"><![CDATA[Harry Potter Vs. LOTR*]]></title>
-    <link href="http://mohitranka.github.io/blog/harry-potter-vs-lotr/"/>
+    <link href="http://mohitranka.com/blog/harry-potter-vs-lotr/"/>
     <updated>2007-10-19T00:00:00+05:30</updated>
-    <id>http://mohitranka.github.io/blog/harry-potter-vs-lotr</id>
+    <id>http://mohitranka.com/blog/harry-potter-vs-lotr</id>
     <content type="html"><![CDATA[*Contains Spoilers
 
 I happen to be a big fan of both, <a href="http://en.wikipedia.org/wiki/Harry_potter" target="_blank">Harry Potter</a> and <a href="http://en.wikipedia.org/wiki/Lotr" target="_blank">LOTR</a>. Both are legendary novels and they have written few chapters that can never be forgotten.
@@ -299,9 +299,9 @@ f) Though the <em>wise-person</em> is perfect (and an <em>almost</em> equal matc
   
   <entry>
     <title type="html"><![CDATA[Success- How does one get it !!?]]></title>
-    <link href="http://mohitranka.github.io/blog/success-how-does-one-get-it/"/>
+    <link href="http://mohitranka.com/blog/success-how-does-one-get-it/"/>
     <updated>2006-06-30T00:00:00+05:30</updated>
-    <id>http://mohitranka.github.io/blog/success-how-does-one-get-it</id>
+    <id>http://mohitranka.com/blog/success-how-does-one-get-it</id>
     <content type="html"><![CDATA[I always wonder what makes people successful ? I dont know if such &#8216;Formula&#8217; exists. I have seen this world,well not much. 20 years are too less to know any thing about this world. but i always get the feeling(from what i have seen) that most deserving people are not always the most successful ones, sucess eludes them from one reason or another. what could it be??<!--more-->
 
 I dont know, I am not successful either. one thing i know for sure that successful people hardly make any blunders.They know what to do well before it actually has to be done.They are planners,people who change the face of the world, or atleast their life, by planning. I might sound cliched, these all are the good qualities,talent,intelligence, hardwork etc. So whats the difference? lots of people have these qualities,they all are not successful.
