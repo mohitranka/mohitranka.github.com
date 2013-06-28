@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: nosql | ]]></title>
+  <link href="http://mohitranka.com/blog/categories/nosql/atom.xml" rel="self"/>
+  <link href="http://mohitranka.com/"/>
+  <updated>2013-06-29T01:55:06+05:30</updated>
+  <id>http://mohitranka.com/</id>
+  <author>
+    <name><![CDATA[Mohit Ranka]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[RDBMS vs. NOSQL?]]></title>
+    <link href="http://mohitranka.com/blog/rdbms-vs-nosql/"/>
+    <updated>2013-06-29T00:16:00+05:30</updated>
+    <id>http://mohitranka.com/blog/rdbms-vs-nosql</id>
+    <content type="html"><![CDATA[<blockquote><p>From our own experience designing and operating a highly available, highly scalable ecommerce platform, we have come to realize that relational databases should only be used when an application really needs the complex query, table join and transaction capabilities of a full-blown relational database. In all other cases, when such relational features are not needed, a NoSQL database service like DynamoDB offers a simpler, more available, more scalable and ultimately a lower cost solution.</p></blockquote>
+
+<pre><code>            — Werner Vogels, CTO Amazon.com on when to use RDBMS
+</code></pre>
+
+<p>I came across this quote in <a href="http://www.allthingsdistributed.com/2013/03/dynamodb-one-year-later.html">an article</a> while researching DynamoDB. As much as I respect Werner, I would suggest take his recommendation on the criteria on database selection with a pinch of salt, due to the obvious conflict of interest — He has a <a href="http://aws.amazon.com/dynamodb/">database</a> to sell.</p>
+
+<!--more-->
+
+
+<p>Most products do not need the <em>scale</em>, which cannot be served by relational databases. Relational databases have survived more than 20 years and still doing well, even at <a href="https://www.facebook.com/MySQLatFacebook">large scale</a>! There are <a href="http://dev.mysql.com/">extremely</a> <a href="http://www.postgresql.org/">mature</a> open source rdbms, requirement independent schemas, optimized queries for filtering, aggregation and list of data, great communities, acquired knowledge, default integration with programming frameworks and lots of tools developed.</p>
+
+<h2>RDBMS are great-for-all, unless&hellip;</h2>
+
+<p>Relational systems are super easy to work with, have great (free) tools for monitoring, backup, operations available, work well for most of the use cases, there is a lot of help (community, web resources, consulting) around and best of all.. you already know it well. <em>Unless</em> I have the following requirements I would use a single node relational database.</p>
+
+<ul>
+<li><h3>Super high availability</h3></li>
+</ul>
+
+
+<p>Relational database&rsquo;s server process is a single point of failure, which means your system <em>will</em> go down, when the process crashes or taken down for scheduled or unscheduled maintainence.</p>
+
+<p>If you are building a system which needs to have close to 100% availability, look into clustered relational databases or distributed databases which choose availability over consistency, eg. cassandra.</p>
+
+<ul>
+<li><h3>Flexible schema</h3></li>
+</ul>
+
+
+<p>One of relational databases' great strength is its schema, data model and <a href="https://en.wikipedia.org/wiki/Database_normalization">related concepts</a>, which allow for schema modelling, without knowing the query patterns in advance, and works well. However, <a href="http://en.wikipedia.org/wiki/Entity%E2%80%93attribute%E2%80%93value_model">not all data can be effectively represented in relational data model</a>. Relational databases are efficitent on fixed schema, with known columns and indexes, which can confirm to normalization rules for a tradeoff between consistency and performance. Flexible schema <a href="http://karwin.blogspot.in/2009/05/eav-fail.html">do</a> <a href="http://tonyandrews.blogspot.in/2004/10/otlt-and-eav-two-big-design-mistakes.html">not</a> <a href="https://www.simple-talk.com/opinion/opinion-pieces/bad-carma/">work well</a> with relational databases.</p>
+
+<p>If you <em>need</em> (do you, really?) flexible schema, look at other nosql options.</p>
+
+<ul>
+<li><h3>Horizontal scaling</h3></li>
+</ul>
+
+
+<p>If you are looking to build a system that should scale horizontally as your data needs grow, a single-node relational database will not suffice forever. There is only so much room to grow, so much RAM and CPU to throw on a single machine. Sooner or later, you will hit that single server machine limit. At that point, you will have to either choose a NoSQL solution or a relational database system cluster.</p>
+
+<h1>Epilogue</h1>
+
+<p>NoSQL is no panacea and RDBMS are still the best choice for most of the applications. Unless you have strong need to <em>not</em> used a relational database, stick to it.</p>
+]]></content>
+  </entry>
+  
+</feed>

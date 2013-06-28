@@ -1,0 +1,207 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>RDBMS vs. NOSQL? - </title>
+  <meta name="author" content="Mohit Ranka">
+
+  
+  <meta name="description" content="From our own experience designing and operating a highly available, highly scalable ecommerce platform, we have come to realize that relational &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://mohitranka.com/blog/rdbms-vs-nosql">
+  <link href="/favicon.ico" rel="icon">
+  
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-41339007-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   class="no-sidebar"  >
+  <header role="banner" style="width: 100%; padding-bottom: 0;"><hgroup>
+  <h1></h1>
+  
+    <h2><a href="/">Mohit Ranka</a></h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><div id="menu">
+    <ul>
+	<li><a href="/">About</a></li>
+    </ul>
+    <ul>		
+	<li><a href="/work">Portfolio</a></li>
+    </ul>
+    <ul>
+	<li><a href="/contact">Contact</a></li>
+	</ul>
+</div>
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">RDBMS vs. NOSQL?</h1>
+    
+    
+      <p class="meta">
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><blockquote><p>From our own experience designing and operating a highly available, highly scalable ecommerce platform, we have come to realize that relational databases should only be used when an application really needs the complex query, table join and transaction capabilities of a full-blown relational database. In all other cases, when such relational features are not needed, a NoSQL database service like DynamoDB offers a simpler, more available, more scalable and ultimately a lower cost solution.</p></blockquote>
+
+<pre><code>            — Werner Vogels, CTO Amazon.com on when to use RDBMS
+</code></pre>
+
+<p>I came across this quote in <a href="http://www.allthingsdistributed.com/2013/03/dynamodb-one-year-later.html">an article</a> while researching DynamoDB. As much as I respect Werner, I would suggest take his recommendation on the criteria on database selection with a pinch of salt, due to the obvious conflict of interest — He has a <a href="http://aws.amazon.com/dynamodb/">database</a> to sell.</p>
+
+<!--more-->
+
+
+<p>Most products do not need the <em>scale</em>, which cannot be served by relational databases. Relational databases have survived more than 20 years and still doing well, even at <a href="https://www.facebook.com/MySQLatFacebook">large scale</a>! There are <a href="http://dev.mysql.com/">extremely</a> <a href="http://www.postgresql.org/">mature</a> open source rdbms, requirement independent schemas, optimized queries for filtering, aggregation and list of data, great communities, acquired knowledge, default integration with programming frameworks and lots of tools developed.</p>
+
+<h2>RDBMS are great-for-all, unless&hellip;</h2>
+
+<p>Relational systems are super easy to work with, have great (free) tools for monitoring, backup, operations available, work well for most of the use cases, there is a lot of help (community, web resources, consulting) around and best of all.. you already know it well. <em>Unless</em> I have the following requirements I would use a single node relational database.</p>
+
+<ul>
+<li><h3>Super high availability</h3></li>
+</ul>
+
+
+<p>Relational database&rsquo;s server process is a single point of failure, which means your system <em>will</em> go down, when the process crashes or taken down for scheduled or unscheduled maintainence.</p>
+
+<p>If you are building a system which needs to have close to 100% availability, look into clustered relational databases or distributed databases which choose availability over consistency, eg. cassandra.</p>
+
+<ul>
+<li><h3>Flexible schema</h3></li>
+</ul>
+
+
+<p>One of relational databases&#8217; great strength is its schema, data model and <a href="https://en.wikipedia.org/wiki/Database_normalization">related concepts</a>, which allow for schema modelling, without knowing the query patterns in advance, and works well. However, <a href="http://en.wikipedia.org/wiki/Entity%E2%80%93attribute%E2%80%93value_model">not all data can be effectively represented in relational data model</a>. Relational databases are efficitent on fixed schema, with known columns and indexes, which can confirm to normalization rules for a tradeoff between consistency and performance. Flexible schema <a href="http://karwin.blogspot.in/2009/05/eav-fail.html">do</a> <a href="http://tonyandrews.blogspot.in/2004/10/otlt-and-eav-two-big-design-mistakes.html">not</a> <a href="https://www.simple-talk.com/opinion/opinion-pieces/bad-carma/">work well</a> with relational databases.</p>
+
+<p>If you <em>need</em> (do you, really?) flexible schema, look at other nosql options.</p>
+
+<ul>
+<li><h3>Horizontal scaling</h3></li>
+</ul>
+
+
+<p>If you are looking to build a system that should scale horizontally as your data needs grow, a single-node relational database will not suffice forever. There is only so much room to grow, so much RAM and CPU to throw on a single machine. Sooner or later, you will hit that single server machine limit. At that point, you will have to either choose a NoSQL solution or a relational database system cluster.</p>
+
+<h1>Epilogue</h1>
+
+<p>NoSQL is no panacea and RDBMS are still the best choice for most of the applications. Unless you have strong need to <em>not</em> used a relational database, stick to it.</p>
+</div>
+
+		
+  <footer>
+   If you read this far you should probably follow me <a href="https://twitter.com/MohitRanka" class="twitter-follow-button" data-show-count="true" data-dnt="true">Follow @MohitRanka</a>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn"><a href="/" title="About the author (Mohit Ranka)" rel="author">Mohit Ranka</a></span></span>
+
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/database/'>database</a>, <a class='category' href='/blog/categories/distributed-computing/'>distributed-computing</a>, <a class='category' href='/blog/categories/nosql/'>nosql</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://mohitranka.com/blog/rdbms-vs-nosql/" data-via="MohitRanka" data-counturl="http://mohitranka.com/blog/rdbms-vs-nosql/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/one-click-website-deployment-with-octopress/" title="Previous Post: One click website deployment with octopress">&laquo; One click website deployment with octopress</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Mohit Ranka -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a>.</span>
+  <span class="rss">Subscribe to the <a href="/atom.xml">Blog</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
