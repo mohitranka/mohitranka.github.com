@@ -4,7 +4,7 @@
   <title><![CDATA[Category: nosql | ]]></title>
   <link href="http://mohitranka.com/blog/categories/nosql/atom.xml" rel="self"/>
   <link href="http://mohitranka.com/"/>
-  <updated>2013-06-29T01:55:06+05:30</updated>
+  <updated>2013-06-29T02:59:37+05:30</updated>
   <id>http://mohitranka.com/</id>
   <author>
     <name><![CDATA[Mohit Ranka]]></name>
@@ -48,7 +48,7 @@
 </ul>
 
 
-<p>One of relational databases' great strength is its schema, data model and <a href="https://en.wikipedia.org/wiki/Database_normalization">related concepts</a>, which allow for schema modelling, without knowing the query patterns in advance, and works well. However, <a href="http://en.wikipedia.org/wiki/Entity%E2%80%93attribute%E2%80%93value_model">not all data can be effectively represented in relational data model</a>. Relational databases are efficitent on fixed schema, with known columns and indexes, which can confirm to normalization rules for a tradeoff between consistency and performance. Flexible schema <a href="http://karwin.blogspot.in/2009/05/eav-fail.html">do</a> <a href="http://tonyandrews.blogspot.in/2004/10/otlt-and-eav-two-big-design-mistakes.html">not</a> <a href="https://www.simple-talk.com/opinion/opinion-pieces/bad-carma/">work well</a> with relational databases.</p>
+<p>One of relational databases' great strength is its schema, data model and <a href="https://en.wikipedia.org/wiki/Database_normalization">related concepts</a>, which allow for schema modelling, without knowing the query patterns in advance, and works well. However, <a href="http://en.wikipedia.org/wiki/Entity%E2%80%93attribute%E2%80%93value_model">not all data can be effectively represented in relational data model</a>. Even though there is some support for <a href="http://www.postgresql.org/docs/9.0/static/hstore.html">flexible</a> <a href="http://www.postgresql.org/docs/current/static/functions-json.html">schema</a> datastructure, relational databases are efficitent on fixed schema which can confirm to normalization rules for a tradeoff between consistency and performance. Flexible schema <a href="http://karwin.blogspot.in/2009/05/eav-fail.html">do</a> <a href="http://tonyandrews.blogspot.in/2004/10/otlt-and-eav-two-big-design-mistakes.html">not</a> <a href="https://www.simple-talk.com/opinion/opinion-pieces/bad-carma/">work well</a> with relational databases.</p>
 
 <p>If you <em>need</em> (do you, really?) flexible schema, look at other nosql options.</p>
 
