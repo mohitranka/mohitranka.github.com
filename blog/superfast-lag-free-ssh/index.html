@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title></title>
+  <title>superfast lag-free SSH - </title>
   <meta name="author" content="Mohit Ranka">
 
   
@@ -19,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://mohitranka.com/blog">
+  <link rel="canonical" href="http://mohitranka.com/blog/superfast-lag-free-ssh">
   <link href="/favicon.ico" rel="icon">
   
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
@@ -70,27 +70,24 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/blog/superfast-lag-free-ssh/">superfast lag-free SSH</a></h1>
+      <h1 class="entry-title">superfast lag-free SSH</h1>
     
     
       <p class="meta">
         
-         | <a href="/blog/superfast-lag-free-ssh/#disqus_thread">Comments</a>
+         | <a href="#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>A tip to speed up commands on ssh significantly, especially for long running sessions.
+<div class="entry-content"><p>A tip to speed up commands on ssh significantly, especially for long running sessions.
 (Note &ndash; All the instructions are only for Ubuntu 12.04)</p>
 
 <ol>
@@ -118,91 +115,54 @@
 
 <p>In my testing, the ssh connect and exit time to a test instance, dropped from 5.25-5.28 sec to 0.84-0.87 sec.</p>
 </div>
-  
-  
 
-
-    </article>
-  
-  
-    <article>
+		
+  <footer>
+   If you read this far you should probably follow me <a href="https://twitter.com/MohitRanka" class="twitter-follow-button" data-show-count="true" data-dnt="true">Follow @MohitRanka</a>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+    <p class="meta">
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/rdbms-vs-nosql/">RDBMS vs. NOSQL?</a></h1>
-    
-    
-      <p class="meta">
-        
-         | <a href="/blog/rdbms-vs-nosql/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><blockquote><p>From our own experience designing and operating a highly available, highly scalable ecommerce platform, we have come to realize that relational databases should only be used when an application really needs the complex query, table join and transaction capabilities of a full-blown relational database. In all other cases, when such relational features are not needed, a NoSQL database service like DynamoDB offers a simpler, more available, more scalable and ultimately a lower cost solution.</p></blockquote>
-
-<pre><code>            — Werner Vogels, CTO Amazon.com on when to use RDBMS
-</code></pre>
-
-<p>I came across this quote in <a href="http://www.allthingsdistributed.com/2013/03/dynamodb-one-year-later.html">an article</a> while researching DynamoDB. As much as I respect Werner, I would suggest take his recommendation on the criteria on database selection with a pinch of salt, due to the obvious conflict of interest — He has a <a href="http://aws.amazon.com/dynamodb/">database</a> to sell.</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/rdbms-vs-nosql/">Read on &rarr;</a>
-    </footer>
   
 
+<span class="byline author vcard">Posted by <span class="fn"><a href="/" title="About the author (Mohit Ranka)" rel="author">Mohit Ranka</a></span></span>
 
-    </article>
-  
-  
-    <article>
       
-  <header>
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/linux/'>linux,</a>, <a class='category' href='/blog/categories/productivity/'>productivity</a>, <a class='category' href='/blog/categories/tip/'>tip,</a>
+  
+</span>
+
+
+    </p>
     
-      <h1 class="entry-title"><a href="/blog/one-click-website-deployment-with-octopress/">One click website deployment with octopress</a></h1>
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://mohitranka.com/blog/superfast-lag-free-ssh/" data-via="MohitRanka" data-counturl="http://mohitranka.com/blog/superfast-lag-free-ssh/" >Tweet</a>
+  
+  
+  
+</div>
+
     
-    
-      <p class="meta">
-        
-         | <a href="/blog/one-click-website-deployment-with-octopress/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/rdbms-vs-nosql/" title="Previous Post: RDBMS vs. NOSQL?">&laquo; RDBMS vs. NOSQL?</a>
+      
+      
+    </p>
+  </footer>
+</article>
 
-
-  <div class="entry-content"><p>I have been thinking to revamp the site for quite sometime and finally got around it. The old version was hosted on github, courtesy github pages which was a fairly simple one page setup, with links to my blog, github repository etc. For the new site, I needed to have one place to maintain the blogposts and webpages, so I started looking for jekyll style static page generators so that I can keep using github for hosting (for free! :D ) and really liked what <a href="http://octopress.org/">Octopress</a> had to offer.</p>
-
-<p>I have the website hosted on mohitranka.github.com (see <a href="https://help.github.com/articles/creating-pages-with-the-automatic-generator">here</a> on how to do it and mohitranka.com is merely a CNAME for it).</p>
-
-<h2>Hello Octopress!</h2>
-
-<p>Octopress is a blogging framework written on top of <a href="http://jekyllrb.com/">Jekyll</a>. It has nifty little commands to create new pages and posts using <a href="http://daringfireball.net/projects/markdown/">markdown</a>, growing number of <a href="http://octopressthemes.com/">themes and plugins</a>, which are everything you need for your static content based website.</p>
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/one-click-website-deployment-with-octopress/">Read on &rarr;</a>
-    </footer>
-  
 
-
-    </article>
-  
-  <div class="pagination">
-    
-      <a class="prev" href="/blog/page/2/">&larr; Older</a>
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
-</div>
 
     </div>
   </div>
@@ -219,7 +179,10 @@
       var disqus_shortname = 'mohitrankablog';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://mohitranka.com/blog/superfast-lag-free-ssh/';
+        var disqus_url = 'http://mohitranka.com/blog/superfast-lag-free-ssh/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
