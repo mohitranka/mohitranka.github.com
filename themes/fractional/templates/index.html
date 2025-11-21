@@ -1,71 +1,96 @@
 {% extends "base.html" %}
 
+{% block title %}Mohit Ranka – Fractional Principal Architect (Infra, Reliability & AI Systems){% endblock %}
+
 {% block content %}
 
 <!-- Hero Section -->
+<!-- Hero Section -->
 <section class="hero">
-    <h1>Engineering Leadership for<br>Data-Intensive Scale-ups.</h1>
-    <p class="subtitle">Fractional CTO & Advisor. Formerly at LinkedIn, Postman, and Booking.com.</p>
+    <h1>Fractional Principal Architect<br>(Infra, Reliability & AI Systems)</h1>
+    <p class="subtitle">I help Series A–C startups that have outgrown their MVP architecture redesign their systems for
+        scale — focusing on infrastructure, reliability, SLOs, and AI-enabled products.</p>
     <div class="cta-group">
-        <a href="#services" class="btn btn-primary">View Services</a>
-        <a href="#work" class="btn">Read Case Studies</a>
+        <a href="mailto:mohit@mohitranka.com" class="btn btn-primary">Talk to me about your architecture</a>
+    </div>
+</section>
+
+<!-- Who I work with Section -->
+<section id="icp">
+    <h2>Who I work with</h2>
+    <div class="icp-content">
+        <p><strong>Series A–C, post-MVP startups.</strong> Teams where the architecture, infra, or reliability is
+            slowing growth.</p>
+        <p><strong>B2B SaaS or AI-enabled products.</strong> Companies needing to scale their systems to support
+            real-world usage and AI features.</p>
+        <p><strong>Founder/CTO/VP Eng buyers.</strong> Leaders looking for high-leverage architectural guidance without
+            the overhead of a full-time executive.</p>
     </div>
 </section>
 
 <!-- Services Section -->
 <section id="services">
-    <h2>The Offerings</h2>
+    <h2>What I do</h2>
     <div class="services-grid">
         <div class="service-card">
-            <h3>The Scale-Ready Audit</h3>
-            <p>Fixed-price architecture review. I evaluate if your current stack (Postgres/MySQL/Monolith) can handle
-                10x growth or if you need distributed patterns.</p>
+            <h3>Scale Architecture Redesign</h3>
+            <p>For startups that have outgrown their MVP. I review your current architecture and design a scalable,
+                pragmatic v2/v3 that can handle the next 10× of growth without a full rewrite.</p>
         </div>
         <div class="service-card">
-            <h3>Data Foundation Sprint</h3>
-            <p>Setting up initial data platforms (Snowflake/Databricks/Airflow) to move from messy data to actionable
-                insights.</p>
+            <h3>Reliability & SLO Foundation</h3>
+            <p>I help you define SLOs, improve observability, and harden your systems so incidents become rare and
+                predictable instead of constant firefighting.</p>
         </div>
         <div class="service-card">
-            <h3>Engineering Org Design</h3>
-            <p>Implementing performance management, hiring standards, and knowledge-sharing systems for teams scaling
-                from 10 to 50 engineers.</p>
+            <h3>AI Product Readiness Review</h3>
+            <p>I evaluate whether your data, infra, and architecture can reliably support AI features (retrieval,
+                latency, iteration) and provide a concrete roadmap.</p>
         </div>
+    </div>
+    <div style="text-align: center; margin-top: 2rem;">
+        <a href="mailto:mohit@mohitranka.com" class="btn">Let’s talk</a>
     </div>
 </section>
 
+<!-- Selected Work Section -->
 <!-- Selected Work Section -->
 <section id="work">
     <h2>Selected Work</h2>
 
     <div class="work-item">
         <div class="work-meta">LINKEDIN</div>
-        <h3>Real-time Data Platform</h3>
-        <p>Consolidated data sources into a real-time platform, increasing sales productivity by 15% and cutting insight
-            retrieval from days to hours.</p>
+        <h3>Real-time Data Platform Architecture</h3>
+        <p>Architected a consolidated real-time data platform, increasing sales productivity by 15% and cutting insight
+            retrieval from days to hours through improved system design.</p>
     </div>
 
     <div class="work-item">
         <div class="work-meta">POSTMAN</div>
-        <h3>Beyond HTTP</h3>
-        <p>Led the transition beyond HTTP protocols and the web launch, supporting 20% user growth in under six months.
-        </p>
+        <h3>Protocol Abstraction Layer</h3>
+        <p>Designed the architecture to support protocols beyond HTTP, enabling the web launch and supporting 20% user
+            growth in under six months.</p>
     </div>
 
     <div class="work-item">
         <div class="work-meta">BOOKING.COM</div>
-        <h3>Identity at Scale</h3>
-        <p>Built Identity Access Management handling 300M+ guests and 1.2M requests/second.</p>
+        <h3>Identity System at Scale</h3>
+        <p>Designed and hardened the Identity Access Management system to handle 300M+ guests and 1.2M requests/second
+            with high reliability.</p>
     </div>
 </section>
 
 <!-- About Section -->
+<!-- About Section -->
 <section id="about">
     <h2>About</h2>
     <p style="font-size: 1.1rem; max-width: 700px;">
-        I help post-revenue startups solve specific scaling problems: fixing messy data infrastructure, transitioning
-        from MVPs to distributed systems, and structuring engineering teams. I remain hands-on with code (Python/Golang)
-        while leading high-level strategy.
+        I am a <strong>Fractional Principal Architect (Infra, Reliability & AI Systems)</strong> helping post-MVP /
+        Series A–C startups.
+        <br><br>
+        With background at LinkedIn, Postman, and Booking.com, I focus on architecture, infrastructure, and reliability.
+        I do <strong>not</strong> act as a day-to-day engineering manager or sprint babysitter. My engagements are
+        short, high-leverage, and focused on systems design and technical strategy.
     </p>
 </section>
 
