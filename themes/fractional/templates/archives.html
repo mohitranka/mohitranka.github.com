@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Blog | {{ SITENAME }}{% endblock %}
+
+{% block content %}
+<h1>Blog</h1>
+<ul class="article-list">
+    {% for article in dates %}
+    <li class="article-item">
+        <a href="{{ SITEURL }}/{{ article.url }}" class="article-title">{{ article.title }}</a>
+        <span class="article-meta">{{ article.locale_date }}</span>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

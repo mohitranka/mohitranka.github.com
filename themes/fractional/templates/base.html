@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="{{ DEFAULT_LANG }}">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}{{ SITENAME }}{% endblock %}</title>
+    <link rel="stylesheet" href="{{ SITEURL }}/theme/css/style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Fira+Code&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <a href="{{ SITEURL }}/" style="font-weight: 700; font-size: 1.2rem; color: #fff;">MOHIT RANKA</a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="{{ SITEURL }}/">Home</a></li>
+                    <li><a href="{{ SITEURL }}/#services">Services</a></li>
+                    <li><a href="{{ SITEURL }}/#work">Work</a></li>
+                    <li><a href="{{ SITEURL }}/#about">About</a></li>
+                    <li><a href="{{ SITEURL }}/blog.html">Blog</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            {% block content %}{% endblock %}
+        </main>
+
+        <footer>
+            <p>&copy; {{ list_dir }} Mohit Ranka. Available for fractional engagements.</p>
+            <p>
+                <a href="https://github.com/mohitranka">GitHub</a> • 
+                <a href="https://www.linkedin.com/in/mohitranka/">LinkedIn</a>
+            </p>
+        </footer>
+    </div>
+</body>
+</html>

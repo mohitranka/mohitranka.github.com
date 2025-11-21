@@ -1,0 +1,165 @@
+:root {
+    --bg-color: #111;
+    --text-color: #eee;
+    --accent-color: #00ffcc; /* Cyan/Teal for engineer aesthetic */
+    --secondary-color: #888;
+    --code-bg: #222;
+    --font-main: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --font-mono: 'Fira Code', 'Courier New', monospace;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-main);
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    color: var(--accent-color);
+    text-decoration: none;
+    transition: opacity 0.2s;
+}
+
+a:hover {
+    opacity: 0.8;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 0;
+    border-bottom: 1px solid #333;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+    padding: 0;
+}
+
+h1, h2, h3 {
+    font-weight: 700;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; color: var(--text-color); }
+h3 { font-size: 1.5rem; color: var(--text-color); }
+
+/* Hero Section */
+.hero {
+    padding: 4rem 0;
+    text-align: left;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+}
+
+.hero .subtitle {
+    font-size: 1.5rem;
+    color: var(--secondary-color);
+    margin-bottom: 2rem;
+}
+
+.cta-group {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    border: 1px solid var(--accent-color);
+    color: var(--accent-color);
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+.btn-primary {
+    background-color: var(--accent-color);
+    color: var(--bg-color);
+}
+
+/* Services */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.service-card {
+    background: #1a1a1a;
+    padding: 1.5rem;
+    border: 1px solid #333;
+    border-radius: 8px;
+}
+
+.service-card h3 {
+    margin-top: 0;
+    color: var(--accent-color);
+}
+
+/* Selected Work */
+.work-item {
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid #222;
+}
+
+.work-item:last-child {
+    border-bottom: none;
+}
+
+.work-meta {
+    font-family: var(--font-mono);
+    color: var(--secondary-color);
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Footer */
+footer {
+    margin-top: 4rem;
+    padding: 2rem 0;
+    border-top: 1px solid #333;
+    text-align: center;
+    color: var(--secondary-color);
+}
+
+/* Blog List */
+.article-list {
+    list-style: none;
+    padding: 0;
+}
+
+.article-item {
+    margin-bottom: 2rem;
+}
+
+.article-title {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.article-meta {
+    font-size: 0.9rem;
+    color: var(--secondary-color);
+}
