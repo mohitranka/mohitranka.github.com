@@ -1,4 +1,2 @@
 User-agent: *
-Disallow: /hire 
-
-Sitemap: http://mohitranka.com/sitemap.xml 
+Disallow:
