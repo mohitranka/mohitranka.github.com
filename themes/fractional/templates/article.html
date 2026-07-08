@@ -1,15 +1,15 @@
 {% extends "base.html" %}
 
-{% block title %}{{ article.title }} | {{ SITENAME }}{% endblock %}
+{% block title %}mohit ranka | {{ article.title }}{% endblock %}
 
 {% block content %}
 <article>
     <header>
-        <h1 class="article-title">{{ article.title }}</h1>
-        <div class="article-meta">
+        <h1 class="font-medium text-xl mb-1 leading-13">{{ article.title }}</h1>
+        <div class="article-meta" style="margin-bottom: 2.5rem;">
             <time datetime="{{ article.date.isoformat() }}">{{ article.locale_date }}</time>
             {% if article.category %}
-            • <a href="{{ SITEURL }}/{{ article.category.url }}">{{ article.category }}</a>
+            • <a href="{{ SITEURL }}/{{ article.category.url }}" class="no-underline">{{ article.category }}</a>
             {% endif %}
         </div>
     </header>

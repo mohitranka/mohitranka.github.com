@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}About - Mohit Ranka{% endblock %}</title>
+    <title>{% block title %}{{ SITENAME }}{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{{ SITEURL }}/theme/css/style.css">
 </head>
@@ -11,14 +11,13 @@
 <body>
     <div class="container">
         <header class="site-header">
-            <div class="site-title">
-                <a href="{{ SITEURL }}/">Mohit Ranka</a>
+            <div class="site-title font-medium">
+                <a href="{{ SITEURL }}/">mohit ranka</a>
             </div>
             <nav class="site-nav">
-                <a href="#">Search</a>
-                <a href="#">Feed</a>
-                <a href="{{ SITEURL }}/archives.html">Archives</a>
-                <a href="{{ SITEURL }}/">About</a>
+                <a href="{{ SITEURL }}/">home</a>
+                <a href="{{ SITEURL }}/blog.html">writing</a>
+                <a href="{{ SITEURL }}/contact/">contact</a>
             </nav>
         </header>
 
