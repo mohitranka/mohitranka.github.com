@@ -1,48 +1,92 @@
 {% extends "base.html" %}
 
-{% block title %}mohit ranka{% endblock %}
+{% block title %}{{ SITENAME }} — Engineering Leader{% endblock %}
+{% block description %}Engineering leader. Builder of data platforms, developer tooling, and reliable distributed backends. Previously LinkedIn, Postman, and Booking.com.{% endblock %}
+{% block canonical %}{{ SITEURL }}/{% endblock %}
+{% block og_url %}{{ SITEURL }}/{% endblock %}
+{% block og_title %}{{ SITENAME }} — Engineering Leader{% endblock %}
+{% block og_description %}Engineering leader. Builder of data platforms, developer tooling, and reliable distributed backends. Previously LinkedIn, Postman, and Booking.com.{% endblock %}
+{% block twitter_title %}{{ SITENAME }} — Engineering Leader{% endblock %}
+{% block twitter_description %}Engineering leader. Builder of data platforms, developer tooling, and reliable distributed backends. Previously LinkedIn, Postman, and Booking.com.{% endblock %}
+
+{% block head_extra %}
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "WebSite",
+            "@id": "{{ SITEURL }}/#website",
+            "url": "{{ SITEURL }}/",
+            "name": "{{ SITENAME }}",
+            "description": "Engineering leader. Builder of data platforms, developer tooling, and reliable distributed backends.",
+            "inLanguage": "en",
+            "publisher": {
+                "@id": "{{ SITEURL }}/#person"
+            }
+        },
+        {
+            "@type": "Person",
+            "@id": "{{ SITEURL }}/#person",
+            "name": "{{ AUTHOR }}",
+            "url": "{{ SITEURL }}/",
+            "email": "mohitranka@gmail.com",
+            "description": "Engineering leader. Builder of data platforms, developer tooling, and reliable distributed backends.",
+            "jobTitle": "Engineering Leader",
+            "alumniOf": {
+                "@type": "CollegeOrUniversity",
+                "name": "Vellore Institute of Technology"
+            },
+            "sameAs": [
+                "https://github.com/mohitranka",
+                "https://www.linkedin.com/in/mohit-ranka"
+            ],
+            "knowsAbout": [
+                "data platforms",
+                "distributed systems",
+                "developer tooling",
+                "engineering leadership",
+                "identity and SSO",
+                "site reliability"
+            ]
+        },
+        {
+            "@type": "ProfilePage",
+            "@id": "{{ SITEURL }}/#profilepage",
+            "url": "{{ SITEURL }}/",
+            "name": "{{ SITENAME }} — Engineering Leader",
+            "isPartOf": {
+                "@id": "{{ SITEURL }}/#website"
+            },
+            "mainEntity": {
+                "@id": "{{ SITEURL }}/#person"
+            },
+            "inLanguage": "en"
+        }
+    ]
+}
+</script>
+{% endblock %}
 
 {% block content %}
-<h1 class="font-medium text-xl mb-1">mohit ranka</h1>
+        <h1>{{ SITENAME }}</h1>
 
-<p>
-    I’m an engineering leader focused on data platforms, developer tooling, and distributed systems.
-    Previously, I led engineering teams at <strong>LinkedIn</strong> (2022–2023), <strong>Postman</strong> (2019–2022),
-    and <strong>Booking.com</strong> (2017–2019).
-</p>
+        <p>I'm an <a href="{{ SITEURL }}/blog.html">engineering leader</a> who builds data platforms, developer tooling, and reliable distributed backends. I prefer clarity over cleverness, long-term impact over short wins, and shipping work that scales from one team to many.</p>
 
-<p>
-    My sweet spot is turning fuzzy product questions into pragmatic, well-instrumented systems.
-    I value platform leverage, end-to-end ownership, and shipping work that scales.
-</p>
+        <p>My sweet spot is turning fuzzy product questions into pragmatic, well-instrumented systems that survive real traffic and real people.</p>
 
-<p>
-    On the side, I build developer tools and pipelines. Some of my experiments include
-    <a href="https://github.com/mohitranka/TwitterSentiment" target="_blank" rel="noopener noreferrer">TwitterSentiment</a>,
-    <a href="https://github.com/mohitranka/Speechify" target="_blank" rel="noopener noreferrer">Speechify</a>, and
-    <a href="https://github.com/mohitranka/mDataRecovery" target="_blank" rel="noopener noreferrer">mDataRecovery</a>.
-    You can explore more on my <a href="https://github.com/mohitranka" target="_blank" rel="noopener noreferrer">GitHub</a>.
-</p>
+        <p>I've consolidated diverse data sources into a near-real-time platform at <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a>, led the web launch of <a href="https://www.postman.com" target="_blank" rel="noopener noreferrer">Postman</a>, and built identity and SSO systems at <a href="https://www.booking.com" target="_blank" rel="noopener noreferrer">Booking.com</a>.</p>
 
-<p>
-    I live in Bangalore, India. I hold a B.Tech. from Vellore Institute of Technology.
-</p>
+        <p>Some writing from earlier years:</p>
 
-<hr>
+        <ul>
+            {% for article in articles[:5] %}
+            <li><a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a></li>
+            {% else %}
+            <li><a href="{{ SITEURL }}/blog/evaluating-ai-systems-in-production/">Evaluating AI systems in production</a></li>
+            <li><a href="{{ SITEURL }}/blog/platforms-that-survive-real-traffic/">Platforms that survive real traffic</a></li>
+            {% endfor %}
+        </ul>
 
-<h3>Writing</h3>
-<p>Some of my writing includes:</p>
-
-<ul class="article-list">
-    {% for article in articles[:5] %}
-    <li class="article-item">
-        <a href="{{ SITEURL }}/{{ article.url }}" class="article-title">{{ article.title }}</a>
-        <span class="article-meta">{{ article.locale_date }}</span>
-    </li>
-    {% endfor %}
-</ul>
-
-<p>
-    You can read all my <a href="{{ SITEURL }}/blog.html">writing</a>, view my code on <a href="https://github.com/mohitranka" target="_blank" rel="noopener noreferrer">GitHub</a>, follow me on <a href="https://www.linkedin.com/in/mohit-ranka/" target="_blank" rel="noopener noreferrer">LinkedIn</a>, or <a href="mailto:mohitranka@gmail.com">reach out</a> via email.
-</p>
+        <p>You can <a href="{{ SITEURL }}/blog.html">read more writing</a>, browse my <a href="https://github.com/mohitranka" target="_blank" rel="noopener noreferrer">code</a>, or <a href="https://www.linkedin.com/in/mohit-ranka" target="_blank" rel="noopener noreferrer">connect on LinkedIn</a>. <a href="mailto:mohitranka@gmail.com">Reach out</a> if interested.</p>
 {% endblock %}

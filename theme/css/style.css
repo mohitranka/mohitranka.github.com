@@ -254,3 +254,34 @@ body {
     background: rgba(129, 140, 248, 0.25);
   }
 }
+
+/* — Ordered lists in articles — */
+.entry-content ol {
+  margin: 12px 0 20px 1.25rem;
+  padding: 0;
+  color: var(--fg-secondary);
+  font-size: 0.9375rem;
+  line-height: 1.75;
+}
+
+.entry-content ol li {
+  padding: 2px 0;
+  color: var(--fg-secondary);
+}
+
+.entry-content ul {
+  list-style: disc;
+  margin: 12px 0 20px 1.25rem;
+  padding: 0;
+}
+
+.entry-content ul li {
+  padding: 2px 0;
+  color: var(--fg-secondary);
+  font-size: 0.9375rem;
+  line-height: 1.75;
+}
+
+.entry-content h2 {
+  color: var(--fg);
+}

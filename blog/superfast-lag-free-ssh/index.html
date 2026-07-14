@@ -1,56 +1,91 @@
 <!DOCTYPE html>
+
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Superfast lag-free SSH | Mohit Ranka</title>
-    <link rel="stylesheet" href="/theme/css/style.css">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Superfast lag-free SSH — Mohit Ranka</title>
+<meta content="A tip to speed up commands on ssh significantly, especially for long running sessions. (Note - All the instructions are only for Ubuntu 12.04)" name="description"/>
+<meta content="Mohit Ranka" name="author"/>
+<meta content="index, follow" name="robots"/>
+<link href="https://www.mohitranka.com/blog/superfast-lag-free-ssh/" rel="canonical"/>
+<meta content="article" property="og:type"/>
+<meta content="Mohit Ranka" property="og:site_name"/>
+<meta content="en_US" property="og:locale"/>
+<meta content="https://www.mohitranka.com/blog/superfast-lag-free-ssh/" property="og:url"/>
+<meta content="Superfast lag-free SSH" property="og:title"/>
+<meta content="A tip to speed up commands on ssh significantly, especially for long running sessions. (Note - All the instructions are only for Ubuntu 12.04)" property="og:description"/>
+<meta content="2013-07-02T16:06:00+05:30" property="article:published_time"/>
+<meta content="Mohit Ranka" property="article:author"/>
+
+<meta content="Superfast lag-free SSH" name="twitter:title"/>
+<meta content="A tip to speed up commands on ssh significantly, especially for long running sessions. (Note - All the instructions are only for Ubuntu 12.04)" name="twitter:description"/>
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Superfast lag-free SSH",
+  "description": "A tip to speed up commands on ssh significantly, especially for long running sessions. (Note - All the instructions are only for Ubuntu 12.04)",
+  "url": "https://www.mohitranka.com/blog/superfast-lag-free-ssh/",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.mohitranka.com/blog/superfast-lag-free-ssh/"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Mohit Ranka",
+    "url": "https://www.mohitranka.com/"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "Mohit Ranka",
+    "url": "https://www.mohitranka.com/"
+  },
+  "inLanguage": "en",
+  "isPartOf": {
+    "@type": "Blog",
+    "name": "Writing — Mohit Ranka",
+    "url": "https://www.mohitranka.com/blog.html"
+  },
+  "datePublished": "2013-07-02T16:06:00+05:30",
+  "dateModified": "2013-07-02T16:06:00+05:30",
+  "image": "https://www.mohitranka.com/theme/images/og.png"
+}</script>
+<meta content="https://www.mohitranka.com/theme/images/og.png" property="og:image"/><meta content="1200" property="og:image:width"/><meta content="630" property="og:image:height"/><meta content="summary_large_image" name="twitter:card"/><meta content="https://www.mohitranka.com/theme/images/og.png" name="twitter:image"/><link href="/theme/css/style.css" rel="stylesheet"/>
 </head>
-
 <body>
-    <main>
-        <h1><a href="/" style="text-decoration:none;">Mohit Ranka</a></h1>
-
+<main>
+<h1><a href="/" style="text-decoration:none;">Mohit Ranka</a></h1>
 <article>
-    <header>
-        <h1 class="article-title">Superfast lag-free SSH</h1>
-        <div class="article-meta">
-            <time datetime="2013-07-02T16:06:00+05:30">Tue 02 July 2013</time>
-            • <a href="https://mohitranka.github.io/category/blog.html">Blog</a>
-        </div>
-    </header>
-
-    <div class="entry-content">
-        <p>A tip to speed up commands on ssh significantly, especially for long running sessions.
-(Note &ndash; All the instructions are only for Ubuntu 12.04)</p>
-
+<header>
+<h1 class="article-title">Superfast lag-free SSH</h1>
+<div class="article-meta">
+<time datetime="2013-07-02T16:06:00+05:30">Tue 02 July 2013</time>
+            • <a href="https://www.mohitranka.com/blog.html">Blog</a>
+</div>
+</header>
+<div class="entry-content">
+<p>A tip to speed up commands on ssh significantly, especially for long running sessions.
+(Note – All the instructions are only for Ubuntu 12.04)</p>
 <ol>
 <li>Put the following in ~/.ssh/config</li>
 </ol>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'> Host *
-</span><span class='line'>    ControlMaster auto
-</span><span class='line'>    ControlPath ~/.ssh/auth/%r@%h:%p
-</span><span class='line'>    ControlPersist yes</span></code></pre></td></tr></table></div></figure>
-
+<figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class=""><span class="line"> Host *
+</span><span class="line">    ControlMaster auto
+</span><span class="line">    ControlPath ~/.ssh/auth/%r@%h:%p
+</span><span class="line">    ControlPersist yes</span></code></pre></td></tr></table></div></figure>
 <ol>
 <li>chmod 600 ~/.ssh/config</li>
 <li>mkdir ~/.ssh/auth</li>
 </ol>
-
 <p>and Voila!</p>
-
 <p>In my testing, the ssh connect and exit time to a test instance, dropped from 5.25-5.28 sec to 0.84-0.87 sec.</p>
-    </div>
+</div>
 </article>
-
-        <p style="margin-top:40px;"><a href="/">← Home</a></p>
-    </main>
+<p style="margin-top:40px;"><a href="/">← Home</a></p>
+</main>
 </body>
-
 </html>

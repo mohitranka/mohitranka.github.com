@@ -39,10 +39,18 @@ YEAR_ARCHIVE_SAVE_AS = 'blog/{date:%Y}/index.html'
 MONTH_ARCHIVE_SAVE_AS = 'blog/{date:%Y}/{date:%m}/index.html'
 
 # Static paths
-STATIC_PATHS = ['images', 'extra/CNAME', 'extra/robots.txt']
+STATIC_PATHS = [
+    'images',
+    'extra/CNAME',
+    'extra/robots.txt',
+    'extra/llms.txt',
+    'extra/llms-full.txt',
+]
 EXTRA_PATH_METADATA = {
     'extra/CNAME': {'path': 'CNAME'},
     'extra/robots.txt': {'path': 'robots.txt'},
+    'extra/llms.txt': {'path': 'llms.txt'},
+    'extra/llms-full.txt': {'path': 'llms-full.txt'},
 }
 
 

@@ -1,16 +1,59 @@
 {% extends "base.html" %}
 
-{% block title %}mohit ranka | {{ article.title }}{% endblock %}
+{% block title %}{{ article.title }} — {{ SITENAME }}{% endblock %}
+{% block description %}{{ article.summary|striptags|truncate(160) }}{% endblock %}
+{% block canonical %}{{ SITEURL }}/{{ article.url }}{% endblock %}
+{% block og_type %}article{% endblock %}
+{% block og_url %}{{ SITEURL }}/{{ article.url }}{% endblock %}
+{% block og_title %}{{ article.title }}{% endblock %}
+{% block og_description %}{{ article.summary|striptags|truncate(160) }}{% endblock %}
+{% block twitter_title %}{{ article.title }}{% endblock %}
+{% block twitter_description %}{{ article.summary|striptags|truncate(160) }}{% endblock %}
+
+{% block head_extra %}
+<meta property="article:published_time" content="{{ article.date.isoformat() }}">
+<meta property="article:author" content="{{ AUTHOR }}">
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": {{ article.title|tojson }},
+    "description": {{ article.summary|striptags|truncate(160)|tojson }},
+    "url": "{{ SITEURL }}/{{ article.url }}",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "{{ SITEURL }}/{{ article.url }}"
+    },
+    "datePublished": "{{ article.date.isoformat() }}",
+    "dateModified": "{{ (article.modified or article.date).isoformat() }}",
+    "author": {
+        "@type": "Person",
+        "name": "{{ AUTHOR }}",
+        "url": "{{ SITEURL }}/"
+    },
+    "publisher": {
+        "@type": "Person",
+        "name": "{{ AUTHOR }}",
+        "url": "{{ SITEURL }}/"
+    },
+    "inLanguage": "en",
+    "isPartOf": {
+        "@type": "Blog",
+        "name": "Writing — {{ SITENAME }}",
+        "url": "{{ SITEURL }}/blog.html"
+    }
+}
+</script>
+{% endblock %}
 
 {% block content %}
+        <h1><a href="{{ SITEURL }}/" style="text-decoration:none;">{{ SITENAME }}</a></h1>
+
 <article>
     <header>
-        <h1 class="font-medium text-xl mb-1 leading-13">{{ article.title }}</h1>
-        <div class="article-meta" style="margin-bottom: 2.5rem;">
+        <h1 class="article-title">{{ article.title }}</h1>
+        <div class="article-meta">
             <time datetime="{{ article.date.isoformat() }}">{{ article.locale_date }}</time>
-            {% if article.category %}
-            • <a href="{{ SITEURL }}/{{ article.category.url }}" class="no-underline">{{ article.category }}</a>
-            {% endif %}
         </div>
     </header>
 
