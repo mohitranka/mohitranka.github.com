@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}mohit ranka{% endblock %}
+
+{% block content %}
+<h1 class="font-medium text-xl mb-1">mohit ranka</h1>
+
+<p>
+    I’m an engineering leader focused on data platforms, developer tooling, and distributed systems.
+    Previously, I led engineering teams at <strong>LinkedIn</strong> (2022–2023), <strong>Postman</strong> (2019–2022),
+    and <strong>Booking.com</strong> (2017–2019).
+</p>
+
+<p>
+    My sweet spot is turning fuzzy product questions into pragmatic, well-instrumented systems.
+    I value platform leverage, end-to-end ownership, and shipping work that scales.
+</p>
+
+<p>
+    On the side, I build developer tools and pipelines. Some of my experiments include
+    <a href="https://github.com/mohitranka/TwitterSentiment" target="_blank" rel="noopener noreferrer">TwitterSentiment</a>,
+    <a href="https://github.com/mohitranka/Speechify" target="_blank" rel="noopener noreferrer">Speechify</a>, and
+    <a href="https://github.com/mohitranka/mDataRecovery" target="_blank" rel="noopener noreferrer">mDataRecovery</a>.
+    You can explore more on my <a href="https://github.com/mohitranka" target="_blank" rel="noopener noreferrer">GitHub</a>.
+</p>
+
+<p>
+    I live in Bangalore, India. I hold a B.Tech. from Vellore Institute of Technology.
+</p>
+
+<hr>
+
+<h3>Writing</h3>
+<p>Some of my writing includes:</p>
+
+<ul class="article-list">
+    {% for article in articles[:5] %}
+    <li class="article-item">
+        <a href="{{ SITEURL }}/{{ article.url }}" class="article-title">{{ article.title }}</a>
+        <span class="article-meta">{{ article.locale_date }}</span>
+    </li>
+    {% endfor %}
+</ul>
+
+<p>
+    You can read all my <a href="{{ SITEURL }}/blog.html">writing</a>, view my code on <a href="https://github.com/mohitranka" target="_blank" rel="noopener noreferrer">GitHub</a>, follow me on <a href="https://www.linkedin.com/in/mohit-ranka/" target="_blank" rel="noopener noreferrer">LinkedIn</a>, or <a href="mailto:mohitranka@gmail.com">reach out</a> via email.
+</p>
+{% endblock %}

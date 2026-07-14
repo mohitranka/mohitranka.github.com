@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>mohit ranka | Superfast lag-free SSH</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/theme/css/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <header class="site-header">
+            <div class="site-title font-medium">
+                <a href="/">mohit ranka</a>
+            </div>
+            <nav class="site-nav">
+                <a href="/">home</a>
+                <a href="/blog.html">writing</a>
+                <a href="/contact/">contact</a>
+            </nav>
+        </header>
+
+        <main>
+<article>
+    <header>
+        <h1 class="font-medium text-xl mb-1 leading-13">Superfast lag-free SSH</h1>
+        <div class="article-meta" style="margin-bottom: 2.5rem;">
+            <time datetime="2013-07-02T16:06:00+05:30">Tue 02 July 2013</time>
+            • <a href="/category/blog.html" class="no-underline">Blog</a>
+        </div>
+    </header>
+
+    <div class="entry-content">
+        <p>A tip to speed up commands on ssh significantly, especially for long running sessions.
+(Note &ndash; All the instructions are only for Ubuntu 12.04)</p>
+
+<ol>
+<li>Put the following in ~/.ssh/config</li>
+</ol>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'> Host *
+</span><span class='line'>    ControlMaster auto
+</span><span class='line'>    ControlPath ~/.ssh/auth/%r@%h:%p
+</span><span class='line'>    ControlPersist yes</span></code></pre></td></tr></table></div></figure>
+
+<ol>
+<li>chmod 600 ~/.ssh/config</li>
+<li>mkdir ~/.ssh/auth</li>
+</ol>
+
+<p>and Voila!</p>
+
+<p>In my testing, the ssh connect and exit time to a test instance, dropped from 5.25-5.28 sec to 0.84-0.87 sec.</p>
+    </div>
+</article>
+        </main>
+    </div>
+</body>
+
+</html>

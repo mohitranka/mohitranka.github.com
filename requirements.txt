@@ -1,0 +1,5 @@
+pelican
+markdown
+beautifulsoup4
+lxml
+ghp-import

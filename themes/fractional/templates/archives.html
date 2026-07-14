@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}writing | {{ SITENAME }}{% endblock %}
+
+{% block content %}
+<h1 class="font-medium text-xl mb-1">writing</h1>
+<a class="meta no-underline" href="{{ SITEURL }}/" style="display: block; margin-top: -1rem; margin-bottom: 2rem;">by mohit ranka</a>
+
+<p class="meta" style="margin-bottom: 2rem;">
+    Older writing from my earlier developer years. Newer work is focused on architecture, infra, and AI systems.
+</p>
+
+<ul class="article-list">
+    {% for article in dates %}
+    <li class="article-item">
+        <a href="{{ SITEURL }}/{{ article.url }}" class="article-title">{{ article.title }}</a>
+        <span class="article-meta">{{ article.locale_date }}</span>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
