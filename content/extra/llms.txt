@@ -22,8 +22,6 @@ Site: https://www.mohitranka.com
 
 ## Writing
 
-- [Evaluating AI systems in production](https://www.mohitranka.com/blog/evaluating-ai-systems-in-production/): Practical rubric for production AI readiness — evals, failure modes, ownership, and cost (2026)
-- [Platforms that survive real traffic](https://www.mohitranka.com/blog/platforms-that-survive-real-traffic/): How to design data platforms and distributed backends that hold up under real load and multi-team use (2026)
 - [Superfast lag-free SSH](https://www.mohitranka.com/blog/superfast-lag-free-ssh/): SSH ControlMaster tips for faster long-running remote sessions (2013)
 - [RDBMS vs. NOSQL?](https://www.mohitranka.com/blog/rdbms-vs-nosql/): When relational databases fit highly available ecommerce platforms and when they do not (2013)
 - [One click website deployment with Octopress](https://www.mohitranka.com/blog/one-click-website-deployment-with-octopress/): Notes on revamping a personal site with Octopress and GitHub Pages (2013)

@@ -82,9 +82,6 @@
         <ul>
             {% for article in articles[:5] %}
             <li><a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a></li>
-            {% else %}
-            <li><a href="{{ SITEURL }}/blog/evaluating-ai-systems-in-production/">Evaluating AI systems in production</a></li>
-            <li><a href="{{ SITEURL }}/blog/platforms-that-survive-real-traffic/">Platforms that survive real traffic</a></li>
             {% endfor %}
         </ul>
 

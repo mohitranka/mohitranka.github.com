@@ -19,11 +19,11 @@ Postman
 , and built identity and SSO systems at
 Booking.com
 .
-Recent writing:
-Evaluating AI systems in production
-Platforms that survive real traffic
+Some writing from earlier years:
 Superfast lag-free SSH
 RDBMS vs. NOSQL?
+One click website deployment with Octopress
+The curse of the gifted
 What it means to work for a startup
 You can
 read more writing
@@ -39,11 +39,7 @@ if interested.
 URL: https://www.mohitranka.com/blog.html
 
 Mohit Ranka
-Writing on architecture, platforms, AI systems in production, and older essays from earlier developer years.
-Evaluating AI systems in production
-Jul 2026
-Platforms that survive real traffic
-Jul 2026
+Older writing from my earlier developer years. Newer work is focused on architecture, infrastructure, and AI systems.
 Superfast lag-free SSH
 Jul 2013
 RDBMS vs. NOSQL?
@@ -81,135 +77,6 @@ mohitranka@gmail.com
 ← Back
 
 ## Posts
-
-### Evaluating AI systems in production
-URL: https://www.mohitranka.com/blog/evaluating-ai-systems-in-production/
-Date: 2026-07-15
-
-Demos lie. Production does not.
-Most AI systems look impressive in a notebook and fragile in a product. The gap is rarely “the model is not smart enough.” It is usually evaluation, ownership, and the boring operational edges around a non-deterministic component.
-This is the rubric I use when someone asks whether an AI feature is ready to sit in front of real users.
-1. What is the product decision?
-Start with the decision the system is supposed to improve:
-Summarize this so a human can act faster?
-Classify this so routing happens correctly?
-Generate a draft that a human will edit?
-Answer a question with a citable source?
-If you cannot name the decision, you cannot name the failure. “Chat with our docs” is not a decision. “Reduce time-to-first-helpful-answer for support L1 without inventing policy” is.
-2. What does “correct” mean?
-For classical systems, correctness is often binary. For AI systems, you need an evaluation story:
-Golden sets
-for known critical cases
-Regression sets
-for bugs you already fixed
-Online signals
-for user repair, abandon, and escalation
-Human review loops
-for high-stakes outputs
-If the only evaluation is “the founders liked the demo,” you do not have a production system. You have a prototype with confidence.
-3. How does it fail, and how loudly?
-I care less about average quality and more about the shape of failure:
-Does it refuse when uncertain, or invent with confidence?
-Can you detect low-quality output before the user does?
-Is there a safe fallback (search, template, human queue)?
-Are latency tails acceptable when the model or tool chain stalls?
-Silent failure is worse than slow failure. Users will trust a confident wrong answer longer than they should.
-4. Can you attribute and audit?
-For anything customer-facing or policy-adjacent, ask:
-What context was retrieved?
-Which tools ran?
-Which model and prompt version produced the answer?
-Can you replay the decision later?
-Without attribution, you cannot debug, cannot improve, and cannot explain yourself when something goes wrong.
-5. Who owns the system after launch?
-AI features often get built by a temporary squad and abandoned into a team that never agreed to the operational load. Before launch:
-Who is on call?
-Who owns prompt/model changes?
-Who owns evaluation drift?
-Who pays for the traffic spike when the feature works?
-If ownership is fuzzy, cost and quality will both drift.
-6. Is the cost curve acceptable at success?
-Success is a load test. The unit economics that look fine at 100 queries/day can look absurd at 100k. Model choice, caching, retrieval breadth, and tool calls all need a cost envelope
-assuming the feature is popular
-.
-Design for success costs, not only for launch-week costs.
-7. Prefer boring architecture around a non-boring core
-I like AI systems that keep the weirdness in one place:
-Deterministic orchestration around a probabilistic model
-Explicit tool interfaces with timeouts and budgets
-Clear separation between retrieval, generation, and policy
-Versioned prompts and models the way you version services
-You do not need a novel architecture diagram. You need a system operators can reason about when the output is wrong at 2 a.m.
-A launch gate I actually use
-Ship only when you can answer yes to most of these:
-Product decision is explicit
-Critical cases are covered by evals
-Failure modes are visible and have fallbacks
-Replay/attribution exists for production traffic
-On-call ownership is named
-Cost at 10× traffic is still acceptable
-Users can recover when the system is wrong
-Everything else is polish.
-AI can be an extraordinary lever. It is still software that has to survive real traffic, real people, and real consequences. Treat it that way and the demos start turning into systems.
-
----
-
-### Platforms that survive real traffic
-URL: https://www.mohitranka.com/blog/platforms-that-survive-real-traffic/
-Date: 2026-07-15
-
-Building a platform is easy in a slide deck. Surviving real traffic is harder: partial failures, messy ownership, and product questions that refuse to stay still.
-I have spent a large part of my career on systems that sit under other systems — data platforms, identity and SSO, developer tooling, and the kind of backends teams only notice when they break. The pattern that keeps recurring is simple:
-clarity beats cleverness when the blast radius is large
-.
-Start from the job, not the architecture diagram
-The useful question is rarely “Kafka or Kinesis?” or “monolith or microservices?” It is:
-What decision does this system make possible?
-Who is on call when it lies?
-What is the cost of being wrong for five minutes vs five hours?
-If you cannot answer those, the diagram is decoration.
-At LinkedIn, consolidating diverse data sources into a near-real-time platform was less about a single technology choice and more about making downstream consumers trustworthy. At Booking.com, identity and SSO work was less about protocol purity and more about not stranding real people mid-login. At Postman, the web launch was less about shipping a UI and more about a path that would still make sense as usage grew.
-Prefer boring contracts
-Platforms age better when their external contracts are boring:
-Stable schemas with explicit versioning
-Explicit SLOs instead of implied “it feels fast”
-Clear ownership of freshness, correctness, and recovery
-Operability first: metrics, traces, and runbooks before the clever abstraction
-Clever internal design is fine. Clever
-interfaces
-are a tax other teams pay forever.
-Design for partial failure as the default
-Real traffic does not fail cleanly. A dependency times out. A region degrades. A consumer double-writes. A backfill races an online path.
-Systems that survive tend to:
-Degrade to a known safe mode rather than invent a new failure mode
-Make retries idempotent and observable
-Separate “cannot complete” from “do not know”
-Treat data quality as a first-class product surface, not a weekend chore
-Optimize for multi-team leverage
-The point of a platform is leverage. That means your success metric is not “we shipped a service.” It is “another team shipped faster
-and
-slept better.”
-That changes design priorities:
-Self-serve over ticket-driven access
-Guardrails over unrestricted power
-Documentation that answers “what happens if I do the wrong thing?”
-Migration paths that do not require heroic freezes
-A short checklist I still use
-When reviewing a platform proposal, I ask:
-What is the unit of correctness?
-What is the unit of failure isolation?
-Who can break this without knowing they did?
-How do we know the data is late vs wrong vs incomplete?
-What is the rollback story for schema
-and
-traffic?
-Can a new team onboard without a tribal walkthrough?
-If the answers are vague, the system will eventually become a museum of special cases.
-Clarity over cleverness
-I prefer systems that a strong engineer can reason about under stress. Cleverness is not the enemy — unaccountable cleverness is. Long-term impact usually comes from making the next decision easier for the people who inherit the system, not from impressing the people in the design review.
-That is the work I still like most: turning fuzzy product questions into pragmatic, well-instrumented systems that survive real traffic and real people.
-
----
 
 ### Superfast lag-free SSH
 URL: https://www.mohitranka.com/blog/superfast-lag-free-ssh/
