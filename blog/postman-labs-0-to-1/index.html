@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Incubating 0→1 beside a mature product — Mohit Ranka</title>
+    <meta name="description" content="When I was at Postman, the core product was already the default API client for a huge HTTP/HTTPS world—on the order of tens of millions of developers on...">
+    <meta name="author" content="Mohit Ranka">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.mohitranka.com/blog/postman-labs-0-to-1/">
+    <link rel="alternate" type="application/atom+xml" title="Mohit Ranka" href="https://www.mohitranka.com/atom.xml">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Mohit Ranka">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:url" content="https://www.mohitranka.com/blog/postman-labs-0-to-1/">
+    <meta property="og:title" content="Incubating 0→1 beside a mature product">
+    <meta property="og:description" content="When I was at Postman, the core product was already the default API client for a huge HTTP/HTTPS world—on the order of tens of millions of developers on...">
+    <meta property="og:image" content="https://www.mohitranka.com/theme/images/og.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Incubating 0→1 beside a mature product">
+    <meta name="twitter:description" content="When I was at Postman, the core product was already the default API client for a huge HTTP/HTTPS world—on the order of tens of millions of developers on...">
+    <meta name="twitter:image" content="https://www.mohitranka.com/theme/images/og.png">
+    <link rel="stylesheet" href="https://www.mohitranka.com/theme/css/style.css">
+<meta property="article:published_time" content="2021-06-15T10:00:00+05:30">
+<meta property="article:author" content="Mohit Ranka">
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Incubating 0\u21921 beside a mature product",
+    "description": "When I was at Postman, the core product was already the default API client for a huge HTTP/HTTPS world\u2014on the order of tens of millions of developers on...",
+    "url": "https://www.mohitranka.com/blog/postman-labs-0-to-1/",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.mohitranka.com/blog/postman-labs-0-to-1/"
+    },
+    "datePublished": "2021-06-15T10:00:00+05:30",
+    "dateModified": "2021-06-15T10:00:00+05:30",
+    "author": {
+        "@type": "Person",
+        "name": "Mohit Ranka",
+        "url": "https://www.mohitranka.com/"
+    },
+    "publisher": {
+        "@type": "Person",
+        "name": "Mohit Ranka",
+        "url": "https://www.mohitranka.com/"
+    },
+    "inLanguage": "en",
+    "isPartOf": {
+        "@type": "Blog",
+        "name": "Writing — Mohit Ranka",
+        "url": "https://www.mohitranka.com/blog.html"
+    }
+}
+</script>
+</head>
+
+<body>
+    <main>
+        <h1><a href="https://www.mohitranka.com/" style="text-decoration:none;">Mohit Ranka</a></h1>
+
+<article>
+    <header>
+        <h1 class="article-title">Incubating 0→1 beside a mature product</h1>
+        <div class="article-meta">
+            <time datetime="2021-06-15T10:00:00+05:30">Tue 15 June 2021</time>
+        </div>
+    </header>
+
+    <div class="entry-content">
+        <p>When I was at Postman, the core product was already the default API client for a huge HTTP/HTTPS world—on the order of tens of millions of developers on desktop. That success created a sharp problem: <strong>how do you explore what comes after HTTP without slowing the product everyone already depends on?</strong></p>
+<p>Postman Labs was our answer: a small unit with a charter to incubate 0→1 work—new protocols and paradigms—without turning every experiment into a core-roadmap hostage situation.</p>
+<!--more-->
+
+<h2>The challenge: the market moved past “REST in a GUI”</h2>
+<p>Developers were increasingly living with:</p>
+<ul>
+<li><strong>WebSockets</strong> for persistent, bidirectional sessions  </li>
+<li><strong>gRPC</strong> for efficient, schema-driven service APIs  </li>
+<li><strong>GraphQL</strong> and other non-CRUD shapes of interface  </li>
+</ul>
+<p>Internally we had ideas. What we lacked was a structured way to <strong>validate, build, and kill or graduate</strong> them while the core team stayed focused on the desktop product’s quality and scale.</p>
+<p>Putting every bet into the main feature factory would have meant either:</p>
+<ul>
+<li>starving core reliability and UX, or  </li>
+<li>shipping “innovation” at the speed of a mature backlog.</li>
+</ul>
+<p>Labs existed to refuse that false choice.</p>
+<h2>Structure for speed (and containment)</h2>
+<p>We did not invent another feature team with the same process tax as core. Labs was intentionally different:</p>
+<ol>
+<li><strong>Smaller team</strong> drawn from engineers who already knew Postman’s product DNA.  </li>
+<li><strong>Less process theater</strong> — lean experiments instead of full SDLC cosplay for every spike.  </li>
+<li><strong>One North Star metric per initiative</strong> — a single definition of success so debates stayed grounded.  </li>
+<li><strong>Explicit separation</strong> from core delivery so a failed experiment did not become a multi-quarter core commitment by accident.</li>
+</ol>
+<p>Charter in two axes:</p>
+<ul>
+<li><strong>Breadth</strong> — protocols and shapes beyond HTTP.  </li>
+<li><strong>Depth</strong> — personas and workflows (testing, automation, CI-shaped use) that the HTTP client alone did not own.</li>
+</ul>
+<p>Independence was not isolation from users. It was isolation from the wrong kind of backlog pressure.</p>
+<h2>A three-phase model that de-risked 0→1</h2>
+<p>Every Labs initiative had to earn the next phase:</p>
+<h3>Phase 1 — Feasibility and market validation</h3>
+<p>Customer conversations, lightweight proofs, honest “who hurts without this?” If the answer was only “it would be cool,” it did not proceed.</p>
+<h3>Phase 2 — MVP and dogfooding</h3>
+<p>Internal builds used by Postman’s own engineers. Usability and correctness issues showed up before a public audience.</p>
+<h3>Phase 3 — Limited beta and public validation</h3>
+<p>Constrained rollout, measure adoption and engagement, then decide: graduate into the main product, iterate, or stop.</p>
+<p>That sequence sounds obvious. The discipline is stopping between phases. Core roadmaps often skip phase 1 and call a half-built feature a launch.</p>
+<h2>WebSockets: persistent sessions are not “requests with extra steps”</h2>
+<p>WebSockets were an early Labs bet because real-time systems (chat, feeds, IoT-style control planes, live tooling) do not fit the request/response mental model Postman had optimized for.</p>
+<p><strong>Hard parts:</strong></p>
+<ul>
+<li>Long-lived bidirectional connections instead of discrete calls  </li>
+<li>Auth flows that must hold for a session, not only a single hit  </li>
+<li>UX for streams of events over time, not one response panel  </li>
+</ul>
+<p><strong>What we built toward:</strong> a first-class WebSocket client experience—connect, send/receive, inspect event history, support practical auth patterns.</p>
+<p><strong>Outcome:</strong> WebSockets did not stay a lab toy; support graduated into Postman’s broader API development surface. That graduation path was the point of Labs.</p>
+<h2>gRPC: schemas and streams in a product trained on text HTTP</h2>
+<p>gRPC was growing fast in backend-heavy environments. Postman’s muscle memory was text-centric HTTP. gRPC forced different questions:</p>
+<ul>
+<li>How do users work with <strong>Protobuf</strong> contracts inside the product?  </li>
+<li>How do unary and streaming calls show up in a composer UX?  </li>
+<li>How do serialization mistakes become debuggable instead of opaque binary pain?</li>
+</ul>
+<p><strong>Execution themes:</strong> schema-aware composition, streaming-aware request/response handling, and making “what did I just send?” inspectable for developers who live in Postman daily.</p>
+<p><strong>Outcome:</strong> gRPC testing/debugging became a real product capability in the same family as REST workflows—not a separate science project users had to leave Postman for.</p>
+<h2>What scaled beyond the first bets</h2>
+<p>When early graduates worked, Labs stopped being only a temporary squad. The incubation pattern—validate, dogfood, beta, graduate—became a reusable company muscle. Later product bets (including automation-shaped work such as Flows-class ideas) could reuse the same organizational shape: <strong>explore beside core, then merge what earns users.</strong></p>
+<p>Eventually Labs-shaped work attracted clearer funding and leadership attention. That is the healthy end state: not a permanent rebel base, but a proven path for 0→1 inside a company that also has to protect a mature product.</p>
+<h2>What I would repeat as an EM</h2>
+<ol>
+<li><strong>Separate exploration capacity from core SLA capacity</strong> — or core always wins and innovation becomes slideware.  </li>
+<li><strong>One success metric per bet</strong> — multi-metric dashboards hide kill decisions.  </li>
+<li><strong>Dogfood before marketing</strong> — especially for developer tools; your engineers are harsh, useful users.  </li>
+<li><strong>Graduation criteria in writing</strong> — “done in Labs” must mean something operationally.  </li>
+<li><strong>Protect the team from identity crisis</strong> — Labs is not “the people who do side quests”; it is a product strategy role.</li>
+</ol>
+<h2>What I would avoid</h2>
+<ul>
+<li>Innovation theater with no kill switch  </li>
+<li>Hiding Labs work so core is surprised at graduation  </li>
+<li>Measuring success only by launches, not by retained use  </li>
+<li>Staffing Labs only with people core “can spare” forever  </li>
+</ul>
+<h2>Closing</h2>
+<p>Incubating 0→1 beside a mature product is a leadership design problem: process, incentives, and graduation rules—not only prototype velocity.</p>
+<p>Postman Labs worked when it had a <strong>narrow charter</strong>, <strong>phased validation</strong>, and a path for WebSockets, gRPC, and similar bets to become real product surfaces without forcing the entire company to pretend it was still a startup with nothing to lose.</p>
+<p>If your core product is already loved, that is not a reason to stop exploring. It is a reason to explore <strong>on purpose</strong>.</p>
+    </div>
+</article>
+    </main>
+</body>
+
+</html>

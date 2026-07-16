@@ -4,97 +4,99 @@ Category: Blog
 Slug: near-real-time-is-a-product-promise
 Tags: data-platforms, distributed-systems, reliability
 
-Near-real-time is one of the most over-claimed and under-specified phrases in data engineering. Teams buy a streaming system, wire a topic to a consumer, and declare victory. The product still lies to users for minutes. Support still escalates. Finance still reconciles offline. The cluster is healthy. The promise is not.
+“Near-real-time” is often used as a synonym for “we bought a streaming stack.” On GTM data platforms, that confusion is expensive. The product promise is about **whether a decision-maker can trust a number in time**—not whether an event log is busy.
+
+At LinkedIn, the Enterprise Data Platform (EDP) was intended as the governed center for GTM datasets. BI teams on Power BI and Tableau still ran on Hadoop-era batch paths. They already had data. What they did not have was a reason to treat EDP as the path that made GTM analytics true, timely, and durable as legacy pipelines were marked for deprecation.
+
+That gap is a product-promise gap.
 
 <!--more-->
 
-## What users actually bought
+## What consumers actually bought
 
-When a product manager says "near-real-time," they rarely mean "events move through a log." They mean something like:
+When sales, marketing, or BI stakeholders ask for better data timing, they rarely mean “please introduce a new consumer group.” They mean things like:
 
-- A member sees an update within a few seconds of a write elsewhere.
-- A dashboard does not contradict the system of record for longer than an agreed window.
-- Downstream teams can act on data before the business decision expires.
+- The dashboard does not contradict the operational truth for long.
+- A GTM metric used in a weekly motion is not secretly a stale extract.
+- There is one place to stand when two numbers disagree.
 
-Those are **product promises**. They have users, failure modes, and opportunity cost. Kafka, Flink, Spark Streaming, change-data-capture, and friends are **implementation options**. Confusing the two produces expensive architecture with soft outcomes.
+Those are promises to **named consumers**. For us, the critical early consumers included BI engineering and the GTM partners who lived in their dashboards. If those consumers do not move, the platform’s internal latency graphs are cosplay.
 
-I have spent a large part of my career on platforms that stitch many sources into something other teams can trust. The pattern that fails most often is technical excellence aimed at the wrong contract.
-
-## A useful definition
+## A definition that forces honesty
 
 I use a boring definition:
 
-> Near-real-time means: for a named dataset and a named consumer, the **age of usable data** stays under a **freshness SLO**, under normal load, with a documented degradation path when it does not.
+> For dataset *D* and consumer *C*, the promise is that the **age of usable data** at the moment *C* acts stays inside an agreed bound—under normal conditions—with a clear story when it does not.
 
-Unpack that:
+Unpack it in platform language:
 
-- **Named dataset**: not "the platform," not "events." *User profile projections*, *billing entitlements*, *feed ranking features*.
-- **Named consumer**: product surface, ML training job, risk system, analytics mart. Different consumers tolerate different staleness.
-- **Age of usable data**: time from source commit to the moment a consumer can correctly act. Not produce latency. Not consumer lag alone.
-- **Freshness SLO**: a number with a percentile and an owner. "Usually fast" is not an SLO.
-- **Degradation path**: what the product does when the promise breaks—stale badge, fallback read, delayed feature, page the platform.
+- **Named dataset** — a sales or GTM entity teams recognize, not “the lake.”
+- **Named consumer** — Power BI workbook owners, Tableau extracts, revenue analytics—not “downstream.”
+- **Usable** — passes the governance and correctness bar, not merely “row arrived.”
+- **Agreed bound** — may start as a milestone (“on EDP before deprecation date, with acceptable query latency”) before it becomes a polished SLO.
+- **Failure story** — what the business does when the path is wrong: freeze a pipeline, pin a version, staff a war room—not “we’ll check the dashboard Monday.”
 
-If you cannot fill those fields, you do not have a near-real-time product. You have a pipeline hobby.
+If you cannot name *D* and *C*, you are not ready to sell near-real-time.
 
-## Where streaming systems help—and where they don't
+## Why “we can already get the data” kills platform promises
 
-Streaming is often the right tool when:
+The BI objection was rational: existing Hadoop-based jobs still produced outputs. From their seat, migration was risk without immediate upside.
 
-- The source naturally emits changes.
-- Multiple consumers need the same ordered history.
-- You care about continuous processing more than periodic bulk recompute.
-- Catch-up and replay are first-class operational needs.
+So the competing product was not another vendor. It was **the legacy batch path that still worked**. Near-real-time platforms lose to “good enough yesterday” until:
 
-Streaming is the wrong primary investment when:
+1. the old path has an end date,
+2. the new path is staffed for adopters,
+3. query performance after cutover is somebody’s on-call problem.
 
-- The real delay is source systems that only flush hourly.
-- Consumers batch by design (daily models, nightly finance).
-- Correctness requires multi-source joins that you have not modeled as timed windows or versioned snapshots.
-- You lack lineage, schema discipline, and on-call—so lag will be discovered by users first.
+We treated those as part of the promise design. EDP engineers helped migrate. Connectors reduced friction into Power BI and Tableau. Deprecation deadlines made dual-running finite. Performance work made “governed” not mean “slower.”
 
-I have seen teams replace a 15-minute batch job with a "real-time" pipeline and keep a 20-minute end-to-end delay because the bottleneck was an upstream approval queue and a downstream cache with a long TTL. The Kafka dashboard was green. The product was unchanged.
+Streaming could have been part of some paths. It was not the adoption strategy.
 
-## The hidden product decisions
+## Hidden decisions that are actually the product
 
-Near-real-time forces choices people prefer to leave implicit:
+### Where is the system of record?
 
-**1. What is the system of record?**  
-If two stores disagree, which one is allowed to win in the UI? If you cannot answer, "real-time sync" becomes "real-time conflict generation."
+If EDP and a legacy pipeline disagree, which number is allowed to win in a QBR deck? Until that is explicit, faster pipelines just produce faster arguments.
 
-**2. Is the promise best-effort or contractual?**  
-Best-effort freshness is a feature enhancement. Contractual freshness is a reliability problem with paging and executive attention. Do not market the second if you staffed the first.
+### Is the promise contractual or best-effort?
 
-**3. Who pays for fan-out?**  
-Every new consumer multiplies load, schema coupling, and incident surface. Platforms that treat every request as free become unmaintainable.
+Deprecating Hadoop paths is a contractual move: the company is choosing a continuity posture. Best-effort “please try EDP” will lose to local convenience forever.
 
-**4. What does "correct" mean while catching up?**  
-After an outage, is a 2-hour backlog replayed in order, sampled, skipped, or rebuilt from snapshots? Product behavior during catch-up is part of the design, not an ops footnote.
+### Who pays for fan-out?
 
-## A platform shape that works
+Every BI team and every GTM dataset multiplies support surface. Platforms that treat every new consumer as free eventually stop being able to keep any promise.
 
-The patterns that scale organizationally look less like "one mega topic" and more like:
+### What happens during catch-up and cutover?
 
-1. **Ingest with explicit source contracts** — schema, ownership, change policy, known delay characteristics.
-2. **A durable log or CDC trail where it earns its keep** — not everywhere by default.
-3. **Materialized products per consumer class** — serving stores optimized for access patterns, not one serving layer pretending to be universal.
-4. **Freshness and correctness signals next to latency** — lag is necessary, not sufficient.
-5. **Replay and rebuild as product features** — if you cannot rebuild, you cannot sleep.
+Migrations create windows where two truths coexist. The product promise must cover the dual-run period—or you will invent tribal knowledge in Slack.
 
-The job of a data platform team is not to own every consumer query. It is to make the path from source truth to trustworthy product views boring, measurable, and hard to misuse.
+## The shape that worked: phases, not a big-bang bus
 
-## Questions I ask before approving "let's go real-time"
+The useful architecture picture was organizational as much as technical:
 
-- What decision improves if this goes from 30 minutes to 30 seconds?
-- Which consumer will notice first if we miss the SLO, and how?
-- What is the p95 source delay *before* our system exists?
-- Can we rebuild the dataset from scratch in a known time budget?
-- Who is on-call for freshness misses—and do they have a runbook that is not "restart the consumer"?
-- What is the cost model at 3× and 10× event volume?
+0. **Executive buy-in** — GTM data consolidation as strategy, not a side project.  
+1. **MVP on high-value sales datasets** — prove the promise where pain is visible.  
+2. **Expand across sales and revenue consumers** — widen the interface only after the path works.  
+3. **Broader GTM standardization** — reduce snowflake pipelines.  
+4. **Governance and optimization** — make the default path the boring path.
 
-If the answers are vague, start with a tighter batch loop, better instrumentation, and a clearer ownership model. You can buy a cluster in an afternoon. You cannot buy a product promise that way.
+That sequence is how you keep a freshness/correctness promise while the org is still learning to trust the platform. “Put everything on a stream in quarter one” is usually a way to buy complexity before you have consumers.
+
+## Questions I ask before approving “let’s go real-time”
+
+- Which decision improves if this dataset gets younger—and who makes that decision?
+- What is the current path’s delay, really (including BI extracts and cache TTLs)?
+- What dies when we succeed—the legacy job, or only our spare time?
+- Who is staffed to migrate the first consumers?
+- What query latency is acceptable in the tools people actually use?
+- What do we measure weekly that a VP would recognize?
+
+If the answers are all technology choices, the promise is not ready.
 
 ## Closing
 
-Near-real-time is not a badge for your architecture diagram. It is a **promise about time, truth, and behavior under stress**. Streaming infrastructure can help you keep that promise. It cannot invent the promise for you.
+Near-real-time is not a badge for an architecture review. It is a **promise about time, truth, and behavior when truth is late**.
 
-If you are evaluating a "real-time platform" initiative, write the consumer-facing freshness contract first. Then choose the smallest architecture that can keep it—and prove it with metrics the product team actually feels.
+EDP’s lesson was blunt: the company does not get that promise when a platform exists. It gets that promise when critical consumers—here, BI on GTM data—run on the governed path, and the old batch defaults are allowed to end.
+
+Build streams when they earn their keep. Build the consumer promise first.

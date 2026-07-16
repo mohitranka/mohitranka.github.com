@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Introducing on-call without burning the team — Mohit Ranka</title>
+    <meta name="description" content="At Postman, my team owned a large-scale platform surface used by millions of developers. What we did not own—formally—was a predictable operational...">
+    <meta name="author" content="Mohit Ranka">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.mohitranka.com/blog/introducing-on-call-without-burnout/">
+    <link rel="alternate" type="application/atom+xml" title="Mohit Ranka" href="https://www.mohitranka.com/atom.xml">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Mohit Ranka">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:url" content="https://www.mohitranka.com/blog/introducing-on-call-without-burnout/">
+    <meta property="og:title" content="Introducing on-call without burning the team">
+    <meta property="og:description" content="At Postman, my team owned a large-scale platform surface used by millions of developers. What we did not own—formally—was a predictable operational...">
+    <meta property="og:image" content="https://www.mohitranka.com/theme/images/og.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Introducing on-call without burning the team">
+    <meta name="twitter:description" content="At Postman, my team owned a large-scale platform surface used by millions of developers. What we did not own—formally—was a predictable operational...">
+    <meta name="twitter:image" content="https://www.mohitranka.com/theme/images/og.png">
+    <link rel="stylesheet" href="https://www.mohitranka.com/theme/css/style.css">
+<meta property="article:published_time" content="2020-11-10T10:00:00+05:30">
+<meta property="article:author" content="Mohit Ranka">
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Introducing on-call without burning the team",
+    "description": "At Postman, my team owned a large-scale platform surface used by millions of developers. What we did not own\u2014formally\u2014was a predictable operational...",
+    "url": "https://www.mohitranka.com/blog/introducing-on-call-without-burnout/",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.mohitranka.com/blog/introducing-on-call-without-burnout/"
+    },
+    "datePublished": "2020-11-10T10:00:00+05:30",
+    "dateModified": "2020-11-10T10:00:00+05:30",
+    "author": {
+        "@type": "Person",
+        "name": "Mohit Ranka",
+        "url": "https://www.mohitranka.com/"
+    },
+    "publisher": {
+        "@type": "Person",
+        "name": "Mohit Ranka",
+        "url": "https://www.mohitranka.com/"
+    },
+    "inLanguage": "en",
+    "isPartOf": {
+        "@type": "Blog",
+        "name": "Writing — Mohit Ranka",
+        "url": "https://www.mohitranka.com/blog.html"
+    }
+}
+</script>
+</head>
+
+<body>
+    <main>
+        <h1><a href="https://www.mohitranka.com/" style="text-decoration:none;">Mohit Ranka</a></h1>
+
+<article>
+    <header>
+        <h1 class="article-title">Introducing on-call without burning the team</h1>
+        <div class="article-meta">
+            <time datetime="2020-11-10T10:00:00+05:30">Tue 10 November 2020</time>
+        </div>
+    </header>
+
+    <div class="entry-content">
+        <p>At Postman, my team owned a large-scale platform surface used by millions of developers. What we did not own—formally—was a <strong>predictable operational response</strong>. Production issues and public GitHub noise were handled ad hoc. Someone jumped in, or everyone hesitated. Retrospectives lacked a clear accountable role. The system worked until it did not, and then it worked by heroics.</p>
+<p>We needed on-call. We also needed engineers who still wanted to build product after the rotation.</p>
+<!--more-->
+
+<h2>What was broken before process</h2>
+<p>Without a rotation, four things piled up:</p>
+<ol>
+<li><strong>Unclear ownership</strong> — incidents waited on “who feels responsible today.”  </li>
+<li><strong>Context-switch tax</strong> — feature work and firefighting shared the same brains without boundaries.  </li>
+<li><strong>Uneven load</strong> — the same people always raised their hands.  </li>
+<li><strong>Weak learning loops</strong> — retros had symptoms, not a role that carried fixes week to week.</li>
+</ol>
+<p>For a developer-facing platform, user-visible breakage is not a side channel. It is the product. Treating ops as optional was a product decision, whether we admitted it or not.</p>
+<h2>Design goals</h2>
+<p>I wanted a system that was:</p>
+<ul>
+<li><strong>Explicit</strong> — someone is primary, always.  </li>
+<li><strong>Fair</strong> — load rotates; it does not stick to volunteers.  </li>
+<li><strong>Bounded</strong> — on-call is a job for a window, not a personality type.  </li>
+<li><strong>Educational</strong> — the whole team sees production, not only a martyr subset.  </li>
+<li><strong>Humane</strong> — no permanent page-from-bed culture dressed up as commitment.</li>
+</ul>
+<p>Reliability that depends on burnout is just deferred attrition.</p>
+<h2>The model we ran</h2>
+<h3>Primary and secondary</h3>
+<ul>
+<li><strong>Primary</strong> — dedicated to monitoring, incident response, and triage (including GitHub-facing noise). Feature delivery expectations drop for that window on purpose.  </li>
+<li><strong>Secondary</strong> — backup for major incidents; not a stealth second primary for every ping.</li>
+</ul>
+<p>If primary is still expected to hit the same sprint commitments, you do not have on-call. You have theater.</p>
+<h3>Two-week shifts with a handoff pattern</h3>
+<p>Engineers rotated on a <strong>two-week</strong> cadence. A common pattern was primary one window, then secondary the next—so knowledge transferred and no one lived forever in the blast radius.</p>
+<p>Back-to-back primary stretches were treated as a smell, not a badge.</p>
+<h3>Handoff as a team ritual</h3>
+<p>Weekly team time included an <strong>on-call handoff</strong>, not only standup status. Primary walked through:</p>
+<ul>
+<li>Incidents and resolutions  </li>
+<li>Adjacent system issues that might hit us next  </li>
+<li>Notable GitHub / support themes  </li>
+<li>Follow-ups that needed owners beyond the shift  </li>
+</ul>
+<p>That ritual turned private pager pain into shared product knowledge.</p>
+<h3>Retros and playbooks</h3>
+<p>Major incidents got structured retros. Recurring issues earned <strong>playbooks</strong>—step-by-step paths so the next primary was not rediscovering folklore at 1 a.m.</p>
+<p>Playbooks are how on-call becomes a team asset instead of tribal knowledge in one engineer’s head.</p>
+<h3>Psychological safety and load management</h3>
+<ul>
+<li>No expectation of endless consecutive primaries.  </li>
+<li>Balance with feature work across the quarter so people are not typed as “ops only.”  </li>
+<li>Managers (me included) treated page load and fairness as staffing concerns, not only engineer grit.</li>
+</ul>
+<h2>What improved</h2>
+<p>With clear ownership:</p>
+<ul>
+<li><strong>Faster response</strong> — we saw on the order of a <strong>~40% reduction in incident response time</strong> once roles were unambiguous (directionally; treat it as an order-of-magnitude win from process, not a lab result).  </li>
+<li><strong>More systematic triage</strong> — fewer “is anyone looking at this?” gaps.  </li>
+<li><strong>Better morale</strong> — predictable pain beats random pain.  </li>
+<li><strong>Broader operational skill</strong> — more engineers touched production reality.  </li>
+<li><strong>Earlier fixes</strong> — primaries had space to chip at known sharp edges before they became SEVs.</li>
+</ul>
+<p>Stability improved because response became a designed system, not a personality contest.</p>
+<h2>What I would tell another EM before day one</h2>
+<ol>
+<li><strong>Write who is primary in a place the team actually looks.</strong>  </li>
+<li><strong>Cut feature load for primary</strong> or you will train people to ignore the pager.  </li>
+<li><strong>Ship handoff and playbooks in the first month</strong>, not after the third outage.  </li>
+<li><strong>Measure response and fairness</strong>, not only uptime.  </li>
+<li><strong>Defend the rotation against “just this once” exceptions</strong> from leadership—exceptions are how volunteers reappear.</li>
+</ol>
+<h2>Failure modes to avoid</h2>
+<ul>
+<li>On-call as punishment for the least political engineers  </li>
+<li>Secondary as free extra primary  </li>
+<li>Retros without owners or due dates  </li>
+<li>Alert noise so high that everyone mutes everything  </li>
+<li>Celebrating heroes instead of fixing the systems that required them  </li>
+</ul>
+<h2>Closing</h2>
+<p>Introducing on-call is not a tooling purchase. It is a <strong>product and staffing decision</strong>: user trust requires an accountable human path, and that path must be sustainable.</p>
+<p>At Postman, primary/secondary roles, two-week rotations, handoffs, retros, and playbooks turned operational ownership from ad hoc heroics into something the team could carry—and still ship.</p>
+<p>If your platform is already large and your response is still “whoever notices,” you do not have a reliability gap only. You have a leadership design gap. Close it on purpose.</p>
+    </div>
+</article>
+    </main>
+</body>
+
+</html>

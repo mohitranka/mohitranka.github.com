@@ -74,6 +74,14 @@ The pattern I trust:
 
 The relational database is not the universe. It is often the **spine**.
 
+## A related lesson from platform service boundaries
+
+Not every “monolith vs microservices” fight is a datastore fight—but the same judgment applies. On an EDP self-serve portal, we had a month-long freeze over whether new UI workflows had to live entirely in a monolithic backend or split early for independent iteration.
+
+The useful answer was hybrid: keep **core platform capabilities** where integration and invariants dominate; split **fast-changing workflows** where deploy independence pays for the seam cost; put **metadata** in a system designed for lifecycle, not in accidental dual writes.
+
+That is the same muscle as choosing a relational spine: **optimize for ownership and correctness at the center, derive or split at the edges, refuse fashion-driven rewrites that stop delivery.**
+
 ## What changed since 2013
 
 A few updates to my older self:

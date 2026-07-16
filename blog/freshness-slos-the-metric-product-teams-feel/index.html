@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Freshness SLOs: the metric product teams actually feel — Mohit Ranka</title>
-    <meta name="description" content="API latency SLOs changed how we run services. Data platforms still underuse the equivalent idea: freshness. Product teams do not experience your consumer...">
+    <meta name="description" content="API latency SLOs changed how we run services. GTM data work taught me the sibling idea the hard way: product teams do not experience your job-success chart....">
     <meta name="author" content="Mohit Ranka">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://www.mohitranka.com/blog/freshness-slos-the-metric-product-teams-feel/">
@@ -15,13 +15,13 @@
     <meta property="og:locale" content="en_US">
     <meta property="og:url" content="https://www.mohitranka.com/blog/freshness-slos-the-metric-product-teams-feel/">
     <meta property="og:title" content="Freshness SLOs: the metric product teams actually feel">
-    <meta property="og:description" content="API latency SLOs changed how we run services. Data platforms still underuse the equivalent idea: freshness. Product teams do not experience your consumer...">
+    <meta property="og:description" content="API latency SLOs changed how we run services. GTM data work taught me the sibling idea the hard way: product teams do not experience your job-success chart....">
     <meta property="og:image" content="https://www.mohitranka.com/theme/images/og.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Freshness SLOs: the metric product teams actually feel">
-    <meta name="twitter:description" content="API latency SLOs changed how we run services. Data platforms still underuse the equivalent idea: freshness. Product teams do not experience your consumer...">
+    <meta name="twitter:description" content="API latency SLOs changed how we run services. GTM data work taught me the sibling idea the hard way: product teams do not experience your job-success chart....">
     <meta name="twitter:image" content="https://www.mohitranka.com/theme/images/og.png">
     <link rel="stylesheet" href="https://www.mohitranka.com/theme/css/style.css">
 <meta property="article:published_time" content="2024-07-11T10:00:00+05:30">
@@ -31,7 +31,7 @@
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     "headline": "Freshness SLOs: the metric product teams actually feel",
-    "description": "API latency SLOs changed how we run services. Data platforms still underuse the equivalent idea: freshness. Product teams do not experience your consumer...",
+    "description": "API latency SLOs changed how we run services. GTM data work taught me the sibling idea the hard way: product teams do not experience your job-success chart....",
     "url": "https://www.mohitranka.com/blog/freshness-slos-the-metric-product-teams-feel/",
     "mainEntityOfPage": {
         "@type": "WebPage",
@@ -72,84 +72,77 @@
     </header>
 
     <div class="entry-content">
-        <p>API latency SLOs changed how we run services. Data platforms still underuse the equivalent idea: <strong>freshness</strong>.</p>
-<p>Product teams do not experience your consumer lag chart. They experience a feed that is wrong, a permission that has not propagated, a metric that disagrees with the transaction they just made. That gap is a freshness problem—even when every job is "green."</p>
+        <p>API latency SLOs changed how we run services. GTM data work taught me the sibling idea the hard way: product teams do not experience your job-success chart. They experience a dashboard that is late, wrong, or disagrees with another “official” number.</p>
+<p>At LinkedIn, BI teams on Power BI and Tableau could already pull data from Hadoop-era batch paths while the Enterprise Data Platform (EDP) was supposed to become the governed center for GTM datasets. Pipelines can be “green” while the business still feels stale or fragmented truth. That feeling is a freshness and trust problem—even when nobody is paging on consumer lag.</p>
 <!--more-->
 
 <h2>Latency is not freshness</h2>
+<p>A fast dashboard query can still serve an extract that is hours old. A successful batch job can still leave sales and marketing acting on last night’s world.</p>
 <p>Latency asks: how long did this request take?<br>
-Freshness asks: <strong>how old is the truth this request used?</strong></p>
-<p>A p99 of 40ms on a read API can still serve hour-old data. From the platform’s perspective, the service is healthy. From the user’s perspective, the product is broken.</p>
-<p>If you only SLO the serving path, you will optimize the wrong layer.</p>
-<h2>Define freshness in product language</h2>
-<p>A workable freshness definition:</p>
+Freshness asks: <strong>how old is the truth this decision used?</strong></p>
+<p>If you only measure the serving API, you will celebrate the wrong layer.</p>
+<h2>Define freshness in the consumer’s language</h2>
+<p>For EDP-shaped work, a useful definition was:</p>
 <blockquote>
-<p>For dataset <em>D</em> and consumer <em>C</em>, freshness is the age of data at the moment <em>C</em> uses it for a user-visible decision.</p>
+<p>For a named GTM dataset and a named BI consumer, how old is the data at the moment someone uses it in a dashboard decision—and is it the governed path?</p>
 </blockquote>
-<p>Make it measurable:</p>
+<p>That forces specifics:</p>
 <ul>
-<li><strong>Event-time freshness</strong>: now − max source event timestamp successfully applied.</li>
-<li><strong>Processing freshness</strong>: now − max watermark / commit the consumer has incorporated.</li>
-<li><strong>Business freshness</strong>: time until a specific user action is visible in a specific surface.</li>
+<li><strong>Dataset</strong> — a sales or GTM entity people recognize.</li>
+<li><strong>Consumer</strong> — a Power BI or Tableau workflow, not “analytics.”</li>
+<li><strong>Usable</strong> — on the platform you claim is source of truth, not a leftover pipeline.</li>
+<li><strong>Age</strong> — including batch boundaries and BI-side refresh behavior, not only platform ingest time.</li>
 </ul>
-<p>Pick one primary definition per contract. Ambiguous freshness metrics become dashboards nobody trusts.</p>
-<h2>SLOs that change behavior</h2>
-<p>A freshness SLO should look like any serious SLO:</p>
+<p>You can formalize that into an SLO later. First you need a sentence a BI lead and a platform EM would both underline.</p>
+<h2>Promises that change behavior (not charts for their own sake)</h2>
+<p>On the BI migration, the promises that changed behavior were not abstract percentiles on a poster. They looked like:</p>
 <ul>
-<li><strong>Target</strong>: e.g. 99% of minutes where data age &lt; 2 minutes</li>
-<li><strong>Window</strong>: 28 days or a similar rolling window</li>
-<li><strong>Scope</strong>: dataset + consumer, not "all pipelines"</li>
-<li><strong>Owner</strong>: a team that can fix the path end-to-end or escalate with authority</li>
-<li><strong>Consequence</strong>: page, ticket priority, feature freeze rules—something real</li>
+<li><strong>Continuity:</strong> legacy Hadoop paths had deprecation dates—staying put was a risk posture, not a neutral default.</li>
+<li><strong>Funded cutover:</strong> EDP engineers helped migrate; adopters were not asked to donate a quarter of calendar alone.</li>
+<li><strong>Acceptable query performance after switch</strong> — so “governed” did not mean “slower dashboards.”</li>
+<li><strong>Finite dual-running</strong> — two truths were a migration window, not a lifestyle.</li>
 </ul>
-<p>Without consequence, it is a chart. With consequence, it becomes engineering.</p>
-<h2>What to measure along the path</h2>
-<p>End-to-end freshness decomposes. Instrument the stages:</p>
+<p>Call those SLOs if your org has the discipline. Call them <strong>operating promises</strong> if you are still early. Either way, something has to hurt when the promise breaks—attention, prioritization, or the ability to keep the old path alive.</p>
+<p>I will not pretend every dataset had a polished error budget. What we had was executive visibility, migration milestones, and a definition of done that included turning legacy paths off.</p>
+<h2>What to measure along a real path</h2>
+<p>For a BI consumer, time and trust hide in stages:</p>
 <ol>
-<li>Source commit / emit delay  </li>
-<li>Ingest and validation  </li>
-<li>Transform / join / enrichment  </li>
-<li>Materialization to serving store  </li>
-<li>Cache TTLs and client refresh behavior  </li>
+<li>Source systems and upstream delay  </li>
+<li>Platform ingest and validation on EDP  </li>
+<li>Dataset readiness / governance checks  </li>
+<li>BI tool refresh or extract behavior  </li>
+<li>Cache and workbook-level assumptions  </li>
 </ol>
-<p>Teams often discover the villain is not the stream processor. It is a cache set to 15 minutes "for performance," or a source that batches for its own convenience. Freshness SLOs force those tradeoffs into the open.</p>
-<h2>Error budgets for data</h2>
-<p>Apply the SRE idea carefully:</p>
-<ul>
-<li><strong>Burn when freshness misses</strong>—not only when the pipeline crashes.</li>
-<li><strong>Distinguish complete outage from slow degradation.</strong> A pipeline that runs late every day is a product bug with a schedule.</li>
-<li><strong>Do not spend the entire budget on new consumers.</strong> Each consumer is a promise; promises need capacity.</li>
-</ul>
-<p>A useful policy: if freshness error budget is exhausted, <strong>new feature extractions from that dataset pause</strong> until reliability work lands. That is how platforms stop being infinite free utilities.</p>
+<p>Teams often discover the villain is not the fanciest processor. It is an extract schedule, a dual pipeline, or a cutover that never finished. Instrument the path your consumers actually use.</p>
 <h2>Correctness sits beside freshness</h2>
-<p>Fresh data that is wrong is worse than slightly stale data that is right. Pair freshness with lightweight correctness signals:</p>
+<p>Fresh wrong data is worse than slightly stale right data. During migration, dual sources create a special failure mode: two numbers, both “recent,” different owners.</p>
+<p>Correctness signals that mattered in practice:</p>
 <ul>
-<li>Row count anomalies vs source  </li>
-<li>Null rate spikes on critical fields  </li>
-<li>Reconciliation samples against system of record  </li>
-<li>Schema violation rates  </li>
+<li>Is this dataset on the governed path?  </li>
+<li>Are legacy feeds still quietly serving production workbooks?  </li>
+<li>Do critical fields null out or drift after cutover?  </li>
+<li>Can someone name the system of record when a QBR fights itself?</li>
 </ul>
-<p>Freshness without validation optimizes for speed of falsehood.</p>
-<h2>How I introduce freshness SLOs in practice</h2>
+<p>Freshness without governance optimizes for speed of confusion.</p>
+<h2>How we introduced the promise for BI</h2>
+<p>The sequence that worked was not “roll out SLO framework company-wide”:</p>
 <ol>
-<li><strong>Choose one user-visible journey</strong> that already causes support pain.  </li>
-<li><strong>Map the data path</strong> on a whiteboard until everyone agrees where time goes.  </li>
-<li><strong>Ship the metric</strong> before the ambitious redesign.  </li>
-<li><strong>Set a conservative SLO</strong> you can keep, then tighten.  </li>
-<li><strong>Attach an owner and a runbook</strong> — including "what the product shows while degraded."</li>
+<li>Pick the consumer class already on the critical path (BI for GTM).  </li>
+<li>Make adoption a leadership priority with a continuity narrative.  </li>
+<li>Staff the migration so the new path is cheaper than it looks.  </li>
+<li>Put dates on deprecation.  </li>
+<li>Fix performance issues as platform bugs, not user error.  </li>
+<li>Only then talk about tightening time bounds dataset by dataset.</li>
 </ol>
-<p>Do not start with twenty datasets. Start with the one that embarrasses you in executive meetings.</p>
-<h2>Common objections</h2>
-<p><strong>"Our sources are slow; we cannot SLO this."</strong><br>
-Then SLO what you control, and publish source delay as a dependency. Silent impossibility helps no one.</p>
-<p><strong>"Batch is fine."</strong><br>
-Great—write a batch freshness SLO ("available by 06:00 UTC in 99% of days"). Batch still needs promises.</p>
-<p><strong>"This will create too much paging."</strong><br>
-Good. That pain means either the system is unreliable or the SLO is dishonest. Both are worth learning quickly.</p>
+<p>If you start with twenty datasets and a perfect taxonomy, you will get a wiki. If you start with one embarrassing consumer journey, you might get a habit.</p>
+<h2>The objection we actually heard</h2>
+<p><strong>“We can already get the data.”</strong><br>
+Yes. That is why platform-only arguments fail. Answer with end-of-life for the old path, labor for the new one, and proof that cutover does not degrade the dashboard.</p>
+<p><strong>“Batch is fine.”</strong><br>
+Sometimes it is. Then write a batch promise (“available by time T for the weekly motion”) and still own correctness and deprecation. Batch without a promise is how shadow pipelines live forever.</p>
 <h2>Closing</h2>
-<p>Product teams feel freshness even if they never say the word. Platforms that only track job success and API latency will be surprised by escalations forever.</p>
-<p>Put a number on the age of truth. Own it. Budget it. Design product behavior for the misses.</p>
-<p>That is how data platforms earn trust—not by moving more bytes, but by making time and correctness legible.</p>
+<p>Product teams feel freshness as trust in the number. Platforms earn that trust when named consumers run on a governed path, old paths can die, and someone is accountable when the age of truth is wrong.</p>
+<p>Whether you brand it SLO or operating promise matters less than whether the company can point to <strong>dataset + consumer + bound + owner</strong>—and whether missing it changes next week’s work.</p>
     </div>
 </article>
     </main>

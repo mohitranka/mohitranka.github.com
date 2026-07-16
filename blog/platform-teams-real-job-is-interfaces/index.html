@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>The platform team’s real job is interfaces — Mohit Ranka</title>
-    <meta name="description" content="Platform teams love infrastructure. Roadmaps fill with clusters, frameworks, migrations, and internal tools. Those matter. They are still not the job. The...">
+    <meta name="description" content="At LinkedIn, the Enterprise Data Platform (EDP) was meant to be the centralized way GTM teams managed and consumed datasets. On paper, that is a clear...">
     <meta name="author" content="Mohit Ranka">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://www.mohitranka.com/blog/platform-teams-real-job-is-interfaces/">
@@ -15,13 +15,13 @@
     <meta property="og:locale" content="en_US">
     <meta property="og:url" content="https://www.mohitranka.com/blog/platform-teams-real-job-is-interfaces/">
     <meta property="og:title" content="The platform team’s real job is interfaces">
-    <meta property="og:description" content="Platform teams love infrastructure. Roadmaps fill with clusters, frameworks, migrations, and internal tools. Those matter. They are still not the job. The...">
+    <meta property="og:description" content="At LinkedIn, the Enterprise Data Platform (EDP) was meant to be the centralized way GTM teams managed and consumed datasets. On paper, that is a clear...">
     <meta property="og:image" content="https://www.mohitranka.com/theme/images/og.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="The platform team’s real job is interfaces">
-    <meta name="twitter:description" content="Platform teams love infrastructure. Roadmaps fill with clusters, frameworks, migrations, and internal tools. Those matter. They are still not the job. The...">
+    <meta name="twitter:description" content="At LinkedIn, the Enterprise Data Platform (EDP) was meant to be the centralized way GTM teams managed and consumed datasets. On paper, that is a clear...">
     <meta name="twitter:image" content="https://www.mohitranka.com/theme/images/og.png">
     <link rel="stylesheet" href="https://www.mohitranka.com/theme/css/style.css">
 <meta property="article:published_time" content="2025-11-13T10:00:00+05:30">
@@ -31,7 +31,7 @@
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     "headline": "The platform team\u2019s real job is interfaces",
-    "description": "Platform teams love infrastructure. Roadmaps fill with clusters, frameworks, migrations, and internal tools. Those matter. They are still not the job. The...",
+    "description": "At LinkedIn, the Enterprise Data Platform (EDP) was meant to be the centralized way GTM teams managed and consumed datasets. On paper, that is a clear...",
     "url": "https://www.mohitranka.com/blog/platform-teams-real-job-is-interfaces/",
     "mainEntityOfPage": {
         "@type": "WebPage",
@@ -72,79 +72,73 @@
     </header>
 
     <div class="entry-content">
-        <p>Platform teams love infrastructure. Roadmaps fill with clusters, frameworks, migrations, and internal tools. Those matter. They are still not the job.</p>
+        <p>At LinkedIn, the Enterprise Data Platform (EDP) was meant to be the centralized way GTM teams managed and consumed datasets. On paper, that is a clear platform charter. In practice, a platform is only real when its <strong>interfaces get adopted</strong>—including by teams that already have a path that “works.”</p>
+<p>The hard case was BI. Power BI and Tableau teams were still living on Hadoop-based pipelines scheduled for deprecation. They could already get data. EDP was strategically important and still optional in their week. Without them, EDP could not become the source of truth for GTM analytics no matter how good the internals looked.</p>
+<p>That is an interface problem, not a cluster problem.</p>
 <!--more-->
 
-<p>The job of a platform team is to <strong>define, evolve, and defend interfaces</strong>—technical and organizational—so many teams can move without negotiating every dependency from scratch.</p>
-<h2>Interfaces, not inventiveness</h2>
-<p>An interface is any stable boundary other teams program against:</p>
+<h2>The interface was “how BI gets governed data”</h2>
+<p>When platform teams say interface, they often mean API shape or event schema. Here the consumer-facing interface was broader:</p>
 <ul>
-<li>An API or event schema</li>
-<li>A paved road for deploy, auth, or data access</li>
-<li>An SLO and the support model behind it</li>
-<li>A policy: what is self-serve, what needs review, what is forbidden</li>
-<li>A mental model: "this is how we ship services here"</li>
+<li>How does a BI engineer get a trusted dataset into a dashboard workflow?</li>
+<li>Who pays the migration cost?</li>
+<li>What happens to the old path, and when?</li>
+<li>Is query performance acceptable the week after cutover?</li>
 </ul>
-<p>If the boundary is clear, teams build. If the boundary is fuzzy, teams schedule meetings. Platform value shows up as <strong>reduced coordination cost</strong>, not as novelty of the stack.</p>
-<p>I have led and worked beside platform groups long enough to see the failure mode: brilliant systems that require a private Slack channel to use safely. That is not leverage. That is a consulting firm disguised as a team.</p>
-<h2>What product teams actually consume</h2>
-<p>Product engineers rarely consume your Kubernetes taste. They consume:</p>
-<ol>
-<li><strong>Time-to-first-success</strong> — how long until a new service or pipeline is real.</li>
-<li><strong>Predictability</strong> — whether the platform behaves the same on Tuesday and during a launch.</li>
-<li><strong>Escape hatches</strong> — what happens when the paved road does not fit.</li>
-<li><strong>Human response</strong> — who answers when the interface fails, and how fast.</li>
-</ol>
-<p>You can score a platform by interviewing five customer teams and asking only those questions. Skip the architecture review for an hour. The answers will tell you if you are a platform or a ticket queue with YAML.</p>
-<h2>Good interfaces have owners and versioning</h2>
-<p>An interface without an owner is a rumor. An interface without versioning is a future incident.</p>
-<p>Minimum bar:</p>
+<p>EDP’s storage format and pipeline elegance did not answer those questions. Until they were answered, BI had no reason to reorder priorities.</p>
+<p><strong>Lesson:</strong> product teams do not consume your architecture diagrams. They consume time-to-success, predictability, and whether the platform team shows up when the path is rocky.</p>
+<h2>Adoption failed as an org problem first</h2>
+<p>This was easy to misread as stubbornness. It was incentives.</p>
 <ul>
-<li><strong>Named owner</strong> (team, not a hero)</li>
-<li><strong>Documented compatibility policy</strong> (what breaks, what deprecates, what lasts a year)</li>
-<li><strong>Migration path</strong> with time, not just a changelog entry</li>
-<li><strong>Telemetry on use</strong> — unused interfaces are liabilities, popular ones are products</li>
+<li>BI teams were measured on analytics delivery, not on platform migration.</li>
+<li>Legacy pipelines still produced outputs.</li>
+<li>Migration looked like unfunded work with downside risk (latency, rework, surprise breakage).</li>
+<li>EDP’s long-term governance story was real—and still abstract compared to this quarter’s dashboards.</li>
 </ul>
-<p>Schema registries, API gateways, and IDPs are tools. The organizational habit is the asset: <strong>breaking changes are rare, intentional, and paid for by the platform</strong>, not surprise-taxed onto every consumer.</p>
-<h2>Platform as product—without cosplay</h2>
-<p>"Platform as product" is good advice that sometimes becomes theater: personas on a slide, no prioritization spine.</p>
-<p>Treat customer teams as users, then do the unglamorous product work:</p>
+<p>Engineering alignment inside the data org was necessary and insufficient. Without a business framing, “please adopt EDP” is a favor request.</p>
+<h2>Executive sponsorship changed the type of conversation</h2>
+<p>I partnered with senior leaders on the data and BI side so EDP adoption was not a side quest. The useful reframe was not “modernize for us.” It was:</p>
 <ul>
-<li>Maintain a <strong>ranked list of jobs-to-be-done</strong> ("create a production service," "expose a dataset," "add SSO").</li>
-<li>Measure <strong>activation and time-to-complete</strong> for those jobs.</li>
-<li>Kill or merge tools that solve the same job three ways.</li>
-<li>Publish a roadmap that says <strong>no</strong> as clearly as <strong>yes</strong>.</li>
+<li>Hadoop paths were going away.</li>
+<li>Continuing to depend on them was a <strong>continuity risk</strong>, not a neutral default.</li>
+<li>EDP was the consolidation path for governed GTM analytics—not a nice-to-have alternate store.</li>
 </ul>
-<p>Your backlog should not be "adopt technology X." It should be "make job Y twice as fast / half as dangerous."</p>
-<h2>Where EMs earn their keep</h2>
-<p>As an engineering manager on platform work, my leverage is rarely a better design doc. It is:</p>
+<p>That shift moved the discussion from technical preference to operating risk. Platforms that cannot get that sentence said out loud usually stall in permanent pilot mode.</p>
+<h2>We lowered the price of yes</h2>
+<p>Even with sponsorship, asking BI to self-fund a migration would have failed slowly. The decision that mattered operationally:</p>
+<p><strong>EDP engineers would take migration load</strong>—connectors, pairing, performance work—not only publish docs and wish for pull requests.</p>
+<p>Concretely, that meant:</p>
 <ul>
-<li><strong>Protecting interface quality</strong> when a loud partner wants a special case hard-coded forever</li>
-<li><strong>Staffing the boring layers</strong>—docs, migrations, dashboards—that make interfaces real</li>
-<li><strong>Negotiating multi-quarter bets</strong> when every product team wants a local optimization</li>
-<li><strong>Hiring for taste at boundaries</strong>: people who can simplify without being simplistic</li>
+<li>Pre-built paths into Power BI and Tableau so “get data from EDP” was not a research project.</li>
+<li>Shared work on query performance so cutover did not mean slower dashboards.</li>
+<li>A migration toolkit and recurring office hours to kill blockers in public, early.</li>
+<li>Alignment with sales and marketing stakeholders who depended on the outputs, not only the producers.</li>
 </ul>
-<p>IC excellence still matters. But a platform team of strong ICs without interface discipline becomes a pile of clever services that do not compose.</p>
-<h2>Special cases are the product</h2>
-<p>Every platform has special cases. The question is whether special cases become:</p>
+<p>This is platform-as-product without the theater: the job-to-be-done was “keep GTM analytics working on a governed foundation,” and we priced the platform to make that job rational.</p>
+<h2>Deprecation is part of the interface</h2>
+<p>Enabling a new path without disabling the old one is how companies collect platforms. The adoption plan included the unglamorous half:</p>
 <ul>
-<li><strong>First-class extension points</strong>, or</li>
-<li><strong>Undocumented exceptions</strong> that only senior people know</li>
+<li>Clear deprecation milestones for legacy Hadoop pipelines.</li>
+<li>Time-bound dual running where needed.</li>
+<li>A definition of done that included <strong>turning things off</strong>, not only turning EDP on.</li>
 </ul>
-<p>If your best engineers spend their weeks on one-off integrations, you do not have a platform strategy. You have an escalation path. Design the extension model deliberately: plugins, approved patterns, shared libraries, or a clear "build it yourself outside the road" policy with consequences.</p>
-<h2>A practical weekly habit</h2>
-<p>Once a week, review:</p>
-<ol>
-<li>Top support themes (what the interface failed to make obvious)</li>
-<li>Slowest customer journeys (where the paved road is gravel)</li>
-<li>Upcoming breaking changes (who is not ready)</li>
-<li>Interfaces with rising use and thin ownership</li>
-</ol>
-<p>This meeting is more important than most architecture reviews. Architecture reviews discuss what you might build. Interface review discusses what other people already depend on.</p>
+<p>Governance is not a slide about ownership. Governance is whether the abandoned path still quietly feeds production dashboards six months later.</p>
+<h2>What changed</h2>
+<p>Within a concentrated push—on the order of a quarter for the BI migration motion—Power BI and Tableau usage moved onto EDP for the scoped GTM paths we targeted. Redundant pipeline surface area could be decommissioned. Freshness and governance improved because fewer competing “sources of truth” were allowed to linger.</p>
+<p>I care less about the trophy phrasing than about the mechanism: <strong>sponsorship + funded migration + forced deprecation + BI-shaped interfaces.</strong></p>
+<h2>Where EMs earn their keep on platform teams</h2>
+<p>The technical work was real. The EM job showed up in places that never appear in a system design doc:</p>
+<ul>
+<li>Spending team capacity on someone else’s migration so the company’s data model could converge.</li>
+<li>Holding a deprecation line when temporary extensions would have been easier.</li>
+<li>Making sure performance issues after cutover were our problem, not a gotcha that punished adopters.</li>
+<li>Translating platform risk into language executives will prioritize.</li>
+</ul>
+<p>Special cases still existed—BI tools always have them—but they were absorbed into connectors and support rituals, not infinite private forks.</p>
 <h2>Closing</h2>
-<p>Build infrastructure, yes. Automate, yes. Chase elegant internals when they reduce cost and risk.</p>
-<p>But judge platform success by the <strong>clarity and stability of the boundaries</strong> other teams stand on. If those interfaces are sharp, versioned, and supported, your company can reorganize around you without rewriting everything. If they are not, no amount of cluster sophistication will save the coordination tax.</p>
-<p>The platform team’s real job is interfaces. Everything else is how you keep them honest.</p>
+<p>Platform teams love infrastructure. Infrastructure is not the job.</p>
+<p>The job is to define, evolve, and defend <strong>interfaces other teams can build on</strong>—including the incentives, migration labor, and deprecation schedule that make those interfaces real.</p>
+<p>EDP did not become the GTM source of truth when it launched. It became the source of truth when BI could succeed on it, and the old paths were allowed to die.</p>
     </div>
 </article>
     </main>

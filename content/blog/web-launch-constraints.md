@@ -4,100 +4,105 @@ Category: Blog
 Slug: web-launch-constraints
 Tags: engineering-leadership, product, developer-tooling
 
-"Led the web launch" fits on a resume line. The useful part is not the launch date. It is the constraint set that made the work hard—and the discipline of shipping inside it.
+At Postman, “put the product on the web” was not a greenfield rewrite. It was a constraint problem: a desktop-native API tool used by millions of developers, enterprise pressure for browser access, browser security that blocked the old execution model, and a conference date that would not move.
+
+I was the engineering manager accountable for cross-functional delivery—architecture choices, security and infra dependencies, product scope, and keeping the team focused when the path was still uncertain. What follows is what that launch actually taught me.
 
 <!--more-->
 
-At Postman I was part of taking a product people already loved in one form and making it real on the web. The details of any one company fade. The constraint patterns transfer.
+## We were borrowing trust, not inventing it
 
-## Constraint 1: You are not inventing trust—you are borrowing it
+Postman already had a reputation. Developers had muscle memory for collections, environments, and the desktop workflow. A weak web surface would not be judged as “v1 of a new product.” It would be judged as Postman getting worse.
 
-When a product already has users, a new surface is judged against memory. Performance, reliability, and mental model mismatches feel like regressions even when they are "v1 web" realities.
+That constraint changed prioritization:
 
-That changes engineering priorities:
+- Core workflow parity beat architectural purity.
+- Predictable behavior beat clever browser tricks.
+- Explicit “not on web yet” beat silent missing features.
 
-- Parity on core workflows beats novel architecture theater  
-- Predictable latency beats exotic efficiency  
-- Clear "not yet on web" boundaries beat silent missing features  
+Trust is spendable once. We treated every launch-day gap as a brand risk, not a backlog curiosity.
 
-Trust is a constraint. You can spend it once.
+## The existing system was a stakeholder
 
-## Constraint 2: The existing system is a stakeholder
+Greenfield essays assume you choose the stack. We inherited runtimes, sync assumptions, offline collaboration expectations, and a large surface area of API tooling behavior. The desktop app was not legacy to be embarrassed about—it was the system of record for how users worked.
 
-Greenfield essays assume you choose the stack. Real launches inherit APIs, auth models, billing, feature flags, and organizational scars.
+The hard question was never “can we draw a web architecture?” It was:
 
-Leading a launch means negotiating with the present:
+- What must be reused so results stay correct?
+- What must be isolated so the browser can ship?
+- What bugs will the web amplify because usage patterns change?
 
-- What must be reused for correctness  
-- What may be isolated to move faster  
-- What must be fixed at the root because the new surface will amplify the bug  
+Treating the existing product as a stakeholder forced interface thinking: web was a new client of a product system, not a parallel fantasy product.
 
-Treating legacy as an enemy wastes time. Treating it as a stakeholder produces interfaces.
+## Browser security forced a hybrid execution model
 
-## Constraint 3: Launch is a reliability event, not a marketing timestamp
+Desktop Postman could talk to the network like a normal app. Browsers cannot. CORS, sandboxing, and the lack of unrestricted local network access were not edge cases—they were the product.
 
-Marketing picks a day. Users pick the hour they migrate critical work. Those are not the same.
+We ended up with multiple execution paths, each owning a real constraint:
 
-Engineering leadership for a launch is mostly:
+- **Browser Agent** — run requests directly when the browser is allowed to.
+- **Cloud Agent** — execute in a cloud-hosted environment when the browser cannot reach the target cleanly (cross-origin and related limits).
+- **Desktop Agent** — bridge the web UI to a local/on-prem network when the user’s world is not reachable from the public cloud.
 
-- Load assumptions written down and tested  
-- Rollback and partial exposure plans  
-- On-call staffing that is not "whoever is excited"  
-- Dashboards that answer user pain, not only host health  
+That hybrid model was the architectural heart of the launch. It was also an organizational heart: security, infra, and product had to agree on what “send request” meant in three different trust domains.
 
-If you cannot describe how you will be wrong safely, you are not ready to be public.
+If there is one technical lesson I would keep from the project, it is this: **when the environment cannot support your old runtime assumptions, make the execution model explicit.** Hiding three behaviors behind one button without a design is how you get support chaos.
 
-## Constraint 4: Cross-team coordination is the critical path
+## Launch day is a reliability event
 
-Web launches fail more often on handoffs than on code:
+Postman on the Web was announced at POSTCON. Missing the date was not a soft failure mode. That does not mean we shipped fantasy scope. It means readiness was defined as:
 
-- Design vs eng vs product scope drift  
-- Security review arriving late  
-- Support documentation not matching UI  
-- Data/analytics not instrumented for the new surface  
+- a user journey that worked under real constraints,
+- a rollout plan that could expand,
+- and a team that knew what was deliberately later.
 
-As an EM, my calendar was the project plan. Unblocking decisions early beat heroic coding late.
+We phased capability instead of pretending the first public cut was the end state: start with constrained access patterns, then enable richer API execution, with the cloud execution path continuing to mature after the headline launch. Marketing owns the keynote. Engineering owns the degradation and expansion story.
 
-A practical habit: maintain a single **decision log** for scope cuts. Ambiguity multiplies under deadline pressure.
+A launch is not a timestamp. It is a reliability event with an audience.
 
-## Constraint 5: Scope cuts are a product skill
+## Cross-team coordination was the critical path
 
-Everyone loves the full vision. The launch needs a spine:
+The longest pole was rarely a single function. Security, infrastructure, performance, and product had legitimate, conflicting optimization targets. In that environment, “the engineers will figure it out in Slack” is not a plan.
 
-- What must work for the first serious cohort  
-- What can be ugly but correct  
-- What is explicitly later  
+What worked in practice:
 
-The hard part is not cutting. It is cutting **without demoralizing the team** or surprising the company. Transparent criteria help: user impact, risk, dependency weight, reversibility.
+- **Executive air cover for dedicated capacity** — without it, every dependency team optimizes for their prior roadmap.
+- **A weekly cross-functional sync** whose job was unblocking, not status theater.
+- **Written scope decisions** — what was in for conference day, what was explicit debt, who owned the follow-through.
 
-## Constraint 6: Developer products punish sloppy feedback loops
+My calendar was part of the architecture. Ambiguity multiplies under deadline pressure; decision logs shrink it.
 
-If your users are technical, they notice:
+## Performance was a product constraint, not polish
 
-- Slow first load  
-- Awkward auth  
-- Inconsistent shortcuts  
-- Error messages that lie  
+API collections can be huge. A desktop WebView habit does not automatically become a good browser experience. Large histories and large collections will punish naive rendering.
 
-They also write about it publicly. That is a feature of the market. Quality bars for developer tooling are emotional as well as functional.
+We invested in boring, necessary work: more efficient history/state handling, lazy loading, virtualized UI for large lists. That work is easy to dismiss as polish until a power user loads a real workspace and the tab melts.
+
+Developer products have an unforgiving feedback loop. Users can tell when the runtime is lying, when the UI is papering over cost, and when error messages are decorative. They will also write about it publicly. That is part of the market.
 
 ## What I would repeat
 
-1. **Write the non-goals** as carefully as the goals.  
-2. **Instrument journeys**, not only services.  
-3. **Rehearse failure** (partial outage, auth issues, dependency brownout).  
-4. **Staff the week after launch** like it is part of the launch.  
-5. **Protect engineers from thrash** by batching stakeholder input.
+1. **Write non-goals as carefully as goals.** Conference-day success needs a spine, not a vision deck.
+2. **Instrument journeys, not only services.** “Request failed” is incomplete without *which agent path* and *which constraint*.
+3. **Rehearse partial failure** — auth issues, agent unavailability, dependency brownouts—not only happy-path demos.
+4. **Staff the week after launch like it is part of launch.** The real traffic pattern arrives after the keynote.
+5. **Protect engineers from thrash** by batching stakeholder input; panic multiplies bad architectural shortcuts.
 
 ## What I would avoid
 
-- Betting the launch on an unfinished platform rewrite  
-- Hidden scope in "polish"  
-- Success metrics that only marketing can love  
-- Hero culture that makes the second week impossible  
+- Betting the public launch on an unfinished platform rewrite that is “almost ready.”
+- Hiding scope cuts inside the word “polish.”
+- Success metrics only a marketing team can love.
+- Hero culture that makes the second week impossible to staff.
+
+## Impact, carefully stated
+
+We hit the conference launch window. The web surface became a real product path, not a demo—with cloud execution continuing to land on its own schedule. Adoption afterward made the strategic point obvious: users wanted Postman without installing a desktop app first, and the company was no longer only a local-first tool.
+
+Exact figures belong in contexts where they can be sourced and defended. The leadership lesson does not depend on a screenshot of a dashboard: **the hybrid execution model plus phased delivery was the only way to respect browser constraints without abandoning the desktop product’s trust.**
 
 ## Closing
 
-Leading a web launch taught me that big shipping moments are constraint problems: trust, legacy, reliability, coordination, and scope. Code is how you express the answers—not the answers themselves.
+“Led the web launch” sounds like a milestone. The work was constraint management: borrowed trust, inherited systems, browser security, conference time, cross-team conflict, and performance under real collections.
 
-If you are heading into a similar moment, spend more time making constraints explicit. Teams move faster when the walls are visible.
+Code expressed the answers. The answers were the constraints we were willing to name early—and the execution model we built so users did not have to understand them all at once.

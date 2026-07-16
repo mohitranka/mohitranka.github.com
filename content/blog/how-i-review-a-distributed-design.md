@@ -4,104 +4,123 @@ Category: Blog
 Slug: how-i-review-a-distributed-design
 Tags: distributed-systems, engineering-leadership, architecture
 
-Design reviews expand to fill calendars. They do not have to. With a disciplined pass, you can learn whether a distributed design is roughly safe in 45 minutes—and leave the rest for deeper follow-up.
+The most expensive design reviews I have run were not missing a box on a diagram. They were missing a decision. One of them froze delivery on an EDP self-serve portal for about a month while two strong engineers disagreed in public about monolith versus microservices—and ownership quietly collapsed.
+
+This is how I run a distributed design review when time is short, using that conflict as the worked example. The forty-five minutes are a filter for **danger and indecision**, not a substitute for deep design.
 
 <!--more-->
 
-This is the checklist I use as an engineering leader reviewing platforms, data paths, and multi-service features. It is not a substitute for formal modeling. It is a filter for **obvious danger and missing ownership**.
+## The situation the review had to unstick
 
-## Minute 0–5: What is the user promise?
+We needed a self-serve portal on top of the Enterprise Data Platform: dataset registration, governance controls, access workflows, metadata—so teams could manage lifecycle without filing tickets into oblivion.
 
-Before boxes and arrows:
+Two credible positions formed:
 
-- Who is the user?  
-- What do they believe will happen?  
-- What is the freshness/consistency expectation in plain language?  
-- What is explicitly out of scope?
+- **Stay close to the monolithic EDP backend** — simpler integration, less duplication, faster delivery on shared infra.
+- **Split into microservices early** — independent iteration on portal features without waiting on the monolith.
 
-If the promise is fuzzy, the design is not ready for deep technical debate. Send it back.
+Both sides had technical merit. The failure mode was social: critique moved into open forums in a way that undermined the owner, the owner disengaged, and execution stopped. Stakeholders saw silence. That is a design-process failure, not only an architecture debate.
 
-## Minute 5–15: Where does truth live?
+## Minutes 0–5: What user promise are we keeping?
 
-I want one slide or paragraph on **systems of record**:
+Before hexagons, I want one paragraph:
 
-- Which store wins for each entity?  
-- Are there dual writes? Why?  
-- How do replicas and caches get invalidated?  
-- What is the rebuild story if a derived store is wrong?
+- Who uses the portal?
+- What can they do without a human intermediary?
+- What is explicitly out of scope for v1?
 
-Distributed systems usually fail at truth propagation, not at drawing the second hexagon.
+For us: GTM/data producers and consumers managing dataset lifecycle—registration, access, metadata—not “rebuild EDP as microservices.”
 
-Red flags:
+If the promise is fuzzy, stop. Architecture will invent scope.
 
-- "Both databases will stay in sync" without a mechanism  
-- Caches as accidental systems of record  
-- Events as hope rather than contract  
+## Minutes 5–15: Where does truth live?
 
-## Minute 15–25: Failure and partiality
+I care about systems of record more than service count.
 
-Ask, quickly:
+Questions that mattered on the portal:
 
-- What happens if service B is down for 10 minutes?  
-- What happens if the message bus duplicates?  
-- What happens if a consumer lags by two hours?  
-- What happens if a deploy rolls back mid-migration?  
-- What is the blast radius of a bad config?
+- Which actions must be consistent with core EDP backend behavior on day one?
+- Which workflows change weekly and need independent deploy cadence?
+- Where does dataset metadata live so the portal is not a second brain?
 
-I am not looking for perfect answers. I am looking for evidence the authors **visited** the failure space.
+We eventually used a hybrid truth model: **core platform capabilities stayed integrated with the existing EDP backend**; **more dynamic workflows** (access requests, tagging-style features) could stand as separate services; **metadata** was centralized with a system fit for dataset lifecycle (in our case, Apache DataHub) so the portal was not inventing yet another catalog.
 
-Green flags: timeouts, idempotency keys, dead-letter plans, explicit degradation modes, feature flags with defaults that fail closed or open intentionally.
+Red flags in any review:
 
-## Minute 25–35: Operability
+- “Both systems will stay in sync” with no mechanism.
+- Every feature forced into one deployability story.
+- Metadata treated as a UI detail.
 
-A design that cannot be run will be run poorly.
+## Minutes 15–25: What fails—technically and organizationally?
 
-- Dashboards: the five signals you would open first  
-- Alerts: what pages a human at 2am  
-- Migrations: expand/contract steps  
-- Multi-tenant risks: noisy neighbor, data isolation  
-- Cost shape: what grows linearly (or worse) with success  
+Classic distributed questions still apply: timeouts, dual writes, partial deploy, replay. On this project the binding failure was different:
 
-If on-call would need to SSH and guess, the design is incomplete.
+- What happens if the owning engineer stops driving?
+- What happens if disagreement becomes a public referendum every week?
+- What happens if leadership hears only one side’s framing?
 
-## Minute 35–40: Security and tenancy edges
+A design review that ignores ownership and decision rights will produce a beautiful diagram and a still project.
 
-Short, pointed:
+I schedule the technical argument **inside a structured forum** with criteria—not in drive-by threads. If you need blame-free space, create it deliberately.
 
-- Authn/z at each hop, not only at the edge  
-- PII flows and retention  
-- Admin/break-glass paths  
-- Whether debug tooling can exfiltrate data  
+## Minutes 25–35: How will we choose without infinite debate?
 
-You are not finishing a security review in five minutes. You are checking that security is not an appendix no one read.
+Opinion without evidence burns weeks. The intervention that worked:
 
-## Minute 40–45: Decision and asks
+1. **Write evaluation criteria** before picking a winner: scalability, maintainability, delivery speed, long-term ownership.
+2. **Force small proofs** — both approaches get a time-boxed spike/POC against the criteria.
+3. **Bring a neutral senior engineer** into the room to pressure-test both sides without owning either ego.
+4. **Time-box the decision** — the review ends with a path, not a sequel meeting.
 
-End with a clear outcome:
+This is operability of the *decision*, not only of the service.
 
-- **Approve** with conditions  
-- **Approve to prototype** only  
-- **Revise** specific sections  
-- **Escalate** a company-level tradeoff (multi-region active-active, new datastore class, etc.)
+## Minutes 35–40: People side (do not skip)
 
-Write the conditions. Verbal approvals evaporate.
+Distributed design is done by humans with status and career goals.
 
-## The only diagram I insist on
+In parallel with the technical path:
 
-If time is tight, I would trade three architecture diagrams for one **sequence of a write + a read after failure**. Sequence diagrams reveal lies that box diagrams hide.
+- Rebuild ownership with the engineer who had stepped back—silence is not an acceptable escalation strategy.
+- Coach the critic on influence: staff-level impact includes *how* you challenge, not only that you are right.
+- Make expectations explicit in 1:1s so the project is not a proxy war.
 
-## Anti-patterns in reviews
+Skip this and the hybrid architecture will still die in the next disagreement.
 
-- Debating framework fashion before the data model  
-- Endless bikeshedding of names  
-- "We will monitor it" without naming metrics  
-- Approving to avoid conflict  
-- Requiring certainty appropriate for a research paper  
+## Minutes 40–45: Decision and conditions
 
-Your job is risk-priced progress, not theatrical rigor.
+We did not pick a pure monolith or a pure microservice rewrite. We picked a **hybrid**:
+
+- Core platform features (registration, governance controls tightly bound to EDP) stayed where integration cost dominated.
+- Dynamic portal features that needed independent iteration moved toward separate services.
+- Metadata lifecycle was centralized rather than re-implemented.
+
+Approve with conditions, in writing: what is in v1, what is explicitly later, who owns the seams, when the next review is if assumptions fail.
+
+Verbal “sounds good” evaporates. Written conditions survive contact with calendars.
+
+## The diagram I want if I only get one
+
+Trade three layered architecture posters for either:
+
+- a **sequence** of one user action through registration → metadata → access, or  
+- a **side-by-side POC scorecard** against the agreed criteria.
+
+Sequence diagrams and scorecards reveal lies that box diagrams hide.
+
+## Anti-patterns this freeze taught me
+
+- Public architecture criticism that bypasses the owner.
+- Binary holy wars (monolith vs microservices) without workload specifics.
+- Design review as spectator sport for leadership without a decision owner.
+- EM waiting too long to facilitate because “they’re seniors, they’ll figure it out.”
+- Approving to end discomfort rather than risk.
+
+## What unblocked looked like
+
+Once criteria, POCs, and a hybrid decision landed, the freeze broke quickly—on the order of a week to resume real execution—and the portal shipped on a timeline measured in months with meaningful adoption. The architecture mattered. The restored ownership mattered more.
 
 ## Closing
 
-Forty-five minutes is enough to test whether a distributed design has a clear promise, a coherent truth model, visited failure modes, and a runnable operating story. Everything else can be scheduled.
+In forty-five minutes you will not finish a distributed design. You can learn whether the team has a clear promise, a coherent truth model, a way to decide, and a human ownership path.
 
-Use the time to find the sharp edges early—while they are still lines on a page, not pages in an incident report.
+On platform work, the last item is not soft. It is how delivery fails first.

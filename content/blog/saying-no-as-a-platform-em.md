@@ -4,112 +4,103 @@ Category: Blog
 Slug: saying-no-as-a-platform-em
 Tags: engineering-leadership, platforms, management
 
-Platform engineering managers live in a structural conflict: every product team has a reasonable request, and the sum of reasonable requests is an unreasonable platform.
+Platform engineering managers do not run out of good ideas. They run out of capacity to say yes to every reasonable request without wrecking the shared system. The skill is not blunt refusal. It is **no with a path**—specific enough that partners can execute, firm enough that your team is not a free consulting desk.
 
-If you say yes to everything, the platform rots. If you say no poorly, you become the blocker people route around. The skill is **no with a path**—clear, fair, and fast.
+Two nos from EDP work at LinkedIn taught me more than any generic prioritization framework.
 
 <!--more-->
 
-## Why platform "no" feels personal
+## Why platform “no” feels personal
 
-Product teams are graded on features and deadlines. Platform teams are graded on reliability, leverage, and shared cost. A no often sounds like:
+Product and BI partners are graded on outputs this quarter. Platform teams are graded on leverage, reliability, and whether the company still has one data model next year. When you decline an unfunded migration or a rewrite-shaped preference, it can sound like indifference.
 
-- indifference to their launch
-- bureaucracy
-- preference for purity over business
+Sometimes that critique is fair. Often it is a missing alternative. A villain blocks silently. A partner names the constraint and funds a way through.
 
-Sometimes that critique is fair. Often it is a translation failure. Your job is to make the constraint **shared and legible**, not vibes-based.
+## Principles I actually use
 
-## Principles before tactics
+1. **Company throughput beats local speed.** A one-week special case that creates a permanent support branch is not kindness.
+2. **A delayed honest yes beats a fake yes.** A Jira key without staffing is a lie.
+3. **Tradeoffs go in writing the same day.** Memory is political; notes are kinder.
 
-**1. Optimize for company throughput, not local speed.**  
-A one-week special case that creates a permanent support branch can destroy months of leverage.
+Everything below is those three principles in concrete form.
 
-**2. Be a partner, not a gate with a mood.**  
-Gates need published rules. Moods create politics.
+## Case A — No to “just adopt the platform”
 
-**3. Prefer delayed yes to fake yes.**  
-A yes without staffing is a lie with a Jira key.
+**Request (implied):** BI teams on Power BI and Tableau should move to EDP because it is the strategic GTM data platform.
 
-**4. Put tradeoffs in writing.**  
-Memory is political. Documents are kinder.
+**Reality:** They could already get data from Hadoop-based pipelines. Migration looked like unfunded risk. EDP could not become the source of truth without them.
 
-## A script that works in real meetings
+**The no:** No to a pure mandate without labor—“adopt EDP” as a favor to the platform team.
 
-When a request arrives that you cannot take:
+**The path:**
 
-1. **Restate the outcome they want** (not the solution they proposed).  
-2. **Name the constraint** (reliability risk, staffing, interface stability, security).  
-3. **Offer options**, at least two:  
-   - self-serve path on today’s paved road  
-   - scheduled platform work with a date range  
-   - approved exception with expiry and owner  
-4. **Confirm what you are committing to**—and what you are not.  
-5. **Follow up in writing** the same day.
+- Executive sponsorship that framed legacy pipeline deprecation as **continuity risk**, not taste.
+- **EDP engineers assigned to migration work**, not only documentation.
+- Connectors into Power BI and Tableau.
+- Query performance work so cutover did not punish adopters.
+- Tooling, office hours, and **hard deprecation milestones** so dual-running ended.
 
-Example:
+That package is a no to magical adoption and a yes to an expensive but real interface change. Within a concentrated push (about a quarter for the BI motion we scoped), the migration stuck and legacy surface area could shrink.
 
-> You need tenant-scoped export by March for the enterprise deal. We cannot safely build a custom exporter in that window without risking the shared query path. Options: (a) use the existing async export with filters X/Y this sprint; (b) we schedule a first-class export API for Q2 with design starting Feb 10; (c) temporary exception with a sunset date and your team owning on-call for the custom path. I recommend (a)+(b).
+**Pattern:** If the consumer has no incentive, your “no” is to unfunded asks; your “yes” is to change incentives and price.
 
-That is a no to "build my one-off forever." It is not a no to the business outcome.
+## Case B — No to both pure extremes in an architecture fight
+
+**Request (implied):** Pick monolith *or* microservices for an EDP self-serve portal—each side sure the other choice was malpractice.
+
+**Reality:** The disagreement went public, ownership collapsed, and delivery froze for roughly a month.
+
+**The no:** No to a binary holy war. No to indefinite debate. No to “loudest critique wins.”
+
+**The path:**
+
+- Structured design review with **written criteria** (scalability, maintainability, speed, ownership).
+- **Time-boxed POCs** from both approaches instead of slide wars.
+- A neutral senior engineer in the room.
+- Explicit coaching on ownership and influence in 1:1s—not only technical arbitration.
+- A **hybrid decision**: core platform capabilities stayed integrated with the EDP backend; more dynamic portal workflows could be separate services; metadata lifecycle centralized (we used DataHub) rather than re-invented.
+
+Execution resumed on the order of a week after the decision landed; the portal followed on a months-long path with real adoption.
+
+**Pattern:** Sometimes the EM’s no is to false dichotomies. The funded path is a hybrid with proofs.
 
 ## Make yes expensive in the right way
 
-Not every yes should be cheap. For exceptions, charge real prices:
+Temporary exceptions will exist—dual pipelines during migration, transitional architecture branches. Price them:
 
-- **Time-bounded**: expires on a date
-- **Owned**: named team for incidents
-- **Observed**: metrics and alerts exist
-- **Documented**: how to remove it later
-- **Visible**: appears on an exceptions list executives can understand
+- **Time-bounded** (deprecation date, not vibes)
+- **Owned** (named team for breakage)
+- **Visible** (on a list leadership can see)
+- **Removable** (exit criteria written down)
 
-If exceptions are free and quiet, you will drown in them.
+Free, quiet exceptions are how platforms drown.
 
 ## Roadmaps are how you say no at scale
 
-One-off negotiation does not scale. Publish:
+One-off negotiation does not survive GTM scope. The EDP sales/GTM program needed an explicit sequence:
 
-- **What the platform will invest in this half**
-- **What is explicitly out of scope**
-- **How to request net-new capabilities** (intake form, rubric, SLA for response)
-- **Decision log** for major nos so people stop re-litigating
+0. Buy-in and prioritization  
+1. MVP on high-value sales datasets  
+2. Expand across sales/revenue consumers  
+3. Broader GTM standardization  
+4. Governance and optimization  
 
-When the roadmap is real, "not now" points to a process instead of a person.
-
-## Fairness beats popularity
-
-The loudest team should not win by default. A simple rubric helps:
-
-- Number of teams unblocked  
-- Risk reduction (sec, reliability, compliance)  
-- Cost of not doing it (deal, churn, legal)  
-- Fit to platform strategy  
-- Ongoing support cost  
-
-Share the rubric. People still disagree, but disagreement becomes about weights, not favoritism.
+That roadmap is a machine for “not yet.” Without it, every dataset is an emergency and every emergency is a yes.
 
 ## Protect the team without hiding behind them
 
-EMs sometimes use "the team is busy" as a shield. Teams smell that. Better:
+“The team is busy” is weak if you cannot show the math. Better:
 
-- Show capacity math ("six engineers, three committed bets, one support rotation")
-- Escalate business prioritization when demand exceeds supply
-- Take the heat in partner meetings so ICs are not negotiating politics alone
+- Here is committed platform work (migration staffing, deprecation, portal seams).
+- Here is what we will not staff this quarter.
+- Here is the escalation if the business wants to reorder.
 
-Your engineers should feel backed. Your partners should feel respected. Both are possible if you tell the truth early.
-
-## When you are wrong
-
-Sometimes the no was incorrect: you misread urgency, overestimated risk, or underestimated leverage. Fix it publicly.
-
-> We declined the shared rate-limit service in November. Two launches later, the duplicated work is clearly worse. We are scheduling it for April and documenting the miss.
-
-Authority grows when corrections are fast and non-defensive.
+Take heat in partner forums so individual engineers are not negotiating company priority alone.
 
 ## Closing
 
-Platform EMs do not earn trust by being agreeable. They earn trust by being **predictable stewards of shared constraints**.
+Saying no as a platform EM is stewardship of shared constraints.
 
-Say no to unbounded special cases. Say yes to clear outcomes, honest timelines, and interfaces that make the next team faster. Write it down. Revisit it.
+On EDP, the nos that mattered were: **no unfunded adoption**, and **no architecture theater that freezes delivery**. The yeses were expensive on purpose—engineers on migration, connectors, deprecation, POCs, hybrid seams.
 
-Villains block silently. Partners constrain in the open.
+If partners can see the path, you are not the villain. You are how the company keeps one platform instead of twelve.

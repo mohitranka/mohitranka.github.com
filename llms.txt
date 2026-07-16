@@ -2,42 +2,41 @@
 
 > Engineering leader. Builder of data platforms, developer tooling, and reliable distributed backends.
 
-Mohit Ranka is an engineering leader focused on data platforms, developer tooling, and reliable distributed backends. He prefers clarity over cleverness, long-term impact over short wins, and systems that scale from one team to many.
+Mohit Ranka is an engineering leader focused on data platforms, developer tooling, and reliable distributed backends.
 
 Experience highlights:
 - LinkedIn: consolidated diverse data sources into a near-real-time platform
 - Postman: led the web launch
 - Booking.com: built identity and SSO systems
 
-Location and background: India; B.Tech. from Vellore Institute of Technology.
-
 Primary contact: mohitranka@gmail.com
 Site: https://www.mohitranka.com
 
 ## Pages
 
-- [Home](https://www.mohitranka.com/): About Mohit Ranka — background, focus areas, and selected writing
-- [Writing](https://www.mohitranka.com/blog.html): Technical writing on platforms, data, reliability, and leadership
-- [Contact](https://www.mohitranka.com/contact/): Email contact for architecture, reliability, or AI-system topics
+- [Home](https://www.mohitranka.com/)
+- [Writing](https://www.mohitranka.com/blog.html)
+- [Contact](https://www.mohitranka.com/contact/)
 
 ## Writing
 
-- [Near-real-time is a product promise, not a Kafka cluster](https://www.mohitranka.com/blog/near-real-time-is-a-product-promise/): Freshness contracts vs streaming infrastructure
-- [The platform team’s real job is interfaces](https://www.mohitranka.com/blog/platform-teams-real-job-is-interfaces/): Platform leverage through stable boundaries
-- [When I still choose a relational database](https://www.mohitranka.com/blog/when-i-still-choose-a-relational-database/): Modern sequel on datastore judgment
-- [Freshness SLOs: the metric product teams actually feel](https://www.mohitranka.com/blog/freshness-slos-the-metric-product-teams-feel/): SLOs for age of truth in data platforms
-- [Saying no as a platform EM without becoming the villain](https://www.mohitranka.com/blog/saying-no-as-a-platform-em/): Prioritization and partner trust for platform leaders
-- [Identity systems fail socially before they fail cryptographically](https://www.mohitranka.com/blog/identity-systems-fail-socially/): Ownership, exceptions, and session semantics
-- [What “led the web launch” taught me about constraints](https://www.mohitranka.com/blog/web-launch-constraints/): Shipping a web surface under real constraints
-- [Cost regressions are production incidents](https://www.mohitranka.com/blog/cost-regressions-are-production-incidents/): Treating spend anomalies as operational events
-- [How I review a distributed design in 45 minutes](https://www.mohitranka.com/blog/how-i-review-a-distributed-design/): A practical architecture review checklist
-- [AI features that deserve a data contract](https://www.mohitranka.com/blog/ai-features-that-deserve-a-data-contract/): Contracts, evals, and ownership for AI products
-- [RDBMS vs. NOSQL?](https://www.mohitranka.com/blog/rdbms-vs-nosql/): Earlier essay on when relational databases still win (2013)
+- [Near-real-time is a product promise, not a Kafka cluster](https://www.mohitranka.com/blog/near-real-time-is-a-product-promise/) (2026-07-16)
+- [The platform team’s real job is interfaces](https://www.mohitranka.com/blog/platform-teams-real-job-is-interfaces/) (2025-11-13)
+- [When I still choose a relational database](https://www.mohitranka.com/blog/when-i-still-choose-a-relational-database/) (2025-03-13)
+- [Freshness SLOs: the metric product teams actually feel](https://www.mohitranka.com/blog/freshness-slos-the-metric-product-teams-feel/) (2024-07-11)
+- [Saying no as a platform EM without becoming the villain](https://www.mohitranka.com/blog/saying-no-as-a-platform-em/) (2023-11-08)
+- [Identity systems fail socially before they fail cryptographically](https://www.mohitranka.com/blog/identity-systems-fail-socially/) (2023-03-08)
+- [What “led the web launch” taught me about constraints](https://www.mohitranka.com/blog/web-launch-constraints/) (2022-07-06)
+- [Incubating 0→1 beside a mature product](https://www.mohitranka.com/blog/postman-labs-0-to-1/) (2021-06-15)
+- [How I review a distributed design in 45 minutes](https://www.mohitranka.com/blog/how-i-review-a-distributed-design/) (2021-03-03)
+- [Introducing on-call without burning the team](https://www.mohitranka.com/blog/introducing-on-call-without-burnout/) (2020-11-10)
+- [GTM datasets need data contracts](https://www.mohitranka.com/blog/gtm-datasets-need-data-contracts/) (2020-07-01)
+- [RDBMS vs. NOSQL?](https://www.mohitranka.com/blog/rdbms-vs-nosql/) (2013-06-29)
 
 ## Optional
 
-- [GitHub](https://github.com/mohitranka): Code and open-source experiments
-- [LinkedIn](https://www.linkedin.com/in/mohit-ranka): Professional profile
-- [Sitemap](https://www.mohitranka.com/sitemap.xml): Machine-readable list of public pages
-- [Atom feed](https://www.mohitranka.com/atom.xml): Site feed
-- [Full text for LLMs](https://www.mohitranka.com/llms-full.txt): Complete page and post text for answer engines
+- [GitHub](https://github.com/mohitranka)
+- [LinkedIn](https://www.linkedin.com/in/mohit-ranka)
+- [Sitemap](https://www.mohitranka.com/sitemap.xml)
+- [Atom feed](https://www.mohitranka.com/atom.xml)
+- [Full text for LLMs](https://www.mohitranka.com/llms-full.txt)
