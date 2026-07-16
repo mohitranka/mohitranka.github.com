@@ -1,5 +1,5 @@
 Title: The best XKCD ever?
-Date: 2009-05-19 00:00
+Date: 2025-09-01 00:00
 Category: Blog
 Slug: the-best-xkcd-ever
 

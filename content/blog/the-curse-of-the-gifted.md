@@ -1,5 +1,5 @@
 Title: The curse of the gifted
-Date: 2011-04-05 00:00
+Date: 2026-03-02 00:00
 Category: Blog
 Slug: the-curse-of-the-gifted
 

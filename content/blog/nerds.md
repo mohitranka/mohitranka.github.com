@@ -1,5 +1,5 @@
 Title: Nerds!
-Date: 2007-11-05 00:00
+Date: 2025-06-02 00:00
 Category: Blog
 Slug: nerds
 

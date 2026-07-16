@@ -1,5 +1,5 @@
 Title: On being a champion
-Date: 2009-06-28 00:00
+Date: 2025-12-01 00:00
 Category: Blog
 Slug: on-being-a-champion
 

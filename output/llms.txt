@@ -1,0 +1,45 @@
+# Mohit Ranka
+
+> Engineering leader. Builder of data platforms, developer tooling, and reliable distributed backends.
+
+Mohit Ranka is an engineering leader focused on data platforms, developer tooling, and reliable distributed backends. He prefers clarity over cleverness, long-term impact over short wins, and systems that scale from one team to many.
+
+Experience highlights:
+- LinkedIn: consolidated diverse data sources into a near-real-time platform
+- Postman: led the web launch
+- Booking.com: built identity and SSO systems
+
+Location and background: India; B.Tech. from Vellore Institute of Technology.
+
+Primary contact: mohitranka@gmail.com
+Site: https://www.mohitranka.com
+
+## Pages
+
+- [Home](https://www.mohitranka.com/): About Mohit Ranka — background, focus areas, and selected writing
+- [Writing](https://www.mohitranka.com/blog.html): Full archive of older technical and personal essays
+- [Contact](https://www.mohitranka.com/contact/): Email contact for architecture, reliability, or AI-system topics
+
+## Writing
+
+- [Superfast lag-free SSH](https://www.mohitranka.com/blog/superfast-lag-free-ssh/): SSH ControlMaster tips for faster long-running remote sessions (2013)
+- [RDBMS vs. NOSQL?](https://www.mohitranka.com/blog/rdbms-vs-nosql/): When relational databases fit highly available ecommerce platforms and when they do not (2013)
+- [One click website deployment with Octopress](https://www.mohitranka.com/blog/one-click-website-deployment-with-octopress/): Notes on revamping a personal site with Octopress and GitHub Pages (2013)
+- [The curse of the gifted](https://www.mohitranka.com/blog/the-curse-of-the-gifted/): Reflection on talent, sharing, and Eric Raymond's essay (2011)
+- [What it means to work for a startup](https://www.mohitranka.com/blog/what-it-means-to-work-for-a-startup/): On commitment, vision, and early-stage team culture (2009)
+- [On being a champion](https://www.mohitranka.com/blog/on-being-a-champion/): Lessons from sport applied to resilience and comebacks (2009)
+- [Just another day in the office](https://www.mohitranka.com/blog/just-another-day-in-the-office/): A long debugging day and the feeling of shipping the fix (2009)
+- [The best XKCD ever?](https://www.mohitranka.com/blog/the-best-xkcd-ever/): A short note on a favorite XKCD comic (2009)
+- [Guest blogged at twistedgenes.com](https://www.mohitranka.com/blog/guest-blogged-at-twistedgenescom/): Guest post mixing Python and philosophy (2008)
+- [Nerds!](https://www.mohitranka.com/blog/nerds/): Short note on nerd culture (2007)
+- [and I feel lucky…](https://www.mohitranka.com/blog/and-i-feel-lucky/): On the value of meeting and interacting with smart people (2007)
+- [Harry Potter vs. LOTR](https://www.mohitranka.com/blog/harry-potter-vs-lotr/): Comparative take on two fantasy series (2007)
+- [Success — How does one get it?](https://www.mohitranka.com/blog/success-how-does-one-get-it-/): Early reflection on success and what drives it (2006)
+
+## Optional
+
+- [GitHub](https://github.com/mohitranka): Code and open-source experiments
+- [LinkedIn](https://www.linkedin.com/in/mohit-ranka): Professional profile
+- [Sitemap](https://www.mohitranka.com/sitemap.xml): Machine-readable list of public pages
+- [Atom feed](https://www.mohitranka.com/atom.xml): Legacy feed of older posts
+- [Full text for LLMs](https://www.mohitranka.com/llms-full.txt): Complete page and post text for answer engines

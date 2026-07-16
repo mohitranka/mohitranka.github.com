@@ -1,5 +1,5 @@
 Title: and I feel lucky....
-Date: 2007-10-26 00:00
+Date: 2025-04-17 00:00
 Category: Blog
 Slug: and-i-feel-lucky
 

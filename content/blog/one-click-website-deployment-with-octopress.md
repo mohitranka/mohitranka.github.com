@@ -1,5 +1,5 @@
 Title: One click website deployment with octopress
-Date: 2013-06-20 00:13
+Date: 2026-04-16 00:13
 Category: Blog
 Slug: one-click-website-deployment-with-octopress
 

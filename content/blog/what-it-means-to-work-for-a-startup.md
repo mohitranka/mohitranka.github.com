@@ -1,5 +1,5 @@
 Title: What it means to work for a startup.
-Date: 2009-08-23 00:00
+Date: 2026-01-15 00:00
 Category: Blog
 Slug: what-it-means-to-work-for-a-startup
 
