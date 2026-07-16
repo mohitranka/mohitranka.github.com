@@ -8,22 +8,22 @@
     <meta name="description" content="In 2013 I wrote RDBMS vs. NOSQL? as a pushback against fashion. The fashion changed costumes—document stores, wide-column, NewSQL, "Postgres is fine,"...">
     <meta name="author" content="Mohit Ranka">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://www.mohitranka.com/blog/when-i-still-choose-a-relational-database/">
-    <link rel="alternate" type="application/atom+xml" title="Mohit Ranka" href="https://www.mohitranka.com/atom.xml">
+    <link rel="canonical" href="../../blog/when-i-still-choose-a-relational-database/">
+    <link rel="alternate" type="application/atom+xml" title="Mohit Ranka" href="../../atom.xml">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="Mohit Ranka">
     <meta property="og:locale" content="en_US">
-    <meta property="og:url" content="https://www.mohitranka.com/blog/when-i-still-choose-a-relational-database/">
+    <meta property="og:url" content="../../blog/when-i-still-choose-a-relational-database/">
     <meta property="og:title" content="When I still choose a relational database">
     <meta property="og:description" content="In 2013 I wrote RDBMS vs. NOSQL? as a pushback against fashion. The fashion changed costumes—document stores, wide-column, NewSQL, "Postgres is fine,"...">
-    <meta property="og:image" content="https://www.mohitranka.com/theme/images/og.png">
+    <meta property="og:image" content="../../theme/images/og.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="When I still choose a relational database">
     <meta name="twitter:description" content="In 2013 I wrote RDBMS vs. NOSQL? as a pushback against fashion. The fashion changed costumes—document stores, wide-column, NewSQL, "Postgres is fine,"...">
-    <meta name="twitter:image" content="https://www.mohitranka.com/theme/images/og.png">
-    <link rel="stylesheet" href="https://www.mohitranka.com/theme/css/style.css">
+    <meta name="twitter:image" content="../../theme/images/og.png">
+    <link rel="stylesheet" href="../../theme/css/style.css">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-CWEDLBH79X"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -39,28 +39,28 @@
     "@type": "BlogPosting",
     "headline": "When I still choose a relational database",
     "description": "In 2013 I wrote RDBMS vs. NOSQL? as a pushback against fashion. The fashion changed costumes\u2014document stores, wide-column, NewSQL, \"Postgres is fine,\"...",
-    "url": "https://www.mohitranka.com/blog/when-i-still-choose-a-relational-database/",
+    "url": "../../blog/when-i-still-choose-a-relational-database/",
     "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": "https://www.mohitranka.com/blog/when-i-still-choose-a-relational-database/"
+        "@id": "../../blog/when-i-still-choose-a-relational-database/"
     },
     "datePublished": "2025-03-13T10:00:00+05:30",
     "dateModified": "2025-03-13T10:00:00+05:30",
     "author": {
         "@type": "Person",
         "name": "Mohit Ranka",
-        "url": "https://www.mohitranka.com/"
+        "url": "../../"
     },
     "publisher": {
         "@type": "Person",
         "name": "Mohit Ranka",
-        "url": "https://www.mohitranka.com/"
+        "url": "../../"
     },
     "inLanguage": "en",
     "isPartOf": {
         "@type": "Blog",
         "name": "Writing — Mohit Ranka",
-        "url": "https://www.mohitranka.com/blog.html"
+        "url": "../../blog.html"
     }
 }
 </script>
@@ -69,10 +69,10 @@
 <body class="page-article">
     <main>
         <header class="site-header">
-            <a class="site-logo" href="https://www.mohitranka.com/">Mohit Ranka</a>
+            <a class="site-logo" href="../../">Mohit Ranka</a>
             <nav class="site-nav" aria-label="Primary">
-                <a href="https://www.mohitranka.com/blog.html">Writing</a>
-                <a href="https://www.mohitranka.com/contact/">Contact</a>
+                <a href="../../blog.html">Writing</a>
+                <a href="../../contact/">Contact</a>
             </nav>
         </header>
 
@@ -85,9 +85,9 @@
     </header>
 
     <div class="entry-content">
-        <p>In 2013 I wrote <a href="https://www.mohitranka.com/blog/rdbms-vs-nosql/">RDBMS vs. NOSQL?</a> as a pushback against fashion. The fashion changed costumes—document stores, wide-column, NewSQL, "Postgres is fine," "everything in the lakehouse"—but the underlying mistake did not: <strong>picking a datastore from a blog post instead of from access patterns and failure modes.</strong></p>
+        <p>In 2013 I wrote <a href="../../blog/rdbms-vs-nosql/">RDBMS vs. NOSQL?</a> as a pushback against fashion. The fashion changed costumes—document stores, wide-column, NewSQL, "Postgres is fine," "everything in the lakehouse"—but the underlying mistake did not: <strong>picking a datastore from a blog post instead of from access patterns and failure modes.</strong></p>
 <figure class="post-figure">
-  <img src="https://www.mohitranka.com/images/blog/when-i-still-choose-a-relational-database.jpg" alt="Illustration of an ordered data table foundation beside scattered documents" loading="lazy" width="1200" height="675">
+  <img src="../../images/blog/when-i-still-choose-a-relational-database.jpg" alt="Illustration of an ordered data table foundation beside scattered documents" loading="lazy" width="1200" height="675">
   <figcaption>
     <span class="fig-caption">A relational spine is often the boring default until access patterns and failure modes force a different shape.</span>
     <span class="fig-credit">Credit: Original illustration created for mohitranka.com (AI-assisted).</span>
@@ -155,11 +155,11 @@ Truly heterogeneous documents with little shared query structure can be a poor f
 </ol>
 <p>If step 6 requires a conference talk, the choice may still be right—but it needs more proof. That detail matters in practice because the surrounding system, incentives, and failure modes usually determine whether the idea survives contact with production and with other teams. I treat this as an operating constraint rather than a slogan: if you cannot explain how it shows up in ownership, metrics, and day-to-day decisions, it will not survive the next roadmap fight.</p>
 <h2>Closing</h2>
-<p>I still choose a relational database when I want <strong>correctness, evolvable queries, and operational boredom</strong> around the core of a product. I choose other systems when the access pattern or scale curve makes that boredom impossible. The winning move is rarely "pick a side." It is <strong>keep a sharp system of record, derive aggressively, and refuse to let fashion rename your requirements.</strong> If you want the older, more argumentative version of this stance, it is still here: <a href="https://www.mohitranka.com/blog/rdbms-vs-nosql/">RDBMS vs. NOSQL?</a>. The industry moved. The need for judgment did not.</p>
+<p>I still choose a relational database when I want <strong>correctness, evolvable queries, and operational boredom</strong> around the core of a product. I choose other systems when the access pattern or scale curve makes that boredom impossible. The winning move is rarely "pick a side." It is <strong>keep a sharp system of record, derive aggressively, and refuse to let fashion rename your requirements.</strong> If you want the older, more argumentative version of this stance, it is still here: <a href="../../blog/rdbms-vs-nosql/">RDBMS vs. NOSQL?</a>. The industry moved. The need for judgment did not.</p>
     </div>
 
     <p class="article-footer meta">
-        <a href="https://www.mohitranka.com/blog.html">← All writing</a>
+        <a href="../../blog.html">← All writing</a>
     </p>
 </article>
     </main>
