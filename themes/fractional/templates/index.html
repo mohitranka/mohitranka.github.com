@@ -8,6 +8,11 @@
 {% block og_description %}Engineering leader. Builder of data platforms, developer tooling, and reliable distributed backends. Previously LinkedIn, Postman, and Booking.com.{% endblock %}
 {% block twitter_title %}{{ SITENAME }} — Engineering Leader{% endblock %}
 {% block twitter_description %}Engineering leader. Builder of data platforms, developer tooling, and reliable distributed backends. Previously LinkedIn, Postman, and Booking.com.{% endblock %}
+{% block body_class %}page-home{% endblock %}
+
+{% block site_brand %}
+            <h1 class="site-logo"><a href="{{ SITEURL }}/">{{ SITENAME }}</a></h1>
+{% endblock %}
 
 {% block head_extra %}
 <script type="application/ld+json">
@@ -69,8 +74,6 @@
 {% endblock %}
 
 {% block content %}
-        <h1>{{ SITENAME }}</h1>
-
         <p>I'm an <a href="{{ SITEURL }}/blog.html">engineering leader</a> who builds data platforms, developer tooling, and reliable distributed backends. I prefer clarity over cleverness, long-term impact over short wins, and shipping work that scales from one team to many.</p>
 
         <p>My sweet spot is turning fuzzy product questions into pragmatic, well-instrumented systems that survive real traffic and real people.</p>
@@ -78,14 +81,15 @@
         <p>I've consolidated diverse data sources into a near-real-time platform at <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a>, led the web launch of <a href="https://www.postman.com" target="_blank" rel="noopener noreferrer">Postman</a>, and built identity and SSO systems at <a href="https://www.booking.com" target="_blank" rel="noopener noreferrer">Booking.com</a>.</p>
 
         {% if articles %}
-        <p>Selected writing:</p>
-
-        <ul>
+        <h2 class="section-label">Selected writing</h2>
+        <ul class="article-list home-writing-list">
             {% for article in articles[:5] %}
-            <li><a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a></li>
+            <li class="article-item">
+                <a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a>
+            </li>
             {% endfor %}
         </ul>
         {% endif %}
 
-        <p>You can <a href="{{ SITEURL }}/blog.html">read more writing</a>, browse my <a href="https://github.com/mohitranka" target="_blank" rel="noopener noreferrer">code</a>, or <a href="https://www.linkedin.com/in/mohit-ranka" target="_blank" rel="noopener noreferrer">connect on LinkedIn</a>. <a href="mailto:mohitranka@gmail.com">Reach out</a> if interested.</p>
+        <p class="site-footer">You can <a href="{{ SITEURL }}/blog.html">read more writing</a>, browse my <a href="https://github.com/mohitranka" target="_blank" rel="noopener noreferrer">code</a>, or <a href="https://www.linkedin.com/in/mohit-ranka" target="_blank" rel="noopener noreferrer">connect on LinkedIn</a>. <a href="mailto:mohitranka@gmail.com">Reach out</a> if interested.</p>
 {% endblock %}

@@ -9,6 +9,7 @@
 {% block og_description %}{{ article.summary|striptags|truncate(160) }}{% endblock %}
 {% block twitter_title %}{{ article.title }}{% endblock %}
 {% block twitter_description %}{{ article.summary|striptags|truncate(160) }}{% endblock %}
+{% block body_class %}page-article{% endblock %}
 
 {% block head_extra %}
 <meta property="article:published_time" content="{{ article.date.isoformat() }}">
@@ -47,24 +48,19 @@
 {% endblock %}
 
 {% block content %}
-        <p class="meta" style="margin-bottom: 0.5rem;">
-            <a href="{{ SITEURL }}/blog.html">← Writing</a>
-        </p>
-        <h1><a href="{{ SITEURL }}/" style="text-decoration:none;">{{ SITENAME }}</a></h1>
-
 <article>
-    <header>
+    <header class="article-header">
         <h1 class="article-title">{{ article.title }}</h1>
-        <div class="article-meta">
-            <time datetime="{{ article.date.isoformat() }}">{{ article.locale_date }}</time>
-        </div>
+        <p class="article-meta">
+            <time datetime="{{ article.date.isoformat() }}">{{ article.date.strftime('%d %b %Y') }}</time>
+        </p>
     </header>
 
     <div class="entry-content">
         {{ article.content }}
     </div>
 
-    <p class="meta" style="margin-top: 3rem;">
+    <p class="article-footer meta">
         <a href="{{ SITEURL }}/blog.html">← All writing</a>
     </p>
 </article>

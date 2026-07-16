@@ -1,21 +1,27 @@
 {% extends "base.html" %}
 
-{% block title %}writing | {{ SITENAME }}{% endblock %}
+{% block title %}Writing — {{ SITENAME }}{% endblock %}
+{% block description %}Technical writing on platforms, data, reliability, and engineering leadership by {{ AUTHOR }}.{% endblock %}
+{% block canonical %}{{ SITEURL }}/blog.html{% endblock %}
+{% block og_url %}{{ SITEURL }}/blog.html{% endblock %}
+{% block og_title %}Writing — {{ SITENAME }}{% endblock %}
+{% block og_description %}Technical writing on platforms, data, reliability, and engineering leadership by {{ AUTHOR }}.{% endblock %}
+{% block twitter_title %}Writing — {{ SITENAME }}{% endblock %}
+{% block twitter_description %}Technical writing on platforms, data, reliability, and engineering leadership by {{ AUTHOR }}.{% endblock %}
+{% block body_class %}page-writing{% endblock %}
 
 {% block content %}
-<h1 class="font-medium text-xl mb-1">writing</h1>
-<a class="meta no-underline" href="{{ SITEURL }}/" style="display: block; margin-top: -1rem; margin-bottom: 2rem;">by mohit ranka</a>
+        <h1>Writing</h1>
+        <p class="meta page-lede">
+            Technical writing on platforms, data, reliability, and engineering leadership.
+        </p>
 
-<p class="meta" style="margin-bottom: 2rem;">
-    Technical writing on platforms, data, reliability, and engineering leadership.
-</p>
-
-<ul class="article-list">
-    {% for article in dates %}
-    <li class="article-item">
-        <a href="{{ SITEURL }}/{{ article.url }}" class="article-title">{{ article.title }}</a>
-        <span class="article-meta">{{ article.locale_date }}</span>
-    </li>
-    {% endfor %}
-</ul>
+        <ul class="article-list">
+            {% for article in dates %}
+            <li class="article-item">
+                <a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a>
+                <time class="article-meta" datetime="{{ article.date.isoformat() }}">{{ article.date.strftime('%b %Y') }}</time>
+            </li>
+            {% endfor %}
+        </ul>
 {% endblock %}
