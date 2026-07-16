@@ -6,6 +6,14 @@ Tags: distributed-systems, engineering-leadership, architecture
 
 The most expensive design reviews I have run were not missing a box on a diagram. They were missing a decision. One of them froze delivery on an EDP self-serve portal for about a month while two strong engineers disagreed in public about monolith versus microservices—and ownership quietly collapsed. This is how I run a distributed design review when time is short, using that conflict as the worked example. The forty-five minutes are a filter for **danger and indecision**, not a substitute for deep design.
 
+<figure class="post-figure">
+  <img src="{static}/images/blog/how-i-review-a-distributed-design.jpg" alt="Illustration of an architecture whiteboard with boxes, arrows, and coffee cups" loading="lazy" width="1200" height="675">
+  <figcaption>
+    <span class="fig-caption">A short design review is a filter for clear promises, truth models, and decisions—not a theater of diagrams.</span>
+    <span class="fig-credit">Credit: Original illustration created for mohitranka.com (AI-assisted).</span>
+  </figcaption>
+</figure>
+
 <!--more-->
 
 ## The situation the review had to unstick

@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom"><title>Mohit Ranka - Blog</title><link href="https://www.mohitranka.com/" rel="alternate"/><link href="https://www.mohitranka.com/feeds/blog.atom.xml" rel="self"/><id>https://www.mohitranka.com/</id><updated>2026-07-16T10:00:00+05:30</updated><entry><title>Near-real-time is a product promise, not a Kafka cluster</title><link href="https://www.mohitranka.com/blog/near-real-time-is-a-product-promise/" rel="alternate"/><published>2026-07-16T10:00:00+05:30</published><updated>2026-07-16T10:00:00+05:30</updated><author><name>Mohit Ranka</name></author><id>tag:www.mohitranka.com,2026-07-16:/blog/near-real-time-is-a-product-promise/</id><summary type="html">&lt;p&gt;“Near-real-time” is often used as a synonym for “we bought a streaming stack.” On GTM data platforms, that confusion is expensive. The product promise is about &lt;strong&gt;whether a decision-maker can trust a number in time&lt;/strong&gt;—not whether an event log is busy. At LinkedIn, the Enterprise Data Platform (EDP) was …&lt;/p&gt;</summary><content type="html">&lt;p&gt;“Near-real-time” is often used as a synonym for “we bought a streaming stack.” On GTM data platforms, that confusion is expensive. The product promise is about &lt;strong&gt;whether a decision-maker can trust a number in time&lt;/strong&gt;—not whether an event log is busy. At LinkedIn, the Enterprise Data Platform (EDP) was intended as the governed center for GTM datasets. BI teams on Power BI and Tableau still ran on Hadoop-era batch paths. They already had data. What they did not have was a reason to treat EDP as the path that made GTM analytics true, timely, and durable as legacy pipelines were marked for deprecation. That gap is a product-promise gap.&lt;/p&gt;
+&lt;figure class="post-figure"&gt;
+  &lt;img src="https://www.mohitranka.com/images/blog/near-real-time-is-a-product-promise.jpg" alt="Abstract illustration of a clock and data streams feeding a product dashboard" loading="lazy" width="1200" height="675"&gt;
+  &lt;figcaption&gt;
+    &lt;span class="fig-caption"&gt;Near-real-time is a promise about the age of truth a consumer can act on—not a badge for a streaming cluster.&lt;/span&gt;
+    &lt;span class="fig-credit"&gt;Credit: Original illustration created for mohitranka.com (AI-assisted).&lt;/span&gt;
+  &lt;/figcaption&gt;
+&lt;/figure&gt;
+
 &lt;!--more--&gt;
 
 &lt;h2&gt;What consumers actually bought&lt;/h2&gt;
@@ -59,6 +67,14 @@
 &lt;p&gt;If the answers are all technology choices, the promise is not ready. That detail matters in practice because the surrounding system, incentives, and failure modes usually determine whether the idea survives contact with production and with other teams. I treat this as an operating constraint rather than a slogan: if you cannot explain how it shows up in ownership, metrics, and day-to-day decisions, it will not survive the next roadmap fight.&lt;/p&gt;
 &lt;h2&gt;Closing&lt;/h2&gt;
 &lt;p&gt;Near-real-time is not a badge for an architecture review. It is a &lt;strong&gt;promise about time, truth, and behavior when truth is late&lt;/strong&gt;. EDP’s lesson was blunt: the company does not get that promise when a platform exists. It gets that promise when critical consumers—here, BI on GTM data—run on the governed path, and the old batch defaults are allowed to end. Build streams when they earn their keep. Build the consumer promise first.&lt;/p&gt;</content><category term="Blog"/><category term="data-platforms"/><category term="distributed-systems"/><category term="reliability"/></entry><entry><title>The platform team’s real job is interfaces</title><link href="https://www.mohitranka.com/blog/platform-teams-real-job-is-interfaces/" rel="alternate"/><published>2025-11-13T10:00:00+05:30</published><updated>2025-11-13T10:00:00+05:30</updated><author><name>Mohit Ranka</name></author><id>tag:www.mohitranka.com,2025-11-13:/blog/platform-teams-real-job-is-interfaces/</id><summary type="html">&lt;p&gt;At LinkedIn, the Enterprise Data Platform (EDP) was meant to be the centralized way GTM teams managed and consumed datasets. On paper, that is a clear platform charter. In practice, a platform is only real when its &lt;strong&gt;interfaces get adopted&lt;/strong&gt;—including by teams that already have a path that “works …&lt;/p&gt;</summary><content type="html">&lt;p&gt;At LinkedIn, the Enterprise Data Platform (EDP) was meant to be the centralized way GTM teams managed and consumed datasets. On paper, that is a clear platform charter. In practice, a platform is only real when its &lt;strong&gt;interfaces get adopted&lt;/strong&gt;—including by teams that already have a path that “works.” The hard case was BI. Power BI and Tableau teams were still living on Hadoop-based pipelines scheduled for deprecation. They could already get data. EDP was strategically important and still optional in their week. Without them, EDP could not become the source of truth for GTM analytics no matter how good the internals looked. That is an interface problem, not a cluster problem.&lt;/p&gt;
+&lt;figure class="post-figure"&gt;
+  &lt;img src="https://www.mohitranka.com/images/blog/platform-teams-real-job-is-interfaces.jpg" alt="Abstract illustration of connecting building blocks and interface ports between teams" loading="lazy" width="1200" height="675"&gt;
+  &lt;figcaption&gt;
+    &lt;span class="fig-caption"&gt;Platforms earn leverage when the interfaces other teams stand on are clear, adoptable, and owned.&lt;/span&gt;
+    &lt;span class="fig-credit"&gt;Credit: Original illustration created for mohitranka.com (AI-assisted).&lt;/span&gt;
+  &lt;/figcaption&gt;
+&lt;/figure&gt;
+
 &lt;!--more--&gt;
 
 &lt;h2&gt;The interface was “how BI gets governed data”&lt;/h2&gt;
@@ -117,9 +133,18 @@
 &lt;p&gt;Special cases still existed—BI tools always have them—but they were absorbed into connectors and support rituals, not infinite private forks. That detail matters in practice because the surrounding system, incentives, and failure modes usually determine whether the idea survives contact with production and with other teams.&lt;/p&gt;
 &lt;h2&gt;Closing&lt;/h2&gt;
 &lt;p&gt;Platform teams love infrastructure. Infrastructure is not the job. The job is to define, evolve, and defend &lt;strong&gt;interfaces other teams can build on&lt;/strong&gt;—including the incentives, migration labor, and deprecation schedule that make those interfaces real. EDP did not become the GTM source of truth when it launched. It became the source of truth when BI could succeed on it, and the old paths were allowed to die.&lt;/p&gt;</content><category term="Blog"/><category term="engineering-leadership"/><category term="platforms"/><category term="developer-tooling"/></entry><entry><title>When I still choose a relational database</title><link href="https://www.mohitranka.com/blog/when-i-still-choose-a-relational-database/" rel="alternate"/><published>2025-03-13T10:00:00+05:30</published><updated>2025-03-13T10:00:00+05:30</updated><author><name>Mohit Ranka</name></author><id>tag:www.mohitranka.com,2025-03-13:/blog/when-i-still-choose-a-relational-database/</id><summary type="html">&lt;p&gt;In 2013 I wrote &lt;a href="https://www.mohitranka.com/blog/rdbms-vs-nosql/"&gt;RDBMS vs. NOSQL?&lt;/a&gt; as a pushback against fashion. The fashion changed costumes—document stores, wide-column, NewSQL, "Postgres is fine," "everything in the lakehouse"—but the underlying mistake did not: &lt;strong&gt;picking a datastore from a blog post instead of from access patterns and failure modes.&lt;/strong&gt;&lt;/p&gt;
-&lt;!--more--&gt;
+&lt;figure class="post-figure"&gt;
+  &lt;img src="https://www.mohitranka.com/images/blog/when-i-still-choose-a-relational-database.jpg" alt="Illustration of an ordered data table foundation beside scattered documents" loading="lazy" width="1200" height="675"&gt;
+  &lt;figcaption&gt;
+    &lt;span class="fig-caption"&gt;A relational …&lt;/span&gt;&lt;/figcaption&gt;&lt;/figure&gt;</summary><content type="html">&lt;p&gt;In 2013 I wrote &lt;a href="https://www.mohitranka.com/blog/rdbms-vs-nosql/"&gt;RDBMS vs. NOSQL?&lt;/a&gt; as a pushback against fashion. The fashion changed costumes—document stores, wide-column, NewSQL, "Postgres is fine," "everything in the lakehouse"—but the underlying mistake did not: &lt;strong&gt;picking a datastore from a blog post instead of from access patterns and failure modes.&lt;/strong&gt;&lt;/p&gt;
+&lt;figure class="post-figure"&gt;
+  &lt;img src="https://www.mohitranka.com/images/blog/when-i-still-choose-a-relational-database.jpg" alt="Illustration of an ordered data table foundation beside scattered documents" loading="lazy" width="1200" height="675"&gt;
+  &lt;figcaption&gt;
+    &lt;span class="fig-caption"&gt;A relational spine is often the boring default until access patterns and failure modes force a different shape.&lt;/span&gt;
+    &lt;span class="fig-credit"&gt;Credit: Original illustration created for mohitranka.com (AI-assisted).&lt;/span&gt;
+  &lt;/figcaption&gt;
+&lt;/figure&gt;
 
-&lt;p&gt;This is …&lt;/p&gt;</summary><content type="html">&lt;p&gt;In 2013 I wrote &lt;a href="https://www.mohitranka.com/blog/rdbms-vs-nosql/"&gt;RDBMS vs. NOSQL?&lt;/a&gt; as a pushback against fashion. The fashion changed costumes—document stores, wide-column, NewSQL, "Postgres is fine," "everything in the lakehouse"—but the underlying mistake did not: &lt;strong&gt;picking a datastore from a blog post instead of from access patterns and failure modes.&lt;/strong&gt;&lt;/p&gt;
 &lt;!--more--&gt;
 
 &lt;p&gt;This is the sequel I would write to myself: when I still choose a relational database in 2026, and when I do not. That detail matters in practice because the surrounding system, incentives, and failure modes usually determine whether the idea survives contact with production and with other teams. I treat this as an operating constraint rather than a slogan: if you cannot explain how it shows up in ownership, metrics, and day-to-day decisions, it will not survive the next roadmap fight.&lt;/p&gt;
@@ -182,6 +207,14 @@ Truly heterogeneous documents with little shared query structure can be a poor f
 &lt;p&gt;If step 6 requires a conference talk, the choice may still be right—but it needs more proof. That detail matters in practice because the surrounding system, incentives, and failure modes usually determine whether the idea survives contact with production and with other teams. I treat this as an operating constraint rather than a slogan: if you cannot explain how it shows up in ownership, metrics, and day-to-day decisions, it will not survive the next roadmap fight.&lt;/p&gt;
 &lt;h2&gt;Closing&lt;/h2&gt;
 &lt;p&gt;I still choose a relational database when I want &lt;strong&gt;correctness, evolvable queries, and operational boredom&lt;/strong&gt; around the core of a product. I choose other systems when the access pattern or scale curve makes that boredom impossible. The winning move is rarely "pick a side." It is &lt;strong&gt;keep a sharp system of record, derive aggressively, and refuse to let fashion rename your requirements.&lt;/strong&gt; If you want the older, more argumentative version of this stance, it is still here: &lt;a href="https://www.mohitranka.com/blog/rdbms-vs-nosql/"&gt;RDBMS vs. NOSQL?&lt;/a&gt;. The industry moved. The need for judgment did not.&lt;/p&gt;</content><category term="Blog"/><category term="data-platforms"/><category term="databases"/><category term="architecture"/></entry><entry><title>Freshness SLOs: the metric product teams actually feel</title><link href="https://www.mohitranka.com/blog/freshness-slos-the-metric-product-teams-feel/" rel="alternate"/><published>2024-07-11T10:00:00+05:30</published><updated>2024-07-11T10:00:00+05:30</updated><author><name>Mohit Ranka</name></author><id>tag:www.mohitranka.com,2024-07-11:/blog/freshness-slos-the-metric-product-teams-feel/</id><summary type="html">&lt;p&gt;API latency SLOs changed how we run services. GTM data work taught me the sibling idea the hard way: product teams do not experience your job-success chart. They experience a dashboard that is late, wrong, or disagrees with another “official” number. At LinkedIn, BI teams on Power BI and Tableau …&lt;/p&gt;</summary><content type="html">&lt;p&gt;API latency SLOs changed how we run services. GTM data work taught me the sibling idea the hard way: product teams do not experience your job-success chart. They experience a dashboard that is late, wrong, or disagrees with another “official” number. At LinkedIn, BI teams on Power BI and Tableau could already pull data from Hadoop-era batch paths while the Enterprise Data Platform (EDP) was supposed to become the governed center for GTM datasets. Pipelines can be “green” while the business still feels stale or fragmented truth. That feeling is a freshness and trust problem—even when nobody is paging on consumer lag.&lt;/p&gt;
+&lt;figure class="post-figure"&gt;
+  &lt;img src="https://www.mohitranka.com/images/blog/freshness-slos-the-metric-product-teams-feel.jpg" alt="Illustration of a freshness gauge on an operations dashboard" loading="lazy" width="1200" height="675"&gt;
+  &lt;figcaption&gt;
+    &lt;span class="fig-caption"&gt;Product teams feel freshness as trust in the number—not as job-success charts on a platform dashboard.&lt;/span&gt;
+    &lt;span class="fig-credit"&gt;Credit: Original illustration created for mohitranka.com (AI-assisted).&lt;/span&gt;
+  &lt;/figcaption&gt;
+&lt;/figure&gt;
+
 &lt;!--more--&gt;
 
 &lt;h2&gt;Latency is not freshness&lt;/h2&gt;
@@ -241,6 +274,14 @@ Yes. That is why platform-only arguments fail. Answer with end-of-life for the o
 Sometimes it is. Then write a batch promise (“available by time T for the weekly motion”) and still own correctness and deprecation. Batch without a promise is how shadow pipelines live forever.&lt;/p&gt;
 &lt;h2&gt;Closing&lt;/h2&gt;
 &lt;p&gt;Product teams feel freshness as trust in the number. Platforms earn that trust when named consumers run on a governed path, old paths can die, and someone is accountable when the age of truth is wrong. Whether you brand it SLO or operating promise matters less than whether the company can point to &lt;strong&gt;dataset + consumer + bound + owner&lt;/strong&gt;—and whether missing it changes next week’s work.&lt;/p&gt;</content><category term="Blog"/><category term="data-platforms"/><category term="reliability"/><category term="observability"/></entry><entry><title>Saying no as a platform EM without becoming the villain</title><link href="https://www.mohitranka.com/blog/saying-no-as-a-platform-em/" rel="alternate"/><published>2023-11-08T10:00:00+05:30</published><updated>2023-11-08T10:00:00+05:30</updated><author><name>Mohit Ranka</name></author><id>tag:www.mohitranka.com,2023-11-08:/blog/saying-no-as-a-platform-em/</id><summary type="html">&lt;p&gt;Platform engineering managers do not run out of good ideas. They run out of capacity to say yes to every reasonable request without wrecking the shared system. The skill is not blunt refusal. It is &lt;strong&gt;no with a path&lt;/strong&gt;—specific enough that partners can execute, firm enough that your team …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Platform engineering managers do not run out of good ideas. They run out of capacity to say yes to every reasonable request without wrecking the shared system. The skill is not blunt refusal. It is &lt;strong&gt;no with a path&lt;/strong&gt;—specific enough that partners can execute, firm enough that your team is not a free consulting desk. Two nos from EDP work at LinkedIn taught me more than any generic prioritization framework.&lt;/p&gt;
+&lt;figure class="post-figure"&gt;
+  &lt;img src="https://www.mohitranka.com/images/blog/saying-no-as-a-platform-em.jpg" alt="Illustration of a fork in the road with one path closed and an alternate route open" loading="lazy" width="1200" height="675"&gt;
+  &lt;figcaption&gt;
+    &lt;span class="fig-caption"&gt;A useful platform “no” names the constraint and funds a path—not a silent block.&lt;/span&gt;
+    &lt;span class="fig-credit"&gt;Credit: Original illustration created for mohitranka.com (AI-assisted).&lt;/span&gt;
+  &lt;/figcaption&gt;
+&lt;/figure&gt;
+
 &lt;!--more--&gt;
 
 &lt;h2&gt;Why platform “no” feels personal&lt;/h2&gt;
@@ -301,9 +342,18 @@ Sometimes it is. Then write a batch promise (“available by time T for the week
 &lt;p&gt;Take heat in partner forums so individual engineers are not negotiating company priority alone. That detail matters in practice because the surrounding system, incentives, and failure modes usually determine whether the idea survives contact with production and with other teams. I treat this as an operating constraint rather than a slogan: if you cannot explain how it shows up in ownership, metrics, and day-to-day decisions, it will not survive the next roadmap fight.&lt;/p&gt;
 &lt;h2&gt;Closing&lt;/h2&gt;
 &lt;p&gt;Saying no as a platform EM is stewardship of shared constraints. On EDP, the nos that mattered were: &lt;strong&gt;no unfunded adoption&lt;/strong&gt;, and &lt;strong&gt;no architecture theater that freezes delivery&lt;/strong&gt;. The yeses were expensive on purpose—engineers on migration, connectors, deprecation, POCs, hybrid seams. If partners can see the path, you are not the villain. You are how the company keeps one platform instead of twelve.&lt;/p&gt;</content><category term="Blog"/><category term="engineering-leadership"/><category term="platforms"/><category term="management"/></entry><entry><title>Identity systems fail socially before they fail cryptographically</title><link href="https://www.mohitranka.com/blog/identity-systems-fail-socially/" rel="alternate"/><published>2023-03-08T10:00:00+05:30</published><updated>2023-03-08T10:00:00+05:30</updated><author><name>Mohit Ranka</name></author><id>tag:www.mohitranka.com,2023-03-08:/blog/identity-systems-fail-socially/</id><summary type="html">&lt;p&gt;When people talk about identity and SSO, they reach for algorithms: token lifetimes, key rotation, SAML vs OIDC, session fixation. Those details matter. In systems I have built and operated, the outages and near-misses that hurt most started earlier—as &lt;strong&gt;social and product failures&lt;/strong&gt; wearing security clothing.&lt;/p&gt;
-&lt;!--more--&gt;
+&lt;figure class="post-figure"&gt;
+  &lt;img src="https://www.mohitranka.com/images/blog/identity-systems-fail-socially.jpg" alt="Illustration of keys, badges, and people connected in a trust network" loading="lazy" width="1200" height="675"&gt;
+  &lt;figcaption&gt;
+    &lt;span class="fig-caption"&gt;Identity systems often …&lt;/span&gt;&lt;/figcaption&gt;&lt;/figure&gt;</summary><content type="html">&lt;p&gt;When people talk about identity and SSO, they reach for algorithms: token lifetimes, key rotation, SAML vs OIDC, session fixation. Those details matter. In systems I have built and operated, the outages and near-misses that hurt most started earlier—as &lt;strong&gt;social and product failures&lt;/strong&gt; wearing security clothing.&lt;/p&gt;
+&lt;figure class="post-figure"&gt;
+  &lt;img src="https://www.mohitranka.com/images/blog/identity-systems-fail-socially.jpg" alt="Illustration of keys, badges, and people connected in a trust network" loading="lazy" width="1200" height="675"&gt;
+  &lt;figcaption&gt;
+    &lt;span class="fig-caption"&gt;Identity systems often fail first as ownership and session-semantics problems, not as crypto bugs.&lt;/span&gt;
+    &lt;span class="fig-credit"&gt;Credit: Original illustration created for mohitranka.com (AI-assisted).&lt;/span&gt;
+  &lt;/figcaption&gt;
+&lt;/figure&gt;
 
-&lt;h2&gt;Identity is a …&lt;/h2&gt;</summary><content type="html">&lt;p&gt;When people talk about identity and SSO, they reach for algorithms: token lifetimes, key rotation, SAML vs OIDC, session fixation. Those details matter. In systems I have built and operated, the outages and near-misses that hurt most started earlier—as &lt;strong&gt;social and product failures&lt;/strong&gt; wearing security clothing.&lt;/p&gt;
 &lt;!--more--&gt;
 
 &lt;h2&gt;Identity is a dependency graph of humans&lt;/h2&gt;
@@ -356,6 +406,14 @@ Sometimes it is. Then write a batch promise (“available by time T for the week
 &lt;p&gt;If those answers are soft, new federation features will add surface area, not safety. That detail matters in practice because the surrounding system, incentives, and failure modes usually determine whether the idea survives contact with production and with other teams. I treat this as an operating constraint rather than a slogan: if you cannot explain how it shows up in ownership, metrics, and day-to-day decisions, it will not survive the next roadmap fight.&lt;/p&gt;
 &lt;h2&gt;Closing&lt;/h2&gt;
 &lt;p&gt;Identity systems do fail cryptographically—and you should hire people who care about that deeply. But if you only harden tokens while leaving ownership, exceptions, session semantics, and rollout discipline vague, you will still fail. They fail socially first: unclear truth, unowned edges, temporary forever, and teams that cannot coordinate under stress. Build the social protocol as carefully as the crypto protocol. Users feel both. Attackers only need one to be weak.&lt;/p&gt;</content><category term="Blog"/><category term="identity"/><category term="security"/><category term="distributed-systems"/></entry><entry><title>What “led the web launch” taught me about constraints</title><link href="https://www.mohitranka.com/blog/web-launch-constraints/" rel="alternate"/><published>2022-07-06T10:00:00+05:30</published><updated>2022-07-06T10:00:00+05:30</updated><author><name>Mohit Ranka</name></author><id>tag:www.mohitranka.com,2022-07-06:/blog/web-launch-constraints/</id><summary type="html">&lt;p&gt;At Postman, “put the product on the web” was not a greenfield rewrite. It was a constraint problem: a desktop-native API tool used by millions of developers, enterprise pressure for browser access, browser security that blocked the old execution model, and a conference date that would not move. I was …&lt;/p&gt;</summary><content type="html">&lt;p&gt;At Postman, “put the product on the web” was not a greenfield rewrite. It was a constraint problem: a desktop-native API tool used by millions of developers, enterprise pressure for browser access, browser security that blocked the old execution model, and a conference date that would not move. I was the engineering manager accountable for cross-functional delivery—architecture choices, security and infra dependencies, product scope, and keeping the team focused when the path was still uncertain. What follows is what that launch actually taught me.&lt;/p&gt;
+&lt;figure class="post-figure"&gt;
+  &lt;img src="https://www.mohitranka.com/images/blog/web-launch-constraints.jpg" alt="Illustration of browser and desktop windows bridged together" loading="lazy" width="1200" height="675"&gt;
+  &lt;figcaption&gt;
+    &lt;span class="fig-caption"&gt;Launching a trusted desktop product on the web is a constraint problem: security, parity, and an immovable date.&lt;/span&gt;
+    &lt;span class="fig-credit"&gt;Credit: Original illustration created for mohitranka.com (AI-assisted).&lt;/span&gt;
+  &lt;/figcaption&gt;
+&lt;/figure&gt;
+
 &lt;!--more--&gt;
 
 &lt;h2&gt;We were borrowing trust, not inventing it&lt;/h2&gt;
@@ -419,6 +477,14 @@ Sometimes it is. Then write a batch promise (“available by time T for the week
 &lt;p&gt;We hit the conference launch window. The web surface became a real product path, not a demo—with cloud execution continuing to land on its own schedule. Adoption afterward made the strategic point obvious: users wanted Postman without installing a desktop app first, and the company was no longer only a local-first tool. Exact figures belong in contexts where they can be sourced and defended. The leadership lesson does not depend on a screenshot of a dashboard: &lt;strong&gt;the hybrid execution model plus phased delivery was the only way to respect browser constraints without abandoning the desktop product’s trust.&lt;/strong&gt;&lt;/p&gt;
 &lt;h2&gt;Closing&lt;/h2&gt;
 &lt;p&gt;“Led the web launch” sounds like a milestone. The work was constraint management: borrowed trust, inherited systems, browser security, conference time, cross-team conflict, and performance under real collections. Code expressed the answers. The answers were the constraints we were willing to name early—and the execution model we built so users did not have to understand them all at once.&lt;/p&gt;</content><category term="Blog"/><category term="engineering-leadership"/><category term="product"/><category term="developer-tooling"/></entry><entry><title>Incubating 0→1 beside a mature product</title><link href="https://www.mohitranka.com/blog/postman-labs-0-to-1/" rel="alternate"/><published>2021-06-15T10:00:00+05:30</published><updated>2021-06-15T10:00:00+05:30</updated><author><name>Mohit Ranka</name></author><id>tag:www.mohitranka.com,2021-06-15:/blog/postman-labs-0-to-1/</id><summary type="html">&lt;p&gt;When I was at Postman, the core product was already the default API client for a huge HTTP/HTTPS world—on the order of tens of millions of developers on desktop. That success created a sharp problem: &lt;strong&gt;how do you explore what comes after HTTP without slowing the product everyone …&lt;/strong&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;When I was at Postman, the core product was already the default API client for a huge HTTP/HTTPS world—on the order of tens of millions of developers on desktop. That success created a sharp problem: &lt;strong&gt;how do you explore what comes after HTTP without slowing the product everyone already depends on?&lt;/strong&gt; Postman Labs was our answer: a small unit with a charter to incubate 0→1 work—new protocols and paradigms—without turning every experiment into a core-roadmap hostage situation.&lt;/p&gt;
+&lt;figure class="post-figure"&gt;
+  &lt;img src="https://www.mohitranka.com/images/blog/postman-labs-0-to-1.jpg" alt="Illustration of a small lab greenhouse beside a solid product building" loading="lazy" width="1200" height="675"&gt;
+  &lt;figcaption&gt;
+    &lt;span class="fig-caption"&gt;0→1 incubation works when it sits beside a mature product with a real graduation path—not as endless side quests.&lt;/span&gt;
+    &lt;span class="fig-credit"&gt;Credit: Original illustration created for mohitranka.com (AI-assisted).&lt;/span&gt;
+  &lt;/figcaption&gt;
+&lt;/figure&gt;
+
 &lt;!--more--&gt;
 
 &lt;h2&gt;The challenge: the market moved past “REST in a GUI”&lt;/h2&gt;
@@ -488,6 +554,14 @@ Constrained rollout, measure adoption and engagement, then decide: graduate into
 &lt;/ul&gt;
 &lt;h2&gt;Closing&lt;/h2&gt;
 &lt;p&gt;Incubating 0→1 beside a mature product is a leadership design problem: process, incentives, and graduation rules—not only prototype velocity. Postman Labs worked when it had a &lt;strong&gt;narrow charter&lt;/strong&gt;, &lt;strong&gt;phased validation&lt;/strong&gt;, and a path for WebSockets, gRPC, and similar bets to become real product surfaces without forcing the entire company to pretend it was still a startup with nothing to lose. If your core product is already loved, that is not a reason to stop exploring. It is a reason to explore &lt;strong&gt;on purpose&lt;/strong&gt;.&lt;/p&gt;</content><category term="Blog"/><category term="engineering-leadership"/><category term="product"/><category term="developer-tooling"/></entry><entry><title>How I review a distributed design in 45 minutes</title><link href="https://www.mohitranka.com/blog/how-i-review-a-distributed-design/" rel="alternate"/><published>2021-03-03T10:00:00+05:30</published><updated>2021-03-03T10:00:00+05:30</updated><author><name>Mohit Ranka</name></author><id>tag:www.mohitranka.com,2021-03-03:/blog/how-i-review-a-distributed-design/</id><summary type="html">&lt;p&gt;The most expensive design reviews I have run were not missing a box on a diagram. They were missing a decision. One of them froze delivery on an EDP self-serve portal for about a month while two strong engineers disagreed in public about monolith versus microservices—and ownership quietly collapsed …&lt;/p&gt;</summary><content type="html">&lt;p&gt;The most expensive design reviews I have run were not missing a box on a diagram. They were missing a decision. One of them froze delivery on an EDP self-serve portal for about a month while two strong engineers disagreed in public about monolith versus microservices—and ownership quietly collapsed. This is how I run a distributed design review when time is short, using that conflict as the worked example. The forty-five minutes are a filter for &lt;strong&gt;danger and indecision&lt;/strong&gt;, not a substitute for deep design.&lt;/p&gt;
+&lt;figure class="post-figure"&gt;
+  &lt;img src="https://www.mohitranka.com/images/blog/how-i-review-a-distributed-design.jpg" alt="Illustration of an architecture whiteboard with boxes, arrows, and coffee cups" loading="lazy" width="1200" height="675"&gt;
+  &lt;figcaption&gt;
+    &lt;span class="fig-caption"&gt;A short design review is a filter for clear promises, truth models, and decisions—not a theater of diagrams.&lt;/span&gt;
+    &lt;span class="fig-credit"&gt;Credit: Original illustration created for mohitranka.com (AI-assisted).&lt;/span&gt;
+  &lt;/figcaption&gt;
+&lt;/figure&gt;
+
 &lt;!--more--&gt;
 
 &lt;h2&gt;The situation the review had to unstick&lt;/h2&gt;
@@ -570,6 +644,14 @@ Constrained rollout, measure adoption and engagement, then decide: graduate into
 &lt;p&gt;Once criteria, POCs, and a hybrid decision landed, the freeze broke quickly—on the order of a week to resume real execution—and the portal shipped on a timeline measured in months with meaningful adoption. The architecture mattered. The restored ownership mattered more. That detail matters in practice because the surrounding system, incentives, and failure modes usually determine whether the idea survives contact with production and with other teams.&lt;/p&gt;
 &lt;h2&gt;Closing&lt;/h2&gt;
 &lt;p&gt;In forty-five minutes you will not finish a distributed design. You can learn whether the team has a clear promise, a coherent truth model, a way to decide, and a human ownership path. On platform work, the last item is not soft. It is how delivery fails first. That detail matters in practice because the surrounding system, incentives, and failure modes usually determine whether the idea survives contact with production and with other teams.&lt;/p&gt;</content><category term="Blog"/><category term="distributed-systems"/><category term="engineering-leadership"/><category term="architecture"/></entry><entry><title>Introducing on-call without burning the team</title><link href="https://www.mohitranka.com/blog/introducing-on-call-without-burnout/" rel="alternate"/><published>2020-11-10T10:00:00+05:30</published><updated>2020-11-10T10:00:00+05:30</updated><author><name>Mohit Ranka</name></author><id>tag:www.mohitranka.com,2020-11-10:/blog/introducing-on-call-without-burnout/</id><summary type="html">&lt;p&gt;At Postman, my team owned a large-scale platform surface used by millions of developers. What we did not own—formally—was a &lt;strong&gt;predictable operational response&lt;/strong&gt;. Production issues and public GitHub noise were handled ad hoc. Someone jumped in, or everyone hesitated. Retrospectives lacked a clear accountable role. The system worked …&lt;/p&gt;</summary><content type="html">&lt;p&gt;At Postman, my team owned a large-scale platform surface used by millions of developers. What we did not own—formally—was a &lt;strong&gt;predictable operational response&lt;/strong&gt;. Production issues and public GitHub noise were handled ad hoc. Someone jumped in, or everyone hesitated. Retrospectives lacked a clear accountable role. The system worked until it did not, and then it worked by heroics. We needed on-call. We also needed engineers who still wanted to build product after the rotation.&lt;/p&gt;
+&lt;figure class="post-figure"&gt;
+  &lt;img src="https://www.mohitranka.com/images/blog/introducing-on-call-without-burnout.jpg" alt="Illustration of a calm night operations desk with a pager and schedule board" loading="lazy" width="1200" height="675"&gt;
+  &lt;figcaption&gt;
+    &lt;span class="fig-caption"&gt;On-call is a product and staffing design: clear ownership without making heroics the default.&lt;/span&gt;
+    &lt;span class="fig-credit"&gt;Credit: Original illustration created for mohitranka.com (AI-assisted).&lt;/span&gt;
+  &lt;/figcaption&gt;
+&lt;/figure&gt;
+
 &lt;!--more--&gt;
 
 &lt;h2&gt;What was broken before process&lt;/h2&gt;
@@ -645,6 +727,14 @@ Constrained rollout, measure adoption and engagement, then decide: graduate into
 &lt;/ul&gt;
 &lt;h2&gt;Closing&lt;/h2&gt;
 &lt;p&gt;Introducing on-call is not a tooling purchase. It is a &lt;strong&gt;product and staffing decision&lt;/strong&gt;: user trust requires an accountable human path, and that path must be sustainable. At Postman, primary/secondary roles, two-week rotations, handoffs, retros, and playbooks turned operational ownership from ad hoc heroics into something the team could carry—and still ship. If your platform is already large and your response is still “whoever notices,” you do not have a reliability gap only. You have a leadership design gap. Close it on purpose.&lt;/p&gt;</content><category term="Blog"/><category term="reliability"/><category term="engineering-leadership"/><category term="platforms"/></entry><entry><title>GTM datasets need data contracts</title><link href="https://www.mohitranka.com/blog/gtm-datasets-need-data-contracts/" rel="alternate"/><published>2020-07-01T10:00:00+05:30</published><updated>2020-07-01T10:00:00+05:30</updated><author><name>Mohit Ranka</name></author><id>tag:www.mohitranka.com,2020-07-01:/blog/gtm-datasets-need-data-contracts/</id><summary type="html">&lt;p&gt;When a go-to-market dashboard is wrong, nobody says “the warehouse is eventually consistent.” They say the number is wrong—and they stop trusting the platform. On LinkedIn’s Enterprise Data Platform (EDP) work, the failure mode was rarely a missing chart type. It was &lt;strong&gt;informal truth&lt;/strong&gt;: datasets without clear producers …&lt;/p&gt;</summary><content type="html">&lt;p&gt;When a go-to-market dashboard is wrong, nobody says “the warehouse is eventually consistent.” They say the number is wrong—and they stop trusting the platform. On LinkedIn’s Enterprise Data Platform (EDP) work, the failure mode was rarely a missing chart type. It was &lt;strong&gt;informal truth&lt;/strong&gt;: datasets without clear producers, consumers, freshness expectations, or a path that BI could rely on when Hadoop-era pipelines still “worked.” That is a data-contract problem, whether or not you use the word contract.&lt;/p&gt;
+&lt;figure class="post-figure"&gt;
+  &lt;img src="https://www.mohitranka.com/images/blog/gtm-datasets-need-data-contracts.jpg" alt="Illustration of two parties exchanging a contract over data folders" loading="lazy" width="1200" height="675"&gt;
+  &lt;figcaption&gt;
+    &lt;span class="fig-caption"&gt;GTM datasets become trustworthy when producers and consumers share explicit contracts—not informal folklore.&lt;/span&gt;
+    &lt;span class="fig-credit"&gt;Credit: Original illustration created for mohitranka.com (AI-assisted).&lt;/span&gt;
+  &lt;/figcaption&gt;
+&lt;/figure&gt;
+
 &lt;!--more--&gt;
 
 &lt;h2&gt;The contract is the product boundary&lt;/h2&gt;
@@ -727,6 +817,14 @@ Constrained rollout, measure adoption and engagement, then decide: graduate into
 
 &lt;pre&gt;&lt;code&gt;            — Werner Vogels, CTO Amazon.com on when to use RDBMS
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;figure class="post-figure"&gt;
+  &lt;img src="https://www.mohitranka.com/images/blog/rdbms-vs-nosql.jpg" alt="Illustration comparing ordered relational tables with flexible document nodes" loading="lazy" width="1200" height="675"&gt;
+  &lt;figcaption&gt;
+    &lt;span class="fig-caption"&gt;Datastore choice is a tradeoff about access patterns and operations—not a fashion contest.&lt;/span&gt;
+    &lt;span class="fig-credit"&gt;Credit: Original illustration created for mohitranka.com (AI-assisted).&lt;/span&gt;
+  &lt;/figcaption&gt;
+&lt;/figure&gt;
 
 &lt;p&gt;I came across this quote in &lt;a href="http://www.allthingsdistributed.com/2013/03/dynamodb-one-year-later.html"&gt;an article&lt;/a&gt; while researching DynamoDB. As much as I respect Werner, I would suggest take his recommendation on the criteria on database selection with a pinch of salt, due to the obvious conflict of interest — He has a &lt;a href="http://aws.amazon.com/dynamodb/"&gt;database&lt;/a&gt; to sell.&lt;/p&gt;
 

@@ -6,6 +6,14 @@ Tags: data-platforms, reliability, observability
 
 API latency SLOs changed how we run services. GTM data work taught me the sibling idea the hard way: product teams do not experience your job-success chart. They experience a dashboard that is late, wrong, or disagrees with another “official” number. At LinkedIn, BI teams on Power BI and Tableau could already pull data from Hadoop-era batch paths while the Enterprise Data Platform (EDP) was supposed to become the governed center for GTM datasets. Pipelines can be “green” while the business still feels stale or fragmented truth. That feeling is a freshness and trust problem—even when nobody is paging on consumer lag.
 
+<figure class="post-figure">
+  <img src="{static}/images/blog/freshness-slos-the-metric-product-teams-feel.jpg" alt="Illustration of a freshness gauge on an operations dashboard" loading="lazy" width="1200" height="675">
+  <figcaption>
+    <span class="fig-caption">Product teams feel freshness as trust in the number—not as job-success charts on a platform dashboard.</span>
+    <span class="fig-credit">Credit: Original illustration created for mohitranka.com (AI-assisted).</span>
+  </figcaption>
+</figure>
+
 <!--more-->
 
 ## Latency is not freshness

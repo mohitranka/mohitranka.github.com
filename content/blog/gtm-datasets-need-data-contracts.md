@@ -6,6 +6,14 @@ Tags: data-platforms, platforms, product
 
 When a go-to-market dashboard is wrong, nobody says “the warehouse is eventually consistent.” They say the number is wrong—and they stop trusting the platform. On LinkedIn’s Enterprise Data Platform (EDP) work, the failure mode was rarely a missing chart type. It was **informal truth**: datasets without clear producers, consumers, freshness expectations, or a path that BI could rely on when Hadoop-era pipelines still “worked.” That is a data-contract problem, whether or not you use the word contract.
 
+<figure class="post-figure">
+  <img src="{static}/images/blog/gtm-datasets-need-data-contracts.jpg" alt="Illustration of two parties exchanging a contract over data folders" loading="lazy" width="1200" height="675">
+  <figcaption>
+    <span class="fig-caption">GTM datasets become trustworthy when producers and consumers share explicit contracts—not informal folklore.</span>
+    <span class="fig-credit">Credit: Original illustration created for mohitranka.com (AI-assisted).</span>
+  </figcaption>
+</figure>
+
 <!--more-->
 
 ## The contract is the product boundary

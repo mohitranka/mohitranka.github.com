@@ -6,6 +6,14 @@ Tags: engineering-leadership, platforms, developer-tooling
 
 At LinkedIn, the Enterprise Data Platform (EDP) was meant to be the centralized way GTM teams managed and consumed datasets. On paper, that is a clear platform charter. In practice, a platform is only real when its **interfaces get adopted**—including by teams that already have a path that “works.” The hard case was BI. Power BI and Tableau teams were still living on Hadoop-based pipelines scheduled for deprecation. They could already get data. EDP was strategically important and still optional in their week. Without them, EDP could not become the source of truth for GTM analytics no matter how good the internals looked. That is an interface problem, not a cluster problem.
 
+<figure class="post-figure">
+  <img src="{static}/images/blog/platform-teams-real-job-is-interfaces.jpg" alt="Abstract illustration of connecting building blocks and interface ports between teams" loading="lazy" width="1200" height="675">
+  <figcaption>
+    <span class="fig-caption">Platforms earn leverage when the interfaces other teams stand on are clear, adoptable, and owned.</span>
+    <span class="fig-credit">Credit: Original illustration created for mohitranka.com (AI-assisted).</span>
+  </figcaption>
+</figure>
+
 <!--more-->
 
 ## The interface was “how BI gets governed data”

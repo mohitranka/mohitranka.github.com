@@ -6,6 +6,14 @@ Tags: identity, security, distributed-systems
 
 When people talk about identity and SSO, they reach for algorithms: token lifetimes, key rotation, SAML vs OIDC, session fixation. Those details matter. In systems I have built and operated, the outages and near-misses that hurt most started earlier—as **social and product failures** wearing security clothing.
 
+<figure class="post-figure">
+  <img src="{static}/images/blog/identity-systems-fail-socially.jpg" alt="Illustration of keys, badges, and people connected in a trust network" loading="lazy" width="1200" height="675">
+  <figcaption>
+    <span class="fig-caption">Identity systems often fail first as ownership and session-semantics problems, not as crypto bugs.</span>
+    <span class="fig-credit">Credit: Original illustration created for mohitranka.com (AI-assisted).</span>
+  </figcaption>
+</figure>
+
 <!--more-->
 
 ## Identity is a dependency graph of humans

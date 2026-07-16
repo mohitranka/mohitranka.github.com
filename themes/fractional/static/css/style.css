@@ -291,6 +291,40 @@ ul li {
   border-top: 1px solid var(--border);
 }
 
+/* — Post figures — */
+.post-figure {
+  margin: 28px 0 32px;
+  padding: 0;
+}
+
+.post-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  background: var(--code-bg);
+}
+
+.post-figure figcaption {
+  margin-top: 10px;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--fg-secondary);
+}
+
+.post-figure .fig-caption {
+  display: block;
+  color: var(--fg-secondary);
+}
+
+.post-figure .fig-credit {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.75rem;
+  color: var(--fg-secondary);
+  opacity: 0.9;
+}
+
 /* — Long-form content — */
 .entry-content p {
   color: var(--fg);

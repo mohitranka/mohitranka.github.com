@@ -6,6 +6,14 @@ Tags: reliability, engineering-leadership, platforms
 
 At Postman, my team owned a large-scale platform surface used by millions of developers. What we did not own—formally—was a **predictable operational response**. Production issues and public GitHub noise were handled ad hoc. Someone jumped in, or everyone hesitated. Retrospectives lacked a clear accountable role. The system worked until it did not, and then it worked by heroics. We needed on-call. We also needed engineers who still wanted to build product after the rotation.
 
+<figure class="post-figure">
+  <img src="{static}/images/blog/introducing-on-call-without-burnout.jpg" alt="Illustration of a calm night operations desk with a pager and schedule board" loading="lazy" width="1200" height="675">
+  <figcaption>
+    <span class="fig-caption">On-call is a product and staffing design: clear ownership without making heroics the default.</span>
+    <span class="fig-credit">Credit: Original illustration created for mohitranka.com (AI-assisted).</span>
+  </figcaption>
+</figure>
+
 <!--more-->
 
 ## What was broken before process

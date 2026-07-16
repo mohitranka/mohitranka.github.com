@@ -6,6 +6,14 @@ Tags: data-platforms, databases, architecture
 
 In 2013 I wrote [RDBMS vs. NOSQL?]({filename}/blog/rdbms-vs-nosql.md) as a pushback against fashion. The fashion changed costumes—document stores, wide-column, NewSQL, "Postgres is fine," "everything in the lakehouse"—but the underlying mistake did not: **picking a datastore from a blog post instead of from access patterns and failure modes.**
 
+<figure class="post-figure">
+  <img src="{static}/images/blog/when-i-still-choose-a-relational-database.jpg" alt="Illustration of an ordered data table foundation beside scattered documents" loading="lazy" width="1200" height="675">
+  <figcaption>
+    <span class="fig-caption">A relational spine is often the boring default until access patterns and failure modes force a different shape.</span>
+    <span class="fig-credit">Credit: Original illustration created for mohitranka.com (AI-assisted).</span>
+  </figcaption>
+</figure>
+
 <!--more-->
 
 This is the sequel I would write to myself: when I still choose a relational database in 2026, and when I do not. That detail matters in practice because the surrounding system, incentives, and failure modes usually determine whether the idea survives contact with production and with other teams. I treat this as an operating constraint rather than a slogan: if you cannot explain how it shows up in ownership, metrics, and day-to-day decisions, it will not survive the next roadmap fight.
