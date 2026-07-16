@@ -10,7 +10,6 @@ The most expensive design reviews I have run were not missing a box on a diagram
   <img src="{static}/images/blog/how-i-review-a-distributed-design.jpg" alt="Illustration of an architecture whiteboard with boxes, arrows, and coffee cups" loading="lazy" width="1200" height="675">
   <figcaption>
     <span class="fig-caption">A short design review is a filter for clear promises, truth models, and decisions—not a theater of diagrams.</span>
-    <span class="fig-credit">Credit: Original illustration created for mohitranka.com.</span>
   </figcaption>
 </figure>
 

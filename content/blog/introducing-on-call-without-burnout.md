@@ -10,7 +10,6 @@ At Postman, my team owned a large-scale platform surface used by millions of dev
   <img src="{static}/images/blog/introducing-on-call-without-burnout.jpg" alt="Illustration of a calm night operations desk with a pager and schedule board" loading="lazy" width="1200" height="675">
   <figcaption>
     <span class="fig-caption">On-call is a product and staffing design: clear ownership without making heroics the default.</span>
-    <span class="fig-credit">Credit: Original illustration created for mohitranka.com.</span>
   </figcaption>
 </figure>
 

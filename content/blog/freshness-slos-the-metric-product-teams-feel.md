@@ -10,7 +10,6 @@ API latency SLOs changed how we run services. GTM data work taught me the siblin
   <img src="{static}/images/blog/freshness-slos-the-metric-product-teams-feel.jpg" alt="Illustration of a freshness gauge on an operations dashboard" loading="lazy" width="1200" height="675">
   <figcaption>
     <span class="fig-caption">Product teams feel freshness as trust in the number—not as job-success charts on a platform dashboard.</span>
-    <span class="fig-credit">Credit: Original illustration created for mohitranka.com.</span>
   </figcaption>
 </figure>
 

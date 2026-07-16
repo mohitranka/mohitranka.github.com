@@ -12,7 +12,6 @@ Slug: rdbms-vs-nosql
   <img src="{static}/images/blog/rdbms-vs-nosql.jpg" alt="Illustration comparing ordered relational tables with flexible document nodes" loading="lazy" width="1200" height="675">
   <figcaption>
     <span class="fig-caption">Datastore choice is a tradeoff about access patterns and operations—not a fashion contest.</span>
-    <span class="fig-credit">Credit: Original illustration created for mohitranka.com.</span>
   </figcaption>
 </figure>
 

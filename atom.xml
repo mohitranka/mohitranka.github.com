@@ -4,7 +4,6 @@
   &lt;img src="https://www.mohitranka.com/images/blog/near-real-time-is-a-product-promise.jpg" alt="Abstract illustration of a clock and data streams feeding a product dashboard" loading="lazy" width="1200" height="675"&gt;
   &lt;figcaption&gt;
     &lt;span class="fig-caption"&gt;Near-real-time is a promise about the age of truth a consumer can act on—not a badge for a streaming cluster.&lt;/span&gt;
-    &lt;span class="fig-credit"&gt;Credit: Original illustration created for mohitranka.com.&lt;/span&gt;
   &lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -71,7 +70,6 @@
   &lt;img src="https://www.mohitranka.com/images/blog/platform-teams-real-job-is-interfaces.jpg" alt="Abstract illustration of connecting building blocks and interface ports between teams" loading="lazy" width="1200" height="675"&gt;
   &lt;figcaption&gt;
     &lt;span class="fig-caption"&gt;Platforms earn leverage when the interfaces other teams stand on are clear, adoptable, and owned.&lt;/span&gt;
-    &lt;span class="fig-credit"&gt;Credit: Original illustration created for mohitranka.com.&lt;/span&gt;
   &lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -141,7 +139,6 @@
   &lt;img src="https://www.mohitranka.com/images/blog/when-i-still-choose-a-relational-database.jpg" alt="Illustration of an ordered data table foundation beside scattered documents" loading="lazy" width="1200" height="675"&gt;
   &lt;figcaption&gt;
     &lt;span class="fig-caption"&gt;A relational spine is often the boring default until access patterns and failure modes force a different shape.&lt;/span&gt;
-    &lt;span class="fig-credit"&gt;Credit: Original illustration created for mohitranka.com.&lt;/span&gt;
   &lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -211,7 +208,6 @@ Truly heterogeneous documents with little shared query structure can be a poor f
   &lt;img src="https://www.mohitranka.com/images/blog/freshness-slos-the-metric-product-teams-feel.jpg" alt="Illustration of a freshness gauge on an operations dashboard" loading="lazy" width="1200" height="675"&gt;
   &lt;figcaption&gt;
     &lt;span class="fig-caption"&gt;Product teams feel freshness as trust in the number—not as job-success charts on a platform dashboard.&lt;/span&gt;
-    &lt;span class="fig-credit"&gt;Credit: Original illustration created for mohitranka.com.&lt;/span&gt;
   &lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -278,7 +274,6 @@ Sometimes it is. Then write a batch promise (“available by time T for the week
   &lt;img src="https://www.mohitranka.com/images/blog/saying-no-as-a-platform-em.jpg" alt="Illustration of a fork in the road with one path closed and an alternate route open" loading="lazy" width="1200" height="675"&gt;
   &lt;figcaption&gt;
     &lt;span class="fig-caption"&gt;A useful platform “no” names the constraint and funds a path—not a silent block.&lt;/span&gt;
-    &lt;span class="fig-credit"&gt;Credit: Original illustration created for mohitranka.com.&lt;/span&gt;
   &lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -350,7 +345,6 @@ Sometimes it is. Then write a batch promise (“available by time T for the week
   &lt;img src="https://www.mohitranka.com/images/blog/identity-systems-fail-socially.jpg" alt="Illustration of keys, badges, and people connected in a trust network" loading="lazy" width="1200" height="675"&gt;
   &lt;figcaption&gt;
     &lt;span class="fig-caption"&gt;Identity systems often fail first as ownership and session-semantics problems, not as crypto bugs.&lt;/span&gt;
-    &lt;span class="fig-credit"&gt;Credit: Original illustration created for mohitranka.com.&lt;/span&gt;
   &lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -410,7 +404,6 @@ Sometimes it is. Then write a batch promise (“available by time T for the week
   &lt;img src="https://www.mohitranka.com/images/blog/web-launch-constraints.jpg" alt="Illustration of browser and desktop windows bridged together" loading="lazy" width="1200" height="675"&gt;
   &lt;figcaption&gt;
     &lt;span class="fig-caption"&gt;Launching a trusted desktop product on the web is a constraint problem: security, parity, and an immovable date.&lt;/span&gt;
-    &lt;span class="fig-credit"&gt;Credit: Original illustration created for mohitranka.com.&lt;/span&gt;
   &lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -481,7 +474,6 @@ Sometimes it is. Then write a batch promise (“available by time T for the week
   &lt;img src="https://www.mohitranka.com/images/blog/postman-labs-0-to-1.jpg" alt="Illustration of a small lab greenhouse beside a solid product building" loading="lazy" width="1200" height="675"&gt;
   &lt;figcaption&gt;
     &lt;span class="fig-caption"&gt;0→1 incubation works when it sits beside a mature product with a real graduation path—not as endless side quests.&lt;/span&gt;
-    &lt;span class="fig-credit"&gt;Credit: Original illustration created for mohitranka.com.&lt;/span&gt;
   &lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -558,7 +550,6 @@ Constrained rollout, measure adoption and engagement, then decide: graduate into
   &lt;img src="https://www.mohitranka.com/images/blog/how-i-review-a-distributed-design.jpg" alt="Illustration of an architecture whiteboard with boxes, arrows, and coffee cups" loading="lazy" width="1200" height="675"&gt;
   &lt;figcaption&gt;
     &lt;span class="fig-caption"&gt;A short design review is a filter for clear promises, truth models, and decisions—not a theater of diagrams.&lt;/span&gt;
-    &lt;span class="fig-credit"&gt;Credit: Original illustration created for mohitranka.com.&lt;/span&gt;
   &lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -648,7 +639,6 @@ Constrained rollout, measure adoption and engagement, then decide: graduate into
   &lt;img src="https://www.mohitranka.com/images/blog/introducing-on-call-without-burnout.jpg" alt="Illustration of a calm night operations desk with a pager and schedule board" loading="lazy" width="1200" height="675"&gt;
   &lt;figcaption&gt;
     &lt;span class="fig-caption"&gt;On-call is a product and staffing design: clear ownership without making heroics the default.&lt;/span&gt;
-    &lt;span class="fig-credit"&gt;Credit: Original illustration created for mohitranka.com.&lt;/span&gt;
   &lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -731,7 +721,6 @@ Constrained rollout, measure adoption and engagement, then decide: graduate into
   &lt;img src="https://www.mohitranka.com/images/blog/gtm-datasets-need-data-contracts.jpg" alt="Illustration of two parties exchanging a contract over data folders" loading="lazy" width="1200" height="675"&gt;
   &lt;figcaption&gt;
     &lt;span class="fig-caption"&gt;GTM datasets become trustworthy when producers and consumers share explicit contracts—not informal folklore.&lt;/span&gt;
-    &lt;span class="fig-credit"&gt;Credit: Original illustration created for mohitranka.com.&lt;/span&gt;
   &lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -822,7 +811,6 @@ Constrained rollout, measure adoption and engagement, then decide: graduate into
   &lt;img src="https://www.mohitranka.com/images/blog/rdbms-vs-nosql.jpg" alt="Illustration comparing ordered relational tables with flexible document nodes" loading="lazy" width="1200" height="675"&gt;
   &lt;figcaption&gt;
     &lt;span class="fig-caption"&gt;Datastore choice is a tradeoff about access patterns and operations—not a fashion contest.&lt;/span&gt;
-    &lt;span class="fig-credit"&gt;Credit: Original illustration created for mohitranka.com.&lt;/span&gt;
   &lt;/figcaption&gt;
 &lt;/figure&gt;
 

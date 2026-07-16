@@ -10,7 +10,6 @@ At LinkedIn, the Enterprise Data Platform (EDP) was meant to be the centralized 
   <img src="{static}/images/blog/platform-teams-real-job-is-interfaces.jpg" alt="Abstract illustration of connecting building blocks and interface ports between teams" loading="lazy" width="1200" height="675">
   <figcaption>
     <span class="fig-caption">Platforms earn leverage when the interfaces other teams stand on are clear, adoptable, and owned.</span>
-    <span class="fig-credit">Credit: Original illustration created for mohitranka.com.</span>
   </figcaption>
 </figure>
 

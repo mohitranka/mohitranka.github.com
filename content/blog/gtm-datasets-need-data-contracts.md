@@ -10,7 +10,6 @@ When a go-to-market dashboard is wrong, nobody says “the warehouse is eventual
   <img src="{static}/images/blog/gtm-datasets-need-data-contracts.jpg" alt="Illustration of two parties exchanging a contract over data folders" loading="lazy" width="1200" height="675">
   <figcaption>
     <span class="fig-caption">GTM datasets become trustworthy when producers and consumers share explicit contracts—not informal folklore.</span>
-    <span class="fig-credit">Credit: Original illustration created for mohitranka.com.</span>
   </figcaption>
 </figure>
 

@@ -10,7 +10,6 @@ When people talk about identity and SSO, they reach for algorithms: token lifeti
   <img src="{static}/images/blog/identity-systems-fail-socially.jpg" alt="Illustration of keys, badges, and people connected in a trust network" loading="lazy" width="1200" height="675">
   <figcaption>
     <span class="fig-caption">Identity systems often fail first as ownership and session-semantics problems, not as crypto bugs.</span>
-    <span class="fig-credit">Credit: Original illustration created for mohitranka.com.</span>
   </figcaption>
 </figure>
 

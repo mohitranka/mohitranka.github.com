@@ -10,7 +10,6 @@ When I was at Postman, the core product was already the default API client for a
   <img src="{static}/images/blog/postman-labs-0-to-1.jpg" alt="Illustration of a small lab greenhouse beside a solid product building" loading="lazy" width="1200" height="675">
   <figcaption>
     <span class="fig-caption">0→1 incubation works when it sits beside a mature product with a real graduation path—not as endless side quests.</span>
-    <span class="fig-credit">Credit: Original illustration created for mohitranka.com.</span>
   </figcaption>
 </figure>
 
