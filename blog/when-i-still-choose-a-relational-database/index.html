@@ -88,9 +88,9 @@
         <p>In 2013 I wrote <a href="https://www.mohitranka.com/blog/rdbms-vs-nosql/">RDBMS vs. NOSQL?</a> as a pushback against fashion. The fashion changed costumes—document stores, wide-column, NewSQL, "Postgres is fine," "everything in the lakehouse"—but the underlying mistake did not: <strong>picking a datastore from a blog post instead of from access patterns and failure modes.</strong></p>
 <!--more-->
 
-<p>This is the sequel I would write to myself: when I still choose a relational database in 2026, and when I do not.</p>
+<p>This is the sequel I would write to myself: when I still choose a relational database in 2026, and when I do not. That detail matters in practice because the surrounding system, incentives, and failure modes usually determine whether the idea survives contact with production and with other teams. I treat this as an operating constraint rather than a slogan: if you cannot explain how it shows up in ownership, metrics, and day-to-day decisions, it will not survive the next roadmap fight.</p>
 <h2>The default remains boring on purpose</h2>
-<p>My default for a new product backend is still a managed relational database (usually PostgreSQL) with:</p>
+<p>My default for a new product backend is still a managed relational database (usually PostgreSQL) with: That detail matters in practice because the surrounding system, incentives, and failure modes usually determine whether the idea survives contact with production and with other teams. I treat this as an operating constraint rather than a slogan: if you cannot explain how it shows up in ownership, metrics, and day-to-day decisions, it will not survive the next roadmap fight.</p>
 <ul>
 <li>Clear schema ownership</li>
 <li>Migrations as code</li>
@@ -98,34 +98,23 @@
 <li>Connection pooling and boring observability</li>
 <li>A plan for read scale that is not "wishful replicas"</li>
 </ul>
-<p>Why? Because most products are <strong>transactional workflows with relationships</strong>: users, accounts, permissions, orders, configurations, audit trails. Relational databases are extraordinarily good at that shape. They also match how humans reason about correctness.</p>
-<p>If your primary problems are multi-row invariants, ad hoc query flexibility, and operational maturity, starting elsewhere is often self-inflicted difficulty.</p>
+<p>Why? Because most products are <strong>transactional workflows with relationships</strong>: users, accounts, permissions, orders, configurations, audit trails. Relational databases are extraordinarily good at that shape. They also match how humans reason about correctness. If your primary problems are multi-row invariants, ad hoc query flexibility, and operational maturity, starting elsewhere is often self-inflicted difficulty.</p>
 <h2>When relational is the right call</h2>
-<p>I lean relational when several of these are true:</p>
-<p><strong>1. Strong invariants matter more than infinite write scale.</strong><br>
-Money, entitlements, identity bindings, "exactly one active X per Y." If the business invariant is relational, fighting the model is expensive.</p>
-<p><strong>2. Query patterns are still evolving.</strong><br>
-Early products change questions weekly. A well-modeled schema with indexes beats a write-optimized store that makes new questions painful.</p>
-<p><strong>3. The team’s operational muscle is SQL-shaped.</strong><br>
-A perfect paper architecture with zero operators is worse than a known system with runbooks. Skills are part of architecture.</p>
-<p><strong>4. Multi-entity transactions simplify the product.</strong><br>
-Saga forests can be correct. They are also a tax. If a single-node or lightly clustered RDBMS can hold the transactional core, keep the core small and sharp.</p>
-<p><strong>5. You need ecosystem gravity.</strong><br>
+<p>I lean relational when several of these are true: <strong>1. Strong invariants matter more than infinite write scale.</strong><br>
+Money, entitlements, identity bindings, "exactly one active X per Y." If the business invariant is relational, fighting the model is expensive. <strong>2. Query patterns are still evolving.</strong><br>
+Early products change questions weekly. A well-modeled schema with indexes beats a write-optimized store that makes new questions painful. <strong>3. The team’s operational muscle is SQL-shaped.</strong><br>
+A perfect paper architecture with zero operators is worse than a known system with runbooks. Skills are part of architecture. <strong>4. Multi-entity transactions simplify the product.</strong><br>
+Saga forests can be correct. They are also a tax. If a single-node or lightly clustered RDBMS can hold the transactional core, keep the core small and sharp. <strong>5. You need ecosystem gravity.</strong><br>
 ORMs, migration tools, BI access, hiring, incident folklore—relational ecosystems are deep. That is not marketing; it is time-to-recovery.</p>
 <h2>When relational becomes the wrong center</h2>
-<p>I move work <em>out</em> of the primary OLTP database when:</p>
-<p><strong>1. Write throughput or state size exceeds honest vertical + read-replica plans.</strong><br>
-Not vanity metrics—measured saturation, vacuum pain, replica lag that product feels, backup windows that scare you.</p>
-<p><strong>2. Access patterns are append-heavy and query-narrow.</strong><br>
-Event logs, high-volume telemetry, massive multi-tenant time series. Different stores exist for reasons.</p>
-<p><strong>3. Fan-out reads need specialized shapes.</strong><br>
-Search, graph traversal at scale, feature stores, geospatial at high QPS—often better as <strong>derived systems</strong> fed from a transactional core.</p>
-<p><strong>4. Availability topology requirements outgrow your relational operator model.</strong><br>
-Some multi-region active-active stories are possible with modern relational systems; many are still research projects wearing production clothes. Be honest about the topology you can run.</p>
-<p><strong>5. Schema flexibility is real, not aesthetic.</strong><br>
+<p>I move work <em>out</em> of the primary OLTP database when: <strong>1. Write throughput or state size exceeds honest vertical + read-replica plans.</strong><br>
+Not vanity metrics—measured saturation, vacuum pain, replica lag that product feels, backup windows that scare you. <strong>2. Access patterns are append-heavy and query-narrow.</strong><br>
+Event logs, high-volume telemetry, massive multi-tenant time series. Different stores exist for reasons. <strong>3. Fan-out reads need specialized shapes.</strong><br>
+Search, graph traversal at scale, feature stores, geospatial at high QPS—often better as <strong>derived systems</strong> fed from a transactional core. <strong>4. Availability topology requirements outgrow your relational operator model.</strong><br>
+Some multi-region active-active stories are possible with modern relational systems; many are still research projects wearing production clothes. Be honest about the topology you can run. <strong>5. Schema flexibility is real, not aesthetic.</strong><br>
 Truly heterogeneous documents with little shared query structure can be a poor fit. "We might need flexibility later" is not a requirement.</p>
 <h2>The architecture that aged best for me</h2>
-<p>The pattern I trust:</p>
+<p>The pattern I trust: That detail matters in practice because the surrounding system, incentives, and failure modes usually determine whether the idea survives contact with production and with other teams. I treat this as an operating constraint rather than a slogan: if you cannot explain how it shows up in ownership, metrics, and day-to-day decisions, it will not survive the next roadmap fight.</p>
 <ol>
 <li><strong>Transactional system of record</strong> in relational (or something with equal invariant strength).</li>
 <li><strong>Explicit integration events</strong> when other systems must react—versioned, owned, documented.</li>
@@ -133,13 +122,11 @@ Truly heterogeneous documents with little shared query structure can be a poor f
 <li><strong>Analytical systems</strong> for heavy aggregation—do not abuse OLTP as a warehouse.</li>
 <li><strong>Clear rules for dual writes</strong> — preferably avoid them; if not, make correctness visible.</li>
 </ol>
-<p>The relational database is not the universe. It is often the <strong>spine</strong>.</p>
+<p>The relational database is not the universe. It is often the <strong>spine</strong>. That detail matters in practice because the surrounding system, incentives, and failure modes usually determine whether the idea survives contact with production and with other teams. I treat this as an operating constraint rather than a slogan: if you cannot explain how it shows up in ownership, metrics, and day-to-day decisions, it will not survive the next roadmap fight.</p>
 <h2>A related lesson from platform service boundaries</h2>
-<p>Not every “monolith vs microservices” fight is a datastore fight—but the same judgment applies. On an EDP self-serve portal, we had a month-long freeze over whether new UI workflows had to live entirely in a monolithic backend or split early for independent iteration.</p>
-<p>The useful answer was hybrid: keep <strong>core platform capabilities</strong> where integration and invariants dominate; split <strong>fast-changing workflows</strong> where deploy independence pays for the seam cost; put <strong>metadata</strong> in a system designed for lifecycle, not in accidental dual writes.</p>
-<p>That is the same muscle as choosing a relational spine: <strong>optimize for ownership and correctness at the center, derive or split at the edges, refuse fashion-driven rewrites that stop delivery.</strong></p>
+<p>Not every “monolith vs microservices” fight is a datastore fight—but the same judgment applies. On an EDP self-serve portal, we had a month-long freeze over whether new UI workflows had to live entirely in a monolithic backend or split early for independent iteration. The useful answer was hybrid: keep <strong>core platform capabilities</strong> where integration and invariants dominate; split <strong>fast-changing workflows</strong> where deploy independence pays for the seam cost; put <strong>metadata</strong> in a system designed for lifecycle, not in accidental dual writes. That is the same muscle as choosing a relational spine: <strong>optimize for ownership and correctness at the center, derive or split at the edges, refuse fashion-driven rewrites that stop delivery.</strong></p>
 <h2>What changed since 2013</h2>
-<p>A few updates to my older self:</p>
+<p>A few updates to my older self: That detail matters in practice because the surrounding system, incentives, and failure modes usually determine whether the idea survives contact with production and with other teams. I treat this as an operating constraint rather than a slogan: if you cannot explain how it shows up in ownership, metrics, and day-to-day decisions, it will not survive the next roadmap fight.</p>
 <ul>
 <li><strong>Managed Postgres (and peers) are much better.</strong> Failover, backups, and scaling knobs improved. That raises the bar for "we need NoSQL to be reliable."</li>
 <li><strong>JSON columns done carefully</strong> cover many former document-store arguments—without abandoning transactions.</li>
@@ -147,9 +134,9 @@ Truly heterogeneous documents with little shared query structure can be a poor f
 <li><strong>Distributed SQL exists</strong> and can be right—but it is still a specialist choice with specialist costs.</li>
 <li><strong>Lakehouses ate a chunk of analytics</strong>, which is good: stop pretending your OLTP DB is a lake.</li>
 </ul>
-<p>What did <em>not</em> change: <strong>NoSQL is not a personality.</strong> It is a set of tradeoffs around consistency, query power, operational complexity, and scale.</p>
+<p>What did <em>not</em> change: <strong>NoSQL is not a personality.</strong> It is a set of tradeoffs around consistency, query power, operational complexity, and scale. That detail matters in practice because the surrounding system, incentives, and failure modes usually determine whether the idea survives contact with production and with other teams.</p>
 <h2>Decision checklist I actually use</h2>
-<p>Before approving a non-relational primary store:</p>
+<p>Before approving a non-relational primary store: That detail matters in practice because the surrounding system, incentives, and failure modes usually determine whether the idea survives contact with production and with other teams. I treat this as an operating constraint rather than a slogan: if you cannot explain how it shows up in ownership, metrics, and day-to-day decisions, it will not survive the next roadmap fight.</p>
 <ol>
 <li>Which queries and invariants are first-class in v1?</li>
 <li>What is the 12-month data size and QPS with ugly margins?</li>
@@ -158,11 +145,9 @@ Truly heterogeneous documents with little shared query structure can be a poor f
 <li>Who is on-call, and what have they operated before?</li>
 <li>Can we explain the choice in one paragraph without vendor slogans?</li>
 </ol>
-<p>If step 6 requires a conference talk, the choice may still be right—but it needs more proof.</p>
+<p>If step 6 requires a conference talk, the choice may still be right—but it needs more proof. That detail matters in practice because the surrounding system, incentives, and failure modes usually determine whether the idea survives contact with production and with other teams. I treat this as an operating constraint rather than a slogan: if you cannot explain how it shows up in ownership, metrics, and day-to-day decisions, it will not survive the next roadmap fight.</p>
 <h2>Closing</h2>
-<p>I still choose a relational database when I want <strong>correctness, evolvable queries, and operational boredom</strong> around the core of a product. I choose other systems when the access pattern or scale curve makes that boredom impossible.</p>
-<p>The winning move is rarely "pick a side." It is <strong>keep a sharp system of record, derive aggressively, and refuse to let fashion rename your requirements.</strong></p>
-<p>If you want the older, more argumentative version of this stance, it is still here: <a href="https://www.mohitranka.com/blog/rdbms-vs-nosql/">RDBMS vs. NOSQL?</a>. The industry moved. The need for judgment did not.</p>
+<p>I still choose a relational database when I want <strong>correctness, evolvable queries, and operational boredom</strong> around the core of a product. I choose other systems when the access pattern or scale curve makes that boredom impossible. The winning move is rarely "pick a side." It is <strong>keep a sharp system of record, derive aggressively, and refuse to let fashion rename your requirements.</strong> If you want the older, more argumentative version of this stance, it is still here: <a href="https://www.mohitranka.com/blog/rdbms-vs-nosql/">RDBMS vs. NOSQL?</a>. The industry moved. The need for judgment did not.</p>
     </div>
 
     <p class="article-footer meta">

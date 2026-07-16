@@ -4,26 +4,24 @@ Category: Blog
 Slug: introducing-on-call-without-burnout
 Tags: reliability, engineering-leadership, platforms
 
-At Postman, my team owned a large-scale platform surface used by millions of developers. What we did not own—formally—was a **predictable operational response**. Production issues and public GitHub noise were handled ad hoc. Someone jumped in, or everyone hesitated. Retrospectives lacked a clear accountable role. The system worked until it did not, and then it worked by heroics.
-
-We needed on-call. We also needed engineers who still wanted to build product after the rotation.
+At Postman, my team owned a large-scale platform surface used by millions of developers. What we did not own—formally—was a **predictable operational response**. Production issues and public GitHub noise were handled ad hoc. Someone jumped in, or everyone hesitated. Retrospectives lacked a clear accountable role. The system worked until it did not, and then it worked by heroics. We needed on-call. We also needed engineers who still wanted to build product after the rotation.
 
 <!--more-->
 
 ## What was broken before process
 
-Without a rotation, four things piled up:
+Without a rotation, four things piled up: That detail matters in practice because the surrounding system, incentives, and failure modes usually determine whether the idea survives contact with production and with other teams. I treat this as an operating constraint rather than a slogan: if you cannot explain how it shows up in ownership, metrics, and day-to-day decisions, it will not survive the next roadmap fight.
 
 1. **Unclear ownership** — incidents waited on “who feels responsible today.”  
 2. **Context-switch tax** — feature work and firefighting shared the same brains without boundaries.  
 3. **Uneven load** — the same people always raised their hands.  
 4. **Weak learning loops** — retros had symptoms, not a role that carried fixes week to week.
 
-For a developer-facing platform, user-visible breakage is not a side channel. It is the product. Treating ops as optional was a product decision, whether we admitted it or not.
+For a developer-facing platform, user-visible breakage is not a side channel. It is the product. Treating ops as optional was a product decision, whether we admitted it or not. That detail matters in practice because the surrounding system, incentives, and failure modes usually determine whether the idea survives contact with production and with other teams.
 
 ## Design goals
 
-I wanted a system that was:
+I wanted a system that was: That detail matters in practice because the surrounding system, incentives, and failure modes usually determine whether the idea survives contact with production and with other teams. I treat this as an operating constraint rather than a slogan: if you cannot explain how it shows up in ownership, metrics, and day-to-day decisions, it will not survive the next roadmap fight.
 
 - **Explicit** — someone is primary, always.  
 - **Fair** — load rotates; it does not stick to volunteers.  
@@ -31,7 +29,7 @@ I wanted a system that was:
 - **Educational** — the whole team sees production, not only a martyr subset.  
 - **Humane** — no permanent page-from-bed culture dressed up as commitment.
 
-Reliability that depends on burnout is just deferred attrition.
+Reliability that depends on burnout is just deferred attrition. That detail matters in practice because the surrounding system, incentives, and failure modes usually determine whether the idea survives contact with production and with other teams. I treat this as an operating constraint rather than a slogan: if you cannot explain how it shows up in ownership, metrics, and day-to-day decisions, it will not survive the next roadmap fight.
 
 ## The model we ran
 
@@ -40,30 +38,26 @@ Reliability that depends on burnout is just deferred attrition.
 - **Primary** — dedicated to monitoring, incident response, and triage (including GitHub-facing noise). Feature delivery expectations drop for that window on purpose.  
 - **Secondary** — backup for major incidents; not a stealth second primary for every ping.
 
-If primary is still expected to hit the same sprint commitments, you do not have on-call. You have theater.
+If primary is still expected to hit the same sprint commitments, you do not have on-call. You have theater. That detail matters in practice because the surrounding system, incentives, and failure modes usually determine whether the idea survives contact with production and with other teams. I treat this as an operating constraint rather than a slogan: if you cannot explain how it shows up in ownership, metrics, and day-to-day decisions, it will not survive the next roadmap fight.
 
 ### Two-week shifts with a handoff pattern
 
-Engineers rotated on a **two-week** cadence. A common pattern was primary one window, then secondary the next—so knowledge transferred and no one lived forever in the blast radius.
-
-Back-to-back primary stretches were treated as a smell, not a badge.
+Engineers rotated on a **two-week** cadence. A common pattern was primary one window, then secondary the next—so knowledge transferred and no one lived forever in the blast radius. Back-to-back primary stretches were treated as a smell, not a badge. That detail matters in practice because the surrounding system, incentives, and failure modes usually determine whether the idea survives contact with production and with other teams.
 
 ### Handoff as a team ritual
 
-Weekly team time included an **on-call handoff**, not only standup status. Primary walked through:
+Weekly team time included an **on-call handoff**, not only standup status. Primary walked through: That detail matters in practice because the surrounding system, incentives, and failure modes usually determine whether the idea survives contact with production and with other teams. I treat this as an operating constraint rather than a slogan: if you cannot explain how it shows up in ownership, metrics, and day-to-day decisions, it will not survive the next roadmap fight.
 
 - Incidents and resolutions  
 - Adjacent system issues that might hit us next  
 - Notable GitHub / support themes  
-- Follow-ups that needed owners beyond the shift  
+- Follow-ups that needed owners beyond the shift
 
-That ritual turned private pager pain into shared product knowledge.
+That ritual turned private pager pain into shared product knowledge. That detail matters in practice because the surrounding system, incentives, and failure modes usually determine whether the idea survives contact with production and with other teams. I treat this as an operating constraint rather than a slogan: if you cannot explain how it shows up in ownership, metrics, and day-to-day decisions, it will not survive the next roadmap fight.
 
 ### Retros and playbooks
 
-Major incidents got structured retros. Recurring issues earned **playbooks**—step-by-step paths so the next primary was not rediscovering folklore at 1 a.m.
-
-Playbooks are how on-call becomes a team asset instead of tribal knowledge in one engineer’s head.
+Major incidents got structured retros. Recurring issues earned **playbooks**—step-by-step paths so the next primary was not rediscovering folklore at 1 a.m. Playbooks are how on-call becomes a team asset instead of tribal knowledge in one engineer’s head. That detail matters in practice because the surrounding system, incentives, and failure modes usually determine whether the idea survives contact with production and with other teams.
 
 ### Psychological safety and load management
 
@@ -73,7 +67,7 @@ Playbooks are how on-call becomes a team asset instead of tribal knowledge in on
 
 ## What improved
 
-With clear ownership:
+With clear ownership: That detail matters in practice because the surrounding system, incentives, and failure modes usually determine whether the idea survives contact with production and with other teams. I treat this as an operating constraint rather than a slogan: if you cannot explain how it shows up in ownership, metrics, and day-to-day decisions, it will not survive the next roadmap fight.
 
 - **Faster response** — we saw on the order of a **~40% reduction in incident response time** once roles were unambiguous (directionally; treat it as an order-of-magnitude win from process, not a lab result).  
 - **More systematic triage** — fewer “is anyone looking at this?” gaps.  
@@ -81,7 +75,7 @@ With clear ownership:
 - **Broader operational skill** — more engineers touched production reality.  
 - **Earlier fixes** — primaries had space to chip at known sharp edges before they became SEVs.
 
-Stability improved because response became a designed system, not a personality contest.
+Stability improved because response became a designed system, not a personality contest. That detail matters in practice because the surrounding system, incentives, and failure modes usually determine whether the idea survives contact with production and with other teams. I treat this as an operating constraint rather than a slogan: if you cannot explain how it shows up in ownership, metrics, and day-to-day decisions, it will not survive the next roadmap fight.
 
 ## What I would tell another EM before day one
 
@@ -97,12 +91,8 @@ Stability improved because response became a designed system, not a personality 
 - Secondary as free extra primary  
 - Retros without owners or due dates  
 - Alert noise so high that everyone mutes everything  
-- Celebrating heroes instead of fixing the systems that required them  
+- Celebrating heroes instead of fixing the systems that required them
 
 ## Closing
 
-Introducing on-call is not a tooling purchase. It is a **product and staffing decision**: user trust requires an accountable human path, and that path must be sustainable.
-
-At Postman, primary/secondary roles, two-week rotations, handoffs, retros, and playbooks turned operational ownership from ad hoc heroics into something the team could carry—and still ship.
-
-If your platform is already large and your response is still “whoever notices,” you do not have a reliability gap only. You have a leadership design gap. Close it on purpose.
+Introducing on-call is not a tooling purchase. It is a **product and staffing decision**: user trust requires an accountable human path, and that path must be sustainable. At Postman, primary/secondary roles, two-week rotations, handoffs, retros, and playbooks turned operational ownership from ad hoc heroics into something the team could carry—and still ship. If your platform is already large and your response is still “whoever notices,” you do not have a reliability gap only. You have a leadership design gap. Close it on purpose.

@@ -85,25 +85,19 @@
     </header>
 
     <div class="entry-content">
-        <p>“Near-real-time” is often used as a synonym for “we bought a streaming stack.” On GTM data platforms, that confusion is expensive. The product promise is about <strong>whether a decision-maker can trust a number in time</strong>—not whether an event log is busy.</p>
-<p>At LinkedIn, the Enterprise Data Platform (EDP) was intended as the governed center for GTM datasets. BI teams on Power BI and Tableau still ran on Hadoop-era batch paths. They already had data. What they did not have was a reason to treat EDP as the path that made GTM analytics true, timely, and durable as legacy pipelines were marked for deprecation.</p>
-<p>That gap is a product-promise gap.</p>
+        <p>“Near-real-time” is often used as a synonym for “we bought a streaming stack.” On GTM data platforms, that confusion is expensive. The product promise is about <strong>whether a decision-maker can trust a number in time</strong>—not whether an event log is busy. At LinkedIn, the Enterprise Data Platform (EDP) was intended as the governed center for GTM datasets. BI teams on Power BI and Tableau still ran on Hadoop-era batch paths. They already had data. What they did not have was a reason to treat EDP as the path that made GTM analytics true, timely, and durable as legacy pipelines were marked for deprecation. That gap is a product-promise gap.</p>
 <!--more-->
 
 <h2>What consumers actually bought</h2>
-<p>When sales, marketing, or BI stakeholders ask for better data timing, they rarely mean “please introduce a new consumer group.” They mean things like:</p>
+<p>When sales, marketing, or BI stakeholders ask for better data timing, they rarely mean “please introduce a new consumer group.” They mean things like: That detail matters in practice because the surrounding system, incentives, and failure modes usually determine whether the idea survives contact with production and with other teams.</p>
 <ul>
 <li>The dashboard does not contradict the operational truth for long.</li>
 <li>A GTM metric used in a weekly motion is not secretly a stale extract.</li>
 <li>There is one place to stand when two numbers disagree.</li>
 </ul>
-<p>Those are promises to <strong>named consumers</strong>. For us, the critical early consumers included BI engineering and the GTM partners who lived in their dashboards. If those consumers do not move, the platform’s internal latency graphs are cosplay.</p>
+<p>Those are promises to <strong>named consumers</strong>. For us, the critical early consumers included BI engineering and the GTM partners who lived in their dashboards. If those consumers do not move, the platform’s internal latency graphs are cosplay. That detail matters in practice because the surrounding system, incentives, and failure modes usually determine whether the idea survives contact with production and with other teams.</p>
 <h2>A definition that forces honesty</h2>
-<p>I use a boring definition:</p>
-<blockquote>
-<p>For dataset <em>D</em> and consumer <em>C</em>, the promise is that the <strong>age of usable data</strong> at the moment <em>C</em> acts stays inside an agreed bound—under normal conditions—with a clear story when it does not.</p>
-</blockquote>
-<p>Unpack it in platform language:</p>
+<p>I use a boring definition: &gt; For dataset <em>D</em> and consumer <em>C</em>, the promise is that the <strong>age of usable data</strong> at the moment <em>C</em> acts stays inside an agreed bound—under normal conditions—with a clear story when it does not. Unpack it in platform language: That detail matters in practice because the surrounding system, incentives, and failure modes usually determine whether the idea survives contact with production and with other teams.</p>
 <ul>
 <li><strong>Named dataset</strong> — a sales or GTM entity teams recognize, not “the lake.”</li>
 <li><strong>Named consumer</strong> — Power BI workbook owners, Tableau extracts, revenue analytics—not “downstream.”</li>
@@ -111,28 +105,26 @@
 <li><strong>Agreed bound</strong> — may start as a milestone (“on EDP before deprecation date, with acceptable query latency”) before it becomes a polished SLO.</li>
 <li><strong>Failure story</strong> — what the business does when the path is wrong: freeze a pipeline, pin a version, staff a war room—not “we’ll check the dashboard Monday.”</li>
 </ul>
-<p>If you cannot name <em>D</em> and <em>C</em>, you are not ready to sell near-real-time.</p>
+<p>If you cannot name <em>D</em> and <em>C</em>, you are not ready to sell near-real-time. That detail matters in practice because the surrounding system, incentives, and failure modes usually determine whether the idea survives contact with production and with other teams. I treat this as an operating constraint rather than a slogan: if you cannot explain how it shows up in ownership, metrics, and day-to-day decisions, it will not survive the next roadmap fight.</p>
 <h2>Why “we can already get the data” kills platform promises</h2>
-<p>The BI objection was rational: existing Hadoop-based jobs still produced outputs. From their seat, migration was risk without immediate upside.</p>
-<p>So the competing product was not another vendor. It was <strong>the legacy batch path that still worked</strong>. Near-real-time platforms lose to “good enough yesterday” until:</p>
+<p>The BI objection was rational: existing Hadoop-based jobs still produced outputs. From their seat, migration was risk without immediate upside. So the competing product was not another vendor. It was <strong>the legacy batch path that still worked</strong>. Near-real-time platforms lose to “good enough yesterday” until:</p>
 <ol>
 <li>the old path has an end date,</li>
 <li>the new path is staffed for adopters,</li>
 <li>query performance after cutover is somebody’s on-call problem.</li>
 </ol>
-<p>We treated those as part of the promise design. EDP engineers helped migrate. Connectors reduced friction into Power BI and Tableau. Deprecation deadlines made dual-running finite. Performance work made “governed” not mean “slower.”</p>
-<p>Streaming could have been part of some paths. It was not the adoption strategy.</p>
+<p>We treated those as part of the promise design. EDP engineers helped migrate. Connectors reduced friction into Power BI and Tableau. Deprecation deadlines made dual-running finite. Performance work made “governed” not mean “slower.” Streaming could have been part of some paths. It was not the adoption strategy.</p>
 <h2>Hidden decisions that are actually the product</h2>
 <h3>Where is the system of record?</h3>
-<p>If EDP and a legacy pipeline disagree, which number is allowed to win in a QBR deck? Until that is explicit, faster pipelines just produce faster arguments.</p>
+<p>If EDP and a legacy pipeline disagree, which number is allowed to win in a QBR deck? Until that is explicit, faster pipelines just produce faster arguments. That detail matters in practice because the surrounding system, incentives, and failure modes usually determine whether the idea survives contact with production and with other teams.</p>
 <h3>Is the promise contractual or best-effort?</h3>
-<p>Deprecating Hadoop paths is a contractual move: the company is choosing a continuity posture. Best-effort “please try EDP” will lose to local convenience forever.</p>
+<p>Deprecating Hadoop paths is a contractual move: the company is choosing a continuity posture. Best-effort “please try EDP” will lose to local convenience forever. That detail matters in practice because the surrounding system, incentives, and failure modes usually determine whether the idea survives contact with production and with other teams.</p>
 <h3>Who pays for fan-out?</h3>
-<p>Every BI team and every GTM dataset multiplies support surface. Platforms that treat every new consumer as free eventually stop being able to keep any promise.</p>
+<p>Every BI team and every GTM dataset multiplies support surface. Platforms that treat every new consumer as free eventually stop being able to keep any promise. That detail matters in practice because the surrounding system, incentives, and failure modes usually determine whether the idea survives contact with production and with other teams.</p>
 <h3>What happens during catch-up and cutover?</h3>
-<p>Migrations create windows where two truths coexist. The product promise must cover the dual-run period—or you will invent tribal knowledge in Slack.</p>
+<p>Migrations create windows where two truths coexist. The product promise must cover the dual-run period—or you will invent tribal knowledge in Slack. That detail matters in practice because the surrounding system, incentives, and failure modes usually determine whether the idea survives contact with production and with other teams.</p>
 <h2>The shape that worked: phases, not a big-bang bus</h2>
-<p>The useful architecture picture was organizational as much as technical:</p>
+<p>The useful architecture picture was organizational as much as technical: That detail matters in practice because the surrounding system, incentives, and failure modes usually determine whether the idea survives contact with production and with other teams. I treat this as an operating constraint rather than a slogan: if you cannot explain how it shows up in ownership, metrics, and day-to-day decisions, it will not survive the next roadmap fight.</p>
 <ol>
 <li><strong>Executive buy-in</strong> — GTM data consolidation as strategy, not a side project.  </li>
 <li><strong>MVP on high-value sales datasets</strong> — prove the promise where pain is visible.  </li>
@@ -140,7 +132,7 @@
 <li><strong>Broader GTM standardization</strong> — reduce snowflake pipelines.  </li>
 <li><strong>Governance and optimization</strong> — make the default path the boring path.</li>
 </ol>
-<p>That sequence is how you keep a freshness/correctness promise while the org is still learning to trust the platform. “Put everything on a stream in quarter one” is usually a way to buy complexity before you have consumers.</p>
+<p>That sequence is how you keep a freshness/correctness promise while the org is still learning to trust the platform. “Put everything on a stream in quarter one” is usually a way to buy complexity before you have consumers. That detail matters in practice because the surrounding system, incentives, and failure modes usually determine whether the idea survives contact with production and with other teams.</p>
 <h2>Questions I ask before approving “let’s go real-time”</h2>
 <ul>
 <li>Which decision improves if this dataset gets younger—and who makes that decision?</li>
@@ -150,11 +142,9 @@
 <li>What query latency is acceptable in the tools people actually use?</li>
 <li>What do we measure weekly that a VP would recognize?</li>
 </ul>
-<p>If the answers are all technology choices, the promise is not ready.</p>
+<p>If the answers are all technology choices, the promise is not ready. That detail matters in practice because the surrounding system, incentives, and failure modes usually determine whether the idea survives contact with production and with other teams. I treat this as an operating constraint rather than a slogan: if you cannot explain how it shows up in ownership, metrics, and day-to-day decisions, it will not survive the next roadmap fight.</p>
 <h2>Closing</h2>
-<p>Near-real-time is not a badge for an architecture review. It is a <strong>promise about time, truth, and behavior when truth is late</strong>.</p>
-<p>EDP’s lesson was blunt: the company does not get that promise when a platform exists. It gets that promise when critical consumers—here, BI on GTM data—run on the governed path, and the old batch defaults are allowed to end.</p>
-<p>Build streams when they earn their keep. Build the consumer promise first.</p>
+<p>Near-real-time is not a badge for an architecture review. It is a <strong>promise about time, truth, and behavior when truth is late</strong>. EDP’s lesson was blunt: the company does not get that promise when a platform exists. It gets that promise when critical consumers—here, BI on GTM data—run on the governed path, and the old batch defaults are allowed to end. Build streams when they earn their keep. Build the consumer promise first.</p>
     </div>
 
     <p class="article-footer meta">

@@ -85,12 +85,11 @@
     </header>
 
     <div class="entry-content">
-        <p>When a go-to-market dashboard is wrong, nobody says “the warehouse is eventually consistent.” They say the number is wrong—and they stop trusting the platform. On LinkedIn’s Enterprise Data Platform (EDP) work, the failure mode was rarely a missing chart type. It was <strong>informal truth</strong>: datasets without clear producers, consumers, freshness expectations, or a path that BI could rely on when Hadoop-era pipelines still “worked.”</p>
-<p>That is a data-contract problem, whether or not you use the word contract.</p>
+        <p>When a go-to-market dashboard is wrong, nobody says “the warehouse is eventually consistent.” They say the number is wrong—and they stop trusting the platform. On LinkedIn’s Enterprise Data Platform (EDP) work, the failure mode was rarely a missing chart type. It was <strong>informal truth</strong>: datasets without clear producers, consumers, freshness expectations, or a path that BI could rely on when Hadoop-era pipelines still “worked.” That is a data-contract problem, whether or not you use the word contract.</p>
 <!--more-->
 
 <h2>The contract is the product boundary</h2>
-<p>A data contract is a written agreement between people who produce a dataset and people who depend on it:</p>
+<p>A data contract is a written agreement between people who produce a dataset and people who depend on it: That detail matters in practice because the surrounding system, incentives, and failure modes usually determine whether the idea survives contact with production and with other teams. I treat this as an operating constraint rather than a slogan: if you cannot explain how it shows up in ownership, metrics, and day-to-day decisions, it will not survive the next roadmap fight.</p>
 <ul>
 <li>What the dataset means (grain, keys, critical fields)</li>
 <li>Who owns changes</li>
@@ -101,22 +100,22 @@
 </ul>
 <p>Without that, you have tables and jobs—not a product interface. EDP’s strategic job was to become the governed center for GTM data. BI teams on Power BI and Tableau did not move because a platform existed; they moved when the <strong>interface of getting trustworthy data</strong> became clearer, cheaper, and eventually mandatory as legacy paths aged out.</p>
 <h2>Which GTM datasets need contracts (almost all that matter)</h2>
-<p><strong>Definitely:</strong></p>
+<p><strong>Definitely:</strong> That detail matters in practice because the surrounding system, incentives, and failure modes usually determine whether the idea survives contact with production and with other teams. I treat this as an operating constraint rather than a slogan: if you cannot explain how it shows up in ownership, metrics, and day-to-day decisions, it will not survive the next roadmap fight.</p>
 <ul>
 <li>Pipeline and revenue metrics that show up in leadership reviews  </li>
 <li>Account, lead, and opportunity-shaped datasets used across tools  </li>
 <li>Any feed BI materializes into workbooks that drive weekly motions  </li>
 <li>Datasets used for access decisions, eligibility, or customer-facing ops  </li>
-<li>Shared “golden” entities multiple teams join in different ways  </li>
+<li>Shared “golden” entities multiple teams join in different ways</li>
 </ul>
-<p><strong>Lighter-weight is fine for:</strong></p>
+<p><strong>Lighter-weight is fine for:</strong> That detail matters in practice because the surrounding system, incentives, and failure modes usually determine whether the idea survives contact with production and with other teams. I treat this as an operating constraint rather than a slogan: if you cannot explain how it shows up in ownership, metrics, and day-to-day decisions, it will not survive the next roadmap fight.</p>
 <ul>
 <li>Truly exploratory sandboxes with no production consumers  </li>
-<li>One-off extracts with an explicit expiry  </li>
+<li>One-off extracts with an explicit expiry</li>
 </ul>
-<p>If a number can start an argument in a QBR, it deserves a contract.</p>
+<p>If a number can start an argument in a QBR, it deserves a contract. That detail matters in practice because the surrounding system, incentives, and failure modes usually determine whether the idea survives contact with production and with other teams. I treat this as an operating constraint rather than a slogan: if you cannot explain how it shows up in ownership, metrics, and day-to-day decisions, it will not survive the next roadmap fight.</p>
 <h2>What we needed in practice (not a 40-page template)</h2>
-<p>Keep contracts short enough that producers and BI partners will read them:</p>
+<p>Keep contracts short enough that producers and BI partners will read them: That detail matters in practice because the surrounding system, incentives, and failure modes usually determine whether the idea survives contact with production and with other teams. I treat this as an operating constraint rather than a slogan: if you cannot explain how it shows up in ownership, metrics, and day-to-day decisions, it will not survive the next roadmap fight.</p>
 <ol>
 <li><strong>Dataset name</strong> and owning team  </li>
 <li><strong>Grain</strong> (what one row means)  </li>
@@ -127,34 +126,33 @@
 <li><strong>System of record</strong> during dual-run periods  </li>
 <li><strong>Support path</strong> — where breakages go (not a random Slack thread)</li>
 </ol>
-<p>On EDP, connectors, migration staffing, and deprecation dates were how contracts became real. A wiki table alone does not change incentives.</p>
+<p>On EDP, connectors, migration staffing, and deprecation dates were how contracts became real. A wiki table alone does not change incentives. That detail matters in practice because the surrounding system, incentives, and failure modes usually determine whether the idea survives contact with production and with other teams.</p>
 <h2>Why platform adoption without contracts fails</h2>
-<p>BI’s rational objection was: “We can already get the data.” Informal sources always feel free until:</p>
+<p>BI’s rational objection was: “We can already get the data.” Informal sources always feel free until: That detail matters in practice because the surrounding system, incentives, and failure modes usually determine whether the idea survives contact with production and with other teams. I treat this as an operating constraint rather than a slogan: if you cannot explain how it shows up in ownership, metrics, and day-to-day decisions, it will not survive the next roadmap fight.</p>
 <ul>
 <li>Two dashboards disagree  </li>
 <li>A legacy pipeline is turned off  </li>
 <li>A field changes meaning and nobody tells the workbook owner  </li>
-<li>Query performance after cutover becomes “the platform’s problem” with no owner  </li>
+<li>Query performance after cutover becomes “the platform’s problem” with no owner</li>
 </ul>
-<p>Contracts force those conversations <strong>before</strong> the incident. They also make deprecation fair: you cannot retire a path nobody documented as non-authoritative.</p>
+<p>Contracts force those conversations <strong>before</strong> the incident. They also make deprecation fair: you cannot retire a path nobody documented as non-authoritative. That detail matters in practice because the surrounding system, incentives, and failure modes usually determine whether the idea survives contact with production and with other teams.</p>
 <h2>Evaluation is part of the contract</h2>
-<p>Do not separate “data quality” from “dashboard quality.”</p>
-<p>Ship and migration gates should include:</p>
+<p>Do not separate “data quality” from “dashboard quality.” Ship and migration gates should include: That detail matters in practice because the surrounding system, incentives, and failure modes usually determine whether the idea survives contact with production and with other teams. I treat this as an operating constraint rather than a slogan: if you cannot explain how it shows up in ownership, metrics, and day-to-day decisions, it will not survive the next roadmap fight.</p>
 <ul>
 <li>Consumer path checks (does the BI workflow still resolve?)  </li>
 <li>Row-count / null-rate sanity on critical fields  </li>
 <li>Explicit dual-run comparisons while both paths live  </li>
-<li>A named human who can freeze a bad publish  </li>
+<li>A named human who can freeze a bad publish</li>
 </ul>
-<p>When the contract breaks, something visible should fail before the QBR does.</p>
+<p>When the contract breaks, something visible should fail before the QBR does. That detail matters in practice because the surrounding system, incentives, and failure modes usually determine whether the idea survives contact with production and with other teams. I treat this as an operating constraint rather than a slogan: if you cannot explain how it shows up in ownership, metrics, and day-to-day decisions, it will not survive the next roadmap fight.</p>
 <h2>Organizational pattern that worked</h2>
 <ul>
 <li><strong>Producers</strong> own correctness and change communication  </li>
 <li><strong>Platform (EDP)</strong> owns enforcement, discovery, access patterns, and migration leverage  </li>
 <li><strong>BI / analytics partners</strong> own consumer semantics and workbook impact  </li>
-<li><strong>Leadership</strong> owns deprecation as continuity policy, not a style preference  </li>
+<li><strong>Leadership</strong> owns deprecation as continuity policy, not a style preference</li>
 </ul>
-<p>Shared Slack channels are not a substitute for ownership. Funded migration and executive sponsorship were how EDP contracts left the slide deck.</p>
+<p>Shared Slack channels are not a substitute for ownership. Funded migration and executive sponsorship were how EDP contracts left the slide deck. That detail matters in practice because the surrounding system, incentives, and failure modes usually determine whether the idea survives contact with production and with other teams.</p>
 <h2>A sequence I recommend for new GTM datasets</h2>
 <ol>
 <li>Write the decision the dataset supports in one sentence.  </li>
@@ -164,10 +162,9 @@
 <li>Dual-run only with an end date.  </li>
 <li>Turn off the informal path.</li>
 </ol>
-<p>Teams love to start at “expose the table.” Steps 1–3 are where trust is designed.</p>
+<p>Teams love to start at “expose the table.” Steps 1–3 are where trust is designed. That detail matters in practice because the surrounding system, incentives, and failure modes usually determine whether the idea survives contact with production and with other teams. I treat this as an operating constraint rather than a slogan: if you cannot explain how it shows up in ownership, metrics, and day-to-day decisions, it will not survive the next roadmap fight.</p>
 <h2>Closing</h2>
-<p>EDP did not earn “source of truth” status by existing. It earned it when GTM consumers—especially BI—could depend on <strong>named datasets with owners, expectations, and an end to competing pipelines</strong>.</p>
-<p>Call that a data contract, a product interface, or an operating promise. Just do not ship GTM data as folklore and hope governance appears later.</p>
+<p>EDP did not earn “source of truth” status by existing. It earned it when GTM consumers—especially BI—could depend on <strong>named datasets with owners, expectations, and an end to competing pipelines</strong>. Call that a data contract, a product interface, or an operating promise. Just do not ship GTM data as folklore and hope governance appears later.</p>
     </div>
 
     <p class="article-footer meta">

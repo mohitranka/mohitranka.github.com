@@ -24,9 +24,9 @@ Slug: rdbms-vs-nosql
 </ul>
 
 
-<p>Relational database&rsquo;s server process is a single point of failure, which means your system <em>will</em> go down, when the process crashes or taken down for scheduled or unscheduled maintainence.</p>
+<p>Relational database&rsquo;s server process is a single point of failure, which means your system <em>will</em> go down, when the process crashes or taken down for scheduled or unscheduled maintainence. In short, prefer the boring system until a concrete requirement forces a different shape—and document that requirement so the next person does not re-litigate it from first principles.</p>
 
-<p>If you are building a system which needs to have close to 100% availability, look into clustered relational databases or distributed databases which choose availability over consistency, eg. cassandra.</p>
+<p>If you are building a system which needs to have close to 100% availability, look into clustered relational databases or distributed databases which choose availability over consistency, eg. cassandra. In short, prefer the boring system until a concrete requirement forces a different shape—and document that requirement so the next person does not re-litigate it from first principles.</p>
 
 <ul>
 <li><h3>Flexible schema</h3></li>
@@ -35,7 +35,7 @@ Slug: rdbms-vs-nosql
 
 <p>One of relational databases&#8217; great strength is its schema, data model and <a href="https://en.wikipedia.org/wiki/Database_normalization">related concepts</a>, which allow for schema modelling, without knowing the query patterns in advance, and works well. However, <a href="http://en.wikipedia.org/wiki/Entity%E2%80%93attribute%E2%80%93value_model">not all data can be effectively represented in relational data model</a>. Even though there is some support for <a href="http://www.postgresql.org/docs/9.0/static/hstore.html">flexible</a> <a href="http://www.postgresql.org/docs/current/static/functions-json.html">schema</a> datastructure, relational databases are efficitent on fixed schema which can confirm to normalization rules for a tradeoff between consistency and performance. Flexible schema <a href="http://karwin.blogspot.in/2009/05/eav-fail.html">do</a> <a href="http://tonyandrews.blogspot.in/2004/10/otlt-and-eav-two-big-design-mistakes.html">not</a> <a href="https://www.simple-talk.com/opinion/opinion-pieces/bad-carma/">work well</a> with relational databases.</p>
 
-<p>If you <em>need</em> (do you, really?) flexible schema, look at other nosql options.</p>
+<p>If you <em>need</em> (do you, really?) flexible schema, look at other nosql options. In short, prefer the boring system until a concrete requirement forces a different shape—and document that requirement so the next person does not re-litigate it from first principles. In short, prefer the boring system until a concrete requirement forces a different shape—and document that requirement so the next person does not re-litigate it from first principles.</p>
 
 <ul>
 <li><h3>Horizontal scaling</h3></li>
@@ -46,5 +46,4 @@ Slug: rdbms-vs-nosql
 
 <h1>Epilogue</h1>
 
-<p>NoSQL is no panacea and RDBMS are still the best choice for most of the applications. Unless you have strong need to <em>not</em> used a relational database, stick to it.</p>
-
+<p>NoSQL is no panacea and RDBMS are still the best choice for most of the applications. Unless you have strong need to <em>not</em> used a relational database, stick to it. In short, prefer the boring system until a concrete requirement forces a different shape—and document that requirement so the next person does not re-litigate it from first principles.</p>
