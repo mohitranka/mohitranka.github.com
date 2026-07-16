@@ -5,9 +5,9 @@
 Mohit Ranka is an engineering leader focused on data platforms, developer tooling, and reliable distributed backends. He prefers clarity over cleverness, long-term impact over short wins, and systems that scale from one team to many.
 
 Experience highlights:
-- LinkedIn: consolidated diverse data sources into a near-real-time platform
-- Postman: led the web launch
-- Booking.com: built identity and SSO systems
+- LinkedIn: engineering leader on the enterprise data platform for GTM/analytics (governed, timely data)
+- Postman: led desktop-to-web for millions of developers; incubated 0→1 beyond HTTP
+- Booking.com: built identity and SSO under production traffic
 
 Location and background: India; B.Tech. from Vellore Institute of Technology.
 
