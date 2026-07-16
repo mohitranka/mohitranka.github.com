@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}{{ tag }} — Writing — {{ SITENAME }}{% endblock %}
+{% block description %}Posts tagged “{{ tag }}” by {{ AUTHOR }}.{% endblock %}
+{% block canonical %}{{ SITEURL }}/{{ tag.url }}{% endblock %}
+{% block og_url %}{{ SITEURL }}/{{ tag.url }}{% endblock %}
+{% block og_title %}{{ tag }} — Writing — {{ SITENAME }}{% endblock %}
+{% block og_description %}Posts tagged “{{ tag }}” by {{ AUTHOR }}.{% endblock %}
+{% block twitter_title %}{{ tag }} — Writing — {{ SITENAME }}{% endblock %}
+{% block twitter_description %}Posts tagged “{{ tag }}” by {{ AUTHOR }}.{% endblock %}
+{% block body_class %}page-tag{% endblock %}
+
+{% block content %}
+        <p class="meta crumb">
+            <a href="{{ SITEURL }}/blog.html">Writing</a>
+            <span aria-hidden="true"> / </span>
+            <a href="{{ SITEURL }}/tags.html">Tags</a>
+            <span aria-hidden="true"> / </span>
+            <span>{{ tag }}</span>
+        </p>
+
+        <h1>Tag: {{ tag }}</h1>
+        <p class="meta page-lede">
+            {{ articles|count }} post{% if articles|count != 1 %}s{% endif %}
+        </p>
+
+        <ul class="article-list">
+            {% for article in articles %}
+            <li class="article-item">
+                <a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a>
+                <time class="article-meta" datetime="{{ article.date.isoformat() }}">{{ article.date.strftime('%b %Y') }}</time>
+            </li>
+            {% endfor %}
+        </ul>
+{% endblock %}

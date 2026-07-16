@@ -14,13 +14,33 @@
         <h1>Writing</h1>
         <p class="meta page-lede">
             Technical writing on platforms, data, reliability, and engineering leadership.
+            {% if tags %}
+            Browse by <a href="{{ SITEURL }}/tags.html">tag</a>.
+            {% endif %}
         </p>
+
+        {% if tags %}
+        <ul class="tag-list tag-list--compact" aria-label="Popular tags">
+            {% for tag, tagged_articles in tags|sort %}
+            <li><a class="tag-chip" href="{{ SITEURL }}/{{ tag.url }}">{{ tag }}</a></li>
+            {% endfor %}
+        </ul>
+        {% endif %}
 
         <ul class="article-list">
             {% for article in dates %}
-            <li class="article-item">
-                <a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a>
-                <time class="article-meta" datetime="{{ article.date.isoformat() }}">{{ article.date.strftime('%b %Y') }}</time>
+            <li class="article-item article-item--stack">
+                <div class="article-item-main">
+                    <a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a>
+                    <time class="article-meta" datetime="{{ article.date.isoformat() }}">{{ article.date.strftime('%b %Y') }}</time>
+                </div>
+                {% if article.tags %}
+                <ul class="tag-list tag-list--compact" aria-label="Tags for {{ article.title }}">
+                    {% for tag in article.tags %}
+                    <li><a class="tag-chip" href="{{ SITEURL }}/{{ tag.url }}">{{ tag }}</a></li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
             </li>
             {% endfor %}
         </ul>

@@ -54,14 +54,33 @@
         <p class="article-meta">
             <time datetime="{{ article.date.isoformat() }}">{{ article.date.strftime('%d %b %Y') }}</time>
         </p>
+        {% if article.tags %}
+        <ul class="tag-list" aria-label="Tags">
+            {% for tag in article.tags %}
+            <li><a class="tag-chip" href="{{ SITEURL }}/{{ tag.url }}">{{ tag }}</a></li>
+            {% endfor %}
+        </ul>
+        {% endif %}
     </header>
 
     <div class="entry-content">
         {{ article.content }}
     </div>
 
-    <p class="article-footer meta">
-        <a href="{{ SITEURL }}/blog.html">← All writing</a>
-    </p>
+    <footer class="article-footer">
+        {% if article.tags %}
+        <p class="meta tag-footer-label">Tagged</p>
+        <ul class="tag-list" aria-label="Tags">
+            {% for tag in article.tags %}
+            <li><a class="tag-chip" href="{{ SITEURL }}/{{ tag.url }}">{{ tag }}</a></li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <p class="meta">
+            <a href="{{ SITEURL }}/blog.html">← All writing</a>
+            ·
+            <a href="{{ SITEURL }}/tags.html">All tags</a>
+        </p>
+    </footer>
 </article>
 {% endblock %}

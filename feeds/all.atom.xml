@@ -848,4 +848,4 @@ Constrained rollout, measure adoption and engagement, then decide: graduate into
 
 &lt;h1&gt;Epilogue&lt;/h1&gt;
 
-&lt;p&gt;NoSQL is no panacea and RDBMS are still the best choice for most of the applications. Unless you have strong need to &lt;em&gt;not&lt;/em&gt; used a relational database, stick to it. In short, prefer the boring system until a concrete requirement forces a different shape—and document that requirement so the next person does not re-litigate it from first principles.&lt;/p&gt;</content><category term="Blog"/></entry></feed>
+&lt;p&gt;NoSQL is no panacea and RDBMS are still the best choice for most of the applications. Unless you have strong need to &lt;em&gt;not&lt;/em&gt; used a relational database, stick to it. In short, prefer the boring system until a concrete requirement forces a different shape—and document that requirement so the next person does not re-litigate it from first principles.&lt;/p&gt;</content><category term="Blog"/><category term="data-platforms"/><category term="databases"/><category term="architecture"/></entry></feed>

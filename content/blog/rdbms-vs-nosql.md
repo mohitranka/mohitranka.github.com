@@ -2,6 +2,7 @@ Title: RDBMS vs. NOSQL?
 Date: 2013-06-29 00:16
 Category: Blog
 Slug: rdbms-vs-nosql
+Tags: data-platforms, databases, architecture
 
 <blockquote><p>From our own experience designing and operating a highly available, highly scalable ecommerce platform, we have come to realize that relational databases should only be used when an application really needs the complex query, table join and transaction capabilities of a full-blown relational database. In all other cases, when such relational features are not needed, a NoSQL database service like DynamoDB offers a simpler, more available, more scalable and ultimately a lower cost solution.</p></blockquote>
 
