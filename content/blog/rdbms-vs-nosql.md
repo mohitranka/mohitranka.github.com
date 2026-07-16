@@ -1,5 +1,5 @@
 Title: RDBMS vs. NOSQL?
-Date: 2026-06-01 00:16
+Date: 2013-06-29 00:16
 Category: Blog
 Slug: rdbms-vs-nosql
 

@@ -77,13 +77,15 @@
 
         <p>I've consolidated diverse data sources into a near-real-time platform at <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a>, led the web launch of <a href="https://www.postman.com" target="_blank" rel="noopener noreferrer">Postman</a>, and built identity and SSO systems at <a href="https://www.booking.com" target="_blank" rel="noopener noreferrer">Booking.com</a>.</p>
 
-        <p>Some writing from earlier years:</p>
+        {% if articles %}
+        <p>Selected writing:</p>
 
         <ul>
             {% for article in articles[:5] %}
             <li><a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a></li>
             {% endfor %}
         </ul>
+        {% endif %}
 
         <p>You can <a href="{{ SITEURL }}/blog.html">read more writing</a>, browse my <a href="https://github.com/mohitranka" target="_blank" rel="noopener noreferrer">code</a>, or <a href="https://www.linkedin.com/in/mohit-ranka" target="_blank" rel="noopener noreferrer">connect on LinkedIn</a>. <a href="mailto:mohitranka@gmail.com">Reach out</a> if interested.</p>
 {% endblock %}
