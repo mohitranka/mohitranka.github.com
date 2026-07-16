@@ -18,4 +18,5 @@ DELETE_OUTPUT_DIRECTORY = True
 # Following items are often useful when publishing
 
 #DISQUS_SITENAME = ""
-#GOOGLE_ANALYTICS = ""
+# Google Analytics 4 measurement ID
+GOOGLE_ANALYTICS = os.environ.get("GOOGLE_ANALYTICS", "G-CWEDLBH79X")
