@@ -10,7 +10,7 @@ Tags: data-platforms, distributed-systems, reliability
   <img src="{static}/images/blog/near-real-time-is-a-product-promise.jpg" alt="Abstract illustration of a clock and data streams feeding a product dashboard" loading="lazy" width="1200" height="675">
   <figcaption>
     <span class="fig-caption">Near-real-time is a promise about the age of truth a consumer can act on—not a badge for a streaming cluster.</span>
-    <span class="fig-credit">Credit: Original illustration created for mohitranka.com (AI-assisted).</span>
+    <span class="fig-credit">Credit: Original illustration created for mohitranka.com.</span>
   </figcaption>
 </figure>
 

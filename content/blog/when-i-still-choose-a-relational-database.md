@@ -10,7 +10,7 @@ In 2013 I wrote [RDBMS vs. NOSQL?]({filename}/blog/rdbms-vs-nosql.md) as a pushb
   <img src="{static}/images/blog/when-i-still-choose-a-relational-database.jpg" alt="Illustration of an ordered data table foundation beside scattered documents" loading="lazy" width="1200" height="675">
   <figcaption>
     <span class="fig-caption">A relational spine is often the boring default until access patterns and failure modes force a different shape.</span>
-    <span class="fig-credit">Credit: Original illustration created for mohitranka.com (AI-assisted).</span>
+    <span class="fig-credit">Credit: Original illustration created for mohitranka.com.</span>
   </figcaption>
 </figure>
 

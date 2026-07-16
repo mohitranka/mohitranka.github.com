@@ -10,7 +10,7 @@ Platform engineering managers do not run out of good ideas. They run out of capa
   <img src="{static}/images/blog/saying-no-as-a-platform-em.jpg" alt="Illustration of a fork in the road with one path closed and an alternate route open" loading="lazy" width="1200" height="675">
   <figcaption>
     <span class="fig-caption">A useful platform “no” names the constraint and funds a path—not a silent block.</span>
-    <span class="fig-credit">Credit: Original illustration created for mohitranka.com (AI-assisted).</span>
+    <span class="fig-credit">Credit: Original illustration created for mohitranka.com.</span>
   </figcaption>
 </figure>
 
