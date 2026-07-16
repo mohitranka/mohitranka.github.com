@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AI features that deserve a data contract — Mohit Ranka</title>
+    <meta name="description" content="AI features fail in public when the model is only half the system. The other half is data: what went in, what it meant, who owned it, and how fresh it was....">
+    <meta name="author" content="Mohit Ranka">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.mohitranka.com/blog/ai-features-that-deserve-a-data-contract/">
+    <link rel="alternate" type="application/atom+xml" title="Mohit Ranka" href="https://www.mohitranka.com/atom.xml">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Mohit Ranka">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:url" content="https://www.mohitranka.com/blog/ai-features-that-deserve-a-data-contract/">
+    <meta property="og:title" content="AI features that deserve a data contract">
+    <meta property="og:description" content="AI features fail in public when the model is only half the system. The other half is data: what went in, what it meant, who owned it, and how fresh it was....">
+    <meta property="og:image" content="https://www.mohitranka.com/theme/images/og.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AI features that deserve a data contract">
+    <meta name="twitter:description" content="AI features fail in public when the model is only half the system. The other half is data: what went in, what it meant, who owned it, and how fresh it was....">
+    <meta name="twitter:image" content="https://www.mohitranka.com/theme/images/og.png">
+    <link rel="stylesheet" href="https://www.mohitranka.com/theme/css/style.css">
+<meta property="article:published_time" content="2020-07-01T10:00:00+05:30">
+<meta property="article:author" content="Mohit Ranka">
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "AI features that deserve a data contract",
+    "description": "AI features fail in public when the model is only half the system. The other half is data: what went in, what it meant, who owned it, and how fresh it was....",
+    "url": "https://www.mohitranka.com/blog/ai-features-that-deserve-a-data-contract/",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.mohitranka.com/blog/ai-features-that-deserve-a-data-contract/"
+    },
+    "datePublished": "2020-07-01T10:00:00+05:30",
+    "dateModified": "2020-07-01T10:00:00+05:30",
+    "author": {
+        "@type": "Person",
+        "name": "Mohit Ranka",
+        "url": "https://www.mohitranka.com/"
+    },
+    "publisher": {
+        "@type": "Person",
+        "name": "Mohit Ranka",
+        "url": "https://www.mohitranka.com/"
+    },
+    "inLanguage": "en",
+    "isPartOf": {
+        "@type": "Blog",
+        "name": "Writing — Mohit Ranka",
+        "url": "https://www.mohitranka.com/blog.html"
+    }
+}
+</script>
+</head>
+
+<body>
+    <main>
+        <h1><a href="https://www.mohitranka.com/" style="text-decoration:none;">Mohit Ranka</a></h1>
+
+<article>
+    <header>
+        <h1 class="article-title">AI features that deserve a data contract</h1>
+        <div class="article-meta">
+            <time datetime="2020-07-01T10:00:00+05:30">Wed 01 July 2020</time>
+        </div>
+    </header>
+
+    <div class="entry-content">
+        <p>AI features fail in public when the model is only half the system. The other half is data: what went in, what it meant, who owned it, and how fresh it was. If that half is informal, you do not have an AI product. You have a demo with an API key.</p>
+<!--more-->
+
+<h2>The contract is the product boundary</h2>
+<p>A data contract for AI is a written agreement between producers and consumers of the signals a model or agent uses:</p>
+<ul>
+<li>Schema and semantics  </li>
+<li>Allowed uses  </li>
+<li>Freshness and completeness expectations  </li>
+<li>Access control and retention  </li>
+<li>Compatibility policy when fields change  </li>
+<li>Owners on both sides  </li>
+</ul>
+<p>This is not paperwork theater. It is how you stop silent training-serving skew, prompt context rot, and "the model got dumber" mysteries that are actually upstream breakage.</p>
+<h2>Which AI features need contracts (almost all of them)</h2>
+<p><strong>Definitely:</strong></p>
+<ul>
+<li>Retrieval-augmented answers over internal knowledge  </li>
+<li>Personalization or ranking features  </li>
+<li>Agents that take actions (tickets, configs, messages)  </li>
+<li>Anything touching PII, money, or security decisions  </li>
+<li>Evaluation datasets used as ship gates  </li>
+</ul>
+<p><strong>Maybe lighter-weight:</strong></p>
+<ul>
+<li>Purely creative one-off tools with no enterprise data  </li>
+<li>Offline experiments with throwaway inputs  </li>
+</ul>
+<p>If a feature can change a user’s state or cite organizational truth, contract it.</p>
+<h2>What goes in a practical contract</h2>
+<p>Keep it short enough that teams will read it:</p>
+<ol>
+<li><strong>Dataset / tool name</strong> and owner  </li>
+<li><strong>Fields</strong> with types and meaning (not only JSON shape)  </li>
+<li><strong>Grain</strong> (per user, per doc, per event)  </li>
+<li><strong>Freshness SLO</strong> and known source delays  </li>
+<li><strong>Completeness</strong> expectations (null rates, coverage)  </li>
+<li><strong>Authz model</strong> for read and for downstream display  </li>
+<li><strong>Change policy</strong> (notice period, versioning)  </li>
+<li><strong>Eval impact</strong> — which offline/online tests must pass after changes  </li>
+</ol>
+<p>If your "contract" is only a Spark table name in a wiki, you have a pointer, not a contract.</p>
+<h2>Why AI makes this more urgent than classic BI</h2>
+<p>BI can often tolerate a broken dashboard for a morning. AI features turn bad data into <strong>confident wrong actions</strong>:</p>
+<ul>
+<li>Hallucinated citations from stale docs  </li>
+<li>Agents using revoked permissions still present in a cache  </li>
+<li>Training sets that silently dropped a population  </li>
+<li>Feature stores that do not match online availability  </li>
+</ul>
+<p>The failure mode is not "number looks off." It is "system did something."</p>
+<h2>Evaluation is part of the contract</h2>
+<p>Do not separate "data quality" from "model quality" as if they are different religions.</p>
+<p>Ship gates should include:</p>
+<ul>
+<li>Retrieval hit quality on a golden set  </li>
+<li>Groundedness checks where applicable  </li>
+<li>Permission-aware evals (can the user see this?)  </li>
+<li>Regression sets for known incidents  </li>
+<li>Online monitors for deflection, escalation, or edit distance from accepted answers  </li>
+</ul>
+<p>When the contract breaks, evals should fail before Twitter does.</p>
+<h2>Organizational pattern that works</h2>
+<ul>
+<li><strong>Producers</strong> own correctness of sources and change communication  </li>
+<li><strong>Platform</strong> owns enforcement, discovery, lineage, access  </li>
+<li><strong>AI product team</strong> owns feature behavior and eval suites  </li>
+<li><strong>Security/legal</strong> own policy constraints that contracts must encode  </li>
+</ul>
+<p>Shared Slack channels are not a substitute for ownership.</p>
+<h2>A sequence I recommend for new AI features</h2>
+<ol>
+<li>Write the user promise in one sentence.  </li>
+<li>List every external truth the feature depends on.  </li>
+<li>Draft contracts for those truths <em>before</em> prompt polishing.  </li>
+<li>Build evals that break when contracts break.  </li>
+<li>Only then scale traffic.</li>
+</ol>
+<p>Teams love to start at step "try models." Steps 1–4 are where senior engineering judgment shows up.</p>
+<h2>Closing</h2>
+<p>AI did not retire data platforms. It made them more visible.</p>
+<p>If you want AI features that survive contact with production, give them what every serious data product needs: <strong>explicit contracts, owners, freshness, and tests that care when truth drifts.</strong></p>
+<p>Models will keep changing. Contracts are how your product stays honest while they do.</p>
+    </div>
+</article>
+    </main>
+</body>
+
+</html>

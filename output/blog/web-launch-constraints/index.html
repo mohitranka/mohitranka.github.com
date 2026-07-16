@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>What “led the web launch” taught me about constraints — Mohit Ranka</title>
+    <meta name="description" content=""Led the web launch" fits on a resume line. The useful part is not the launch date. It is the constraint set that made the work hard—and the discipline of...">
+    <meta name="author" content="Mohit Ranka">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.mohitranka.com/blog/web-launch-constraints/">
+    <link rel="alternate" type="application/atom+xml" title="Mohit Ranka" href="https://www.mohitranka.com/atom.xml">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Mohit Ranka">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:url" content="https://www.mohitranka.com/blog/web-launch-constraints/">
+    <meta property="og:title" content="What “led the web launch” taught me about constraints">
+    <meta property="og:description" content=""Led the web launch" fits on a resume line. The useful part is not the launch date. It is the constraint set that made the work hard—and the discipline of...">
+    <meta property="og:image" content="https://www.mohitranka.com/theme/images/og.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="What “led the web launch” taught me about constraints">
+    <meta name="twitter:description" content=""Led the web launch" fits on a resume line. The useful part is not the launch date. It is the constraint set that made the work hard—and the discipline of...">
+    <meta name="twitter:image" content="https://www.mohitranka.com/theme/images/og.png">
+    <link rel="stylesheet" href="https://www.mohitranka.com/theme/css/style.css">
+<meta property="article:published_time" content="2022-07-06T10:00:00+05:30">
+<meta property="article:author" content="Mohit Ranka">
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "What \u201cled the web launch\u201d taught me about constraints",
+    "description": "\"Led the web launch\" fits on a resume line. The useful part is not the launch date. It is the constraint set that made the work hard\u2014and the discipline of...",
+    "url": "https://www.mohitranka.com/blog/web-launch-constraints/",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.mohitranka.com/blog/web-launch-constraints/"
+    },
+    "datePublished": "2022-07-06T10:00:00+05:30",
+    "dateModified": "2022-07-06T10:00:00+05:30",
+    "author": {
+        "@type": "Person",
+        "name": "Mohit Ranka",
+        "url": "https://www.mohitranka.com/"
+    },
+    "publisher": {
+        "@type": "Person",
+        "name": "Mohit Ranka",
+        "url": "https://www.mohitranka.com/"
+    },
+    "inLanguage": "en",
+    "isPartOf": {
+        "@type": "Blog",
+        "name": "Writing — Mohit Ranka",
+        "url": "https://www.mohitranka.com/blog.html"
+    }
+}
+</script>
+</head>
+
+<body>
+    <main>
+        <h1><a href="https://www.mohitranka.com/" style="text-decoration:none;">Mohit Ranka</a></h1>
+
+<article>
+    <header>
+        <h1 class="article-title">What “led the web launch” taught me about constraints</h1>
+        <div class="article-meta">
+            <time datetime="2022-07-06T10:00:00+05:30">Wed 06 July 2022</time>
+        </div>
+    </header>
+
+    <div class="entry-content">
+        <p>"Led the web launch" fits on a resume line. The useful part is not the launch date. It is the constraint set that made the work hard—and the discipline of shipping inside it.</p>
+<!--more-->
+
+<p>At Postman I was part of taking a product people already loved in one form and making it real on the web. The details of any one company fade. The constraint patterns transfer.</p>
+<h2>Constraint 1: You are not inventing trust—you are borrowing it</h2>
+<p>When a product already has users, a new surface is judged against memory. Performance, reliability, and mental model mismatches feel like regressions even when they are "v1 web" realities.</p>
+<p>That changes engineering priorities:</p>
+<ul>
+<li>Parity on core workflows beats novel architecture theater  </li>
+<li>Predictable latency beats exotic efficiency  </li>
+<li>Clear "not yet on web" boundaries beat silent missing features  </li>
+</ul>
+<p>Trust is a constraint. You can spend it once.</p>
+<h2>Constraint 2: The existing system is a stakeholder</h2>
+<p>Greenfield essays assume you choose the stack. Real launches inherit APIs, auth models, billing, feature flags, and organizational scars.</p>
+<p>Leading a launch means negotiating with the present:</p>
+<ul>
+<li>What must be reused for correctness  </li>
+<li>What may be isolated to move faster  </li>
+<li>What must be fixed at the root because the new surface will amplify the bug  </li>
+</ul>
+<p>Treating legacy as an enemy wastes time. Treating it as a stakeholder produces interfaces.</p>
+<h2>Constraint 3: Launch is a reliability event, not a marketing timestamp</h2>
+<p>Marketing picks a day. Users pick the hour they migrate critical work. Those are not the same.</p>
+<p>Engineering leadership for a launch is mostly:</p>
+<ul>
+<li>Load assumptions written down and tested  </li>
+<li>Rollback and partial exposure plans  </li>
+<li>On-call staffing that is not "whoever is excited"  </li>
+<li>Dashboards that answer user pain, not only host health  </li>
+</ul>
+<p>If you cannot describe how you will be wrong safely, you are not ready to be public.</p>
+<h2>Constraint 4: Cross-team coordination is the critical path</h2>
+<p>Web launches fail more often on handoffs than on code:</p>
+<ul>
+<li>Design vs eng vs product scope drift  </li>
+<li>Security review arriving late  </li>
+<li>Support documentation not matching UI  </li>
+<li>Data/analytics not instrumented for the new surface  </li>
+</ul>
+<p>As an EM, my calendar was the project plan. Unblocking decisions early beat heroic coding late.</p>
+<p>A practical habit: maintain a single <strong>decision log</strong> for scope cuts. Ambiguity multiplies under deadline pressure.</p>
+<h2>Constraint 5: Scope cuts are a product skill</h2>
+<p>Everyone loves the full vision. The launch needs a spine:</p>
+<ul>
+<li>What must work for the first serious cohort  </li>
+<li>What can be ugly but correct  </li>
+<li>What is explicitly later  </li>
+</ul>
+<p>The hard part is not cutting. It is cutting <strong>without demoralizing the team</strong> or surprising the company. Transparent criteria help: user impact, risk, dependency weight, reversibility.</p>
+<h2>Constraint 6: Developer products punish sloppy feedback loops</h2>
+<p>If your users are technical, they notice:</p>
+<ul>
+<li>Slow first load  </li>
+<li>Awkward auth  </li>
+<li>Inconsistent shortcuts  </li>
+<li>Error messages that lie  </li>
+</ul>
+<p>They also write about it publicly. That is a feature of the market. Quality bars for developer tooling are emotional as well as functional.</p>
+<h2>What I would repeat</h2>
+<ol>
+<li><strong>Write the non-goals</strong> as carefully as the goals.  </li>
+<li><strong>Instrument journeys</strong>, not only services.  </li>
+<li><strong>Rehearse failure</strong> (partial outage, auth issues, dependency brownout).  </li>
+<li><strong>Staff the week after launch</strong> like it is part of the launch.  </li>
+<li><strong>Protect engineers from thrash</strong> by batching stakeholder input.</li>
+</ol>
+<h2>What I would avoid</h2>
+<ul>
+<li>Betting the launch on an unfinished platform rewrite  </li>
+<li>Hidden scope in "polish"  </li>
+<li>Success metrics that only marketing can love  </li>
+<li>Hero culture that makes the second week impossible  </li>
+</ul>
+<h2>Closing</h2>
+<p>Leading a web launch taught me that big shipping moments are constraint problems: trust, legacy, reliability, coordination, and scope. Code is how you express the answers—not the answers themselves.</p>
+<p>If you are heading into a similar moment, spend more time making constraints explicit. Teams move faster when the walls are visible.</p>
+    </div>
+</article>
+    </main>
+</body>
+
+</html>

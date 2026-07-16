@@ -31,6 +31,66 @@
     <priority>0.4</priority>
   </url>
   <url>
+    <loc>https://www.mohitranka.com/blog/near-real-time-is-a-product-promise/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.mohitranka.com/blog/platform-teams-real-job-is-interfaces/</loc>
+    <lastmod>2025-11-13</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.mohitranka.com/blog/when-i-still-choose-a-relational-database/</loc>
+    <lastmod>2025-03-13</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.mohitranka.com/blog/freshness-slos-the-metric-product-teams-feel/</loc>
+    <lastmod>2024-07-11</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.mohitranka.com/blog/saying-no-as-a-platform-em/</loc>
+    <lastmod>2023-11-08</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.mohitranka.com/blog/identity-systems-fail-socially/</loc>
+    <lastmod>2023-03-08</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.mohitranka.com/blog/web-launch-constraints/</loc>
+    <lastmod>2022-07-06</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.mohitranka.com/blog/cost-regressions-are-production-incidents/</loc>
+    <lastmod>2021-11-03</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.mohitranka.com/blog/how-i-review-a-distributed-design/</loc>
+    <lastmod>2021-03-03</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.mohitranka.com/blog/ai-features-that-deserve-a-data-contract/</loc>
+    <lastmod>2020-07-01</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.mohitranka.com/blog/rdbms-vs-nosql/</loc>
     <lastmod>2013-06-29</lastmod>
     <changefreq>yearly</changefreq>

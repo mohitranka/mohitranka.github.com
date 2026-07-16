@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cost regressions are production incidents — Mohit Ranka</title>
+    <meta name="description" content="We page for latency, errors, and saturation. We shrug at a 30% cost jump that arrives with the same deploy. That asymmetry is irrational. Money is a...">
+    <meta name="author" content="Mohit Ranka">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.mohitranka.com/blog/cost-regressions-are-production-incidents/">
+    <link rel="alternate" type="application/atom+xml" title="Mohit Ranka" href="https://www.mohitranka.com/atom.xml">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Mohit Ranka">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:url" content="https://www.mohitranka.com/blog/cost-regressions-are-production-incidents/">
+    <meta property="og:title" content="Cost regressions are production incidents">
+    <meta property="og:description" content="We page for latency, errors, and saturation. We shrug at a 30% cost jump that arrives with the same deploy. That asymmetry is irrational. Money is a...">
+    <meta property="og:image" content="https://www.mohitranka.com/theme/images/og.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Cost regressions are production incidents">
+    <meta name="twitter:description" content="We page for latency, errors, and saturation. We shrug at a 30% cost jump that arrives with the same deploy. That asymmetry is irrational. Money is a...">
+    <meta name="twitter:image" content="https://www.mohitranka.com/theme/images/og.png">
+    <link rel="stylesheet" href="https://www.mohitranka.com/theme/css/style.css">
+<meta property="article:published_time" content="2021-11-03T10:00:00+05:30">
+<meta property="article:author" content="Mohit Ranka">
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Cost regressions are production incidents",
+    "description": "We page for latency, errors, and saturation. We shrug at a 30% cost jump that arrives with the same deploy. That asymmetry is irrational. Money is a...",
+    "url": "https://www.mohitranka.com/blog/cost-regressions-are-production-incidents/",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.mohitranka.com/blog/cost-regressions-are-production-incidents/"
+    },
+    "datePublished": "2021-11-03T10:00:00+05:30",
+    "dateModified": "2021-11-03T10:00:00+05:30",
+    "author": {
+        "@type": "Person",
+        "name": "Mohit Ranka",
+        "url": "https://www.mohitranka.com/"
+    },
+    "publisher": {
+        "@type": "Person",
+        "name": "Mohit Ranka",
+        "url": "https://www.mohitranka.com/"
+    },
+    "inLanguage": "en",
+    "isPartOf": {
+        "@type": "Blog",
+        "name": "Writing — Mohit Ranka",
+        "url": "https://www.mohitranka.com/blog.html"
+    }
+}
+</script>
+</head>
+
+<body>
+    <main>
+        <h1><a href="https://www.mohitranka.com/" style="text-decoration:none;">Mohit Ranka</a></h1>
+
+<article>
+    <header>
+        <h1 class="article-title">Cost regressions are production incidents</h1>
+        <div class="article-meta">
+            <time datetime="2021-11-03T10:00:00+05:30">Wed 03 November 2021</time>
+        </div>
+    </header>
+
+    <div class="entry-content">
+        <p>We page for latency, errors, and saturation. We shrug at a 30% cost jump that arrives with the same deploy. That asymmetry is irrational. <strong>Money is a production signal.</strong></p>
+<!--more-->
+
+<p>In data platforms and backend systems, cost regressions are often the first visible sign of:</p>
+<ul>
+<li>A fan-out bug  </li>
+<li>A broken partition filter  </li>
+<li>An accidental full scan  </li>
+<li>A retry storm  </li>
+<li>A "temporary" backfill that never ended  </li>
+<li>A feature flag defaulted wrong  </li>
+</ul>
+<p>If your reliability culture ignores cost, you will learn about these from finance—late, bluntly, and without a stack trace.</p>
+<h2>Why cost belongs next to SLOs</h2>
+<p>SRE taught us that user-visible symptoms deserve automated response. Cost is user-visible at company scale: it constrains hiring, pricing, and how much platform you can afford to run.</p>
+<p>Treat cost as a service level indicator where it matters:</p>
+<ul>
+<li>Per pipeline or service unit cost  </li>
+<li>Per tenant cost for multi-tenant platforms  </li>
+<li>Storage growth rate vs plan  </li>
+<li>Warehouse/scan bytes  </li>
+<li>Egress that should not exist  </li>
+</ul>
+<p>You do not need perfect unit economics on day one. You need <strong>anomaly detection tied to ownership</strong>.</p>
+<h2>What a cost incident looks like</h2>
+<p>Define it like any other incident class:</p>
+<ul>
+<li><strong>Symptom</strong>: spend or projected spend exceeds threshold vs baseline  </li>
+<li><strong>Severity</strong>: based on burn rate and blast radius, not embarrassment  </li>
+<li><strong>Commander</strong>: service owner, not "whoever understands the cloud bill"  </li>
+<li><strong>Mitigations</strong>: disable flag, rate-limit, stop backfill, roll back, tighten retention  </li>
+<li><strong>Follow-up</strong>: prevent silent recurrence with tests, budgets, or gates  </li>
+</ul>
+<p>The first time you declare a SEV for cost, it will feel awkward. The third time, it will feel obvious.</p>
+<h2>Architecture choices that prevent cost pages</h2>
+<p><strong>1. Make expensive paths explicit.</strong><br>
+Large scans, cross-region copies, and fan-out APIs should be hard to do by accident.</p>
+<p><strong>2. Budget in the design review.</strong><br>
+"What does this cost at 10×?" is not a finance question. It is a scalability question.</p>
+<p><strong>3. Separate exploratory from production compute.</strong><br>
+If analysts and production share unconstrained capacity, production will pay for curiosity.</p>
+<p><strong>4. Retention is a feature.</strong><br>
+Default forever is an incident scheduled on a calendar.</p>
+<p><strong>5. Backfills require tickets and kill switches.</strong><br>
+History rewrites should not be a casual cron.</p>
+<h2>Cultural resistance (and answers)</h2>
+<p><strong>"Engineers should not think about money."</strong><br>
+Engineers already think about CPU and memory. Cost is those resources with an invoice.</p>
+<p><strong>"Cloud bills are too lagged to page on."</strong><br>
+Then instrument leading indicators: scan bytes, task hours, partition pruning rates, queue depth for heavy jobs. Page on the lead, reconcile on the lag.</p>
+<p><strong>"This will slow delivery."</strong><br>
+Unbounded cost slows delivery harder—with hiring freezes and emergency migrations.</p>
+<h2>A minimal operating model</h2>
+<ol>
+<li>Tag resources by service/team/dataset.  </li>
+<li>Publish weekly cost by owner.  </li>
+<li>Alert on sudden deltas and on forecast breach.  </li>
+<li>Include cost in incident taxonomy.  </li>
+<li>Review top regressions in the same forum as reliability.</li>
+</ol>
+<p>Platform EMs should be able to name their top three cost risks the way they name their top three reliability risks.</p>
+<h2>Closing</h2>
+<p>A system that is correct, fast, and quietly unaffordable is not healthy. It is pre-incident.</p>
+<p>Put cost on the same operational shelf as latency and errors. Your future self—and your finance partner—will treat that as basic professionalism, not thrift theater.</p>
+    </div>
+</article>
+    </main>
+</body>
+
+</html>

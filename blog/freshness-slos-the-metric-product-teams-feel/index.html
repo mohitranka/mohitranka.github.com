@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Freshness SLOs: the metric product teams actually feel — Mohit Ranka</title>
+    <meta name="description" content="API latency SLOs changed how we run services. Data platforms still underuse the equivalent idea: freshness. Product teams do not experience your consumer...">
+    <meta name="author" content="Mohit Ranka">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.mohitranka.com/blog/freshness-slos-the-metric-product-teams-feel/">
+    <link rel="alternate" type="application/atom+xml" title="Mohit Ranka" href="https://www.mohitranka.com/atom.xml">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Mohit Ranka">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:url" content="https://www.mohitranka.com/blog/freshness-slos-the-metric-product-teams-feel/">
+    <meta property="og:title" content="Freshness SLOs: the metric product teams actually feel">
+    <meta property="og:description" content="API latency SLOs changed how we run services. Data platforms still underuse the equivalent idea: freshness. Product teams do not experience your consumer...">
+    <meta property="og:image" content="https://www.mohitranka.com/theme/images/og.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Freshness SLOs: the metric product teams actually feel">
+    <meta name="twitter:description" content="API latency SLOs changed how we run services. Data platforms still underuse the equivalent idea: freshness. Product teams do not experience your consumer...">
+    <meta name="twitter:image" content="https://www.mohitranka.com/theme/images/og.png">
+    <link rel="stylesheet" href="https://www.mohitranka.com/theme/css/style.css">
+<meta property="article:published_time" content="2024-07-11T10:00:00+05:30">
+<meta property="article:author" content="Mohit Ranka">
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Freshness SLOs: the metric product teams actually feel",
+    "description": "API latency SLOs changed how we run services. Data platforms still underuse the equivalent idea: freshness. Product teams do not experience your consumer...",
+    "url": "https://www.mohitranka.com/blog/freshness-slos-the-metric-product-teams-feel/",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.mohitranka.com/blog/freshness-slos-the-metric-product-teams-feel/"
+    },
+    "datePublished": "2024-07-11T10:00:00+05:30",
+    "dateModified": "2024-07-11T10:00:00+05:30",
+    "author": {
+        "@type": "Person",
+        "name": "Mohit Ranka",
+        "url": "https://www.mohitranka.com/"
+    },
+    "publisher": {
+        "@type": "Person",
+        "name": "Mohit Ranka",
+        "url": "https://www.mohitranka.com/"
+    },
+    "inLanguage": "en",
+    "isPartOf": {
+        "@type": "Blog",
+        "name": "Writing — Mohit Ranka",
+        "url": "https://www.mohitranka.com/blog.html"
+    }
+}
+</script>
+</head>
+
+<body>
+    <main>
+        <h1><a href="https://www.mohitranka.com/" style="text-decoration:none;">Mohit Ranka</a></h1>
+
+<article>
+    <header>
+        <h1 class="article-title">Freshness SLOs: the metric product teams actually feel</h1>
+        <div class="article-meta">
+            <time datetime="2024-07-11T10:00:00+05:30">Thu 11 July 2024</time>
+        </div>
+    </header>
+
+    <div class="entry-content">
+        <p>API latency SLOs changed how we run services. Data platforms still underuse the equivalent idea: <strong>freshness</strong>.</p>
+<p>Product teams do not experience your consumer lag chart. They experience a feed that is wrong, a permission that has not propagated, a metric that disagrees with the transaction they just made. That gap is a freshness problem—even when every job is "green."</p>
+<!--more-->
+
+<h2>Latency is not freshness</h2>
+<p>Latency asks: how long did this request take?<br>
+Freshness asks: <strong>how old is the truth this request used?</strong></p>
+<p>A p99 of 40ms on a read API can still serve hour-old data. From the platform’s perspective, the service is healthy. From the user’s perspective, the product is broken.</p>
+<p>If you only SLO the serving path, you will optimize the wrong layer.</p>
+<h2>Define freshness in product language</h2>
+<p>A workable freshness definition:</p>
+<blockquote>
+<p>For dataset <em>D</em> and consumer <em>C</em>, freshness is the age of data at the moment <em>C</em> uses it for a user-visible decision.</p>
+</blockquote>
+<p>Make it measurable:</p>
+<ul>
+<li><strong>Event-time freshness</strong>: now − max source event timestamp successfully applied.</li>
+<li><strong>Processing freshness</strong>: now − max watermark / commit the consumer has incorporated.</li>
+<li><strong>Business freshness</strong>: time until a specific user action is visible in a specific surface.</li>
+</ul>
+<p>Pick one primary definition per contract. Ambiguous freshness metrics become dashboards nobody trusts.</p>
+<h2>SLOs that change behavior</h2>
+<p>A freshness SLO should look like any serious SLO:</p>
+<ul>
+<li><strong>Target</strong>: e.g. 99% of minutes where data age &lt; 2 minutes</li>
+<li><strong>Window</strong>: 28 days or a similar rolling window</li>
+<li><strong>Scope</strong>: dataset + consumer, not "all pipelines"</li>
+<li><strong>Owner</strong>: a team that can fix the path end-to-end or escalate with authority</li>
+<li><strong>Consequence</strong>: page, ticket priority, feature freeze rules—something real</li>
+</ul>
+<p>Without consequence, it is a chart. With consequence, it becomes engineering.</p>
+<h2>What to measure along the path</h2>
+<p>End-to-end freshness decomposes. Instrument the stages:</p>
+<ol>
+<li>Source commit / emit delay  </li>
+<li>Ingest and validation  </li>
+<li>Transform / join / enrichment  </li>
+<li>Materialization to serving store  </li>
+<li>Cache TTLs and client refresh behavior  </li>
+</ol>
+<p>Teams often discover the villain is not the stream processor. It is a cache set to 15 minutes "for performance," or a source that batches for its own convenience. Freshness SLOs force those tradeoffs into the open.</p>
+<h2>Error budgets for data</h2>
+<p>Apply the SRE idea carefully:</p>
+<ul>
+<li><strong>Burn when freshness misses</strong>—not only when the pipeline crashes.</li>
+<li><strong>Distinguish complete outage from slow degradation.</strong> A pipeline that runs late every day is a product bug with a schedule.</li>
+<li><strong>Do not spend the entire budget on new consumers.</strong> Each consumer is a promise; promises need capacity.</li>
+</ul>
+<p>A useful policy: if freshness error budget is exhausted, <strong>new feature extractions from that dataset pause</strong> until reliability work lands. That is how platforms stop being infinite free utilities.</p>
+<h2>Correctness sits beside freshness</h2>
+<p>Fresh data that is wrong is worse than slightly stale data that is right. Pair freshness with lightweight correctness signals:</p>
+<ul>
+<li>Row count anomalies vs source  </li>
+<li>Null rate spikes on critical fields  </li>
+<li>Reconciliation samples against system of record  </li>
+<li>Schema violation rates  </li>
+</ul>
+<p>Freshness without validation optimizes for speed of falsehood.</p>
+<h2>How I introduce freshness SLOs in practice</h2>
+<ol>
+<li><strong>Choose one user-visible journey</strong> that already causes support pain.  </li>
+<li><strong>Map the data path</strong> on a whiteboard until everyone agrees where time goes.  </li>
+<li><strong>Ship the metric</strong> before the ambitious redesign.  </li>
+<li><strong>Set a conservative SLO</strong> you can keep, then tighten.  </li>
+<li><strong>Attach an owner and a runbook</strong> — including "what the product shows while degraded."</li>
+</ol>
+<p>Do not start with twenty datasets. Start with the one that embarrasses you in executive meetings.</p>
+<h2>Common objections</h2>
+<p><strong>"Our sources are slow; we cannot SLO this."</strong><br>
+Then SLO what you control, and publish source delay as a dependency. Silent impossibility helps no one.</p>
+<p><strong>"Batch is fine."</strong><br>
+Great—write a batch freshness SLO ("available by 06:00 UTC in 99% of days"). Batch still needs promises.</p>
+<p><strong>"This will create too much paging."</strong><br>
+Good. That pain means either the system is unreliable or the SLO is dishonest. Both are worth learning quickly.</p>
+<h2>Closing</h2>
+<p>Product teams feel freshness even if they never say the word. Platforms that only track job success and API latency will be surprised by escalations forever.</p>
+<p>Put a number on the age of truth. Own it. Budget it. Design product behavior for the misses.</p>
+<p>That is how data platforms earn trust—not by moving more bytes, but by making time and correctness legible.</p>
+    </div>
+</article>
+    </main>
+</body>
+
+</html>

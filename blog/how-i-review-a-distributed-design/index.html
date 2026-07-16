@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>How I review a distributed design in 45 minutes — Mohit Ranka</title>
+    <meta name="description" content="Design reviews expand to fill calendars. They do not have to. With a disciplined pass, you can learn whether a distributed design is roughly safe in 45...">
+    <meta name="author" content="Mohit Ranka">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.mohitranka.com/blog/how-i-review-a-distributed-design/">
+    <link rel="alternate" type="application/atom+xml" title="Mohit Ranka" href="https://www.mohitranka.com/atom.xml">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Mohit Ranka">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:url" content="https://www.mohitranka.com/blog/how-i-review-a-distributed-design/">
+    <meta property="og:title" content="How I review a distributed design in 45 minutes">
+    <meta property="og:description" content="Design reviews expand to fill calendars. They do not have to. With a disciplined pass, you can learn whether a distributed design is roughly safe in 45...">
+    <meta property="og:image" content="https://www.mohitranka.com/theme/images/og.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="How I review a distributed design in 45 minutes">
+    <meta name="twitter:description" content="Design reviews expand to fill calendars. They do not have to. With a disciplined pass, you can learn whether a distributed design is roughly safe in 45...">
+    <meta name="twitter:image" content="https://www.mohitranka.com/theme/images/og.png">
+    <link rel="stylesheet" href="https://www.mohitranka.com/theme/css/style.css">
+<meta property="article:published_time" content="2021-03-03T10:00:00+05:30">
+<meta property="article:author" content="Mohit Ranka">
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "How I review a distributed design in 45 minutes",
+    "description": "Design reviews expand to fill calendars. They do not have to. With a disciplined pass, you can learn whether a distributed design is roughly safe in 45...",
+    "url": "https://www.mohitranka.com/blog/how-i-review-a-distributed-design/",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.mohitranka.com/blog/how-i-review-a-distributed-design/"
+    },
+    "datePublished": "2021-03-03T10:00:00+05:30",
+    "dateModified": "2021-03-03T10:00:00+05:30",
+    "author": {
+        "@type": "Person",
+        "name": "Mohit Ranka",
+        "url": "https://www.mohitranka.com/"
+    },
+    "publisher": {
+        "@type": "Person",
+        "name": "Mohit Ranka",
+        "url": "https://www.mohitranka.com/"
+    },
+    "inLanguage": "en",
+    "isPartOf": {
+        "@type": "Blog",
+        "name": "Writing — Mohit Ranka",
+        "url": "https://www.mohitranka.com/blog.html"
+    }
+}
+</script>
+</head>
+
+<body>
+    <main>
+        <h1><a href="https://www.mohitranka.com/" style="text-decoration:none;">Mohit Ranka</a></h1>
+
+<article>
+    <header>
+        <h1 class="article-title">How I review a distributed design in 45 minutes</h1>
+        <div class="article-meta">
+            <time datetime="2021-03-03T10:00:00+05:30">Wed 03 March 2021</time>
+        </div>
+    </header>
+
+    <div class="entry-content">
+        <p>Design reviews expand to fill calendars. They do not have to. With a disciplined pass, you can learn whether a distributed design is roughly safe in 45 minutes—and leave the rest for deeper follow-up.</p>
+<!--more-->
+
+<p>This is the checklist I use as an engineering leader reviewing platforms, data paths, and multi-service features. It is not a substitute for formal modeling. It is a filter for <strong>obvious danger and missing ownership</strong>.</p>
+<h2>Minute 0–5: What is the user promise?</h2>
+<p>Before boxes and arrows:</p>
+<ul>
+<li>Who is the user?  </li>
+<li>What do they believe will happen?  </li>
+<li>What is the freshness/consistency expectation in plain language?  </li>
+<li>What is explicitly out of scope?</li>
+</ul>
+<p>If the promise is fuzzy, the design is not ready for deep technical debate. Send it back.</p>
+<h2>Minute 5–15: Where does truth live?</h2>
+<p>I want one slide or paragraph on <strong>systems of record</strong>:</p>
+<ul>
+<li>Which store wins for each entity?  </li>
+<li>Are there dual writes? Why?  </li>
+<li>How do replicas and caches get invalidated?  </li>
+<li>What is the rebuild story if a derived store is wrong?</li>
+</ul>
+<p>Distributed systems usually fail at truth propagation, not at drawing the second hexagon.</p>
+<p>Red flags:</p>
+<ul>
+<li>"Both databases will stay in sync" without a mechanism  </li>
+<li>Caches as accidental systems of record  </li>
+<li>Events as hope rather than contract  </li>
+</ul>
+<h2>Minute 15–25: Failure and partiality</h2>
+<p>Ask, quickly:</p>
+<ul>
+<li>What happens if service B is down for 10 minutes?  </li>
+<li>What happens if the message bus duplicates?  </li>
+<li>What happens if a consumer lags by two hours?  </li>
+<li>What happens if a deploy rolls back mid-migration?  </li>
+<li>What is the blast radius of a bad config?</li>
+</ul>
+<p>I am not looking for perfect answers. I am looking for evidence the authors <strong>visited</strong> the failure space.</p>
+<p>Green flags: timeouts, idempotency keys, dead-letter plans, explicit degradation modes, feature flags with defaults that fail closed or open intentionally.</p>
+<h2>Minute 25–35: Operability</h2>
+<p>A design that cannot be run will be run poorly.</p>
+<ul>
+<li>Dashboards: the five signals you would open first  </li>
+<li>Alerts: what pages a human at 2am  </li>
+<li>Migrations: expand/contract steps  </li>
+<li>Multi-tenant risks: noisy neighbor, data isolation  </li>
+<li>Cost shape: what grows linearly (or worse) with success  </li>
+</ul>
+<p>If on-call would need to SSH and guess, the design is incomplete.</p>
+<h2>Minute 35–40: Security and tenancy edges</h2>
+<p>Short, pointed:</p>
+<ul>
+<li>Authn/z at each hop, not only at the edge  </li>
+<li>PII flows and retention  </li>
+<li>Admin/break-glass paths  </li>
+<li>Whether debug tooling can exfiltrate data  </li>
+</ul>
+<p>You are not finishing a security review in five minutes. You are checking that security is not an appendix no one read.</p>
+<h2>Minute 40–45: Decision and asks</h2>
+<p>End with a clear outcome:</p>
+<ul>
+<li><strong>Approve</strong> with conditions  </li>
+<li><strong>Approve to prototype</strong> only  </li>
+<li><strong>Revise</strong> specific sections  </li>
+<li><strong>Escalate</strong> a company-level tradeoff (multi-region active-active, new datastore class, etc.)</li>
+</ul>
+<p>Write the conditions. Verbal approvals evaporate.</p>
+<h2>The only diagram I insist on</h2>
+<p>If time is tight, I would trade three architecture diagrams for one <strong>sequence of a write + a read after failure</strong>. Sequence diagrams reveal lies that box diagrams hide.</p>
+<h2>Anti-patterns in reviews</h2>
+<ul>
+<li>Debating framework fashion before the data model  </li>
+<li>Endless bikeshedding of names  </li>
+<li>"We will monitor it" without naming metrics  </li>
+<li>Approving to avoid conflict  </li>
+<li>Requiring certainty appropriate for a research paper  </li>
+</ul>
+<p>Your job is risk-priced progress, not theatrical rigor.</p>
+<h2>Closing</h2>
+<p>Forty-five minutes is enough to test whether a distributed design has a clear promise, a coherent truth model, visited failure modes, and a runnable operating story. Everything else can be scheduled.</p>
+<p>Use the time to find the sharp edges early—while they are still lines on a page, not pages in an incident report.</p>
+    </div>
+</article>
+    </main>
+</body>
+
+</html>

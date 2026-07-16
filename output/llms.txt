@@ -17,12 +17,22 @@ Site: https://www.mohitranka.com
 ## Pages
 
 - [Home](https://www.mohitranka.com/): About Mohit Ranka — background, focus areas, and selected writing
-- [Writing](https://www.mohitranka.com/blog.html): Selected technical writing on systems and data
+- [Writing](https://www.mohitranka.com/blog.html): Technical writing on platforms, data, reliability, and leadership
 - [Contact](https://www.mohitranka.com/contact/): Email contact for architecture, reliability, or AI-system topics
 
 ## Writing
 
-- [RDBMS vs. NOSQL?](https://www.mohitranka.com/blog/rdbms-vs-nosql/): When relational databases fit highly available ecommerce platforms and when they do not (2013)
+- [Near-real-time is a product promise, not a Kafka cluster](https://www.mohitranka.com/blog/near-real-time-is-a-product-promise/): Freshness contracts vs streaming infrastructure
+- [The platform team’s real job is interfaces](https://www.mohitranka.com/blog/platform-teams-real-job-is-interfaces/): Platform leverage through stable boundaries
+- [When I still choose a relational database](https://www.mohitranka.com/blog/when-i-still-choose-a-relational-database/): Modern sequel on datastore judgment
+- [Freshness SLOs: the metric product teams actually feel](https://www.mohitranka.com/blog/freshness-slos-the-metric-product-teams-feel/): SLOs for age of truth in data platforms
+- [Saying no as a platform EM without becoming the villain](https://www.mohitranka.com/blog/saying-no-as-a-platform-em/): Prioritization and partner trust for platform leaders
+- [Identity systems fail socially before they fail cryptographically](https://www.mohitranka.com/blog/identity-systems-fail-socially/): Ownership, exceptions, and session semantics
+- [What “led the web launch” taught me about constraints](https://www.mohitranka.com/blog/web-launch-constraints/): Shipping a web surface under real constraints
+- [Cost regressions are production incidents](https://www.mohitranka.com/blog/cost-regressions-are-production-incidents/): Treating spend anomalies as operational events
+- [How I review a distributed design in 45 minutes](https://www.mohitranka.com/blog/how-i-review-a-distributed-design/): A practical architecture review checklist
+- [AI features that deserve a data contract](https://www.mohitranka.com/blog/ai-features-that-deserve-a-data-contract/): Contracts, evals, and ownership for AI products
+- [RDBMS vs. NOSQL?](https://www.mohitranka.com/blog/rdbms-vs-nosql/): Earlier essay on when relational databases still win (2013)
 
 ## Optional
 
