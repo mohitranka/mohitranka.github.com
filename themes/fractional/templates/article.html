@@ -47,6 +47,9 @@
 {% endblock %}
 
 {% block content %}
+        <p class="meta" style="margin-bottom: 0.5rem;">
+            <a href="{{ SITEURL }}/blog.html">← Writing</a>
+        </p>
         <h1><a href="{{ SITEURL }}/" style="text-decoration:none;">{{ SITENAME }}</a></h1>
 
 <article>
@@ -60,5 +63,9 @@
     <div class="entry-content">
         {{ article.content }}
     </div>
+
+    <p class="meta" style="margin-top: 3rem;">
+        <a href="{{ SITEURL }}/blog.html">← All writing</a>
+    </p>
 </article>
 {% endblock %}

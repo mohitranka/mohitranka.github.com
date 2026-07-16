@@ -2,21 +2,23 @@
 
 > Engineering leader. Builder of data platforms, developer tooling, and reliable distributed backends.
 
-Mohit Ranka is an engineering leader focused on data platforms, developer tooling, and reliable distributed backends.
+Mohit Ranka is an engineering leader focused on data platforms, developer tooling, and reliable distributed backends. He prefers clarity over cleverness, long-term impact over short wins, and systems that scale from one team to many.
 
 Experience highlights:
 - LinkedIn: consolidated diverse data sources into a near-real-time platform
 - Postman: led the web launch
 - Booking.com: built identity and SSO systems
 
+Location and background: India; B.Tech. from Vellore Institute of Technology.
+
 Primary contact: mohitranka@gmail.com
 Site: https://www.mohitranka.com
 
 ## Pages
 
-- [Home](https://www.mohitranka.com/)
-- [Writing](https://www.mohitranka.com/blog.html)
-- [Contact](https://www.mohitranka.com/contact/)
+- [Home](https://www.mohitranka.com/): About Mohit Ranka — background, focus areas, and selected writing
+- [Writing](https://www.mohitranka.com/blog.html): Technical writing on platforms, data, reliability, and leadership
+- [Contact](https://www.mohitranka.com/contact/): Email contact for architecture, reliability, or AI-system topics
 
 ## Writing
 
@@ -35,8 +37,8 @@ Site: https://www.mohitranka.com
 
 ## Optional
 
-- [GitHub](https://github.com/mohitranka)
-- [LinkedIn](https://www.linkedin.com/in/mohit-ranka)
-- [Sitemap](https://www.mohitranka.com/sitemap.xml)
-- [Atom feed](https://www.mohitranka.com/atom.xml)
-- [Full text for LLMs](https://www.mohitranka.com/llms-full.txt)
+- [GitHub](https://github.com/mohitranka): Code and open-source experiments
+- [LinkedIn](https://www.linkedin.com/in/mohit-ranka): Professional profile
+- [Sitemap](https://www.mohitranka.com/sitemap.xml): Machine-readable list of public pages
+- [Atom feed](https://www.mohitranka.com/atom.xml): Site feed
+- [Full text for LLMs](https://www.mohitranka.com/llms-full.txt): Complete page and post text for answer engines
