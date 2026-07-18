@@ -528,6 +528,54 @@ ul li {
   margin-top: 0;
 }
 
+/* — Company logos (homepage) — */
+.company-logos {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 22px;
+  list-style: none;
+  margin: 28px 0 8px;
+  padding: 0;
+}
+
+.company-logos li {
+  padding: 0;
+  margin: 0;
+  font-size: inherit;
+  line-height: 1;
+  color: inherit;
+}
+
+.company-logos a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--fg-secondary);
+  text-decoration: none;
+  font-size: 0.8125rem;
+  line-height: 1.2;
+  transition: color 0.2s ease;
+}
+
+.company-logos a:hover {
+  color: var(--fg);
+  text-decoration: none;
+}
+
+.company-logo-icon {
+  display: block;
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  opacity: 0.85;
+  transition: opacity 0.2s ease;
+}
+
+.company-logos a:hover .company-logo-icon {
+  opacity: 1;
+}
+
 /* — Footer-like section — */
 .site-footer {
   margin-top: 40px;
