@@ -528,48 +528,6 @@ ul li {
   margin-top: 0;
 }
 
-/* — Company strip (homepage) — */
-/* Quiet monochrome marks under the bio, after the work story is told
-   in prose (same pattern as many editorial personal sites). */
-.company-strip {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 10px 20px;
-  margin: 28px 0 8px;
-  padding: 0;
-  font-size: 0.8125rem;
-  line-height: 1.2;
-  color: var(--fg-secondary);
-}
-
-.company-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  color: var(--fg-secondary);
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
-
-.company-chip:hover {
-  color: var(--fg);
-  text-decoration: none;
-}
-
-.company-logo-icon {
-  display: block;
-  flex-shrink: 0;
-  width: 16px;
-  height: 16px;
-  opacity: 0.8;
-  transition: opacity 0.2s ease;
-}
-
-.company-chip:hover .company-logo-icon {
-  opacity: 1;
-}
-
 /* — Footer-like section — */
 .site-footer {
   margin-top: 40px;
