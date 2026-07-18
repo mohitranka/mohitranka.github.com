@@ -528,52 +528,57 @@ ul li {
   margin-top: 0;
 }
 
-/* — Company logos (homepage) — */
-.company-logos {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 10px 22px;
+/* — Experience (homepage) — */
+.experience-list {
   list-style: none;
-  margin: 28px 0 8px;
+  margin: 4px 0 8px;
   padding: 0;
 }
 
-.company-logos li {
-  padding: 0;
-  margin: 0;
+.experience-item {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
   font-size: inherit;
-  line-height: 1;
+  line-height: inherit;
   color: inherit;
 }
 
-.company-logos a {
+.experience-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.experience-company {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  color: var(--fg-secondary);
-  text-decoration: none;
-  font-size: 0.8125rem;
-  line-height: 1.2;
-  transition: color 0.2s ease;
-}
-
-.company-logos a:hover {
   color: var(--fg);
   text-decoration: none;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.experience-company:hover {
+  color: var(--fg);
+  text-decoration: underline;
+  text-decoration-color: var(--link-decoration-hover);
+  text-underline-offset: 2.5px;
 }
 
 .company-logo-icon {
   display: block;
   flex-shrink: 0;
-  width: 20px;
-  height: 20px;
-  opacity: 0.85;
-  transition: opacity 0.2s ease;
+  width: 18px;
+  height: 18px;
+  opacity: 0.9;
 }
 
-.company-logos a:hover .company-logo-icon {
-  opacity: 1;
+.experience-item p {
+  margin: 6px 0 0;
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: var(--fg-secondary);
 }
 
 /* — Footer-like section — */
