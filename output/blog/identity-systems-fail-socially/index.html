@@ -90,7 +90,7 @@
     </header>
 
     <div class="entry-content">
-        <p>When people talk about identity and SSO, they reach for algorithms: token lifetimes, key rotation, SAML vs OIDC, session fixation. Those details matter. In systems I have built and operated, the outages and near-misses that hurt most started earlier—as <strong>social and product failures</strong> wearing security clothing.</p>
+        <p>When people talk about identity and SSO, they reach for algorithms: token lifetimes, key rotation, SAML vs OIDC, session fixation. Those details matter. In systems I have built and operated, the outages and near-misses that hurt most started earlier — as <strong>social and product failures</strong> wearing security clothing.</p>
 <figure class="post-figure">
   <img src="../../images/blog/identity-systems-fail-socially.jpg" alt="Illustration of keys, badges, and people connected in a trust network" loading="lazy" width="1200" height="675">
   <figcaption>
@@ -101,7 +101,7 @@
 <!--more-->
 
 <h2>Identity is a dependency graph of humans</h2>
-<p>An identity platform is not only a service. It is: That detail matters in practice because the surrounding system, incentives, and failure modes usually determine whether the idea survives contact with production and with other teams. I treat this as an operating constraint rather than a slogan: if you cannot explain how it shows up in ownership, metrics, and day-to-day decisions, it will not survive the next roadmap fight.</p>
+<p>An identity platform is not only a service. It is:</p>
 <ul>
 <li>Who is allowed to grant access  </li>
 <li>How contractors, partners, and acquisitions show up  </li>
@@ -109,16 +109,16 @@
 <li>Which team gets paged when login breaks on a Sunday  </li>
 <li>How quickly a leaver loses access in reality, not in policy PDFs</li>
 </ul>
-<p>Crypto bugs are rare relative to <strong>misowned workflows</strong>. The system can be textbook-correct and still fail the organization. That detail matters in practice because the surrounding system, incentives, and failure modes usually determine whether the idea survives contact with production and with other teams.</p>
+<p>Crypto bugs are rare relative to <strong>misowned workflows</strong>. The system can be textbook-correct and still fail the organization.</p>
 <h2>Failure mode 1: Ambiguous system of record for "who is this person?"</h2>
-<p>Enterprises collect identities the way rivers collect silt: HRIS, directories, partner IdPs, legacy user tables, support tools that mint exceptions. If you cannot answer "what is the canonical identifier, and who can change it?" you will eventually: That detail matters in practice because the surrounding system, incentives, and failure modes usually determine whether the idea survives contact with production and with other teams.</p>
+<p>Enterprises collect identities the way rivers collect silt: HRIS, directories, partner IdPs, legacy user tables, support tools that mint exceptions. If you cannot answer "what is the canonical identifier, and who can change it?" you will eventually:</p>
 <ul>
 <li>Duplicate humans  </li>
 <li>Orphan entitlements  </li>
 <li>Merge the wrong accounts  </li>
 <li>Build reconciliation jobs that become the real product</li>
 </ul>
-<p>SSO does not fix identity entropy. It multiplies whatever model you already have. <strong>Design move:</strong> pick a primary subject key strategy, document merge/split procedures, and make account recovery a first-class flow—not a Zendesk folklore. That detail matters in practice because the surrounding system, incentives, and failure modes usually determine whether the idea survives contact with production and with other teams.</p>
+<p>SSO does not fix identity entropy. It multiplies whatever model you already have. <strong>Design move:</strong> pick a primary subject key strategy, document merge/split procedures, and make account recovery a first-class flow — not a Zendesk folklore.</p>
 <h2>Failure mode 2: Special cases without expiry</h2>
 <p>Sales needs a demo tenant. Support needs impersonation. A partner needs a long-lived integration user. Security accepts a temporary bypass. Temporary becomes permanent. Permanent becomes unmonitored. Unmonitored becomes the breach path. <strong>Design move:</strong> every exception has an owner, an expiry, metrics, and a removal plan. Impersonation and break-glass are products with audit trails, not Slack approvals.</p>
 <h2>Failure mode 3: Logout and session mental models differ by app</h2>
@@ -128,7 +128,7 @@
 <h2>Failure mode 5: Ownership is "security and also platform and also the app"</h2>
 <p>When login fails, three teams page each other. When it works, nobody funds hardening. Diffused ownership produces brittle reliability. <strong>Design move:</strong> a single operational owner for the login path, with written dependencies on IdP, DNS, email, device services, and app session layers. Security sets policy; platform runs the path; apps integrate against a stable interface. Blurry RACI is an availability risk.</p>
 <h2>What good looks like</h2>
-<p>Strong identity programs I have seen share traits: That detail matters in practice because the surrounding system, incentives, and failure modes usually determine whether the idea survives contact with production and with other teams. I treat this as an operating constraint rather than a slogan: if you cannot explain how it shows up in ownership, metrics, and day-to-day decisions, it will not survive the next roadmap fight.</p>
+<p>Strong identity programs I have seen share a few traits:</p>
 <ol>
 <li><strong>Boring standards on the outside</strong> (OIDC/SAML done plainly)  </li>
 <li><strong>Strict internal models</strong> for subjects, credentials, devices, and grants  </li>
@@ -137,7 +137,7 @@
 <li><strong>Customer-visible status</strong> when auth is degraded  </li>
 <li><strong>Load and failure testing of login</strong>, not only of core APIs</li>
 </ol>
-<p>Notice how little of that is "pick the trendy token format." That detail matters in practice because the surrounding system, incentives, and failure modes usually determine whether the idea survives contact with production and with other teams. I treat this as an operating constraint rather than a slogan: if you cannot explain how it shows up in ownership, metrics, and day-to-day decisions, it will not survive the next roadmap fight.</p>
+<p>Notice how little of that is "pick the trendy token format."</p>
 <h2>Questions before you add another identity feature</h2>
 <ul>
 <li>Who is the human-level source of truth?  </li>
@@ -147,9 +147,9 @@
 <li>Which team’s error budget does login reliability consume?  </li>
 <li>Can we re-run last quarter’s incidents as game days?</li>
 </ul>
-<p>If those answers are soft, new federation features will add surface area, not safety. That detail matters in practice because the surrounding system, incentives, and failure modes usually determine whether the idea survives contact with production and with other teams. I treat this as an operating constraint rather than a slogan: if you cannot explain how it shows up in ownership, metrics, and day-to-day decisions, it will not survive the next roadmap fight.</p>
+<p>If those answers are soft, new federation features will add surface area, not safety.</p>
 <h2>Closing</h2>
-<p>Identity systems do fail cryptographically—and you should hire people who care about that deeply. But if you only harden tokens while leaving ownership, exceptions, session semantics, and rollout discipline vague, you will still fail. They fail socially first: unclear truth, unowned edges, temporary forever, and teams that cannot coordinate under stress. Build the social protocol as carefully as the crypto protocol. Users feel both. Attackers only need one to be weak.</p>
+<p>Identity systems do fail cryptographically — and you should hire people who care about that deeply. But if you only harden tokens while leaving ownership, exceptions, session semantics, and rollout discipline vague, you will still fail. They fail socially first: unclear truth, unowned edges, temporary forever, and teams that cannot coordinate under stress. Build the social protocol as carefully as the crypto protocol. Users feel both. Attackers only need one to be weak.</p>
     </div>
 
     <footer class="article-footer">

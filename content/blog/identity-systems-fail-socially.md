@@ -4,7 +4,7 @@ Category: Blog
 Slug: identity-systems-fail-socially
 Tags: identity, security, distributed-systems
 
-When people talk about identity and SSO, they reach for algorithms: token lifetimes, key rotation, SAML vs OIDC, session fixation. Those details matter. In systems I have built and operated, the outages and near-misses that hurt most started earlier—as **social and product failures** wearing security clothing.
+When people talk about identity and SSO, they reach for algorithms: token lifetimes, key rotation, SAML vs OIDC, session fixation. Those details matter. In systems I have built and operated, the outages and near-misses that hurt most started earlier — as **social and product failures** wearing security clothing.
 
 <figure class="post-figure">
   <img src="{static}/images/blog/identity-systems-fail-socially.jpg" alt="Illustration of keys, badges, and people connected in a trust network" loading="lazy" width="1200" height="675">
@@ -17,7 +17,7 @@ When people talk about identity and SSO, they reach for algorithms: token lifeti
 
 ## Identity is a dependency graph of humans
 
-An identity platform is not only a service. It is: That detail matters in practice because the surrounding system, incentives, and failure modes usually determine whether the idea survives contact with production and with other teams. I treat this as an operating constraint rather than a slogan: if you cannot explain how it shows up in ownership, metrics, and day-to-day decisions, it will not survive the next roadmap fight.
+An identity platform is not only a service. It is:
 
 - Who is allowed to grant access  
 - How contractors, partners, and acquisitions show up  
@@ -25,18 +25,18 @@ An identity platform is not only a service. It is: That detail matters in practi
 - Which team gets paged when login breaks on a Sunday  
 - How quickly a leaver loses access in reality, not in policy PDFs
 
-Crypto bugs are rare relative to **misowned workflows**. The system can be textbook-correct and still fail the organization. That detail matters in practice because the surrounding system, incentives, and failure modes usually determine whether the idea survives contact with production and with other teams.
+Crypto bugs are rare relative to **misowned workflows**. The system can be textbook-correct and still fail the organization.
 
 ## Failure mode 1: Ambiguous system of record for "who is this person?"
 
-Enterprises collect identities the way rivers collect silt: HRIS, directories, partner IdPs, legacy user tables, support tools that mint exceptions. If you cannot answer "what is the canonical identifier, and who can change it?" you will eventually: That detail matters in practice because the surrounding system, incentives, and failure modes usually determine whether the idea survives contact with production and with other teams.
+Enterprises collect identities the way rivers collect silt: HRIS, directories, partner IdPs, legacy user tables, support tools that mint exceptions. If you cannot answer "what is the canonical identifier, and who can change it?" you will eventually:
 
 - Duplicate humans  
 - Orphan entitlements  
 - Merge the wrong accounts  
 - Build reconciliation jobs that become the real product
 
-SSO does not fix identity entropy. It multiplies whatever model you already have. **Design move:** pick a primary subject key strategy, document merge/split procedures, and make account recovery a first-class flow—not a Zendesk folklore. That detail matters in practice because the surrounding system, incentives, and failure modes usually determine whether the idea survives contact with production and with other teams.
+SSO does not fix identity entropy. It multiplies whatever model you already have. **Design move:** pick a primary subject key strategy, document merge/split procedures, and make account recovery a first-class flow — not a Zendesk folklore.
 
 ## Failure mode 2: Special cases without expiry
 
@@ -56,7 +56,7 @@ When login fails, three teams page each other. When it works, nobody funds harde
 
 ## What good looks like
 
-Strong identity programs I have seen share traits: That detail matters in practice because the surrounding system, incentives, and failure modes usually determine whether the idea survives contact with production and with other teams. I treat this as an operating constraint rather than a slogan: if you cannot explain how it shows up in ownership, metrics, and day-to-day decisions, it will not survive the next roadmap fight.
+Strong identity programs I have seen share a few traits:
 
 1. **Boring standards on the outside** (OIDC/SAML done plainly)  
 2. **Strict internal models** for subjects, credentials, devices, and grants  
@@ -65,7 +65,7 @@ Strong identity programs I have seen share traits: That detail matters in practi
 5. **Customer-visible status** when auth is degraded  
 6. **Load and failure testing of login**, not only of core APIs
 
-Notice how little of that is "pick the trendy token format." That detail matters in practice because the surrounding system, incentives, and failure modes usually determine whether the idea survives contact with production and with other teams. I treat this as an operating constraint rather than a slogan: if you cannot explain how it shows up in ownership, metrics, and day-to-day decisions, it will not survive the next roadmap fight.
+Notice how little of that is "pick the trendy token format."
 
 ## Questions before you add another identity feature
 
@@ -76,8 +76,8 @@ Notice how little of that is "pick the trendy token format." That detail matters
 - Which team’s error budget does login reliability consume?  
 - Can we re-run last quarter’s incidents as game days?
 
-If those answers are soft, new federation features will add surface area, not safety. That detail matters in practice because the surrounding system, incentives, and failure modes usually determine whether the idea survives contact with production and with other teams. I treat this as an operating constraint rather than a slogan: if you cannot explain how it shows up in ownership, metrics, and day-to-day decisions, it will not survive the next roadmap fight.
+If those answers are soft, new federation features will add surface area, not safety.
 
 ## Closing
 
-Identity systems do fail cryptographically—and you should hire people who care about that deeply. But if you only harden tokens while leaving ownership, exceptions, session semantics, and rollout discipline vague, you will still fail. They fail socially first: unclear truth, unowned edges, temporary forever, and teams that cannot coordinate under stress. Build the social protocol as carefully as the crypto protocol. Users feel both. Attackers only need one to be weak.
+Identity systems do fail cryptographically — and you should hire people who care about that deeply. But if you only harden tokens while leaving ownership, exceptions, session semantics, and rollout discipline vague, you will still fail. They fail socially first: unclear truth, unowned edges, temporary forever, and teams that cannot coordinate under stress. Build the social protocol as carefully as the crypto protocol. Users feel both. Attackers only need one to be weak.
