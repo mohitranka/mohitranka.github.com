@@ -1,0 +1,237 @@
+{
+  "timestamp": "2026-07-21T22:18:10.112Z",
+  "tool": "axe-core",
+  "version": "4.12.1",
+  "standard": "WCAG 2.1 AA",
+  "axeOptions": {
+    "runOnly": {
+      "type": "tag",
+      "values": [
+        "wcag2a",
+        "wcag2aa",
+        "wcag21a",
+        "wcag21aa"
+      ]
+    }
+  },
+  "routes": {
+    "home": {
+      "url": "/",
+      "light": {
+        "violations": [],
+        "passes": 16,
+        "incomplete": 0,
+        "inapplicable": 46
+      },
+      "dark": {
+        "violations": [],
+        "passes": 16,
+        "incomplete": 0,
+        "inapplicable": 46
+      }
+    },
+    "blog-list": {
+      "url": "/blog.html",
+      "light": {
+        "violations": [],
+        "passes": 16,
+        "incomplete": 0,
+        "inapplicable": 46
+      },
+      "dark": {
+        "violations": [],
+        "passes": 16,
+        "incomplete": 0,
+        "inapplicable": 46
+      }
+    },
+    "blog-article": {
+      "url": "/blog/freshness-slos-the-metric-product-teams-feel/",
+      "light": {
+        "violations": [],
+        "passes": 17,
+        "incomplete": 0,
+        "inapplicable": 45
+      },
+      "dark": {
+        "violations": [],
+        "passes": 17,
+        "incomplete": 0,
+        "inapplicable": 45
+      }
+    },
+    "tags": {
+      "url": "/tags.html",
+      "light": {
+        "violations": [],
+        "passes": 16,
+        "incomplete": 0,
+        "inapplicable": 46
+      },
+      "dark": {
+        "violations": [],
+        "passes": 16,
+        "incomplete": 0,
+        "inapplicable": 46
+      }
+    },
+    "work": {
+      "url": "/work/",
+      "light": {
+        "violations": [],
+        "passes": 13,
+        "incomplete": 0,
+        "inapplicable": 49
+      },
+      "dark": {
+        "violations": [],
+        "passes": 13,
+        "incomplete": 0,
+        "inapplicable": 49
+      }
+    },
+    "contact": {
+      "url": "/contact/",
+      "light": {
+        "violations": [],
+        "passes": 13,
+        "incomplete": 0,
+        "inapplicable": 49
+      },
+      "dark": {
+        "violations": [],
+        "passes": 13,
+        "incomplete": 0,
+        "inapplicable": 49
+      }
+    }
+  },
+  "summary": {
+    "totalRoutes": 6,
+    "totalAxeRuns": 12,
+    "totalViolations": 0,
+    "horizontalScrollIssues": [],
+    "focusVisibleIssues": [],
+    "screenshotCount": 36,
+    "allScreenshots": [
+      "redesign-home-360-light.png",
+      "redesign-home-360-dark.png",
+      "redesign-home-640-light.png",
+      "redesign-home-640-dark.png",
+      "redesign-home-1024-light.png",
+      "redesign-home-1024-dark.png",
+      "redesign-blog-list-360-light.png",
+      "redesign-blog-list-360-dark.png",
+      "redesign-blog-list-640-light.png",
+      "redesign-blog-list-640-dark.png",
+      "redesign-blog-list-1024-light.png",
+      "redesign-blog-list-1024-dark.png",
+      "redesign-blog-article-360-light.png",
+      "redesign-blog-article-360-dark.png",
+      "redesign-blog-article-640-light.png",
+      "redesign-blog-article-640-dark.png",
+      "redesign-blog-article-1024-light.png",
+      "redesign-blog-article-1024-dark.png",
+      "redesign-tags-360-light.png",
+      "redesign-tags-360-dark.png",
+      "redesign-tags-640-light.png",
+      "redesign-tags-640-dark.png",
+      "redesign-tags-1024-light.png",
+      "redesign-tags-1024-dark.png",
+      "redesign-work-360-light.png",
+      "redesign-work-360-dark.png",
+      "redesign-work-640-light.png",
+      "redesign-work-640-dark.png",
+      "redesign-work-1024-light.png",
+      "redesign-work-1024-dark.png",
+      "redesign-contact-360-light.png",
+      "redesign-contact-360-dark.png",
+      "redesign-contact-640-light.png",
+      "redesign-contact-640-dark.png",
+      "redesign-contact-1024-light.png",
+      "redesign-contact-1024-dark.png"
+    ]
+  },
+  "horizontalScrollDetails": {
+    "home": {
+      "documentScrollWidth": 360,
+      "documentClientWidth": 360,
+      "bodyScrollWidth": 360,
+      "bodyClientWidth": 360,
+      "hasHorizontalScroll": false,
+      "overflowPx": 0
+    },
+    "blog-list": {
+      "documentScrollWidth": 360,
+      "documentClientWidth": 360,
+      "bodyScrollWidth": 360,
+      "bodyClientWidth": 360,
+      "hasHorizontalScroll": false,
+      "overflowPx": 0
+    },
+    "blog-article": {
+      "documentScrollWidth": 360,
+      "documentClientWidth": 360,
+      "bodyScrollWidth": 360,
+      "bodyClientWidth": 360,
+      "hasHorizontalScroll": false,
+      "overflowPx": 0
+    },
+    "tags": {
+      "documentScrollWidth": 360,
+      "documentClientWidth": 360,
+      "bodyScrollWidth": 360,
+      "bodyClientWidth": 360,
+      "hasHorizontalScroll": false,
+      "overflowPx": 0
+    },
+    "work": {
+      "documentScrollWidth": 360,
+      "documentClientWidth": 360,
+      "bodyScrollWidth": 360,
+      "bodyClientWidth": 360,
+      "hasHorizontalScroll": false,
+      "overflowPx": 0
+    },
+    "contact": {
+      "documentScrollWidth": 360,
+      "documentClientWidth": 360,
+      "bodyScrollWidth": 360,
+      "bodyClientWidth": 360,
+      "hasHorizontalScroll": false,
+      "overflowPx": 0
+    }
+  },
+  "focusVisibleDetails": {
+    "home": {
+      "totalFocusable": 21,
+      "issueCount": 0,
+      "issues": []
+    },
+    "blog-list": {
+      "totalFocusable": 66,
+      "issueCount": 0,
+      "issues": []
+    },
+    "blog-article": {
+      "totalFocusable": 12,
+      "issueCount": 0,
+      "issues": []
+    },
+    "tags": {
+      "totalFocusable": 18,
+      "issueCount": 0,
+      "issues": []
+    },
+    "work": {
+      "totalFocusable": 7,
+      "issueCount": 0,
+      "issues": []
+    },
+    "contact": {
+      "totalFocusable": 5,
+      "issueCount": 0,
+      "issues": []
+    }
+  }
+}
