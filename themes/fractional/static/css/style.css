@@ -606,6 +606,18 @@ ul li {
   margin-top: var(--space-3);
 }
 
+.work-card h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: var(--space-1);
+}
+
+.work-outcome {
+  color: var(--fg-secondary);
+  font-size: 0.875rem;
+  margin-top: var(--space-1);
+}
+
 /* — Divider — */
 hr {
   border: none;
