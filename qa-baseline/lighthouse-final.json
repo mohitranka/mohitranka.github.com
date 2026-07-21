@@ -1,0 +1,26 @@
+{
+  "home": {
+    "performance": 1,
+    "accessibility": 1,
+    "bestPractices": 0.96,
+    "seo": 0.92
+  },
+  "blog-list": {
+    "performance": 0.96,
+    "accessibility": 1,
+    "bestPractices": 0.96,
+    "seo": 0.92
+  },
+  "work": {
+    "performance": 0.96,
+    "accessibility": 1,
+    "bestPractices": 0.96,
+    "seo": 0.92
+  },
+  "blog-article": {
+    "performance": 1,
+    "accessibility": 1,
+    "bestPractices": 0.96,
+    "seo": 0.92
+  }
+}
