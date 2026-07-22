@@ -11,7 +11,7 @@ Experience highlights:
 
 Location and background: India; B.Tech. from Vellore Institute of Technology.
 
-Primary contact: mohitranka@gmail.com
+Primary contact: https://www.mohitranka.com/contact/ (web form)
 Site: https://www.mohitranka.com
 
 ## Pages
@@ -19,7 +19,7 @@ Site: https://www.mohitranka.com
 - [Home](https://www.mohitranka.com/): About Mohit Ranka — background, focus areas, and selected writing
 - [Writing](https://www.mohitranka.com/blog.html): Technical writing on platforms, data, reliability, and leadership
 - [Work](https://www.mohitranka.com/work/): Roles and outcomes at LinkedIn, Postman, and Booking.com
-- [Contact](https://www.mohitranka.com/contact/): Email contact for platform, data, reliability, or engineering leadership topics
+- [Contact](https://www.mohitranka.com/contact/): Contact form for platform, data, reliability, or engineering leadership topics
 
 ## Writing
 

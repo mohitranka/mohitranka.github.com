@@ -23,7 +23,7 @@ Built and operated identity and SSO under production traffic, where failures sho
 ### Contact
 URL: https://www.mohitranka.com/contact/
 
-Tell me about platform, data, reliability, or engineering leadership challenges — the kind of work that shows up in my writing. Open to architecture reviews, advisory conversations, speaking, and thoughtful hiring threads. Email: mohitranka@gmail.com. LinkedIn: https://www.linkedin.com/in/mohit-ranka
+Tell me about platform, data, reliability, or engineering leadership challenges — the kind of work that shows up in my writing. Open to architecture reviews, advisory conversations, speaking, and thoughtful hiring threads. Use the contact form at https://www.mohitranka.com/contact/. LinkedIn: https://www.linkedin.com/in/mohit-ranka
 
 ## Writing archive
 

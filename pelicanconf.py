@@ -43,12 +43,14 @@ STATIC_PATHS = [
     'extra/robots.txt',
     'extra/llms.txt',
     'extra/llms-full.txt',
+    'extra/contact-config.js',
 ]
 EXTRA_PATH_METADATA = {
     'extra/CNAME': {'path': 'CNAME'},
     'extra/robots.txt': {'path': 'robots.txt'},
     'extra/llms.txt': {'path': 'llms.txt'},
     'extra/llms-full.txt': {'path': 'llms-full.txt'},
+    'extra/contact-config.js': {'path': 'contact-config.js'},
 }
 
 # Google Analytics 4 (fine for local + production; filter localhost in GA if desired)

@@ -29,7 +29,7 @@ sync: build
 	rsync -a $(OUTPUT)/images/ images/
 	@if [ -d $(OUTPUT)/tag ]; then rsync -a --delete $(OUTPUT)/tag/ tag/; fi
 	@for f in index.html blog.html authors.html categories.html tags.html \
-		robots.txt CNAME llms.txt llms-full.txt; do \
+		robots.txt CNAME llms.txt llms-full.txt contact-config.js; do \
 		if [ -f $(OUTPUT)/$$f ]; then cp $(OUTPUT)/$$f .; fi; \
 	done
 	@# Keep root OG asset even if output/images only has blog art

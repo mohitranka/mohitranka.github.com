@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Contact — Mohit Ranka</title>
-    <meta name="description" content="Tell me about platform, data, reliability, or engineering leadership challenges. Email mohitranka@gmail.com.">
+    <meta name="description" content="Tell me about platform, data, reliability, or engineering leadership challenges. Use the form on this page.">
     <meta name="author" content="Mohit Ranka">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://www.mohitranka.com/contact/">
@@ -15,13 +15,13 @@
     <meta property="og:locale" content="en_US">
     <meta property="og:url" content="https://www.mohitranka.com/contact/">
     <meta property="og:title" content="Contact — Mohit Ranka">
-    <meta property="og:description" content="Tell me about platform, data, reliability, or engineering leadership challenges. Email mohitranka@gmail.com.">
+    <meta property="og:description" content="Tell me about platform, data, reliability, or engineering leadership challenges. Use the form on this page.">
     <meta property="og:image" content="https://www.mohitranka.com/theme/images/og.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Contact — Mohit Ranka">
-    <meta name="twitter:description" content="Tell me about platform, data, reliability, or engineering leadership challenges. Email mohitranka@gmail.com.">
+    <meta name="twitter:description" content="Tell me about platform, data, reliability, or engineering leadership challenges. Use the form on this page.">
     <meta name="twitter:image" content="https://www.mohitranka.com/theme/images/og.png">
     <link rel="preload" href="../theme/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="../theme/css/style.css">
@@ -32,9 +32,11 @@
       gtag('js', new Date());
       gtag('config', 'G-CWEDLBH79X');
     </script>
+<script src="../contact-config.js" defer></script>
+<script src="../theme/js/contact-form.js" defer></script>
 </head>
 
-<body class="page-static">
+<body class="page-static page-contact">
     <main>
         <header class="site-header">
             <a class="site-logo" href="../">Mohit Ranka</a>
@@ -50,8 +52,57 @@
     <div class="entry-content page-content">
         <p>Tell me about <strong>platform, data, reliability, or engineering leadership</strong> challenges — the kind of work that shows up in my writing.</p>
 <p>I am open to architecture reviews, advisory conversations, speaking, and thoughtful hiring threads. If you are not sure it fits, a short note is enough; I will say so.</p>
-<p><a href="mailto:mohitranka@gmail.com">Email me at mohitranka@gmail.com</a></p>
 <p>You can also <a href="https://www.linkedin.com/in/mohit-ranka">connect on LinkedIn</a>.</p>
+    </div>
+
+    <div class="contact-form-card">
+        <h2 class="contact-form-heading">Send a message</h2>
+        <p class="form-lead">Tell me what you are working on. I will get back to you as soon as I can.</p>
+
+        <form id="contact-form" novalidate>
+            <!-- Honeypot (hidden from humans) -->
+            <input
+                type="checkbox"
+                name="botcheck"
+                class="sr-only"
+                tabindex="-1"
+                autocomplete="off"
+                aria-hidden="true"
+            >
+
+            <div class="form-grid two">
+                <div class="form-field">
+                    <label for="name">Name <span class="req" aria-hidden="true">*</span></label>
+                    <input id="name" name="name" type="text" autocomplete="name" required placeholder="Ada Lovelace">
+                </div>
+                <div class="form-field">
+                    <label for="email">Email <span class="req" aria-hidden="true">*</span></label>
+                    <input id="email" name="email" type="email" autocomplete="email" required placeholder="ada@example.com">
+                </div>
+            </div>
+
+            <div class="form-grid" style="margin-top: 1rem">
+                <div class="form-field">
+                    <label for="company">Company</label>
+                    <input id="company" name="company" type="text" autocomplete="organization" placeholder="Optional">
+                </div>
+                <div class="form-field">
+                    <label for="message">Message <span class="req" aria-hidden="true">*</span></label>
+                    <textarea id="message" name="message" required placeholder="What are you building? How can I help?"></textarea>
+                </div>
+                <div class="form-actions">
+                    <button class="btn-submit" type="submit">Send message</button>
+                </div>
+            </div>
+
+            <div class="form-status success" data-form-success role="status">
+                Thank you! Your message has been sent. I will get back to you soon.
+            </div>
+            <div class="form-status error" data-form-error role="alert">
+                Sorry, something went wrong. Please try again in a moment, or
+                <a href="https://www.linkedin.com/in/mohit-ranka" target="_blank" rel="noopener noreferrer">connect on LinkedIn</a>.
+            </div>
+        </form>
     </div>
 </article>
     </main>
