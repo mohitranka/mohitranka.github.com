@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Write meta-refresh stubs for old .html URLs after clean-path migration."""
+"""Write meta-refresh stubs for old URLs after path migrations."""
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -41,13 +41,14 @@ def main() -> None:
         # Old Pelican pagination filenames (pre clean-path migration)
         "author/mohit-ranka2.html": "/author/mohit-ranka/",
         "category/blog2.html": "/category/blog/",
+        # Singular /tag/ index → plural tags index
+        "tag/index.html": "/tags/",
     }
     for rel, target in fixed.items():
         write_redirect(ROOT / rel, target)
 
-    # Per-tag / per-category / per-author pages previously ended in .html
+    # Per-category / per-author: old .html leaf → directory index
     for directory, url_prefix in (
-        ("tag", "/tag"),
         ("category", "/category"),
         ("author", "/author"),
     ):
@@ -58,7 +59,18 @@ def main() -> None:
             if child.is_dir() and (child / "index.html").is_file():
                 write_redirect(base / f"{child.name}.html", f"{url_prefix}/{child.name}/")
 
-    print("legacy .html redirects written")
+    # Tags consolidated under /tags/<slug>/ — redirect old /tag/… paths
+    tags_dir = ROOT / "tags"
+    if tags_dir.is_dir():
+        for child in tags_dir.iterdir():
+            if child.is_dir() and (child / "index.html").is_file():
+                slug = child.name
+                write_redirect(ROOT / "tag" / f"{slug}.html", f"/tags/{slug}/")
+                write_redirect(ROOT / "tag" / slug / "index.html", f"/tags/{slug}/")
+                # Brief period when clean path was /tag/<slug>/
+                write_redirect(ROOT / "tags" / f"{slug}.html", f"/tags/{slug}/")
+
+    print("legacy redirects written")
 
 
 if __name__ == "__main__":

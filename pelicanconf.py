@@ -38,10 +38,11 @@ ARCHIVES_SAVE_AS = 'blog/index.html'
 YEAR_ARCHIVE_SAVE_AS = 'blog/{date:%Y}/index.html'
 MONTH_ARCHIVE_SAVE_AS = 'blog/{date:%Y}/{date:%m}/index.html'
 
+# All tags under /tags/ — index at /tags/, posts at /tags/<slug>/
 TAGS_URL = 'tags/'
 TAGS_SAVE_AS = 'tags/index.html'
-TAG_URL = 'tag/{slug}/'
-TAG_SAVE_AS = 'tag/{slug}/index.html'
+TAG_URL = 'tags/{slug}/'
+TAG_SAVE_AS = 'tags/{slug}/index.html'
 
 CATEGORIES_URL = 'categories/'
 CATEGORIES_SAVE_AS = 'categories/index.html'

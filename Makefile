@@ -27,7 +27,8 @@ sync: build
 	rsync -a $(OUTPUT)/feeds/ feeds/
 	rsync -a $(OUTPUT)/theme/ theme/
 	rsync -a $(OUTPUT)/images/ images/
-	@if [ -d $(OUTPUT)/tag ]; then rsync -a --delete $(OUTPUT)/tag/ tag/; fi
+	@# Tags: only /tags/ is canonical; drop generated /tag/ if present, then sync
+	@rm -rf tag
 	@if [ -d $(OUTPUT)/tags ]; then rsync -a --delete $(OUTPUT)/tags/ tags/; fi
 	@if [ -d $(OUTPUT)/authors ]; then rsync -a --delete $(OUTPUT)/authors/ authors/; fi
 	@if [ -d $(OUTPUT)/categories ]; then rsync -a --delete $(OUTPUT)/categories/ categories/; fi
