@@ -20,16 +20,18 @@ build:
 # Copy the single build into the GitHub Pages root layout used by this repo.
 sync: build
 	rsync -a --delete $(OUTPUT)/blog/ blog/
-	rsync -a $(OUTPUT)/author/ author/
-	rsync -a $(OUTPUT)/category/ category/
+	rsync -a --delete $(OUTPUT)/author/ author/
+	rsync -a --delete $(OUTPUT)/category/ category/
 	rsync -a $(OUTPUT)/contact/ contact/
 	rsync -a $(OUTPUT)/work/ work/  # Pelican-generated page from content/pages/work.md via page.html; mirrors /contact/ pattern
 	rsync -a $(OUTPUT)/feeds/ feeds/
 	rsync -a $(OUTPUT)/theme/ theme/
 	rsync -a $(OUTPUT)/images/ images/
 	@if [ -d $(OUTPUT)/tag ]; then rsync -a --delete $(OUTPUT)/tag/ tag/; fi
-	@for f in index.html blog.html authors.html categories.html tags.html \
-		robots.txt CNAME llms.txt llms-full.txt contact-config.js; do \
+	@if [ -d $(OUTPUT)/tags ]; then rsync -a --delete $(OUTPUT)/tags/ tags/; fi
+	@if [ -d $(OUTPUT)/authors ]; then rsync -a --delete $(OUTPUT)/authors/ authors/; fi
+	@if [ -d $(OUTPUT)/categories ]; then rsync -a --delete $(OUTPUT)/categories/ categories/; fi
+	@for f in index.html robots.txt CNAME llms.txt llms-full.txt contact-config.js; do \
 		if [ -f $(OUTPUT)/$$f ]; then cp $(OUTPUT)/$$f .; fi; \
 	done
 	@# Keep root OG asset even if output/images only has blog art
@@ -44,6 +46,7 @@ sync: build
 t=t.replace('href=\"https://www.mohitranka.com/feeds/all.atom.xml\" rel=\"self\"',\
 'href=\"https://www.mohitranka.com/atom.xml\" rel=\"self\"'); p.write_text(t)"
 	@$(PYTHON) scripts/update_sitemap.py
+	@$(PYTHON) scripts/write_legacy_redirects.py
 
 site: sync
 

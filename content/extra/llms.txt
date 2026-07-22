@@ -17,7 +17,7 @@ Site: https://www.mohitranka.com
 ## Pages
 
 - [Home](https://www.mohitranka.com/): About Mohit Ranka — background, focus areas, and selected writing
-- [Writing](https://www.mohitranka.com/blog.html): Technical writing on platforms, data, reliability, and leadership
+- [Writing](https://www.mohitranka.com/blog/): Technical writing on platforms, data, reliability, and leadership
 - [Work](https://www.mohitranka.com/work/): Roles and outcomes at LinkedIn, Postman, and Booking.com
 - [Contact](https://www.mohitranka.com/contact/): Contact form for platform, data, reliability, or engineering leadership topics
 
