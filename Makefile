@@ -46,10 +46,17 @@ sync: build
 		mkdir -p $(OUTPUT)/images; \
 		cp theme/images/og.png $(OUTPUT)/images/og.png; \
 	fi
+	@# Canonical short feed URLs at site root
 	@cp feeds/all.atom.xml atom.xml
 	@$(PYTHON) -c "from pathlib import Path; p=Path('atom.xml'); t=p.read_text();\
 t=t.replace('href=\"https://www.mohitranka.com/feeds/all.atom.xml\" rel=\"self\"',\
 'href=\"https://www.mohitranka.com/atom.xml\" rel=\"self\"'); p.write_text(t)"
+	@if [ -f feeds/all.rss.xml ]; then \
+		cp feeds/all.rss.xml rss.xml; \
+		$(PYTHON) -c "from pathlib import Path; p=Path('rss.xml'); t=p.read_text();\
+t=t.replace('https://www.mohitranka.com/feeds/all.rss.xml','https://www.mohitranka.com/rss.xml');\
+p.write_text(t)"; \
+	fi
 	@$(PYTHON) scripts/update_sitemap.py
 	@$(PYTHON) scripts/write_legacy_redirects.py
 

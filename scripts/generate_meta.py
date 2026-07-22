@@ -120,7 +120,8 @@ def write_llms_txt(posts: list[dict]) -> None:
         "- [GitHub](https://github.com/mohitranka): Code and open-source experiments",
         "- [LinkedIn](https://www.linkedin.com/in/mohit-ranka): Professional profile",
         f"- [Sitemap]({BASE}/sitemap.xml): Machine-readable list of public pages",
-        f"- [Atom feed]({BASE}/atom.xml): Site feed",
+        f"- [Atom feed]({BASE}/atom.xml): Blog feed (Atom)",
+        f"- [RSS feed]({BASE}/rss.xml): Blog feed (RSS 2.0)",
         f"- [Full text for LLMs]({BASE}/llms-full.txt): Complete page and post text for answer engines",
         "",
     ]

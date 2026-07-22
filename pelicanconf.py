@@ -2,6 +2,10 @@ import os
 
 AUTHOR = 'Mohit Ranka'
 SITENAME = 'Mohit Ranka'
+SITESUBTITLE = (
+    'Engineering leader. Writing on data platforms, developer tooling, '
+    'reliability, and leadership.'
+)
 
 # SITEURL is rewritten to relative paths when RELATIVE_URLS=True (nav, CSS, images).
 # SITE_ORIGIN stays absolute for canonical, Open Graph, Twitter, JSON-LD, and feeds.
@@ -15,12 +19,18 @@ OUTPUT_PATH = 'output'
 TIMEZONE = 'Asia/Kolkata'
 DEFAULT_LANG = 'en'
 
-# Feeds (same in local preview and production)
+# Feeds — Atom + RSS (all posts; blog category is identical for this site)
+FEED_DOMAIN = SITE_ORIGIN
 FEED_ALL_ATOM = 'feeds/all.atom.xml'
+FEED_ALL_RSS = 'feeds/all.rss.xml'
 CATEGORY_FEED_ATOM = 'feeds/{slug}.atom.xml'
+CATEGORY_FEED_RSS = 'feeds/{slug}.rss.xml'
 TRANSLATION_FEED_ATOM = None
 AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
+TAG_FEED_ATOM = None
+TAG_FEED_RSS = None
+FEED_MAX_ITEMS = 50
 
 DEFAULT_PAGINATION = 10
 

@@ -11,7 +11,8 @@
     <meta name="robots" content="index, follow">
     {% endblock %}
     <link rel="canonical" href="{% block canonical %}{{ SITE_ORIGIN }}/{% endblock %}">
-    <link rel="alternate" type="application/atom+xml" title="{{ SITENAME }}" href="{{ SITE_ORIGIN }}/atom.xml">
+    <link rel="alternate" type="application/atom+xml" title="{{ SITENAME }} — Atom" href="{{ SITE_ORIGIN }}/atom.xml">
+    <link rel="alternate" type="application/rss+xml" title="{{ SITENAME }} — RSS" href="{{ SITE_ORIGIN }}/rss.xml">
     <meta property="og:type" content="{% block og_type %}website{% endblock %}">
     <meta property="og:site_name" content="{{ SITENAME }}">
     <meta property="og:locale" content="en_US">

@@ -33,6 +33,8 @@ urls = [
     (f"{BASE}/contact/", TODAY, "yearly", "0.6"),
     (f"{BASE}/llms.txt", TODAY, "monthly", "0.5"),
     (f"{BASE}/llms-full.txt", TODAY, "monthly", "0.4"),
+    (f"{BASE}/atom.xml", TODAY, "weekly", "0.4"),
+    (f"{BASE}/rss.xml", TODAY, "weekly", "0.4"),
 ]
 for d, slug, _title in posts:
     if slug:

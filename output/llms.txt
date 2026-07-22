@@ -43,5 +43,6 @@ Site: https://www.mohitranka.com
 - [GitHub](https://github.com/mohitranka): Code and open-source experiments
 - [LinkedIn](https://www.linkedin.com/in/mohit-ranka): Professional profile
 - [Sitemap](https://www.mohitranka.com/sitemap.xml): Machine-readable list of public pages
-- [Atom feed](https://www.mohitranka.com/atom.xml): Site feed
+- [Atom feed](https://www.mohitranka.com/atom.xml): Blog feed (Atom)
+- [RSS feed](https://www.mohitranka.com/rss.xml): Blog feed (RSS 2.0)
 - [Full text for LLMs](https://www.mohitranka.com/llms-full.txt): Complete page and post text for answer engines
