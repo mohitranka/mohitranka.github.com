@@ -59,7 +59,7 @@ def main() -> None:
             if child.is_dir() and (child / "index.html").is_file():
                 write_redirect(base / f"{child.name}.html", f"{url_prefix}/{child.name}/")
 
-    # Tags consolidated under /tags/<slug>/ — redirect old /tag/… paths
+    # Tags consolidated under /tags/<slug>/ — redirect old singular /tag/… paths
     tags_dir = ROOT / "tags"
     if tags_dir.is_dir():
         for child in tags_dir.iterdir():
@@ -67,8 +67,10 @@ def main() -> None:
                 slug = child.name
                 write_redirect(ROOT / "tag" / f"{slug}.html", f"/tags/{slug}/")
                 write_redirect(ROOT / "tag" / slug / "index.html", f"/tags/{slug}/")
-                # Brief period when clean path was /tag/<slug>/
-                write_redirect(ROOT / "tags" / f"{slug}.html", f"/tags/{slug}/")
+                # Drop accidental tags/<slug>.html stubs from an earlier redirect pass
+                stale = ROOT / "tags" / f"{slug}.html"
+                if stale.is_file():
+                    stale.unlink()
 
     print("legacy redirects written")
 
