@@ -2,13 +2,17 @@
 
 {% block title %}{{ article.title }} — {{ SITENAME }}{% endblock %}
 {% block description %}{{ article.summary|striptags|truncate(160) }}{% endblock %}
-{% block canonical %}{{ SITEURL }}/{{ article.url }}{% endblock %}
+{% block canonical %}{{ SITE_ORIGIN }}/{{ article.url }}{% endblock %}
 {% block og_type %}article{% endblock %}
-{% block og_url %}{{ SITEURL }}/{{ article.url }}{% endblock %}
+{% block og_url %}{{ SITE_ORIGIN }}/{{ article.url }}{% endblock %}
 {% block og_title %}{{ article.title }}{% endblock %}
 {% block og_description %}{{ article.summary|striptags|truncate(160) }}{% endblock %}
+{% block og_image %}{{ SITE_ORIGIN }}/images/blog/{{ article.slug }}.jpg{% endblock %}
+{% block og_image_width %}1200{% endblock %}
+{% block og_image_height %}675{% endblock %}
 {% block twitter_title %}{{ article.title }}{% endblock %}
 {% block twitter_description %}{{ article.summary|striptags|truncate(160) }}{% endblock %}
+{% block twitter_image %}{{ SITE_ORIGIN }}/images/blog/{{ article.slug }}.jpg{% endblock %}
 {% block body_class %}page-article{% endblock %}
 
 {% block head_extra %}
@@ -20,28 +24,29 @@
     "@type": "BlogPosting",
     "headline": {{ article.title|tojson }},
     "description": {{ article.summary|striptags|truncate(160)|tojson }},
-    "url": "{{ SITEURL }}/{{ article.url }}",
+    "url": "{{ SITE_ORIGIN }}/{{ article.url }}",
+    "image": "{{ SITE_ORIGIN }}/images/blog/{{ article.slug }}.jpg",
     "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": "{{ SITEURL }}/{{ article.url }}"
+        "@id": "{{ SITE_ORIGIN }}/{{ article.url }}"
     },
     "datePublished": "{{ article.date.isoformat() }}",
     "dateModified": "{{ (article.modified or article.date).isoformat() }}",
     "author": {
         "@type": "Person",
         "name": "{{ AUTHOR }}",
-        "url": "{{ SITEURL }}/"
+        "url": "{{ SITE_ORIGIN }}/"
     },
     "publisher": {
         "@type": "Person",
         "name": "{{ AUTHOR }}",
-        "url": "{{ SITEURL }}/"
+        "url": "{{ SITE_ORIGIN }}/"
     },
     "inLanguage": "en",
     "isPartOf": {
         "@type": "Blog",
         "name": "Writing — {{ SITENAME }}",
-        "url": "{{ SITEURL }}/blog.html"
+        "url": "{{ SITE_ORIGIN }}/blog.html"
     }
 }
 </script>

@@ -10,21 +10,21 @@
     <meta name="author" content="{{ AUTHOR }}">
     <meta name="robots" content="index, follow">
     {% endblock %}
-    <link rel="canonical" href="{% block canonical %}{{ SITEURL }}/{% endblock %}">
-    <link rel="alternate" type="application/atom+xml" title="{{ SITENAME }}" href="{{ SITEURL }}/atom.xml">
+    <link rel="canonical" href="{% block canonical %}{{ SITE_ORIGIN }}/{% endblock %}">
+    <link rel="alternate" type="application/atom+xml" title="{{ SITENAME }}" href="{{ SITE_ORIGIN }}/atom.xml">
     <meta property="og:type" content="{% block og_type %}website{% endblock %}">
     <meta property="og:site_name" content="{{ SITENAME }}">
     <meta property="og:locale" content="en_US">
-    <meta property="og:url" content="{% block og_url %}{{ SITEURL }}/{% endblock %}">
+    <meta property="og:url" content="{% block og_url %}{{ SITE_ORIGIN }}/{% endblock %}">
     <meta property="og:title" content="{% block og_title %}{{ SITENAME }}{% endblock %}">
     <meta property="og:description" content="{% block og_description %}Engineering leader. Builder of data platforms, developer tooling, and reliable distributed backends.{% endblock %}">
-    <meta property="og:image" content="{{ SITEURL }}/theme/images/og.png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
+    <meta property="og:image" content="{% block og_image %}{{ SITE_ORIGIN }}/theme/images/og.png{% endblock %}">
+    <meta property="og:image:width" content="{% block og_image_width %}1200{% endblock %}">
+    <meta property="og:image:height" content="{% block og_image_height %}630{% endblock %}">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{% block twitter_title %}{{ SITENAME }}{% endblock %}">
     <meta name="twitter:description" content="{% block twitter_description %}Engineering leader. Builder of data platforms, developer tooling, and reliable distributed backends.{% endblock %}">
-    <meta name="twitter:image" content="{{ SITEURL }}/theme/images/og.png">
+    <meta name="twitter:image" content="{% block twitter_image %}{{ SITE_ORIGIN }}/theme/images/og.png{% endblock %}">
     <link rel="preload" href="{{ SITEURL }}/theme/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="{{ SITEURL }}/theme/css/style.css">
     {% if GOOGLE_ANALYTICS %}

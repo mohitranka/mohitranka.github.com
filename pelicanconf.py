@@ -3,10 +3,10 @@ import os
 AUTHOR = 'Mohit Ranka'
 SITENAME = 'Mohit Ranka'
 
-# Canonical site origin (feeds, some absolute metadata).
-# RELATIVE_URLS=True makes page links, CSS, and images host-relative so the
-# *same build* works on localhost and on production without config swaps.
+# SITEURL is rewritten to relative paths when RELATIVE_URLS=True (nav, CSS, images).
+# SITE_ORIGIN stays absolute for canonical, Open Graph, Twitter, JSON-LD, and feeds.
 SITEURL = 'https://www.mohitranka.com'
+SITE_ORIGIN = 'https://www.mohitranka.com'
 RELATIVE_URLS = True
 
 PATH = 'content'

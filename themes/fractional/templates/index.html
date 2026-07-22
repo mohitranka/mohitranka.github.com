@@ -2,8 +2,8 @@
 
 {% block title %}{{ SITENAME }} — Engineering Leader{% endblock %}
 {% block description %}Engineering leader. Builder of data platforms, developer tooling, and reliable distributed backends. Previously LinkedIn, Postman, and Booking.com.{% endblock %}
-{% block canonical %}{{ SITEURL }}/{% endblock %}
-{% block og_url %}{{ SITEURL }}/{% endblock %}
+{% block canonical %}{{ SITE_ORIGIN }}/{% endblock %}
+{% block og_url %}{{ SITE_ORIGIN }}/{% endblock %}
 {% block og_title %}{{ SITENAME }} — Engineering Leader{% endblock %}
 {% block og_description %}Engineering leader. Builder of data platforms, developer tooling, and reliable distributed backends. Previously LinkedIn, Postman, and Booking.com.{% endblock %}
 {% block twitter_title %}{{ SITENAME }} — Engineering Leader{% endblock %}
@@ -21,20 +21,20 @@
     "@graph": [
         {
             "@type": "WebSite",
-            "@id": "{{ SITEURL }}/#website",
-            "url": "{{ SITEURL }}/",
+            "@id": "{{ SITE_ORIGIN }}/#website",
+            "url": "{{ SITE_ORIGIN }}/",
             "name": "{{ SITENAME }}",
             "description": "Engineering leader. Builder of data platforms, developer tooling, and reliable distributed backends.",
             "inLanguage": "en",
             "publisher": {
-                "@id": "{{ SITEURL }}/#person"
+                "@id": "{{ SITE_ORIGIN }}/#person"
             }
         },
         {
             "@type": "Person",
-            "@id": "{{ SITEURL }}/#person",
+            "@id": "{{ SITE_ORIGIN }}/#person",
             "name": "{{ AUTHOR }}",
-            "url": "{{ SITEURL }}/",
+            "url": "{{ SITE_ORIGIN }}/",
             "email": "mohitranka@gmail.com",
             "description": "Engineering leader. Builder of data platforms, developer tooling, and reliable distributed backends.",
             "jobTitle": "Engineering Leader",
@@ -57,14 +57,14 @@
         },
         {
             "@type": "ProfilePage",
-            "@id": "{{ SITEURL }}/#profilepage",
-            "url": "{{ SITEURL }}/",
+            "@id": "{{ SITE_ORIGIN }}/#profilepage",
+            "url": "{{ SITE_ORIGIN }}/",
             "name": "{{ SITENAME }} — Engineering Leader",
             "isPartOf": {
-                "@id": "{{ SITEURL }}/#website"
+                "@id": "{{ SITE_ORIGIN }}/#website"
             },
             "mainEntity": {
-                "@id": "{{ SITEURL }}/#person"
+                "@id": "{{ SITE_ORIGIN }}/#person"
             },
             "inLanguage": "en"
         }
@@ -78,13 +78,11 @@
 
         <p>My sweet spot is turning fuzzy product questions into pragmatic, well-instrumented systems that survive real traffic and real people.</p>
 
-        <p>I currently lead engineering on the enterprise data platform at <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a>. Before that, I took <a href="https://www.postman.com" target="_blank" rel="noopener noreferrer">Postman</a>'s desktop-native API product to the web and incubated 0→1 work beyond HTTP, and built identity and SSO systems at <a href="https://www.booking.com" target="_blank" rel="noopener noreferrer">Booking.com</a> under real production traffic.</p>
-
         <section class="work-preview"><h2 class="section-label">Work</h2>
         <ul class="work-card-list">
           <li class="work-card work-card--preview"><a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a> <span class="work-role">enterprise data platform</span></li>
-          <li class="work-card work-card--preview"><a href="https://www.postman.com" target="_blank" rel="noopener noreferrer">Postman</a> <span class="work-role">desktop-native API product to the web</span></li>
-          <li class="work-card work-card--preview"><a href="https://www.booking.com" target="_blank" rel="noopener noreferrer">Booking.com</a> <span class="work-role">identity and SSO systems</span></li>
+          <li class="work-card work-card--preview"><a href="https://www.postman.com" target="_blank" rel="noopener noreferrer">Postman</a> <span class="work-role">desktop → web · 0→1 incubation</span></li>
+          <li class="work-card work-card--preview"><a href="https://www.booking.com" target="_blank" rel="noopener noreferrer">Booking.com</a> <span class="work-role">identity and SSO</span></li>
         </ul>
         <p class="work-cta"><a href="{{ SITEURL }}/work/">See all work →</a></p>
         </section>

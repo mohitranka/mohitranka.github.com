@@ -2,8 +2,9 @@
 
 {% block title %}{{ page.title }} — {{ SITENAME }}{% endblock %}
 {% block description %}{{ page.summary|default(page.content, true)|striptags|truncate(160) }}{% endblock %}
-{% block canonical %}{{ SITEURL }}/{{ page.url }}{% endblock %}
-{% block og_url %}{{ SITEURL }}/{{ page.url }}{% endblock %}
+{% block canonical %}{{ SITE_ORIGIN }}/{{ page.url }}{% endblock %}
+{% block og_url %}{{ SITE_ORIGIN }}/{{ page.url }}{% endblock %}
+
 {% block og_title %}{{ page.title }} — {{ SITENAME }}{% endblock %}
 {% block og_description %}{{ page.summary|default(page.content, true)|striptags|truncate(160) }}{% endblock %}
 {% block twitter_title %}{{ page.title }} — {{ SITENAME }}{% endblock %}

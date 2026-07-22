@@ -2,8 +2,9 @@
 
 {% block title %}{{ tag }} — Writing — {{ SITENAME }}{% endblock %}
 {% block description %}Posts tagged “{{ tag }}” by {{ AUTHOR }}.{% endblock %}
-{% block canonical %}{{ SITEURL }}/{{ tag.url }}{% endblock %}
-{% block og_url %}{{ SITEURL }}/{{ tag.url }}{% endblock %}
+{% block canonical %}{{ SITE_ORIGIN }}/{{ tag.url }}{% endblock %}
+{% block og_url %}{{ SITE_ORIGIN }}/{{ tag.url }}{% endblock %}
+
 {% block og_title %}{{ tag }} — Writing — {{ SITENAME }}{% endblock %}
 {% block og_description %}Posts tagged “{{ tag }}” by {{ AUTHOR }}.{% endblock %}
 {% block twitter_title %}{{ tag }} — Writing — {{ SITENAME }}{% endblock %}

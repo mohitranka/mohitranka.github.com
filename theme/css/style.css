@@ -66,7 +66,7 @@
 /* — Typography — */
 @font-face {
   font-family: 'Inter';
-  src: url('/theme/fonts/inter.woff2') format('woff2-variations');
+  src: url('../fonts/inter.woff2') format('woff2-variations');
   font-weight: 100 900;
   font-display: swap;
   font-style: normal;
@@ -609,13 +609,28 @@ ul li {
 .work-card h2 {
   font-size: 1.25rem;
   font-weight: 600;
-  margin-bottom: var(--space-1);
+  margin: 0 0 var(--space-1);
+}
+
+.page-content .work-card {
+  margin: var(--space-4) 0 0;
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.page-content .work-card:first-of-type {
+  margin-top: var(--space-5);
+}
+
+.work-card .work-role {
+  margin: 0 0 var(--space-1);
 }
 
 .work-outcome {
   color: var(--fg-secondary);
   font-size: 0.875rem;
-  margin-top: var(--space-1);
+  margin: var(--space-1) 0 0;
+  line-height: 1.6;
 }
 
 /* — Divider — */
