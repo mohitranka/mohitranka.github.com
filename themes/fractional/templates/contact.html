@@ -73,4 +73,44 @@
 {% block head_extra %}
 <script src="{{ SITEURL }}/contact-config.js" defer></script>
 <script src="{{ SITEURL }}/theme/js/contact-form.js" defer></script>
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "ContactPage",
+            "@id": "{{ SITE_ORIGIN }}/contact/#contactpage",
+            "url": "{{ SITE_ORIGIN }}/contact/",
+            "name": "Contact — {{ SITENAME }}",
+            "description": "Contact form for platform, data, reliability, or engineering leadership topics.",
+            "isPartOf": {
+                "@type": "WebSite",
+                "@id": "{{ SITE_ORIGIN }}/#website"
+            },
+            "mainEntity": {
+                "@type": "Person",
+                "@id": "{{ SITE_ORIGIN }}/#person"
+            }
+        },
+        {
+            "@type": "BreadcrumbList",
+            "@id": "{{ SITE_ORIGIN }}/contact/#breadcrumb",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "{{ SITE_ORIGIN }}/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Contact",
+                    "item": "{{ SITE_ORIGIN }}/contact/"
+                }
+            ]
+        }
+    ]
+}
+</script>
 {% endblock %}

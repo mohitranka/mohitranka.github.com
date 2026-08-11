@@ -32,5 +32,19 @@ Allow: /
 User-agent: meta-externalagent
 Allow: /
 
-# Prefer www as the canonical host
+User-agent: FacebookBot
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: omgili
+Allow: /
+
+# LLM Directives & Machine-readable files
+# LLM-Summary: https://www.mohitranka.com/llms.txt
+# LLM-Full: https://www.mohitranka.com/llms-full.txt
 Sitemap: https://www.mohitranka.com/sitemap.xml

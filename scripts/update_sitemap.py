@@ -57,4 +57,7 @@ for loc, lastmod, freq, pri in urls:
     ]
 lines.append("</urlset>")
 (ROOT / "sitemap.xml").write_text("\n".join(lines) + "\n", encoding="utf-8")
+out_dir = ROOT / "output"
+if out_dir.exists():
+    (out_dir / "sitemap.xml").write_text("\n".join(lines) + "\n", encoding="utf-8")
 print(f"sitemap.xml updated ({len(urls)} urls)")

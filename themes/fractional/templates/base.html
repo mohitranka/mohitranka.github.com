@@ -13,6 +13,8 @@
     <link rel="canonical" href="{% block canonical %}{{ SITE_ORIGIN }}/{% endblock %}">
     <link rel="alternate" type="application/atom+xml" title="{{ SITENAME }} — Atom" href="{{ SITE_ORIGIN }}/atom.xml">
     <link rel="alternate" type="application/rss+xml" title="{{ SITENAME }} — RSS" href="{{ SITE_ORIGIN }}/rss.xml">
+    <link rel="alternate" type="text/plain" title="{{ SITENAME }} — LLM Summary" href="{{ SITE_ORIGIN }}/llms.txt">
+    <link rel="alternate" type="text/plain" title="{{ SITENAME }} — LLM Full Context" href="{{ SITE_ORIGIN }}/llms-full.txt">
     <meta property="og:type" content="{% block og_type %}website{% endblock %}">
     <meta property="og:site_name" content="{{ SITENAME }}">
     <meta property="og:locale" content="en_US">
@@ -20,12 +22,14 @@
     <meta property="og:title" content="{% block og_title %}{{ SITENAME }}{% endblock %}">
     <meta property="og:description" content="{% block og_description %}Engineering leader. Builder of data platforms, developer tooling, and reliable distributed backends.{% endblock %}">
     <meta property="og:image" content="{% block og_image %}{{ SITE_ORIGIN }}/theme/images/og.png{% endblock %}">
+    <meta property="og:image:alt" content="{% block og_image_alt %}{{ SITENAME }} — Engineering Leader{% endblock %}">
     <meta property="og:image:width" content="{% block og_image_width %}1200{% endblock %}">
     <meta property="og:image:height" content="{% block og_image_height %}630{% endblock %}">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{% block twitter_title %}{{ SITENAME }}{% endblock %}">
     <meta name="twitter:description" content="{% block twitter_description %}Engineering leader. Builder of data platforms, developer tooling, and reliable distributed backends.{% endblock %}">
     <meta name="twitter:image" content="{% block twitter_image %}{{ SITE_ORIGIN }}/theme/images/og.png{% endblock %}">
+    <meta name="twitter:image:alt" content="{% block twitter_image_alt %}{{ SITENAME }} — Engineering Leader{% endblock %}">
     <link rel="preload" href="{{ SITEURL }}/theme/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="{{ SITEURL }}/theme/css/style.css">
     {% if GOOGLE_ANALYTICS %}

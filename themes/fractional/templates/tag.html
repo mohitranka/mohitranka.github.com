@@ -11,6 +11,57 @@
 {% block twitter_description %}Posts tagged “{{ tag }}” by {{ AUTHOR }}.{% endblock %}
 {% block body_class %}page-tag{% endblock %}
 
+{% block head_extra %}
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "CollectionPage",
+            "@id": "{{ SITE_ORIGIN }}/{{ tag.url }}#collectionpage",
+            "url": "{{ SITE_ORIGIN }}/{{ tag.url }}",
+            "name": "{{ tag }} — Writing — {{ SITENAME }}",
+            "description": "Posts tagged “{{ tag }}” by {{ AUTHOR }}.",
+            "isPartOf": {
+                "@type": "WebSite",
+                "@id": "{{ SITE_ORIGIN }}/#website"
+            }
+        },
+        {
+            "@type": "BreadcrumbList",
+            "@id": "{{ SITE_ORIGIN }}/{{ tag.url }}#breadcrumb",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "{{ SITE_ORIGIN }}/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Writing",
+                    "item": "{{ SITE_ORIGIN }}/blog/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "Tags",
+                    "item": "{{ SITE_ORIGIN }}/tags/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 4,
+                    "name": {{ tag.name|default(tag)|tojson }},
+                    "item": "{{ SITE_ORIGIN }}/{{ tag.url }}"
+                }
+            ]
+        }
+    ]
+}
+</script>
+{% endblock %}
+
 {% block content %}
         <p class="meta crumb">
             <a href="{{ SITEURL }}/blog/">Writing</a>

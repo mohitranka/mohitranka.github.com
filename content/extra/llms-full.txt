@@ -42,25 +42,26 @@ Use the contact form at https://www.mohitranka.com/contact/. LinkedIn: https://w
 
 ## Writing archive
 
-- The line manager role is disappearing faster than you think (2026-07-21)
-- Near-real-time is a product promise, not a Kafka cluster (2026-07-16)
-- The platform team’s real job is interfaces (2025-11-13)
-- When I still choose a relational database (2025-03-13)
-- Freshness SLOs: the metric product teams actually feel (2024-07-11)
-- Saying no as a platform EM without becoming the villain (2023-11-08)
-- Identity systems fail socially before they fail cryptographically (2023-03-08)
-- What “led the web launch” taught me about constraints (2022-07-06)
-- Incubating 0→1 beside a mature product (2021-06-15)
-- How I review a distributed design in 45 minutes (2021-03-03)
-- Introducing on-call without burning the team (2020-11-10)
-- GTM datasets need data contracts (2020-07-01)
-- RDBMS vs. NOSQL? (2013-06-29)
+- The line manager role is disappearing faster than you think (2026-07-21) [Tags: engineering-leadership, management, product]
+- Near-real-time is a product promise, not a Kafka cluster (2026-07-16) [Tags: data-platforms, distributed-systems, reliability]
+- The platform team’s real job is interfaces (2025-11-13) [Tags: engineering-leadership, platforms, developer-tooling]
+- When I still choose a relational database (2025-03-13) [Tags: data-platforms, databases, architecture]
+- Freshness SLOs: the metric product teams actually feel (2024-07-11) [Tags: data-platforms, reliability, observability]
+- Saying no as a platform EM without becoming the villain (2023-11-08) [Tags: engineering-leadership, platforms, management]
+- Identity systems fail socially before they fail cryptographically (2023-03-08) [Tags: identity, security, distributed-systems]
+- What “led the web launch” taught me about constraints (2022-07-06) [Tags: engineering-leadership, product, developer-tooling]
+- Incubating 0→1 beside a mature product (2021-06-15) [Tags: engineering-leadership, product, developer-tooling]
+- How I review a distributed design in 45 minutes (2021-03-03) [Tags: distributed-systems, engineering-leadership, architecture]
+- Introducing on-call without burning the team (2020-11-10) [Tags: reliability, engineering-leadership, platforms]
+- GTM datasets need data contracts (2020-07-01) [Tags: data-platforms, platforms, product]
+- RDBMS vs. NOSQL? (2013-06-29) [Tags: data-platforms, databases, architecture]
 
 ## Posts
 
 ### The line manager role is disappearing faster than you think
 URL: https://www.mohitranka.com/blog/line-manager-role-is-disappearing/
 Date: 2026-07-21
+Tags: engineering-leadership, management, product
 
 The line manager role is disappearing faster than most career plans assume. Meta has already moved toward one senior manager for roughly every fifty developers. That is not a distant forecast. It is an operating choice already in the market. If you lead engineers — or want to — the useful question is not “will this happen?” It is what kind of leader still has a job when the org chart gets that thin.
 
@@ -117,6 +118,7 @@ What are you doing right now to stay relevant as the middle of the org chart thi
 ### Near-real-time is a product promise, not a Kafka cluster
 URL: https://www.mohitranka.com/blog/near-real-time-is-a-product-promise/
 Date: 2026-07-16
+Tags: data-platforms, distributed-systems, reliability
 
 “Near-real-time” is often used as a synonym for “we bought a streaming stack.” On GTM data platforms, that confusion is expensive. The product promise is about whether a decision-maker can trust a number in time — not whether an event log is busy. At LinkedIn, the Enterprise Data Platform (EDP) was intended as the governed center for GTM datasets. BI teams on Power BI and Tableau still ran on Hadoop-era batch paths. They already had data. What they did not have was a reason to treat EDP as the path that made GTM analytics true, timely, and durable as legacy pipelines were marked for deprecation. That gap is a product-promise gap.
 
@@ -201,6 +203,7 @@ Near-real-time is not a badge for an architecture review. It is a promise about 
 ### The platform team’s real job is interfaces
 URL: https://www.mohitranka.com/blog/platform-teams-real-job-is-interfaces/
 Date: 2025-11-13
+Tags: engineering-leadership, platforms, developer-tooling
 
 At LinkedIn, the Enterprise Data Platform (EDP) was meant to be the centralized way GTM teams managed and consumed datasets. On paper, that is a clear platform charter. In practice, a platform is only real when its interfaces get adopted — including by teams that already have a path that “works.” The hard case was BI. Power BI and Tableau teams were still living on Hadoop-based pipelines scheduled for deprecation. They could already get data. EDP was strategically important and still optional in their week. Without them, EDP could not become the source of truth for GTM analytics no matter how good the internals looked. That is an interface problem, not a cluster problem.
 
@@ -280,6 +283,7 @@ Platform teams love infrastructure. Infrastructure is not the job. The job is to
 ### When I still choose a relational database
 URL: https://www.mohitranka.com/blog/when-i-still-choose-a-relational-database/
 Date: 2025-03-13
+Tags: data-platforms, databases, architecture
 
 In 2013 I wrote RDBMS vs. NOSQL? as a pushback against fashion. The fashion changed costumes — document stores, wide-column, NewSQL, "Postgres is fine," "everything in the lakehouse" — but the underlying mistake did not: picking a datastore from a blog post instead of from access patterns and failure modes.
 
@@ -384,6 +388,7 @@ I still choose a relational database when I want correctness, evolvable queries,
 ### Freshness SLOs: the metric product teams actually feel
 URL: https://www.mohitranka.com/blog/freshness-slos-the-metric-product-teams-feel/
 Date: 2024-07-11
+Tags: data-platforms, reliability, observability
 
 API latency SLOs changed how we run services. GTM data work taught me the sibling idea the hard way: product teams do not experience your job-success chart. They experience a dashboard that is late, wrong, or disagrees with another “official” number. At LinkedIn, BI teams on Power BI and Tableau could already pull data from Hadoop-era batch paths while the Enterprise Data Platform (EDP) was supposed to become the governed center for GTM datasets. Pipelines can be “green” while the business still feels stale or fragmented truth. That feeling is a freshness and trust problem — even when nobody is paging on consumer lag.
 
@@ -466,6 +471,7 @@ Product teams feel freshness as trust in the number. Platforms earn that trust w
 ### Saying no as a platform EM without becoming the villain
 URL: https://www.mohitranka.com/blog/saying-no-as-a-platform-em/
 Date: 2023-11-08
+Tags: engineering-leadership, platforms, management
 
 Platform engineering managers do not run out of good ideas. They run out of capacity to say yes to every reasonable request without wrecking the shared system. The skill is not blunt refusal. It is no with a path — specific enough that partners can actually execute, firm enough that your team is not a free consulting desk. Two nos from EDP work at LinkedIn taught me more than any generic prioritization framework.
 
@@ -546,6 +552,7 @@ Saying no as a platform EM is stewardship of shared constraints. On EDP, the nos
 ### Identity systems fail socially before they fail cryptographically
 URL: https://www.mohitranka.com/blog/identity-systems-fail-socially/
 Date: 2023-03-08
+Tags: identity, security, distributed-systems
 
 When people talk about identity and SSO, they reach for algorithms: token lifetimes, key rotation, SAML vs OIDC, session fixation. Those details matter. In systems I have built and operated, the outages and near-misses that hurt most started earlier — as social and product failures wearing security clothing.
 
@@ -620,6 +627,7 @@ Identity systems do fail cryptographically — and you should hire people who ca
 ### What “led the web launch” taught me about constraints
 URL: https://www.mohitranka.com/blog/web-launch-constraints/
 Date: 2022-07-06
+Tags: engineering-leadership, product, developer-tooling
 
 At Postman, “put the product on the web” was not a greenfield rewrite. It was a constraint problem: a desktop-native API tool used by millions of developers, enterprise pressure for browser access, browser security that blocked the old execution model, and a conference date that would not move. I was the engineering manager accountable for cross-functional delivery — architecture choices, security and infra dependencies, product scope, and keeping the team focused when the path was still uncertain. What follows is what that launch actually taught me.
 
@@ -704,6 +712,7 @@ Closing
 ### Incubating 0→1 beside a mature product
 URL: https://www.mohitranka.com/blog/postman-labs-0-to-1/
 Date: 2021-06-15
+Tags: engineering-leadership, product, developer-tooling
 
 When I was at Postman, the core product was already the default API client for a huge HTTP/HTTPS world — on the order of tens of millions of developers on desktop. That success created a sharp problem: how do you explore what comes after HTTP without slowing the product everyone already depends on? Postman Labs was our answer: a small unit with a charter to incubate 0→1 work — new protocols and paradigms — without turning every experiment into a core-roadmap hostage situation.
 
@@ -803,6 +812,7 @@ Incubating 0→1 beside a mature product is a leadership design problem: process
 ### How I review a distributed design in 45 minutes
 URL: https://www.mohitranka.com/blog/how-i-review-a-distributed-design/
 Date: 2021-03-03
+Tags: distributed-systems, engineering-leadership, architecture
 
 The most expensive design reviews I have run were not missing a box on a diagram. They were missing a decision. One of them froze delivery on an EDP self-serve portal for about a month while two strong engineers disagreed in public about monolith versus microservices — and ownership quietly collapsed. This is how I run a distributed design review when time is short, using that conflict as the worked example. The forty-five minutes are a filter for danger and indecision, not a substitute for deep design.
 
@@ -909,6 +919,7 @@ In forty-five minutes you will not finish a distributed design. You can learn wh
 ### Introducing on-call without burning the team
 URL: https://www.mohitranka.com/blog/introducing-on-call-without-burnout/
 Date: 2020-11-10
+Tags: reliability, engineering-leadership, platforms
 
 At Postman, my team owned a large-scale platform surface used by millions of developers. What we did not own — formally — was a predictable operational response. Production issues and public GitHub noise were handled ad hoc. Someone jumped in, or everyone hesitated. Retrospectives lacked a clear accountable role. The system worked until it did not, and then it worked by heroics. We needed on-call. We also needed engineers who still wanted to build product after the rotation.
 
@@ -1005,6 +1016,7 @@ Introducing on-call is not a tooling purchase. It is a product and staffing deci
 ### GTM datasets need data contracts
 URL: https://www.mohitranka.com/blog/gtm-datasets-need-data-contracts/
 Date: 2020-07-01
+Tags: data-platforms, platforms, product
 
 When a go-to-market dashboard is wrong, nobody says “the warehouse is eventually consistent.” They say the number is wrong — and they stop trusting the platform. On LinkedIn’s Enterprise Data Platform (EDP) work, the failure mode was rarely a missing chart type. It was informal truth: datasets without clear producers, consumers, freshness expectations, or a path that BI could rely on when Hadoop-era pipelines still “worked.” That is a data-contract problem, whether or not you use the word contract.
 
@@ -1103,6 +1115,7 @@ EDP did not earn “source of truth” status by existing. It earned it when GTM
 ### RDBMS vs. NOSQL?
 URL: https://www.mohitranka.com/blog/rdbms-vs-nosql/
 Date: 2013-06-29
+Tags: data-platforms, databases, architecture
 
 From our own experience designing and operating a highly available, highly scalable ecommerce platform, we have come to realize that relational databases should only be used when an application really needs the complex query, table join and transaction capabilities of a full-blown relational database. In all other cases, when such relational features are not needed, a NoSQL database service like DynamoDB offers a simpler, more available, more scalable and ultimately a lower cost solution.
 

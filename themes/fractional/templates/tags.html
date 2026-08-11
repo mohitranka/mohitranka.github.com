@@ -11,6 +11,51 @@
 {% block twitter_description %}Browse writing by tag — platforms, data, reliability, leadership, and more.{% endblock %}
 {% block body_class %}page-tags{% endblock %}
 
+{% block head_extra %}
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "CollectionPage",
+            "@id": "{{ SITE_ORIGIN }}/tags/#collectionpage",
+            "url": "{{ SITE_ORIGIN }}/tags/",
+            "name": "Tags — {{ SITENAME }}",
+            "description": "Browse writing by tag — platforms, data, reliability, leadership, and more.",
+            "isPartOf": {
+                "@type": "WebSite",
+                "@id": "{{ SITE_ORIGIN }}/#website"
+            }
+        },
+        {
+            "@type": "BreadcrumbList",
+            "@id": "{{ SITE_ORIGIN }}/tags/#breadcrumb",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "{{ SITE_ORIGIN }}/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Writing",
+                    "item": "{{ SITE_ORIGIN }}/blog/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "Tags",
+                    "item": "{{ SITE_ORIGIN }}/tags/"
+                }
+            ]
+        }
+    ]
+}
+</script>
+{% endblock %}
+
 {% block content %}
         <p class="meta crumb">
             <a href="{{ SITEURL }}/blog/">Writing</a>

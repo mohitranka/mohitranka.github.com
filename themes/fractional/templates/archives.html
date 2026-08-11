@@ -11,6 +11,45 @@
 {% block twitter_description %}Technical writing on platforms, data, reliability, and engineering leadership by {{ AUTHOR }}.{% endblock %}
 {% block body_class %}page-writing{% endblock %}
 
+{% block head_extra %}
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "CollectionPage",
+            "@id": "{{ SITE_ORIGIN }}/blog/#collectionpage",
+            "url": "{{ SITE_ORIGIN }}/blog/",
+            "name": "Writing — {{ SITENAME }}",
+            "description": "Technical writing on platforms, data, reliability, and engineering leadership by {{ AUTHOR }}.",
+            "isPartOf": {
+                "@type": "WebSite",
+                "@id": "{{ SITE_ORIGIN }}/#website"
+            }
+        },
+        {
+            "@type": "BreadcrumbList",
+            "@id": "{{ SITE_ORIGIN }}/blog/#breadcrumb",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "{{ SITE_ORIGIN }}/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Writing",
+                    "item": "{{ SITE_ORIGIN }}/blog/"
+                }
+            ]
+        }
+    ]
+}
+</script>
+{% endblock %}
+
 {% block content %}
         <h1>Writing</h1>
         <p class="meta page-lede">

@@ -62,6 +62,7 @@ def load_posts() -> list[dict]:
                 "title": meta.get("Title", path.stem),
                 "slug": meta.get("Slug", path.stem),
                 "date": date,
+                "summary": meta.get("Summary", ""),
                 "tags": [
                     t.strip()
                     for t in (meta.get("Tags") or "").split(",")
@@ -110,8 +111,9 @@ def write_llms_txt(posts: list[dict]) -> None:
         "",
     ]
     for p in posts:
+        summary_suffix = f": {p['summary']}" if p.get("summary") else ""
         lines.append(
-            f"- [{p['title']}]({BASE}/blog/{p['slug']}/) ({p['date']})"
+            f"- [{p['title']}]({BASE}/blog/{p['slug']}/) ({p['date']}){summary_suffix}"
         )
     lines += [
         "",
@@ -161,13 +163,17 @@ def write_llms_full(posts: list[dict]) -> None:
         "",
     ]
     for p in posts:
-        lines.append(f"- {p['title']} ({p['date']})")
+        tags_str = f" [Tags: {', '.join(p['tags'])}]" if p.get("tags") else ""
+        lines.append(f"- {p['title']} ({p['date']}){tags_str}")
     lines += ["", "## Posts", ""]
     for p in posts:
+        tag_line = f"Tags: {', '.join(p['tags'])}\n" if p.get("tags") else ""
+        summary_line = f"Summary: {p['summary']}\n" if p.get("summary") else ""
         lines += [
             f"### {p['title']}",
             f"URL: {BASE}/blog/{p['slug']}/",
             f"Date: {p['date']}",
+            f"{tag_line}{summary_line}".strip(),
             "",
             p["plain"],
             "",

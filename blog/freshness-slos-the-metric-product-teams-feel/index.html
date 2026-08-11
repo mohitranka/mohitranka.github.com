@@ -11,6 +11,8 @@
     <link rel="canonical" href="https://www.mohitranka.com/blog/freshness-slos-the-metric-product-teams-feel/">
     <link rel="alternate" type="application/atom+xml" title="Mohit Ranka — Atom" href="https://www.mohitranka.com/atom.xml">
     <link rel="alternate" type="application/rss+xml" title="Mohit Ranka — RSS" href="https://www.mohitranka.com/rss.xml">
+    <link rel="alternate" type="text/plain" title="Mohit Ranka — LLM Summary" href="https://www.mohitranka.com/llms.txt">
+    <link rel="alternate" type="text/plain" title="Mohit Ranka — LLM Full Context" href="https://www.mohitranka.com/llms-full.txt">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="Mohit Ranka">
     <meta property="og:locale" content="en_US">
@@ -18,12 +20,14 @@
     <meta property="og:title" content="Freshness SLOs: the metric product teams actually feel">
     <meta property="og:description" content="API latency SLOs changed how we run services. GTM data work taught me the sibling idea the hard way: product teams do not experience your job-success chart....">
     <meta property="og:image" content="https://www.mohitranka.com/images/blog/freshness-slos-the-metric-product-teams-feel.jpg">
+    <meta property="og:image:alt" content="Freshness SLOs: the metric product teams actually feel">
     <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="675">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Freshness SLOs: the metric product teams actually feel">
     <meta name="twitter:description" content="API latency SLOs changed how we run services. GTM data work taught me the sibling idea the hard way: product teams do not experience your job-success chart....">
     <meta name="twitter:image" content="https://www.mohitranka.com/images/blog/freshness-slos-the-metric-product-teams-feel.jpg">
+    <meta name="twitter:image:alt" content="Freshness SLOs: the metric product teams actually feel">
     <link rel="preload" href="../../theme/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="../../theme/css/style.css">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-CWEDLBH79X"></script>
@@ -35,36 +39,74 @@
     </script>
 <meta property="article:published_time" content="2024-07-11T10:00:00+05:30">
 <meta property="article:author" content="Mohit Ranka">
+<meta property="article:tag" content="data-platforms, reliability, observability">
 <script type="application/ld+json">
 {
     "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    "headline": "Freshness SLOs: the metric product teams actually feel",
-    "description": "API latency SLOs changed how we run services. GTM data work taught me the sibling idea the hard way: product teams do not experience your job-success chart....",
-    "url": "https://www.mohitranka.com/blog/freshness-slos-the-metric-product-teams-feel/",
-    "image": "https://www.mohitranka.com/images/blog/freshness-slos-the-metric-product-teams-feel.jpg",
-    "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": "https://www.mohitranka.com/blog/freshness-slos-the-metric-product-teams-feel/"
-    },
-    "datePublished": "2024-07-11T10:00:00+05:30",
-    "dateModified": "2024-07-11T10:00:00+05:30",
-    "author": {
-        "@type": "Person",
-        "name": "Mohit Ranka",
-        "url": "https://www.mohitranka.com/"
-    },
-    "publisher": {
-        "@type": "Person",
-        "name": "Mohit Ranka",
-        "url": "https://www.mohitranka.com/"
-    },
-    "inLanguage": "en",
-    "isPartOf": {
-        "@type": "Blog",
-        "name": "Writing — Mohit Ranka",
-        "url": "https://www.mohitranka.com/blog/"
-    }
+    "@graph": [
+        {
+            "@type": "BlogPosting",
+            "@id": "https://www.mohitranka.com/blog/freshness-slos-the-metric-product-teams-feel/#article",
+            "headline": "Freshness SLOs: the metric product teams actually feel",
+            "description": "API latency SLOs changed how we run services. GTM data work taught me the sibling idea the hard way: product teams do not experience your job-success chart....",
+            "url": "https://www.mohitranka.com/blog/freshness-slos-the-metric-product-teams-feel/",
+            "image": "https://www.mohitranka.com/images/blog/freshness-slos-the-metric-product-teams-feel.jpg",
+            "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": "https://www.mohitranka.com/blog/freshness-slos-the-metric-product-teams-feel/"
+            },
+            "datePublished": "2024-07-11T10:00:00+05:30",
+            "dateModified": "2024-07-11T10:00:00+05:30",
+            "author": {
+                "@type": "Person",
+                "@id": "https://www.mohitranka.com/#person",
+                "name": "Mohit Ranka",
+                "url": "https://www.mohitranka.com/",
+                "sameAs": [
+                    "https://github.com/mohitranka",
+                    "https://www.linkedin.com/in/mohit-ranka"
+                ]
+            },
+            "publisher": {
+                "@type": "Person",
+                "@id": "https://www.mohitranka.com/#person",
+                "name": "Mohit Ranka",
+                "url": "https://www.mohitranka.com/"
+            },
+            "keywords": ["data-platforms", "reliability", "observability"],
+            "inLanguage": "en",
+            "isPartOf": {
+                "@type": "Blog",
+                "@id": "https://www.mohitranka.com/blog/#blog",
+                "name": "Writing — Mohit Ranka",
+                "url": "https://www.mohitranka.com/blog/"
+            }
+        },
+        {
+            "@type": "BreadcrumbList",
+            "@id": "https://www.mohitranka.com/blog/freshness-slos-the-metric-product-teams-feel/#breadcrumb",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "https://www.mohitranka.com/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Writing",
+                    "item": "https://www.mohitranka.com/blog/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "Freshness SLOs: the metric product teams actually feel",
+                    "item": "https://www.mohitranka.com/blog/freshness-slos-the-metric-product-teams-feel/"
+                }
+            ]
+        }
+    ]
 }
 </script>
 </head>

@@ -9,45 +9,88 @@
 {% block og_description %}{{ article.summary|striptags|truncate(160) }}{% endblock %}
 {% block og_image %}{{ SITE_ORIGIN }}/images/blog/{{ article.slug }}.jpg{% endblock %}
 {% block og_image_width %}1200{% endblock %}
-{% block og_image_height %}675{% endblock %}
+{% block og_image_alt %}{{ article.title }}{% endblock %}
 {% block twitter_title %}{{ article.title }}{% endblock %}
 {% block twitter_description %}{{ article.summary|striptags|truncate(160) }}{% endblock %}
 {% block twitter_image %}{{ SITE_ORIGIN }}/images/blog/{{ article.slug }}.jpg{% endblock %}
+{% block twitter_image_alt %}{{ article.title }}{% endblock %}
 {% block body_class %}page-article{% endblock %}
 
 {% block head_extra %}
 <meta property="article:published_time" content="{{ article.date.isoformat() }}">
 <meta property="article:author" content="{{ AUTHOR }}">
+{% if article.tags %}
+<meta property="article:tag" content="{% for tag in article.tags %}{{ tag }}{% if not loop.last %}, {% endif %}{% endfor %}">
+{% endif %}
 <script type="application/ld+json">
 {
     "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    "headline": {{ article.title|tojson }},
-    "description": {{ article.summary|striptags|truncate(160)|tojson }},
-    "url": "{{ SITE_ORIGIN }}/{{ article.url }}",
-    "image": "{{ SITE_ORIGIN }}/images/blog/{{ article.slug }}.jpg",
-    "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": "{{ SITE_ORIGIN }}/{{ article.url }}"
-    },
-    "datePublished": "{{ article.date.isoformat() }}",
-    "dateModified": "{{ (article.modified or article.date).isoformat() }}",
-    "author": {
-        "@type": "Person",
-        "name": "{{ AUTHOR }}",
-        "url": "{{ SITE_ORIGIN }}/"
-    },
-    "publisher": {
-        "@type": "Person",
-        "name": "{{ AUTHOR }}",
-        "url": "{{ SITE_ORIGIN }}/"
-    },
-    "inLanguage": "en",
-    "isPartOf": {
-        "@type": "Blog",
-        "name": "Writing — {{ SITENAME }}",
-        "url": "{{ SITE_ORIGIN }}/blog/"
-    }
+    "@graph": [
+        {
+            "@type": "BlogPosting",
+            "@id": "{{ SITE_ORIGIN }}/{{ article.url }}#article",
+            "headline": {{ article.title|tojson }},
+            "description": {{ article.summary|striptags|truncate(160)|tojson }},
+            "url": "{{ SITE_ORIGIN }}/{{ article.url }}",
+            "image": "{{ SITE_ORIGIN }}/images/blog/{{ article.slug }}.jpg",
+            "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": "{{ SITE_ORIGIN }}/{{ article.url }}"
+            },
+            "datePublished": "{{ article.date.isoformat() }}",
+            "dateModified": "{{ (article.modified or article.date).isoformat() }}",
+            "author": {
+                "@type": "Person",
+                "@id": "{{ SITE_ORIGIN }}/#person",
+                "name": "{{ AUTHOR }}",
+                "url": "{{ SITE_ORIGIN }}/",
+                "sameAs": [
+                    "https://github.com/mohitranka",
+                    "https://www.linkedin.com/in/mohit-ranka"
+                ]
+            },
+            "publisher": {
+                "@type": "Person",
+                "@id": "{{ SITE_ORIGIN }}/#person",
+                "name": "{{ AUTHOR }}",
+                "url": "{{ SITE_ORIGIN }}/"
+            },
+            {% if article.tags %}
+            "keywords": [{% for tag in article.tags %}{{ tag.name|tojson }}{% if not loop.last %}, {% endif %}{% endfor %}],
+            {% endif %}
+            "inLanguage": "en",
+            "isPartOf": {
+                "@type": "Blog",
+                "@id": "{{ SITE_ORIGIN }}/blog/#blog",
+                "name": "Writing — {{ SITENAME }}",
+                "url": "{{ SITE_ORIGIN }}/blog/"
+            }
+        },
+        {
+            "@type": "BreadcrumbList",
+            "@id": "{{ SITE_ORIGIN }}/{{ article.url }}#breadcrumb",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "{{ SITE_ORIGIN }}/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Writing",
+                    "item": "{{ SITE_ORIGIN }}/blog/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": {{ article.title|tojson }},
+                    "item": "{{ SITE_ORIGIN }}/{{ article.url }}"
+                }
+            ]
+        }
+    ]
 }
 </script>
 {% endblock %}
