@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}{{ SITENAME }}{% endblock %}</title>
     {% block meta %}
-    <meta name="description" content="{% block description %}Engineering leader. Builder of data platforms, developer tooling, and reliable distributed backends.{% endblock %}">
+    <meta name="description" content="{% block description %}Senior engineering leader for 6–12 month embedded engagements. Architecture, technical decision-making and delivery leadership for product engineering teams.{% endblock %}">
     <meta name="author" content="{{ AUTHOR }}">
     <meta name="robots" content="index, follow">
     {% endblock %}
@@ -20,16 +20,23 @@
     <meta property="og:locale" content="en_US">
     <meta property="og:url" content="{% block og_url %}{{ SITE_ORIGIN }}/{% endblock %}">
     <meta property="og:title" content="{% block og_title %}{{ SITENAME }}{% endblock %}">
-    <meta property="og:description" content="{% block og_description %}Engineering leader. Builder of data platforms, developer tooling, and reliable distributed backends.{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}Senior engineering leader for 6–12 month embedded engagements. Architecture, technical decision-making and delivery leadership for product engineering teams.{% endblock %}">
     <meta property="og:image" content="{% block og_image %}{{ SITE_ORIGIN }}/theme/images/og.png{% endblock %}">
     <meta property="og:image:alt" content="{% block og_image_alt %}{{ SITENAME }} — Engineering Leader{% endblock %}">
     <meta property="og:image:width" content="{% block og_image_width %}1200{% endblock %}">
     <meta property="og:image:height" content="{% block og_image_height %}630{% endblock %}">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{% block twitter_title %}{{ SITENAME }}{% endblock %}">
-    <meta name="twitter:description" content="{% block twitter_description %}Engineering leader. Builder of data platforms, developer tooling, and reliable distributed backends.{% endblock %}">
+    <meta name="twitter:description" content="{% block twitter_description %}Senior engineering leader for 6–12 month embedded engagements. Architecture, technical decision-making and delivery leadership for product engineering teams.{% endblock %}">
     <meta name="twitter:image" content="{% block twitter_image %}{{ SITE_ORIGIN }}/theme/images/og.png{% endblock %}">
     <meta name="twitter:image:alt" content="{% block twitter_image_alt %}{{ SITENAME }} — Engineering Leader{% endblock %}">
+    <script>
+        (function () {
+            var theme = 'dark';
+            try { theme = localStorage.getItem('theme') || 'dark'; } catch (e) {}
+            document.documentElement.setAttribute('data-theme', theme);
+        })();
+    </script>
     <link rel="preload" href="{{ SITEURL }}/theme/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="{{ SITEURL }}/theme/css/style.css">
     {% if GOOGLE_ANALYTICS %}
@@ -54,11 +61,33 @@
                 <a href="{{ SITEURL }}/blog/"{% if output_file is defined and output_file == 'blog/index.html' %} aria-current="page"{% endif %}>Writing</a>
                 <a href="{{ SITEURL }}/work/"{% if output_file is defined and output_file.startswith('work') %} aria-current="page"{% endif %}>Work</a>
                 <a href="{{ SITEURL }}/contact/"{% if output_file is defined and output_file.startswith('contact') %} aria-current="page"{% endif %}>Contact</a>
+                <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to light theme">
+                    <svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+                    <svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                </button>
             </nav>
         </header>
 
         {% block content %}{% endblock %}
     </main>
+    <script>
+        (function () {
+            var root = document.documentElement;
+            var btn = document.getElementById('theme-toggle');
+            if (!btn) return;
+            function sync() {
+                var dark = root.getAttribute('data-theme') !== 'light';
+                btn.setAttribute('aria-label', dark ? 'Switch to light theme' : 'Switch to dark theme');
+            }
+            sync();
+            btn.addEventListener('click', function () {
+                var next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+                root.setAttribute('data-theme', next);
+                try { localStorage.setItem('theme', next); } catch (e) {}
+                sync();
+            });
+        })();
+    </script>
 </body>
 
 </html>

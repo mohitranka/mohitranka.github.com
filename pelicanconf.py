@@ -3,8 +3,7 @@ import os
 AUTHOR = 'Mohit Ranka'
 SITENAME = 'Mohit Ranka'
 SITESUBTITLE = (
-    'Engineering leader. Writing on data platforms, developer tooling, '
-    'reliability, and leadership.'
+    'Senior engineering leadership for hard, well-defined problems.'
 )
 
 # SITEURL is rewritten to relative paths when RELATIVE_URLS=True (nav, CSS, images).

@@ -1,18 +1,15 @@
 {% extends "base.html" %}
 
-{% block title %}{{ SITENAME }} — Engineering Leader{% endblock %}
-{% block description %}Engineering leader. Builder of data platforms, developer tooling, and reliable distributed backends. Previously LinkedIn, Postman, and Booking.com.{% endblock %}
+{% block title %}Mohit Ranka — Embedded Engineering Leader{% endblock %}
+{% block description %}Senior engineering leader for 6–12 month embedded engagements. Architecture, technical decision-making and delivery leadership for product engineering teams.{% endblock %}
 {% block canonical %}{{ SITE_ORIGIN }}/{% endblock %}
 {% block og_url %}{{ SITE_ORIGIN }}/{% endblock %}
-{% block og_title %}{{ SITENAME }} — Engineering Leader{% endblock %}
-{% block og_description %}Engineering leader. Builder of data platforms, developer tooling, and reliable distributed backends. Previously LinkedIn, Postman, and Booking.com.{% endblock %}
-{% block twitter_title %}{{ SITENAME }} — Engineering Leader{% endblock %}
-{% block twitter_description %}Engineering leader. Builder of data platforms, developer tooling, and reliable distributed backends. Previously LinkedIn, Postman, and Booking.com.{% endblock %}
+{% block og_title %}Mohit Ranka — Embedded Engineering Leader{% endblock %}
+{% block og_description %}Senior engineering leader for 6–12 month embedded engagements. Architecture, technical decision-making and delivery leadership for product engineering teams.{% endblock %}
+{% block twitter_title %}Mohit Ranka — Embedded Engineering Leader{% endblock %}
+{% block twitter_description %}Senior engineering leader for 6–12 month embedded engagements. Architecture, technical decision-making and delivery leadership for product engineering teams.{% endblock %}
+{% block og_image_alt %}Mohit Ranka — Senior engineering leadership for hard, well-defined problems{% endblock %}
 {% block body_class %}page-home{% endblock %}
-
-{% block site_brand %}
-            <h1 class="site-logo"><a href="{{ SITEURL }}/">{{ SITENAME }}</a></h1>
-{% endblock %}
 
 {% block head_extra %}
 <script type="application/ld+json">
@@ -24,7 +21,7 @@
             "@id": "{{ SITE_ORIGIN }}/#website",
             "url": "{{ SITE_ORIGIN }}/",
             "name": "{{ SITENAME }}",
-            "description": "Engineering leader. Builder of data platforms, developer tooling, and reliable distributed backends.",
+            "description": "Senior engineering leader for 6–12 month embedded engagements.",
             "inLanguage": "en",
             "publisher": {
                 "@id": "{{ SITE_ORIGIN }}/#person"
@@ -35,8 +32,8 @@
             "@id": "{{ SITE_ORIGIN }}/#person",
             "name": "{{ AUTHOR }}",
             "url": "{{ SITE_ORIGIN }}/",
-            "description": "Engineering leader. Builder of data platforms, developer tooling, and reliable distributed backends.",
-            "jobTitle": "Engineering Leader",
+            "description": "Senior engineering leader for 6–12 month embedded engagements. Architecture, technical decision-making, and delivery leadership for product engineering teams.",
+            "jobTitle": "Embedded Engineering Leader",
             "alumniOf": {
                 "@type": "CollegeOrUniversity",
                 "name": "Vellore Institute of Technology"
@@ -44,30 +41,31 @@
             "sameAs": [
                 "https://github.com/mohitranka",
                 "https://www.linkedin.com/in/mohit-ranka",
+                "https://github.com/NorviaLabs/forge",
                 "{{ SITE_ORIGIN }}/atom.xml",
                 "{{ SITE_ORIGIN }}/rss.xml"
             ],
             "hasOccupation": {
                 "@type": "Occupation",
-                "name": "Engineering Leader",
+                "name": "Embedded Engineering Leader",
                 "occupationalCategory": "Software Engineering Leadership & Architecture"
             },
             "knowsAbout": [
-                "data platforms",
-                "distributed systems",
-                "developer tooling",
-                "engineering leadership",
-                "identity and SSO",
-                "site reliability",
                 "software architecture",
-                "data infrastructure"
+                "technical decision-making",
+                "engineering delivery",
+                "engineering leadership",
+                "platform evolution",
+                "software engineering culture",
+                "distributed systems",
+                "developer tooling"
             ]
         },
         {
             "@type": "ProfilePage",
             "@id": "{{ SITE_ORIGIN }}/#profilepage",
             "url": "{{ SITE_ORIGIN }}/",
-            "name": "{{ SITENAME }} — Engineering Leader",
+            "name": "Mohit Ranka — Embedded Engineering Leader",
             "isPartOf": {
                 "@id": "{{ SITE_ORIGIN }}/#website"
             },
@@ -82,20 +80,120 @@
 {% endblock %}
 
 {% block content %}
-        <p>I'm an <a href="{{ SITEURL }}/blog/">engineering leader</a> who builds data platforms, developer tooling, and reliable distributed backends. I prefer clarity over cleverness, long-term impact over short wins, and shipping work that scales from one team to many.</p>
+        <section class="hero">
+            <h1 class="hero-title">Senior engineering leadership for hard, well-defined problems.</h1>
+            <p class="hero-lede">I embed with one product engineering team for 6–12 months and own an important technical or delivery objective.</p>
+            <p class="hero-lede hero-lede--secondary">You define the problem and the outcome. I own how it gets solved.</p>
 
-        <p>My sweet spot is turning fuzzy product questions into pragmatic, well-instrumented systems that survive real traffic and real people. I've done that at LinkedIn, Postman, and Booking.com — more on the <a href="{{ SITEURL }}/work/">work</a> page.</p>
+            <ul class="engagement-meta" aria-label="Background">
+                <li>Previously Booking.com, Postman, LinkedIn</li>
+            </ul>
 
-        {% if articles %}
-        <h2 class="section-label">Selected writing</h2>
-        <ul class="article-list home-writing-list">
-            {% for article in articles[:5] %}
-            <li class="article-item">
-                <a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a>
-            </li>
-            {% endfor %}
-        </ul>
-        {% endif %}
+            <div class="hero-actions">
+                <a class="btn-primary" href="{{ SITEURL }}/contact/">Discuss an engagement</a>
+                <a class="btn-secondary" href="#selected-impact">See selected work</a>
+            </div>
+        </section>
 
-        <p class="site-footer">You can <a href="{{ SITEURL }}/blog/">read more writing</a>, browse my <a href="https://github.com/mohitranka" target="_blank" rel="noopener noreferrer">code</a>, or <a href="https://www.linkedin.com/in/mohit-ranka" target="_blank" rel="noopener noreferrer">connect on LinkedIn</a>. <a href="{{ SITEURL }}/contact/">Reach out</a> if interested.</p>
+        <section class="home-section">
+            <h2 class="section-label">When to bring me in</h2>
+            <ul class="situation-list">
+                <li>A critical engineering initiative is losing time.</li>
+                <li>The team needs senior technical direction without another permanent management layer.</li>
+                <li>Architecture or technical decisions have become bottlenecks.</li>
+                <li>The outcome is clear, but ownership of how to reach it is not.</li>
+                <li>A platform needs to evolve without slowing product delivery.</li>
+            </ul>
+        </section>
+
+        <section class="home-section">
+            <h2 class="section-label">What I do</h2>
+            <p>I work across architecture and execution because they are the same problem: deciding what to build, how it should work, and keeping delivery moving as the system evolves.</p>
+            <ul class="area-list" aria-label="Areas of work">
+                <li>architecture</li>
+                <li>technical decision-making</li>
+                <li>engineering delivery</li>
+                <li>removing execution bottlenecks</li>
+                <li>engineering standards</li>
+                <li>platform evolution</li>
+                <li>software engineering culture</li>
+                <li>connecting technical decisions to business outcomes</li>
+            </ul>
+        </section>
+
+        <section class="home-section" id="selected-impact">
+            <h2 class="section-label">Selected impact</h2>
+            <ul class="impact-list">
+                <li class="impact-item">
+                    <h3 class="impact-name"><a href="https://www.booking.com" target="_blank" rel="noopener noreferrer">Booking.com</a></h3>
+                    <p class="impact-outcome">Built authentication and authorization infrastructure supporting multiple Booking.com portfolio products at roughly 1M requests per second.</p>
+                </li>
+                <li class="impact-item">
+                    <h3 class="impact-name"><a href="https://www.postman.com" target="_blank" rel="noopener noreferrer">Postman</a></h3>
+                    <p class="impact-outcome">Led engineering around Runtime and core developer workflows for one of the world's most widely used API platforms.</p>
+                </li>
+                <li class="impact-item">
+                    <h3 class="impact-name"><a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a></h3>
+                    <p class="impact-outcome">Led enterprise data-platform work supporting major business functions and improving how quickly teams could access and act on data.</p>
+                </li>
+                <li class="impact-item">
+                    <h3 class="impact-name">
+                        <a href="https://github.com/NorviaLabs/forge" target="_blank" rel="noopener noreferrer">Forge</a>
+                        <span class="impact-tag">Open source</span>
+                    </h3>
+                    <p class="impact-outcome">Creator of Forge, a terminal-native AI coding environment combining agent conversation, repository navigation, editing, shell execution, diffs, approvals, and durable sessions in one workspace.</p>
+                </li>
+            </ul>
+        </section>
+
+        <section class="home-section">
+            <h2 class="section-label">How I work</h2>
+            <div class="principles">
+                <div class="principle">
+                    <h3>Defined problem. Open solution space.</h3>
+                    <p>You stay clear on the problem and the outcome. The how is mine to own.</p>
+                </div>
+                <div class="principle">
+                    <h3>Close to the team.</h3>
+                    <p>I work with one product engineering team, embedded with them day to day rather than reviewing from the outside.</p>
+                </div>
+                <div class="principle">
+                    <h3>Technical leadership, not management theatre.</h3>
+                    <p>Architecture, engineering judgment, delivery, and engineering culture. No extra reporting layers, no meetings for their own sake.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="home-section">
+            <h2 class="section-label">About</h2>
+            <p>I have spent 15+ years across hands-on engineering and engineering leadership at Booking.com, Postman, LinkedIn, and Moveworks.</p>
+            <p>I work at the boundary between technical leadership and engineering management: close enough to the code to make sound technical calls, senior enough to own delivery and the decisions around it.</p>
+            <p>I build <a href="https://github.com/NorviaLabs/forge" target="_blank" rel="noopener noreferrer">Forge</a> through Norvia Labs and take on a small number of embedded engagements. Based in India, working remotely with teams internationally.</p>
+        </section>
+
+        <section class="home-section">
+            <h2 class="section-label">Engagement</h2>
+            <dl class="engagement-details">
+                <div class="detail-row">
+                    <dt>Typical engagement</dt>
+                    <dd>6–12 months</dd>
+                </div>
+                <div class="detail-row">
+                    <dt>Team</dt>
+                    <dd>One product engineering team</dd>
+                </div>
+                <div class="detail-row">
+                    <dt>Location</dt>
+                    <dd>Fully remote</dd>
+                </div>
+            </dl>
+        </section>
+
+        <section class="home-section final-cta">
+            <h2>Have an engineering problem that needs an owner?</h2>
+            <p>Tell me what needs to change and why it matters. We can work out the rest in a conversation.</p>
+            <a class="btn-primary" href="{{ SITEURL }}/contact/">Start a conversation</a>
+        </section>
+
+        <p class="site-footer">I also <a href="{{ SITEURL }}/blog/">write about engineering leadership and platforms</a>, and you can find my <a href="https://github.com/mohitranka" target="_blank" rel="noopener noreferrer">code on GitHub</a> or <a href="https://www.linkedin.com/in/mohit-ranka" target="_blank" rel="noopener noreferrer">connect on LinkedIn</a>.</p>
 {% endblock %}

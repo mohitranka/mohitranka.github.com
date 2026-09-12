@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Work — Mohit Ranka</title>
-    <meta name="description" content="Engineering leadership on data platforms, developer tooling, and identity systems at LinkedIn, Postman, and Booking.com.">
+    <meta name="description" content="Embedded engineering leadership — architecture, technical direction, and delivery at Booking.com, Postman, and LinkedIn, and creator of Forge.">
     <meta name="author" content="Mohit Ranka">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://www.mohitranka.com/work/">
@@ -18,16 +18,23 @@
     <meta property="og:locale" content="en_US">
     <meta property="og:url" content="https://www.mohitranka.com/work/">
     <meta property="og:title" content="Work — Mohit Ranka">
-    <meta property="og:description" content="Engineering leadership on data platforms, developer tooling, and identity systems at LinkedIn, Postman, and Booking.com.">
+    <meta property="og:description" content="Embedded engineering leadership — architecture, technical direction, and delivery at Booking.com, Postman, and LinkedIn, and creator of Forge.">
     <meta property="og:image" content="https://www.mohitranka.com/theme/images/og.png">
     <meta property="og:image:alt" content="Mohit Ranka — Engineering Leader">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Work — Mohit Ranka">
-    <meta name="twitter:description" content="Engineering leadership on data platforms, developer tooling, and identity systems at LinkedIn, Postman, and Booking.com.">
+    <meta name="twitter:description" content="Embedded engineering leadership — architecture, technical direction, and delivery at Booking.com, Postman, and LinkedIn, and creator of Forge.">
     <meta name="twitter:image" content="https://www.mohitranka.com/theme/images/og.png">
     <meta name="twitter:image:alt" content="Mohit Ranka — Engineering Leader">
+    <script>
+        (function () {
+            var theme = 'dark';
+            try { theme = localStorage.getItem('theme') || 'dark'; } catch (e) {}
+            document.documentElement.setAttribute('data-theme', theme);
+        })();
+    </script>
     <link rel="preload" href="../theme/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="../theme/css/style.css">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-CWEDLBH79X"></script>
@@ -46,7 +53,7 @@
             "@id": "https://www.mohitranka.com/work/#webpage",
             "url": "https://www.mohitranka.com/work/",
             "name": "Work — Mohit Ranka",
-            "description": "Engineering leadership on data platforms, developer tooling, and identity systems at LinkedIn, Postman, and Booking.com.",
+            "description": "Embedded engineering leadership \u2014 architecture, technical direction, and delivery at Booking.com, Postman, and LinkedIn, and creator of Forge.",
             "isPartOf": {
                 "@type": "WebSite",
                 "@id": "https://www.mohitranka.com/#website"
@@ -83,33 +90,63 @@
                 <a href="../blog/">Writing</a>
                 <a href="../work/" aria-current="page">Work</a>
                 <a href="../contact/">Contact</a>
+                <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to light theme">
+                    <svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+                    <svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                </button>
             </nav>
         </header>
 
 <article>
     <h1>Work</h1>
     <div class="entry-content page-content">
-        <p>I lead and build systems that have to survive real traffic, real consumers, and real org politics — data platforms, developer tooling, and identity. The thread across companies is the same: turn fuzzy product pressure into clear interfaces, measurable promises, and teams that can ship without heroics.</p>
+        <p>I take on a small number of embedded engagements: one product engineering team, one important objective, 6–12 months. The work spans architecture, technical decision-making, and delivery — not advice handed over the wall.</p>
 <section class="work-card">
-  <h2><a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a></h2>
-  <p class="work-role">Engineering leader · Enterprise data platform (GTM / analytics)</p>
-  <p class="work-outcome">Building the governed path for GTM datasets: named consumers, freshness and correctness promises, and migration off legacy Hadoop batch so BI on Power BI and Tableau can trust one system of record.</p>
+  <h2><a href="https://www.booking.com" target="_blank" rel="noopener noreferrer">Booking.com</a></h2>
+  <p class="work-role">Authentication and authorization infrastructure</p>
+  <p class="work-outcome">Built authentication and authorization infrastructure supporting multiple Booking.com portfolio products at roughly 1M requests per second.</p>
 </section>
 
 <section class="work-card">
   <h2><a href="https://www.postman.com" target="_blank" rel="noopener noreferrer">Postman</a></h2>
-  <p class="work-role">Engineering manager · Desktop → web · 0→1 incubation</p>
-  <p class="work-outcome">Took a desktop-native API product used by millions of developers to the web under hard browser and brand constraints, and incubated Labs work beyond HTTP with a clear path to graduate or kill experiments.</p>
+  <p class="work-role">Runtime and core developer workflows</p>
+  <p class="work-outcome">Led engineering around Runtime and core developer workflows for one of the world's most widely used API platforms.</p>
 </section>
 
 <section class="work-card">
-  <h2><a href="https://www.booking.com" target="_blank" rel="noopener noreferrer">Booking.com</a></h2>
-  <p class="work-role">Engineering · Identity and SSO</p>
-  <p class="work-outcome">Built and operated identity and SSO under production traffic, where failures show up first as ownership and session-semantics problems — not crypto bugs.</p>
+  <h2><a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a></h2>
+  <p class="work-role">Enterprise data platform</p>
+  <p class="work-outcome">Led enterprise data-platform work supporting major business functions and improving how quickly teams could access and act on data.</p>
 </section>
+
+<section class="work-card">
+  <h2><a href="https://github.com/NorviaLabs/forge" target="_blank" rel="noopener noreferrer">Forge</a> <span class="impact-tag">Open source</span></h2>
+  <p class="work-role">Creator · Norvia Labs</p>
+  <p class="work-outcome">Forge is a terminal-native AI coding environment combining agent conversation, repository navigation, editing, shell execution, diffs, approvals, and durable sessions in one workspace.</p>
+</section>
+
+<p>If you have an engineering problem that fits this model, tell me what needs to change and why it matters — <a href="/contact/">start a conversation</a>.</p>
     </div>
 </article>
     </main>
+    <script>
+        (function () {
+            var root = document.documentElement;
+            var btn = document.getElementById('theme-toggle');
+            if (!btn) return;
+            function sync() {
+                var dark = root.getAttribute('data-theme') !== 'light';
+                btn.setAttribute('aria-label', dark ? 'Switch to light theme' : 'Switch to dark theme');
+            }
+            sync();
+            btn.addEventListener('click', function () {
+                var next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+                root.setAttribute('data-theme', next);
+                try { localStorage.setItem('theme', next); } catch (e) {}
+                sync();
+            });
+        })();
+    </script>
 </body>
 
 </html>

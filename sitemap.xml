@@ -2,55 +2,55 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.mohitranka.com/</loc>
-    <lastmod>2026-08-12</lastmod>
+    <lastmod>2026-09-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://www.mohitranka.com/blog/</loc>
-    <lastmod>2026-08-12</lastmod>
+    <lastmod>2026-09-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.mohitranka.com/tags/</loc>
-    <lastmod>2026-08-12</lastmod>
+    <lastmod>2026-09-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://www.mohitranka.com/work/</loc>
-    <lastmod>2026-08-12</lastmod>
+    <lastmod>2026-09-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.mohitranka.com/contact/</loc>
-    <lastmod>2026-08-12</lastmod>
+    <lastmod>2026-09-12</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.mohitranka.com/llms.txt</loc>
-    <lastmod>2026-08-12</lastmod>
+    <lastmod>2026-09-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://www.mohitranka.com/llms-full.txt</loc>
-    <lastmod>2026-08-12</lastmod>
+    <lastmod>2026-09-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
     <loc>https://www.mohitranka.com/atom.xml</loc>
-    <lastmod>2026-08-12</lastmod>
+    <lastmod>2026-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
     <loc>https://www.mohitranka.com/rss.xml</loc>
-    <lastmod>2026-08-12</lastmod>
+    <lastmod>2026-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.4</priority>
   </url>
@@ -134,79 +134,79 @@
   </url>
   <url>
     <loc>https://www.mohitranka.com/tags/architecture/</loc>
-    <lastmod>2026-08-12</lastmod>
+    <lastmod>2026-09-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
     <loc>https://www.mohitranka.com/tags/data-platforms/</loc>
-    <lastmod>2026-08-12</lastmod>
+    <lastmod>2026-09-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
     <loc>https://www.mohitranka.com/tags/databases/</loc>
-    <lastmod>2026-08-12</lastmod>
+    <lastmod>2026-09-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
     <loc>https://www.mohitranka.com/tags/developer-tooling/</loc>
-    <lastmod>2026-08-12</lastmod>
+    <lastmod>2026-09-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
     <loc>https://www.mohitranka.com/tags/distributed-systems/</loc>
-    <lastmod>2026-08-12</lastmod>
+    <lastmod>2026-09-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
     <loc>https://www.mohitranka.com/tags/engineering-leadership/</loc>
-    <lastmod>2026-08-12</lastmod>
+    <lastmod>2026-09-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
     <loc>https://www.mohitranka.com/tags/identity/</loc>
-    <lastmod>2026-08-12</lastmod>
+    <lastmod>2026-09-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
     <loc>https://www.mohitranka.com/tags/management/</loc>
-    <lastmod>2026-08-12</lastmod>
+    <lastmod>2026-09-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
     <loc>https://www.mohitranka.com/tags/observability/</loc>
-    <lastmod>2026-08-12</lastmod>
+    <lastmod>2026-09-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
     <loc>https://www.mohitranka.com/tags/platforms/</loc>
-    <lastmod>2026-08-12</lastmod>
+    <lastmod>2026-09-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
     <loc>https://www.mohitranka.com/tags/product/</loc>
-    <lastmod>2026-08-12</lastmod>
+    <lastmod>2026-09-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
     <loc>https://www.mohitranka.com/tags/reliability/</loc>
-    <lastmod>2026-08-12</lastmod>
+    <lastmod>2026-09-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
     <loc>https://www.mohitranka.com/tags/security/</loc>
-    <lastmod>2026-08-12</lastmod>
+    <lastmod>2026-09-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>

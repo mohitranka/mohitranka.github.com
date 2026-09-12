@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Mohit Ranka - Categories</title>
-    <meta name="description" content="Engineering leader. Builder of data platforms, developer tooling, and reliable distributed backends.">
+    <meta name="description" content="Senior engineering leader for 6–12 month embedded engagements. Architecture, technical decision-making and delivery leadership for product engineering teams.">
     <meta name="author" content="Mohit Ranka">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://www.mohitranka.com/">
@@ -18,16 +18,23 @@
     <meta property="og:locale" content="en_US">
     <meta property="og:url" content="https://www.mohitranka.com/">
     <meta property="og:title" content="Mohit Ranka">
-    <meta property="og:description" content="Engineering leader. Builder of data platforms, developer tooling, and reliable distributed backends.">
+    <meta property="og:description" content="Senior engineering leader for 6–12 month embedded engagements. Architecture, technical decision-making and delivery leadership for product engineering teams.">
     <meta property="og:image" content="https://www.mohitranka.com/theme/images/og.png">
     <meta property="og:image:alt" content="Mohit Ranka — Engineering Leader">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Mohit Ranka">
-    <meta name="twitter:description" content="Engineering leader. Builder of data platforms, developer tooling, and reliable distributed backends.">
+    <meta name="twitter:description" content="Senior engineering leader for 6–12 month embedded engagements. Architecture, technical decision-making and delivery leadership for product engineering teams.">
     <meta name="twitter:image" content="https://www.mohitranka.com/theme/images/og.png">
     <meta name="twitter:image:alt" content="Mohit Ranka — Engineering Leader">
+    <script>
+        (function () {
+            var theme = 'dark';
+            try { theme = localStorage.getItem('theme') || 'dark'; } catch (e) {}
+            document.documentElement.setAttribute('data-theme', theme);
+        })();
+    </script>
     <link rel="preload" href="../theme/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="../theme/css/style.css">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-CWEDLBH79X"></script>
@@ -47,6 +54,10 @@
                 <a href="../blog/">Writing</a>
                 <a href="../work/">Work</a>
                 <a href="../contact/">Contact</a>
+                <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to light theme">
+                    <svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+                    <svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                </button>
             </nav>
         </header>
 
@@ -55,6 +66,24 @@
             <li><a href="../category/blog/">Blog</a> (13)</li>
     </ul>
     </main>
+    <script>
+        (function () {
+            var root = document.documentElement;
+            var btn = document.getElementById('theme-toggle');
+            if (!btn) return;
+            function sync() {
+                var dark = root.getAttribute('data-theme') !== 'light';
+                btn.setAttribute('aria-label', dark ? 'Switch to light theme' : 'Switch to dark theme');
+            }
+            sync();
+            btn.addEventListener('click', function () {
+                var next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+                root.setAttribute('data-theme', next);
+                try { localStorage.setItem('theme', next); } catch (e) {}
+                sync();
+            });
+        })();
+    </script>
 </body>
 
 </html>

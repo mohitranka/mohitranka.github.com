@@ -1,10 +1,12 @@
 Title: Contact
 Slug: contact
 Template: contact
-Summary: Tell me about platform, data, reliability, or engineering leadership challenges. Use the form on this page.
+Summary: Tell me about an engineering problem worth owning for 6–12 months.
 
-Tell me about **platform, data, reliability, or engineering leadership** challenges — the kind of work that shows up in my writing.
+Tell me what needs to change and why it matters.
 
-I am open to architecture reviews, advisory conversations, speaking, and thoughtful hiring threads. If you are not sure it fits, a short note is enough; I will say so.
+The best fit is a clearly defined, consequential engineering objective with executive sponsorship, a capable team, and genuine technical and delivery autonomy — typically one product engineering team, 3–4 days a week, for 6–12 months.
+
+I read everything myself. If it is not a fit, I will say so.
 
 You can also [connect on LinkedIn](https://www.linkedin.com/in/mohit-ranka).

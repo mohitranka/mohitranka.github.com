@@ -1,23 +1,31 @@
 Title: Work
 Slug: work
-Summary: Engineering leadership on data platforms, developer tooling, and identity systems at LinkedIn, Postman, and Booking.com.
+Summary: Embedded engineering leadership — architecture, technical direction, and delivery at Booking.com, Postman, and LinkedIn, and creator of Forge.
 
-I lead and build systems that have to survive real traffic, real consumers, and real org politics — data platforms, developer tooling, and identity. The thread across companies is the same: turn fuzzy product pressure into clear interfaces, measurable promises, and teams that can ship without heroics.
+I take on a small number of embedded engagements: one product engineering team, one important objective, 6–12 months. The work spans architecture, technical decision-making, and delivery — not advice handed over the wall.
 
 <section class="work-card">
-  <h2><a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a></h2>
-  <p class="work-role">Engineering leader · Enterprise data platform (GTM / analytics)</p>
-  <p class="work-outcome">Building the governed path for GTM datasets: named consumers, freshness and correctness promises, and migration off legacy Hadoop batch so BI on Power BI and Tableau can trust one system of record.</p>
+  <h2><a href="https://www.booking.com" target="_blank" rel="noopener noreferrer">Booking.com</a></h2>
+  <p class="work-role">Authentication and authorization infrastructure</p>
+  <p class="work-outcome">Built authentication and authorization infrastructure supporting multiple Booking.com portfolio products at roughly 1M requests per second.</p>
 </section>
 
 <section class="work-card">
   <h2><a href="https://www.postman.com" target="_blank" rel="noopener noreferrer">Postman</a></h2>
-  <p class="work-role">Engineering manager · Desktop → web · 0→1 incubation</p>
-  <p class="work-outcome">Took a desktop-native API product used by millions of developers to the web under hard browser and brand constraints, and incubated Labs work beyond HTTP with a clear path to graduate or kill experiments.</p>
+  <p class="work-role">Runtime and core developer workflows</p>
+  <p class="work-outcome">Led engineering around Runtime and core developer workflows for one of the world's most widely used API platforms.</p>
 </section>
 
 <section class="work-card">
-  <h2><a href="https://www.booking.com" target="_blank" rel="noopener noreferrer">Booking.com</a></h2>
-  <p class="work-role">Engineering · Identity and SSO</p>
-  <p class="work-outcome">Built and operated identity and SSO under production traffic, where failures show up first as ownership and session-semantics problems — not crypto bugs.</p>
+  <h2><a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a></h2>
+  <p class="work-role">Enterprise data platform</p>
+  <p class="work-outcome">Led enterprise data-platform work supporting major business functions and improving how quickly teams could access and act on data.</p>
 </section>
+
+<section class="work-card">
+  <h2><a href="https://github.com/NorviaLabs/forge" target="_blank" rel="noopener noreferrer">Forge</a> <span class="impact-tag">Open source</span></h2>
+  <p class="work-role">Creator · Norvia Labs</p>
+  <p class="work-outcome">Forge is a terminal-native AI coding environment combining agent conversation, repository navigation, editing, shell execution, diffs, approvals, and durable sessions in one workspace.</p>
+</section>
+
+If you have an engineering problem that fits this model, tell me what needs to change and why it matters — [start a conversation](/contact/).
