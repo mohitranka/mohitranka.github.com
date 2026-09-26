@@ -187,7 +187,7 @@ Cache eligibility and reuse depend on the provider's caching strategy. A coding 
 <li>A provider-specific wire request: <code>ModelRequest</code> object is formatted as per specific provider API before making the network request. </li>
 </ul>
 <figure class="post-figure forge-cache-diagram">
-  <img class="diagram-dark" src="../../images/blog/forge-request-construction.svg" alt="Forge request flow from system prompt, journaled history, new turn and tool schemas through preparation into a provider-neutral ModelRequest, then into provider-specific serializers" loading="lazy" width="1080" height="540">
+  <img class="diagram-dark" src="../../images/blog/forge-request-construction.svg?v=45747a7" alt="Forge request flow from system prompt, journaled history, new turn and tool schemas through preparation into a provider-neutral ModelRequest, then into provider-specific serializers" loading="lazy" width="1080" height="540">
   <img class="diagram-light" src="../../images/blog/forge-request-construction-light.svg" alt="Forge request flow from system prompt, journaled history, new turn and tool schemas through preparation into a provider-neutral ModelRequest, then into provider-specific serializers" loading="lazy" width="1080" height="540">
   <figcaption>
     <span class="fig-caption">Forge builds a canonical request; provider adapters serialize it and add their cache markers or routing hints.</span>
