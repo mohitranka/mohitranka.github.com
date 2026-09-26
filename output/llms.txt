@@ -25,6 +25,7 @@ Site: https://www.mohitranka.com
 
 ## Writing
 
+- [How Forge Structures Requests for Prompt Cache Reuse](https://www.mohitranka.com/blog/how-forge-structures-requests-for-prompt-cache-reuse/) (2026-09-24)
 - [The line manager role is disappearing faster than you think](https://www.mohitranka.com/blog/line-manager-role-is-disappearing/) (2026-07-21)
 - [Near-real-time is a product promise, not a Kafka cluster](https://www.mohitranka.com/blog/near-real-time-is-a-product-promise/) (2026-07-16)
 - [The platform team’s real job is interfaces](https://www.mohitranka.com/blog/platform-teams-real-job-is-interfaces/) (2025-11-13)
