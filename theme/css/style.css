@@ -1063,6 +1063,38 @@ hr {
   }
 }
 
+/* — Comments (giscus) — */
+.comments {
+  margin-top: 48px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+
+.comments-title {
+  font-size: 1.125rem;
+  font-weight: 500;
+  margin: 0 0 6px;
+  color: var(--fg);
+}
+
+.comments-note {
+  font-size: 0.875rem;
+  color: var(--fg-secondary);
+  margin: 0 0 20px;
+  line-height: 1.55;
+}
+
+/* Reserve space so the lazy-loaded iframe does not push the footer down. */
+.comments-embed {
+  min-height: 180px;
+}
+
+.comments-embed .giscus,
+.comments-embed iframe.giscus-frame {
+  width: 100%;
+  border: none;
+}
+
 /* — Selection — */
 ::selection {
   background: rgba(129, 140, 248, 0.25);

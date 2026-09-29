@@ -83,5 +83,23 @@ EXTRA_PATH_METADATA = {
 # Google Analytics 4 (fine for local + production; filter localhost in GA if desired)
 GOOGLE_ANALYTICS = os.environ.get('GOOGLE_ANALYTICS', 'G-CWEDLBH79X')
 
+# Comments — giscus (GitHub Discussions), rendered on article pages only.
+# Comments live in the "General" discussion category of this repo; the giscus
+# app is installed on it. Both ids below come from https://giscus.app — if the
+# repo is ever renamed or the category changes, regenerate them there.
+# While either id is blank, no comments section is rendered at all.
+# Set GISCUS = None to turn comments off site-wide.
+GISCUS = {
+    'repo': 'mohitranka/mohitranka.github.com',
+    'repo_id': 'MDEwOlJlcG9zaXRvcnkyMjc2OTA4',
+    'category': 'General',
+    'category_id': 'DIC_kwDOACK-LM4DGq8R',
+    'mapping': 'pathname',  # one discussion per canonical /blog/<slug>/ URL
+    'reactions_enabled': '1',
+    'input_position': 'top',
+    'lang': 'en',
+    'loading': 'lazy',  # defer the iframe until the reader scrolls to it
+}
+
 # Clean output/ on each build (never point OUTPUT_PATH at repo root with this on)
 DELETE_OUTPUT_DIRECTORY = True

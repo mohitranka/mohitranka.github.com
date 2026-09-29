@@ -1,0 +1,38 @@
+{#
+  Comments — giscus (GitHub Discussions).
+  Configured in pelicanconf.py; opt out per post with "Comments: false" in the
+  article front matter.
+#}
+{% set comments_off = article.comments is defined and article.comments|string|lower in ('false', 'no', 'off', '0') %}
+{% if GISCUS and GISCUS.repo_id and GISCUS.category_id and not comments_off %}
+<section class="comments" id="comments" aria-labelledby="comments-title">
+    <h2 class="comments-title" id="comments-title">Comments</h2>
+    <p class="comments-note">
+        Sign in with GitHub to join the discussion.
+    </p>
+    <div class="comments-embed">
+        <script src="https://giscus.app/client.js"
+                data-repo="{{ GISCUS.repo }}"
+                data-repo-id="{{ GISCUS.repo_id }}"
+                data-category="{{ GISCUS.category }}"
+                data-category-id="{{ GISCUS.category_id }}"
+                data-mapping="{{ GISCUS.mapping }}"
+                data-reactions-enabled="{{ GISCUS.reactions_enabled }}"
+                data-emit-metadata="0"
+                data-input-position="{{ GISCUS.input_position }}"
+                data-theme="dark"
+                data-lang="{{ GISCUS.lang }}"
+                data-loading="{{ GISCUS.loading }}"
+                crossorigin="anonymous"
+                async>
+        </script>
+    </div>
+    <noscript>
+        <p class="comments-note">
+            Comments need JavaScript. You can also
+            <a href="https://github.com/{{ GISCUS.repo }}/discussions">read them on GitHub</a>.
+        </p>
+    </noscript>
+</section>
+<script src="{{ SITEURL }}/theme/js/comments.js" defer></script>
+{% endif %}
