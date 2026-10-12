@@ -1,0 +1,615 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-12T14:26:56+00:00",
+  "title": "Design System: Mohit Ranka",
+  "extensions": {
+    "colorMeta": {
+      "pen-blue": {
+        "role": "primary",
+        "displayName": "Fountain-Pen Blue",
+        "canonical": "#2348a8",
+        "tonalRamp": [
+          "oklch(15% 0.14 266)",
+          "oklch(25% 0.14 266)",
+          "oklch(38% 0.14 266)",
+          "oklch(50% 0.14 266)",
+          "oklch(62% 0.14 266)",
+          "oklch(74% 0.14 266)",
+          "oklch(86% 0.14 266)",
+          "oklch(95% 0.14 266)"
+        ]
+      },
+      "pen-blue-night": {
+        "role": "primary",
+        "displayName": "Fountain-Pen Blue (night)",
+        "canonical": "#93adff",
+        "tonalRamp": [
+          "oklch(15% 0.14 266)",
+          "oklch(25% 0.14 266)",
+          "oklch(38% 0.14 266)",
+          "oklch(50% 0.14 266)",
+          "oklch(62% 0.14 266)",
+          "oklch(74% 0.14 266)",
+          "oklch(86% 0.14 266)",
+          "oklch(95% 0.14 266)"
+        ]
+      },
+      "pen-wash": {
+        "role": "primary",
+        "displayName": "Pen Wash",
+        "canonical": "rgba(35, 72, 168, 0.1)",
+        "tonalRamp": [
+          "oklch(15% 0.14 266)",
+          "oklch(25% 0.14 266)",
+          "oklch(38% 0.14 266)",
+          "oklch(50% 0.14 266)",
+          "oklch(62% 0.14 266)",
+          "oklch(74% 0.14 266)",
+          "oklch(86% 0.14 266)",
+          "oklch(95% 0.14 266)"
+        ]
+      },
+      "pen-wash-night": {
+        "role": "primary",
+        "displayName": "Pen Wash (night)",
+        "canonical": "rgba(147, 173, 255, 0.14)",
+        "tonalRamp": [
+          "oklch(15% 0.14 266)",
+          "oklch(25% 0.14 266)",
+          "oklch(38% 0.14 266)",
+          "oklch(50% 0.14 266)",
+          "oklch(62% 0.14 266)",
+          "oklch(74% 0.14 266)",
+          "oklch(86% 0.14 266)",
+          "oklch(95% 0.14 266)"
+        ]
+      },
+      "on-pen": {
+        "role": "neutral",
+        "displayName": "On Pen",
+        "canonical": "#ffffff",
+        "tonalRamp": [
+          "oklch(15% 0.015 270)",
+          "oklch(25% 0.015 270)",
+          "oklch(38% 0.015 270)",
+          "oklch(50% 0.015 270)",
+          "oklch(62% 0.015 270)",
+          "oklch(74% 0.015 270)",
+          "oklch(86% 0.015 270)",
+          "oklch(95% 0.015 270)"
+        ]
+      },
+      "on-pen-night": {
+        "role": "neutral",
+        "displayName": "On Pen (night)",
+        "canonical": "#0d1222",
+        "tonalRamp": [
+          "oklch(15% 0.14 266)",
+          "oklch(25% 0.14 266)",
+          "oklch(38% 0.14 266)",
+          "oklch(50% 0.14 266)",
+          "oklch(62% 0.14 266)",
+          "oklch(74% 0.14 266)",
+          "oklch(86% 0.14 266)",
+          "oklch(95% 0.14 266)"
+        ]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Paper",
+        "canonical": "#fbfaf6",
+        "tonalRamp": [
+          "oklch(15% 0.012 90)",
+          "oklch(25% 0.012 90)",
+          "oklch(38% 0.012 90)",
+          "oklch(50% 0.012 90)",
+          "oklch(62% 0.012 90)",
+          "oklch(74% 0.012 90)",
+          "oklch(86% 0.012 90)",
+          "oklch(95% 0.012 90)"
+        ]
+      },
+      "paper-night": {
+        "role": "neutral",
+        "displayName": "Paper (night)",
+        "canonical": "#15171c",
+        "tonalRamp": [
+          "oklch(15% 0.015 270)",
+          "oklch(25% 0.015 270)",
+          "oklch(38% 0.015 270)",
+          "oklch(50% 0.015 270)",
+          "oklch(62% 0.015 270)",
+          "oklch(74% 0.015 270)",
+          "oklch(86% 0.015 270)",
+          "oklch(95% 0.015 270)"
+        ]
+      },
+      "desk": {
+        "role": "neutral",
+        "displayName": "Desk",
+        "canonical": "#efede6",
+        "tonalRamp": [
+          "oklch(15% 0.012 90)",
+          "oklch(25% 0.012 90)",
+          "oklch(38% 0.012 90)",
+          "oklch(50% 0.012 90)",
+          "oklch(62% 0.012 90)",
+          "oklch(74% 0.012 90)",
+          "oklch(86% 0.012 90)",
+          "oklch(95% 0.012 90)"
+        ]
+      },
+      "desk-night": {
+        "role": "neutral",
+        "displayName": "Desk (night)",
+        "canonical": "#0d0f13",
+        "tonalRamp": [
+          "oklch(15% 0.015 270)",
+          "oklch(25% 0.015 270)",
+          "oklch(38% 0.015 270)",
+          "oklch(50% 0.015 270)",
+          "oklch(62% 0.015 270)",
+          "oklch(74% 0.015 270)",
+          "oklch(86% 0.015 270)",
+          "oklch(95% 0.015 270)"
+        ]
+      },
+      "desk-dot": {
+        "role": "neutral",
+        "displayName": "Desk Dot",
+        "canonical": "#d3cfc3",
+        "tonalRamp": [
+          "oklch(15% 0.012 90)",
+          "oklch(25% 0.012 90)",
+          "oklch(38% 0.012 90)",
+          "oklch(50% 0.012 90)",
+          "oklch(62% 0.012 90)",
+          "oklch(74% 0.012 90)",
+          "oklch(86% 0.012 90)",
+          "oklch(95% 0.012 90)"
+        ]
+      },
+      "desk-dot-night": {
+        "role": "neutral",
+        "displayName": "Desk Dot (night)",
+        "canonical": "#262a33",
+        "tonalRamp": [
+          "oklch(15% 0.015 270)",
+          "oklch(25% 0.015 270)",
+          "oklch(38% 0.015 270)",
+          "oklch(50% 0.015 270)",
+          "oklch(62% 0.015 270)",
+          "oklch(74% 0.015 270)",
+          "oklch(86% 0.015 270)",
+          "oklch(95% 0.015 270)"
+        ]
+      },
+      "paper-shade": {
+        "role": "neutral",
+        "displayName": "Paper Shade",
+        "canonical": "#f2f0e9",
+        "tonalRamp": [
+          "oklch(15% 0.012 90)",
+          "oklch(25% 0.012 90)",
+          "oklch(38% 0.012 90)",
+          "oklch(50% 0.012 90)",
+          "oklch(62% 0.012 90)",
+          "oklch(74% 0.012 90)",
+          "oklch(86% 0.012 90)",
+          "oklch(95% 0.012 90)"
+        ]
+      },
+      "paper-shade-night": {
+        "role": "neutral",
+        "displayName": "Paper Shade (night)",
+        "canonical": "#1c1f26",
+        "tonalRamp": [
+          "oklch(15% 0.015 270)",
+          "oklch(25% 0.015 270)",
+          "oklch(38% 0.015 270)",
+          "oklch(50% 0.015 270)",
+          "oklch(62% 0.015 270)",
+          "oklch(74% 0.015 270)",
+          "oklch(86% 0.015 270)",
+          "oklch(95% 0.015 270)"
+        ]
+      },
+      "code-paper": {
+        "role": "neutral",
+        "displayName": "Code Paper",
+        "canonical": "#f0eee7",
+        "tonalRamp": [
+          "oklch(15% 0.012 90)",
+          "oklch(25% 0.012 90)",
+          "oklch(38% 0.012 90)",
+          "oklch(50% 0.012 90)",
+          "oklch(62% 0.012 90)",
+          "oklch(74% 0.012 90)",
+          "oklch(86% 0.012 90)",
+          "oklch(95% 0.012 90)"
+        ]
+      },
+      "code-paper-night": {
+        "role": "neutral",
+        "displayName": "Code Paper (night)",
+        "canonical": "#1d2029",
+        "tonalRamp": [
+          "oklch(15% 0.015 270)",
+          "oklch(25% 0.015 270)",
+          "oklch(38% 0.015 270)",
+          "oklch(50% 0.015 270)",
+          "oklch(62% 0.015 270)",
+          "oklch(74% 0.015 270)",
+          "oklch(86% 0.015 270)",
+          "oklch(95% 0.015 270)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Blue-Black Ink",
+        "canonical": "#1c1d22",
+        "tonalRamp": [
+          "oklch(15% 0.015 270)",
+          "oklch(25% 0.015 270)",
+          "oklch(38% 0.015 270)",
+          "oklch(50% 0.015 270)",
+          "oklch(62% 0.015 270)",
+          "oklch(74% 0.015 270)",
+          "oklch(86% 0.015 270)",
+          "oklch(95% 0.015 270)"
+        ]
+      },
+      "ink-night": {
+        "role": "neutral",
+        "displayName": "Ink (night)",
+        "canonical": "#e7e9ef",
+        "tonalRamp": [
+          "oklch(15% 0.015 270)",
+          "oklch(25% 0.015 270)",
+          "oklch(38% 0.015 270)",
+          "oklch(50% 0.015 270)",
+          "oklch(62% 0.015 270)",
+          "oklch(74% 0.015 270)",
+          "oklch(86% 0.015 270)",
+          "oklch(95% 0.015 270)"
+        ]
+      },
+      "ink-soft": {
+        "role": "neutral",
+        "displayName": "Soft Ink",
+        "canonical": "#464852",
+        "tonalRamp": [
+          "oklch(15% 0.015 270)",
+          "oklch(25% 0.015 270)",
+          "oklch(38% 0.015 270)",
+          "oklch(50% 0.015 270)",
+          "oklch(62% 0.015 270)",
+          "oklch(74% 0.015 270)",
+          "oklch(86% 0.015 270)",
+          "oklch(95% 0.015 270)"
+        ]
+      },
+      "ink-soft-night": {
+        "role": "neutral",
+        "displayName": "Soft Ink (night)",
+        "canonical": "#b7bbc7",
+        "tonalRamp": [
+          "oklch(15% 0.015 270)",
+          "oklch(25% 0.015 270)",
+          "oklch(38% 0.015 270)",
+          "oklch(50% 0.015 270)",
+          "oklch(62% 0.015 270)",
+          "oklch(74% 0.015 270)",
+          "oklch(86% 0.015 270)",
+          "oklch(95% 0.015 270)"
+        ]
+      },
+      "ink-faint": {
+        "role": "neutral",
+        "displayName": "Faint Ink",
+        "canonical": "#676a74",
+        "tonalRamp": [
+          "oklch(15% 0.015 270)",
+          "oklch(25% 0.015 270)",
+          "oklch(38% 0.015 270)",
+          "oklch(50% 0.015 270)",
+          "oklch(62% 0.015 270)",
+          "oklch(74% 0.015 270)",
+          "oklch(86% 0.015 270)",
+          "oklch(95% 0.015 270)"
+        ]
+      },
+      "ink-faint-night": {
+        "role": "neutral",
+        "displayName": "Faint Ink (night)",
+        "canonical": "#8d92a0",
+        "tonalRamp": [
+          "oklch(15% 0.015 270)",
+          "oklch(25% 0.015 270)",
+          "oklch(38% 0.015 270)",
+          "oklch(50% 0.015 270)",
+          "oklch(62% 0.015 270)",
+          "oklch(74% 0.015 270)",
+          "oklch(86% 0.015 270)",
+          "oklch(95% 0.015 270)"
+        ]
+      },
+      "rule": {
+        "role": "neutral",
+        "displayName": "Rule",
+        "canonical": "#e2dfd6",
+        "tonalRamp": [
+          "oklch(15% 0.012 90)",
+          "oklch(25% 0.012 90)",
+          "oklch(38% 0.012 90)",
+          "oklch(50% 0.012 90)",
+          "oklch(62% 0.012 90)",
+          "oklch(74% 0.012 90)",
+          "oklch(86% 0.012 90)",
+          "oklch(95% 0.012 90)"
+        ]
+      },
+      "rule-night": {
+        "role": "neutral",
+        "displayName": "Rule (night)",
+        "canonical": "#2b2f39",
+        "tonalRamp": [
+          "oklch(15% 0.015 270)",
+          "oklch(25% 0.015 270)",
+          "oklch(38% 0.015 270)",
+          "oklch(50% 0.015 270)",
+          "oklch(62% 0.015 270)",
+          "oklch(74% 0.015 270)",
+          "oklch(86% 0.015 270)",
+          "oklch(95% 0.015 270)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Homepage identity sentence only."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Essay and page titles."
+      },
+      "headline-sm": {
+        "displayName": "Headline Sm",
+        "purpose": "h2 inside Markdown pages (Work)."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Shelf headings, section titles, essay h2."
+      },
+      "title-sm": {
+        "displayName": "Title Sm",
+        "purpose": "Essay-row titles."
+      },
+      "body-reading": {
+        "displayName": "Body Reading",
+        "purpose": "Essay body at the 42rem measure."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Base text."
+      },
+      "ui": {
+        "displayName": "Ui",
+        "purpose": "Nav, shelf links, descriptions, form leads."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Uppercase metadata: dates, Older/Newer, meta lines; never a kicker."
+      },
+      "hand": {
+        "displayName": "Hand",
+        "purpose": "Margin notes in pen blue, rotated -1.5deg; facts from the site only."
+      },
+      "hand-year": {
+        "displayName": "Hand Year",
+        "purpose": "Handwritten years in the Writing archive margin."
+      },
+      "mono": {
+        "displayName": "Mono",
+        "purpose": "Inline code and code blocks."
+      }
+    },
+    "shadows": [
+      {
+        "name": "book-on-paper",
+        "value": "0 1px 2px rgba(28, 29, 34, 0.08), 0 8px 24px -12px rgba(28, 29, 34, 0.3)",
+        "purpose": "Book covers only (light)."
+      },
+      {
+        "name": "book-on-paper-night",
+        "value": "0 1px 2px rgba(0, 0, 0, 0.5), 0 10px 28px -14px rgba(0, 0, 0, 0.85)",
+        "purpose": "Book covers only (night)."
+      },
+      {
+        "name": "sheet-edge",
+        "value": "1px 0 0 var(--rule), -1px 0 0 var(--rule)",
+        "purpose": "The paper sheet's edges against the dotted desk."
+      },
+      {
+        "name": "focus-halo",
+        "value": "0 0 0 3px var(--accent-wash)",
+        "purpose": "Input focus halo, with pen-blue border."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "The single easing for every transition."
+      },
+      {
+        "name": "state",
+        "value": "0.2s",
+        "purpose": "Color, underline thickness, border changes."
+      },
+      {
+        "name": "lift",
+        "value": "0.35s",
+        "purpose": "Book cover lift (-4px) and identity-sentence highlight fill."
+      },
+      {
+        "name": "underline-in",
+        "value": "0.9s, staggered 0.12s",
+        "purpose": "Identity sentence underlines draw in on load; reduced-motion gated."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "article-nav",
+        "value": "560px"
+      },
+      {
+        "name": "work-and-archive",
+        "value": "640px"
+      },
+      {
+        "name": "shelf",
+        "value": "760px"
+      },
+      {
+        "name": "books-seven",
+        "value": "900px"
+      },
+      {
+        "name": "intro-note",
+        "value": "1000px"
+      },
+      {
+        "name": "entry-year",
+        "value": "1100px"
+      },
+      {
+        "name": "list-note",
+        "value": "1240px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Submit Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The one filled button; pen blue, used for the contact form.",
+      "html": "<button class=\"ds-btn\">Send message</button>",
+      "css": ":host{--font-display:'Bricolage Grotesque',ui-sans-serif,system-ui,sans-serif;--font-text:'Literata',Georgia,serif;--font-hand:'Kalam','Bradley Hand',cursive;--bg:#fbfaf6;--surface:#f2f0e9;--ink:#1c1d22;--ink-2:#464852;--ink-3:#676a74;--rule:#e2dfd6;--accent:#2348a8;--accent-ink:#fff;--accent-wash:rgba(35,72,168,.1);--ease-out:cubic-bezier(0.16,1,0.3,1);--shadow:0 1px 2px rgba(28,29,34,.08),0 8px 24px -12px rgba(28,29,34,.3)} .ds-btn{appearance:none;padding:.75rem 1.3rem;border:0;border-radius:4px;background:var(--accent);color:var(--accent-ink);font-family:var(--font-display);font-size:1rem;font-weight:600;cursor:pointer;transition:filter .2s var(--ease-out)}.ds-btn:hover{filter:brightness(1.08)}.ds-btn:focus-visible{outline:2px solid var(--accent);outline-offset:3px}.ds-btn:disabled{opacity:.6;cursor:progress}"
+    },
+    {
+      "name": "Text Field",
+      "kind": "input",
+      "refersTo": "input-field",
+      "description": "Paper field with rule border; pen-blue border and wash halo on focus.",
+      "html": "<label class=\"ds-field\"><span>Email <span class=\"ds-req\">*</span></span><input type=\"email\" placeholder=\"you@example.com\"></label>",
+      "css": ":host{--font-display:'Bricolage Grotesque',ui-sans-serif,system-ui,sans-serif;--font-text:'Literata',Georgia,serif;--font-hand:'Kalam','Bradley Hand',cursive;--bg:#fbfaf6;--surface:#f2f0e9;--ink:#1c1d22;--ink-2:#464852;--ink-3:#676a74;--rule:#e2dfd6;--accent:#2348a8;--accent-ink:#fff;--accent-wash:rgba(35,72,168,.1);--ease-out:cubic-bezier(0.16,1,0.3,1);--shadow:0 1px 2px rgba(28,29,34,.08),0 8px 24px -12px rgba(28,29,34,.3)} .ds-field{display:flex;flex-direction:column;gap:.4rem;font-family:var(--font-display);font-size:.875rem;font-weight:600;color:var(--ink)}.ds-req{color:var(--accent)}.ds-field input{padding:.7rem .8rem;border:1px solid var(--rule);border-radius:4px;background:var(--bg);color:var(--ink);font-family:var(--font-display);font-size:1rem;font-weight:400;transition:border-color .2s var(--ease-out),box-shadow .2s var(--ease-out)}.ds-field input::placeholder{color:var(--ink-3)}.ds-field input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-wash)}"
+    },
+    {
+      "name": "Site Navigation",
+      "kind": "nav",
+      "refersTo": "nav-link",
+      "description": "Slim header: Literata name left, Bricolage links right, current page underlined in pen blue.",
+      "html": "<header class=\"ds-nav\"><a class=\"ds-logo\" href=\"#\">Mohit Ranka</a><nav><a href=\"#\" aria-current=\"page\">Writing</a><a href=\"#\">Work</a><a href=\"#\">Library</a><a href=\"#\">Contact</a></nav></header>",
+      "css": ":host{--font-display:'Bricolage Grotesque',ui-sans-serif,system-ui,sans-serif;--font-text:'Literata',Georgia,serif;--font-hand:'Kalam','Bradley Hand',cursive;--bg:#fbfaf6;--surface:#f2f0e9;--ink:#1c1d22;--ink-2:#464852;--ink-3:#676a74;--rule:#e2dfd6;--accent:#2348a8;--accent-ink:#fff;--accent-wash:rgba(35,72,168,.1);--ease-out:cubic-bezier(0.16,1,0.3,1);--shadow:0 1px 2px rgba(28,29,34,.08),0 8px 24px -12px rgba(28,29,34,.3)} .ds-nav{display:flex;justify-content:space-between;align-items:center;gap:.5rem 1.5rem;padding:1.5rem 0;background:var(--bg)}.ds-logo{font-family:var(--font-text);font-size:1.1875rem;font-weight:600;color:var(--ink);text-decoration:none}.ds-nav nav{display:flex;gap:.5rem 1.5rem;font-family:var(--font-display);font-size:.9375rem;font-weight:500}.ds-nav nav a{color:var(--ink-2);text-decoration:none;padding:.25rem 0}.ds-nav nav a:hover{color:var(--ink)}.ds-nav nav a[aria-current=page]{color:var(--ink);text-decoration:underline;text-decoration-color:var(--accent);text-decoration-thickness:2px;text-underline-offset:.35em}.ds-nav a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}"
+    },
+    {
+      "name": "Tag Chip",
+      "kind": "chip",
+      "refersTo": "tag-chip",
+      "description": "Rule-bordered pill; turns pen blue on hover.",
+      "html": "<a class=\"ds-chip\" href=\"#\">Platform</a>",
+      "css": ":host{--font-display:'Bricolage Grotesque',ui-sans-serif,system-ui,sans-serif;--font-text:'Literata',Georgia,serif;--font-hand:'Kalam','Bradley Hand',cursive;--bg:#fbfaf6;--surface:#f2f0e9;--ink:#1c1d22;--ink-2:#464852;--ink-3:#676a74;--rule:#e2dfd6;--accent:#2348a8;--accent-ink:#fff;--accent-wash:rgba(35,72,168,.1);--ease-out:cubic-bezier(0.16,1,0.3,1);--shadow:0 1px 2px rgba(28,29,34,.08),0 8px 24px -12px rgba(28,29,34,.3)} .ds-chip{display:inline-block;padding:.2rem .6rem;border:1px solid var(--rule);border-radius:999px;font-family:var(--font-display);font-size:.8125rem;font-weight:500;line-height:1.4;color:var(--ink-2);text-decoration:none;transition:border-color .2s var(--ease-out),color .2s var(--ease-out)}.ds-chip:hover{border-color:var(--accent);color:var(--accent)}.ds-chip:focus-visible{outline:2px solid var(--accent);outline-offset:3px}"
+    },
+    {
+      "name": "Identity Sentence",
+      "kind": "custom",
+      "refersTo": "display",
+      "description": "Signature: Display sentence whose verbs are links with pen-blue bar underlines that fill on hover.",
+      "html": "<h1 class=\"ds-intro\">Mohit builds <a href=\"#\">software</a>, reads <a href=\"#\">widely</a>, and <a href=\"#\">writes it all down</a> here.</h1>",
+      "css": ":host{--font-display:'Bricolage Grotesque',ui-sans-serif,system-ui,sans-serif;--font-text:'Literata',Georgia,serif;--font-hand:'Kalam','Bradley Hand',cursive;--bg:#fbfaf6;--surface:#f2f0e9;--ink:#1c1d22;--ink-2:#464852;--ink-3:#676a74;--rule:#e2dfd6;--accent:#2348a8;--accent-ink:#fff;--accent-wash:rgba(35,72,168,.1);--ease-out:cubic-bezier(0.16,1,0.3,1);--shadow:0 1px 2px rgba(28,29,34,.08),0 8px 24px -12px rgba(28,29,34,.3)} .ds-intro{max-width:20ch;margin:0;font-family:var(--font-text);font-size:clamp(2.1rem,1.3rem + 3.2vw,3.6rem);font-weight:600;line-height:1.12;letter-spacing:-.025em;color:var(--ink)}.ds-intro a{color:inherit;text-decoration:none;background-image:linear-gradient(var(--accent),var(--accent));background-repeat:no-repeat;background-position:0 92%;background-size:100% .09em;transition:background-size .35s var(--ease-out),color .2s var(--ease-out)}.ds-intro a:hover,.ds-intro a:focus-visible{color:var(--accent-ink);background-size:100% 100%;outline:none}"
+    },
+    {
+      "name": "Margin Note",
+      "kind": "custom",
+      "refersTo": "margin-note",
+      "description": "Signature: short Kalam aside in pen blue with a pen-stroke leader; facts from the site only.",
+      "html": "<p class=\"ds-note\">first entry, 2013: “RDBMS vs. NoSQL?”</p>",
+      "css": ":host{--font-display:'Bricolage Grotesque',ui-sans-serif,system-ui,sans-serif;--font-text:'Literata',Georgia,serif;--font-hand:'Kalam','Bradley Hand',cursive;--bg:#fbfaf6;--surface:#f2f0e9;--ink:#1c1d22;--ink-2:#464852;--ink-3:#676a74;--rule:#e2dfd6;--accent:#2348a8;--accent-ink:#fff;--accent-wash:rgba(35,72,168,.1);--ease-out:cubic-bezier(0.16,1,0.3,1);--shadow:0 1px 2px rgba(28,29,34,.08),0 8px 24px -12px rgba(28,29,34,.3)} .ds-note{display:block;max-width:14rem;margin:0;font-family:var(--font-hand);font-size:1.125rem;line-height:1.3;color:var(--accent);transform:rotate(-1.5deg);transform-origin:left top}.ds-note::before{content:'';display:block;width:2.5rem;margin-bottom:.5rem;border-top:1.5px solid var(--accent)}"
+    },
+    {
+      "name": "Essay Row",
+      "kind": "card",
+      "refersTo": "essay-row",
+      "description": "Title, uppercase date label, excerpt; whole row links, title turns pen blue.",
+      "html": "<a class=\"ds-essay\" href=\"#\"><span class=\"ds-essay-t\">The platform team’s real job is interfaces</span><span class=\"ds-essay-d\">13 November 2025</span><span class=\"ds-essay-x\">At LinkedIn, the Enterprise Data Platform was meant to be the centralized way teams consumed datasets.</span></a>",
+      "css": ":host{--font-display:'Bricolage Grotesque',ui-sans-serif,system-ui,sans-serif;--font-text:'Literata',Georgia,serif;--font-hand:'Kalam','Bradley Hand',cursive;--bg:#fbfaf6;--surface:#f2f0e9;--ink:#1c1d22;--ink-2:#464852;--ink-3:#676a74;--rule:#e2dfd6;--accent:#2348a8;--accent-ink:#fff;--accent-wash:rgba(35,72,168,.1);--ease-out:cubic-bezier(0.16,1,0.3,1);--shadow:0 1px 2px rgba(28,29,34,.08),0 8px 24px -12px rgba(28,29,34,.3)} .ds-essay{display:block;padding:1rem 0;border-top:1px solid var(--rule);text-decoration:none;color:var(--ink)}.ds-essay-t{display:block;font-family:var(--font-text);font-size:1.1875rem;font-weight:600;line-height:1.3;letter-spacing:-.01em;transition:color .2s var(--ease-out)}.ds-essay:hover .ds-essay-t{color:var(--accent)}.ds-essay-d{display:block;margin-top:.3rem;font-family:var(--font-display);font-size:.8125rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}.ds-essay-x{display:block;max-width:40rem;margin-top:.4rem;font-family:var(--font-text);font-size:.9375rem;line-height:1.55;color:var(--ink-2)}.ds-essay:focus-visible{outline:2px solid var(--accent);outline-offset:3px}"
+    },
+    {
+      "name": "Book Card",
+      "kind": "card",
+      "refersTo": "book-cover",
+      "description": "Real cover with bound-book corners and the only shadow in the system; lifts 4px on hover.",
+      "html": "<a class=\"ds-book\" href=\"#\"><span class=\"ds-cover\"></span><span class=\"ds-book-t\">Thinking in Systems</span><span class=\"ds-book-a\">Donella H. Meadows</span></a>",
+      "css": ":host{--font-display:'Bricolage Grotesque',ui-sans-serif,system-ui,sans-serif;--font-text:'Literata',Georgia,serif;--font-hand:'Kalam','Bradley Hand',cursive;--bg:#fbfaf6;--surface:#f2f0e9;--ink:#1c1d22;--ink-2:#464852;--ink-3:#676a74;--rule:#e2dfd6;--accent:#2348a8;--accent-ink:#fff;--accent-wash:rgba(35,72,168,.1);--ease-out:cubic-bezier(0.16,1,0.3,1);--shadow:0 1px 2px rgba(28,29,34,.08),0 8px 24px -12px rgba(28,29,34,.3)} .ds-book{display:block;width:8.5rem;text-decoration:none;color:var(--ink)}.ds-cover{display:block;aspect-ratio:2/3;border-radius:2px 4px 4px 2px;background:var(--surface);box-shadow:var(--shadow);transition:transform .35s var(--ease-out)}.ds-book:hover .ds-cover{transform:translateY(-4px)}.ds-book-t{display:block;margin-top:.7rem;font-family:var(--font-text);font-size:.9375rem;font-weight:600;line-height:1.3}.ds-book:hover .ds-book-t{color:var(--accent)}.ds-book-a{display:block;margin-top:.15rem;font-family:var(--font-display);font-size:.8125rem;line-height:1.35;color:var(--ink-3)}.ds-book:focus-visible{outline:2px solid var(--accent);outline-offset:3px}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Writer's Notebook",
+    "overview": "**Creative North Star: \"The Writer's Notebook\"**\n\nThe whole site is one plain paper sheet laid on a dot-grid desk. The desk shows at the sheet's left and right edges as a 22px dot grid; everything that matters sits on the sheet. Everything is written in blue-black ink, and one fountain-pen blue does every job an accent does: links, underlines, focus, list markers, and the handwritten margin notes. The opening sentence is the navigation. Each of its verbs (builds, leads, reads, writes) is underlined in pen blue and opens its own section.\n\nDensity is a reader's density. Essays run at a 42rem measure with a 1.7 line height. Homepage sections (\"shelves\") put a label column on the left and content on the right, divided only by hairline rules. Real book covers are the only imagery and the only objects that cast a shadow. Light and dark are the same notebook: by day, and under a desk lamp at night. The reader switches between them with the header toggle; the first visit follows the system preference.\n\nThe world refuses the bare name-tagline-post-list default and anything that reads as a pitch. Nothing is decorated for its own sake: there are no illustrations, no gradients beyond the pen underline, and no cards floating on the sheet.",
+    "keyCharacteristics": [
+      "A paper sheet on a dotted desk; the sheet is the only surface.",
+      "One accent, pen blue, used for every link and every handwritten note.",
+      "Literata for reading and headings, Bricolage Grotesque for small labels and controls, Kalam only for short margin notes and year markers.",
+      "Hairline rules divide content; nothing else does.",
+      "Book covers are the only imagery and the only lifted objects.",
+      "Light and dark are user-toggled and default to the system preference."
+    ],
+    "rules": [
+      {
+        "name": "The One Pen Rule",
+        "body": "Pen blue is the only accent. If something needs emphasis that is not a link, a note, or focus, it gets weight or ink, not a new color.",
+        "section": "colors"
+      },
+      {
+        "name": "The Ink Link Rule",
+        "body": "Links keep their surrounding ink color and carry a 1.5px pen-blue underline offset 0.2em. On hover the text turns pen blue and the underline thickens to 2.5px. Links are never set as solid blue text at rest.",
+        "section": "colors"
+      },
+      {
+        "name": "The Margin Fact Rule",
+        "body": "Kalam appears only in short margin notes and year markers. A note states a fact taken from the site (a first entry, a count, a date read), never an invented opinion, and stays within a sentence.",
+        "section": "typography"
+      },
+      {
+        "name": "The Labels Follow Rule",
+        "body": "Uppercase labels are metadata that sits under or beside the thing they describe (a date under a title). They are never a kicker or eyebrow placed above a heading.",
+        "section": "typography"
+      },
+      {
+        "name": "The Only Objects Rule",
+        "body": "Book covers are the only things on the sheet that cast a shadow. Text, lists, chips, and sections are ink on paper, divided by hairlines.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** use pen blue for every link underline, margin note, focus ring, and list marker, and for nothing decorative beyond that.",
+      "**Do** separate content with 1px rule hairlines, not boxes or backgrounds.",
+      "**Do** keep reading text in Literata at the 42rem measure with a line height of 1.65–1.7.",
+      "**Do** write margin notes in Kalam that state only facts found on the site (a year, a count, a title), in a sentence or less.",
+      "**Do** define every color for both themes, and let the header toggle switch between them; the first visit follows the system preference.",
+      "**Do** use real book covers as the only imagery. Embed provenance in every shipping raster: og.png is a rendered HTML card; 27 covers are sourced from Goodreads RSS; Ikigai (40534545) comes from Open Library (ISBN 9781786330895), border-trimmed by hand. `COVER_OVERRIDES` in `scripts/sync_library.py` re-fetches that override untrimmed if `content/images/library` is cleared, so re-trim it and re-embed its provenance. New covers added by future syncs need provenance embedded with `impeccable embed-prompt`.",
+      "**Do** gate entrance motion behind `prefers-reduced-motion: no-preference`, and use the single `cubic-bezier(0.16, 1, 0.3, 1)` ease-out for transitions."
+    ],
+    "donts": [
+      "**Don't** add a second accent color. Emphasis comes from weight and ink, not a new hue.",
+      "**Don't** use Kalam for headings, body, buttons, or anything longer than a short note or a year.",
+      "**Don't** put uppercase labels above headings as kickers or eyebrows. Labels sit under or beside what they describe.",
+      "**Don't** give shadows to anything but book covers. Cards, chips, and sections stay flat.",
+      "**Don't** add illustrations, stock imagery, or icon glyphs in place of words. The only icons are the stroked sun and moon in the theme toggle.",
+      "**Don't** hard-code colors that skip the night theme. Every value needs a night counterpart."
+    ]
+  }
+}

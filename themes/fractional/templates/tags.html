@@ -57,23 +57,17 @@
 {% endblock %}
 
 {% block content %}
-        <p class="meta crumb">
-            <a href="{{ SITEURL }}/blog/">Writing</a>
-            <span aria-hidden="true"> / </span>
-            <span>Tags</span>
-        </p>
-
-        <h1>Tags</h1>
-        <p class="meta page-lede">
-            Browse the writing by topic.
-        </p>
-
-        <ul class="tag-index">
-            {% for tag, articles in tags|sort %}
-            <li>
-                <a class="tag-chip" href="{{ SITEURL }}/{{ tag.url }}">{{ tag }}</a>
-                <span class="tag-count">{{ articles|count }}</span>
-            </li>
-            {% endfor %}
-        </ul>
+<header class="page-head">
+    <h1>Topics</h1>
+    <p class="page-lede">Browse the writing by topic.</p>
+</header>
+<ul class="tag-index page-body">
+    {% for tag, articles in tags|sort %}
+    <li>
+        <a class="tag-chip" href="{{ SITEURL }}/{{ tag.url }}">{{ tag|string|replace('-', ' ')|capitalize }}</a>
+        <span class="tag-count">{{ articles|count }}</span>
+    </li>
+    {% endfor %}
+</ul>
+<p class="back-links"><a href="{{ SITEURL }}/blog/">All writing</a></p>
 {% endblock %}

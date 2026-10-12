@@ -2,3 +2,5 @@
 # Keep internal project files off the public site.
 exclude:
   - PRODUCT.md
+  - data
+  - DESIGN.md

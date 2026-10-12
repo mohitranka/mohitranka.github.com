@@ -1,14 +1,14 @@
 {% extends "base.html" %}
 
-{% block title %}Mohit Ranka — Engineering Leader{% endblock %}
-{% block description %}Engineering leader with 15+ years at Booking.com, Postman, LinkedIn, and Moveworks. Writing on platforms, data, reliability, and engineering leadership.{% endblock %}
+{% block title %}Mohit Ranka{% endblock %}
+{% block description %}Mohit Ranka builds software, leads engineering teams, reads widely, and writes it all down here. 15+ years at Booking.com, Postman, LinkedIn, and Moveworks; creator of Forge.{% endblock %}
 {% block canonical %}{{ SITE_ORIGIN }}/{% endblock %}
 {% block og_url %}{{ SITE_ORIGIN }}/{% endblock %}
-{% block og_title %}Mohit Ranka — Engineering Leader{% endblock %}
-{% block og_description %}Engineering leader with 15+ years at Booking.com, Postman, LinkedIn, and Moveworks. Writing on platforms, data, reliability, and engineering leadership.{% endblock %}
-{% block twitter_title %}Mohit Ranka — Engineering Leader{% endblock %}
-{% block twitter_description %}Engineering leader with 15+ years at Booking.com, Postman, LinkedIn, and Moveworks. Writing on platforms, data, reliability, and engineering leadership.{% endblock %}
-{% block og_image_alt %}Mohit Ranka — Engineering Leader{% endblock %}
+{% block og_title %}Mohit Ranka{% endblock %}
+{% block og_description %}Mohit Ranka builds software, leads engineering teams, reads widely, and writes it all down here. 15+ years at Booking.com, Postman, LinkedIn, and Moveworks; creator of Forge.{% endblock %}
+{% block twitter_title %}Mohit Ranka{% endblock %}
+{% block twitter_description %}Mohit Ranka builds software, leads engineering teams, reads widely, and writes it all down here. 15+ years at Booking.com, Postman, LinkedIn, and Moveworks; creator of Forge.{% endblock %}
+{% block og_image_alt %}Mohit Ranka{% endblock %}
 {% block body_class %}page-home{% endblock %}
 
 {% block head_extra %}
@@ -21,7 +21,7 @@
             "@id": "{{ SITE_ORIGIN }}/#website",
             "url": "{{ SITE_ORIGIN }}/",
             "name": "{{ SITENAME }}",
-            "description": "Mohit Ranka's work and writing on platforms, data, reliability, and engineering leadership.",
+            "description": "Writing, work, and reading by Mohit Ranka.",
             "inLanguage": "en",
             "publisher": {
                 "@id": "{{ SITE_ORIGIN }}/#person"
@@ -32,8 +32,7 @@
             "@id": "{{ SITE_ORIGIN }}/#person",
             "name": "{{ AUTHOR }}",
             "url": "{{ SITE_ORIGIN }}/",
-            "description": "Engineering leader with 15+ years at Booking.com, Postman, LinkedIn, and Moveworks. Writing on platforms, data, reliability, and engineering leadership.",
-            "jobTitle": "Engineering Leader",
+            "description": "Mohit Ranka builds software, leads engineering teams, reads widely, and writes it all down here. 15+ years at Booking.com, Postman, LinkedIn, and Moveworks; creator of Forge.",
             "alumniOf": {
                 "@type": "CollegeOrUniversity",
                 "name": "Vellore Institute of Technology"
@@ -45,11 +44,6 @@
                 "{{ SITE_ORIGIN }}/atom.xml",
                 "{{ SITE_ORIGIN }}/rss.xml"
             ],
-            "hasOccupation": {
-                "@type": "Occupation",
-                "name": "Engineering Leader",
-                "occupationalCategory": "Software Engineering Leadership & Architecture"
-            },
             "knowsAbout": [
                 "software architecture",
                 "technical decision-making",
@@ -65,7 +59,7 @@
             "@type": "ProfilePage",
             "@id": "{{ SITE_ORIGIN }}/#profilepage",
             "url": "{{ SITE_ORIGIN }}/",
-            "name": "Mohit Ranka — Engineering Leader",
+            "name": "Mohit Ranka",
             "isPartOf": {
                 "@id": "{{ SITE_ORIGIN }}/#website"
             },
@@ -80,87 +74,86 @@
 {% endblock %}
 
 {% block content %}
-        <section class="hero">
-            <h1 class="hero-title">Engineering manager who stays close enough to the code to make the technical calls.</h1>
-            <p class="hero-lede">15+ years of hands-on engineering and engineering leadership at Booking.com, Postman, LinkedIn, and Moveworks.</p>
-            <p class="hero-lede hero-lede--secondary">I lead teams across architecture and delivery, and own the decisions in between.</p>
-
-            <div class="hero-actions">
-                <a class="btn-primary" href="#selected-impact">See selected work</a>
-                <a class="btn-secondary" href="{{ SITEURL }}/blog/">Read the writing</a>
+        <section class="intro" aria-labelledby="intro-title">
+            <h1 class="intro-sentence" id="intro-title">Mohit builds <a href="{{ SITEURL }}/work/#forge">software</a>, leads <a href="{{ SITEURL }}/work/">engineering teams</a>, reads <a href="{{ SITEURL }}/library/">widely</a>, and <a href="{{ SITEURL }}/blog/">writes it all down</a> here.</h1>
+            <div class="intro-detail">
+                <p>15+ years of hands-on engineering and engineering leadership at Booking.com, Postman, LinkedIn, and Moveworks. Creator of <a href="https://github.com/NorviaLabs/forge" rel="noopener noreferrer">Forge</a>, an open-source AI coding environment. Based in India.</p>
             </div>
+            {% if articles %}{% set first = articles|last %}
+            <p class="margin-note intro-note">first entry, {{ first.date.year }}: “{{ first.title }}”</p>
+            {% endif %}
         </section>
 
-        <section class="home-section">
-            <h2 class="section-label">What I do</h2>
-            <p>I work across architecture and execution because they are the same problem: deciding what to build, how it should work, and keeping delivery moving as the system evolves.</p>
-            <ul class="area-list" aria-label="Areas of work">
-                <li>engineering leadership</li>
-                <li>architecture</li>
-                <li>technical decision-making</li>
-                <li>engineering delivery</li>
-                <li>removing execution bottlenecks</li>
-                <li>engineering standards</li>
-                <li>platform evolution</li>
-                <li>software engineering culture</li>
-                <li>connecting technical decisions to business outcomes</li>
+        {% if articles %}
+        <section class="shelf" aria-labelledby="writing-title">
+            <div class="shelf-head">
+                <h2 id="writing-title">Writing</h2>
+                <p>Essays on platforms, data, reliability, and leading teams.</p>
+                <a class="shelf-more" href="{{ SITEURL }}/blog/">All {{ articles|count }} essays</a>
+            </div>
+            <ul class="essay-list essay-list--noted">
+                {% for article in articles[:4] %}
+                <li>
+                    <a class="essay" href="{{ SITEURL }}/{{ article.url }}">
+                        <span class="essay-title">{{ article.title }}</span>
+                        <span class="essay-meta label"><time datetime="{{ article.date.isoformat() }}">{{ article.date.strftime('%-d %B %Y') }}</time></span>
+                        <span class="essay-excerpt">{{ (article.summary.split('<p>', 1)[-1].split('</p>')[0])|striptags|truncate(190) }}</span>
+                    </a>
+                </li>
+                {% endfor %}
+                <li class="margin-note list-note" aria-hidden="true">{{ articles|count }} essays since {{ (articles|last).date.year }}, newest first</li>
+            </ul>
+        </section>
+        {% endif %}
+
+        <section class="shelf" aria-labelledby="work-title">
+            <div class="shelf-head">
+                <h2 id="work-title">Work</h2>
+                <p>Selected work across architecture, technical decisions, and delivery.</p>
+                <a class="shelf-more" href="{{ SITEURL }}/work/">More on how I work</a>
+            </div>
+            <ul class="work-list">
+                <li class="work-entry">
+                    <h3><a href="{{ SITEURL }}/work/#booking">Booking.com</a></h3>
+                    <p class="work-role">Authentication and authorization infrastructure</p>
+                    <p>Built authentication and authorization infrastructure supporting multiple Booking.com portfolio products at roughly 1M requests per second.</p>
+                </li>
+                <li class="work-entry">
+                    <h3><a href="{{ SITEURL }}/work/#postman">Postman</a></h3>
+                    <p class="work-role">Runtime and core developer workflows</p>
+                    <p>Led engineering around Runtime and core developer workflows for one of the world's most widely used API platforms.</p>
+                </li>
+                <li class="work-entry">
+                    <h3><a href="{{ SITEURL }}/work/#linkedin">LinkedIn</a></h3>
+                    <p class="work-role">Enterprise data platform</p>
+                    <p>Led enterprise data-platform work supporting major business functions and improving how quickly teams could access and act on data.</p>
+                </li>
+                <li class="work-entry">
+                    <h3><a href="https://github.com/NorviaLabs/forge" rel="noopener noreferrer">Forge</a><span class="oss-tag">Open source</span></h3>
+                    <p class="work-role">Creator · Norvia Labs</p>
+                    <p>A terminal-native AI coding environment combining agent conversation, repository navigation, editing, shell execution, diffs, approvals, and durable sessions in one workspace.</p>
+                </li>
             </ul>
         </section>
 
-        <section class="home-section" id="selected-impact">
-            <h2 class="section-label">Selected impact</h2>
-            <ul class="impact-list">
-                <li class="impact-item">
-                    <h3 class="impact-name"><a href="https://www.booking.com" target="_blank" rel="noopener noreferrer">Booking.com</a></h3>
-                    <p class="impact-outcome">Built authentication and authorization infrastructure supporting multiple Booking.com portfolio products at roughly 1M requests per second.</p>
+        {% if LIBRARY.favourites %}
+        <section class="shelf shelf--books" aria-labelledby="library-title">
+            <div class="shelf-head">
+                <h2 id="library-title">Library</h2>
+                <p>Books I keep coming back to.</p>
+                <a class="shelf-more" href="{{ SITEURL }}/library/">All {{ LIBRARY.books|count }} books</a>
+            </div>
+            <ul class="books books--row">
+                {% for book_id in LIBRARY.favourites %}{% set book = LIBRARY.by_id[book_id] %}
+                <li>
+                    <a class="book" href="{{ book.url }}" rel="noopener noreferrer">
+                        <span class="book-cover">{% if book.cover %}<img src="{{ SITEURL }}/{{ book.cover }}" alt="" width="313" height="475" loading="lazy">{% endif %}</span>
+                        <span class="book-title">{{ book.title }}</span>
+                        <span class="book-author">{{ book.author }}</span>
+                    </a>
                 </li>
-                <li class="impact-item">
-                    <h3 class="impact-name"><a href="https://www.postman.com" target="_blank" rel="noopener noreferrer">Postman</a></h3>
-                    <p class="impact-outcome">Led engineering around Runtime and core developer workflows for one of the world's most widely used API platforms.</p>
-                </li>
-                <li class="impact-item">
-                    <h3 class="impact-name"><a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a></h3>
-                    <p class="impact-outcome">Led enterprise data-platform work supporting major business functions and improving how quickly teams could access and act on data.</p>
-                </li>
-                <li class="impact-item">
-                    <h3 class="impact-name">
-                        <a href="https://github.com/NorviaLabs/forge" target="_blank" rel="noopener noreferrer">Forge</a>
-                        <span class="impact-tag">Open source</span>
-                    </h3>
-                    <p class="impact-outcome">Creator of Forge, a terminal-native AI coding environment combining agent conversation, repository navigation, editing, shell execution, diffs, approvals, and durable sessions in one workspace.</p>
-                </li>
+                {% endfor %}
             </ul>
         </section>
-
-        <section class="home-section">
-            <h2 class="section-label">How I work</h2>
-            <div class="principles">
-                <div class="principle">
-                    <h3>Clear outcome. Owned execution.</h3>
-                    <p>I agree the problem and the outcome with the business, then own how the team gets there.</p>
-                </div>
-                <div class="principle">
-                    <h3>Close to the team.</h3>
-                    <p>I work alongside the team day to day rather than reviewing from the outside.</p>
-                </div>
-                <div class="principle">
-                    <h3>Management without the theatre.</h3>
-                    <p>Architecture, engineering judgment, delivery, and engineering culture. No meetings for their own sake.</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="home-section">
-            <h2 class="section-label">About</h2>
-            <p>I work at the boundary between technical leadership and engineering management: close enough to the code to make sound technical calls, senior enough to own delivery and the decisions around it.</p>
-            <p>I also build <a href="https://github.com/NorviaLabs/forge" target="_blank" rel="noopener noreferrer">Forge</a>, an open-source AI coding environment, through Norvia Labs. Based in India.</p>
-        </section>
-
-        <section class="home-section final-cta">
-            <h2>Get in touch</h2>
-            <p>Write to me about something I have written, about Forge, or about an engineering problem you are working through. I read every message myself.</p>
-            <a class="btn-primary" href="{{ SITEURL }}/contact/">Start a conversation</a>
-        </section>
-
-        <p class="site-footer">I also <a href="{{ SITEURL }}/blog/">write about engineering leadership and platforms</a>, and you can find my <a href="https://github.com/mohitranka" target="_blank" rel="noopener noreferrer">code on GitHub</a> or <a href="https://www.linkedin.com/in/mohit-ranka" target="_blank" rel="noopener noreferrer">connect on LinkedIn</a>.</p>
+        {% endif %}
 {% endblock %}

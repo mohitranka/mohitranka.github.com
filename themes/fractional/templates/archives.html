@@ -51,39 +51,32 @@
 {% endblock %}
 
 {% block content %}
-        <h1>Writing</h1>
-        <p class="meta page-lede">
-            Technical writing on platforms, data, reliability, and engineering leadership.
-            {% if tags %}
-            Browse by <a href="{{ SITEURL }}/tags/">tag</a>.
-            {% endif %}
-            Subscribe via <a href="{{ SITE_ORIGIN }}/atom.xml">Atom</a>
-            or <a href="{{ SITE_ORIGIN }}/rss.xml">RSS</a>.
-        </p>
-
-        {% if tags %}
-        <ul class="tag-list tag-list--compact" aria-label="Popular tags">
-            {% for tag, tagged_articles in tags|sort %}
-            <li><a class="tag-chip" href="{{ SITEURL }}/{{ tag.url }}">{{ tag }}</a></li>
-            {% endfor %}
-        </ul>
-        {% endif %}
-
-        <ul class="article-list">
-            {% for article in dates %}
-            <li class="article-item article-item--stack">
-                <div class="article-item-main">
-                    <a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a>
-                    <time class="article-meta" datetime="{{ article.date.isoformat() }}">{{ article.date.strftime('%b %Y') }}</time>
-                </div>
-                {% if article.tags %}
-                <ul class="tag-list tag-list--compact" aria-label="Tags for {{ article.title }}">
-                    {% for tag in article.tags %}
-                    <li><a class="tag-chip" href="{{ SITEURL }}/{{ tag.url }}">{{ tag }}</a></li>
-                    {% endfor %}
-                </ul>
-                {% endif %}
+<header class="page-head">
+    <h1>Writing</h1>
+    <p class="page-lede">{{ dates|count }} essays on platforms, data, reliability, and engineering leadership, from 2013 to now.</p>
+    {% if tags %}
+    <ul class="tag-list" aria-label="Topics">
+        {% for tag, tagged_articles in tags|sort %}
+        <li><a class="tag-chip" href="{{ SITEURL }}/{{ tag.url }}">{{ tag|string|replace('-', ' ')|capitalize }}</a></li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <p class="feeds">Follow along by <a href="{{ SITE_ORIGIN }}/rss.xml">RSS</a> or <a href="{{ SITE_ORIGIN }}/atom.xml">Atom</a>.</p>
+</header>
+{% for year, year_articles in dates|groupby('date.year')|reverse %}
+<section class="year-group" aria-labelledby="y{{ year }}">
+    <h2 id="y{{ year }}">{{ year }}</h2>
+    <ul class="essay-list">
+        {% for article in year_articles|sort(attribute='date', reverse=true) %}
+            <li>
+                <a class="essay" href="{{ SITEURL }}/{{ article.url }}">
+                    <span class="essay-title">{{ article.title }}</span>
+                    <span class="essay-meta label"><time datetime="{{ article.date.isoformat() }}">{{ article.date.strftime('%-d %B') }}</time></span>
+                    <span class="essay-excerpt">{{ (article.summary.split('<p>', 1)[-1].split('</p>')[0])|striptags|truncate(190) }}</span>
+                </a>
             </li>
-            {% endfor %}
-        </ul>
+        {% endfor %}
+    </ul>
+</section>
+{% endfor %}
 {% endblock %}

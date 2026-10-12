@@ -25,7 +25,10 @@ A senior engineering leader whose record covers both architecture and delivery a
 ## Operating Context
 
 - Visitors usually arrive from a shared essay, RSS/Atom, LinkedIn, GitHub, or Forge.
-- The homepage is a profile, not a landing page. Writing is reached through the nav, the hero, the Work page and the footer; the homepage does not list posts (decided 2026-10-12).
+- The homepage is a complete personal index on the model of maggieappleton.com (decided 2026-10-12, replacing the earlier writing-as-link-only choice): an identity sentence, then previews of Writing, Work and Library.
+- Identity sentence, in the user's chosen words: "Mohit builds software, leads engineering teams, reads widely, and writes it all down here." Do not lead with "Engineering Manager"; that is only one part of who he is.
+- Sections: Writing, Work, Library, Contact. Not wanted for now: Antilibrary, Now, Notes.
+- Library is synced from Goodreads (`make library`, scripts/sync_library.py): the 7 profile favourites first, then everything read, newest first; star ratings are never shown.
 - The contact form is a general inbox: questions about the writing, Forge, or an engineering problem.
 - Answer engines and LLM crawlers are a deliberate channel. `llms.txt`, `llms-full.txt`, JSON-LD and the robots config are maintained on purpose.
 - Mohit is based in India. Do not state a work arrangement, region, or relocation preference.
@@ -33,7 +36,7 @@ A senior engineering leader whose record covers both architecture and delivery a
 ## Capabilities and Constraints
 
 - Static site generated with Pelican (`pelicanconf.py`, `publishconf.py`) using the custom theme `themes/fractional`. Hosted on GitHub Pages at www.mohitranka.com (`CNAME`). Built with `make site` / `make serve`.
-- Pages: Home, Writing (`/blog/`), Work, Contact, Tags. Articles are Markdown in `content/blog/`; pages are in `content/pages/`.
+- Pages: Home, Writing (`/blog/`), Work, Library (`/library/`), Contact, Tags. Articles are Markdown in `content/blog/`; pages are in `content/pages/`.
 - The contact form is configured in `contact-config.js`. Giscus comments on posts follow the site's selected theme. The site has a user-selectable light/dark theme.
 - Feeds: Atom and RSS. SEO/AEO: JSON-LD `Person`/`ProfilePage`/`WebSite`, `llms.txt`, `llms-full.txt`, sitemap.
 - Copy changes to positioning have to be made everywhere it appears: templates, page Markdown, `llms*.txt`, JSON-LD and meta descriptions.
@@ -49,6 +52,7 @@ A senior engineering leader whose record covers both architecture and delivery a
 - Four highlights, stated exactly as on the Work page: Booking.com (auth infrastructure, ~1M rps), Postman (Runtime and core developer workflows), LinkedIn (enterprise data platform), Forge (creator, open source).
 - Education: B.Tech., Vellore Institute of Technology.
 - 14 published essays (2013–2026) in `content/blog/`, with diagrams in `content/images/blog/`.
+- Goodreads read shelf (28 books with covers) via its public RSS feed; profile favourites: Flow, The Little Prince, Thinking in Systems, Sapiens, The Martian, Atomic Habits, Ikigai.
 - **Absent, so never fabricate:** testimonials, client or employer quotes, logos used as endorsements, team-size or outcome metrics beyond those above, case studies, Forge adoption numbers, salary, availability or job-seeking claims.
 
 ## Product Principles
