@@ -52,7 +52,8 @@
 </head>
 
 <body class="{% block body_class %}{% endblock %}">
-    <main>
+    {% block before_main %}{% endblock %}
+    <main id="site">
         <header class="site-header">
             {% block site_brand %}
             <a class="site-logo" href="{{ SITEURL }}/">{{ SITENAME }}</a>

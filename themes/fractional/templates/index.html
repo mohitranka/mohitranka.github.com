@@ -12,6 +12,8 @@
 {% block body_class %}page-home{% endblock %}
 
 {% block head_extra %}
+<link rel="modulepreload" href="{{ SITEURL }}/theme/js/vendor/three.module.min.js">
+<script type="module" src="{{ SITEURL }}/theme/js/town.js"></script>
 <script type="application/ld+json">
 {
     "@context": "https://schema.org",
@@ -77,6 +79,62 @@
     ]
 }
 </script>
+{% endblock %}
+
+{% block before_main %}
+<section class="town" id="town" aria-label="Mohit's town: an explorable 3D homepage">
+    <canvas class="town-canvas" tabindex="0" aria-label="3D island town. Use arrow keys or WASD to walk, or click a place."></canvas>
+    <div class="town-labels" aria-hidden="true"></div>
+
+    <div class="town-card">
+        <p class="town-name">Hi, I'm Mohit Ranka</p>
+        <p class="town-line">I build software, lead engineering teams, read widely, and write it all down.<span class="town-walk"> Walk around my town.</span></p>
+        <nav class="town-places" aria-label="Places in the town">
+            <button type="button" data-walk="writing">Writing</button>
+            <button type="button" data-walk="work">Work</button>
+            <button type="button" data-walk="library">Library</button>
+            <button type="button" data-walk="forge">Forge</button>
+            <button type="button" data-walk="contact">Contact</button>
+        </nav>
+        <nav class="town-fallback-links" aria-label="Also here">
+            <a href="{{ LIBRARY.profile }}" rel="noopener noreferrer">Library</a>
+            <a href="https://github.com/NorviaLabs/forge" rel="noopener noreferrer">Forge</a>
+        </nav>
+    </div>
+
+    <aside class="town-panel" hidden aria-live="polite">
+        <p class="town-panel-title"></p>
+        <div class="town-panel-body"></div>
+        <a class="town-panel-link" href="#">Enter</a>
+    </aside>
+
+    <div class="town-foot">
+        <p class="town-hint"><span class="hint-keys"><kbd>WASD</kbd> or <kbd>arrows</kbd> to walk · click anywhere to go there</span><span class="hint-touch">Tap anywhere to walk there</span></p>
+        <a class="town-skip" href="#site">Skip to the site</a>
+    </div>
+
+    <script type="application/json" id="town-data">{
+        "essayCount": {{ articles|count if articles else 0 }},
+        "essays": [{% for a in (articles[:5] if articles else []) %}
+            {"title": {{ a.title|striptags|tojson }}, "url": {{ (SITEURL ~ '/' ~ a.url)|tojson }}, "date": {{ a.date.strftime('%b %Y')|tojson }}}{% if not loop.last %},{% endif %}{% endfor %}
+        ],
+        "books": [{% for book_id in LIBRARY.favourites %}{% set b = LIBRARY.by_id[book_id] %}
+            {"title": {{ b.title|tojson }}, "author": {{ b.author|tojson }}, "url": {{ b.url|tojson }}, "cover": {{ (SITEURL ~ '/' ~ b.cover)|tojson }}}{% if not loop.last %},{% endif %}{% endfor %}
+        ],
+        "work": [
+            {"name": "Booking.com", "role": "Authentication and authorization infrastructure", "outcome": "Built authentication and authorization infrastructure supporting multiple Booking.com portfolio products at roughly 1M requests per second.", "href": {{ (SITEURL ~ '/work/#booking')|tojson }}},
+            {"name": "Postman", "role": "Runtime and core developer workflows", "outcome": "Led engineering around Runtime and core developer workflows for one of the world's most widely used API platforms.", "href": {{ (SITEURL ~ '/work/#postman')|tojson }}},
+            {"name": "LinkedIn", "role": "Enterprise data platform", "outcome": "Led enterprise data-platform work supporting major business functions and improving how quickly teams could access and act on data.", "href": {{ (SITEURL ~ '/work/#linkedin')|tojson }}}
+        ],
+        "forge": "Forge is a terminal-native AI coding environment I created at Norvia Labs: agent conversation, repository navigation, editing, shell execution, diffs, approvals, and durable sessions in one workspace. Open source.",
+        "links": {
+            "forge": "https://github.com/NorviaLabs/forge",
+            "writing": {{ (SITEURL ~ '/blog/')|tojson }},
+            "library": {{ LIBRARY.profile|tojson }},
+            "contact": {{ (SITEURL ~ '/contact/')|tojson }}
+        }
+    }</script>
+</section>
 {% endblock %}
 
 {% block content %}

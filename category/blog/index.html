@@ -44,6 +44,8 @@
       gtag('js', new Date());
       gtag('config', 'G-CWEDLBH79X');
     </script>
+<link rel="modulepreload" href="../../theme/js/vendor/three.module.min.js">
+<script type="module" src="../../theme/js/town.js"></script>
 <script type="application/ld+json">
 {
     "@context": "https://schema.org",
@@ -112,7 +114,56 @@
 </head>
 
 <body class="page-home">
-    <main>
+<section class="town" id="town" aria-label="Mohit's town: an explorable 3D homepage">
+    <canvas class="town-canvas" tabindex="0" aria-label="3D island town. Use arrow keys or WASD to walk, or click a place."></canvas>
+    <div class="town-labels" aria-hidden="true"></div>
+
+    <div class="town-card">
+        <p class="town-name">Hi, I'm Mohit Ranka</p>
+        <p class="town-line">I build software, lead engineering teams, read widely, and write it all down.<span class="town-walk"> Walk around my town.</span></p>
+        <nav class="town-places" aria-label="Places in the town">
+            <button type="button" data-walk="writing">Writing</button>
+            <button type="button" data-walk="work">Work</button>
+            <button type="button" data-walk="library">Library</button>
+            <button type="button" data-walk="forge">Forge</button>
+            <button type="button" data-walk="contact">Contact</button>
+        </nav>
+        <nav class="town-fallback-links" aria-label="Also here">
+            <a href="https://www.goodreads.com/user/show/49116640" rel="noopener noreferrer">Library</a>
+            <a href="https://github.com/NorviaLabs/forge" rel="noopener noreferrer">Forge</a>
+        </nav>
+    </div>
+
+    <aside class="town-panel" hidden aria-live="polite">
+        <p class="town-panel-title"></p>
+        <div class="town-panel-body"></div>
+        <a class="town-panel-link" href="#">Enter</a>
+    </aside>
+
+    <div class="town-foot">
+        <p class="town-hint"><span class="hint-keys"><kbd>WASD</kbd> or <kbd>arrows</kbd> to walk · click anywhere to go there</span><span class="hint-touch">Tap anywhere to walk there</span></p>
+        <a class="town-skip" href="#site">Skip to the site</a>
+    </div>
+
+    <script type="application/json" id="town-data">{
+        "essayCount": 14,
+        "essays": [            {"title": "How Forge Structures Requests for Prompt Cache Reuse", "url": "../../blog/how-forge-structures-requests-for-prompt-cache-reuse/", "date": "Sep 2026"},            {"title": "The line manager role is disappearing faster than you think", "url": "../../blog/line-manager-role-is-disappearing/", "date": "Jul 2026"},            {"title": "Near-real-time is a product promise, not a Kafka cluster", "url": "../../blog/near-real-time-is-a-product-promise/", "date": "Jul 2026"},            {"title": "The platform team\u2019s real job is interfaces", "url": "../../blog/platform-teams-real-job-is-interfaces/", "date": "Nov 2025"},            {"title": "When I still choose a relational database", "url": "../../blog/when-i-still-choose-a-relational-database/", "date": "Mar 2025"}        ],
+        "books": [            {"title": "Flow", "author": "Mih\u00e1ly Cs\u00edkszentmih\u00e1lyi", "url": "https://www.goodreads.com/book/show/117101", "cover": "../../images/library/117101.jpg"},            {"title": "The Little Prince", "author": "Antoine de Saint-Exup\u00e9ry", "url": "https://www.goodreads.com/book/show/157993", "cover": "../../images/library/157993.jpg"},            {"title": "Thinking In Systems", "author": "Donella H. Meadows", "url": "https://www.goodreads.com/book/show/3828902", "cover": "../../images/library/3828902.jpg"},            {"title": "Sapiens", "author": "Yuval Noah Harari", "url": "https://www.goodreads.com/book/show/23692271", "cover": "../../images/library/23692271.jpg"},            {"title": "The Martian", "author": "Andy Weir", "url": "https://www.goodreads.com/book/show/18401393", "cover": "../../images/library/18401393.jpg"},            {"title": "Atomic Habits", "author": "James Clear", "url": "https://www.goodreads.com/book/show/40121378", "cover": "../../images/library/40121378.jpg"},            {"title": "Ikigai", "author": "H\u00e9ctor Garc\u00eda", "url": "https://www.goodreads.com/book/show/40534545", "cover": "../../images/library/40534545.jpg"}        ],
+        "work": [
+            {"name": "Booking.com", "role": "Authentication and authorization infrastructure", "outcome": "Built authentication and authorization infrastructure supporting multiple Booking.com portfolio products at roughly 1M requests per second.", "href": "../../work/#booking"},
+            {"name": "Postman", "role": "Runtime and core developer workflows", "outcome": "Led engineering around Runtime and core developer workflows for one of the world's most widely used API platforms.", "href": "../../work/#postman"},
+            {"name": "LinkedIn", "role": "Enterprise data platform", "outcome": "Led enterprise data-platform work supporting major business functions and improving how quickly teams could access and act on data.", "href": "../../work/#linkedin"}
+        ],
+        "forge": "Forge is a terminal-native AI coding environment I created at Norvia Labs: agent conversation, repository navigation, editing, shell execution, diffs, approvals, and durable sessions in one workspace. Open source.",
+        "links": {
+            "forge": "https://github.com/NorviaLabs/forge",
+            "writing": "../../blog/",
+            "library": "https://www.goodreads.com/user/show/49116640",
+            "contact": "../../contact/"
+        }
+    }</script>
+</section>
+    <main id="site">
         <header class="site-header">
             <a class="site-logo" href="../../">Mohit Ranka</a>
             <nav class="site-nav" aria-label="Primary">

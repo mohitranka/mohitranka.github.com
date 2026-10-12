@@ -6,7 +6,7 @@ OUTPUT  := output
 CONF    := pelicanconf.py
 PORT    ?= 8000
 
-.PHONY: build sync site serve clean help meta
+.PHONY: build sync site serve clean help meta library
 
 help:
 	@echo "make site   - meta + build + sync to repo root (GitHub Pages tree)"
@@ -15,10 +15,13 @@ help:
 	@echo "make build  - pelican only (output/)"
 	@echo "make clean  - remove output/"
 
+library:
+	@$(PYTHON) scripts/sync_library.py
+
 meta:
 	@$(PYTHON) scripts/generate_meta.py
 
-build: meta
+build: library meta
 	$(PELICAN) $(INPUT) -o $(OUTPUT) -s $(CONF)
 
 # Copy the single build into the GitHub Pages root layout used by this repo.

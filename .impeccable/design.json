@@ -1,0 +1,766 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-12T17:39:19+00:00",
+  "title": "Design System: Mohit Ranka",
+  "extensions": {
+    "colorMeta": {
+      "slate-night": {
+        "role": "neutral",
+        "displayName": "Slate Night",
+        "canonical": "#0f172a",
+        "purpose": "Dark-theme ground; light-theme text.",
+        "tonalRamp": [
+          "#0f172a",
+          "#1e293b",
+          "#475569",
+          "#64748b",
+          "#94a3b8",
+          "#cbd5e1",
+          "#e2e8f0",
+          "#f8fafc"
+        ]
+      },
+      "slate-mist": {
+        "role": "neutral",
+        "displayName": "Slate Mist",
+        "canonical": "#f8fafc",
+        "purpose": "Dark-theme text; light-theme ground (gray-100).",
+        "tonalRamp": [
+          "#0f172a",
+          "#1e293b",
+          "#475569",
+          "#64748b",
+          "#94a3b8",
+          "#cbd5e1",
+          "#e2e8f0",
+          "#f8fafc"
+        ]
+      },
+      "slate-wash": {
+        "role": "neutral",
+        "displayName": "Slate Wash",
+        "canonical": "#f1f5f9",
+        "purpose": "Light-theme code background (gray-200).",
+        "tonalRamp": [
+          "#0f172a",
+          "#1e293b",
+          "#475569",
+          "#64748b",
+          "#94a3b8",
+          "#cbd5e1",
+          "#e2e8f0",
+          "#f8fafc"
+        ]
+      },
+      "slate-hairline": {
+        "role": "neutral",
+        "displayName": "Slate Hairline",
+        "canonical": "#e2e8f0",
+        "purpose": "Light-theme borders (gray-300).",
+        "tonalRamp": [
+          "#0f172a",
+          "#1e293b",
+          "#475569",
+          "#64748b",
+          "#94a3b8",
+          "#cbd5e1",
+          "#e2e8f0",
+          "#f8fafc"
+        ]
+      },
+      "slate-silver": {
+        "role": "neutral",
+        "displayName": "Slate Silver",
+        "canonical": "#cbd5e1",
+        "purpose": "Dark-theme link underline hover; light scrollbar (gray-400).",
+        "tonalRamp": [
+          "#0f172a",
+          "#1e293b",
+          "#475569",
+          "#64748b",
+          "#94a3b8",
+          "#cbd5e1",
+          "#e2e8f0",
+          "#f8fafc"
+        ]
+      },
+      "slate-steel": {
+        "role": "neutral",
+        "displayName": "Slate Steel",
+        "canonical": "#94a3b8",
+        "purpose": "Dark-theme secondary text and link underline (gray-500).",
+        "tonalRamp": [
+          "#0f172a",
+          "#1e293b",
+          "#475569",
+          "#64748b",
+          "#94a3b8",
+          "#cbd5e1",
+          "#e2e8f0",
+          "#f8fafc"
+        ]
+      },
+      "slate-pewter": {
+        "role": "neutral",
+        "displayName": "Slate Pewter",
+        "canonical": "#64748b",
+        "purpose": "Light-theme secondary text and link underline (gray-600).",
+        "tonalRamp": [
+          "#0f172a",
+          "#1e293b",
+          "#475569",
+          "#64748b",
+          "#94a3b8",
+          "#cbd5e1",
+          "#e2e8f0",
+          "#f8fafc"
+        ]
+      },
+      "slate-graphite": {
+        "role": "neutral",
+        "displayName": "Slate Graphite",
+        "canonical": "#475569",
+        "purpose": "Light-theme underline hover; dark scrollbar (gray-700).",
+        "tonalRamp": [
+          "#0f172a",
+          "#1e293b",
+          "#475569",
+          "#64748b",
+          "#94a3b8",
+          "#cbd5e1",
+          "#e2e8f0",
+          "#f8fafc"
+        ]
+      },
+      "slate-deep": {
+        "role": "neutral",
+        "displayName": "Slate Deep",
+        "canonical": "#1e293b",
+        "purpose": "Dark-theme borders and code background (gray-800).",
+        "tonalRamp": [
+          "#0f172a",
+          "#1e293b",
+          "#475569",
+          "#64748b",
+          "#94a3b8",
+          "#cbd5e1",
+          "#e2e8f0",
+          "#f8fafc"
+        ]
+      },
+      "town-ink": {
+        "role": "secondary",
+        "displayName": "Town Ink",
+        "canonical": "#14161b",
+        "purpose": "Solid ground of town overlays; text on paper and ember.",
+        "tonalRamp": [
+          "#090b10",
+          "#23252a",
+          "#3f4248",
+          "#5f6167",
+          "#7f8289",
+          "#a2a5ac",
+          "#c6c9d0",
+          "#ebeef6"
+        ]
+      },
+      "town-ink-2": {
+        "role": "secondary",
+        "displayName": "Town Ink 2",
+        "canonical": "#23262e",
+        "purpose": "Lifted ink step.",
+        "tonalRamp": [
+          "#080b12",
+          "#22252d",
+          "#3e424b",
+          "#5d616a",
+          "#7e828c",
+          "#a1a5af",
+          "#c5c9d4",
+          "#eaeef9"
+        ]
+      },
+      "town-paper": {
+        "role": "secondary",
+        "displayName": "Town Paper",
+        "canonical": "#fffaf0",
+        "purpose": "Overlay text, floating labels, Skip pill.",
+        "tonalRamp": [
+          "#0e0b05",
+          "#28251d",
+          "#45423a",
+          "#656158",
+          "#868279",
+          "#a9a49b",
+          "#cdc9bf",
+          "#f3eee4"
+        ]
+      },
+      "town-muted": {
+        "role": "secondary",
+        "displayName": "Town Muted",
+        "canonical": "#a9adb8",
+        "purpose": "Secondary overlay text.",
+        "tonalRamp": [
+          "#080b12",
+          "#22252d",
+          "#3e424b",
+          "#5d616b",
+          "#7e828d",
+          "#a1a5b0",
+          "#c5c9d4",
+          "#eaeefa"
+        ]
+      },
+      "forge-ember": {
+        "role": "primary",
+        "displayName": "Forge Ember",
+        "canonical": "#ff8a2a",
+        "purpose": "The town's single UI accent: near/hover, Enter, focus; also the forge fire.",
+        "tonalRamp": [
+          "#170600",
+          "#3c1b02",
+          "#663206",
+          "#944a07",
+          "#c56408",
+          "#f5811c",
+          "#ffb788",
+          "#ffeadd"
+        ]
+      },
+      "day-sky": {
+        "role": "tertiary",
+        "displayName": "Day Sky",
+        "canonical": "#9fd3e6",
+        "purpose": "Daytime sky and town section background.",
+        "tonalRamp": [
+          "#000e13",
+          "#012a36",
+          "#154959",
+          "#37697a",
+          "#598b9c",
+          "#7baec0",
+          "#9fd3e6",
+          "#d7f4ff"
+        ]
+      },
+      "day-sea": {
+        "role": "tertiary",
+        "displayName": "Day Sea",
+        "canonical": "#3d9cc2",
+        "purpose": "Daytime sea.",
+        "tonalRamp": [
+          "#000d14",
+          "#012938",
+          "#034960",
+          "#146b89",
+          "#2c8eb3",
+          "#55b2d8",
+          "#7bd7ff",
+          "#dbf3ff"
+        ]
+      },
+      "sand": {
+        "role": "tertiary",
+        "displayName": "Sand",
+        "canonical": "#f0d9a6",
+        "purpose": "Island beach ring.",
+        "tonalRamp": [
+          "#110a00",
+          "#302301",
+          "#523f0b",
+          "#735e2f",
+          "#958050",
+          "#b9a371",
+          "#ddc794",
+          "#feedc7"
+        ]
+      },
+      "grass": {
+        "role": "tertiary",
+        "displayName": "Grass",
+        "canonical": "#8cc76a",
+        "purpose": "Island lawns and hemisphere ground light.",
+        "tonalRamp": [
+          "#040f00",
+          "#122d00",
+          "#274d09",
+          "#3b710b",
+          "#5c9438",
+          "#7eb85c",
+          "#a1dd7f",
+          "#d1ffb8"
+        ]
+      },
+      "path": {
+        "role": "tertiary",
+        "displayName": "Warm Path",
+        "canonical": "#e9c98f",
+        "purpose": "Plaza and walking paths.",
+        "tonalRamp": [
+          "#110a00",
+          "#322201",
+          "#563d01",
+          "#795c23",
+          "#9b7d45",
+          "#bfa067",
+          "#e4c48b",
+          "#feeccc"
+        ]
+      },
+      "cream-wall": {
+        "role": "tertiary",
+        "displayName": "Cream Wall",
+        "canonical": "#f4ecdc",
+        "purpose": "Building walls and default sign ground.",
+        "tonalRamp": [
+          "#100a02",
+          "#2a2418",
+          "#484134",
+          "#676053",
+          "#898273",
+          "#aca495",
+          "#d0c8b9",
+          "#f6eede"
+        ]
+      },
+      "roof-terracotta": {
+        "role": "tertiary",
+        "displayName": "Terracotta Roof",
+        "canonical": "#d9653b",
+        "purpose": "Roof rotation.",
+        "tonalRamp": [
+          "#1b0300",
+          "#441201",
+          "#732402",
+          "#a23b10",
+          "#cd5a30",
+          "#f57e54",
+          "#ffb59b",
+          "#ffe9e2"
+        ]
+      },
+      "roof-slate": {
+        "role": "tertiary",
+        "displayName": "Slate Roof",
+        "canonical": "#5a6b8c",
+        "purpose": "Roof rotation.",
+        "tonalRamp": [
+          "#020922",
+          "#162440",
+          "#324260",
+          "#516182",
+          "#7183a5",
+          "#93a5c9",
+          "#b6caef",
+          "#e6efff"
+        ]
+      },
+      "roof-teal": {
+        "role": "tertiary",
+        "displayName": "Teal Roof",
+        "canonical": "#2f8f83",
+        "purpose": "Roof rotation; bookshop sign.",
+        "tonalRamp": [
+          "#000f0c",
+          "#002c27",
+          "#004d46",
+          "#107066",
+          "#359488",
+          "#5cb8ab",
+          "#82ddcf",
+          "#bcfef3"
+        ]
+      },
+      "roof-ochre": {
+        "role": "tertiary",
+        "displayName": "Ochre Roof",
+        "canonical": "#e0a33c",
+        "purpose": "Roof rotation.",
+        "tonalRamp": [
+          "#130900",
+          "#332102",
+          "#583c05",
+          "#815804",
+          "#ac7603",
+          "#d5982e",
+          "#fbbd59",
+          "#feecd2"
+        ]
+      },
+      "post-red": {
+        "role": "tertiary",
+        "displayName": "Post Red",
+        "canonical": "#d8342c",
+        "purpose": "Contact post box.",
+        "tonalRamp": [
+          "#1e0101",
+          "#4c0203",
+          "#7f0607",
+          "#b90009",
+          "#e23e35",
+          "#fa7869",
+          "#ffb3a8",
+          "#ffe9e5"
+        ]
+      },
+      "night-sky": {
+        "role": "tertiary",
+        "displayName": "Night Sky",
+        "canonical": "#0d1830",
+        "purpose": "Night sky and town section background in dark theme.",
+        "tonalRamp": [
+          "#030920",
+          "#18243d",
+          "#34425d",
+          "#53617e",
+          "#7382a1",
+          "#95a5c5",
+          "#b9caeb",
+          "#e7effe"
+        ]
+      },
+      "night-sea": {
+        "role": "tertiary",
+        "displayName": "Night Sea",
+        "canonical": "#173a5c",
+        "purpose": "Night sea.",
+        "tonalRamp": [
+          "#000c1d",
+          "#022646",
+          "#214467",
+          "#406489",
+          "#6186ac",
+          "#83a9d1",
+          "#a6cdf7",
+          "#e3f0ff"
+        ]
+      },
+      "window-glow": {
+        "role": "tertiary",
+        "displayName": "Window Glow",
+        "canonical": "#ffcf7a",
+        "purpose": "Lit windows at night.",
+        "tonalRamp": [
+          "#120900",
+          "#322202",
+          "#563d05",
+          "#7e5a03",
+          "#a67a1c",
+          "#cb9d47",
+          "#f0c16c",
+          "#ffeccd"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "town-display": {
+        "displayName": "Town Display",
+        "purpose": "The town card greeting only."
+      },
+      "display": {
+        "displayName": "Display",
+        "purpose": "Homepage hero headline below the town."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Article titles (1.75rem at 640px+)."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "h2, site logo, form and comment headings."
+      },
+      "town-title": {
+        "displayName": "Town Panel Title",
+        "purpose": "Proximity panel heading."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Article prose in the 720px column."
+      },
+      "body-small": {
+        "displayName": "Body Small",
+        "purpose": "Secondary paragraphs and lists, in secondary colour."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Section labels, metadata, form labels; sentence case."
+      },
+      "town-label": {
+        "displayName": "Town Label",
+        "purpose": "Floating building labels and place buttons."
+      },
+      "mono": {
+        "displayName": "Mono",
+        "purpose": "Inline and block code."
+      }
+    },
+    "shadows": [
+      {
+        "name": "overlay-lift",
+        "value": "0 18px 44px -18px rgba(0, 0, 0, 0.7)",
+        "purpose": "Town card and panel over the 3D scene."
+      },
+      {
+        "name": "pill-lift",
+        "value": "0 6px 14px -6px rgba(20, 22, 27, 0.55)",
+        "purpose": "Floating name labels and the Skip pill."
+      },
+      {
+        "name": "input-focus-halo",
+        "value": "0 0 0 3px color-mix(in srgb, var(--fg-secondary) 18%, transparent)",
+        "purpose": "Desk form field focus."
+      },
+      {
+        "name": "canvas-focus",
+        "value": "inset 0 0 0 3px #ff8a2a",
+        "purpose": "Keyboard focus on the town canvas."
+      }
+    ],
+    "motion": [
+      {
+        "name": "desk-state",
+        "value": "0.15s ease",
+        "purpose": "Buttons, inputs, chips."
+      },
+      {
+        "name": "link-underline",
+        "value": "0.2s ease",
+        "purpose": "Link underline and colour."
+      },
+      {
+        "name": "panel-rise",
+        "value": "opacity 0.25s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Town panel fades in and rises 12px."
+      },
+      {
+        "name": "label-state",
+        "value": "0.2s ease",
+        "purpose": "Town label background and visibility."
+      },
+      {
+        "name": "arrival-hop",
+        "value": "sin hop, 0.55 units, decays at 2.2/s",
+        "purpose": "Character hops and turns to face the building on arrival; disabled under prefers-reduced-motion."
+      },
+      {
+        "name": "camera-follow",
+        "value": "lerp 1 - 0.02^dt",
+        "purpose": "Camera eases after the character."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "compact",
+        "value": "520px"
+      },
+      {
+        "name": "form-grid",
+        "value": "560px"
+      },
+      {
+        "name": "phone",
+        "value": "640px"
+      },
+      {
+        "name": "town-portrait",
+        "value": "aspect < 0.8"
+      },
+      {
+        "name": "town-narrow-landscape",
+        "value": "aspect < 1.3"
+      }
+    ],
+    "world": {
+      "engine": "three r160, vendored at themes/fractional/static/js/vendor/",
+      "materials": "MeshStandardMaterial, flatShading true, roughness 0.85; ACES filmic tone mapping (exposure 1.0 day, 1.15 night); pixel ratio capped at 2",
+      "camera": {
+        "landscape": {
+          "fov": 32,
+          "offset": [
+            0,
+            30,
+            34
+          ],
+          "narrowScale": 1.35
+        },
+        "portrait": {
+          "fov": 60,
+          "offset": [
+            0,
+            66,
+            26
+          ],
+          "heroScale": 1.5
+        }
+      },
+      "places": [
+        "Forge",
+        "Writing (print shop)",
+        "Library (bookshop)",
+        "Booking.com",
+        "Postman",
+        "LinkedIn",
+        "Contact (post box)"
+      ],
+      "themeSource": "documentElement data-theme; light = day, otherwise night; MutationObserver relights live",
+      "fallback": "No WebGL: town--fallback, a compact ink card at the column width with Library and Forge links",
+      "debugHook": "?debug exposes window.__town for stepped tests"
+    },
+    "assetProvenance": [
+      {
+        "asset": "og.png",
+        "source": "Rendered HTML card"
+      },
+      {
+        "asset": "content/images/library/*.jpg",
+        "source": "Goodreads RSS via scripts/sync_library.py"
+      },
+      {
+        "asset": "content/images/library/40534545.jpg (Ikigai)",
+        "source": "Open Library, ISBN 9781786330895, hand-trimmed; COVER_OVERRIDES re-fetches untrimmed if covers are cleared"
+      },
+      {
+        "asset": "future synced covers",
+        "source": "Need impeccable embed-prompt to carry provenance"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Desk primary action: foreground-on-ground inversion.",
+      "html": "<a class=\"ds-btn-primary\" href=\"#\">See selected work</a>",
+      "css": ".ds-btn-primary{display:inline-block;font-family: Inter, system-ui, -apple-system, 'Segoe UI', sans-serif; font-size:.875rem;font-weight:500;line-height:1.3;padding:10px 18px;border-radius:6px;border:1px solid var(--fg,#f8fafc);background:var(--fg,#f8fafc);color:var(--bg,#0f172a);text-decoration:none;transition:opacity .15s ease}.ds-btn-primary:hover{opacity:.9}.ds-btn-primary:focus-visible{outline:2px solid var(--fg-secondary,#94a3b8);outline-offset:2px}"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Desk secondary action: hairline outline.",
+      "html": "<a class=\"ds-btn-secondary\" href=\"#\">Read the writing</a>",
+      "css": ".ds-btn-secondary{display:inline-block;font-family: Inter, system-ui, -apple-system, 'Segoe UI', sans-serif; font-size:.875rem;font-weight:500;line-height:1.3;padding:10px 18px;border-radius:6px;border:1px solid var(--border,#1e293b);background:transparent;color:var(--fg,#f8fafc);text-decoration:none;transition:border-color .15s ease}.ds-btn-secondary:hover{border-color:var(--fg-secondary,#94a3b8)}.ds-btn-secondary:focus-visible{outline:2px solid var(--fg-secondary,#94a3b8);outline-offset:2px}"
+    },
+    {
+      "name": "Tag Chip",
+      "kind": "chip",
+      "refersTo": "tag-chip",
+      "description": "Article tag pill.",
+      "html": "<a class=\"ds-tag-chip\" href=\"#\">reliability</a>",
+      "css": ".ds-tag-chip{display:inline-block;font-family: Inter, system-ui, -apple-system, 'Segoe UI', sans-serif; font-size:.75rem;line-height:1.3;padding:3px 9px;border-radius:999px;border:1px solid var(--border,#1e293b);color:var(--fg-secondary,#94a3b8);text-decoration:none}.ds-tag-chip:hover{color:var(--fg,#f8fafc);border-color:var(--fg-secondary,#94a3b8)}"
+    },
+    {
+      "name": "Text Field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Contact form field with soft focus halo.",
+      "html": "<input class=\"ds-input\" placeholder=\"Your name\">",
+      "css": ".ds-input{font-family: Inter, system-ui, -apple-system, 'Segoe UI', sans-serif; font-size:.9375rem;line-height:1.4;padding:10px 12px;border-radius:6px;border:1px solid var(--border,#1e293b);background:var(--bg,#0f172a);color:var(--fg,#f8fafc);transition:border-color .15s ease,box-shadow .15s ease}.ds-input::placeholder{color:var(--fg-secondary,#94a3b8);opacity:.75}.ds-input:focus{outline:none;border-color:var(--fg-secondary,#94a3b8);box-shadow:0 0 0 3px color-mix(in srgb,var(--fg-secondary,#94a3b8) 18%,transparent)}"
+    },
+    {
+      "name": "Site Navigation",
+      "kind": "nav",
+      "refersTo": "site-nav",
+      "description": "Desk header nav: secondary links, current page underlined.",
+      "html": "<nav class=\"ds-nav\"><a href=\"#\" aria-current=\"page\">Writing</a><a href=\"#\">Work</a><a href=\"#\">Contact</a></nav>",
+      "css": ".ds-nav{display:flex;gap:4px 16px;font-family: Inter, system-ui, -apple-system, 'Segoe UI', sans-serif; font-size:.875rem;line-height:1.4}.ds-nav a{color:var(--fg-secondary,#94a3b8);text-decoration:none}.ds-nav a:hover,.ds-nav a[aria-current=page]{color:var(--fg,#f8fafc)}.ds-nav a[aria-current=page]{text-decoration:underline;text-decoration-color:var(--link-decoration,#94a3b8);text-underline-offset:3px}"
+    },
+    {
+      "name": "Town Card",
+      "kind": "card",
+      "refersTo": "town-card",
+      "description": "Bottom-left intro card on the 3D town, with place buttons that walk the character.",
+      "html": "<div class=\"ds-town-card\"><p class=\"ds-town-name\">Hi, I'm Mohit Ranka</p><p class=\"ds-town-line\">I build software, lead engineering teams, read widely, and write it all down.</p><nav class=\"ds-town-places\"><button>Writing</button><button>Work</button><button>Library</button><button>Forge</button><button>Contact</button></nav></div>",
+      "css": ".ds-town-card{font-family: Inter, system-ui, -apple-system, 'Segoe UI', sans-serif; max-width:23rem;padding:1.2rem 1.3rem 1.15rem;border-radius:14px;background:#14161b;color:#fffaf0;box-shadow:0 18px 44px -18px rgba(0,0,0,.7)}.ds-town-name{margin:0 0 .45rem;font-size:clamp(1.5rem,1.2rem + 1.2vw,2rem);font-weight:800;line-height:1.05;letter-spacing:-.03em}.ds-town-line{margin:0 0 1rem;font-size:.9375rem;line-height:1.5;color:#a9adb8}.ds-town-places{display:flex;flex-wrap:wrap;gap:.4rem}.ds-town-places button{appearance:none;padding:.5rem .8rem;border:1px solid rgba(255,250,240,.28);border-radius:999px;background:transparent;color:#fffaf0;font:600 .875rem/1 Inter,system-ui,sans-serif;cursor:pointer;transition:background .15s ease,color .15s ease,border-color .15s ease}.ds-town-places button:hover{border-color:#ff8a2a;background:#ff8a2a;color:#14161b}.ds-town-places button:focus-visible{outline:3px solid #ff8a2a;outline-offset:2px}"
+    },
+    {
+      "name": "Town Proximity Panel",
+      "kind": "card",
+      "refersTo": "town-panel",
+      "description": "Bottom-right panel that opens at a building: facts, list rows, one ember Enter link.",
+      "html": "<aside class=\"ds-town-panel\"><p class=\"ds-town-panel-title\">The print shop</p><p class=\"ds-town-panel-body\">14 essays on platforms, data, reliability, and leading teams.</p><ul class=\"ds-town-list\"><li><a href=\"#\">When I still choose a relational database</a><span>Mar 2025</span></li></ul><a class=\"ds-town-enter\" href=\"#\">Read all the writing</a></aside>",
+      "css": ".ds-town-panel{font-family: Inter, system-ui, -apple-system, 'Segoe UI', sans-serif; width:min(24rem,100%);padding:1.15rem 1.25rem 1.2rem;border-radius:14px;background:#14161b;color:#fffaf0;box-shadow:0 18px 44px -18px rgba(0,0,0,.7)}.ds-town-panel-title{margin:0 0 .4rem;font-size:1.25rem;font-weight:800;letter-spacing:-.02em}.ds-town-panel-body{margin:0 0 .75rem;font-size:.9375rem;line-height:1.55;color:#a9adb8}.ds-town-list{margin:0 0 .9rem;padding:0;list-style:none}.ds-town-list li{padding:.5rem 0;border-top:1px solid rgba(255,250,240,.12);font-size:.875rem;line-height:1.35}.ds-town-list a{color:#fffaf0;font-weight:600;text-decoration-color:#ff8a2a}.ds-town-list span{display:block;margin-top:.15rem;color:#a9adb8;font-size:.8125rem}.ds-town-enter{display:inline-block;padding:.6rem 1rem;border-radius:999px;background:#ff8a2a;color:#14161b;font-weight:700;font-size:.9375rem;text-decoration:none}.ds-town-enter:hover{filter:brightness(1.06)}.ds-town-enter:focus-visible,.ds-town-list a:focus-visible{outline:3px solid #ff8a2a;outline-offset:2px}"
+    },
+    {
+      "name": "Town Name Label",
+      "kind": "chip",
+      "refersTo": "town-label",
+      "description": "Paper pill floated over each building; ember when the character is near.",
+      "html": "<span class=\"ds-town-label\">Library</span> <span class=\"ds-town-label is-near\">Writing</span>",
+      "css": ".ds-town-label{display:inline-block;padding:.35rem .7rem;border-radius:999px;background:#fffaf0;color:#14161b;font:700 .875rem/1 Inter,system-ui,sans-serif;white-space:nowrap;box-shadow:0 6px 14px -6px rgba(20,22,27,.55);cursor:pointer;transition:background .2s ease}.ds-town-label:hover,.ds-town-label.is-near{background:#ff8a2a}"
+    },
+    {
+      "name": "Town Hint and Skip",
+      "kind": "custom",
+      "refersTo": "town-hint",
+      "description": "Top-right controls hint (ink pill with kbd chips) and the paper Skip pill.",
+      "html": "<div class=\"ds-town-foot\"><p class=\"ds-town-hint\"><kbd>WASD</kbd> or <kbd>arrows</kbd> to walk</p><a class=\"ds-town-skip\" href=\"#\">Skip to the site</a></div>",
+      "css": ".ds-town-foot{display:flex;gap:.5rem;align-items:center;font-family: Inter, system-ui, -apple-system, 'Segoe UI', sans-serif;}.ds-town-hint{margin:0;padding:.45rem .8rem;border-radius:999px;background:#14161b;color:#fffaf0;font-size:.8125rem}.ds-town-hint kbd{font:600 .75rem/1 Inter,system-ui,sans-serif;padding:.12rem .35rem;border-radius:4px;background:rgba(255,250,240,.16)}.ds-town-skip{padding:.45rem .85rem;border-radius:999px;background:#fffaf0;color:#14161b;font-weight:700;font-size:.875rem;text-decoration:none;box-shadow:0 6px 14px -6px rgba(20,22,27,.55)}.ds-town-skip:hover{background:#ff8a2a}.ds-town-skip:focus-visible{outline:3px solid #ff8a2a;outline-offset:2px}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Quiet Desk and the Island Town",
+    "overview": "The site is two layers. Underneath is an incumbent reading desk: a single 720px column of Inter on a slate ground, dark by default with a light alternative, flat, hairline-bordered and almost colourless. Hierarchy comes from weight (500 to 600) and from the step between primary and secondary text, never from colour. The writing is the product and the chrome stays out of its way.\n\nOn top, only on the homepage, sits the town: a full-screen, low-poly, flat-shaded island built in Three.js (vendored r160) from primitives, toy-scale and warm. The visitor walks Mohit's character between seven buildings (Forge, Writing print shop, Library bookshop, Booking.com, Postman and LinkedIn offices, Contact post box), and each building is a real section of the site. The town follows the site theme: the light theme is a sunny day, the dark theme is a moonlit night with lit windows, lamps and a glowing forge. Its UI overlay is the site's Inter set heavier (700 to 800) on solid ink panels with paper text and a single forge-ember accent.\n\nThe two layers meet at the type family and at the theme switch. Below the first viewport the incumbent theme resumes untouched, and when WebGL is unavailable the town collapses to a compact ink card on the site's own ground.",
+    "keyCharacteristics": [
+      "Inter everywhere; weight carries hierarchy (500 on the desk, 700 to 800 in the town).",
+      "Desk: slate grayscale, flat, hairline borders, one 720px column.",
+      "Town: low-poly flat-shaded primitives, warm day palette, moonlit night palette, forge ember as the one UI accent.",
+      "The town is driven by `data-theme`; day is light, night is dark.",
+      "Every place in the town maps to a real page; names only, no logos or brand colours."
+    ],
+    "rules": [
+      {
+        "name": "The Two Grounds Rule",
+        "body": "The desk has no accent colour; the town has exactly one (Forge Ember). Ember never leaves the town, and slate never styles a town overlay.",
+        "section": "colors"
+      },
+      {
+        "name": "The Theme Is the Clock Rule",
+        "body": "The town has no time-of-day control of its own. Light theme is day, dark theme is night, and switching the site theme relights the island live.",
+        "section": "colors"
+      },
+      {
+        "name": "The Names Only Rule",
+        "body": "Employer buildings carry their names as text on plain signs and labels, never logos or brand colours. Roof colours come from the island palette.",
+        "section": "colors"
+      },
+      {
+        "name": "The Weight Not Colour Rule",
+        "body": "Hierarchy is weight and the primary/secondary text step. No coloured headings anywhere.",
+        "section": "typography"
+      },
+      {
+        "name": "The Heavy Town Rule",
+        "body": "Weights 700 and 800 belong to the town overlay; the desk tops out at 600.",
+        "section": "typography"
+      },
+      {
+        "name": "The Corners Are Clear Rule",
+        "body": "Town overlays sit only in corners, so the buildings across the top and centre of the frame are never covered.",
+        "section": "layout"
+      },
+      {
+        "name": "The Flat Desk Rule",
+        "body": "Desk surfaces carry no drop shadow; shadows belong to things floating over the 3D town.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** keep Forge Ember (#ff8a2a) as the town's only UI accent and keep it off the desk.",
+      "**Do** relight the town from `data-theme`: light is day, dark is night.",
+      "**Do** build new places from flat-shaded primitives in the PALETTE, with a plain text sign and a door facing the plaza.",
+      "**Do** anchor town overlays to corners with the clamp(1rem, 3vw, 2rem) inset and solid ink grounds, never translucent glass.",
+      "**Do** keep the no-WebGL path a single compact ink card with real links, followed by the desk.",
+      "**Do** give every shipped raster embedded provenance. New Goodreads covers from a future sync need `impeccable embed-prompt`."
+    ],
+    "donts": [
+      "**Don't** put logos or brand colours on the employer buildings; names only.",
+      "**Don't** add a town place that doesn't map to a real section of the site.",
+      "**Don't** give desk surfaces drop shadows or an accent colour; depth there is hairlines and tone.",
+      "**Don't** use weights above 600 on the desk.",
+      "**Don't** let an overlay cover the buildings across the top of the frame."
+    ]
+  }
+}

@@ -1053,3 +1053,398 @@ hr {
 :root[data-theme="light"] ::selection {
   background: rgba(99, 102, 241, 0.2);
 }
+
+/* — Homepage town: a full-screen 3D island (theme/js/town.js). — */
+.town {
+  --town-ink: #14161b;
+  --town-ink-2: #23262e;
+  --town-paper: #fffaf0;
+  --town-muted: #a9adb8;
+  --town-accent: #ff8a2a;
+  position: relative;
+  height: 100vh;
+  height: 100svh;
+  min-height: 560px;
+  overflow: hidden;
+  background: #9fd3e6;
+  color: var(--town-paper);
+  font-family: var(--font-sans);
+}
+
+.town.town--night {
+  background: #0d1830;
+}
+
+.town-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  outline: none;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.town-canvas:focus-visible {
+  box-shadow: inset 0 0 0 3px var(--town-accent);
+}
+
+/* Name labels float over each building, like painted shop signs. */
+.town-labels {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.town-label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 0.35rem 0.7rem;
+  border: 0;
+  border-radius: 999px;
+  background: var(--town-paper);
+  color: var(--town-ink);
+  font: 700 0.875rem/1 var(--font-sans);
+  white-space: nowrap;
+  box-shadow: 0 6px 14px -6px rgba(20, 22, 27, 0.55);
+  pointer-events: auto;
+  cursor: pointer;
+  transition: background 0.2s ease, opacity 0.2s ease;
+}
+
+.town-label:hover,
+.town-label.is-near {
+  background: var(--town-accent);
+}
+
+.town-label.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Overlay panels: solid ink with paper text. */
+.town-card,
+.town-panel {
+  position: absolute;
+  border-radius: 14px;
+  background: var(--town-ink);
+  color: var(--town-paper);
+  box-shadow: 0 18px 44px -18px rgba(0, 0, 0, 0.7);
+}
+
+/* Intro card sits bottom-left so the row of buildings across the top stays clear. */
+.town-card {
+  bottom: clamp(1rem, 3vw, 2rem);
+  left: clamp(1rem, 3vw, 2rem);
+  max-width: 23rem;
+  padding: 1.2rem 1.3rem 1.15rem;
+}
+
+.town-name {
+  margin: 0 0 0.45rem;
+  font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: var(--town-paper);
+}
+
+.town-line {
+  margin: 0 0 1rem;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--town-muted);
+}
+
+.town-places,
+.town-fallback-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.town-places button,
+.town-fallback-links a {
+  appearance: none;
+  padding: 0.5rem 0.8rem;
+  border: 1px solid rgba(255, 250, 240, 0.28);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--town-paper);
+  font: 600 0.875rem/1 var(--font-sans);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.town-places button:hover,
+.town-fallback-links a:hover {
+  border-color: var(--town-accent);
+  background: var(--town-accent);
+  color: var(--town-ink);
+}
+
+.town-places button:focus-visible,
+.town-fallback-links a:focus-visible,
+.town-label:focus-visible,
+.town-panel-link:focus-visible,
+.town-skip:focus-visible,
+.town-panel-body a:focus-visible {
+  outline: 3px solid var(--town-accent);
+  outline-offset: 2px;
+}
+
+.town-fallback-links {
+  display: none;
+}
+
+/* With a panel open, the card collapses to its place buttons. */
+.town.has-panel .town-name,
+.town.has-panel .town-line {
+  display: none;
+}
+
+/* Panel that opens beside a building. */
+.town-panel {
+  right: clamp(1rem, 3vw, 2rem);
+  bottom: clamp(1rem, 3vw, 2rem);
+  width: min(24rem, calc(100% - 2rem));
+  max-height: calc(100% - 6rem);
+  overflow-y: auto;
+  padding: 1.15rem 1.25rem 1.2rem;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.25s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 250, 240, 0.3) transparent;
+}
+
+.town-panel.is-open {
+  opacity: 1;
+  transform: none;
+}
+
+.town-panel-title {
+  margin: 0 0 0.4rem;
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--town-paper);
+}
+
+.town-panel-body p {
+  margin: 0 0 0.75rem;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--town-muted);
+}
+
+.town-panel-body ul {
+  margin: 0 0 0.9rem;
+  padding: 0;
+  list-style: none;
+}
+
+.town-panel-body li {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0;
+  border-top: 1px solid rgba(255, 250, 240, 0.12);
+  font-size: 0.875rem;
+  line-height: 1.35;
+}
+
+.town-panel-body li > div {
+  flex: 1;
+  min-width: 0;
+}
+
+.town-panel-body li a {
+  color: var(--town-paper);
+  font-weight: 600;
+  text-decoration-color: var(--town-accent);
+}
+
+.town-panel-body li img {
+  flex-shrink: 0;
+  width: 28px;
+  height: 42px;
+  object-fit: cover;
+  border-radius: 2px;
+}
+
+.town-panel-body li span {
+  display: block;
+  margin-top: 0.15rem;
+  color: var(--town-muted);
+  font-size: 0.8125rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.town-panel-link {
+  display: inline-block;
+  padding: 0.6rem 1rem;
+  border-radius: 999px;
+  background: var(--town-accent);
+  color: var(--town-ink);
+  font-weight: 700;
+  font-size: 0.9375rem;
+  text-decoration: none;
+}
+
+.town-panel-link:hover {
+  color: var(--town-ink);
+  text-decoration: none;
+  filter: brightness(1.06);
+}
+
+/* Top-right: controls hint and the way out, clear of the forge's smoke. */
+.town-foot {
+  position: absolute;
+  top: clamp(1rem, 2.5vh, 1.5rem);
+  right: clamp(1rem, 3vw, 2rem);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  max-width: calc(100% - 2rem);
+  pointer-events: none;
+}
+
+.town-hint {
+  margin: 0;
+  padding: 0.45rem 0.8rem;
+  border-radius: 999px;
+  background: var(--town-ink);
+  color: var(--town-paper);
+  font-size: 0.8125rem;
+}
+
+.town-hint kbd {
+  font: 600 0.75rem/1 var(--font-sans);
+  padding: 0.12rem 0.35rem;
+  border-radius: 4px;
+  background: rgba(255, 250, 240, 0.16);
+}
+
+.hint-touch {
+  display: none;
+}
+
+.town-skip {
+  pointer-events: auto;
+  padding: 0.45rem 0.85rem;
+  border-radius: 999px;
+  background: var(--town-paper);
+  color: var(--town-ink);
+  font-weight: 700;
+  font-size: 0.875rem;
+  text-decoration: none;
+  box-shadow: 0 6px 14px -6px rgba(20, 22, 27, 0.55);
+}
+
+.town-skip:hover {
+  background: var(--town-accent);
+  color: var(--town-ink);
+  text-decoration: none;
+}
+
+@media (hover: none), (max-width: 640px) {
+  .hint-keys {
+    display: none;
+  }
+
+  .hint-touch {
+    display: inline;
+  }
+}
+
+/* Before the world loads the card works on its own. */
+.town:not(.town--ready) .town-labels,
+.town:not(.town--ready) .town-hint {
+  display: none;
+}
+
+/* No WebGL: a compact intro strip on the site's own ground, then the site. */
+.town--fallback {
+  height: auto;
+  min-height: 0;
+  overflow: visible;
+  background: transparent;
+}
+
+.town--fallback .town-name {
+  display: none;
+}
+
+.town--fallback .town-canvas,
+.town--fallback .town-places,
+.town--fallback .town-foot {
+  display: none;
+}
+
+.town--fallback .town-fallback-links {
+  display: flex;
+}
+
+.town--fallback .town-card {
+  position: static;
+  max-width: calc(var(--main-w) - 48px);
+  margin: 32px auto 8px;
+  box-sizing: border-box;
+}
+
+.town--fallback .town-walk {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .town-card {
+    right: 1rem;
+    left: 1rem;
+    bottom: 1rem;
+    max-width: none;
+    padding: 0.9rem 1rem 0.9rem;
+  }
+
+  .town-line {
+    display: none;
+  }
+
+  .town-places button {
+    padding: 0.45rem 0.7rem;
+    font-size: 0.8125rem;
+  }
+
+  .town.has-panel .town-card {
+    visibility: hidden;
+  }
+
+  /* On phones the panel takes the card's place while it is open. */
+  .town-panel {
+    right: 1rem;
+    left: 1rem;
+    width: auto;
+    bottom: 1rem;
+    max-height: 52%;
+  }
+
+  .town-foot {
+    left: 1rem;
+    right: 1rem;
+    justify-content: space-between;
+  }
+}
+
+/* The page scrollbar takes the site's colours instead of the browser default. */
+:root {
+  scrollbar-color: var(--gray-700) var(--bg);
+}
+
+:root[data-theme="light"] {
+  scrollbar-color: var(--gray-400) var(--bg);
+}

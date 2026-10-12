@@ -103,3 +103,12 @@ GISCUS = {
 
 # Clean output/ on each build (never point OUTPUT_PATH at repo root with this on)
 DELETE_OUTPUT_DIRECTORY = True
+
+# Library — books from Goodreads, refreshed by scripts/sync_library.py (make library).
+# Feeds the bookshop in the homepage town. Missing data renders an empty shop.
+import json as _json
+from pathlib import Path as _Path
+
+_library = _Path(__file__).resolve().parent / 'data' / 'library.json'
+LIBRARY = _json.loads(_library.read_text()) if _library.exists() else {'books': [], 'favourites': [], 'profile': ''}
+LIBRARY['by_id'] = {book['id']: book for book in LIBRARY['books']}

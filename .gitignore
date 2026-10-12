@@ -1,0 +1,6 @@
+# Impeccable design scratch (sketches, decision pages, review captures, local preview)
+.impeccable/mocks/
+.impeccable/questions/
+.impeccable/review/
+.impeccable/preview/
+.impeccable/harness/
