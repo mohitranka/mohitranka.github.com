@@ -1,0 +1,4 @@
+# GitHub Pages serves the prebuilt Pelican output in this repo root.
+# Keep internal project files off the public site.
+exclude:
+  - PRODUCT.md
