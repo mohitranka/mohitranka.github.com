@@ -262,6 +262,12 @@ a:hover {
   text-decoration-color: var(--link-decoration-hover);
 }
 
+a:focus-visible,
+.btn-submit:focus-visible {
+  outline: 2px solid var(--fg-secondary);
+  outline-offset: 3px;
+}
+
 /* — Lists — */
 ul {
   list-style: none;
@@ -818,13 +824,14 @@ hr {
   margin: 40px 0;
 }
 
-/* — Homepage: engagement positioning — */
+/* — Homepage — */
 .hero-title {
   font-size: 1.75rem;
   font-weight: 600;
   letter-spacing: -0.025em;
   line-height: 1.25;
   margin: 0 0 20px;
+  text-wrap: balance;
 }
 
 .hero-lede {
@@ -833,6 +840,7 @@ hr {
   line-height: 1.7;
   color: var(--fg);
   max-width: 58ch;
+  text-wrap: pretty;
 }
 
 .hero-lede--secondary {
@@ -840,24 +848,18 @@ hr {
   color: var(--fg-secondary);
 }
 
-.engagement-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px 0;
+/* Availability is the first fact a recruiter needs; it reads at body weight, not as fine print. */
+.hero-meta {
   margin: 28px 0;
   padding: 0;
 }
 
-.engagement-meta li {
+.hero-meta li {
   padding: 0;
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
+  font-weight: 500;
   line-height: 1.5;
-  color: var(--fg-secondary);
-}
-
-.engagement-meta li:not(:last-child)::after {
-  content: "·";
-  margin: 0 10px;
+  color: var(--fg);
 }
 
 .hero-actions {
@@ -908,43 +910,29 @@ hr {
   margin: 0 0 14px;
 }
 
-.situation-list {
-  margin: 0;
-  padding: 0;
-}
-
-.situation-list li {
-  position: relative;
-  padding: 7px 0 7px 20px;
-  font-size: 0.9375rem;
-  line-height: 1.6;
-  color: var(--fg);
-}
-
-.situation-list li::before {
-  content: "—";
-  position: absolute;
-  left: 0;
-  color: var(--fg-secondary);
-}
-
+/* Separators lead each item; the list is pulled left by one separator width and that
+   strip is clipped, so no line starts or ends on a dangling dot. */
 .area-list {
   display: flex;
   flex-wrap: wrap;
   gap: 4px 0;
-  margin: 4px 0 0;
+  margin: 4px 0 0 -1.25em;
   padding: 0;
+  font-size: 0.875rem;
+  clip-path: inset(0 0 0 1.25em);
 }
 
 .area-list li {
   padding: 0;
-  font-size: 0.875rem;
+  font-size: inherit;
   color: var(--fg-secondary);
 }
 
-.area-list li:not(:last-child)::after {
+.area-list li::before {
   content: "·";
-  margin: 0 8px;
+  display: inline-block;
+  width: 1.25em;
+  text-align: center;
 }
 
 .impact-list {
@@ -1010,31 +998,6 @@ hr {
   color: var(--fg-secondary);
 }
 
-.engagement-details {
-  margin: 4px 0 0;
-  padding: 0;
-}
-
-.detail-row {
-  display: grid;
-  grid-template-columns: 180px 1fr;
-  gap: 16px;
-  padding: 11px 0;
-  border-top: 1px solid var(--border);
-}
-
-.detail-row dt {
-  font-size: 0.875rem;
-  color: var(--fg-secondary);
-}
-
-.detail-row dd {
-  margin: 0;
-  font-size: 0.875rem;
-  line-height: 1.6;
-  color: var(--fg);
-}
-
 .final-cta {
   margin-top: 56px;
   padding-top: 28px;
@@ -1043,6 +1006,7 @@ hr {
 
 .final-cta h2 {
   margin: 0 0 8px;
+  text-wrap: balance;
   font-size: 1.25rem;
   font-weight: 600;
   letter-spacing: -0.015em;
@@ -1055,11 +1019,6 @@ hr {
 @media (max-width: 640px) {
   .hero-title {
     font-size: 1.5rem;
-  }
-
-  .detail-row {
-    grid-template-columns: 1fr;
-    gap: 2px;
   }
 }
 
