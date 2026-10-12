@@ -1,11 +1,11 @@
 Title: Contact
 Slug: contact
 Template: contact
-Summary: Tell me about an engineering problem worth owning for 6–12 months.
+Summary: Hiring an Engineering Lead or Engineering Manager? Tell me about the role.
 
-Tell me what needs to change and why it matters.
+Tell me about the role, the team, and what needs to change.
 
-The best fit is a clearly defined, consequential engineering objective with executive sponsorship, a capable team, and genuine technical and delivery autonomy — typically one product engineering team, 3–4 days a week, for 6–12 months.
+I am looking for a full-time Engineering Lead or Engineering Manager role: leading a team, owning delivery, and staying close enough to the code to make the technical calls.
 
 I read everything myself. If it is not a fit, I will say so.
 

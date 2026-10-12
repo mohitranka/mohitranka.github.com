@@ -1,8 +1,8 @@
 Title: Work
 Slug: work
-Summary: Embedded engineering leadership — architecture, technical direction, and delivery at Booking.com, Postman, and LinkedIn, and creator of Forge.
+Summary: Engineering leadership — architecture, technical direction, and delivery at Booking.com, Postman, and LinkedIn, and creator of Forge.
 
-I take on a small number of embedded engagements: one product engineering team, one important objective, 6–12 months. The work spans architecture, technical decision-making, and delivery — not advice handed over the wall.
+Selected work from 15+ years of hands-on engineering and engineering leadership. It spans architecture, technical decision-making, and delivery — owning the outcome, not handing advice over the wall.
 
 <section class="work-card">
   <h2><a href="https://www.booking.com" target="_blank" rel="noopener noreferrer">Booking.com</a></h2>
@@ -28,4 +28,4 @@ I take on a small number of embedded engagements: one product engineering team, 
   <p class="work-outcome">Forge is a terminal-native AI coding environment combining agent conversation, repository navigation, editing, shell execution, diffs, approvals, and durable sessions in one workspace.</p>
 </section>
 
-If you have an engineering problem that fits this model, tell me what needs to change and why it matters — [start a conversation](/contact/).
+If you are hiring an Engineering Lead or Engineering Manager, tell me about the role — [start a conversation](/contact/).
