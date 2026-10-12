@@ -1,8 +1,8 @@
 # Mohit Ranka
 
-> Engineering leader with 15+ years at Booking.com, Postman, LinkedIn and Moveworks. Open to full-time Engineering Lead and Engineering Manager roles.
+> Engineering leader with 15+ years at Booking.com, Postman, LinkedIn, and Moveworks. Writing on platforms, data, reliability, and engineering leadership.
 
-Mohit Ranka is an engineering leader with 15+ years of hands-on engineering and engineering leadership at Booking.com, Postman, LinkedIn, and Moveworks. He works at the boundary between technical leadership and engineering management: close enough to the code to make sound technical calls, senior enough to own delivery and the decisions around it. He is open to full-time Engineering Lead and Engineering Manager roles.
+Mohit Ranka is an engineering leader with 15+ years of hands-on engineering and engineering leadership at Booking.com, Postman, LinkedIn, and Moveworks. He works at the boundary between technical leadership and engineering management: close enough to the code to make sound technical calls, senior enough to own delivery and the decisions around it.
 
 Experience highlights:
 - Booking.com: built authentication and authorization infrastructure for multiple portfolio products at roughly 1M requests per second
@@ -17,10 +17,10 @@ Site: https://www.mohitranka.com
 
 ## Pages
 
-- [Home](https://www.mohitranka.com/): Engineering Lead and Engineering Manager profile — selected impact, how Mohit works, and background
+- [Home](https://www.mohitranka.com/): Selected impact, how Mohit works, and background
 - [Writing](https://www.mohitranka.com/blog/): Technical writing on platforms, data, reliability, and leadership
 - [Work](https://www.mohitranka.com/work/): Selected impact at Booking.com, Postman, and LinkedIn, plus Forge
-- [Contact](https://www.mohitranka.com/contact/): Start a conversation about a full-time Engineering Lead or Engineering Manager role
+- [Contact](https://www.mohitranka.com/contact/): Send Mohit a message
 - [Tags](https://www.mohitranka.com/tags/): Browse writing by topic tag
 
 ## Writing

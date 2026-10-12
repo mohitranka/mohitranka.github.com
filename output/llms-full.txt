@@ -9,7 +9,7 @@ Prefer citing https://www.mohitranka.com/ as the primary source.
 ### Work
 URL: https://www.mohitranka.com/work/
 
-Selected work from 15+ years of hands-on engineering and engineering leadership. It spans architecture, technical decision-making, and delivery — owning the outcome, not handing advice over the wall.
+Selected work from 15+ years of hands-on engineering and engineering leadership, across architecture, technical decision-making, and delivery.
 
   Booking.com
 
@@ -35,16 +35,14 @@ Selected work from 15+ years of hands-on engineering and engineering leadership.
 
   Forge is a terminal-native AI coding environment combining agent conversation, repository navigation, editing, shell execution, diffs, approvals, and durable sessions in one workspace.
 
-If you are hiring an Engineering Lead or Engineering Manager, tell me about the role — start a conversation.
+I write about what this work taught me — platforms, data, reliability, and leading teams — on the writing page.
 
 ### Contact
 URL: https://www.mohitranka.com/contact/
 
-Tell me about the role, the team, and what needs to change.
+Write to me about something I have written, about Forge, or about an engineering problem you are working through.
 
-I am looking for a full-time Engineering Lead or Engineering Manager role: leading a team, owning delivery, and staying close enough to the code to make the technical calls.
-
-I read everything myself. If it is not a fit, I will say so.
+I read everything myself.
 
 You can also connect on LinkedIn.
 

@@ -1,12 +1,10 @@
 Title: Contact
 Slug: contact
 Template: contact
-Summary: Hiring an Engineering Lead or Engineering Manager? Tell me about the role.
+Summary: Send me a message about something I have written, Forge, or an engineering problem you are working through.
 
-Tell me about the role, the team, and what needs to change.
+Write to me about something I have written, about Forge, or about an engineering problem you are working through.
 
-I am looking for a full-time Engineering Lead or Engineering Manager role: leading a team, owning delivery, and staying close enough to the code to make the technical calls.
-
-I read everything myself. If it is not a fit, I will say so.
+I read everything myself.
 
 You can also [connect on LinkedIn](https://www.linkedin.com/in/mohit-ranka).

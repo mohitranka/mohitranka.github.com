@@ -52,10 +52,15 @@
     const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailTrim);
 
     if (!nameTrim || !emailOk || !messageTrim) {
-      show(
-        error,
-        "Please fill in name, a valid email, and a message — then try again."
-      );
+      const missing = [];
+      if (!nameTrim) missing.push("your name");
+      if (!emailOk) missing.push("a valid email address");
+      if (!messageTrim) missing.push("a message");
+      const list =
+        missing.length > 1
+          ? `${missing.slice(0, -1).join(", ")} and ${missing[missing.length - 1]}`
+          : missing[0];
+      show(error, `Please add ${list}, then send again.`);
       return;
     }
 
@@ -64,7 +69,7 @@
     if (botEl && botEl.checked) {
       show(
         success,
-        "Thank you! Your message has been sent. I will get back to you soon."
+        "Thanks. Your message has been sent, and I will reply as soon as I can."
       );
       contactForm.reset();
       return;
@@ -73,8 +78,8 @@
     if (!accessKey || accessKey === "YOUR_ACCESS_KEY_HERE") {
       show(
         error,
-        `Contact form is not configured yet. Please
-        <a href="${linkedInUrl}" target="_blank" rel="noopener noreferrer">connect on LinkedIn</a>.`
+        `The contact form is not available right now. Please
+        <a href="${linkedInUrl}" target="_blank" rel="noopener noreferrer">reach me on LinkedIn</a>.`
       );
       return;
     }
@@ -104,13 +109,13 @@
       if (res.ok && data.success) {
         show(
           success,
-          "Thank you! Your message has been sent. I will get back to you soon."
+          "Thanks. Your message has been sent, and I will reply as soon as I can."
         );
         contactForm.reset();
       } else {
         const msg =
           data.message ||
-          "Sorry, something went wrong. Please try again in a moment.";
+          "Your message could not be sent. Please try again in a moment.";
         show(
           error,
           `${msg}

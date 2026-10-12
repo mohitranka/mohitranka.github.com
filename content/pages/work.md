@@ -2,7 +2,7 @@ Title: Work
 Slug: work
 Summary: Engineering leadership — architecture, technical direction, and delivery at Booking.com, Postman, and LinkedIn, and creator of Forge.
 
-Selected work from 15+ years of hands-on engineering and engineering leadership. It spans architecture, technical decision-making, and delivery — owning the outcome, not handing advice over the wall.
+Selected work from 15+ years of hands-on engineering and engineering leadership, across architecture, technical decision-making, and delivery.
 
 <section class="work-card">
   <h2><a href="https://www.booking.com" target="_blank" rel="noopener noreferrer">Booking.com</a></h2>
@@ -28,4 +28,4 @@ Selected work from 15+ years of hands-on engineering and engineering leadership.
   <p class="work-outcome">Forge is a terminal-native AI coding environment combining agent conversation, repository navigation, editing, shell execution, diffs, approvals, and durable sessions in one workspace.</p>
 </section>
 
-If you are hiring an Engineering Lead or Engineering Manager, tell me about the role — [start a conversation](/contact/).
+I write about what this work taught me — platforms, data, reliability, and leading teams — on the [writing](/blog/) page.
