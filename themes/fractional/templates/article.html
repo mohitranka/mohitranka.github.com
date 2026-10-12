@@ -96,36 +96,39 @@
 {% endblock %}
 
 {% block content %}
-{% set minutes = ((article.content|striptags|wordcount) / 220)|round(0, 'ceil')|int %}
-<article class="article">
+<article>
     <header class="article-header">
-        <span class="margin-note entry-year" aria-hidden="true">{{ article.date.strftime('%-d %b') }}<br>{{ article.date.year }}</span>
         <h1 class="article-title">{{ article.title }}</h1>
-        <p class="article-meta label">
-            <time datetime="{{ article.date.isoformat() }}">{{ article.date.strftime('%-d %B %Y') }}</time>
-            <span>{{ minutes }} min read</span>
+        <p class="article-meta">
+            <time datetime="{{ article.date.isoformat() }}">{{ article.date.strftime('%d %b %Y') }}</time>
         </p>
         {% if article.tags %}
         <ul class="tag-list" aria-label="Tags">
             {% for tag in article.tags %}
-            <li><a class="tag-chip" href="{{ SITEURL }}/{{ tag.url }}">{{ tag|string|replace('-', ' ')|capitalize }}</a></li>
+            <li><a class="tag-chip" href="{{ SITEURL }}/{{ tag.url }}">{{ tag }}</a></li>
             {% endfor %}
         </ul>
         {% endif %}
     </header>
+
     <div class="entry-content">
         {{ article.content }}
     </div>
+
     <footer class="article-footer">
-        <nav class="article-nav" aria-label="More writing">
-            {% if article.prev_article %}
-            <a class="prev" href="{{ SITEURL }}/{{ article.prev_article.url }}"><span class="label">Older</span><span class="essay-title">{{ article.prev_article.title }}</span></a>
-            {% else %}<span></span>{% endif %}
-            {% if article.next_article %}
-            <a class="next" href="{{ SITEURL }}/{{ article.next_article.url }}"><span class="label">Newer</span><span class="essay-title">{{ article.next_article.title }}</span></a>
-            {% endif %}
-        </nav>
-        <p class="back-links"><a href="{{ SITEURL }}/blog/">All writing</a></p>
+        {% if article.tags %}
+        <p class="meta tag-footer-label">Tagged</p>
+        <ul class="tag-list" aria-label="Tags">
+            {% for tag in article.tags %}
+            <li><a class="tag-chip" href="{{ SITEURL }}/{{ tag.url }}">{{ tag }}</a></li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <p class="meta">
+            <a href="{{ SITEURL }}/blog/">← All writing</a>
+            ·
+            <a href="{{ SITEURL }}/tags/">All tags</a>
+        </p>
     </footer>
 </article>
 {% include "comments.html" %}

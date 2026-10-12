@@ -19,24 +19,23 @@
     <meta property="og:url" content="https://www.mohitranka.com/tags/">
     <meta property="og:title" content="Tags — Mohit Ranka">
     <meta property="og:description" content="Browse writing by tag — platforms, data, reliability, leadership, and more.">
-    <meta property="og:image" content="https://www.mohitranka.com/theme/images/og.png?v=2026-10-12c">
-    <meta property="og:image:alt" content="Mohit Ranka">
+    <meta property="og:image" content="https://www.mohitranka.com/theme/images/og.png?v=2026-10-12b">
+    <meta property="og:image:alt" content="Mohit Ranka — Engineering Leader">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Tags — Mohit Ranka">
     <meta name="twitter:description" content="Browse writing by tag — platforms, data, reliability, leadership, and more.">
-    <meta name="twitter:image" content="https://www.mohitranka.com/theme/images/og.png?v=2026-10-12c">
-    <meta name="twitter:image:alt" content="Mohit Ranka">
+    <meta name="twitter:image" content="https://www.mohitranka.com/theme/images/og.png?v=2026-10-12b">
+    <meta name="twitter:image:alt" content="Mohit Ranka — Engineering Leader">
     <script>
         (function () {
-            var theme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-            try { theme = localStorage.getItem('theme') || theme; } catch (e) {}
+            var theme = 'dark';
+            try { theme = localStorage.getItem('theme') || 'dark'; } catch (e) {}
             document.documentElement.setAttribute('data-theme', theme);
         })();
     </script>
-    <link rel="preload" href="../theme/fonts/bricolage-grotesque-normal.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="../theme/fonts/literata-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../theme/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="../theme/css/style.css">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-CWEDLBH79X"></script>
     <script>
@@ -90,96 +89,86 @@
 </head>
 
 <body class="page-tags">
-    <div class="site">
-        <header class="site-header wrap">
+    <main>
+        <header class="site-header">
             <a class="site-logo" href="../">Mohit Ranka</a>
             <nav class="site-nav" aria-label="Primary">
-                <a href="../blog/" aria-current="page">Writing</a>
+                <a href="../blog/">Writing</a>
                 <a href="../work/">Work</a>
-                <a href="../library/">Library</a>
                 <a href="../contact/">Contact</a>
-                <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark theme">
-                    <svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
-                    <svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to light theme">
+                    <svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+                    <svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
                 </button>
             </nav>
         </header>
 
-        <main class="wrap">
-<header class="page-head">
-    <h1>Topics</h1>
-    <p class="page-lede">Browse the writing by topic.</p>
-</header>
-<ul class="tag-index page-body">
-    <li>
-        <a class="tag-chip" href="../tags/architecture/">Architecture</a>
-        <span class="tag-count">4</span>
-    </li>
-    <li>
-        <a class="tag-chip" href="../tags/data-platforms/">Data platforms</a>
-        <span class="tag-count">5</span>
-    </li>
-    <li>
-        <a class="tag-chip" href="../tags/databases/">Databases</a>
-        <span class="tag-count">2</span>
-    </li>
-    <li>
-        <a class="tag-chip" href="../tags/developer-tooling/">Developer tooling</a>
-        <span class="tag-count">4</span>
-    </li>
-    <li>
-        <a class="tag-chip" href="../tags/distributed-systems/">Distributed systems</a>
-        <span class="tag-count">3</span>
-    </li>
-    <li>
-        <a class="tag-chip" href="../tags/engineering-leadership/">Engineering leadership</a>
-        <span class="tag-count">7</span>
-    </li>
-    <li>
-        <a class="tag-chip" href="../tags/identity/">Identity</a>
-        <span class="tag-count">1</span>
-    </li>
-    <li>
-        <a class="tag-chip" href="../tags/management/">Management</a>
-        <span class="tag-count">2</span>
-    </li>
-    <li>
-        <a class="tag-chip" href="../tags/observability/">Observability</a>
-        <span class="tag-count">1</span>
-    </li>
-    <li>
-        <a class="tag-chip" href="../tags/platforms/">Platforms</a>
-        <span class="tag-count">4</span>
-    </li>
-    <li>
-        <a class="tag-chip" href="../tags/product/">Product</a>
-        <span class="tag-count">4</span>
-    </li>
-    <li>
-        <a class="tag-chip" href="../tags/reliability/">Reliability</a>
-        <span class="tag-count">4</span>
-    </li>
-    <li>
-        <a class="tag-chip" href="../tags/security/">Security</a>
-        <span class="tag-count">1</span>
-    </li>
-</ul>
-<p class="back-links"><a href="../blog/">All writing</a></p>
-        </main>
+        <p class="meta crumb">
+            <a href="../blog/">Writing</a>
+            <span aria-hidden="true"> / </span>
+            <span>Tags</span>
+        </p>
 
-        <footer class="site-footer">
-            <div class="wrap footer-grid">
-                <span>Mohit Ranka</span>
-                <nav class="footer-links" aria-label="Elsewhere">
-                    <a href="https://github.com/mohitranka" rel="noopener noreferrer">GitHub</a>
-                    <a href="https://www.linkedin.com/in/mohit-ranka" rel="noopener noreferrer">LinkedIn</a>
-                    <a href="https://www.goodreads.com/user/show/49116640-mohit-ranka" rel="noopener noreferrer">Goodreads</a>
-                    <a href="https://www.mohitranka.com/rss.xml">RSS</a>
-                    <a href="https://www.mohitranka.com/atom.xml">Atom</a>
-                </nav>
-            </div>
-        </footer>
-    </div>
+        <h1>Tags</h1>
+        <p class="meta page-lede">
+            Browse the writing by topic.
+        </p>
+
+        <ul class="tag-index">
+            <li>
+                <a class="tag-chip" href="../tags/architecture/">architecture</a>
+                <span class="tag-count">4</span>
+            </li>
+            <li>
+                <a class="tag-chip" href="../tags/data-platforms/">data-platforms</a>
+                <span class="tag-count">5</span>
+            </li>
+            <li>
+                <a class="tag-chip" href="../tags/databases/">databases</a>
+                <span class="tag-count">2</span>
+            </li>
+            <li>
+                <a class="tag-chip" href="../tags/developer-tooling/">developer-tooling</a>
+                <span class="tag-count">4</span>
+            </li>
+            <li>
+                <a class="tag-chip" href="../tags/distributed-systems/">distributed-systems</a>
+                <span class="tag-count">3</span>
+            </li>
+            <li>
+                <a class="tag-chip" href="../tags/engineering-leadership/">engineering-leadership</a>
+                <span class="tag-count">7</span>
+            </li>
+            <li>
+                <a class="tag-chip" href="../tags/identity/">identity</a>
+                <span class="tag-count">1</span>
+            </li>
+            <li>
+                <a class="tag-chip" href="../tags/management/">management</a>
+                <span class="tag-count">2</span>
+            </li>
+            <li>
+                <a class="tag-chip" href="../tags/observability/">observability</a>
+                <span class="tag-count">1</span>
+            </li>
+            <li>
+                <a class="tag-chip" href="../tags/platforms/">platforms</a>
+                <span class="tag-count">4</span>
+            </li>
+            <li>
+                <a class="tag-chip" href="../tags/product/">product</a>
+                <span class="tag-count">4</span>
+            </li>
+            <li>
+                <a class="tag-chip" href="../tags/reliability/">reliability</a>
+                <span class="tag-count">4</span>
+            </li>
+            <li>
+                <a class="tag-chip" href="../tags/security/">security</a>
+                <span class="tag-count">1</span>
+            </li>
+        </ul>
+    </main>
     <script>
         (function () {
             var root = document.documentElement;

@@ -30,13 +30,12 @@
     <meta name="twitter:image:alt" content="How Forge Structures Requests for Prompt Cache Reuse">
     <script>
         (function () {
-            var theme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-            try { theme = localStorage.getItem('theme') || theme; } catch (e) {}
+            var theme = 'dark';
+            try { theme = localStorage.getItem('theme') || 'dark'; } catch (e) {}
             document.documentElement.setAttribute('data-theme', theme);
         })();
     </script>
-    <link rel="preload" href="../../theme/fonts/bricolage-grotesque-normal.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="../../theme/fonts/literata-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../../theme/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="../../theme/css/style.css">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-CWEDLBH79X"></script>
     <script>
@@ -120,36 +119,33 @@
 </head>
 
 <body class="page-article">
-    <div class="site">
-        <header class="site-header wrap">
+    <main>
+        <header class="site-header">
             <a class="site-logo" href="../../">Mohit Ranka</a>
             <nav class="site-nav" aria-label="Primary">
-                <a href="../../blog/" aria-current="page">Writing</a>
+                <a href="../../blog/">Writing</a>
                 <a href="../../work/">Work</a>
-                <a href="../../library/">Library</a>
                 <a href="../../contact/">Contact</a>
-                <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark theme">
-                    <svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
-                    <svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to light theme">
+                    <svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+                    <svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
                 </button>
             </nav>
         </header>
 
-        <main class="wrap">
-<article class="article">
+<article>
     <header class="article-header">
-        <span class="margin-note entry-year" aria-hidden="true">24 Sep<br>2026</span>
         <h1 class="article-title">How Forge Structures Requests for Prompt Cache Reuse</h1>
-        <p class="article-meta label">
-            <time datetime="2026-09-24T10:00:00+05:30">24 September 2026</time>
-            <span>7 min read</span>
+        <p class="article-meta">
+            <time datetime="2026-09-24T10:00:00+05:30">24 Sep 2026</time>
         </p>
         <ul class="tag-list" aria-label="Tags">
-            <li><a class="tag-chip" href="../../tags/developer-tooling/">Developer tooling</a></li>
-            <li><a class="tag-chip" href="../../tags/architecture/">Architecture</a></li>
-            <li><a class="tag-chip" href="../../tags/reliability/">Reliability</a></li>
+            <li><a class="tag-chip" href="../../tags/developer-tooling/">developer-tooling</a></li>
+            <li><a class="tag-chip" href="../../tags/architecture/">architecture</a></li>
+            <li><a class="tag-chip" href="../../tags/reliability/">reliability</a></li>
         </ul>
     </header>
+
     <div class="entry-content">
         <h2>Introduction</h2>
 <p>For the last couple of months, we have been working on building an <a href="https://www.github.com/norvialabs/forge">open-source</a> terminal-first AI IDE, <a href="https://forge.norvialabs.com/">Forge</a>.
@@ -323,10 +319,19 @@ Cache eligibility and reuse depend on the provider's caching strategy. A coding 
 <p>Prompt caching is a request-design problem shared by the harness and provider. The harness controls request ordering, history persistence, and cache hints; the provider determines which prefixes it retains and reuses. 
 Tracking usage alongside serialized request snapshots connects cache behavior to the prefix that produced it. The main lesson here is to design request construction and cache observability together while writing an agentic harness.</p>
     </div>
+
     <footer class="article-footer">
-        <nav class="article-nav" aria-label="More writing">
-<span></span>        </nav>
-        <p class="back-links"><a href="../../blog/">All writing</a></p>
+        <p class="meta tag-footer-label">Tagged</p>
+        <ul class="tag-list" aria-label="Tags">
+            <li><a class="tag-chip" href="../../tags/developer-tooling/">developer-tooling</a></li>
+            <li><a class="tag-chip" href="../../tags/architecture/">architecture</a></li>
+            <li><a class="tag-chip" href="../../tags/reliability/">reliability</a></li>
+        </ul>
+        <p class="meta">
+            <a href="../../blog/">← All writing</a>
+            ·
+            <a href="../../tags/">All tags</a>
+        </p>
     </footer>
 </article>
 <section class="comments" id="comments" aria-labelledby="comments-title">
@@ -359,21 +364,7 @@ Tracking usage alongside serialized request snapshots connects cache behavior to
     </noscript>
 </section>
 <script src="../../theme/js/comments.js" defer></script>
-        </main>
-
-        <footer class="site-footer">
-            <div class="wrap footer-grid">
-                <span>Mohit Ranka</span>
-                <nav class="footer-links" aria-label="Elsewhere">
-                    <a href="https://github.com/mohitranka" rel="noopener noreferrer">GitHub</a>
-                    <a href="https://www.linkedin.com/in/mohit-ranka" rel="noopener noreferrer">LinkedIn</a>
-                    <a href="https://www.goodreads.com/user/show/49116640-mohit-ranka" rel="noopener noreferrer">Goodreads</a>
-                    <a href="https://www.mohitranka.com/rss.xml">RSS</a>
-                    <a href="https://www.mohitranka.com/atom.xml">Atom</a>
-                </nav>
-            </div>
-        </footer>
-    </div>
+    </main>
     <script>
         (function () {
             var root = document.documentElement;

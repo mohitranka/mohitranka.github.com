@@ -35,53 +35,6 @@ Selected work from 15+ years of hands-on engineering and engineering leadership,
 
   Forge is a terminal-native AI coding environment combining agent conversation, repository navigation, editing, shell execution, diffs, approvals, and durable sessions in one workspace.
 
-What I do
-
-I work across architecture and execution because they are the same problem: deciding what to build, how it should work, and keeping delivery moving as the system evolves.
-
-  engineering leadership
-
-  architecture
-
-  technical decision-making
-
-  engineering delivery
-
-  removing execution bottlenecks
-
-  engineering standards
-
-  platform evolution
-
-  software engineering culture
-
-  connecting technical decisions to business outcomes
-
-How I work
-
-  
-    Clear outcome. Owned execution.
-
-    I agree the problem and the outcome with the business, then own how the team gets there.
-
-  
-  
-    Close to the team.
-
-    I work alongside the team day to day rather than reviewing from the outside.
-
-  
-  
-    Management without the theatre.
-
-    Architecture, engineering judgment, delivery, and engineering culture. No meetings for their own sake.
-
-  
-
-About
-
-I work at the boundary between technical leadership and engineering management: close enough to the code to make sound technical calls, senior enough to own delivery and the decisions around it. Based in India.
-
 I write about what this work taught me — platforms, data, reliability, and leading teams — on the writing page.
 
 ### Contact

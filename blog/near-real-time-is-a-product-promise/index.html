@@ -30,13 +30,12 @@
     <meta name="twitter:image:alt" content="Near-real-time is a product promise, not a Kafka cluster">
     <script>
         (function () {
-            var theme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-            try { theme = localStorage.getItem('theme') || theme; } catch (e) {}
+            var theme = 'dark';
+            try { theme = localStorage.getItem('theme') || 'dark'; } catch (e) {}
             document.documentElement.setAttribute('data-theme', theme);
         })();
     </script>
-    <link rel="preload" href="../../theme/fonts/bricolage-grotesque-normal.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="../../theme/fonts/literata-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../../theme/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="../../theme/css/style.css">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-CWEDLBH79X"></script>
     <script>
@@ -120,36 +119,33 @@
 </head>
 
 <body class="page-article">
-    <div class="site">
-        <header class="site-header wrap">
+    <main>
+        <header class="site-header">
             <a class="site-logo" href="../../">Mohit Ranka</a>
             <nav class="site-nav" aria-label="Primary">
-                <a href="../../blog/" aria-current="page">Writing</a>
+                <a href="../../blog/">Writing</a>
                 <a href="../../work/">Work</a>
-                <a href="../../library/">Library</a>
                 <a href="../../contact/">Contact</a>
-                <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark theme">
-                    <svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
-                    <svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to light theme">
+                    <svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+                    <svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
                 </button>
             </nav>
         </header>
 
-        <main class="wrap">
-<article class="article">
+<article>
     <header class="article-header">
-        <span class="margin-note entry-year" aria-hidden="true">16 Jul<br>2026</span>
         <h1 class="article-title">Near-real-time is a product promise, not a Kafka cluster</h1>
-        <p class="article-meta label">
-            <time datetime="2026-07-16T10:00:00+05:30">16 July 2026</time>
-            <span>5 min read</span>
+        <p class="article-meta">
+            <time datetime="2026-07-16T10:00:00+05:30">16 Jul 2026</time>
         </p>
         <ul class="tag-list" aria-label="Tags">
-            <li><a class="tag-chip" href="../../tags/data-platforms/">Data platforms</a></li>
-            <li><a class="tag-chip" href="../../tags/distributed-systems/">Distributed systems</a></li>
-            <li><a class="tag-chip" href="../../tags/reliability/">Reliability</a></li>
+            <li><a class="tag-chip" href="../../tags/data-platforms/">data-platforms</a></li>
+            <li><a class="tag-chip" href="../../tags/distributed-systems/">distributed-systems</a></li>
+            <li><a class="tag-chip" href="../../tags/reliability/">reliability</a></li>
         </ul>
     </header>
+
     <div class="entry-content">
         <p>“Near-real-time” is often used as a synonym for “we bought a streaming stack.” On GTM data platforms, that confusion is expensive. The product promise is about <strong>whether a decision-maker can trust a number in time</strong> — not whether an event log is busy. At LinkedIn, the Enterprise Data Platform (EDP) was intended as the governed center for GTM datasets. BI teams on Power BI and Tableau still ran on Hadoop-era batch paths. They already had data. What they did not have was a reason to treat EDP as the path that made GTM analytics true, timely, and durable as legacy pipelines were marked for deprecation. That gap is a product-promise gap.</p>
 <figure class="post-figure">
@@ -219,10 +215,19 @@
 <h2>Closing</h2>
 <p>Near-real-time is not a badge for an architecture review. It is a <strong>promise about time, truth, and behavior when truth is late</strong>. EDP’s lesson was blunt: the company does not get that promise when a platform exists. It gets that promise when critical consumers — here, BI on GTM data — run on the governed path, and the old batch defaults are allowed to end. Build streams when they earn their keep. Build the consumer promise first.</p>
     </div>
+
     <footer class="article-footer">
-        <nav class="article-nav" aria-label="More writing">
-<span></span>        </nav>
-        <p class="back-links"><a href="../../blog/">All writing</a></p>
+        <p class="meta tag-footer-label">Tagged</p>
+        <ul class="tag-list" aria-label="Tags">
+            <li><a class="tag-chip" href="../../tags/data-platforms/">data-platforms</a></li>
+            <li><a class="tag-chip" href="../../tags/distributed-systems/">distributed-systems</a></li>
+            <li><a class="tag-chip" href="../../tags/reliability/">reliability</a></li>
+        </ul>
+        <p class="meta">
+            <a href="../../blog/">← All writing</a>
+            ·
+            <a href="../../tags/">All tags</a>
+        </p>
     </footer>
 </article>
 <section class="comments" id="comments" aria-labelledby="comments-title">
@@ -255,21 +260,7 @@
     </noscript>
 </section>
 <script src="../../theme/js/comments.js" defer></script>
-        </main>
-
-        <footer class="site-footer">
-            <div class="wrap footer-grid">
-                <span>Mohit Ranka</span>
-                <nav class="footer-links" aria-label="Elsewhere">
-                    <a href="https://github.com/mohitranka" rel="noopener noreferrer">GitHub</a>
-                    <a href="https://www.linkedin.com/in/mohit-ranka" rel="noopener noreferrer">LinkedIn</a>
-                    <a href="https://www.goodreads.com/user/show/49116640-mohit-ranka" rel="noopener noreferrer">Goodreads</a>
-                    <a href="https://www.mohitranka.com/rss.xml">RSS</a>
-                    <a href="https://www.mohitranka.com/atom.xml">Atom</a>
-                </nav>
-            </div>
-        </footer>
-    </div>
+    </main>
     <script>
         (function () {
             var root = document.documentElement;

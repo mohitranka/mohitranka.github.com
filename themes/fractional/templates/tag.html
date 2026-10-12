@@ -63,20 +63,25 @@
 {% endblock %}
 
 {% block content %}
-<header class="page-head">
-    <h1>{{ tag|string|replace('-', ' ')|capitalize }}</h1>
-    <p class="page-lede">{{ articles|count }} essay{% if articles|count != 1 %}s{% endif %} on this topic.</p>
-</header>
-<ul class="essay-list page-body">
-    {% for article in articles %}
-        <li>
-                <a class="essay" href="{{ SITEURL }}/{{ article.url }}">
-                    <span class="essay-title">{{ article.title }}</span>
-                    <span class="essay-meta label"><time datetime="{{ article.date.isoformat() }}">{{ article.date.strftime('%-d %B %Y') }}</time></span>
-                    <span class="essay-excerpt">{{ (article.summary.split('<p>', 1)[-1].split('</p>')[0])|striptags|truncate(190) }}</span>
-                </a>
+        <p class="meta crumb">
+            <a href="{{ SITEURL }}/blog/">Writing</a>
+            <span aria-hidden="true"> / </span>
+            <a href="{{ SITEURL }}/tags/">Tags</a>
+            <span aria-hidden="true"> / </span>
+            <span>{{ tag }}</span>
+        </p>
+
+        <h1>Tag: {{ tag }}</h1>
+        <p class="meta page-lede">
+            {{ articles|count }} post{% if articles|count != 1 %}s{% endif %}
+        </p>
+
+        <ul class="article-list">
+            {% for article in articles %}
+            <li class="article-item">
+                <a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a>
+                <time class="article-meta" datetime="{{ article.date.isoformat() }}">{{ article.date.strftime('%b %Y') }}</time>
             </li>
-    {% endfor %}
-</ul>
-<p class="back-links"><a href="{{ SITEURL }}/tags/">All topics</a> · <a href="{{ SITEURL }}/blog/">All writing</a></p>
+            {% endfor %}
+        </ul>
 {% endblock %}
