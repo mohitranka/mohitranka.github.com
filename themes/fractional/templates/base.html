@@ -39,6 +39,20 @@
     </script>
     <link rel="preload" href="{{ SITEURL }}/theme/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="{{ SITEURL }}/theme/css/style.css">
+    <script>
+        // The tour takes over the page once it starts; until then the plain page stays hidden
+        // briefly, and comes back on its own if the tour never starts.
+        (function () {
+            var off = false;
+            try { off = localStorage.getItem('tour') === 'off'; } catch (e) {}
+            var root = document.documentElement;
+            if (off) { root.classList.add('tour-off'); return; }
+            root.classList.add('tour-pending');
+            setTimeout(function () { root.classList.remove('tour-pending'); }, 3500);
+        })();
+    </script>
+    <link rel="modulepreload" href="{{ SITEURL }}/theme/js/vendor/three.module.min.js">
+    <script type="module" src="{{ SITEURL }}/theme/js/town.js"></script>
     {% if GOOGLE_ANALYTICS %}
     <script async src="https://www.googletagmanager.com/gtag/js?id={{ GOOGLE_ANALYTICS }}"></script>
     <script>
@@ -52,7 +66,7 @@
 </head>
 
 <body class="{% block body_class %}{% endblock %}">
-    {% block before_main %}{% endblock %}
+{% include "tour.html" %}
     <main id="site">
         <header class="site-header">
             {% block site_brand %}
@@ -61,8 +75,10 @@
             <nav class="site-nav" aria-label="Primary">
                 <a href="{{ SITEURL }}/blog/"{% if output_file is defined and output_file == 'blog/index.html' %} aria-current="page"{% endif %}>Writing</a>
                 <a href="{{ SITEURL }}/work/"{% if output_file is defined and output_file.startswith('work') %} aria-current="page"{% endif %}>Work</a>
+                <a href="{{ SITEURL }}/library/"{% if output_file is defined and output_file.startswith('library') %} aria-current="page"{% endif %}>Library</a>
                 <a href="{{ SITEURL }}/contact/"{% if output_file is defined and output_file.startswith('contact') %} aria-current="page"{% endif %}>Contact</a>
-                <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to light theme">
+                <button class="tour-resume" type="button" data-tour="on">Take the tour</button>
+                <button class="theme-toggle" id="theme-toggle" data-theme-toggle type="button" aria-label="Switch to light theme">
                     <svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
                     <svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
                 </button>
@@ -74,18 +90,27 @@
     <script>
         (function () {
             var root = document.documentElement;
-            var btn = document.getElementById('theme-toggle');
-            if (!btn) return;
+            var buttons = document.querySelectorAll('[data-theme-toggle]');
             function sync() {
                 var dark = root.getAttribute('data-theme') !== 'light';
-                btn.setAttribute('aria-label', dark ? 'Switch to light theme' : 'Switch to dark theme');
+                buttons.forEach(function (btn) {
+                    btn.setAttribute('aria-label', dark ? 'Switch to day' : 'Switch to night');
+                });
             }
             sync();
-            btn.addEventListener('click', function () {
-                var next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-                root.setAttribute('data-theme', next);
-                try { localStorage.setItem('theme', next); } catch (e) {}
-                sync();
+            buttons.forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    var next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+                    root.setAttribute('data-theme', next);
+                    try { localStorage.setItem('theme', next); } catch (e) {}
+                    sync();
+                });
+            });
+            document.querySelectorAll('[data-tour="on"]').forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    try { localStorage.removeItem('tour'); } catch (e) {}
+                    window.location.reload();
+                });
             });
         })();
     </script>

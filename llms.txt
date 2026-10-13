@@ -20,6 +20,7 @@ Site: https://www.mohitranka.com
 - [Home](https://www.mohitranka.com/): Selected impact, how Mohit works, and background
 - [Writing](https://www.mohitranka.com/blog/): Technical writing on platforms, data, reliability, and leadership
 - [Work](https://www.mohitranka.com/work/): Selected impact at Booking.com, Postman, and LinkedIn, plus Forge
+- [Library](https://www.mohitranka.com/library/): Books Mohit has read, synced from Goodreads, favourites first
 - [Contact](https://www.mohitranka.com/contact/): Send Mohit a message
 - [Tags](https://www.mohitranka.com/tags/): Browse writing by topic tag
 

@@ -1,0 +1,86 @@
+<section class="town" id="town" aria-label="Mohit's town: the site as a virtual tour">
+    <canvas class="town-canvas" tabindex="0" aria-label="3D island town. Use arrow keys or WASD to walk, click a place to go there, Enter to go inside."></canvas>
+    <div class="town-labels" aria-hidden="true"></div>
+
+    <div class="town-card">
+        <p class="town-name">Hi, I'm Mohit Ranka</p>
+        <p class="town-line">I build software, lead engineering teams, read widely, and write it all down.<span class="town-walk"> Walk around my town, or take the tour.</span></p>
+        <button type="button" class="town-tour-start" data-tour="start">Take the tour</button>
+        <nav class="town-places" aria-label="Places in the town">
+            <button type="button" data-walk="writing">Writing</button>
+            <button type="button" data-walk="work">Work</button>
+            <button type="button" data-walk="library">Library</button>
+            <button type="button" data-walk="forge">Forge</button>
+            <button type="button" data-walk="contact">Contact</button>
+        </nav>
+        <nav class="town-fallback-links" aria-label="Also here">
+            <a href="{{ SITEURL }}/library/">Library</a>
+            <a href="https://github.com/NorviaLabs/forge" rel="noopener noreferrer">Forge</a>
+        </nav>
+    </div>
+
+    <div class="town-guide" hidden aria-live="polite">
+        <p class="town-guide-title"></p>
+        <p class="town-guide-text"></p>
+        <div class="town-guide-actions">
+            <button type="button" class="town-guide-inside" data-guide="inside">Go inside</button>
+            <button type="button" data-guide="next">Next stop</button>
+            <button type="button" data-guide="end">End tour</button>
+        </div>
+    </div>
+
+    <aside class="town-panel" hidden aria-live="polite">
+        <p class="town-panel-title"></p>
+        <div class="town-panel-body"></div>
+        <a class="town-panel-link" href="#">Go inside</a>
+    </aside>
+
+    <div class="room" hidden>
+        <div class="room-bar">
+            <button type="button" class="room-back"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>Back outside</button>
+            <p class="room-name"></p>
+        </div>
+        <div class="room-scroll" tabindex="-1">
+            <div class="room-content"></div>
+        </div>
+    </div>
+
+    <div class="town-foot">
+        <p class="town-hint"><span class="hint-keys"><kbd>WASD</kbd> or <kbd>arrows</kbd> to walk · click anywhere to go there</span><span class="hint-touch">Tap anywhere to walk there</span></p>
+        <button type="button" class="town-theme" data-theme-toggle aria-label="Switch day or night">
+            <svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+            <svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button type="button" class="town-skip" data-tour="off">Read without the tour</button>
+    </div>
+
+    <div class="town-fade" aria-hidden="true"></div>
+
+    <script type="application/json" id="town-data">{
+        "homeTitle": {{ (SITENAME ~ ' — Engineering Leader')|tojson }},
+        "essayCount": {{ articles|count if articles else 0 }},
+        "essays": [{% for a in (articles if articles else []) %}
+            {"title": {{ a.title|striptags|tojson }}, "url": {{ (SITEURL ~ '/' ~ a.url)|tojson }}, "date": {{ a.date.strftime('%b %Y')|tojson }}}{% if not loop.last %},{% endif %}{% endfor %}
+        ],
+        "books": [{% for book_id in LIBRARY.favourites %}{% set b = LIBRARY.by_id[book_id] %}
+            {"title": {{ b.title|tojson }}, "author": {{ b.author|tojson }}, "url": {{ b.url|tojson }}, "cover": {{ (SITEURL ~ '/' ~ b.cover)|tojson }}}{% if not loop.last %},{% endif %}{% endfor %}
+        ],
+        "allBooks": [{% for b in LIBRARY.books if b.cover %}
+            {"title": {{ b.title|tojson }}, "url": {{ b.url|tojson }}, "cover": {{ (SITEURL ~ '/' ~ b.cover)|tojson }}}{% if not loop.last %},{% endif %}{% endfor %}
+        ],
+        "work": [
+            {"name": "Booking.com", "role": "Authentication and authorization infrastructure", "outcome": "Built authentication and authorization infrastructure supporting multiple Booking.com portfolio products at roughly 1M requests per second."},
+            {"name": "Postman", "role": "Runtime and core developer workflows", "outcome": "Led engineering around Runtime and core developer workflows for one of the world's most widely used API platforms."},
+            {"name": "LinkedIn", "role": "Enterprise data platform", "outcome": "Led enterprise data-platform work supporting major business functions and improving how quickly teams could access and act on data."}
+        ],
+        "forge": "Forge is a terminal-native AI coding environment I created at Norvia Labs: agent conversation, repository navigation, editing, shell execution, diffs, approvals, and durable sessions in one workspace. Open source.",
+        "links": {
+            "home": {{ (SITEURL ~ '/')|tojson }},
+            "writing": {{ (SITEURL ~ '/blog/')|tojson }},
+            "work": {{ (SITEURL ~ '/work/')|tojson }},
+            "library": {{ (SITEURL ~ '/library/')|tojson }},
+            "contact": {{ (SITEURL ~ '/contact/')|tojson }},
+            "forge": "https://github.com/NorviaLabs/forge"
+        }
+    }</script>
+</section>

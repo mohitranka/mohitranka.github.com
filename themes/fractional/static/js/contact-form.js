@@ -3,8 +3,11 @@
  * Expects window.SITE_CONTACT from contact-config.js.
  */
 (function () {
+// Exposed so the tour can bind a form it injects into a room.
+function initContactForm() {
   const contactForm = document.getElementById("contact-form");
-  if (!contactForm) return;
+  if (!contactForm || contactForm.dataset.bound) return;
+  contactForm.dataset.bound = "1";
 
   const success = contactForm.querySelector("[data-form-success]");
   const error = contactForm.querySelector("[data-form-error]");
@@ -133,4 +136,8 @@
       setLoading(false);
     }
   });
+}
+
+window.initContactForm = initContactForm;
+initContactForm();
 })();

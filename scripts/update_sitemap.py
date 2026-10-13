@@ -30,6 +30,7 @@ urls = [
     (f"{BASE}/blog/", TODAY, "monthly", "0.9"),
     (f"{BASE}/tags/", TODAY, "monthly", "0.5"),
     (f"{BASE}/work/", TODAY, "monthly", "0.7"),
+    (f"{BASE}/library/", TODAY, "monthly", "0.5"),
     (f"{BASE}/contact/", TODAY, "yearly", "0.6"),
     (f"{BASE}/llms.txt", TODAY, "monthly", "0.5"),
     (f"{BASE}/llms-full.txt", TODAY, "monthly", "0.4"),

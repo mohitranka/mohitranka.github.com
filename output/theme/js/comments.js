@@ -5,6 +5,9 @@
  * that theme to Giscus when its iframe appears/loads and whenever it changes.
  */
 (function () {
+  // The tour may inject an essay (and this script) more than once; sync only once.
+  if (window.__commentsThemeSync) return;
+  window.__commentsThemeSync = true;
   var ORIGIN = 'https://giscus.app';
 
   function siteTheme() {

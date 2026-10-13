@@ -37,6 +37,11 @@ Selected work from 15+ years of hands-on engineering and engineering leadership,
 
 I write about what this work taught me — platforms, data, reliability, and leading teams — on the writing page.
 
+### Library
+URL: https://www.mohitranka.com/library/
+
+Books Mohit has read, kept in sync with his Goodreads shelf: Flow by Mihály Csíkszentmihályi; The Little Prince by Antoine de Saint-Exupéry; Thinking In Systems by Donella H. Meadows; Sapiens by Yuval Noah Harari; The Martian by Andy Weir; Atomic Habits by James Clear; Ikigai by Héctor García; The Good Soldier Švejk by Jaroslav Hašek; Homo Deus by Yuval Noah Harari; The Four Agreements by Miguel Ruiz; Nonviolent Communication by Marshall B. Rosenberg; Meditations by Marcus Aurelius; Designing Data-Intensive Applications by Martin Kleppmann; Radical Candor by Kim Malone Scott; The Psychology of Money by Morgan Housel; The First 90 Days by Michael D. Watkins; An Elegant Puzzle by Will Larson; The Servant as Leader by Robert K. Greenleaf; Project Hail Mary by Andy Weir; How to Read a Book by Mortimer J. Adler; Arsène Lupin, Gentleman-Thief by Maurice Leblanc; The Restaurant at the End of the Universe by Douglas Adams; The Art Of Saying NO by Damon Zahariades; Thinking, Fast and Slow by Daniel Kahneman; No Rules Rules by Reed Hastings; Never Split the Difference by Chris Voss; Domain-Driven Design Distilled by Vaughn Vernon; Paul Graham by Andrew Warner.
+
 ### Contact
 URL: https://www.mohitranka.com/contact/
 

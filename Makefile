@@ -31,6 +31,7 @@ sync: build
 	rsync -a --delete $(OUTPUT)/category/ category/
 	rsync -a $(OUTPUT)/contact/ contact/
 	rsync -a $(OUTPUT)/work/ work/  # Pelican-generated page from content/pages/work.md via page.html; mirrors /contact/ pattern
+	rsync -a $(OUTPUT)/library/ library/
 	rsync -a $(OUTPUT)/feeds/ feeds/
 	rsync -a $(OUTPUT)/theme/ theme/
 	rsync -a $(OUTPUT)/images/ images/

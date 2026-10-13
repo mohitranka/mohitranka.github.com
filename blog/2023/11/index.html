@@ -37,6 +37,20 @@
     </script>
     <link rel="preload" href="../../../theme/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="../../../theme/css/style.css">
+    <script>
+        // The tour takes over the page once it starts; until then the plain page stays hidden
+        // briefly, and comes back on its own if the tour never starts.
+        (function () {
+            var off = false;
+            try { off = localStorage.getItem('tour') === 'off'; } catch (e) {}
+            var root = document.documentElement;
+            if (off) { root.classList.add('tour-off'); return; }
+            root.classList.add('tour-pending');
+            setTimeout(function () { root.classList.remove('tour-pending'); }, 3500);
+        })();
+    </script>
+    <link rel="modulepreload" href="../../../theme/js/vendor/three.module.min.js">
+    <script type="module" src="../../../theme/js/town.js"></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-CWEDLBH79X"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -47,14 +61,95 @@
 </head>
 
 <body class="">
-    <main id="site">
+<section class="town" id="town" aria-label="Mohit's town: the site as a virtual tour">
+    <canvas class="town-canvas" tabindex="0" aria-label="3D island town. Use arrow keys or WASD to walk, click a place to go there, Enter to go inside."></canvas>
+    <div class="town-labels" aria-hidden="true"></div>
+
+    <div class="town-card">
+        <p class="town-name">Hi, I'm Mohit Ranka</p>
+        <p class="town-line">I build software, lead engineering teams, read widely, and write it all down.<span class="town-walk"> Walk around my town, or take the tour.</span></p>
+        <button type="button" class="town-tour-start" data-tour="start">Take the tour</button>
+        <nav class="town-places" aria-label="Places in the town">
+            <button type="button" data-walk="writing">Writing</button>
+            <button type="button" data-walk="work">Work</button>
+            <button type="button" data-walk="library">Library</button>
+            <button type="button" data-walk="forge">Forge</button>
+            <button type="button" data-walk="contact">Contact</button>
+        </nav>
+        <nav class="town-fallback-links" aria-label="Also here">
+            <a href="../../../library/">Library</a>
+            <a href="https://github.com/NorviaLabs/forge" rel="noopener noreferrer">Forge</a>
+        </nav>
+    </div>
+
+    <div class="town-guide" hidden aria-live="polite">
+        <p class="town-guide-title"></p>
+        <p class="town-guide-text"></p>
+        <div class="town-guide-actions">
+            <button type="button" class="town-guide-inside" data-guide="inside">Go inside</button>
+            <button type="button" data-guide="next">Next stop</button>
+            <button type="button" data-guide="end">End tour</button>
+        </div>
+    </div>
+
+    <aside class="town-panel" hidden aria-live="polite">
+        <p class="town-panel-title"></p>
+        <div class="town-panel-body"></div>
+        <a class="town-panel-link" href="#">Go inside</a>
+    </aside>
+
+    <div class="room" hidden>
+        <div class="room-bar">
+            <button type="button" class="room-back"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>Back outside</button>
+            <p class="room-name"></p>
+        </div>
+        <div class="room-scroll" tabindex="-1">
+            <div class="room-content"></div>
+        </div>
+    </div>
+
+    <div class="town-foot">
+        <p class="town-hint"><span class="hint-keys"><kbd>WASD</kbd> or <kbd>arrows</kbd> to walk · click anywhere to go there</span><span class="hint-touch">Tap anywhere to walk there</span></p>
+        <button type="button" class="town-theme" data-theme-toggle aria-label="Switch day or night">
+            <svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+            <svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button type="button" class="town-skip" data-tour="off">Read without the tour</button>
+    </div>
+
+    <div class="town-fade" aria-hidden="true"></div>
+
+    <script type="application/json" id="town-data">{
+        "homeTitle": "Mohit Ranka \u2014 Engineering Leader",
+        "essayCount": 1,
+        "essays": [            {"title": "Saying no as a platform EM without becoming the villain", "url": "../../../blog/saying-no-as-a-platform-em/", "date": "Nov 2023"}        ],
+        "books": [            {"title": "Flow", "author": "Mih\u00e1ly Cs\u00edkszentmih\u00e1lyi", "url": "https://www.goodreads.com/book/show/117101", "cover": "../../../images/library/117101.jpg"},            {"title": "The Little Prince", "author": "Antoine de Saint-Exup\u00e9ry", "url": "https://www.goodreads.com/book/show/157993", "cover": "../../../images/library/157993.jpg"},            {"title": "Thinking In Systems", "author": "Donella H. Meadows", "url": "https://www.goodreads.com/book/show/3828902", "cover": "../../../images/library/3828902.jpg"},            {"title": "Sapiens", "author": "Yuval Noah Harari", "url": "https://www.goodreads.com/book/show/23692271", "cover": "../../../images/library/23692271.jpg"},            {"title": "The Martian", "author": "Andy Weir", "url": "https://www.goodreads.com/book/show/18401393", "cover": "../../../images/library/18401393.jpg"},            {"title": "Atomic Habits", "author": "James Clear", "url": "https://www.goodreads.com/book/show/40121378", "cover": "../../../images/library/40121378.jpg"},            {"title": "Ikigai", "author": "H\u00e9ctor Garc\u00eda", "url": "https://www.goodreads.com/book/show/40534545", "cover": "../../../images/library/40534545.jpg"}        ],
+        "allBooks": [            {"title": "Flow", "url": "https://www.goodreads.com/book/show/117101", "cover": "../../../images/library/117101.jpg"},            {"title": "The Good Soldier \u0160vejk", "url": "https://www.goodreads.com/book/show/7629", "cover": "../../../images/library/7629.jpg"},            {"title": "The Martian", "url": "https://www.goodreads.com/book/show/18401393", "cover": "../../../images/library/18401393.jpg"},            {"title": "Ikigai", "url": "https://www.goodreads.com/book/show/40534545", "cover": "../../../images/library/40534545.jpg"},            {"title": "Homo Deus", "url": "https://www.goodreads.com/book/show/31138556", "cover": "../../../images/library/31138556.jpg"},            {"title": "The Four Agreements", "url": "https://www.goodreads.com/book/show/6596", "cover": "../../../images/library/6596.jpg"},            {"title": "Nonviolent Communication", "url": "https://www.goodreads.com/book/show/3601593", "cover": "../../../images/library/3601593.jpg"},            {"title": "Meditations", "url": "https://www.goodreads.com/book/show/30659", "cover": "../../../images/library/30659.jpg"},            {"title": "Designing Data-Intensive Applications", "url": "https://www.goodreads.com/book/show/23463279", "cover": "../../../images/library/23463279.jpg"},            {"title": "Radical Candor", "url": "https://www.goodreads.com/book/show/29939161", "cover": "../../../images/library/29939161.jpg"},            {"title": "The Psychology of Money", "url": "https://www.goodreads.com/book/show/41881472", "cover": "../../../images/library/41881472.jpg"},            {"title": "Thinking In Systems", "url": "https://www.goodreads.com/book/show/3828902", "cover": "../../../images/library/3828902.jpg"},            {"title": "The First 90 Days", "url": "https://www.goodreads.com/book/show/15824358", "cover": "../../../images/library/15824358.jpg"},            {"title": "An Elegant Puzzle", "url": "https://www.goodreads.com/book/show/45303387", "cover": "../../../images/library/45303387.jpg"},            {"title": "The Little Prince", "url": "https://www.goodreads.com/book/show/157993", "cover": "../../../images/library/157993.jpg"},            {"title": "The Servant as Leader", "url": "https://www.goodreads.com/book/show/12552292", "cover": "../../../images/library/12552292.jpg"},            {"title": "Project Hail Mary", "url": "https://www.goodreads.com/book/show/54493401", "cover": "../../../images/library/54493401.jpg"},            {"title": "How to Read a Book", "url": "https://www.goodreads.com/book/show/567610", "cover": "../../../images/library/567610.jpg"},            {"title": "Ars\u00e8ne Lupin, Gentleman-Thief", "url": "https://www.goodreads.com/book/show/141270", "cover": "../../../images/library/141270.jpg"},            {"title": "The Restaurant at the End of the Universe", "url": "https://www.goodreads.com/book/show/8695", "cover": "../../../images/library/8695.jpg"},            {"title": "The Art Of Saying NO", "url": "https://www.goodreads.com/book/show/36119521", "cover": "../../../images/library/36119521.jpg"},            {"title": "Sapiens", "url": "https://www.goodreads.com/book/show/23692271", "cover": "../../../images/library/23692271.jpg"},            {"title": "Atomic Habits", "url": "https://www.goodreads.com/book/show/40121378", "cover": "../../../images/library/40121378.jpg"},            {"title": "Thinking, Fast and Slow", "url": "https://www.goodreads.com/book/show/11468377", "cover": "../../../images/library/11468377.jpg"},            {"title": "No Rules Rules", "url": "https://www.goodreads.com/book/show/50964609", "cover": "../../../images/library/50964609.jpg"},            {"title": "Never Split the Difference", "url": "https://www.goodreads.com/book/show/26156469", "cover": "../../../images/library/26156469.jpg"},            {"title": "Domain-Driven Design Distilled", "url": "https://www.goodreads.com/book/show/28602719", "cover": "../../../images/library/28602719.jpg"},            {"title": "Paul Graham", "url": "https://www.goodreads.com/book/show/13152479", "cover": "../../../images/library/13152479.jpg"}        ],
+        "work": [
+            {"name": "Booking.com", "role": "Authentication and authorization infrastructure", "outcome": "Built authentication and authorization infrastructure supporting multiple Booking.com portfolio products at roughly 1M requests per second."},
+            {"name": "Postman", "role": "Runtime and core developer workflows", "outcome": "Led engineering around Runtime and core developer workflows for one of the world's most widely used API platforms."},
+            {"name": "LinkedIn", "role": "Enterprise data platform", "outcome": "Led enterprise data-platform work supporting major business functions and improving how quickly teams could access and act on data."}
+        ],
+        "forge": "Forge is a terminal-native AI coding environment I created at Norvia Labs: agent conversation, repository navigation, editing, shell execution, diffs, approvals, and durable sessions in one workspace. Open source.",
+        "links": {
+            "home": "../../../",
+            "writing": "../../../blog/",
+            "work": "../../../work/",
+            "library": "../../../library/",
+            "contact": "../../../contact/",
+            "forge": "https://github.com/NorviaLabs/forge"
+        }
+    }</script>
+</section>    <main id="site">
         <header class="site-header">
             <a class="site-logo" href="../../../">Mohit Ranka</a>
             <nav class="site-nav" aria-label="Primary">
                 <a href="../../../blog/">Writing</a>
                 <a href="../../../work/">Work</a>
+                <a href="../../../library/">Library</a>
                 <a href="../../../contact/">Contact</a>
-                <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to light theme">
+                <button class="tour-resume" type="button" data-tour="on">Take the tour</button>
+                <button class="theme-toggle" id="theme-toggle" data-theme-toggle type="button" aria-label="Switch to light theme">
                     <svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
                     <svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
                 </button>
@@ -71,18 +166,27 @@
     <script>
         (function () {
             var root = document.documentElement;
-            var btn = document.getElementById('theme-toggle');
-            if (!btn) return;
+            var buttons = document.querySelectorAll('[data-theme-toggle]');
             function sync() {
                 var dark = root.getAttribute('data-theme') !== 'light';
-                btn.setAttribute('aria-label', dark ? 'Switch to light theme' : 'Switch to dark theme');
+                buttons.forEach(function (btn) {
+                    btn.setAttribute('aria-label', dark ? 'Switch to day' : 'Switch to night');
+                });
             }
             sync();
-            btn.addEventListener('click', function () {
-                var next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-                root.setAttribute('data-theme', next);
-                try { localStorage.setItem('theme', next); } catch (e) {}
-                sync();
+            buttons.forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    var next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+                    root.setAttribute('data-theme', next);
+                    try { localStorage.setItem('theme', next); } catch (e) {}
+                    sync();
+                });
+            });
+            document.querySelectorAll('[data-tour="on"]').forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    try { localStorage.removeItem('tour'); } catch (e) {}
+                    window.location.reload();
+                });
             });
         })();
     </script>

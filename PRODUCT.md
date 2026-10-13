@@ -33,7 +33,7 @@ A senior engineering leader whose record covers both architecture and delivery a
 ## Capabilities and Constraints
 
 - Static site generated with Pelican (`pelicanconf.py`, `publishconf.py`) using the custom theme `themes/fractional`. Hosted on GitHub Pages at www.mohitranka.com (`CNAME`). Built with `make site` / `make serve`.
-- Pages: Home, Writing (`/blog/`), Work, Contact, Tags. Articles are Markdown in `content/blog/`; pages are in `content/pages/`.
+- Pages: Home, Writing (`/blog/`), Work, Library (`/library/`), Contact, Tags. With WebGL the whole site runs as a virtual tour of the 3D town (themes/fractional/static/js/town.js): every section is a room and pages open in a reading room; "Read without the tour" switches to the plain pages. Articles are Markdown in `content/blog/`; pages are in `content/pages/`.
 - The contact form is configured in `contact-config.js`. Giscus comments on posts follow the site's selected theme. The site has a user-selectable light/dark theme.
 - Feeds: Atom and RSS. SEO/AEO: JSON-LD `Person`/`ProfilePage`/`WebSite`, `llms.txt`, `llms-full.txt`, sitemap.
 - Copy changes to positioning have to be made everywhere it appears: templates, page Markdown, `llms*.txt`, JSON-LD and meta descriptions.

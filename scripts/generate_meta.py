@@ -105,6 +105,7 @@ def write_llms_txt(posts: list[dict]) -> None:
         f"- [Home]({BASE}/): Selected impact, how Mohit works, and background",
         f"- [Writing]({BASE}/blog/): Technical writing on platforms, data, reliability, and leadership",
         f"- [Work]({BASE}/work/): Selected impact at Booking.com, Postman, and LinkedIn, plus Forge",
+        f"- [Library]({BASE}/library/): Books Mohit has read, synced from Goodreads, favourites first",
         f"- [Contact]({BASE}/contact/): Send Mohit a message",
         f"- [Tags]({BASE}/tags/): Browse writing by topic tag",
         "",
@@ -133,6 +134,18 @@ def write_llms_txt(posts: list[dict]) -> None:
     print(f"wrote {path.relative_to(ROOT)}")
 
 
+def library_titles() -> str:
+    """Favourites first, then the rest, from data/library.json."""
+    import json
+    path = ROOT / "data" / "library.json"
+    if not path.exists():
+        return "(library data not synced)"
+    data = json.loads(path.read_text())
+    by_id = {b["id"]: b for b in data["books"]}
+    ordered = [by_id[i] for i in data["favourites"] if i in by_id] + [b for b in data["books"] if b["id"] not in data["favourites"]]
+    return "; ".join(f"{b['title']} by {b['author']}" for b in ordered) + "."
+
+
 def write_llms_full(posts: list[dict]) -> None:
     _, work_body = load_page("work")
     _, contact_body = load_page("contact")
@@ -152,6 +165,11 @@ def write_llms_full(posts: list[dict]) -> None:
         f"URL: {BASE}/work/",
         "",
         work_plain,
+        "",
+        "### Library",
+        f"URL: {BASE}/library/",
+        "",
+        "Books Mohit has read, kept in sync with his Goodreads shelf: " + library_titles(),
         "",
         "### Contact",
         f"URL: {BASE}/contact/",

@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Library — Mohit Ranka</title>
+    <meta name="description" content="Books Mohit Ranka has read, synced from Goodreads — favourites first.">
+    <meta name="author" content="Mohit Ranka">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.mohitranka.com/library/">
+    <link rel="alternate" type="application/atom+xml" title="Mohit Ranka — Atom" href="https://www.mohitranka.com/atom.xml">
+    <link rel="alternate" type="application/rss+xml" title="Mohit Ranka — RSS" href="https://www.mohitranka.com/rss.xml">
+    <link rel="alternate" type="text/plain" title="Mohit Ranka — LLM Summary" href="https://www.mohitranka.com/llms.txt">
+    <link rel="alternate" type="text/plain" title="Mohit Ranka — LLM Full Context" href="https://www.mohitranka.com/llms-full.txt">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Mohit Ranka">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:url" content="https://www.mohitranka.com/library/">
+    <meta property="og:title" content="Library — Mohit Ranka">
+    <meta property="og:description" content="Books Mohit Ranka has read, synced from Goodreads — favourites first.">
+    <meta property="og:image" content="https://www.mohitranka.com/theme/images/og.png?v=2026-10-12b">
+    <meta property="og:image:alt" content="Mohit Ranka — Engineering Leader">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Library — Mohit Ranka">
+    <meta name="twitter:description" content="Books Mohit Ranka has read, synced from Goodreads — favourites first.">
+    <meta name="twitter:image" content="https://www.mohitranka.com/theme/images/og.png?v=2026-10-12b">
+    <meta name="twitter:image:alt" content="Mohit Ranka — Engineering Leader">
+    <script>
+        (function () {
+            var theme = 'dark';
+            try { theme = localStorage.getItem('theme') || 'dark'; } catch (e) {}
+            document.documentElement.setAttribute('data-theme', theme);
+        })();
+    </script>
+    <link rel="preload" href="../theme/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../theme/css/style.css">
+    <script>
+        // The tour takes over the page once it starts; until then the plain page stays hidden
+        // briefly, and comes back on its own if the tour never starts.
+        (function () {
+            var off = false;
+            try { off = localStorage.getItem('tour') === 'off'; } catch (e) {}
+            var root = document.documentElement;
+            if (off) { root.classList.add('tour-off'); return; }
+            root.classList.add('tour-pending');
+            setTimeout(function () { root.classList.remove('tour-pending'); }, 3500);
+        })();
+    </script>
+    <link rel="modulepreload" href="../theme/js/vendor/three.module.min.js">
+    <script type="module" src="../theme/js/town.js"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CWEDLBH79X"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-CWEDLBH79X');
+    </script>
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "WebPage",
+            "@id": "https://www.mohitranka.com/library/#webpage",
+            "url": "https://www.mohitranka.com/library/",
+            "name": "Library — Mohit Ranka",
+            "description": "Books Mohit Ranka has read, synced from Goodreads \u2014 favourites first.",
+            "isPartOf": {
+                "@type": "WebSite",
+                "@id": "https://www.mohitranka.com/#website"
+            }
+        },
+        {
+            "@type": "BreadcrumbList",
+            "@id": "https://www.mohitranka.com/library/#breadcrumb",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "https://www.mohitranka.com/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Library",
+                    "item": "https://www.mohitranka.com/library/"
+                }
+            ]
+        }
+    ]
+}
+</script>
+</head>
+
+<body class="page-library">
+<section class="town" id="town" aria-label="Mohit's town: the site as a virtual tour">
+    <canvas class="town-canvas" tabindex="0" aria-label="3D island town. Use arrow keys or WASD to walk, click a place to go there, Enter to go inside."></canvas>
+    <div class="town-labels" aria-hidden="true"></div>
+
+    <div class="town-card">
+        <p class="town-name">Hi, I'm Mohit Ranka</p>
+        <p class="town-line">I build software, lead engineering teams, read widely, and write it all down.<span class="town-walk"> Walk around my town, or take the tour.</span></p>
+        <button type="button" class="town-tour-start" data-tour="start">Take the tour</button>
+        <nav class="town-places" aria-label="Places in the town">
+            <button type="button" data-walk="writing">Writing</button>
+            <button type="button" data-walk="work">Work</button>
+            <button type="button" data-walk="library">Library</button>
+            <button type="button" data-walk="forge">Forge</button>
+            <button type="button" data-walk="contact">Contact</button>
+        </nav>
+        <nav class="town-fallback-links" aria-label="Also here">
+            <a href="../library/">Library</a>
+            <a href="https://github.com/NorviaLabs/forge" rel="noopener noreferrer">Forge</a>
+        </nav>
+    </div>
+
+    <div class="town-guide" hidden aria-live="polite">
+        <p class="town-guide-title"></p>
+        <p class="town-guide-text"></p>
+        <div class="town-guide-actions">
+            <button type="button" class="town-guide-inside" data-guide="inside">Go inside</button>
+            <button type="button" data-guide="next">Next stop</button>
+            <button type="button" data-guide="end">End tour</button>
+        </div>
+    </div>
+
+    <aside class="town-panel" hidden aria-live="polite">
+        <p class="town-panel-title"></p>
+        <div class="town-panel-body"></div>
+        <a class="town-panel-link" href="#">Go inside</a>
+    </aside>
+
+    <div class="room" hidden>
+        <div class="room-bar">
+            <button type="button" class="room-back"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>Back outside</button>
+            <p class="room-name"></p>
+        </div>
+        <div class="room-scroll" tabindex="-1">
+            <div class="room-content"></div>
+        </div>
+    </div>
+
+    <div class="town-foot">
+        <p class="town-hint"><span class="hint-keys"><kbd>WASD</kbd> or <kbd>arrows</kbd> to walk · click anywhere to go there</span><span class="hint-touch">Tap anywhere to walk there</span></p>
+        <button type="button" class="town-theme" data-theme-toggle aria-label="Switch day or night">
+            <svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+            <svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button type="button" class="town-skip" data-tour="off">Read without the tour</button>
+    </div>
+
+    <div class="town-fade" aria-hidden="true"></div>
+
+    <script type="application/json" id="town-data">{
+        "homeTitle": "Mohit Ranka \u2014 Engineering Leader",
+        "essayCount": 14,
+        "essays": [            {"title": "How Forge Structures Requests for Prompt Cache Reuse", "url": "../blog/how-forge-structures-requests-for-prompt-cache-reuse/", "date": "Sep 2026"},            {"title": "The line manager role is disappearing faster than you think", "url": "../blog/line-manager-role-is-disappearing/", "date": "Jul 2026"},            {"title": "Near-real-time is a product promise, not a Kafka cluster", "url": "../blog/near-real-time-is-a-product-promise/", "date": "Jul 2026"},            {"title": "The platform team\u2019s real job is interfaces", "url": "../blog/platform-teams-real-job-is-interfaces/", "date": "Nov 2025"},            {"title": "When I still choose a relational database", "url": "../blog/when-i-still-choose-a-relational-database/", "date": "Mar 2025"},            {"title": "Freshness SLOs: the metric product teams actually feel", "url": "../blog/freshness-slos-the-metric-product-teams-feel/", "date": "Jul 2024"},            {"title": "Saying no as a platform EM without becoming the villain", "url": "../blog/saying-no-as-a-platform-em/", "date": "Nov 2023"},            {"title": "Identity systems fail socially before they fail cryptographically", "url": "../blog/identity-systems-fail-socially/", "date": "Mar 2023"},            {"title": "What \u201cled the web launch\u201d taught me about constraints", "url": "../blog/web-launch-constraints/", "date": "Jul 2022"},            {"title": "Incubating 0\u21921 beside a mature product", "url": "../blog/postman-labs-0-to-1/", "date": "Jun 2021"},            {"title": "How I review a distributed design in 45 minutes", "url": "../blog/how-i-review-a-distributed-design/", "date": "Mar 2021"},            {"title": "Introducing on-call without burning the team", "url": "../blog/introducing-on-call-without-burnout/", "date": "Nov 2020"},            {"title": "GTM datasets need data contracts", "url": "../blog/gtm-datasets-need-data-contracts/", "date": "Jul 2020"},            {"title": "RDBMS vs. NOSQL?", "url": "../blog/rdbms-vs-nosql/", "date": "Jun 2013"}        ],
+        "books": [            {"title": "Flow", "author": "Mih\u00e1ly Cs\u00edkszentmih\u00e1lyi", "url": "https://www.goodreads.com/book/show/117101", "cover": "../images/library/117101.jpg"},            {"title": "The Little Prince", "author": "Antoine de Saint-Exup\u00e9ry", "url": "https://www.goodreads.com/book/show/157993", "cover": "../images/library/157993.jpg"},            {"title": "Thinking In Systems", "author": "Donella H. Meadows", "url": "https://www.goodreads.com/book/show/3828902", "cover": "../images/library/3828902.jpg"},            {"title": "Sapiens", "author": "Yuval Noah Harari", "url": "https://www.goodreads.com/book/show/23692271", "cover": "../images/library/23692271.jpg"},            {"title": "The Martian", "author": "Andy Weir", "url": "https://www.goodreads.com/book/show/18401393", "cover": "../images/library/18401393.jpg"},            {"title": "Atomic Habits", "author": "James Clear", "url": "https://www.goodreads.com/book/show/40121378", "cover": "../images/library/40121378.jpg"},            {"title": "Ikigai", "author": "H\u00e9ctor Garc\u00eda", "url": "https://www.goodreads.com/book/show/40534545", "cover": "../images/library/40534545.jpg"}        ],
+        "allBooks": [            {"title": "Flow", "url": "https://www.goodreads.com/book/show/117101", "cover": "../images/library/117101.jpg"},            {"title": "The Good Soldier \u0160vejk", "url": "https://www.goodreads.com/book/show/7629", "cover": "../images/library/7629.jpg"},            {"title": "The Martian", "url": "https://www.goodreads.com/book/show/18401393", "cover": "../images/library/18401393.jpg"},            {"title": "Ikigai", "url": "https://www.goodreads.com/book/show/40534545", "cover": "../images/library/40534545.jpg"},            {"title": "Homo Deus", "url": "https://www.goodreads.com/book/show/31138556", "cover": "../images/library/31138556.jpg"},            {"title": "The Four Agreements", "url": "https://www.goodreads.com/book/show/6596", "cover": "../images/library/6596.jpg"},            {"title": "Nonviolent Communication", "url": "https://www.goodreads.com/book/show/3601593", "cover": "../images/library/3601593.jpg"},            {"title": "Meditations", "url": "https://www.goodreads.com/book/show/30659", "cover": "../images/library/30659.jpg"},            {"title": "Designing Data-Intensive Applications", "url": "https://www.goodreads.com/book/show/23463279", "cover": "../images/library/23463279.jpg"},            {"title": "Radical Candor", "url": "https://www.goodreads.com/book/show/29939161", "cover": "../images/library/29939161.jpg"},            {"title": "The Psychology of Money", "url": "https://www.goodreads.com/book/show/41881472", "cover": "../images/library/41881472.jpg"},            {"title": "Thinking In Systems", "url": "https://www.goodreads.com/book/show/3828902", "cover": "../images/library/3828902.jpg"},            {"title": "The First 90 Days", "url": "https://www.goodreads.com/book/show/15824358", "cover": "../images/library/15824358.jpg"},            {"title": "An Elegant Puzzle", "url": "https://www.goodreads.com/book/show/45303387", "cover": "../images/library/45303387.jpg"},            {"title": "The Little Prince", "url": "https://www.goodreads.com/book/show/157993", "cover": "../images/library/157993.jpg"},            {"title": "The Servant as Leader", "url": "https://www.goodreads.com/book/show/12552292", "cover": "../images/library/12552292.jpg"},            {"title": "Project Hail Mary", "url": "https://www.goodreads.com/book/show/54493401", "cover": "../images/library/54493401.jpg"},            {"title": "How to Read a Book", "url": "https://www.goodreads.com/book/show/567610", "cover": "../images/library/567610.jpg"},            {"title": "Ars\u00e8ne Lupin, Gentleman-Thief", "url": "https://www.goodreads.com/book/show/141270", "cover": "../images/library/141270.jpg"},            {"title": "The Restaurant at the End of the Universe", "url": "https://www.goodreads.com/book/show/8695", "cover": "../images/library/8695.jpg"},            {"title": "The Art Of Saying NO", "url": "https://www.goodreads.com/book/show/36119521", "cover": "../images/library/36119521.jpg"},            {"title": "Sapiens", "url": "https://www.goodreads.com/book/show/23692271", "cover": "../images/library/23692271.jpg"},            {"title": "Atomic Habits", "url": "https://www.goodreads.com/book/show/40121378", "cover": "../images/library/40121378.jpg"},            {"title": "Thinking, Fast and Slow", "url": "https://www.goodreads.com/book/show/11468377", "cover": "../images/library/11468377.jpg"},            {"title": "No Rules Rules", "url": "https://www.goodreads.com/book/show/50964609", "cover": "../images/library/50964609.jpg"},            {"title": "Never Split the Difference", "url": "https://www.goodreads.com/book/show/26156469", "cover": "../images/library/26156469.jpg"},            {"title": "Domain-Driven Design Distilled", "url": "https://www.goodreads.com/book/show/28602719", "cover": "../images/library/28602719.jpg"},            {"title": "Paul Graham", "url": "https://www.goodreads.com/book/show/13152479", "cover": "../images/library/13152479.jpg"}        ],
+        "work": [
+            {"name": "Booking.com", "role": "Authentication and authorization infrastructure", "outcome": "Built authentication and authorization infrastructure supporting multiple Booking.com portfolio products at roughly 1M requests per second."},
+            {"name": "Postman", "role": "Runtime and core developer workflows", "outcome": "Led engineering around Runtime and core developer workflows for one of the world's most widely used API platforms."},
+            {"name": "LinkedIn", "role": "Enterprise data platform", "outcome": "Led enterprise data-platform work supporting major business functions and improving how quickly teams could access and act on data."}
+        ],
+        "forge": "Forge is a terminal-native AI coding environment I created at Norvia Labs: agent conversation, repository navigation, editing, shell execution, diffs, approvals, and durable sessions in one workspace. Open source.",
+        "links": {
+            "home": "../",
+            "writing": "../blog/",
+            "work": "../work/",
+            "library": "../library/",
+            "contact": "../contact/",
+            "forge": "https://github.com/NorviaLabs/forge"
+        }
+    }</script>
+</section>    <main id="site">
+        <header class="site-header">
+            <a class="site-logo" href="../">Mohit Ranka</a>
+            <nav class="site-nav" aria-label="Primary">
+                <a href="../blog/">Writing</a>
+                <a href="../work/">Work</a>
+                <a href="../library/" aria-current="page">Library</a>
+                <a href="../contact/">Contact</a>
+                <button class="tour-resume" type="button" data-tour="on">Take the tour</button>
+                <button class="theme-toggle" id="theme-toggle" data-theme-toggle type="button" aria-label="Switch to light theme">
+                    <svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+                    <svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                </button>
+            </nav>
+        </header>
+
+<article>
+    <h1>Library</h1>
+    <div class="entry-content page-content"><p>Books I have read, kept in sync with my <a href="https://www.goodreads.com/user/show/49116640-mohit-ranka">Goodreads</a> shelf. Favourites first, then everything else, most recent first.</p></div>
+
+    <h2 class="section-label">Favourites</h2>
+    <ul class="books">
+        <li><a class="book" href="https://www.goodreads.com/book/show/117101" target="_blank" rel="noopener noreferrer">
+    <span class="book-cover"><img src="../images/library/117101.jpg" alt="" width="313" height="475" loading="lazy"></span>
+    <span class="book-title">Flow</span>
+    <span class="book-author">Mihály Csíkszentmihályi</span>
+</a></li>
+        <li><a class="book" href="https://www.goodreads.com/book/show/157993" target="_blank" rel="noopener noreferrer">
+    <span class="book-cover"><img src="../images/library/157993.jpg" alt="" width="313" height="475" loading="lazy"></span>
+    <span class="book-title">The Little Prince</span>
+    <span class="book-author">Antoine de Saint-Exupéry</span>
+</a></li>
+        <li><a class="book" href="https://www.goodreads.com/book/show/3828902" target="_blank" rel="noopener noreferrer">
+    <span class="book-cover"><img src="../images/library/3828902.jpg" alt="" width="313" height="475" loading="lazy"></span>
+    <span class="book-title">Thinking In Systems</span>
+    <span class="book-author">Donella H. Meadows</span>
+</a></li>
+        <li><a class="book" href="https://www.goodreads.com/book/show/23692271" target="_blank" rel="noopener noreferrer">
+    <span class="book-cover"><img src="../images/library/23692271.jpg" alt="" width="313" height="475" loading="lazy"></span>
+    <span class="book-title">Sapiens</span>
+    <span class="book-author">Yuval Noah Harari</span>
+</a></li>
+        <li><a class="book" href="https://www.goodreads.com/book/show/18401393" target="_blank" rel="noopener noreferrer">
+    <span class="book-cover"><img src="../images/library/18401393.jpg" alt="" width="313" height="475" loading="lazy"></span>
+    <span class="book-title">The Martian</span>
+    <span class="book-author">Andy Weir</span>
+</a></li>
+        <li><a class="book" href="https://www.goodreads.com/book/show/40121378" target="_blank" rel="noopener noreferrer">
+    <span class="book-cover"><img src="../images/library/40121378.jpg" alt="" width="313" height="475" loading="lazy"></span>
+    <span class="book-title">Atomic Habits</span>
+    <span class="book-author">James Clear</span>
+</a></li>
+        <li><a class="book" href="https://www.goodreads.com/book/show/40534545" target="_blank" rel="noopener noreferrer">
+    <span class="book-cover"><img src="../images/library/40534545.jpg" alt="" width="313" height="475" loading="lazy"></span>
+    <span class="book-title">Ikigai</span>
+    <span class="book-author">Héctor García</span>
+</a></li>
+    </ul>
+
+    <h2 class="section-label">Everything else I've read</h2>
+    <ul class="books">
+        <li><a class="book" href="https://www.goodreads.com/book/show/7629" target="_blank" rel="noopener noreferrer">
+    <span class="book-cover"><img src="../images/library/7629.jpg" alt="" width="313" height="475" loading="lazy"></span>
+    <span class="book-title">The Good Soldier Švejk</span>
+    <span class="book-author">Jaroslav Hašek</span>
+</a></li>
+        <li><a class="book" href="https://www.goodreads.com/book/show/31138556" target="_blank" rel="noopener noreferrer">
+    <span class="book-cover"><img src="../images/library/31138556.jpg" alt="" width="313" height="475" loading="lazy"></span>
+    <span class="book-title">Homo Deus</span>
+    <span class="book-author">Yuval Noah Harari</span>
+</a></li>
+        <li><a class="book" href="https://www.goodreads.com/book/show/6596" target="_blank" rel="noopener noreferrer">
+    <span class="book-cover"><img src="../images/library/6596.jpg" alt="" width="313" height="475" loading="lazy"></span>
+    <span class="book-title">The Four Agreements</span>
+    <span class="book-author">Miguel Ruiz</span>
+</a></li>
+        <li><a class="book" href="https://www.goodreads.com/book/show/3601593" target="_blank" rel="noopener noreferrer">
+    <span class="book-cover"><img src="../images/library/3601593.jpg" alt="" width="313" height="475" loading="lazy"></span>
+    <span class="book-title">Nonviolent Communication</span>
+    <span class="book-author">Marshall B. Rosenberg</span>
+</a></li>
+        <li><a class="book" href="https://www.goodreads.com/book/show/30659" target="_blank" rel="noopener noreferrer">
+    <span class="book-cover"><img src="../images/library/30659.jpg" alt="" width="313" height="475" loading="lazy"></span>
+    <span class="book-title">Meditations</span>
+    <span class="book-author">Marcus Aurelius</span>
+</a></li>
+        <li><a class="book" href="https://www.goodreads.com/book/show/23463279" target="_blank" rel="noopener noreferrer">
+    <span class="book-cover"><img src="../images/library/23463279.jpg" alt="" width="313" height="475" loading="lazy"></span>
+    <span class="book-title">Designing Data-Intensive Applications</span>
+    <span class="book-author">Martin Kleppmann</span>
+</a></li>
+        <li><a class="book" href="https://www.goodreads.com/book/show/29939161" target="_blank" rel="noopener noreferrer">
+    <span class="book-cover"><img src="../images/library/29939161.jpg" alt="" width="313" height="475" loading="lazy"></span>
+    <span class="book-title">Radical Candor</span>
+    <span class="book-author">Kim Malone Scott</span>
+</a></li>
+        <li><a class="book" href="https://www.goodreads.com/book/show/41881472" target="_blank" rel="noopener noreferrer">
+    <span class="book-cover"><img src="../images/library/41881472.jpg" alt="" width="313" height="475" loading="lazy"></span>
+    <span class="book-title">The Psychology of Money</span>
+    <span class="book-author">Morgan Housel</span>
+</a></li>
+        <li><a class="book" href="https://www.goodreads.com/book/show/15824358" target="_blank" rel="noopener noreferrer">
+    <span class="book-cover"><img src="../images/library/15824358.jpg" alt="" width="313" height="475" loading="lazy"></span>
+    <span class="book-title">The First 90 Days</span>
+    <span class="book-author">Michael D. Watkins</span>
+</a></li>
+        <li><a class="book" href="https://www.goodreads.com/book/show/45303387" target="_blank" rel="noopener noreferrer">
+    <span class="book-cover"><img src="../images/library/45303387.jpg" alt="" width="313" height="475" loading="lazy"></span>
+    <span class="book-title">An Elegant Puzzle</span>
+    <span class="book-author">Will Larson</span>
+</a></li>
+        <li><a class="book" href="https://www.goodreads.com/book/show/12552292" target="_blank" rel="noopener noreferrer">
+    <span class="book-cover"><img src="../images/library/12552292.jpg" alt="" width="313" height="475" loading="lazy"></span>
+    <span class="book-title">The Servant as Leader</span>
+    <span class="book-author">Robert K. Greenleaf</span>
+</a></li>
+        <li><a class="book" href="https://www.goodreads.com/book/show/54493401" target="_blank" rel="noopener noreferrer">
+    <span class="book-cover"><img src="../images/library/54493401.jpg" alt="" width="313" height="475" loading="lazy"></span>
+    <span class="book-title">Project Hail Mary</span>
+    <span class="book-author">Andy Weir</span>
+</a></li>
+        <li><a class="book" href="https://www.goodreads.com/book/show/567610" target="_blank" rel="noopener noreferrer">
+    <span class="book-cover"><img src="../images/library/567610.jpg" alt="" width="313" height="475" loading="lazy"></span>
+    <span class="book-title">How to Read a Book</span>
+    <span class="book-author">Mortimer J. Adler</span>
+</a></li>
+        <li><a class="book" href="https://www.goodreads.com/book/show/141270" target="_blank" rel="noopener noreferrer">
+    <span class="book-cover"><img src="../images/library/141270.jpg" alt="" width="313" height="475" loading="lazy"></span>
+    <span class="book-title">Arsène Lupin, Gentleman-Thief</span>
+    <span class="book-author">Maurice Leblanc</span>
+</a></li>
+        <li><a class="book" href="https://www.goodreads.com/book/show/8695" target="_blank" rel="noopener noreferrer">
+    <span class="book-cover"><img src="../images/library/8695.jpg" alt="" width="313" height="475" loading="lazy"></span>
+    <span class="book-title">The Restaurant at the End of the Universe</span>
+    <span class="book-author">Douglas Adams</span>
+</a></li>
+        <li><a class="book" href="https://www.goodreads.com/book/show/36119521" target="_blank" rel="noopener noreferrer">
+    <span class="book-cover"><img src="../images/library/36119521.jpg" alt="" width="313" height="475" loading="lazy"></span>
+    <span class="book-title">The Art Of Saying NO</span>
+    <span class="book-author">Damon Zahariades</span>
+</a></li>
+        <li><a class="book" href="https://www.goodreads.com/book/show/11468377" target="_blank" rel="noopener noreferrer">
+    <span class="book-cover"><img src="../images/library/11468377.jpg" alt="" width="313" height="475" loading="lazy"></span>
+    <span class="book-title">Thinking, Fast and Slow</span>
+    <span class="book-author">Daniel Kahneman</span>
+</a></li>
+        <li><a class="book" href="https://www.goodreads.com/book/show/50964609" target="_blank" rel="noopener noreferrer">
+    <span class="book-cover"><img src="../images/library/50964609.jpg" alt="" width="313" height="475" loading="lazy"></span>
+    <span class="book-title">No Rules Rules</span>
+    <span class="book-author">Reed Hastings</span>
+</a></li>
+        <li><a class="book" href="https://www.goodreads.com/book/show/26156469" target="_blank" rel="noopener noreferrer">
+    <span class="book-cover"><img src="../images/library/26156469.jpg" alt="" width="313" height="475" loading="lazy"></span>
+    <span class="book-title">Never Split the Difference</span>
+    <span class="book-author">Chris Voss</span>
+</a></li>
+        <li><a class="book" href="https://www.goodreads.com/book/show/28602719" target="_blank" rel="noopener noreferrer">
+    <span class="book-cover"><img src="../images/library/28602719.jpg" alt="" width="313" height="475" loading="lazy"></span>
+    <span class="book-title">Domain-Driven Design Distilled</span>
+    <span class="book-author">Vaughn Vernon</span>
+</a></li>
+        <li><a class="book" href="https://www.goodreads.com/book/show/13152479" target="_blank" rel="noopener noreferrer">
+    <span class="book-cover"><img src="../images/library/13152479.jpg" alt="" width="313" height="475" loading="lazy"></span>
+    <span class="book-title">Paul Graham</span>
+    <span class="book-author">Andrew Warner</span>
+</a></li>
+    </ul>
+</article>
+    </main>
+    <script>
+        (function () {
+            var root = document.documentElement;
+            var buttons = document.querySelectorAll('[data-theme-toggle]');
+            function sync() {
+                var dark = root.getAttribute('data-theme') !== 'light';
+                buttons.forEach(function (btn) {
+                    btn.setAttribute('aria-label', dark ? 'Switch to day' : 'Switch to night');
+                });
+            }
+            sync();
+            buttons.forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    var next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+                    root.setAttribute('data-theme', next);
+                    try { localStorage.setItem('theme', next); } catch (e) {}
+                    sync();
+                });
+            });
+            document.querySelectorAll('[data-tour="on"]').forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    try { localStorage.removeItem('tour'); } catch (e) {}
+                    window.location.reload();
+                });
+            });
+        })();
+    </script>
+</body>
+
+</html>
