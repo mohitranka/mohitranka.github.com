@@ -29,28 +29,34 @@
     <meta name="twitter:image" content="https://www.mohitranka.com/images/blog/gtm-datasets-need-data-contracts.jpg">
     <meta name="twitter:image:alt" content="GTM datasets need data contracts">
     <script>
+        // Theme and world are decided before first paint so nothing jumps.
         (function () {
-            var theme = 'dark';
-            try { theme = localStorage.getItem('theme') || 'dark'; } catch (e) {}
-            document.documentElement.setAttribute('data-theme', theme);
+            var root = document.documentElement;
+            var theme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            var world = 'read';
+            try {
+                theme = localStorage.getItem('theme') || theme;
+                world = localStorage.getItem('world') || 'read';
+            } catch (e) {}
+            var asked = /[?&]world=([a-z]+)/.exec(location.search);
+            if (asked) world = asked[1];
+            if (!/^(read|city|apartment|atlas)$/.test(world)) world = 'read';
+            root.setAttribute('data-theme', theme);
+            root.setAttribute('data-world', world);
+            root.classList.add('js');
+            if (world !== 'read') {
+                root.classList.add('world-loading');
+                // if the runtime never arrives, show the page rather than a loading screen
+                setTimeout(function () {
+                    if (!root.classList.contains('world-on')) root.classList.remove('world-loading');
+                }, 6000);
+            }
         })();
     </script>
     <link rel="preload" href="../../theme/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../../theme/fonts/source-serif-4-normal-200-900.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="../../theme/css/style.css">
-    <script>
-        // The tour takes over the page once it starts; until then the plain page stays hidden
-        // briefly, and comes back on its own if the tour never starts.
-        (function () {
-            var off = false;
-            try { off = localStorage.getItem('tour') === 'off'; } catch (e) {}
-            var root = document.documentElement;
-            if (off) { root.classList.add('tour-off'); return; }
-            root.classList.add('tour-pending');
-            setTimeout(function () { root.classList.remove('tour-pending'); }, 3500);
-        })();
-    </script>
-    <link rel="modulepreload" href="../../theme/js/vendor/three.module.min.js">
-    <script type="module" src="../../theme/js/town.js"></script>
+    <script type="module" src="../../theme/js/site/core.js" onerror="document.documentElement.classList.remove('world-loading')"></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-CWEDLBH79X"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -133,115 +139,44 @@
 </head>
 
 <body class="page-article">
-<section class="town" id="town" aria-label="Mohit's town: the site as a virtual tour">
-    <canvas class="town-canvas" tabindex="0" aria-label="3D island town. Use arrow keys or WASD to walk, click a place to go there, Enter to go inside."></canvas>
-    <div class="town-labels" aria-hidden="true"></div>
+    <a class="skip-link" href="#site">Skip to content</a>
 
-    <div class="town-card">
-        <p class="town-name">Hi, I'm Mohit Ranka</p>
-        <p class="town-line">I build software, lead engineering teams, read widely, and write it all down.<span class="town-walk"> Walk around my town, or take the tour.</span></p>
-        <button type="button" class="town-tour-start" data-tour="start">Take the tour</button>
-        <nav class="town-places" aria-label="Places in the town">
-            <button type="button" data-walk="writing">Writing</button>
-            <button type="button" data-walk="work">Work</button>
-            <button type="button" data-walk="library">Library</button>
-            <button type="button" data-walk="forge">Forge</button>
-            <button type="button" data-walk="contact">Contact</button>
-        </nav>
-        <nav class="town-fallback-links" aria-label="Also here">
-            <a href="../../library/">Library</a>
-            <a href="https://github.com/NorviaLabs/forge" rel="noopener noreferrer">Forge</a>
-        </nav>
-    </div>
-
-    <div class="town-guide" hidden aria-live="polite">
-        <p class="town-guide-title"></p>
-        <p class="town-guide-text"></p>
-        <div class="town-guide-actions">
-            <button type="button" class="town-guide-inside" data-guide="inside">Go inside</button>
-            <button type="button" data-guide="next">Next stop</button>
-            <button type="button" data-guide="end">End tour</button>
-        </div>
-    </div>
-
-    <aside class="town-panel" hidden aria-live="polite">
-        <p class="town-panel-title"></p>
-        <div class="town-panel-body"></div>
-        <a class="town-panel-link" href="#">Go inside</a>
-    </aside>
-
-    <div class="room" hidden>
-        <div class="room-bar">
-            <button type="button" class="room-back"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>Back outside</button>
-            <p class="room-name"></p>
-        </div>
-        <div class="room-scroll" tabindex="-1">
-            <div class="room-content"></div>
-        </div>
-    </div>
-
-    <div class="town-foot">
-        <p class="town-hint"><span class="hint-keys"><kbd>WASD</kbd> or <kbd>arrows</kbd> to walk · click anywhere to go there</span><span class="hint-touch">Tap anywhere to walk there</span></p>
-        <button type="button" class="town-theme" data-theme-toggle aria-label="Switch day or night">
-            <svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
-            <svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-        </button>
-        <button type="button" class="town-skip" data-tour="off">Read without the tour</button>
-    </div>
-
-    <div class="town-fade" aria-hidden="true"></div>
-
-    <script type="application/json" id="town-data">{
-        "homeTitle": "Mohit Ranka \u2014 Engineering Leader",
-        "essayCount": 14,
-        "essays": [            {"title": "How Forge Structures Requests for Prompt Cache Reuse", "url": "../../blog/how-forge-structures-requests-for-prompt-cache-reuse/", "date": "Sep 2026"},            {"title": "The line manager role is disappearing faster than you think", "url": "../../blog/line-manager-role-is-disappearing/", "date": "Jul 2026"},            {"title": "Near-real-time is a product promise, not a Kafka cluster", "url": "../../blog/near-real-time-is-a-product-promise/", "date": "Jul 2026"},            {"title": "The platform team\u2019s real job is interfaces", "url": "../../blog/platform-teams-real-job-is-interfaces/", "date": "Nov 2025"},            {"title": "When I still choose a relational database", "url": "../../blog/when-i-still-choose-a-relational-database/", "date": "Mar 2025"},            {"title": "Freshness SLOs: the metric product teams actually feel", "url": "../../blog/freshness-slos-the-metric-product-teams-feel/", "date": "Jul 2024"},            {"title": "Saying no as a platform EM without becoming the villain", "url": "../../blog/saying-no-as-a-platform-em/", "date": "Nov 2023"},            {"title": "Identity systems fail socially before they fail cryptographically", "url": "../../blog/identity-systems-fail-socially/", "date": "Mar 2023"},            {"title": "What \u201cled the web launch\u201d taught me about constraints", "url": "../../blog/web-launch-constraints/", "date": "Jul 2022"},            {"title": "Incubating 0\u21921 beside a mature product", "url": "../../blog/postman-labs-0-to-1/", "date": "Jun 2021"},            {"title": "How I review a distributed design in 45 minutes", "url": "../../blog/how-i-review-a-distributed-design/", "date": "Mar 2021"},            {"title": "Introducing on-call without burning the team", "url": "../../blog/introducing-on-call-without-burnout/", "date": "Nov 2020"},            {"title": "GTM datasets need data contracts", "url": "../../blog/gtm-datasets-need-data-contracts/", "date": "Jul 2020"},            {"title": "RDBMS vs. NOSQL?", "url": "../../blog/rdbms-vs-nosql/", "date": "Jun 2013"}        ],
-        "books": [            {"title": "Flow", "author": "Mih\u00e1ly Cs\u00edkszentmih\u00e1lyi", "url": "https://www.goodreads.com/book/show/117101", "cover": "../../images/library/117101.jpg"},            {"title": "The Little Prince", "author": "Antoine de Saint-Exup\u00e9ry", "url": "https://www.goodreads.com/book/show/157993", "cover": "../../images/library/157993.jpg"},            {"title": "Thinking In Systems", "author": "Donella H. Meadows", "url": "https://www.goodreads.com/book/show/3828902", "cover": "../../images/library/3828902.jpg"},            {"title": "Sapiens", "author": "Yuval Noah Harari", "url": "https://www.goodreads.com/book/show/23692271", "cover": "../../images/library/23692271.jpg"},            {"title": "The Martian", "author": "Andy Weir", "url": "https://www.goodreads.com/book/show/18401393", "cover": "../../images/library/18401393.jpg"},            {"title": "Atomic Habits", "author": "James Clear", "url": "https://www.goodreads.com/book/show/40121378", "cover": "../../images/library/40121378.jpg"},            {"title": "Ikigai", "author": "H\u00e9ctor Garc\u00eda", "url": "https://www.goodreads.com/book/show/40534545", "cover": "../../images/library/40534545.jpg"}        ],
-        "allBooks": [            {"title": "Flow", "url": "https://www.goodreads.com/book/show/117101", "cover": "../../images/library/117101.jpg"},            {"title": "The Good Soldier \u0160vejk", "url": "https://www.goodreads.com/book/show/7629", "cover": "../../images/library/7629.jpg"},            {"title": "The Martian", "url": "https://www.goodreads.com/book/show/18401393", "cover": "../../images/library/18401393.jpg"},            {"title": "Ikigai", "url": "https://www.goodreads.com/book/show/40534545", "cover": "../../images/library/40534545.jpg"},            {"title": "Homo Deus", "url": "https://www.goodreads.com/book/show/31138556", "cover": "../../images/library/31138556.jpg"},            {"title": "The Four Agreements", "url": "https://www.goodreads.com/book/show/6596", "cover": "../../images/library/6596.jpg"},            {"title": "Nonviolent Communication", "url": "https://www.goodreads.com/book/show/3601593", "cover": "../../images/library/3601593.jpg"},            {"title": "Meditations", "url": "https://www.goodreads.com/book/show/30659", "cover": "../../images/library/30659.jpg"},            {"title": "Designing Data-Intensive Applications", "url": "https://www.goodreads.com/book/show/23463279", "cover": "../../images/library/23463279.jpg"},            {"title": "Radical Candor", "url": "https://www.goodreads.com/book/show/29939161", "cover": "../../images/library/29939161.jpg"},            {"title": "The Psychology of Money", "url": "https://www.goodreads.com/book/show/41881472", "cover": "../../images/library/41881472.jpg"},            {"title": "Thinking In Systems", "url": "https://www.goodreads.com/book/show/3828902", "cover": "../../images/library/3828902.jpg"},            {"title": "The First 90 Days", "url": "https://www.goodreads.com/book/show/15824358", "cover": "../../images/library/15824358.jpg"},            {"title": "An Elegant Puzzle", "url": "https://www.goodreads.com/book/show/45303387", "cover": "../../images/library/45303387.jpg"},            {"title": "The Little Prince", "url": "https://www.goodreads.com/book/show/157993", "cover": "../../images/library/157993.jpg"},            {"title": "The Servant as Leader", "url": "https://www.goodreads.com/book/show/12552292", "cover": "../../images/library/12552292.jpg"},            {"title": "Project Hail Mary", "url": "https://www.goodreads.com/book/show/54493401", "cover": "../../images/library/54493401.jpg"},            {"title": "How to Read a Book", "url": "https://www.goodreads.com/book/show/567610", "cover": "../../images/library/567610.jpg"},            {"title": "Ars\u00e8ne Lupin, Gentleman-Thief", "url": "https://www.goodreads.com/book/show/141270", "cover": "../../images/library/141270.jpg"},            {"title": "The Restaurant at the End of the Universe", "url": "https://www.goodreads.com/book/show/8695", "cover": "../../images/library/8695.jpg"},            {"title": "The Art Of Saying NO", "url": "https://www.goodreads.com/book/show/36119521", "cover": "../../images/library/36119521.jpg"},            {"title": "Sapiens", "url": "https://www.goodreads.com/book/show/23692271", "cover": "../../images/library/23692271.jpg"},            {"title": "Atomic Habits", "url": "https://www.goodreads.com/book/show/40121378", "cover": "../../images/library/40121378.jpg"},            {"title": "Thinking, Fast and Slow", "url": "https://www.goodreads.com/book/show/11468377", "cover": "../../images/library/11468377.jpg"},            {"title": "No Rules Rules", "url": "https://www.goodreads.com/book/show/50964609", "cover": "../../images/library/50964609.jpg"},            {"title": "Never Split the Difference", "url": "https://www.goodreads.com/book/show/26156469", "cover": "../../images/library/26156469.jpg"},            {"title": "Domain-Driven Design Distilled", "url": "https://www.goodreads.com/book/show/28602719", "cover": "../../images/library/28602719.jpg"},            {"title": "Paul Graham", "url": "https://www.goodreads.com/book/show/13152479", "cover": "../../images/library/13152479.jpg"}        ],
-        "work": [
-            {"name": "Booking.com", "role": "Authentication and authorization infrastructure", "outcome": "Built authentication and authorization infrastructure supporting multiple Booking.com portfolio products at roughly 1M requests per second."},
-            {"name": "Postman", "role": "Runtime and core developer workflows", "outcome": "Led engineering around Runtime and core developer workflows for one of the world's most widely used API platforms."},
-            {"name": "LinkedIn", "role": "Enterprise data platform", "outcome": "Led enterprise data-platform work supporting major business functions and improving how quickly teams could access and act on data."}
-        ],
-        "forge": "Forge is a terminal-native AI coding environment I created at Norvia Labs: agent conversation, repository navigation, editing, shell execution, diffs, approvals, and durable sessions in one workspace. Open source.",
-        "links": {
-            "home": "../../",
-            "writing": "../../blog/",
-            "work": "../../work/",
-            "library": "../../library/",
-            "contact": "../../contact/",
-            "forge": "https://github.com/NorviaLabs/forge"
-        }
-    }</script>
-</section>    <main id="site">
-        <header class="site-header">
+    <header class="site-header">
+        <div class="site-header-inner">
             <a class="site-logo" href="../../">Mohit Ranka</a>
-            <nav class="site-nav" aria-label="Primary">
-                <a href="../../blog/">Writing</a>
+            <nav class="site-nav" aria-label="Sections">
+                <a href="../../about/">About</a>
+                <a href="../../blog/" aria-current="page">Writing</a>
                 <a href="../../work/">Work</a>
+                <a href="../../projects/">Projects</a>
                 <a href="../../library/">Library</a>
                 <a href="../../contact/">Contact</a>
-                <button class="tour-resume" type="button" data-tour="on">Take the tour</button>
-                <button class="theme-toggle" id="theme-toggle" data-theme-toggle type="button" aria-label="Switch to light theme">
+            </nav>
+            <div class="site-controls">
+                <button class="world-switch" type="button" data-open-worlds hidden>
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.8 3 2.8 15 0 18M12 3c-2.8 3-2.8 15 0 18"/></svg>
+                    <span>Visit a world</span>
+                </button>
+                <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch to dark mode">
                     <svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
                     <svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
                 </button>
-            </nav>
-        </header>
-
-<article>
-    <header class="article-header">
-        <h1 class="article-title">GTM datasets need data contracts</h1>
-        <p class="article-meta">
-            <time datetime="2020-07-01T10:00:00+05:30">01 Jul 2020</time>
-        </p>
-        <ul class="tag-list" aria-label="Tags">
-            <li><a class="tag-chip" href="../../tags/data-platforms/">data-platforms</a></li>
-            <li><a class="tag-chip" href="../../tags/platforms/">platforms</a></li>
-            <li><a class="tag-chip" href="../../tags/product/">product</a></li>
-        </ul>
+            </div>
+        </div>
     </header>
 
-    <div class="entry-content">
+    <main id="site" class="site-main" tabindex="-1">
+<article class="essay">
+    <aside class="essay-aside">
+        <p class="essay-kind">Essay · 4 min</p>
+        <p class="essay-date"><time datetime="2020-07-01T10:00:00+05:30">1 July 2020</time></p>
+        <nav class="essay-outline" aria-label="In this essay" data-outline hidden></nav>
+    </aside>
+    <header class="essay-head">
+        <h1 class="essay-title">GTM datasets need data contracts</h1>
+        <p class="essay-filed">Filed under <a href="../../tags/data-platforms/">data platforms</a>, <a href="../../tags/platforms/">platforms</a> and <a href="../../tags/product/">product</a></p>
+    </header>
+    <div class="entry-content essay-body">
         <p>When a go-to-market dashboard is wrong, nobody says “the warehouse is eventually consistent.” They say the number is wrong — and they stop trusting the platform. On LinkedIn’s Enterprise Data Platform (EDP) work, the failure mode was rarely a missing chart type. It was <strong>informal truth</strong>: datasets without clear producers, consumers, freshness expectations, or a path that BI could rely on when Hadoop-era pipelines still “worked.” That is a data-contract problem, whether or not you use the word contract.</p>
 <figure class="post-figure">
   <img src="../../images/blog/gtm-datasets-need-data-contracts.jpg" alt="Illustration of two parties exchanging a contract over data folders" loading="lazy" width="1200" height="675">
@@ -330,19 +265,10 @@
 <h2>Closing</h2>
 <p>EDP did not earn “source of truth” status by existing. It earned it when GTM consumers — especially BI — could depend on <strong>named datasets with owners, expectations, and an end to competing pipelines</strong>. Call that a data contract, a product interface, or an operating promise. Just do not ship GTM data as folklore and hope governance appears later.</p>
     </div>
-
-    <footer class="article-footer">
-        <p class="meta tag-footer-label">Tagged</p>
-        <ul class="tag-list" aria-label="Tags">
-            <li><a class="tag-chip" href="../../tags/data-platforms/">data-platforms</a></li>
-            <li><a class="tag-chip" href="../../tags/platforms/">platforms</a></li>
-            <li><a class="tag-chip" href="../../tags/product/">product</a></li>
-        </ul>
-        <p class="meta">
-            <a href="../../blog/">← All writing</a>
-            ·
-            <a href="../../tags/">All tags</a>
-        </p>
+    <footer class="essay-foot">
+        <nav class="essay-nav" aria-label="More writing">
+<span></span>        </nav>
+        <p class="essay-all"><a href="../../blog/">All writing</a> · <a href="../../tags/">Topics</a></p>
     </footer>
 </article>
 <section class="comments" id="comments" aria-labelledby="comments-title">
@@ -376,33 +302,143 @@
 </section>
 <script src="../../theme/js/comments.js" defer></script>
     </main>
-    <script>
-        (function () {
-            var root = document.documentElement;
-            var buttons = document.querySelectorAll('[data-theme-toggle]');
-            function sync() {
-                var dark = root.getAttribute('data-theme') !== 'light';
-                buttons.forEach(function (btn) {
-                    btn.setAttribute('aria-label', dark ? 'Switch to day' : 'Switch to night');
-                });
-            }
-            sync();
-            buttons.forEach(function (btn) {
-                btn.addEventListener('click', function () {
-                    var next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-                    root.setAttribute('data-theme', next);
-                    try { localStorage.setItem('theme', next); } catch (e) {}
-                    sync();
-                });
-            });
-            document.querySelectorAll('[data-tour="on"]').forEach(function (btn) {
-                btn.addEventListener('click', function () {
-                    try { localStorage.removeItem('tour'); } catch (e) {}
-                    window.location.reload();
-                });
-            });
-        })();
-    </script>
-</body>
+
+    <footer class="site-footer">
+        <div class="site-footer-inner">
+            <p>Mohit Ranka · Bangalore</p>
+            <nav aria-label="Elsewhere">
+                <a href="https://github.com/mohitranka" rel="noopener noreferrer">GitHub</a>
+                <a href="https://www.linkedin.com/in/mohit-ranka" rel="noopener noreferrer">LinkedIn</a>
+                <a href="https://www.goodreads.com/user/show/49116640-mohit-ranka" rel="noopener noreferrer">Goodreads</a>
+                <a href="https://www.mohitranka.com/rss.xml">RSS</a>
+            </nav>
+        </div>
+    </footer>
+
+<div class="world-stage" id="world-stage" aria-hidden="true"></div>
+
+<section class="reader" id="reader" hidden aria-labelledby="reader-place">
+    <div class="reader-bar">
+        <button class="reader-close" type="button" data-reader-close>
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+            <span>Back to the world</span>
+        </button>
+        <p class="reader-place" id="reader-place"></p>
+        <a class="reader-plain" href="#" data-just-read>Just Read</a>
+    </div>
+    <div class="reader-scroll" tabindex="-1">
+        <div class="reader-content"></div>
+    </div>
+</section>
+
+<div class="world-hud" id="world-hud" hidden>
+    <button class="hud-pill hud-world" type="button" data-open-worlds aria-label="Change world">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.8 3 2.8 15 0 18M12 3c-2.8 3-2.8 15 0 18"/></svg>
+        <span class="hud-world-name">World</span>
+    </button>
+    <div class="music" id="music">
+        <button class="hud-pill music-toggle" type="button" aria-pressed="false" aria-describedby="music-track">
+            <svg class="music-icon music-icon--off" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/><path d="M3 3l18 18"/></svg>
+            <svg class="music-icon music-icon--on" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg>
+            <span class="music-bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+            <span class="music-label">Music off</span>
+        </button>
+        <div class="music-panel">
+            <p class="music-track" id="music-track"></p>
+            <label class="music-volume"><span>Volume</span><input type="range" min="0" max="100" step="1" value="35"></label>
+        </div>
+    </div>
+    <button class="hud-pill hud-theme" type="button" data-theme-toggle aria-label="Switch to dark mode">
+        <svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+    <a class="hud-pill hud-read" href="#" data-just-read>Just Read</a>
+</div>
+
+<dialog class="worlds-dialog" id="worlds-dialog" aria-labelledby="worlds-dialog-title">
+    <div class="worlds-dialog-head">
+        <p class="worlds-dialog-title" id="worlds-dialog-title">Choose your world</p>
+        <button class="worlds-dialog-close" type="button" data-close-worlds aria-label="Close">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+    </div>
+    <div class="worlds-pano worlds-pano--compact" role="list">
+  <div class="world-slice world-slice--city" role="listitem">
+    <svg class="world-art" viewBox="0 0 600 520" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs><linearGradient id="pv-dusk-c" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a1b4f"/><stop offset=".55" stop-color="#a8457a"/><stop offset="1" stop-color="#ff9e5e"/></linearGradient></defs>
+      <rect width="600" height="520" fill="url(#pv-dusk-c)"/>
+      <circle cx="470" cy="130" r="34" fill="#ffd38a" opacity=".9"/>
+      <g fill="#1a0f2e"><rect x="20" y="230" width="70" height="290"/><rect x="95" y="180" width="54" height="340"/><rect x="155" y="260" width="90" height="260"/><rect x="250" y="150" width="60" height="370"/><rect x="315" y="220" width="96" height="300"/><rect x="420" y="270" width="70" height="250"/><rect x="495" y="200" width="90" height="320"/></g>
+      <g fill="#ffcf5a"><rect x="34" y="250" width="8" height="10"/><rect x="60" y="280" width="8" height="10"/><rect x="108" y="200" width="8" height="10"/><rect x="126" y="240" width="8" height="10"/><rect x="170" y="290" width="8" height="10"/><rect x="200" y="320" width="8" height="10"/><rect x="262" y="180" width="8" height="10"/><rect x="286" y="230" width="8" height="10"/><rect x="330" y="250" width="8" height="10"/><rect x="380" y="300" width="8" height="10"/><rect x="510" y="230" width="8" height="10"/><rect x="550" y="280" width="8" height="10"/></g>
+      <rect x="244" y="122" width="72" height="26" fill="#ff3d7f"/>
+      <path d="M0 470 Q300 430 600 470 L600 520 L0 520Z" fill="#2b2140"/>
+      <path d="M0 492 L600 492" stroke="#ffe066" stroke-width="4" stroke-dasharray="26 18"/>
+      <g transform="translate(330 455)"><rect width="48" height="26" rx="8" fill="#ffd400"/><rect y="12" width="48" height="14" fill="#1b5e3b"/><circle cx="10" cy="28" r="6" fill="#111"/><circle cx="40" cy="28" r="6" fill="#111"/></g>
+    </svg>
+    <div class="world-copy">
+      <p class="world-name">Side Quest City</p>
+      <p class="world-desc">A small Bangalore of the mind. Traffic is realistic; parking is not.</p>
+      <button class="world-enter" type="button" data-world-choose="city">Enter the city</button>
+    </div>
+  </div>
+  <div class="world-slice world-slice--apartment" role="listitem">
+    <svg class="world-art" viewBox="0 0 600 520" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <rect width="600" height="520" fill="#6b3a5c"/>
+      <rect width="600" height="380" fill="#c9a24a"/>
+      <rect y="380" width="600" height="140" fill="#7a4b2e"/>
+      <rect x="60" y="70" width="150" height="190" fill="#7fb6c9" stroke="#fff4d6" stroke-width="10"/><path d="M135 70 V260 M60 165 H210" stroke="#fff4d6" stroke-width="6"/>
+      <rect x="380" y="60" width="150" height="290" fill="#3d6b6a"/>
+      <g><rect x="395" y="90" width="18" height="60" fill="#e8553f"/><rect x="415" y="96" width="14" height="54" fill="#f2c14e"/><rect x="431" y="88" width="20" height="62" fill="#fff4d6"/><rect x="453" y="100" width="12" height="50" fill="#4f7ac9"/><rect x="467" y="92" width="18" height="58" fill="#7a2e3a"/><rect x="390" y="150" width="130" height="8" fill="#2a4a49"/><rect x="398" y="170" width="16" height="56" fill="#f2c14e"/><rect x="416" y="176" width="22" height="50" fill="#e8553f"/><rect x="440" y="166" width="14" height="60" fill="#4f7ac9"/></g>
+      <path d="M120 380 Q120 300 200 300 H420 Q500 300 500 380 Z" fill="#a83f4f"/><rect x="110" y="370" width="400" height="60" rx="18" fill="#c4505e"/>
+      <rect x="250" y="440" width="120" height="16" fill="#5b3420"/>
+      <rect x="30" y="300" width="70" height="56" rx="6" fill="#2a2a2a"/><rect x="36" y="306" width="58" height="40" fill="#9fd3e6"/>
+    </svg>
+    <div class="world-copy">
+      <p class="world-name">Apartment 404</p>
+      <p class="world-desc">The apartment that could not be found. Please wipe your feet anyway.</p>
+      <button class="world-enter" type="button" data-world-choose="apartment">Knock</button>
+    </div>
+  </div>
+  <div class="world-slice world-slice--atlas" role="listitem">
+    <svg class="world-art" viewBox="0 0 600 520" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <rect width="600" height="520" fill="#efe2c4"/>
+      <path d="M40 300 Q120 230 200 260 T380 240 T560 300 L560 520 L40 520Z" fill="#e3d1a6" stroke="#4a3622" stroke-width="2"/>
+      <g fill="none" stroke="#4a3622" stroke-width="2"><path d="M150 230 l20-40 l20 40"/><path d="M180 230 l26-56 l26 56"/><path d="M220 230 l18-34 l18 34"/></g>
+      <g fill="#4a3622"><path d="M70 150 l6 -14 l6 14z"/><path d="M86 160 l6 -14 l6 14z"/><path d="M78 138 l6 -14 l6 14z"/></g>
+      <path d="M120 400 C200 360 260 420 330 380 S470 360 520 410" fill="none" stroke="#a83a2a" stroke-width="2.5" stroke-dasharray="6 7"/>
+      <circle cx="120" cy="400" r="8" fill="#a83a2a"/>
+      <g transform="translate(470 120)" stroke="#4a3622" fill="none"><circle r="42" stroke-width="1.5"/><path d="M0 -50 L8 0 L0 50 L-8 0Z" fill="#4a3622"/><path d="M-50 0 L0 -6 L50 0 L0 6Z"/></g>
+    </svg>
+    <div class="world-copy">
+      <p class="world-name">The Unfinished Atlas</p>
+      <p class="world-desc">A map of ideas, partly surveyed. The cartographer is still out walking.</p>
+      <button class="world-enter" type="button" data-world-choose="atlas">Unroll the map</button>
+    </div>
+  </div>
+</div>
+    <div class="worlds-dialog-foot">
+        <button class="world-read" type="button" data-world-choose="read">Just Read: no world, no music</button>
+        <p>The page you are on comes with you.</p>
+    </div>
+</dialog>
+
+<div class="world-curtain" id="world-curtain" aria-hidden="true"></div>
+<p class="sr-only" id="world-status" role="status" aria-live="polite"></p>
+
+<script type="application/json" id="site-data">{
+    "root": "../../",
+    "sections": {
+        "about": "../../about/",
+        "writing": "../../blog/",
+        "work": "../../work/",
+        "projects": "../../projects/",
+        "library": "../../library/",
+        "contact": "../../contact/"
+    },
+    "essays": [        {"title": "How Forge Structures Requests for Prompt Cache Reuse", "url": "../../blog/how-forge-structures-requests-for-prompt-cache-reuse/", "date": "Sep 2026"},        {"title": "The line manager role is disappearing faster than you think", "url": "../../blog/line-manager-role-is-disappearing/", "date": "Jul 2026"},        {"title": "Near-real-time is a product promise, not a Kafka cluster", "url": "../../blog/near-real-time-is-a-product-promise/", "date": "Jul 2026"},        {"title": "The platform team\u2019s real job is interfaces", "url": "../../blog/platform-teams-real-job-is-interfaces/", "date": "Nov 2025"},        {"title": "When I still choose a relational database", "url": "../../blog/when-i-still-choose-a-relational-database/", "date": "Mar 2025"},        {"title": "Freshness SLOs: the metric product teams actually feel", "url": "../../blog/freshness-slos-the-metric-product-teams-feel/", "date": "Jul 2024"},        {"title": "Saying no as a platform EM without becoming the villain", "url": "../../blog/saying-no-as-a-platform-em/", "date": "Nov 2023"},        {"title": "Identity systems fail socially before they fail cryptographically", "url": "../../blog/identity-systems-fail-socially/", "date": "Mar 2023"},        {"title": "What \u201cled the web launch\u201d taught me about constraints", "url": "../../blog/web-launch-constraints/", "date": "Jul 2022"},        {"title": "Incubating 0\u21921 beside a mature product", "url": "../../blog/postman-labs-0-to-1/", "date": "Jun 2021"},        {"title": "How I review a distributed design in 45 minutes", "url": "../../blog/how-i-review-a-distributed-design/", "date": "Mar 2021"},        {"title": "Introducing on-call without burning the team", "url": "../../blog/introducing-on-call-without-burnout/", "date": "Nov 2020"},        {"title": "GTM datasets need data contracts", "url": "../../blog/gtm-datasets-need-data-contracts/", "date": "Jul 2020"},        {"title": "RDBMS vs. NOSQL?", "url": "../../blog/rdbms-vs-nosql/", "date": "Jun 2013"}    ],
+    "books": [        {"title": "Flow", "author": "Mih\u00e1ly Cs\u00edkszentmih\u00e1lyi", "cover": "../../images/library/117101.jpg"},        {"title": "The Little Prince", "author": "Antoine de Saint-Exup\u00e9ry", "cover": "../../images/library/157993.jpg"},        {"title": "Thinking In Systems", "author": "Donella H. Meadows", "cover": "../../images/library/3828902.jpg"},        {"title": "Sapiens", "author": "Yuval Noah Harari", "cover": "../../images/library/23692271.jpg"},        {"title": "The Martian", "author": "Andy Weir", "cover": "../../images/library/18401393.jpg"},        {"title": "Atomic Habits", "author": "James Clear", "cover": "../../images/library/40121378.jpg"},        {"title": "Ikigai", "author": "H\u00e9ctor Garc\u00eda", "cover": "../../images/library/40534545.jpg"}    ],
+    "bookCount": 28,
+    "assets": "../../theme/"
+}</script></body>
 
 </html>

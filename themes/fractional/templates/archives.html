@@ -51,39 +51,28 @@
 {% endblock %}
 
 {% block content %}
-        <h1>Writing</h1>
-        <p class="meta page-lede">
-            Technical writing on platforms, data, reliability, and engineering leadership.
-            {% if tags %}
-            Browse by <a href="{{ SITEURL }}/tags/">tag</a>.
-            {% endif %}
-            Subscribe via <a href="{{ SITE_ORIGIN }}/atom.xml">Atom</a>
-            or <a href="{{ SITE_ORIGIN }}/rss.xml">RSS</a>.
-        </p>
-
-        {% if tags %}
-        <ul class="tag-list tag-list--compact" aria-label="Popular tags">
-            {% for tag, tagged_articles in tags|sort %}
-            <li><a class="tag-chip" href="{{ SITEURL }}/{{ tag.url }}">{{ tag }}</a></li>
-            {% endfor %}
-        </ul>
-        {% endif %}
-
-        <ul class="article-list">
-            {% for article in dates %}
-            <li class="article-item article-item--stack">
-                <div class="article-item-main">
-                    <a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a>
-                    <time class="article-meta" datetime="{{ article.date.isoformat() }}">{{ article.date.strftime('%b %Y') }}</time>
-                </div>
-                {% if article.tags %}
-                <ul class="tag-list tag-list--compact" aria-label="Tags for {{ article.title }}">
-                    {% for tag in article.tags %}
-                    <li><a class="tag-chip" href="{{ SITEURL }}/{{ tag.url }}">{{ tag }}</a></li>
-                    {% endfor %}
-                </ul>
-                {% endif %}
-            </li>
-            {% endfor %}
-        </ul>
+<header class="page-head">
+    <h1>Writing</h1>
+    <p class="page-lede">{{ dates|count }} essays, technical and otherwise, from 2013 to now. Follow along by <a href="{{ SITE_ORIGIN }}/rss.xml">RSS</a> or <a href="{{ SITE_ORIGIN }}/atom.xml">Atom</a>.</p>
+    {% if tags %}
+    <ul class="tag-list" aria-label="Topics">
+        {% for tag, tagged in tags|sort %}
+        <li><a class="tag-chip" href="{{ SITEURL }}/{{ tag.url }}">{{ tag|string|replace('-', ' ') }} <span class="tag-count">{{ tagged|count }}</span></a></li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</header>
+{% for year, year_articles in dates|groupby('date.year')|reverse %}
+<section class="year" aria-labelledby="y{{ year }}">
+    <h2 class="year-label" id="y{{ year }}">{{ year }}</h2>
+    <ol class="essay-list">
+        {% for article in year_articles|sort(attribute='date', reverse=true) %}
+        <li>
+            <a class="essay-link" href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a>
+            <time class="essay-date" datetime="{{ article.date.isoformat() }}">{{ article.date.strftime('%-d %b') }}</time>
+        </li>
+        {% endfor %}
+    </ol>
+</section>
+{% endfor %}
 {% endblock %}

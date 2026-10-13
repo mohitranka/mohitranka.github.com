@@ -1,0 +1,243 @@
+/* Side Quest City: dusk purple and sodium orange, condensed caps in yellow, a HUD
+   that borrows from open-world games without borrowing anyone's game. */
+
+html.world-city {
+  --hud-bg: #1a0f2e;
+  --hud-fg: #fffaf0;
+  --hud-accent: #ffe066;
+  --reader-bg: #fbf8f2;
+  --reader-ink: #1d1c1a;
+  --reader-rule: #e6dfd2;
+  --reader-accent: #b54a17;
+  --reader-radius: 6px;
+}
+html.world-city[data-theme="dark"] {
+  --reader-bg: #17141f;
+  --reader-ink: #ece8e1;
+  --reader-rule: #2e2840;
+  --reader-accent: #ffb070;
+}
+html.world-city .reader {
+  --bg: var(--reader-bg);
+  --ink: var(--reader-ink);
+  --ink-2: color-mix(in srgb, var(--reader-ink) 80%, transparent);
+  --ink-3: color-mix(in srgb, var(--reader-ink) 62%, transparent);
+  --rule: var(--reader-rule);
+  --accent: var(--reader-accent);
+  --surface: color-mix(in srgb, var(--reader-bg) 92%, var(--reader-ink));
+  --code-bg: var(--surface);
+  border-top: 6px solid #ffe066;
+}
+html.world-city .reader-place {
+  font: 900 1.35rem/1 'Big Shoulders Display', var(--font-ui);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--reader-accent);
+}
+
+.city {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: #2a1b4f;
+  font-family: var(--font-ui);
+  color: #fffaf0;
+}
+.city-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+  cursor: grab;
+}
+.city-canvas:active { cursor: grabbing; }
+
+.city-tags { position: absolute; inset: 0; pointer-events: none; }
+.city-tag {
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: 0.3rem 0.6rem 0.35rem;
+  border-top: 3px solid var(--c);
+  background: rgba(20, 12, 36, 0.86);
+  white-space: nowrap;
+  transition: opacity 0.25s ease;
+  will-change: transform;
+}
+.city-tag b {
+  display: block;
+  font: 900 1.05rem/1 'Big Shoulders Display', var(--font-ui);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: #fffaf0;
+}
+.city-tag span { font-size: 0.6875rem; font-weight: 600; color: var(--c); }
+.city-tag::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  width: 2px;
+  height: 14px;
+  background: var(--c);
+}
+.city-tag.is-off { opacity: 0; }
+.city-tag.is-hover,
+.city-tag.is-active { background: var(--c); }
+.city-tag.is-hover b,
+.city-tag.is-active b,
+.city-tag.is-hover span,
+.city-tag.is-active span { color: #1a0f2e; }
+
+.city-readout {
+  position: absolute;
+  left: clamp(0.75rem, 2vw, 1.25rem);
+  top: clamp(0.75rem, 2vw, 1.25rem);
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.6rem 1rem 0.6rem 0.75rem;
+  background: rgba(20, 12, 36, 0.88);
+  border-bottom: 3px solid #ffe066;
+}
+.city-pin {
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 50%;
+  background: #ffe066;
+  box-shadow: 0 0 0 4px rgba(255, 224, 102, 0.25);
+}
+.city-here {
+  font: 900 1.6rem/1 'Big Shoulders Display', var(--font-ui);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: #ffe066;
+}
+.city-area { margin-top: 0.15rem; font-size: 0.75rem; font-weight: 600; color: #d9cfee; }
+
+.city-travel {
+  position: absolute;
+  left: clamp(0.75rem, 2vw, 1.25rem);
+  top: 6.2rem;
+  width: 15rem;
+  padding: 0.7rem 0.5rem 0.5rem;
+  background: rgba(20, 12, 36, 0.82);
+}
+.city-travel-title {
+  padding: 0 0.5rem 0.4rem;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #b9add6;
+}
+.city-travel ul { list-style: none; }
+.city-travel button {
+  display: grid;
+  grid-template-columns: 0.7rem 1fr auto;
+  align-items: center;
+  gap: 0.6rem;
+  width: 100%;
+  padding: 0.45rem 0.5rem;
+  border: 0;
+  background: transparent;
+  color: #fffaf0;
+  font: 600 0.875rem/1.2 var(--font-ui);
+  text-align: left;
+  cursor: pointer;
+}
+.city-travel button i { width: 0.7rem; height: 0.7rem; background: var(--c); transform: rotate(45deg); }
+.city-travel button span { font-size: 0.75rem; font-weight: 500; color: #b9add6; }
+.city-travel button:hover,
+.city-travel button[aria-current] { background: rgba(255, 224, 102, 0.14); }
+.city-travel button:focus-visible { outline: 2px solid #ffe066; outline-offset: -2px; }
+
+.city-map {
+  position: absolute;
+  left: clamp(0.75rem, 2vw, 1.25rem);
+  bottom: clamp(0.75rem, 2vw, 1.25rem);
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 4px solid #1a0f2e;
+  box-shadow: 0 0 0 2px #ffe066, 0 12px 30px -12px rgba(0, 0, 0, 0.7);
+}
+.city-map canvas { width: 100%; height: 100%; }
+
+.city-hint {
+  position: absolute;
+  left: 50%;
+  bottom: clamp(0.75rem, 2vw, 1.25rem);
+  transform: translateX(-50%);
+  padding: 0.5rem 0.9rem;
+  background: rgba(20, 12, 36, 0.82);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: opacity 0.4s ease;
+}
+.city kbd {
+  display: inline-block;
+  min-width: 1.4em;
+  margin: 0 0.1em;
+  padding: 0.05em 0.3em;
+  border: 1px solid #6b6380;
+  border-bottom-width: 2px;
+  border-radius: 3px;
+  font: 700 0.75rem/1.3 var(--font-ui);
+  text-align: center;
+}
+.city.is-driving .city-hint { opacity: 0; }
+.city-prompt {
+  position: absolute;
+  left: 50%;
+  bottom: 4.5rem;
+  transform: translateX(-50%);
+  padding: 0.6rem 1rem;
+  background: #ffe066;
+  color: #1a0f2e;
+  font-weight: 700;
+}
+.city-prompt kbd { border-color: #1a0f2e; }
+.city-prompt[hidden],
+.city-bubble[hidden] { display: none; }
+
+.city-bubble {
+  position: fixed;
+  z-index: 16;
+  max-width: 20rem;
+  transform: translate(-50%, -100%);
+  padding: 0.7rem 0.9rem;
+  background: #fffaf0;
+  color: #1a0f2e;
+  font-weight: 600;
+  line-height: 1.4;
+  outline: 3px solid #1a0f2e;
+  box-shadow: 0 14px 30px -14px rgba(0, 0, 0, 0.7);
+  pointer-events: none;
+}
+
+.city.is-reading .city-hint { opacity: 0; }
+
+@media (max-width: 760px) {
+  .city-here { font-size: 1.2rem; }
+  .city-readout { top: 3.6rem; padding: 0.45rem 0.7rem; }
+  .city-map, .city-hint { display: none; }
+  .city-travel {
+    top: auto;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: auto;
+    padding: 0.5rem;
+    overflow-x: auto;
+  }
+  .city-travel-title { display: none; }
+  .city-travel ul { display: flex; gap: 0.35rem; }
+  .city-travel li { flex: none; }
+  .city-travel button { grid-template-columns: 0.6rem auto; padding: 0.6rem 0.7rem; background: rgba(255, 255, 255, 0.06); }
+  .city-travel button span { display: none; }
+  .city.is-reading .city-travel { display: none; }
+  .city-tag b { font-size: 0.875rem; }
+}

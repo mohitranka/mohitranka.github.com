@@ -32,8 +32,10 @@ sync: build
 	rsync -a $(OUTPUT)/contact/ contact/
 	rsync -a $(OUTPUT)/work/ work/  # Pelican-generated page from content/pages/work.md via page.html; mirrors /contact/ pattern
 	rsync -a $(OUTPUT)/library/ library/
+	rsync -a $(OUTPUT)/about/ about/
+	rsync -a $(OUTPUT)/projects/ projects/
 	rsync -a $(OUTPUT)/feeds/ feeds/
-	rsync -a $(OUTPUT)/theme/ theme/
+	rsync -a --delete $(OUTPUT)/theme/ theme/
 	rsync -a $(OUTPUT)/images/ images/
 	@# Tags: only /tags/ is canonical; drop generated /tag/ if present, then sync
 	@rm -rf tag

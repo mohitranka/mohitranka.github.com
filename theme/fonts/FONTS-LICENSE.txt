@@ -1,0 +1,8 @@
+All fonts below are self-hosted Latin subsets from Google Fonts, licensed under the
+SIL Open Font License 1.1 (https://openfontlicense.org/open-font-license-official-text/),
+except Inter (see INTER-LICENSE.txt, also OFL 1.1).
+
+Source Serif 4 — Copyright 2014-2023 Adobe (https://github.com/adobe-fonts/source-serif)
+Big Shoulders Display — Copyright 2019 The Big Shoulders Project Authors (https://github.com/xotypeco/big_shoulders)
+Righteous — Copyright 2011 Astigmatic (https://github.com/googlefonts/righteous)
+IM Fell English / IM Fell English SC — Copyright 2010 Igino Marini (http://iginomarini.com/fell)

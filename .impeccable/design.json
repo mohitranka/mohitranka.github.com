@@ -1,46 +1,330 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-13T05:16:22+00:00",
+  "generatedAt": "2026-10-13T11:23:04+00:00",
   "title": "Design System: Mohit Ranka",
   "extensions": {
     "colorMeta": {
-      "town-ink": {
-        "role": "secondary",
-        "displayName": "Town Ink",
-        "canonical": "#14161b",
-        "purpose": "Light-theme text; ground of every ink panel (intro card, guide card, street panel, hint, plain-page impact items, Work cards, contact form, code blocks).",
+      "paper": {
+        "role": "neutral",
+        "displayName": "Warm Paper",
+        "canonical": "#fbf8f2",
         "tonalRamp": [
-          "#090b10",
+          "#0d0b07",
+          "#272520",
+          "#44423d",
+          "#63615c",
+          "#85827d",
+          "#a7a59f",
+          "#ccc9c3",
+          "#f1eee8"
+        ]
+      },
+      "paper-surface": {
+        "role": "neutral",
+        "displayName": "Paper Surface",
+        "canonical": "#f3eee4",
+        "tonalRamp": [
+          "#0e0b05",
+          "#28251d",
+          "#464239",
+          "#656158",
+          "#868279",
+          "#a9a49b",
+          "#cdc9bf",
+          "#f3eee4"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Press Ink",
+        "canonical": "#1d1c1a",
+        "tonalRamp": [
+          "#0c0b09",
+          "#262523",
+          "#434240",
+          "#62615f",
+          "#838280",
+          "#a6a5a2",
+          "#cac9c6",
+          "#f0eeeb"
+        ]
+      },
+      "ink-2": {
+        "role": "neutral",
+        "displayName": "Ink 2",
+        "canonical": "#4a4741",
+        "tonalRamp": [
+          "#0d0b06",
+          "#27251f",
+          "#45423c",
+          "#64615b",
+          "#85827b",
+          "#a8a59e",
+          "#ccc9c1",
+          "#f2eee7"
+        ]
+      },
+      "ink-3": {
+        "role": "neutral",
+        "displayName": "Ink 3",
+        "canonical": "#6f6b63",
+        "tonalRamp": [
+          "#0e0b05",
+          "#28251e",
+          "#45423a",
+          "#656159",
+          "#86827a",
+          "#a9a59c",
+          "#cdc9c0",
+          "#f3eee5"
+        ]
+      },
+      "rule": {
+        "role": "neutral",
+        "displayName": "Hairline Rule",
+        "canonical": "#e6dfd2",
+        "tonalRamp": [
+          "#0f0a03",
+          "#2a241b",
+          "#474137",
+          "#676055",
+          "#888276",
+          "#aba498",
+          "#cfc8bc",
+          "#f5eee0"
+        ]
+      },
+      "rust": {
+        "role": "primary",
+        "displayName": "Letterpress Rust",
+        "canonical": "#b54a17",
+        "tonalRamp": [
+          "#200000",
+          "#451100",
+          "#712600",
+          "#a33b00",
+          "#ca5e2f",
+          "#f28153",
+          "#ffb598",
+          "#fee9e1"
+        ]
+      },
+      "rust-wash": {
+        "role": "primary",
+        "displayName": "Rust Wash",
+        "canonical": "rgba(181, 74, 23, 0.12)",
+        "note": "Translucent; ramp computed from the opaque base colour.",
+        "tonalRamp": [
+          "#200000",
+          "#451100",
+          "#712600",
+          "#a33b00",
+          "#ca5e2f",
+          "#f28153",
+          "#ffb598",
+          "#fee9e1"
+        ]
+      },
+      "code-paper": {
+        "role": "neutral",
+        "displayName": "Code Paper",
+        "canonical": "#f1ebe0",
+        "tonalRamp": [
+          "#0e0b04",
+          "#29241c",
+          "#464138",
+          "#666157",
+          "#878278",
+          "#aaa49a",
+          "#cec8be",
+          "#f4eee3"
+        ]
+      },
+      "night-bg": {
+        "role": "neutral",
+        "displayName": "Night Ground",
+        "canonical": "#15161a",
+        "tonalRamp": [
+          "#0a0b0f",
+          "#242529",
+          "#414246",
+          "#606166",
+          "#818287",
+          "#a3a5aa",
+          "#c7c9cf",
+          "#edeef4"
+        ]
+      },
+      "night-surface": {
+        "role": "neutral",
+        "displayName": "Night Surface",
+        "canonical": "#1d1f24",
+        "tonalRamp": [
+          "#090b0f",
           "#23252a",
-          "#3f4248",
+          "#404247",
           "#5f6167",
-          "#7f8289",
+          "#808289",
           "#a2a5ac",
           "#c6c9d0",
-          "#ebeef6"
+          "#ebeef5"
         ]
       },
-      "town-ink-2": {
-        "role": "secondary",
-        "displayName": "Town Ink 2",
-        "canonical": "#23262e",
-        "purpose": "Lifted ink step.",
+      "night-ink": {
+        "role": "neutral",
+        "displayName": "Night Ink",
+        "canonical": "#ece8e1",
         "tonalRamp": [
-          "#080b12",
+          "#0d0b07",
+          "#28251f",
+          "#45423c",
+          "#64615b",
+          "#85827b",
+          "#a8a49e",
+          "#ccc9c2",
+          "#f2eee7"
+        ]
+      },
+      "night-ink-2": {
+        "role": "neutral",
+        "displayName": "Night Ink 2",
+        "canonical": "#c4bfb6",
+        "tonalRamp": [
+          "#0e0b05",
+          "#28251e",
+          "#46413a",
+          "#656159",
+          "#868279",
+          "#a9a49c",
+          "#cec8bf",
+          "#f3eee4"
+        ]
+      },
+      "night-ink-3": {
+        "role": "neutral",
+        "displayName": "Night Ink 3",
+        "canonical": "#9a958c",
+        "tonalRamp": [
+          "#0e0b05",
+          "#28241d",
+          "#46413a",
+          "#656158",
+          "#878279",
+          "#a9a49b",
+          "#cec8bf",
+          "#f3eee4"
+        ]
+      },
+      "night-rule": {
+        "role": "neutral",
+        "displayName": "Night Rule",
+        "canonical": "#2c2e35",
+        "tonalRamp": [
+          "#090b11",
+          "#23252c",
+          "#404249",
+          "#5f6169",
+          "#80828a",
+          "#a2a5ad",
+          "#c6c9d2",
+          "#ebeef7"
+        ]
+      },
+      "night-rust": {
+        "role": "primary",
+        "displayName": "Ember by Night",
+        "canonical": "#f08a52",
+        "tonalRamp": [
+          "#1e0100",
+          "#411600",
+          "#6d2c00",
+          "#9c4300",
+          "#c56328",
+          "#ec864e",
+          "#ffb690",
+          "#ffeadf"
+        ]
+      },
+      "night-rust-wash": {
+        "role": "primary",
+        "displayName": "Ember Wash",
+        "canonical": "rgba(240, 138, 82, 0.16)",
+        "note": "Translucent; ramp computed from the opaque base colour.",
+        "tonalRamp": [
+          "#1e0100",
+          "#411600",
+          "#6d2c00",
+          "#9c4300",
+          "#c56328",
+          "#ec864e",
+          "#ffb690",
+          "#ffeadf"
+        ]
+      },
+      "night-code": {
+        "role": "neutral",
+        "displayName": "Night Code",
+        "canonical": "#1f2127",
+        "tonalRamp": [
+          "#090b10",
+          "#23252b",
+          "#404248",
+          "#5f6168",
+          "#80828a",
+          "#a2a5ad",
+          "#c6c9d1",
+          "#ebeef7"
+        ]
+      },
+      "chrome-black": {
+        "role": "neutral",
+        "displayName": "Stage Black",
+        "canonical": "#111216",
+        "tonalRamp": [
+          "#0a0b0f",
+          "#242529",
+          "#404247",
+          "#606166",
+          "#818287",
+          "#a3a5aa",
+          "#c7c9cf",
+          "#edeef4"
+        ]
+      },
+      "chrome-step": {
+        "role": "neutral",
+        "displayName": "Chrome Step",
+        "canonical": "#23252c",
+        "tonalRamp": [
+          "#090b11",
+          "#23252c",
+          "#3f4249",
+          "#5e6169",
+          "#7f828b",
+          "#a2a5ae",
+          "#c6c9d2",
+          "#ebeef8"
+        ]
+      },
+      "chrome-border": {
+        "role": "neutral",
+        "displayName": "Chrome Border",
+        "canonical": "#3a3d46",
+        "tonalRamp": [
+          "#090b12",
           "#22252d",
-          "#3e424b",
-          "#5d616a",
-          "#7e828c",
+          "#3f424b",
+          "#5e616b",
+          "#7f828c",
           "#a1a5af",
           "#c5c9d4",
-          "#eaeef9"
+          "#eaeefa"
         ]
       },
-      "town-paper": {
-        "role": "secondary",
-        "displayName": "Town Paper",
+      "chrome-paper": {
+        "role": "neutral",
+        "displayName": "Chrome Paper",
         "canonical": "#fffaf0",
-        "purpose": "Light-theme page and reading-room ground; dark-theme text; text on ink panels; town labels, day/night switch and Read without the tour pill.",
         "tonalRamp": [
           "#0e0b05",
           "#28251d",
@@ -52,11 +336,10 @@
           "#f3eee4"
         ]
       },
-      "town-muted": {
-        "role": "secondary",
-        "displayName": "Town Muted",
+      "chrome-muted": {
+        "role": "neutral",
+        "displayName": "Chrome Muted",
         "canonical": "#a9adb8",
-        "purpose": "Secondary text on ink panels.",
         "tonalRamp": [
           "#080b12",
           "#22252d",
@@ -68,927 +351,899 @@
           "#eaeefa"
         ]
       },
-      "forge-ember": {
-        "role": "primary",
-        "displayName": "Forge Ember",
-        "canonical": "#ff8a2a",
-        "purpose": "The single accent site-wide: active nav, main actions (Take the tour, Go inside), tag hover, link underlines, focus, selection; also the forge fire.",
-        "tonalRamp": [
-          "#170600",
-          "#3c1b02",
-          "#663206",
-          "#944a07",
-          "#c56408",
-          "#f5811c",
-          "#ffb788",
-          "#ffeadd"
-        ]
-      },
-      "night-surface": {
-        "role": "neutral",
-        "displayName": "Night Surface",
-        "canonical": "#14213f",
-        "purpose": "Quiet lifted blocks on the night ground.",
-        "tonalRamp": [
-          "#070b14",
-          "#1b2436",
-          "#323f5b",
-          "#4d5d80",
-          "#6c7da1",
-          "#8c9ec4",
-          "#b3c4e7",
-          "#e3efff"
-        ]
-      },
-      "night-secondary": {
-        "role": "neutral",
-        "displayName": "Night Secondary",
-        "canonical": "#a9b4cc",
-        "purpose": "Secondary text by night.",
-        "tonalRamp": [
-          "#090b11",
-          "#1f242f",
-          "#384051",
-          "#545d73",
-          "#737d94",
-          "#949eb6",
-          "#bac4da",
-          "#e8effd"
-        ]
-      },
-      "night-border": {
-        "role": "neutral",
-        "displayName": "Night Border",
-        "canonical": "#24335c",
-        "purpose": "Hairlines and unfilled pill outlines by night.",
-        "tonalRamp": [
-          "#070b16",
-          "#1a233a",
-          "#303e62",
-          "#4a5c88",
-          "#697cab",
-          "#899dce",
-          "#b1c4f0",
-          "#e1eeff"
-        ]
-      },
-      "night-code": {
-        "role": "neutral",
-        "displayName": "Night Code",
-        "canonical": "#1b2a4d",
-        "purpose": "Inline code fill by night.",
-        "tonalRamp": [
-          "#070b15",
-          "#1a2438",
-          "#313f5f",
-          "#4b5d84",
-          "#6a7da6",
-          "#8a9ec9",
-          "#b1c4ec",
-          "#e2efff"
-        ]
-      },
-      "night-shore": {
-        "role": "neutral",
-        "displayName": "Night Shore",
-        "canonical": "#8a7a55",
-        "purpose": "The 10px shore band under the fallback card by night.",
-        "tonalRamp": [
-          "#0f0b03",
-          "#2b2310",
-          "#4b3e20",
-          "#6b5c38",
-          "#8c7c56",
-          "#ad9d77",
-          "#d2c3a0",
-          "#f8eed6"
-        ]
-      },
-      "day-surface": {
-        "role": "neutral",
-        "displayName": "Day Surface",
-        "canonical": "#f6eedc",
-        "purpose": "Closing call-to-action block by day.",
-        "tonalRamp": [
-          "#0d0b07",
-          "#27241c",
-          "#453f33",
-          "#645d4e",
-          "#847d6c",
-          "#a59e8d",
-          "#cac3b4",
-          "#f3eee4"
-        ]
-      },
-      "day-secondary": {
-        "role": "neutral",
-        "displayName": "Day Secondary",
-        "canonical": "#5b5f69",
-        "purpose": "Secondary text by day.",
-        "tonalRamp": [
-          "#080b12",
-          "#20242c",
-          "#3c4049",
-          "#595d67",
-          "#797d88",
-          "#9a9ea9",
-          "#bfc4cf",
-          "#eaeefa"
-        ]
-      },
-      "day-border": {
-        "role": "neutral",
-        "displayName": "Day Border",
-        "canonical": "#eadfc8",
-        "purpose": "Hairlines and pill outlines by day.",
-        "tonalRamp": [
-          "#0d0b06",
-          "#282319",
-          "#473f2f",
-          "#665d49",
-          "#867c67",
-          "#a89d88",
-          "#cdc3af",
-          "#f4eee0"
-        ]
-      },
-      "day-code": {
-        "role": "neutral",
-        "displayName": "Day Code",
-        "canonical": "#f3e8d2",
-        "purpose": "Inline code fill by day.",
-        "tonalRamp": [
-          "#0d0b06",
-          "#282319",
-          "#463f2f",
-          "#665c4a",
-          "#867c68",
-          "#a89d89",
-          "#cdc3b0",
-          "#f4eee1"
-        ]
-      },
-      "day-sky": {
+      "city-dusk": {
         "role": "tertiary",
-        "displayName": "Day Sky",
-        "canonical": "#9fd3e6",
-        "purpose": "Daytime sky and town section background.",
+        "displayName": "Side Quest City: Dusk",
+        "canonical": "#1a0f2e",
         "tonalRamp": [
-          "#000e13",
-          "#012a36",
-          "#154959",
-          "#37697a",
-          "#598b9c",
-          "#7baec0",
-          "#9fd3e6",
-          "#d7f4ff"
+          "#0f0421",
+          "#281e3e",
+          "#453b5e",
+          "#655a7f",
+          "#867ba2",
+          "#a99ec7",
+          "#cdc2ec",
+          "#f0ebfe"
         ]
       },
-      "day-sea": {
+      "city-sky": {
         "role": "tertiary",
-        "displayName": "Day Sea",
-        "canonical": "#3d9cc2",
-        "purpose": "Daytime sea.",
+        "displayName": "Side Quest City: Sky",
+        "canonical": "#2a1b4f",
         "tonalRamp": [
-          "#000d14",
-          "#012938",
-          "#034960",
-          "#146b89",
-          "#2c8eb3",
-          "#55b2d8",
-          "#7bd7ff",
+          "#0f002d",
+          "#28194c",
+          "#44376e",
+          "#635790",
+          "#8478b4",
+          "#a69bda",
+          "#cabfff",
+          "#eeecff"
+        ]
+      },
+      "city-panel": {
+        "role": "tertiary",
+        "displayName": "Side Quest City: Panel",
+        "canonical": "rgba(20, 12, 36, 0.86)",
+        "note": "Translucent; ramp computed from the opaque base colour.",
+        "tonalRamp": [
+          "#0e061d",
+          "#27203a",
+          "#443d59",
+          "#645c7a",
+          "#857d9c",
+          "#a89fc0",
+          "#ccc3e6",
+          "#f0ebff"
+        ]
+      },
+      "city-yellow": {
+        "role": "tertiary",
+        "displayName": "Side Quest City: Yellow",
+        "canonical": "#ffe066",
+        "tonalRamp": [
+          "#110a00",
+          "#2e2400",
+          "#4f4100",
+          "#736000",
+          "#9a8103",
+          "#c1a315",
+          "#e6c84b",
+          "#ffefb1"
+        ]
+      },
+      "city-lavender": {
+        "role": "tertiary",
+        "displayName": "Side Quest City: Lavender",
+        "canonical": "#b9add6",
+        "tonalRamp": [
+          "#0f0420",
+          "#291e3e",
+          "#463b5d",
+          "#655a7f",
+          "#877ba2",
+          "#a99dc6",
+          "#cec1eb",
+          "#f0ebff"
+        ]
+      },
+      "city-reader-accent": {
+        "role": "tertiary",
+        "displayName": "Side Quest City: Reader Accent",
+        "canonical": "#b54a17",
+        "tonalRamp": [
+          "#200000",
+          "#451200",
+          "#712700",
+          "#a23c00",
+          "#cc5d2a",
+          "#f3804f",
+          "#feb598",
+          "#ffe9e1"
+        ]
+      },
+      "city-night-reader": {
+        "role": "tertiary",
+        "displayName": "Side Quest City: Night Reader",
+        "canonical": "#17141f",
+        "tonalRamp": [
+          "#0c0913",
+          "#26232f",
+          "#43404d",
+          "#625f6d",
+          "#83808e",
+          "#a6a2b2",
+          "#cac6d6",
+          "#f0ecfc"
+        ]
+      },
+      "city-night-accent": {
+        "role": "tertiary",
+        "displayName": "Side Quest City: Night Accent",
+        "canonical": "#ffb070",
+        "tonalRamp": [
+          "#1b0400",
+          "#3c1b00",
+          "#643400",
+          "#904e01",
+          "#b76e2b",
+          "#dd9151",
+          "#ffb77f",
+          "#ffeadb"
+        ]
+      },
+      "city-place-about": {
+        "role": "tertiary",
+        "displayName": "Side Quest City: Place About",
+        "canonical": "#ff8fb1",
+        "tonalRamp": [
+          "#210009",
+          "#4b0021",
+          "#78103d",
+          "#9d375c",
+          "#c45a7d",
+          "#eb7d9f",
+          "#ffafc5",
+          "#fee8ed"
+        ]
+      },
+      "city-place-work": {
+        "role": "tertiary",
+        "displayName": "Side Quest City: Place Work",
+        "canonical": "#7fd6ff",
+        "tonalRamp": [
+          "#000e18",
+          "#00293b",
+          "#004962",
+          "#016b8e",
+          "#328db3",
+          "#59b1d9",
+          "#7fd6ff",
           "#dbf3ff"
         ]
       },
-      "sand": {
+      "city-place-projects": {
         "role": "tertiary",
-        "displayName": "Sand",
-        "canonical": "#f0d9a6",
-        "purpose": "Island beach ring; the shore band by day.",
+        "displayName": "Side Quest City: Place Projects",
+        "canonical": "#ffa94d",
         "tonalRamp": [
-          "#110a00",
-          "#302301",
-          "#523f0b",
-          "#735e2f",
-          "#958050",
-          "#b9a371",
-          "#ddc794",
-          "#feedc7"
+          "#190500",
+          "#3a1d00",
+          "#613600",
+          "#8c5100",
+          "#b96e02",
+          "#e38f2e",
+          "#ffb974",
+          "#feebd9"
         ]
       },
-      "grass": {
+      "city-place-library": {
         "role": "tertiary",
-        "displayName": "Grass",
-        "canonical": "#8cc76a",
-        "purpose": "Island lawns, room yards and hemisphere ground light.",
+        "displayName": "Side Quest City: Place Library",
+        "canonical": "#b197fc",
         "tonalRamp": [
-          "#040f00",
-          "#122d00",
-          "#274d09",
-          "#3b710b",
-          "#5c9438",
-          "#7eb85c",
-          "#a1dd7f",
-          "#d1ffb8"
+          "#11002e",
+          "#2e0162",
+          "#4a2a85",
+          "#684ca9",
+          "#896ecf",
+          "#ab91f6",
+          "#ccbeff",
+          "#efebff"
         ]
       },
-      "path": {
+      "city-place-contact": {
         "role": "tertiary",
-        "displayName": "Warm Path",
-        "canonical": "#e9c98f",
-        "purpose": "Flat ring road, spokes and plaza planes; room plinths.",
+        "displayName": "Side Quest City: Place Contact",
+        "canonical": "#ff6b6b",
         "tonalRamp": [
-          "#110a00",
-          "#322201",
-          "#563d01",
-          "#795c23",
-          "#9b7d45",
-          "#bfa067",
-          "#e4c48b",
-          "#feeccc"
+          "#220000",
+          "#4e0008",
+          "#800016",
+          "#b11d2c",
+          "#d9484c",
+          "#ff7271",
+          "#feb3ae",
+          "#fee9e7"
         ]
       },
-      "cream-wall": {
+      "apt-plum": {
         "role": "tertiary",
-        "displayName": "Cream Wall",
-        "canonical": "#f4ecdc",
-        "purpose": "Building walls and default sign ground.",
+        "displayName": "Apartment 404: Plum",
+        "canonical": "#3a1f33",
         "tonalRamp": [
-          "#100a02",
-          "#2a2418",
-          "#484134",
-          "#676053",
-          "#898273",
-          "#aca495",
-          "#d0c8b9",
-          "#f6eede"
+          "#180213",
+          "#351a2e",
+          "#54374c",
+          "#75566c",
+          "#97778e",
+          "#bb99b1",
+          "#e0bdd6",
+          "#ffe6f7"
         ]
       },
-      "roof-terracotta": {
+      "apt-purple": {
         "role": "tertiary",
-        "displayName": "Terracotta Roof",
-        "canonical": "#d9653b",
-        "purpose": "Roof rotation; light-theme link underline hover.",
+        "displayName": "Apartment 404: Purple",
+        "canonical": "#5b3a7a",
         "tonalRamp": [
-          "#1b0300",
-          "#441201",
-          "#732402",
-          "#a23b10",
-          "#cd5a30",
-          "#f57e54",
-          "#ffb59b",
-          "#ffe9e2"
+          "#150028",
+          "#320f4d",
+          "#502f6e",
+          "#714f91",
+          "#9271b5",
+          "#b693db",
+          "#dab8ff",
+          "#f3eaff"
         ]
       },
-      "roof-slate": {
+      "apt-mustard": {
         "role": "tertiary",
-        "displayName": "Slate Roof",
-        "canonical": "#5a6b8c",
-        "purpose": "Roof rotation.",
+        "displayName": "Apartment 404: Mustard",
+        "canonical": "#d9a94a",
         "tonalRamp": [
-          "#020922",
-          "#162440",
-          "#324260",
-          "#516182",
-          "#7183a5",
-          "#93a5c9",
-          "#b6caef",
-          "#e6efff"
+          "#150800",
+          "#332100",
+          "#573d00",
+          "#7e5a00",
+          "#a77902",
+          "#cc9c3c",
+          "#f2c163",
+          "#ffeccc"
         ]
       },
-      "roof-teal": {
+      "apt-cream": {
         "role": "tertiary",
-        "displayName": "Teal Roof",
-        "canonical": "#2f8f83",
-        "purpose": "Roof rotation; bookshop sign.",
+        "displayName": "Apartment 404: Cream",
+        "canonical": "#fff4d6",
         "tonalRamp": [
-          "#000f0c",
-          "#002c27",
-          "#004d46",
-          "#107066",
-          "#359488",
-          "#5cb8ab",
-          "#82ddcf",
-          "#bcfef3"
+          "#120a00",
+          "#2d240b",
+          "#4a4128",
+          "#6a6147",
+          "#8c8267",
+          "#afa488",
+          "#d3c9ac",
+          "#f9eed0"
         ]
       },
-      "roof-ochre": {
+      "apt-gold": {
         "role": "tertiary",
-        "displayName": "Ochre Roof",
-        "canonical": "#e0a33c",
-        "purpose": "Roof rotation.",
+        "displayName": "Apartment 404: Gold",
+        "canonical": "#f2c14e",
+        "tonalRamp": [
+          "#140900",
+          "#312200",
+          "#553e00",
+          "#7b5c00",
+          "#a47b00",
+          "#cd9d1d",
+          "#f3c24f",
+          "#ffedc7"
+        ]
+      },
+      "apt-rose": {
+        "role": "tertiary",
+        "displayName": "Apartment 404: Rose",
+        "canonical": "#a83f4f",
+        "tonalRamp": [
+          "#220003",
+          "#4d0014",
+          "#7a102a",
+          "#a03849",
+          "#c75b69",
+          "#ee7e8a",
+          "#feb1b7",
+          "#fee8e9"
+        ]
+      },
+      "apt-curtain": {
+        "role": "tertiary",
+        "displayName": "Apartment 404: Curtain",
+        "canonical": "#7a2e3a",
+        "tonalRamp": [
+          "#220003",
+          "#4c0015",
+          "#6f2431",
+          "#93454f",
+          "#b96670",
+          "#df8991",
+          "#feb1b8",
+          "#fee8ea"
+        ]
+      },
+      "apt-ink": {
+        "role": "tertiary",
+        "displayName": "Apartment 404: Ink",
+        "canonical": "#2a1e1a",
+        "tonalRamp": [
+          "#130805",
+          "#2e221e",
+          "#4c3f3a",
+          "#6c5e59",
+          "#8e7e79",
+          "#b1a19c",
+          "#d6c5c0",
+          "#fceae5"
+        ]
+      },
+      "apt-remote": {
+        "role": "tertiary",
+        "displayName": "Apartment 404: Remote",
+        "canonical": "#23181f",
+        "tonalRamp": [
+          "#11080e",
+          "#2c2128",
+          "#4a3e45",
+          "#6a5d65",
+          "#8c7d86",
+          "#afa0a9",
+          "#d4c4cd",
+          "#f9e9f3"
+        ]
+      },
+      "apt-night-reader": {
+        "role": "tertiary",
+        "displayName": "Apartment 404: Night Reader",
+        "canonical": "#2b1d28",
+        "tonalRamp": [
+          "#120710",
+          "#2e202b",
+          "#4c3c48",
+          "#6c5b68",
+          "#8e7c8a",
+          "#b19fad",
+          "#d6c2d1",
+          "#fbe8f7"
+        ]
+      },
+      "atlas-parchment": {
+        "role": "tertiary",
+        "displayName": "The Unfinished Atlas: Parchment",
+        "canonical": "#efe2c4",
         "tonalRamp": [
           "#130900",
-          "#332102",
-          "#583c05",
-          "#815804",
-          "#ac7603",
-          "#d5982e",
-          "#fbbd59",
-          "#feecd2"
+          "#2e240a",
+          "#4c4127",
+          "#6b6046",
+          "#8d8166",
+          "#b0a487",
+          "#d5c8ab",
+          "#fbedcf"
         ]
       },
-      "post-red": {
+      "atlas-parchment-2": {
         "role": "tertiary",
-        "displayName": "Post Red",
-        "canonical": "#d8342c",
-        "purpose": "Contact post box.",
+        "displayName": "The Unfinished Atlas: Parchment 2",
+        "canonical": "#e3d1a6",
         "tonalRamp": [
-          "#1e0101",
-          "#4c0203",
-          "#7f0607",
-          "#b90009",
-          "#e23e35",
-          "#fa7869",
-          "#ffb3a8",
-          "#ffe9e5"
+          "#130900",
+          "#312300",
+          "#4f4018",
+          "#6f5f38",
+          "#918158",
+          "#b5a37a",
+          "#d9c89d",
+          "#ffedc3"
         ]
       },
-      "night-sky": {
-        "role": "neutral",
-        "displayName": "Night Sky",
-        "canonical": "#0d1830",
-        "purpose": "Dark-theme page and reading-room ground, the town's night sky and the fade layer.",
-        "tonalRamp": [
-          "#030920",
-          "#18243d",
-          "#34425d",
-          "#53617e",
-          "#7382a1",
-          "#95a5c5",
-          "#b9caeb",
-          "#e7effe"
-        ]
-      },
-      "night-fog": {
+      "atlas-card": {
         "role": "tertiary",
-        "displayName": "Night Fog",
-        "canonical": "#2b4170",
-        "purpose": "Street fog by night; lighter than the sky so it reads as the sky after ACES tone mapping.",
+        "displayName": "The Unfinished Atlas: Card",
+        "canonical": "#f6ecd2",
         "tonalRamp": [
-          "#020a26",
-          "#14244a",
-          "#2b4170",
-          "#45608f",
-          "#6380b0",
-          "#86a2d1",
-          "#abc6f2",
-          "#e2eeff"
+          "#110a00",
+          "#2c240f",
+          "#4a412c",
+          "#69614a",
+          "#8b826a",
+          "#aea48c",
+          "#d2c9af",
+          "#f8eed4"
         ]
       },
-      "night-sea": {
+      "atlas-sea": {
         "role": "tertiary",
-        "displayName": "Night Sea",
-        "canonical": "#173a5c",
-        "purpose": "Night sea.",
+        "displayName": "The Unfinished Atlas: Sea",
+        "canonical": "#dccaa0",
         "tonalRamp": [
-          "#000c1d",
-          "#022646",
-          "#214467",
-          "#406489",
-          "#6186ac",
-          "#83a9d1",
-          "#a6cdf7",
-          "#e3f0ff"
+          "#130900",
+          "#312300",
+          "#4f4019",
+          "#6f5f39",
+          "#918159",
+          "#b5a37b",
+          "#d9c89e",
+          "#ffedc3"
         ]
       },
-      "window-glow": {
+      "atlas-ink": {
         "role": "tertiary",
-        "displayName": "Window Glow",
-        "canonical": "#ffcf7a",
-        "purpose": "Lit windows at night; dark-theme link underline hover.",
+        "displayName": "The Unfinished Atlas: Ink",
+        "canonical": "#3b2a18",
         "tonalRamp": [
-          "#120900",
-          "#322202",
-          "#563d05",
-          "#7e5a03",
-          "#a67a1c",
-          "#cb9d47",
-          "#f0c16c",
-          "#ffeccd"
+          "#160700",
+          "#32210f",
+          "#503e2c",
+          "#705d4a",
+          "#937e6a",
+          "#b6a18c",
+          "#dbc5af",
+          "#ffebd6"
+        ]
+      },
+      "atlas-ink-2": {
+        "role": "tertiary",
+        "displayName": "The Unfinished Atlas: Ink 2",
+        "canonical": "#6a4e30",
+        "tonalRamp": [
+          "#180600",
+          "#371f00",
+          "#573c1e",
+          "#785b3d",
+          "#9a7c5d",
+          "#be9f7e",
+          "#e3c3a1",
+          "#ffebd7"
+        ]
+      },
+      "atlas-frame": {
+        "role": "tertiary",
+        "displayName": "The Unfinished Atlas: Frame",
+        "canonical": "#8a6a3e",
+        "tonalRamp": [
+          "#160700",
+          "#362000",
+          "#593b0b",
+          "#7a5b2f",
+          "#9d7c50",
+          "#c19f71",
+          "#e6c394",
+          "#ffebd2"
+        ]
+      },
+      "atlas-road": {
+        "role": "tertiary",
+        "displayName": "The Unfinished Atlas: Road",
+        "canonical": "#a83a2a",
+        "tonalRamp": [
+          "#230000",
+          "#4e0000",
+          "#7e0c00",
+          "#a43727",
+          "#cb5a48",
+          "#f37e6a",
+          "#feb4a6",
+          "#fee9e5"
+        ]
+      },
+      "atlas-water": {
+        "role": "tertiary",
+        "displayName": "The Unfinished Atlas: Water",
+        "canonical": "#5a7d8a",
+        "tonalRamp": [
+          "#000e16",
+          "#062a35",
+          "#254753",
+          "#456774",
+          "#658996",
+          "#87acb9",
+          "#abd0de",
+          "#d8f4ff"
+        ]
+      },
+      "atlas-lantern": {
+        "role": "tertiary",
+        "displayName": "The Unfinished Atlas: Lantern",
+        "canonical": "#f2a93b",
+        "tonalRamp": [
+          "#170700",
+          "#362000",
+          "#5c3a00",
+          "#855600",
+          "#b07401",
+          "#dc941c",
+          "#ffba5a",
+          "#ffebd2"
+        ]
+      },
+      "atlas-reader": {
+        "role": "tertiary",
+        "displayName": "The Unfinished Atlas: Reader",
+        "canonical": "#fbf4e2",
+        "tonalRamp": [
+          "#0f0b02",
+          "#2a2517",
+          "#474233",
+          "#676151",
+          "#888272",
+          "#aba594",
+          "#cfc9b7",
+          "#f5eedc"
         ]
       }
     },
     "typographyMeta": {
-      "town-display": {
-        "displayName": "Town Display",
-        "purpose": "The intro card greeting only."
-      },
       "display": {
         "displayName": "Display",
-        "purpose": "Homepage hero headline on the plain page; 800."
+        "purpose": "Page and essay titles and the homepage title; clamp(1.9rem, 1.4rem + 1.6vw, 2.6rem) inside the world reader."
       },
       "headline": {
         "displayName": "Headline",
-        "purpose": "Article titles and page h1; 800."
+        "purpose": "Homepage section heads and archive year labels (ink-3, oldstyle numerals)."
       },
       "title": {
         "displayName": "Title",
-        "purpose": "h2 and h3; 700."
+        "purpose": "Essay links in lists."
       },
-      "town-title": {
-        "displayName": "Town Panel Title",
-        "purpose": "Street panel heading."
+      "lede": {
+        "displayName": "Lede",
+        "purpose": "The sentence under a page title, in ink-2."
       },
-      "guide-title": {
-        "displayName": "Guide Title",
-        "purpose": "The place name heading the guide card."
+      "body-read": {
+        "displayName": "Body (read)",
+        "purpose": "Essays and pages at the 40rem measure."
       },
-      "room-name": {
-        "displayName": "Room Name",
-        "purpose": "The room's name in the reading room's top bar."
-      },
-      "body": {
-        "displayName": "Body",
-        "purpose": "Article prose; max 42rem in the reading room, 720px column on the plain page."
-      },
-      "body-small": {
-        "displayName": "Body Small",
-        "purpose": "Secondary paragraphs and lists, in secondary colour."
+      "body-ui": {
+        "displayName": "Body (UI)",
+        "purpose": "Chrome, forms and the default page font."
       },
       "label": {
         "displayName": "Label",
-        "purpose": "Homepage section labels; 700, primary colour, sentence case."
+        "purpose": "Pills, form labels and buttons."
       },
-      "town-label": {
-        "displayName": "Town Label",
-        "purpose": "Floating building labels and place buttons."
+      "wordmark": {
+        "displayName": "Wordmark",
+        "purpose": "The name in the site header only."
       },
       "mono": {
         "displayName": "Mono",
         "purpose": "Inline and block code."
+      },
+      "city-display": {
+        "displayName": "Side Quest City display",
+        "purpose": "Uppercase place names: location readout, place tags, reader place name, panorama name."
+      },
+      "apt-display": {
+        "displayName": "Apartment 404 display",
+        "purpose": "Title card, object labels, reader place name, painted props."
+      },
+      "atlas-display": {
+        "displayName": "Atlas small caps",
+        "purpose": "Atlas title, place names, card names, legend title, reader place name."
+      },
+      "atlas-body": {
+        "displayName": "Atlas prose",
+        "purpose": "Card text, legend, notes and region names (italic); reader titles in the atlas."
       }
     },
     "shadows": [
       {
-        "name": "panel-lift",
-        "value": "0 18px 44px -18px rgba(0, 0, 0, 0.55)",
-        "purpose": "Ink panels on the plain page (impact items, Work cards, contact form) and Library book covers (--lift)."
+        "name": "book-cover",
+        "value": "0 1px 2px rgba(0, 0, 0, 0.12), 0 10px 22px -14px rgba(0, 0, 0, 0.45)",
+        "purpose": "Library covers; the only lift on the Just Read page."
       },
       {
-        "name": "overlay-lift",
-        "value": "0 18px 44px -18px rgba(0, 0, 0, 0.7)",
-        "purpose": "Intro card, guide card and street panel over the 3D scene."
+        "name": "hud-pill",
+        "value": "0 6px 18px -8px rgba(0, 0, 0, 0.55)",
+        "purpose": "Floating HUD controls over a world."
       },
       {
-        "name": "room-lift",
-        "value": "0 24px 60px -24px rgba(0, 0, 0, 0.75)",
-        "purpose": "The reading room panel."
+        "name": "music-panel",
+        "value": "0 16px 36px -16px rgba(0, 0, 0, 0.7)",
+        "purpose": "The music volume panel."
       },
       {
-        "name": "pill-lift",
-        "value": "0 6px 14px -6px rgba(20, 22, 27, 0.55)",
-        "purpose": "Floating name labels, Read without the tour, the round day/night switch."
+        "name": "toast",
+        "value": "0 16px 40px -18px rgba(0, 0, 0, 0.7)",
+        "purpose": "Brief notes such as the no-WebGL message."
       },
       {
-        "name": "field-focus-halo",
-        "value": "0 0 0 3px rgba(255, 138, 42, 0.25)",
-        "purpose": "Fields inside the ink contact form."
+        "name": "reader",
+        "value": "0 24px 60px -24px rgba(0, 0, 0, 0.7)",
+        "purpose": "The docked world reader."
       },
       {
-        "name": "canvas-focus",
-        "value": "inset 0 0 0 3px #ff8a2a",
-        "purpose": "Keyboard focus on the town canvas."
+        "name": "dialog",
+        "value": "0 40px 90px -30px rgba(0, 0, 0, 0.8)",
+        "purpose": "The Change World dialog, over a rgba(10, 10, 14, 0.62) backdrop."
+      },
+      {
+        "name": "input-focus",
+        "value": "0 0 0 3px var(--accent-wash)",
+        "purpose": "Focus ring on form fields."
+      },
+      {
+        "name": "atlas-vellum",
+        "value": "0 14px 30px -18px rgba(59, 42, 24, 0.8), inset 0 0 0 4px #f6ecd2, inset 0 0 0 5px rgba(138, 106, 62, 0.45)",
+        "purpose": "Every atlas overlay: soft lift plus a ruled inner frame (with a 1px #8a6a3e border)."
+      },
+      {
+        "name": "atlas-reader",
+        "value": "0 30px 60px -28px rgba(40, 25, 10, 0.85), inset 0 0 0 5px #fbf4e2, inset 0 0 0 6px rgba(138, 106, 62, 0.4)",
+        "purpose": "The reader as a framed sheet in the atlas."
       }
     ],
     "motion": [
       {
-        "name": "control-state",
-        "value": "0.15s ease",
-        "purpose": "Pills, buttons, inputs, chips."
+        "name": "ease",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Site-wide easing for hovers, reader, dialog, panorama and toast."
       },
       {
-        "name": "link-underline",
-        "value": "0.2s ease",
-        "purpose": "Link underline and colour."
+        "name": "hover",
+        "value": "0.2s",
+        "purpose": "Link, pill, chip and input state transitions."
       },
       {
-        "name": "panel-rise",
-        "value": "opacity 0.25s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1)",
-        "purpose": "Street panel fades in and rises 12px."
+        "name": "reader-in",
+        "value": "0.45s ease, translateX(24px) to 0 (translateY on phones)",
+        "purpose": "Reader entrance."
       },
       {
-        "name": "room-fade",
-        "value": "opacity 0.25s ease on a #0d1830 layer; ~260ms in, swap, ~260ms out; instant under prefers-reduced-motion",
-        "purpose": "Changing room or returning to the street. No fade between pages of the same room."
+        "name": "dialog-in",
+        "value": "0.35s ease, translateY(12px) scale(0.98) to none",
+        "purpose": "Change World dialog entrance."
       },
       {
-        "name": "label-state",
-        "value": "0.2s ease",
-        "purpose": "Town label background and visibility."
+        "name": "panorama-slice",
+        "value": "flex 1 to 1.4 over 0.6s ease",
+        "purpose": "A slice widens on hover or focus."
       },
       {
-        "name": "arrival-hop",
-        "value": "sin hop, 0.55 units, decays at 2.2/s",
-        "purpose": "Character hops and turns to face the building on arrival; disabled under prefers-reduced-motion."
+        "name": "curtain",
+        "value": "0.55s cubic-bezier(0.65, 0, 0.35, 1)",
+        "purpose": "World-switch curtains, in and out; skipped under reduced motion."
       },
       {
-        "name": "camera-follow",
-        "value": "lerp 1 - 0.02^dt",
-        "purpose": "Camera eases after the character."
+        "name": "apt-spring",
+        "value": "cubic-bezier(0.34, 1.56, 0.64, 1)",
+        "purpose": "Apartment objects and speech bubbles; atlas place icons and stamps."
+      },
+      {
+        "name": "atlas-road-march",
+        "value": "stroke-dashoffset -120 over 14s linear infinite",
+        "purpose": "The red road's dots marching."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "animation and transition durations 0.01ms",
+        "purpose": "prefers-reduced-motion: reduce; worlds also jump instead of fly."
       }
     ],
     "breakpoints": [
       {
-        "name": "compact",
-        "value": "520px"
-      },
-      {
-        "name": "form-grid",
+        "name": "form-two-up",
         "value": "560px"
       },
       {
-        "name": "phone",
+        "name": "nav-wrap",
         "value": "640px"
       },
       {
-        "name": "reading-room-sheet",
+        "name": "archive-stack",
+        "value": "680px"
+      },
+      {
+        "name": "world-phone",
         "value": "760px"
       },
       {
-        "name": "town-portrait",
-        "value": "aspect < 0.8"
+        "name": "panorama-stack",
+        "value": "820px"
       },
       {
-        "name": "town-narrow-landscape",
-        "value": "aspect < 1.3"
+        "name": "essay-outline",
+        "value": "960px"
       }
     ],
-    "world": {
-      "engine": "three r160, vendored at themes/fractional/static/js/vendor/",
-      "materials": "MeshStandardMaterial, flatShading true, roughness 0.85; ACES filmic tone mapping (exposure 1.0 day, 1.15 night); pixel ratio capped at 2",
-      "camera": {
-        "landscape": {
-          "fov": 32,
-          "offset": [
-            0,
-            30,
-            34
-          ],
-          "narrowScale": 1.35
-        },
-        "portrait": {
-          "fov": 60,
-          "offset": [
-            0,
-            66,
-            26
-          ],
-          "heroScale": 1.5
-        },
-        "room": {
-          "fov": 40,
-          "portraitFov": 50,
-          "framing": "camera.setViewOffset shifts the projection into the free region (left of the reading room, or above the sheet); distance fits the room's height, the yard fills the sides"
-        }
-      },
-      "places": [
-        "Forge",
-        "Writing (print shop)",
-        "Library (bookshop)",
-        "Booking.com",
-        "Postman",
-        "LinkedIn",
-        "Contact (post office)"
-      ],
-      "themeSource": "documentElement data-theme; light = day, otherwise night; MutationObserver relights live",
-      "fallback": "No WebGL or failed start: town--fallback, a compact ink card at the column width with Library and Forge links above the plain page",
-      "debugHook": "?debug exposes window.__town for stepped tests",
-      "shore": "10px bottom border on the plain-page town (fallback card) in --shore (#8a7a55 night, sand by day)",
-      "fog": {
-        "day": "#b9e0ec",
-        "night": "#2b4170 (pre-compensated for ACES so the far island fades toward the sky)"
-      },
-      "paths": "Ring road, four spokes and plaza disc are flat planes (RingGeometry, PlaneGeometry, CircleGeometry) just above the grass",
-      "rooms": {
-        "origin": "ROOM_ORIGIN (400, 0, 400) + index * 60 on x; built off-island, never visible from the street",
-        "shell": "Open-fronted box 14 x 10 with 6.5-tall walls, skirting in the building colour, back-wall window glowing at night, warm point light #ffe2b0 (14 day, 26 night), path plinth, 30-unit grass yard just below the floor",
-        "list": [
-          {
-            "id": "writing",
-            "index": 0,
-            "title": "The print shop",
-            "url": "/blog/ (and /tags/, /category/, /author/, every essay)",
-            "furnishing": "Press, up to 14 essays pinned on two drying lines (clickable to the essay), side desk with paper"
-          },
-          {
-            "id": "library",
-            "index": 1,
-            "title": "The bookshop",
-            "url": "/library/",
-            "furnishing": "Shelves of every synced cover (9 per row), favourites on a front table; covers open Goodreads"
-          },
-          {
-            "id": "forge",
-            "index": 2,
-            "title": "The Forge",
-            "url": "/work/#forge",
-            "furnishing": "Stone hearth with ember coals and firelight, chimney, anvil on a stump, tool rack, workbench with a laptop whose screen opens the GitHub repo"
-          },
-          {
-            "id": "work-0",
-            "index": 3,
-            "title": "Booking.com",
-            "url": "/work/#booking",
-            "furnishing": "Name plate and role in text, desk, monitor, chair, potted plant; ochre skirting"
-          },
-          {
-            "id": "work-1",
-            "index": 4,
-            "title": "Postman",
-            "url": "/work/#postman",
-            "furnishing": "Same office set; terracotta skirting"
-          },
-          {
-            "id": "work-2",
-            "index": 5,
-            "title": "LinkedIn",
-            "url": "/work/#linkedin",
-            "furnishing": "Same office set; slate skirting"
-          },
-          {
-            "id": "contact",
-            "index": 6,
-            "title": "The post office",
-            "url": "/contact/",
-            "furnishing": "Counter with letters, pigeonholes with paper slips, Post Red post box"
-          }
+    "worlds": {
+      "interface": {
+        "registry": "WORLDS in static/js/site/core.js: title, module, css, places per section, webgl flag (city).",
+        "methods": [
+          "mount(stage, api)",
+          "show(section, { instant, url })",
+          "setReading(open)",
+          "setTheme(theme)",
+          "unmount()"
+        ],
+        "api": [
+          "id",
+          "data",
+          "reduceMotion",
+          "coarse",
+          "theme()",
+          "go(section)",
+          "navigate(url)",
+          "sfx(name)",
+          "toggleMusic()",
+          "musicPlaying()",
+          "toast(message)",
+          "readerRect()",
+          "section()"
+        ],
+        "themeHooks": [
+          "--hud-bg",
+          "--hud-fg",
+          "--hud-accent",
+          "--reader-bg",
+          "--reader-ink",
+          "--reader-rule",
+          "--reader-accent",
+          "--reader-radius"
         ]
       },
-      "tour": {
-        "model": "Street = Experience (walk, guided tour, roam); room = Read (page in the reading room)",
-        "stops": [
-          "forge",
-          "writing",
-          "library",
-          "work-0",
-          "work-1",
-          "work-2",
-          "contact"
+      "city": {
+        "title": "Side Quest City",
+        "files": [
+          "static/js/worlds/city.js",
+          "static/css/worlds/city.css",
+          "static/js/music/city.js"
         ],
-        "guide": "Place name is the heading; caption 'Walking there…' then the place's description; Go inside / Next stop · n of 7 (Finish the tour on the last) / End tour",
-        "router": "Same-site room links pushState and swap inside the world; fetched pages cached, header stripped, relative links rebased; other links navigate normally; Escape and Back outside return to the street at that building's door"
+        "render": "Three.js r160, WebGL",
+        "navigation": "Click buildings or tags, Quick travel list, minimap, drag to orbit, WASD auto-rickshaw with Press E to enter",
+        "track": "Night Bus to Nowhere Nagar, lo-fi jazz, 82 bpm"
       },
-      "optOut": "Read without the tour sets localStorage tour=off and reloads into the plain pages (tour-off hides the town); header Take the tour removes it and reloads",
-      "loading": "tour-pending hides the plain page under the fixed town for at most 3.5s",
-      "pageScripts": "window.initContactForm binds once per form (data-bound); comments.js theme sync guards with window.__commentsThemeSync"
-    },
-    "assetProvenance": [
-      {
-        "asset": "og.png",
-        "source": "Rendered HTML card"
+      "apartment": {
+        "title": "Apartment 404",
+        "files": [
+          "static/js/worlds/apartment.js",
+          "static/css/worlds/apartment.css",
+          "static/js/music/apartment.js"
+        ],
+        "render": "SVG",
+        "navigation": "Objects in the room with hover labels; TV remote with one button per section; sideways pan on phones",
+        "track": "Brushes on a Tuesday, swung jazz trio, 132 bpm"
       },
-      {
-        "asset": "content/images/library/*.jpg",
-        "source": "Goodreads RSS via scripts/sync_library.py; used as bookshop shelf and table textures and in the Library grid"
-      },
-      {
-        "asset": "content/images/library/40534545.jpg (Ikigai)",
-        "source": "Open Library, ISBN 9781786330895, hand-trimmed; COVER_OVERRIDES re-fetches untrimmed if covers are cleared"
-      },
-      {
-        "asset": "future synced covers",
-        "source": "Need impeccable embed-prompt to carry provenance"
+      "atlas": {
+        "title": "The Unfinished Atlas",
+        "files": [
+          "static/js/worlds/atlas.js",
+          "static/css/worlds/atlas.css",
+          "static/js/music/atlas.js"
+        ],
+        "render": "SVG",
+        "navigation": "Drag and zoom the map; place cards with a go button; lantern walks the road; visited stamps persist",
+        "track": "Lantern Road, 12/8, 66 bpm, D dorian"
       }
-    ],
-    "knownDrift": [
-      {
-        "item": "Street night sky",
-        "value": "renders about #071030 against the #0d1830 target",
-        "note": "ACES tone mapping darkens the scene background; the fog is pre-compensated, the sky is not. Not a rule."
-      },
-      {
-        "item": "Orphaned street-panel styles",
-        "value": "list rows and 28x42 cover thumbnails",
-        "note": "The street panel now renders one paragraph. Not a rule."
-      },
-      {
-        "item": "Contact status colours",
-        "value": "#16a34a success, #dc2626 error (6px radius)",
-        "note": "Outside the palette; not a rule."
-      },
-      {
-        "item": "Off-ramp sizes",
-        "value": "1.0625rem hero lede, 0.6875rem uppercase tracked impact tag, 0.75rem figure credit",
-        "note": "Off the type ramp; not a rule."
-      },
-      {
-        "item": "Off-set radii",
-        "value": "3px inline code, 10px contact fields",
-        "note": "Off the 2/4/14/pill set; not a rule."
-      },
-      {
-        "item": "One-off ink step",
-        "value": "#1d2028 contact field fill",
-        "note": "Not tokenized."
-      },
-      {
-        "item": "Retired slate ramp",
-        "value": "--gray-100 to --gray-800 still declared",
-        "note": "Used only by the scrollbar; retired from the system."
-      }
-    ]
+    }
   },
   "components": [
     {
-      "name": "Primary Button",
+      "name": "Control Pill",
       "kind": "button",
-      "refersTo": "button-primary",
-      "description": "Main action on any page: ember pill with ink text.",
-      "html": "<a class=\"ds-btn-primary\" href=\"#\">See selected work</a>",
-      "css": ".ds-btn-primary{display:inline-block;font-family: Inter, system-ui, -apple-system, 'Segoe UI', sans-serif;font-size:.875rem;font-weight:700;line-height:1.3;padding:.65rem 1.1rem;border:0;border-radius:999px;background:var(--ember,#ff8a2a);color:var(--ink,#14161b);text-decoration:none;transition:filter .15s ease}.ds-btn-primary:hover{filter:brightness(1.06)}.ds-btn-primary:focus-visible{outline:2px solid var(--ember,#ff8a2a);outline-offset:3px}"
+      "refersTo": "control-pill",
+      "description": "Header controls in Just Read: Visit a world and the theme toggle.",
+      "html": "<div class=\"ds-controls\"><button class=\"ds-pill\" type=\"button\"><svg viewBox=\"0 0 24 24\" width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M3 12h18M12 3c2.8 3 2.8 15 0 18M12 3c-2.8 3-2.8 15 0 18\"/></svg><span>Visit a world</span></button><button class=\"ds-pill ds-pill--icon\" type=\"button\" aria-label=\"Switch to dark mode\"><svg viewBox=\"0 0 24 24\" width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"4\"/><path d=\"M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4\"/></svg></button></div>",
+      "css": ".ds-controls{display:flex;gap:.5rem;padding:1rem;background:var(--bg,#fbf8f2)} .ds-pill{display:inline-flex;align-items:center;gap:.45rem;height:2.25rem;padding:0 .85rem;border:1px solid var(--rule,#e6dfd2);border-radius:999px;background:transparent;color:var(--ink,#1d1c1a);font:600 .875rem/1 var(--font-ui, 'Inter', system-ui, sans-serif);cursor:pointer;transition:border-color .2s cubic-bezier(.16,1,.3,1)} .ds-pill--icon{width:2.25rem;padding:0;justify-content:center} .ds-pill:hover{border-color:var(--accent,#b54a17)} .ds-pill:focus-visible{outline:2px solid var(--accent,#b54a17);outline-offset:3px}"
     },
     {
-      "name": "Secondary Button",
+      "name": "Submit Button",
       "kind": "button",
-      "refersTo": "button-secondary",
-      "description": "Outlined pill; outline turns ember on hover.",
-      "html": "<a class=\"ds-btn-secondary\" href=\"#\">Read the writing</a>",
-      "css": ".ds-btn-secondary{display:inline-block;font-family: Inter, system-ui, -apple-system, 'Segoe UI', sans-serif;font-size:.875rem;font-weight:700;line-height:1.3;padding:.65rem 1.1rem;border:1px solid var(--border,#24335c);border-radius:999px;background:transparent;color:var(--fg,#fffaf0);text-decoration:none;transition:border-color .15s ease}.ds-btn-secondary:hover{border-color:var(--ember,#ff8a2a)}.ds-btn-secondary:focus-visible{outline:2px solid var(--ember,#ff8a2a);outline-offset:3px}"
-    },
-    {
-      "name": "Site Navigation",
-      "kind": "nav",
-      "refersTo": "nav-pill",
-      "description": "Header pills; current page and hover fill ember.",
-      "html": "<nav class=\"ds-nav\"><a href=\"#\" aria-current=\"page\">Writing</a><a href=\"#\">Work</a><a href=\"#\">Contact</a></nav>",
-      "css": ".ds-nav{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-family: Inter, system-ui, -apple-system, 'Segoe UI', sans-serif;font-size:.875rem;line-height:1.4}.ds-nav a{padding:.45rem .8rem;border:1px solid var(--border,#24335c);border-radius:999px;color:var(--fg,#fffaf0);font-weight:600;text-decoration:none;transition:background .15s ease,border-color .15s ease,color .15s ease}.ds-nav a:hover,.ds-nav a[aria-current=page]{border-color:var(--ember,#ff8a2a);background:var(--ember,#ff8a2a);color:var(--ink,#14161b)}.ds-nav a:focus-visible{outline:2px solid var(--ember,#ff8a2a);outline-offset:3px}"
+      "refersTo": "button-submit",
+      "description": "The one filled button: ink at rest, rust on hover.",
+      "html": "<button class=\"ds-submit\" type=\"button\">Send message</button>",
+      "css": ".ds-submit{padding:.75rem 1.3rem;border:0;border-radius:999px;background:var(--ink,#1d1c1a);color:var(--bg,#fbf8f2);font:700 .9375rem/1 var(--font-ui, 'Inter', system-ui, sans-serif);cursor:pointer} .ds-submit:hover{background:var(--accent,#b54a17)} .ds-submit:focus-visible{outline:2px solid var(--accent,#b54a17);outline-offset:3px} .ds-submit:disabled{opacity:.6;cursor:progress}"
     },
     {
       "name": "Tag Chip",
       "kind": "chip",
       "refersTo": "tag-chip",
-      "description": "Article tag pill; hover fills ember.",
-      "html": "<a class=\"ds-tag-chip\" href=\"#\">reliability</a>",
-      "css": ".ds-tag-chip{display:inline-block;font-family: Inter, system-ui, -apple-system, 'Segoe UI', sans-serif;font-size:.75rem;font-weight:600;line-height:1.3;padding:3px 9px;border-radius:999px;border:1px solid var(--border,#24335c);color:var(--fg,#fffaf0);text-decoration:none;transition:background .15s ease,color .15s ease}.ds-tag-chip:hover{border-color:var(--ember,#ff8a2a);background:var(--ember,#ff8a2a);color:var(--ink,#14161b)}"
+      "description": "Topic chips with a count.",
+      "html": "<ul class=\"ds-tags\"><li><a class=\"ds-chip\" href=\"#\">engineering <span>6</span></a></li><li><a class=\"ds-chip\" href=\"#\">philosophy <span>3</span></a></li></ul>",
+      "css": ".ds-tags{list-style:none;display:flex;flex-wrap:wrap;gap:.4rem;margin:0;padding:0} .ds-chip{display:inline-flex;align-items:baseline;gap:.35rem;padding:.25rem .65rem;border:1px solid var(--rule,#e6dfd2);border-radius:999px;font:500 .8125rem/1.6 var(--font-ui, 'Inter', system-ui, sans-serif);color:var(--ink-2,#4a4741);text-decoration:none;transition:border-color .2s,color .2s} .ds-chip span{font-size:.75rem;color:var(--ink-3,#6f6b63);font-variant-numeric:tabular-nums} .ds-chip:hover{border-color:var(--accent,#b54a17);color:var(--ink,#1d1c1a)} .ds-chip:focus-visible{outline:2px solid var(--accent,#b54a17);outline-offset:3px}"
     },
     {
-      "name": "Ink Panel",
-      "kind": "card",
-      "refersTo": "ink-panel",
-      "description": "Impact items, Work cards and the contact form: solid ink with the panel lift.",
-      "html": "<div class=\"ds-ink-panel\"><p class=\"ds-ink-name\"><a href=\"#\">Booking.com</a></p><p class=\"ds-ink-outcome\">Built authentication and authorization infrastructure supporting multiple Booking.com portfolio products at roughly 1M requests per second.</p></div>",
-      "css": ".ds-ink-panel{font-family: Inter, system-ui, -apple-system, 'Segoe UI', sans-serif;max-width:22rem;padding:1.1rem 1.2rem;border-radius:14px;background:var(--ink,#14161b);color:var(--paper,#fffaf0);box-shadow:0 18px 44px -18px rgba(0,0,0,.55)}.ds-ink-name{margin:0 0 4px;font-size:1rem;font-weight:600;line-height:1.4}.ds-ink-name a{color:var(--paper,#fffaf0);text-decoration-color:var(--ember,#ff8a2a);text-underline-offset:2.5px}.ds-ink-name a:focus-visible{outline:2px solid var(--ember,#ff8a2a);outline-offset:3px}.ds-ink-outcome{margin:0;font-size:.875rem;line-height:1.6;color:#a9adb8}"
-    },
-    {
-      "name": "Text Field on Ink",
+      "name": "Text Field",
       "kind": "input",
-      "refersTo": "ink-panel",
-      "description": "Contact form field on the plain page's ink panel; ember focus. Inside the reading room the field sits on the theme surface with a theme border.",
-      "html": "<div class=\"ds-field-wrap\"><input class=\"ds-input\" placeholder=\"Your name\"></div>",
-      "css": ".ds-field-wrap{padding:16px;border-radius:14px;background:#14161b}.ds-input{width:100%;font-family: Inter, system-ui, -apple-system, 'Segoe UI', sans-serif;font-size:.9375rem;line-height:1.4;padding:10px 12px;border-radius:10px;border:1px solid rgba(255,250,240,.2);background:#1d2028;color:#fffaf0;transition:border-color .15s ease,box-shadow .15s ease}.ds-input::placeholder{color:#a9adb8}.ds-input:focus{outline:none;border-color:#ff8a2a;box-shadow:0 0 0 3px rgba(255,138,42,.25)}"
+      "refersTo": "input",
+      "description": "Contact form field with label.",
+      "html": "<label class=\"ds-field\"><span>Email</span><input type=\"email\" placeholder=\"you@example.com\"></label>",
+      "css": ".ds-field{display:flex;flex-direction:column;gap:.35rem;max-width:22rem;font:600 .875rem/1.4 var(--font-ui, 'Inter', system-ui, sans-serif);color:var(--ink,#1d1c1a)} .ds-field input{padding:.7rem .8rem;border:1px solid var(--rule,#e6dfd2);border-radius:8px;background:var(--surface,#f3eee4);color:var(--ink,#1d1c1a);font:400 1rem/1.4 var(--font-ui, 'Inter', system-ui, sans-serif);transition:border-color .2s,box-shadow .2s} .ds-field input::placeholder{color:var(--ink-3,#6f6b63)} .ds-field input:focus{outline:none;border-color:var(--accent,#b54a17);box-shadow:0 0 0 3px var(--accent-wash,rgba(181,74,23,.12))}"
     },
     {
-      "name": "Town Card",
-      "kind": "card",
-      "refersTo": "town-card",
-      "description": "Bottom-left intro card on the street: greeting, one line, Take the tour, and place buttons that walk the character.",
-      "html": "<div class=\"ds-town-card\"><p class=\"ds-town-name\">Hi, I'm Mohit Ranka</p><p class=\"ds-town-line\">I build software, lead engineering teams, read widely, and write it all down. Walk around my town, or take the tour.</p><button class=\"ds-tour-start\">Take the tour</button><nav class=\"ds-town-places\"><button>Writing</button><button>Work</button><button>Library</button><button>Forge</button><button>Contact</button></nav></div>",
-      "css": ".ds-town-card{font-family: Inter, system-ui, -apple-system, 'Segoe UI', sans-serif; max-width:23rem;padding:1.2rem 1.3rem 1.15rem;border-radius:14px;background:#14161b;color:#fffaf0;box-shadow:0 18px 44px -18px rgba(0,0,0,.7)}.ds-town-name{margin:0 0 .45rem;font-size:clamp(1.5rem,1.2rem + 1.2vw,2rem);font-weight:800;line-height:1.05;letter-spacing:-.03em}.ds-town-line{margin:0 0 1rem;font-size:.9375rem;line-height:1.5;color:#a9adb8}.ds-town-places{display:flex;flex-wrap:wrap;gap:.4rem}.ds-town-places button{appearance:none;padding:.5rem .8rem;border:1px solid rgba(255,250,240,.28);border-radius:999px;background:transparent;color:#fffaf0;font:600 .875rem/1 Inter,system-ui,sans-serif;cursor:pointer;transition:background .15s ease,color .15s ease,border-color .15s ease}.ds-town-places button:hover{border-color:#ff8a2a;background:#ff8a2a;color:#14161b}.ds-town-places button:focus-visible{outline:3px solid #ff8a2a;outline-offset:2px}.ds-tour-start{display:block;appearance:none;margin:0 0 .9rem;padding:.65rem 1.1rem;border:0;border-radius:999px;background:#ff8a2a;color:#14161b;font:700 .9375rem/1 Inter,system-ui,sans-serif;cursor:pointer}.ds-tour-start:hover{filter:brightness(1.06)}.ds-tour-start:focus-visible{outline:3px solid #ff8a2a;outline-offset:2px}"
+      "name": "Site Navigation",
+      "kind": "nav",
+      "refersTo": "site-nav",
+      "description": "Header nav: ink-2 links, current page underlined in rust.",
+      "html": "<nav class=\"ds-nav\"><a href=\"#\">About</a><a href=\"#\" aria-current=\"page\">Writing</a><a href=\"#\">Work</a><a href=\"#\">Projects</a><a href=\"#\">Library</a><a href=\"#\">Contact</a></nav>",
+      "css": ".ds-nav{display:flex;flex-wrap:wrap;gap:.25rem 1.4rem;font:500 .9375rem/1.6 var(--font-ui, 'Inter', system-ui, sans-serif)} .ds-nav a{color:var(--ink-2,#4a4741);text-decoration:none;padding:.2rem 0} .ds-nav a:hover{color:var(--ink,#1d1c1a)} .ds-nav a[aria-current=page]{color:var(--ink,#1d1c1a);text-decoration:underline;text-decoration-color:var(--accent,#b54a17);text-decoration-thickness:2px;text-underline-offset:.45em} .ds-nav a:focus-visible{outline:2px solid var(--accent,#b54a17);outline-offset:3px;border-radius:2px}"
     },
     {
-      "name": "Street Panel",
-      "kind": "card",
-      "refersTo": "town-panel",
-      "description": "Bottom-right panel at a building's door: name, one line of facts, ember Go inside.",
-      "html": "<aside class=\"ds-town-panel\"><p class=\"ds-town-panel-title\">The print shop</p><p class=\"ds-town-panel-body\">14 essays on platforms, data, reliability, and leading teams.</p><a class=\"ds-town-enter\" href=\"#\">Go inside</a></aside>",
-      "css": ".ds-town-panel{font-family: Inter, system-ui, -apple-system, 'Segoe UI', sans-serif; width:min(24rem,100%);padding:1.15rem 1.25rem 1.2rem;border-radius:14px;background:#14161b;color:#fffaf0;box-shadow:0 18px 44px -18px rgba(0,0,0,.7)}.ds-town-panel-title{margin:0 0 .4rem;font-size:1.25rem;font-weight:800;letter-spacing:-.02em}.ds-town-panel-body{margin:0 0 .75rem;font-size:.9375rem;line-height:1.55;color:#a9adb8}.ds-town-enter{display:inline-block;padding:.6rem 1rem;border-radius:999px;background:#ff8a2a;color:#14161b;font-weight:700;font-size:.9375rem;text-decoration:none}.ds-town-enter:hover{filter:brightness(1.06)}.ds-town-enter:focus-visible{outline:3px solid #ff8a2a;outline-offset:2px}"
-    },
-    {
-      "name": "Town Name Label",
-      "kind": "chip",
-      "refersTo": "town-label",
-      "description": "Paper pill floated over each building; ember when the character is near.",
-      "html": "<span class=\"ds-town-label\">Library</span> <span class=\"ds-town-label is-near\">Writing</span>",
-      "css": ".ds-town-label{display:inline-block;padding:.35rem .7rem;border-radius:999px;background:#fffaf0;color:#14161b;font:700 .875rem/1 Inter,system-ui,sans-serif;white-space:nowrap;box-shadow:0 6px 14px -6px rgba(20,22,27,.55);cursor:pointer;transition:background .2s ease}.ds-town-label:hover,.ds-town-label.is-near{background:#ff8a2a}"
-    },
-    {
-      "name": "Town Foot Controls",
+      "name": "Essay List Row",
       "kind": "custom",
-      "refersTo": "town-hint",
-      "description": "Top-right on the street (top-left in a room): hint pill, round day/night switch, Read without the tour.",
-      "html": "<div class=\"ds-town-foot\"><p class=\"ds-town-hint\"><kbd>WASD</kbd> or <kbd>arrows</kbd> to walk · click anywhere to go there</p><button class=\"ds-town-theme\" aria-label=\"Switch to day\"><svg viewBox=\"0 0 24 24\" width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z\"/></svg></button><button class=\"ds-town-skip\">Read without the tour</button></div>",
-      "css": ".ds-town-foot{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;font-family: Inter, system-ui, -apple-system, 'Segoe UI', sans-serif;}.ds-town-hint{margin:0;padding:.45rem .8rem;border-radius:999px;background:#14161b;color:#fffaf0;font-size:.8125rem}.ds-town-hint kbd{font:600 .75rem/1 Inter,system-ui,sans-serif;padding:.12rem .35rem;border-radius:4px;background:rgba(255,250,240,.16)}.ds-town-theme{display:inline-grid;place-items:center;width:34px;height:34px;padding:0;border:0;border-radius:999px;background:#fffaf0;color:#14161b;cursor:pointer;box-shadow:0 6px 14px -6px rgba(20,22,27,.55)}.ds-town-theme:hover{background:#ff8a2a}.ds-town-skip{padding:.45rem .85rem;border:0;border-radius:999px;background:#fffaf0;color:#14161b;font:700 .875rem Inter,system-ui,sans-serif;cursor:pointer;box-shadow:0 6px 14px -6px rgba(20,22,27,.55)}.ds-town-skip:hover{background:#ff8a2a}.ds-town-skip:focus-visible,.ds-town-theme:focus-visible{outline:3px solid #ff8a2a;outline-offset:2px}"
+      "refersTo": "essay-list",
+      "description": "Rule-divided list of essays: serif title, tabular Inter date.",
+      "html": "<ul class=\"ds-essays\"><li><a href=\"#\">An essay title set in the reading face</a><span>Mar 2026</span></li><li><a href=\"#\">Another essay, a little longer in the title</a><span>Nov 2025</span></li></ul>",
+      "css": ".ds-essays{list-style:none;margin:0;padding:0;max-width:40rem} .ds-essays li{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;padding:.7rem 0;border-bottom:1px solid var(--rule,#e6dfd2)} .ds-essays a{font:400 1.2rem/1.35 var(--font-read, 'Source Serif 4', Georgia, serif);color:var(--ink,#1d1c1a);text-decoration:none} .ds-essays a:hover{text-decoration:underline;text-decoration-color:var(--accent,#b54a17);text-underline-offset:.22em} .ds-essays span{flex-shrink:0;font:400 .875rem var(--font-ui, 'Inter', system-ui, sans-serif);color:var(--ink-3,#6f6b63);font-variant-numeric:tabular-nums}"
     },
     {
-      "name": "Guide Card",
-      "kind": "card",
-      "refersTo": "town-guide",
-      "description": "Bottom-centre guided-tour card: place name as heading, caption, Go inside / Next stop with the count / End tour.",
-      "html": "<div class=\"ds-guide\"><p class=\"ds-guide-title\">The Forge</p><p class=\"ds-guide-text\">Forge is a terminal-native AI coding environment I created at Norvia Labs. Open source.</p><div class=\"ds-guide-actions\"><button class=\"is-inside\">Go inside</button><button>Next stop · 2 of 7</button><button>End tour</button></div></div>",
-      "css": ".ds-guide{font-family: Inter, system-ui, -apple-system, 'Segoe UI', sans-serif;width:min(30rem,100%);padding:1rem 1.2rem 1.1rem;border-radius:14px;background:#14161b;color:#fffaf0;box-shadow:0 18px 44px -18px rgba(0,0,0,.7)}.ds-guide-title{margin:0 0 .3rem;font-size:1.125rem;font-weight:800;letter-spacing:-.02em}.ds-guide-text{margin:0 0 .9rem;font-size:.9375rem;line-height:1.5}.ds-guide-actions{display:flex;flex-wrap:wrap;gap:.4rem}.ds-guide-actions button{appearance:none;padding:.5rem .85rem;border:1px solid rgba(255,250,240,.28);border-radius:999px;background:transparent;color:#fffaf0;font:600 .875rem/1 Inter,system-ui,sans-serif;cursor:pointer}.ds-guide-actions button:hover{border-color:#ff8a2a}.ds-guide-actions .is-inside{border-color:#ff8a2a;background:#ff8a2a;color:#14161b}.ds-guide-actions button:focus-visible{outline:3px solid #ff8a2a;outline-offset:2px}"
-    },
-    {
-      "name": "Reading Room",
+      "name": "HUD Pills",
       "kind": "custom",
-      "refersTo": "reading-room",
-      "description": "The page beside its room: page tokens, 1px border, Back outside pill and room name; Work and Contact flattened inside.",
-      "html": "<div class=\"ds-room\"><div class=\"ds-room-bar\"><button class=\"ds-room-back\"><svg viewBox=\"0 0 24 24\" width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M19 12H5M11 18l-6-6 6-6\"/></svg>Back outside</button><p class=\"ds-room-name\">The post office</p></div><div class=\"ds-room-scroll\"><h1>Contact</h1><p>Write to me about something I have written, about Forge, or about an engineering problem you are working through.</p><div class=\"ds-room-flat\"><h2>Send a message</h2><input placeholder=\"Ada Lovelace\"></div></div></div>",
-      "css": ".ds-room{font-family: Inter, system-ui, -apple-system, 'Segoe UI', sans-serif;max-width:46rem;border:1px solid var(--border,#24335c);border-radius:14px;background:var(--bg,#0d1830);color:var(--fg,#fffaf0);box-shadow:0 24px 60px -24px rgba(0,0,0,.75);overflow:hidden}.ds-room-bar{display:flex;align-items:center;gap:.75rem;padding:.75rem 1rem;border-bottom:1px solid var(--border,#24335c)}.ds-room-back{display:inline-flex;align-items:center;gap:.4rem;appearance:none;padding:.5rem .9rem;border:1px solid var(--border,#24335c);border-radius:999px;background:transparent;color:inherit;font:600 .875rem/1 Inter,system-ui,sans-serif;cursor:pointer}.ds-room-back:hover{border-color:#ff8a2a;background:#ff8a2a;color:#14161b}.ds-room-back:focus-visible{outline:3px solid #ff8a2a;outline-offset:2px}.ds-room-name{margin:0;font-size:1rem;font-weight:800;letter-spacing:-.02em}.ds-room-scroll{padding:1.75rem 2rem 2rem;max-width:42rem}.ds-room-scroll h1{margin:0 0 .75rem;font-size:1.5rem;font-weight:800;letter-spacing:-.03em}.ds-room-scroll p{font-size:1rem;line-height:1.75}.ds-room-flat{margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid var(--border,#24335c)}.ds-room-flat h2{margin:0 0 .75rem;font-size:1.125rem;font-weight:700;letter-spacing:-.02em}.ds-room-flat input{width:100%;padding:10px 12px;border:1px solid var(--border,#24335c);border-radius:10px;background:var(--surface,#14213f);color:inherit;font:400 .9375rem Inter,system-ui,sans-serif}.ds-room-flat input:focus{outline:none;border-color:#ff8a2a;box-shadow:0 0 0 3px rgba(255,138,42,.25)}"
+      "refersTo": "hud-pill",
+      "description": "World-layer controls, coloured by each world's --hud-* hooks (shown in Apartment 404's plum).",
+      "html": "<div class=\"ds-hud\"><button class=\"ds-hud-pill\" type=\"button\"><svg viewBox=\"0 0 24 24\" width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M3 12h18M12 3c2.8 3 2.8 15 0 18M12 3c-2.8 3-2.8 15 0 18\"/></svg><span>Apartment 404</span></button><a class=\"ds-hud-pill\" href=\"#\">Just Read</a></div>",
+      "css": ".ds-hud{display:flex;gap:.4rem;padding:1rem;background:#d9a94a;--hud-bg:#3a1f33;--hud-fg:#fff4d6;--hud-accent:#f2c14e} .ds-hud-pill{display:inline-flex;align-items:center;gap:.45rem;height:2.25rem;padding:0 .85rem;border:0;border-radius:999px;background:var(--hud-bg);color:var(--hud-fg);font:600 .8125rem/1 var(--font-ui, 'Inter', system-ui, sans-serif);text-decoration:none;cursor:pointer;box-shadow:0 6px 18px -8px rgba(0,0,0,.55)} .ds-hud-pill:hover{filter:brightness(1.12)} .ds-hud-pill:focus-visible{outline:3px solid var(--hud-accent);outline-offset:2px}"
     },
     {
-      "name": "Take the Tour (header)",
-      "kind": "button",
-      "refersTo": "tour-resume",
-      "description": "Header pill shown only with the tour off; ember outline, fills ember on hover.",
-      "html": "<button class=\"ds-tour-resume\">Take the tour</button>",
-      "css": ".ds-tour-resume{display:inline-flex;align-items:center;padding:.45rem .8rem;border:1px solid #ff8a2a;border-radius:999px;background:transparent;color:var(--fg,#fffaf0);font:600 .875rem/1 Inter,system-ui,sans-serif;cursor:pointer}.ds-tour-resume:hover{background:#ff8a2a;color:#14161b}.ds-tour-resume:focus-visible{outline:2px solid #ff8a2a;outline-offset:3px}"
+      "name": "Reader Bar",
+      "kind": "custom",
+      "refersTo": "reader",
+      "description": "Top of the shared world reader, shown in Side Quest City's tokens.",
+      "html": "<section class=\"ds-reader\"><div class=\"ds-reader-bar\"><button class=\"ds-reader-close\" type=\"button\"><svg viewBox=\"0 0 24 24\" width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M19 12H5M11 18l-6-6 6-6\"/></svg><span>Back to the world</span></button><p class=\"ds-reader-place\">The Daily Commit</p><a href=\"#\">Just Read</a></div><div class=\"ds-reader-body\"><h1>Writing</h1><p>The page itself renders here in Just Read markup, re-tokened to the world.</p></div></section>",
+      "css": ".ds-reader{max-width:30rem;border-radius:6px;background:#fbf8f2;color:#1d1c1a;border-top:6px solid #ffe066;box-shadow:0 24px 60px -24px rgba(0,0,0,.7);overflow:hidden} .ds-reader-bar{display:flex;align-items:center;gap:.75rem;padding:.7rem .9rem;border-bottom:1px solid #e6dfd2;font-family:var(--font-ui, 'Inter', system-ui, sans-serif)} .ds-reader-close{display:inline-flex;align-items:center;gap:.4rem;height:2.1rem;padding:0 .85rem;border:1px solid #e6dfd2;border-radius:999px;background:transparent;color:inherit;font:600 .8125rem/1 var(--font-ui, 'Inter', system-ui, sans-serif);cursor:pointer} .ds-reader-close:hover{border-color:#b54a17} .ds-reader-place{flex:1;margin:0;font:900 1.35rem/1 'Big Shoulders Display',var(--font-ui, 'Inter', system-ui, sans-serif);text-transform:uppercase;letter-spacing:.02em;color:#b54a17} .ds-reader-bar a{font-size:.8125rem;font-weight:600;color:inherit;text-decoration-color:#b54a17} .ds-reader-body{padding:1.5rem 1.75rem 2rem;font:400 1.125rem/1.65 var(--font-read, 'Source Serif 4', Georgia, serif)} .ds-reader-body h1{margin:0 0 .5rem;font:700 1.9rem/1.06 var(--font-read, 'Source Serif 4', Georgia, serif);letter-spacing:-.02em}"
+    },
+    {
+      "name": "Atlas Place Card",
+      "kind": "card",
+      "refersTo": "atlas-card",
+      "description": "Vellum card that unfolds when a place on the atlas is chosen.",
+      "html": "<aside class=\"ds-atlas-card\"><p class=\"ds-ac-name\">The Citadel</p><p class=\"ds-ac-text\">Where the day jobs live. Well defended, mostly by on-call rotas.</p><button class=\"ds-ac-go\" type=\"button\">Enter the Citadel</button></aside>",
+      "css": ".ds-atlas-card{width:20rem;padding:1rem 1.15rem 1.1rem;background:#f6ecd2;border:1px solid #8a6a3e;box-shadow:0 14px 30px -18px rgba(59,42,24,.8),inset 0 0 0 4px #f6ecd2,inset 0 0 0 5px rgba(138,106,62,.45);color:#3b2a18;font-family:'IM Fell English',Georgia,serif} .ds-ac-name{margin:0;font:1.55rem/1.1 'IM Fell English SC',Georgia,serif} .ds-ac-text{margin:.4rem 0 0;font-size:1.08rem;line-height:1.4;color:#4a3622} .ds-ac-go{margin-top:.8rem;padding:.5rem .9rem;border:1px solid #3b2a18;background:transparent;color:#3b2a18;font:600 .8125rem/1 var(--font-ui, 'Inter', system-ui, sans-serif);cursor:pointer} .ds-ac-go:hover{background:#3b2a18;color:#f6ecd2} .ds-ac-go:focus-visible{outline:2px solid #a83a2a;outline-offset:2px}"
     }
   ],
   "narrative": {
-    "northStar": "The Island Town",
-    "overview": "The whole site is a virtual tour. Every page carries the same 3D island town (Three.js r160, vendored), a full-screen, low-poly, flat-shaded island built from primitives, toy-scale and warm. The street is the homepage and the site's Experience mode: the visitor walks Mohit's character between seven places (Forge, Writing print shop, Library bookshop, Booking.com, Postman and LinkedIn offices, Contact post office), takes a guided tour, or roams. Every other URL is a room. Stepping inside fades to an open-fronted interior furnished for that building, and the page itself opens in the reading room, a panel beside the room set in the site's own page tokens; that is the Read mode. Links between rooms travel inside the world instead of reloading, and every URL loads straight into its room.\n\nThe tour and the plain pages are one world. By day the ground is the town's paper with ink text; by night it is the island's navy sky with paper text. Forge ember is the one accent everywhere: active navigation, the main action, link underlines, focus and selection. Inter is set heavy (800 for headings, 700 for subheads and controls) like the town's painted signs. Controls are pills, and the overlays and weighty content sit on solid ink panels with 14px corners and a soft lift. The town follows the site theme: light is a sunny day, dark is a moonlit night with lit windows, lamps and a glowing forge.\n\nThe plain page under every URL stays whole. It is what readers get with \"Read without the tour\", without WebGL, and while the tour is loading; there, a 10px band of shore separates a compact ink intro card from the page, and reading is one 720px column, prose at 1rem on 1.75.",
+    "northStar": "The Reading Room With Three Doors",
+    "overview": "Every URL renders as Just Read: a quiet writer's site on warm paper, set in Source Serif 4 for reading and Inter for everything you operate. It is the canonical system and a first-class reading experience, not a fallback. Behind three doors sit three worlds (Side Quest City, Apartment 404, The Unfinished Atlas) that present the same six sections (About, Writing, Work, Projects, Library, Contact) as places. Each world is its own sub-system with its own palette, lettering, composition, navigation, motion and music; none is a reskin of another, and none is required to read anything.\n\nThe architecture is a sandwich. At the bottom is the shared content layer (Pelican templates, identical HTML in every mode). In the middle is the shared world layer: the HUD pills, the reader panel where any page opens beside a world, the Change World dialog, the curtains that wipe between worlds, and the homepage panorama of all three. On top is one world module at a time, loaded only when chosen, which restyles the shared layer through a small set of `--hud-*` and `--reader-*` custom properties and otherwise owns its own stage.\n\nJust Read is flat, generous and calm: one rust accent that marks links and state, hairline rules instead of boxes, a 40rem reading measure. The worlds are allowed to be loud, because they are chosen. Light theme is day and dark theme is night in every mode; music never plays until pressed and is silent in Just Read.",
     "keyCharacteristics": [
-      "The site is the town: the street is home, every section is a furnished room, every URL a place.",
-      "Two modes: Experience on the street, Read in the reading room beside the room.",
-      "One world on every page: paper and ink by day, navy sky by night.",
-      "Forge Ember (#ff8a2a) is the single accent, on the island and off it.",
-      "Inter everywhere, heavy: 800 headings, 700 subheads, labels and buttons.",
-      "Pills for every control; ink panels with a soft lift for overlays and weighty content.",
-      "The town is driven by `data-theme`; day is light, night is dark.",
-      "The plain page is always there underneath: opt-out, no-WebGL and loading all land on it."
+      "Warm paper (#fbf8f2) and near-black ink (#1d1c1a), one rust accent (#b54a17), a cool-charcoal dark theme with a lifted orange accent.",
+      "Source Serif 4 for everything read; Inter for everything operated.",
+      "Flat, rule-divided Just Read; elevation belongs to the world layer.",
+      "Every control is a pill.",
+      "Three worlds, each with its own display face, palette, navigation idiom and synthesized track.",
+      "Pages always open in the shared reader, re-tokened per world; the plain page is one click away."
     ],
     "rules": [
       {
-        "name": "The One World Rule",
-        "body": "Every page is drawn from the town's materials: paper, ink, the night sky, sand and ember. There is no separate site palette; a new surface picks its ground from the active theme and its weight from an ink panel.",
+        "name": "The One Rust Rule",
+        "body": "Just Read has exactly one accent and it marks links, state and focus. It never fills a heading or a large surface; the only accent fill is the submit button's hover.",
         "section": "colors"
       },
       {
-        "name": "The One Ember Rule",
-        "body": "Forge Ember is the only accent on any page. It marks what is active, primary or focused; it never fills a heading or a large background.",
+        "name": "The World Owns Its Palette Rule",
+        "body": "A world's colours stay inside its stage, its curtain, its panorama slice and its `--hud-*` / `--reader-*` overrides. They never leak into Just Read, and Just Read's rust never appears inside a world's stage.",
         "section": "colors"
       },
       {
-        "name": "The Theme Is the Clock Rule",
-        "body": "The town has no time-of-day control of its own. Light theme is day, dark theme is night; the street's round day/night switch and the header toggle both flip `data-theme`, relighting the island, the rooms and the pages together.",
-        "section": "colors"
-      },
-      {
-        "name": "The Names Only Rule",
-        "body": "Employer buildings and offices carry their names as text on plain signs and name plates, never logos or brand colours. Roof and skirting colours come from the island palette.",
-        "section": "colors"
-      },
-      {
-        "name": "The Painted Sign Rule",
-        "body": "Headings are 800, subheads and controls 700; body text never goes heavier than 400. Weight, not colour, carries hierarchy: no coloured headings anywhere.",
+        "name": "The Read/Operate Rule",
+        "body": "If you read it, it is Source Serif 4; if you press or scan it, it is Inter. Worlds add a display face for names of places; they do not replace either role.",
         "section": "typography"
       },
       {
-        "name": "The Edges Are Clear Rule",
-        "body": "Street overlays hug the frame's edges (bottom-left, bottom-centre, bottom-right, top-right) so the arc of buildings across the upper middle is never covered.",
-        "section": "layout"
+        "name": "The Own Lettering Rule",
+        "body": "Each world's display face appears only in that world, its curtain-adjacent chrome and its panorama slice. Just Read never borrows one.",
+        "section": "typography"
       },
       {
-        "name": "The Room Stays in View Rule",
-        "body": "Inside a room the camera's view offset frames the room in the space the reading room leaves free; the panel never sits over the room.",
-        "section": "layout"
-      },
-      {
-        "name": "The Ink Carries Weight Rule",
-        "body": "Only ink panels, things floating over the town, and book covers (objects on the shelf) cast a shadow. Paper and night-sky surfaces on the plain page stay flat; inside the reading room, cards flatten (see Components).",
+        "name": "The Flat Paper Rule",
+        "body": "Nothing on the Just Read page lifts except a book cover. Cards are rows divided by rules, not boxes.",
         "section": "elevation"
       },
       {
-        "name": "The Flat Paths Rule",
-        "body": "The ring road, spokes and plaza are flat planes (ring, plane and circle geometry) laid just above the grass, never extruded slabs, so the character's feet and the shadows stay on one ground.",
-        "section": "shapes"
-      },
-      {
-        "name": "The Yard Rule",
-        "body": "Every room sits on a 30-unit grass yard just below its floor, so whatever the camera sees past the open front and beside the room is the island's own lawn, never the void.",
-        "section": "shapes"
-      },
-      {
-        "name": "The No Card on a Card Rule",
-        "body": "Inside the reading room, Work cards and the contact form flatten: no ink ground, no radius, no shadow, a hairline top rule, theme text and secondary colours, and fields on the theme surface with a theme border. The ink treatment belongs to the plain page.",
-        "section": "components"
+        "name": "The Floating Layer Rule",
+        "body": "Shadows exist for things that float over a world: HUD, reader, dialog, toast, world overlays. They are soft and downward, never coloured.",
+        "section": "elevation"
       }
     ],
     "dos": [
-      "**Do** give every new section a room: a route in the router, a furnished open-fronted room on the yard at the next ROOM_ORIGIN slot, and its page read in the reading room.",
-      "**Do** build every new surface from the town's materials: paper ground and ink text by day, the night sky (#0d1830) and paper text by night.",
-      "**Do** keep Forge Ember (#ff8a2a) as the single accent site-wide, for active, primary, focus and selection states.",
-      "**Do** put street overlays on solid ink panels (14px corners, overlay lift) and make every control a pill.",
-      "**Do** set the reading room in the site's page tokens with its 1px border, and flatten Work, Contact and any card inside it.",
-      "**Do** frame rooms into the free region with the camera's view offset so the panel never covers the room.",
-      "**Do** put the place name in the guide card's heading and the stop count in its Next control.",
-      "**Do** set headings in Inter 800 and subheads, labels and buttons in 700.",
-      "**Do** relight the town and rooms from `data-theme`: light is day, dark is night.",
-      "**Do** lay paths as flat planes and furnish rooms from flat-shaded primitives in the PALETTE, with the site's real data on the walls.",
-      "**Do** keep the plain page whole under every URL: Read without the tour, no WebGL and slow loads all land on it.",
-      "**Do** give every shipped raster embedded provenance. New Goodreads covers from a future sync need `impeccable embed-prompt`."
+      "**Do** render every page completely in Just Read first; a world is a layer over the same HTML, never a replacement for it.",
+      "**Do** set anything read in Source Serif 4 and anything operated in Inter, inside worlds too.",
+      "**Do** keep Just Read's rust on links, markers, focus and state only (the One Rust Rule).",
+      "**Do** make every control a pill (999px) and divide Just Read content with 1px rules rather than boxes.",
+      "**Do** give a new world the full set: a module implementing mount / show / setReading / setTheme / unmount, a stylesheet that sets `--hud-*` and `--reader-*`, a curtain, a panorama slice, a place per section, a day and a night, and an original synthesized track.",
+      "**Do** open pages from a world in the shared reader and frame the world around it.",
+      "**Do** honour reduced motion: curtains skip, cameras jump, transitions collapse.",
+      "**Do** keep music off until pressed, and silent in Just Read.",
+      "**Do** name employers in the worlds by name only."
     ],
     "donts": [
-      "**Don't** bring back a separate slate site palette or a second accent; the site and the town are one world.",
-      "**Don't** fill headings or large backgrounds with ember; it marks state, not decoration.",
-      "**Don't** give plain-page paper or night-sky surfaces a drop shadow; only ink panels, town overlays, the reading room and book covers lift.",
-      "**Don't** put an ink card inside the reading room; it is page ground, not a card stack.",
-      "**Don't** put logos or brand colours on the employer buildings or offices; names only.",
-      "**Don't** add a place or room that doesn't map to a real section of the site.",
-      "**Don't** let a street overlay cover the buildings across the upper middle of the frame.",
-      "**Don't** add a kicker or step label above the guide card's place name; the count belongs in Next stop.",
-      "**Don't** make the tour the only way in: never remove the opt-out, the header Take the tour, or the no-WebGL path."
+      "**Don't** put Just Read content behind a world, a WebGL check or an animation; without WebGL the city declines with a toast and the visitor stays reading.",
+      "**Don't** let one world's palette or display face appear in Just Read or in another world.",
+      "**Don't** add drop shadows to Just Read surfaces other than book covers.",
+      "**Don't** fill headings or large surfaces with the rust accent.",
+      "**Don't** add a place to a world that does not map to a real section of the site.",
+      "**Don't** put logos or brand colours on employer buildings or places.",
+      "**Don't** copy the panorama's small uppercase genre labels above world names onto new surfaces; they are carried by the build, not part of the system."
     ]
   }
 }

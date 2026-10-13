@@ -1,472 +1,459 @@
 ---
 name: Mohit Ranka
-description: The whole site is a virtual tour of a low-poly island town; every URL is a room, read in a panel beside it, paper and ink by day, navy sky by night, forge ember as the one accent.
+description: One person, three worlds, many things worth exploring. A quiet reading site with three optional worlds layered over the same pages.
 colors:
-  town-ink: "#14161b"
-  town-ink-2: "#23262e"
-  town-paper: "#fffaf0"
-  town-muted: "#a9adb8"
-  forge-ember: "#ff8a2a"
-  night-surface: "#14213f"
-  night-secondary: "#a9b4cc"
-  night-border: "#24335c"
-  night-code: "#1b2a4d"
-  night-shore: "#8a7a55"
-  day-surface: "#f6eedc"
-  day-secondary: "#5b5f69"
-  day-border: "#eadfc8"
-  day-code: "#f3e8d2"
-  day-sky: "#9fd3e6"
-  day-sea: "#3d9cc2"
-  sand: "#f0d9a6"
-  grass: "#8cc76a"
-  path: "#e9c98f"
-  cream-wall: "#f4ecdc"
-  roof-terracotta: "#d9653b"
-  roof-slate: "#5a6b8c"
-  roof-teal: "#2f8f83"
-  roof-ochre: "#e0a33c"
-  post-red: "#d8342c"
-  night-sky: "#0d1830"
-  night-fog: "#2b4170"
-  night-sea: "#173a5c"
-  window-glow: "#ffcf7a"
+  paper: "#fbf8f2"
+  paper-surface: "#f3eee4"
+  ink: "#1d1c1a"
+  ink-2: "#4a4741"
+  ink-3: "#6f6b63"
+  rule: "#e6dfd2"
+  rust: "#b54a17"
+  rust-wash: "rgba(181, 74, 23, 0.12)"
+  code-paper: "#f1ebe0"
+  night-bg: "#15161a"
+  night-surface: "#1d1f24"
+  night-ink: "#ece8e1"
+  night-ink-2: "#c4bfb6"
+  night-ink-3: "#9a958c"
+  night-rule: "#2c2e35"
+  night-rust: "#f08a52"
+  night-rust-wash: "rgba(240, 138, 82, 0.16)"
+  night-code: "#1f2127"
+  chrome-black: "#111216"
+  chrome-step: "#23252c"
+  chrome-border: "#3a3d46"
+  chrome-paper: "#fffaf0"
+  chrome-muted: "#a9adb8"
+  city-dusk: "#1a0f2e"
+  city-sky: "#2a1b4f"
+  city-panel: "rgba(20, 12, 36, 0.86)"
+  city-yellow: "#ffe066"
+  city-lavender: "#b9add6"
+  city-reader-accent: "#b54a17"
+  city-night-reader: "#17141f"
+  city-night-accent: "#ffb070"
+  city-place-about: "#ff8fb1"
+  city-place-work: "#7fd6ff"
+  city-place-projects: "#ffa94d"
+  city-place-library: "#b197fc"
+  city-place-contact: "#ff6b6b"
+  apt-plum: "#3a1f33"
+  apt-purple: "#5b3a7a"
+  apt-mustard: "#d9a94a"
+  apt-cream: "#fff4d6"
+  apt-gold: "#f2c14e"
+  apt-rose: "#a83f4f"
+  apt-curtain: "#7a2e3a"
+  apt-ink: "#2a1e1a"
+  apt-remote: "#23181f"
+  apt-night-reader: "#2b1d28"
+  atlas-parchment: "#efe2c4"
+  atlas-parchment-2: "#e3d1a6"
+  atlas-card: "#f6ecd2"
+  atlas-sea: "#dccaa0"
+  atlas-ink: "#3b2a18"
+  atlas-ink-2: "#6a4e30"
+  atlas-frame: "#8a6a3e"
+  atlas-road: "#a83a2a"
+  atlas-water: "#5a7d8a"
+  atlas-lantern: "#f2a93b"
+  atlas-reader: "#fbf4e2"
 typography:
-  town-display:
-    fontFamily: "Inter, system-ui, -apple-system, Segoe UI, sans-serif"
-    fontSize: "clamp(1.5rem, 1.2rem + 1.2vw, 2rem)"
-    fontWeight: 800
-    lineHeight: 1.05
-    letterSpacing: "-0.03em"
   display:
-    fontFamily: "Inter, system-ui, -apple-system, Segoe UI, sans-serif"
-    fontSize: "1.75rem"
-    fontWeight: 800
-    lineHeight: 1.25
-    letterSpacing: "-0.03em"
+    fontFamily: "'Source Serif 4', Georgia, 'Times New Roman', serif"
+    fontSize: "clamp(2.25rem, 1.6rem + 2.6vw, 3.4rem)"
+    fontWeight: 700
+    lineHeight: 1.06
+    letterSpacing: "-0.02em"
   headline:
-    fontFamily: "Inter, system-ui, -apple-system, Segoe UI, sans-serif"
-    fontSize: "1.625rem"
-    fontWeight: 800
-    lineHeight: 1.25
-    letterSpacing: "-0.03em"
+    fontFamily: "'Source Serif 4', Georgia, 'Times New Roman', serif"
+    fontSize: "1.6rem"
+    fontWeight: 600
+    letterSpacing: "-0.01em"
   title:
-    fontFamily: "Inter, system-ui, -apple-system, Segoe UI, sans-serif"
-    fontSize: "1.125rem"
-    fontWeight: 700
-    lineHeight: 1.3
-    letterSpacing: "-0.02em"
-  town-title:
-    fontFamily: "Inter, system-ui, -apple-system, Segoe UI, sans-serif"
+    fontFamily: "'Source Serif 4', Georgia, 'Times New Roman', serif"
+    fontSize: "1.2rem"
+    fontWeight: 400
+    lineHeight: 1.35
+  lede:
+    fontFamily: "'Source Serif 4', Georgia, 'Times New Roman', serif"
     fontSize: "1.25rem"
-    fontWeight: 800
-    letterSpacing: "-0.02em"
-  guide-title:
-    fontFamily: "Inter, system-ui, -apple-system, Segoe UI, sans-serif"
-    fontSize: "1.125rem"
-    fontWeight: 800
-    letterSpacing: "-0.02em"
-  room-name:
-    fontFamily: "Inter, system-ui, -apple-system, Segoe UI, sans-serif"
-    fontSize: "1rem"
-    fontWeight: 800
-    letterSpacing: "-0.02em"
-  body:
-    fontFamily: "Inter, system-ui, -apple-system, Segoe UI, sans-serif"
+    fontWeight: 400
+    lineHeight: 1.55
+  body-read:
+    fontFamily: "'Source Serif 4', Georgia, 'Times New Roman', serif"
+    fontSize: "clamp(1.125rem, 1.05rem + 0.3vw, 1.3rem)"
+    fontWeight: 400
+    lineHeight: 1.65
+  body-ui:
+    fontFamily: "'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif"
     fontSize: "1rem"
     fontWeight: 400
-    lineHeight: 1.75
-    letterSpacing: "-0.011em"
-    fontFeature: "'cv11', 'ss01'"
-  body-small:
-    fontFamily: "Inter, system-ui, -apple-system, Segoe UI, sans-serif"
-    fontSize: "0.9375rem"
-    fontWeight: 400
-    lineHeight: 1.75
-    letterSpacing: "-0.011em"
+    lineHeight: 1.6
   label:
-    fontFamily: "Inter, system-ui, -apple-system, Segoe UI, sans-serif"
+    fontFamily: "'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif"
     fontSize: "0.875rem"
-    fontWeight: 700
-    lineHeight: 1.3
-  town-label:
-    fontFamily: "Inter, system-ui, -apple-system, Segoe UI, sans-serif"
-    fontSize: "0.875rem"
-    fontWeight: 700
+    fontWeight: 600
     lineHeight: 1
+  wordmark:
+    fontFamily: "'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif"
+    fontSize: "1.1875rem"
+    fontWeight: 800
+    letterSpacing: "-0.03em"
   mono:
-    fontFamily: "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace"
-    fontSize: "0.875em"
+    fontFamily: "ui-monospace, SFMono-Regular, Menlo, Consolas, monospace"
+    fontSize: "0.82em"
+  city-display:
+    fontFamily: "'Big Shoulders Display', 'Inter', sans-serif"
+    fontSize: "1.6rem"
+    fontWeight: 900
+    lineHeight: 1
+    letterSpacing: "0.02em"
+  apt-display:
+    fontFamily: "'Righteous', 'Inter', sans-serif"
+    fontSize: "1.6rem"
+    fontWeight: 400
+    lineHeight: 1
+    letterSpacing: "0.01em"
+  atlas-display:
+    fontFamily: "'IM Fell English SC', Georgia, serif"
+    fontSize: "1.9rem"
+    fontWeight: 400
+    lineHeight: 1
+    letterSpacing: "0.02em"
+  atlas-body:
+    fontFamily: "'IM Fell English', Georgia, serif"
+    fontSize: "1.08rem"
+    fontWeight: 400
+    lineHeight: 1.4
 rounded:
-  xs: "2px"
-  sm: "4px"
-  panel: "14px"
+  focus: "2px"
+  cover: "3px"
+  code: "4px"
+  md: "8px"
+  toast: "10px"
+  panel: "12px"
+  pano: "14px"
+  dialog: "16px"
   pill: "999px"
+  city-reader: "6px"
+  apt-reader: "18px"
+  atlas-reader: "4px"
 spacing:
-  space-1: "8px"
-  space-2: "16px"
-  space-3: "24px"
-  space-4: "32px"
-  space-5: "40px"
-  space-6: "48px"
-  space-7: "56px"
-  space-8: "64px"
+  space-1: "0.5rem"
+  space-2: "1rem"
+  space-3: "1.5rem"
+  space-4: "2.5rem"
+  space-5: "4rem"
+  space-6: "6rem"
+  gutter: "clamp(1.25rem, 4vw, 3rem)"
+  measure: "40rem"
+  page-w: "72rem"
 components:
-  button-primary:
-    backgroundColor: "{colors.forge-ember}"
-    textColor: "{colors.town-ink}"
-    rounded: "{rounded.pill}"
-    padding: "0.65rem 1.1rem"
-  button-secondary:
+  control-pill:
     backgroundColor: "transparent"
+    textColor: "{colors.ink}"
+    typography: "{typography.label}"
     rounded: "{rounded.pill}"
-    padding: "0.65rem 1.1rem"
-  nav-pill:
-    backgroundColor: "transparent"
+    padding: "0 0.85rem"
+    height: "2.25rem"
+  button-submit:
+    backgroundColor: "{colors.ink}"
+    textColor: "{colors.paper}"
     rounded: "{rounded.pill}"
-    padding: "0.45rem 0.8rem"
-  nav-pill-active:
-    backgroundColor: "{colors.forge-ember}"
-    textColor: "{colors.town-ink}"
-  tour-resume:
-    backgroundColor: "transparent"
-    rounded: "{rounded.pill}"
-    padding: "0.45rem 0.8rem"
-  tour-resume-hover:
-    backgroundColor: "{colors.forge-ember}"
-    textColor: "{colors.town-ink}"
+    padding: "0.75rem 1.3rem"
+  button-submit-hover:
+    backgroundColor: "{colors.rust}"
+    textColor: "{colors.paper}"
   tag-chip:
     backgroundColor: "transparent"
-    rounded: "{rounded.pill}"
-    padding: "3px 9px"
-  tag-chip-hover:
-    backgroundColor: "{colors.forge-ember}"
-    textColor: "{colors.town-ink}"
-  tag-chip-compact:
-    backgroundColor: "transparent"
-    rounded: "{rounded.pill}"
-    padding: "0.15rem 0.55rem"
-  ink-panel:
-    backgroundColor: "{colors.town-ink}"
-    textColor: "{colors.town-paper}"
-    rounded: "{rounded.panel}"
-    padding: "1.1rem 1.2rem"
+    textColor: "{colors.ink-2}"
+    padding: "0"
+  input:
+    backgroundColor: "{colors.paper-surface}"
+    textColor: "{colors.ink}"
+    typography: "{typography.body-ui}"
+    rounded: "{rounded.md}"
+    padding: "0.7rem 0.8rem"
   code-block:
-    backgroundColor: "{colors.town-ink}"
-    textColor: "{colors.town-paper}"
-    rounded: "{rounded.panel}"
-    padding: "14px 16px"
-  book-cover:
-    rounded: "{rounded.sm}"
-  town-card:
-    backgroundColor: "{colors.town-ink}"
-    textColor: "{colors.town-paper}"
-    rounded: "{rounded.panel}"
-    padding: "1.2rem 1.3rem 1.15rem"
-    width: "23rem"
-  town-tour-start:
-    backgroundColor: "{colors.forge-ember}"
-    textColor: "{colors.town-ink}"
+    backgroundColor: "{colors.code-paper}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.md}"
+    padding: "1rem 1.15rem"
+  hud-pill:
+    backgroundColor: "{colors.chrome-black}"
+    textColor: "{colors.chrome-paper}"
     rounded: "{rounded.pill}"
-    padding: "0.65rem 1.1rem"
-  town-guide:
-    backgroundColor: "{colors.town-ink}"
-    textColor: "{colors.town-paper}"
-    typography: "{typography.guide-title}"
-    rounded: "{rounded.panel}"
-    padding: "1rem 1.2rem 1.1rem"
-    width: "min(30rem, calc(100% - 2rem))"
-  town-guide-action:
-    backgroundColor: "transparent"
-    textColor: "{colors.town-paper}"
-    rounded: "{rounded.pill}"
-    padding: "0.5rem 0.85rem"
-  town-guide-inside:
-    backgroundColor: "{colors.forge-ember}"
-    textColor: "{colors.town-ink}"
-    rounded: "{rounded.pill}"
-    padding: "0.5rem 0.85rem"
-  town-panel:
-    backgroundColor: "{colors.town-ink}"
-    textColor: "{colors.town-paper}"
-    rounded: "{rounded.panel}"
-    padding: "1.15rem 1.25rem 1.2rem"
-    width: "min(24rem, calc(100% - 2rem))"
-  town-place-button:
-    backgroundColor: "transparent"
-    textColor: "{colors.town-paper}"
-    typography: "{typography.town-label}"
-    rounded: "{rounded.pill}"
-    padding: "0.5rem 0.8rem"
-  town-place-button-hover:
-    backgroundColor: "{colors.forge-ember}"
-    textColor: "{colors.town-ink}"
-  town-label:
-    backgroundColor: "{colors.town-paper}"
-    textColor: "{colors.town-ink}"
-    typography: "{typography.town-label}"
-    rounded: "{rounded.pill}"
-    padding: "0.35rem 0.7rem"
-  town-label-near:
-    backgroundColor: "{colors.forge-ember}"
-    textColor: "{colors.town-ink}"
-  town-enter:
-    backgroundColor: "{colors.forge-ember}"
-    textColor: "{colors.town-ink}"
-    rounded: "{rounded.pill}"
-    padding: "0.6rem 1rem"
-  town-skip:
-    backgroundColor: "{colors.town-paper}"
-    textColor: "{colors.town-ink}"
-    rounded: "{rounded.pill}"
-    padding: "0.45rem 0.85rem"
-  town-theme:
-    backgroundColor: "{colors.town-paper}"
-    textColor: "{colors.town-ink}"
-    rounded: "{rounded.pill}"
-    size: "34px"
-  town-hint:
-    backgroundColor: "{colors.town-ink}"
-    textColor: "{colors.town-paper}"
-    rounded: "{rounded.pill}"
-    padding: "0.45rem 0.8rem"
-  reading-room:
-    backgroundColor: "{colors.night-sky}"
-    textColor: "{colors.town-paper}"
-    rounded: "{rounded.panel}"
-    width: "min(46rem, 56%)"
-  reading-room-day:
-    backgroundColor: "{colors.town-paper}"
-    textColor: "{colors.town-ink}"
-    rounded: "{rounded.panel}"
-    width: "min(46rem, 56%)"
-  room-back:
-    backgroundColor: "transparent"
-    rounded: "{rounded.pill}"
-    padding: "0.5rem 0.9rem"
-  room-back-hover:
-    backgroundColor: "{colors.forge-ember}"
-    textColor: "{colors.town-ink}"
+    padding: "0 0.85rem"
+    height: "2.25rem"
+  reader:
+    backgroundColor: "{colors.paper}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.pano}"
+    width: "min(46rem, 56vw)"
+  worlds-dialog:
+    backgroundColor: "{colors.chrome-black}"
+    textColor: "{colors.chrome-paper}"
+    rounded: "{rounded.dialog}"
+    width: "min(64rem, calc(100vw - 2rem))"
+  toast:
+    backgroundColor: "{colors.ink}"
+    textColor: "{colors.paper}"
+    rounded: "{rounded.toast}"
+    padding: "0.75rem 1rem"
+  city-tag:
+    backgroundColor: "{colors.city-panel}"
+    textColor: "{colors.chrome-paper}"
+    typography: "{typography.city-display}"
+    padding: "0.3rem 0.6rem 0.35rem"
+  apt-remote:
+    backgroundColor: "{colors.apt-remote}"
+    textColor: "{colors.apt-cream}"
+    rounded: "22px"
+    padding: "0.5rem"
+  atlas-card:
+    backgroundColor: "{colors.atlas-card}"
+    textColor: "{colors.atlas-ink}"
+    typography: "{typography.atlas-body}"
+    padding: "1rem 1.15rem 1.1rem"
+    width: "min(20rem, calc(100vw - 2rem))"
 ---
 
 # Design System: Mohit Ranka
 
 ## Overview
 
-**Creative North Star: "The Island Town"**
+**Creative North Star: "The Reading Room With Three Doors"**
 
-The whole site is a virtual tour. Every page carries the same 3D island town (Three.js r160, vendored), a full-screen, low-poly, flat-shaded island built from primitives, toy-scale and warm. The street is the homepage and the site's Experience mode: the visitor walks Mohit's character between seven places (Forge, Writing print shop, Library bookshop, Booking.com, Postman and LinkedIn offices, Contact post office), takes a guided tour, or roams. Every other URL is a room. Stepping inside fades to an open-fronted interior furnished for that building, and the page itself opens in the reading room, a panel beside the room set in the site's own page tokens; that is the Read mode. Links between rooms travel inside the world instead of reloading, and every URL loads straight into its room.
+Every URL renders as Just Read: a quiet writer's site on warm paper, set in Source Serif 4 for reading and Inter for everything you operate. It is the canonical system and a first-class reading experience, not a fallback. Behind three doors sit three worlds (Side Quest City, Apartment 404, The Unfinished Atlas) that present the same six sections (About, Writing, Work, Projects, Library, Contact) as places. Each world is its own sub-system with its own palette, lettering, composition, navigation, motion and music; none is a reskin of another, and none is required to read anything.
 
-The tour and the plain pages are one world. By day the ground is the town's paper with ink text; by night it is the island's navy sky with paper text. Forge ember is the one accent everywhere: active navigation, the main action, link underlines, focus and selection. Inter is set heavy (800 for headings, 700 for subheads and controls) like the town's painted signs. Controls are pills, and the overlays and weighty content sit on solid ink panels with 14px corners and a soft lift. The town follows the site theme: light is a sunny day, dark is a moonlit night with lit windows, lamps and a glowing forge.
+The architecture is a sandwich. At the bottom is the shared content layer (Pelican templates, identical HTML in every mode). In the middle is the shared world layer: the HUD pills, the reader panel where any page opens beside a world, the Change World dialog, the curtains that wipe between worlds, and the homepage panorama of all three. On top is one world module at a time, loaded only when chosen, which restyles the shared layer through a small set of `--hud-*` and `--reader-*` custom properties and otherwise owns its own stage.
 
-The plain page under every URL stays whole. It is what readers get with "Read without the tour", without WebGL, and while the tour is loading; there, a 10px band of shore separates a compact ink intro card from the page, and reading is one 720px column, prose at 1rem on 1.75.
+Just Read is flat, generous and calm: one rust accent that marks links and state, hairline rules instead of boxes, a 40rem reading measure. The worlds are allowed to be loud, because they are chosen. Light theme is day and dark theme is night in every mode; music never plays until pressed and is silent in Just Read.
 
 **Key Characteristics:**
-- The site is the town: the street is home, every section is a furnished room, every URL a place.
-- Two modes: Experience on the street, Read in the reading room beside the room.
-- One world on every page: paper and ink by day, navy sky by night.
-- Forge Ember (#ff8a2a) is the single accent, on the island and off it.
-- Inter everywhere, heavy: 800 headings, 700 subheads, labels and buttons.
-- Pills for every control; ink panels with a soft lift for overlays and weighty content.
-- The town is driven by `data-theme`; day is light, night is dark.
-- The plain page is always there underneath: opt-out, no-WebGL and loading all land on it.
+- Warm paper (#fbf8f2) and near-black ink (#1d1c1a), one rust accent (#b54a17), a cool-charcoal dark theme with a lifted orange accent.
+- Source Serif 4 for everything read; Inter for everything operated.
+- Flat, rule-divided Just Read; elevation belongs to the world layer.
+- Every control is a pill.
+- Three worlds, each with its own display face, palette, navigation idiom and synthesized track.
+- Pages always open in the shared reader, re-tokened per world; the plain page is one click away.
 
 ## Colors
 
-A warm toy palette on two grounds that are the town's own: paper by day, the island's night sky after dark, with ember as the one voice.
+A warm paper-and-ink reading palette with a single rust accent, a charcoal night theme, a near-black shared world chrome, and three self-contained world palettes.
 
 ### Primary
-- **Forge Ember** (forge-ember): the one accent across the whole site. Active and hovered nav pills, primary and submit buttons, Take the tour, the guide's Go inside, the street panel's Go inside, Back outside on hover, tag hover, link underlines in both themes, blockquote rule, focus outlines, selection (ember at 30% by night, 25% by day), and inside the town the near/hover labels, the forge's coals, firelight and the Forge laptop screen.
+- **Letterpress Rust** (`rust`): link underlines (1px, 2px on hover), the active nav underline, list markers, blockquote rule, outline active bar, pill hover borders, topic-link hover underlines, the essay drop cap, focus outlines, the required-field asterisk and the submit button's hover fill. Its translucent wash (`rust-wash`) is the selection colour, the input focus ring and the success status ground.
+- **Ember by Night** (`night-rust`, `night-rust-wash`): the same roles in the dark theme, lifted so it stays legible on charcoal.
 
-### Secondary
-- **Town Ink** (town-ink): the light theme's text colour and the ground of every ink panel (intro card, guide card, street panel, hint pill, homepage impact items, Work cards and the contact form on the plain page, code blocks); text on paper and ember surfaces. Town Ink 2 (town-ink-2) is its lifted step.
-- **Town Paper** (town-paper): the light theme's page ground, the dark theme's text colour, and the text on every ink panel; also the floating labels, the Read without the tour pill and the round day/night switch. Translucent paper (rgba(255, 250, 240, 0.28)) outlines place buttons, guide actions and tags on ink; at 0.2 it borders fields on ink; at 0.16 it fills kbd chips.
-- **Town Muted** (town-muted): secondary text on ink panels (the intro line, street panel body, impact and Work outcomes, the form lead). The guide card's caption stays full paper.
+### Neutral
+- **Warm Paper** (`paper`): the Just Read page ground and the default reader ground.
+- **Paper Surface** (`paper-surface`): input fields and book-cover placeholders. **Code Paper** (`code-paper`) holds inline and block code.
+- **Press Ink** (`ink`): body and heading text; the submit button and toast ground.
+- **Ink 2** (`ink-2`): ledes, nav links at rest, secondary metadata. **Ink 3** (`ink-3`): dates, captions, counts, footer text.
+- **Hairline Rule** (`rule`): every divider, list row and pill outline, and the resting underline of topic links.
+- **Night set** (`night-bg`, `night-surface`, `night-ink`, `night-ink-2`, `night-ink-3`, `night-rule`, `night-code`): the dark theme, role for role.
 
-### Tertiary (the island's world palette, in town.js PALETTE)
-- **Day:** Day Sky (fog #b9e0ec), Day Sea (foam #e9f6fb), Sand, Grass (dark #6fae55), Path, Cream Wall, stone #b9b2a4, wood #8a5a3b. Roofs rotate through Terracotta, Slate, Teal and Ochre so each building reads apart; each room's skirting carries its building's colour (slate print shop, teal bookshop, stone forge, ochre/terracotta/slate offices, Post Red post office). The character wears a #2f6fd6 shirt.
-- **Night:** Night Sky is the scene background. Night Fog (night-fog) is deliberately lighter than the sky so that, after ACES filmic tone mapping, the distant island fades toward the sky instead of to black. Night Sea (foam #5f7fa3), moonlight #a9bdff, Window Glow and lamp glow #ffd28a, moon #f6f1d8 with a #bfd0ff halo, white stars (street only). Exposure rises from 1.0 to 1.15; room lights rise from 14 to 26.
+### World Chrome
+- **Stage Black** (`chrome-black`): the panorama frame, the Change World dialog and the fallback HUD pill ground. **Chrome Step** (`chrome-step`) is the dialog close button; **Chrome Border** (`chrome-border`) outlines the Just Read button in the dialog.
+- **Chrome Paper** (`chrome-paper`) and **Chrome Muted** (`chrome-muted`): text on the dark chrome.
 
-### Neutral (the page grounds, per theme; also the reading room)
-- **Night (default):** Night Sky (night-sky) is the page ground and the reading room's ground. Night Surface (night-surface) lifts quiet blocks and fills fields inside the reading room; Night Secondary (night-secondary) is secondary text; Night Border (night-border) draws hairlines, the reading room's 1px edge and unfilled pill outlines; Night Code (night-code) fills inline code; Night Shore (night-shore) is the band under the fallback card. Link underlines brighten from ember to Window Glow on hover.
-- **Day:** Town Paper is the page and reading-room ground. Day Surface (day-surface), Day Secondary (day-secondary), Day Border (day-border) and Day Code (day-code) play the same roles; Sand is the shore band. Link underlines deepen from ember to Terracotta on hover.
+### Side Quest City
+Dusk purple and sodium yellow over a pastel low-poly Bangalore.
+- **Dusk** (`city-dusk`): HUD pills, sign backs, hazard-stripe curtain. **Dusk Sky** (`city-sky`): the stage ground before the scene paints.
+- **Night Glass** (`city-panel`): translucent ground of every city overlay (place tags, location readout, travel list, hint).
+- **Sodium Yellow** (`city-yellow`): the city's accent; the readout underline, the reader's 6px top band, the pin, HUD focus, the prompt ground.
+- **Lavender** (`city-lavender`): secondary text in the travel list.
+- **Place colours**: each section carries its own colour on its tag's top border, its leader line and its travel-list diamond: About (`city-place-about`), Writing (`city-yellow`), Work (`city-place-work`), Projects (`city-place-projects`), Library (`city-place-library`), Contact (`city-place-contact`).
+- **Reader**: paper by day with `city-reader-accent`; `city-night-reader` with `city-night-accent` by night.
+
+### Apartment 404
+A warm 1990s sitcom set: mustard walls, plum and rose upholstery.
+- **Plum** (`apt-plum`): HUD pills. **Set Purple** (`apt-purple`): the title card and the reader's 6px frame.
+- **Mustard Wall** (`apt-mustard`), **Cream Trim** (`apt-cream`): the room itself; cream is also HUD text, object labels and the remote's text.
+- **Gold** (`apt-gold`): HUD accent, active-object outline, remote focus, the title card's tagline.
+- **Rose** (`apt-rose`): label headings and the day reader accent. **Curtain Red** (`apt-curtain`): the stage-curtain wipe.
+- **Remote Black** (`apt-remote`), **Bubble Ink** (`apt-ink`): the remote body and the speech-bubble stroke and text.
+- **Reader**: paper by day; `apt-night-reader` with gold accent by night.
+
+### The Unfinished Atlas
+Parchment, iron-gall ink and a red road.
+- **Parchment** (`atlas-parchment`, `atlas-parchment-2`) for land, **Sea Vellum** (`atlas-sea`) for water, **Card Vellum** (`atlas-card`) for every overlay.
+- **Iron-gall Ink** (`atlas-ink`): coastlines, hatching, text, the HUD ground. **Faded Ink** (`atlas-ink-2`): region names and subtitles.
+- **Red Road** (`atlas-road`): the marching dotted road, visited stamps, hovered place names, focus, the reader accent.
+- **Framing Brown** (`atlas-frame`): the 1px outer rule of every overlay and the reader. **River** (`atlas-water`), **Lantern** (`atlas-lantern`): rivers and the lantern that walks the road; lantern is also the HUD accent.
+- **Reader** (`atlas-reader`): a sheet of good paper in both themes; at night only the map dims to candlelight.
 
 ### Named Rules
-**The One World Rule.** Every page is drawn from the town's materials: paper, ink, the night sky, sand and ember. There is no separate site palette; a new surface picks its ground from the active theme and its weight from an ink panel.
+**The One Rust Rule.** Just Read has exactly one accent and it marks links, state and focus. It never fills a heading or a large surface; the only accent fill is the submit button's hover.
 
-**The One Ember Rule.** Forge Ember is the only accent on any page. It marks what is active, primary or focused; it never fills a heading or a large background.
-
-**The Theme Is the Clock Rule.** The town has no time-of-day control of its own. Light theme is day, dark theme is night; the street's round day/night switch and the header toggle both flip `data-theme`, relighting the island, the rooms and the pages together.
-
-**The Names Only Rule.** Employer buildings and offices carry their names as text on plain signs and name plates, never logos or brand colours. Roof and skirting colours come from the island palette.
+**The World Owns Its Palette Rule.** A world's colours stay inside its stage, its curtain, its panorama slice and its `--hud-*` / `--reader-*` overrides. They never leak into Just Read, and Just Read's rust never appears inside a world's stage.
 
 ## Typography
 
-**Display Font:** Inter (variable 100 to 900, self-hosted woff2, Latin and Latin-1 subset), fallback system-ui, -apple-system, Segoe UI, sans-serif
-**Body Font:** Inter
-**Label/Mono Font:** ui-monospace stack for code only
+**Reading Font:** Source Serif 4 (with Georgia, Times New Roman)
+**UI Font:** Inter (with system-ui, -apple-system, Segoe UI)
+**Mono:** ui-monospace stack
+**World display faces:** Big Shoulders Display (city), Righteous (apartment), IM Fell English and IM Fell English SC (atlas)
 
-**Character:** One family set like the town's painted signs. Headings are 800 with tight tracking (-0.03em), subheads and controls 700, and body text stays at 400 with cv11 and ss01 on so long reading remains easy.
+**Character:** A sturdy, warm text serif carries every word meant to be read, including titles and section heads; a neutral grotesk carries every word meant to be operated. Each world announces itself in a face that belongs to its place and period.
 
 ### Hierarchy
-- **Town Display** (800, clamp(1.5rem, 1.2rem + 1.2vw, 2rem), 1.05): "Hi, I'm Mohit Ranka" on the intro card. Once per page.
-- **Display** (800, 1.75rem, 1.25): the homepage hero headline on the plain page (1.5rem under 640px).
-- **Headline** (800, 1.625rem rising to 1.75rem at 640px+, 1.25): article titles, in the reading room and on the plain page. Page h1 is 800 at 1.5rem, 1.3. The site name is 800 at 1.25rem.
-- **Title** (700, 1.125rem, 1.3, -0.02em): h2 and h3 (h3 at 1rem). The street panel title is 800 at 1.25rem; the guide card's place name is 800 at 1.125rem; the reading room's room name is 800 at 1rem.
-- **Body** (400, 1rem, 1.75): article prose, max 42rem inside the reading room, 720px column on the plain page. Secondary paragraphs and lists use 0.9375rem at 1.75 in secondary colour. Guide and panel captions are 0.9375rem at 1.5 to 1.55.
-- **Label** (700, 0.875rem, no tracking, sentence case, primary colour): section labels. Nav pills, Take the tour (header), Back outside and guide actions are 600 at 0.875rem; buttons 700 at 0.875rem (Take the tour on the card 700 at 0.9375rem); tags 600 at 0.75rem. Town labels and place buttons are 600 to 700 at 0.875rem, line-height 1.
+- **Display** (Source Serif 4 700, clamp(2.25rem → 3.4rem), 1.06): page and essay titles, the homepage title. Reduced to clamp(1.9rem → 2.6rem) inside the reader.
+- **Headline** (Source Serif 4 600, 1.6rem): homepage section heads and the archive's year labels (year labels in ink-3, oldstyle numerals). Library and contact section heads use 1.4rem.
+- **Title** (Source Serif 4 400, 1.2rem, 1.35): essay links in lists; 1.3rem 600 on the homepage "ways in" grid.
+- **Lede** (Source Serif 4 400, 1.25rem, 1.55, ink-2): the sentence under a page title; the homepage lede scales to 1.45rem.
+- **Body (read)** (Source Serif 4 400, clamp(1.125rem → 1.3rem), 1.65): essays and pages, 40rem measure. In-body h2 is 1.55em 600, h3 1.2em 600; tables switch to Inter at 0.9375rem with tabular numerals.
+- **Body (UI)** (Inter 400, 1rem, 1.6): chrome, forms, the default page font.
+- **Label** (Inter 600, 0.875rem): pills, form labels, buttons (submit and world-enter at 700). Nav links are Inter 500 at 0.9375rem; dates and counts use tabular numerals.
+- **Wordmark** (Inter 800, 1.1875rem, -0.03em): the name in the header, nowhere else.
+
+### World lettering
+- **City**: Big Shoulders Display 900, uppercase, slightly tracked (0.02–0.03em). Location readout 1.6rem in sodium yellow; place tags 1.05rem in chrome paper; the reader's place name 1.35rem in the reader accent; panorama name 2.4rem.
+- **Apartment**: Righteous 400. Title card 1.6rem, label headings 1.05rem in rose, reader place name 1.1rem. Painted props use Righteous too (the 404 door number, the poster).
+- **Atlas**: IM Fell English SC for names (title 1.9rem, card name 1.55rem, place names on the map, legend title, reader place name); IM Fell English for prose, italic for subtitles, region names (tracked 0.18em) and notes. The reader's page and essay titles switch to IM Fell English 400.
+- In every world, operational text (hints, buttons, remote labels, zoom, HUD) stays in Inter.
 
 ### Named Rules
-**The Painted Sign Rule.** Headings are 800, subheads and controls 700; body text never goes heavier than 400. Weight, not colour, carries hierarchy: no coloured headings anywhere.
+**The Read/Operate Rule.** If you read it, it is Source Serif 4; if you press or scan it, it is Inter. Worlds add a display face for names of places; they do not replace either role.
+
+**The Own Lettering Rule.** Each world's display face appears only in that world, its curtain-adjacent chrome and its panorama slice. Just Read never borrows one.
 
 ## Layout
 
-**The tour model.** While the tour runs (`tour-on`), the town is fixed full-screen over the page, the document does not scroll, and the plain page (`main#site`) is hidden. There are two places to be:
+Just Read is a single centered column system: a 72rem page width with a fluid gutter, and a 40rem reading measure for anything read. Vertical rhythm comes from a six-step spacing scale (0.5, 1, 1.5, 2.5, 4, 6rem): sections are separated by 4rem, page heads sit 2.5rem above content, and the main area opens with 4rem top and 6rem bottom padding.
 
-- **The street (Experience).** A high three-quarter camera follows the character, aimed ahead so the arc of buildings fills the upper two-thirds (fov 32 on landscape, pulled back 1.35x under aspect 1.3; fov 60 with a steeper offset and a 1.5x character on portrait under aspect 0.8). Overlays hug the frame's edges with a clamp(1rem, 3vw, 2rem) inset: the intro card bottom-left (max 23rem), the guide card bottom-centre (min(30rem, 100% - 2rem)), the street panel bottom-right (max 24rem), and the foot controls top-right (hint pill, round day/night switch, Read without the tour). Under 640px the intro card spans the width and keeps one short line, the panel replaces the card while open (max 52% height), and the hint switches to "Tap anywhere to walk there". Floating labels resolve overlaps nearest-first against cached overlay rectangles.
-- **A room (Read).** Each room is built off-island at ROOM_ORIGIN (400, 0, 400) plus 60 units per room index along x, so no room is ever seen from the street. The reading room panel takes the right side on desktop (min(46rem, 56%), inset clamp(0.75rem, 2vw, 1.25rem) top, right and bottom); at 760px and under it becomes a bottom sheet from 34% of the height to the bottom edge, with top corners only. The camera looks in through the open front at fov 40 (50 on portrait) and `camera.setViewOffset` shifts the projection so the room is centred in the free region (left of the panel, or above the sheet), fitted to the room's height while the yard fills the sides. The visitor's character stands inside facing the room. Inside a room the street overlays hide and the foot controls move top-left; on phones they hide entirely so the room stays visible.
-
-**Rooms and URLs.** The router maps paths to rooms and back:
-
-| Room | Building | URL |
-| --- | --- | --- |
-| writing | The print shop | /blog/, plus /tags/, /category/, /author/ and every essay |
-| library | The bookshop | /library/ |
-| forge | The Forge | /work/#forge |
-| work-0 / work-1 / work-2 | Booking.com, Postman, LinkedIn offices | /work/#booking, /work/#postman, /work/#linkedin |
-| contact | The post office | /contact/ |
-| street | the island | / |
-
-Same-site links matching a room travel through the world (history.pushState, fetched page cached, header stripped, relative links rebased); a hash on the current room scrolls the reading room instead. Anything else, or a failed fetch, is a normal navigation. Escape and Back outside return to the street at that building's door.
-
-**The guided tour** visits forge, writing, library, work-0, work-1, work-2, contact in that order, walking the character to each door.
-
-**The plain page.** One centred column (720px max, padding 48px 24px 120px; 32px 20px 80px under 640px) on an 8px spacing scale (space-1 to space-8). The header is the heavy site name, the nav pills, the Take the tour pill (only when the tour is off) and a round theme toggle. Without WebGL the town becomes a compact static ink card at the column's width (margin 32px auto 8px) with Library and Forge links, above the page.
-
-**The Edges Are Clear Rule.** Street overlays hug the frame's edges (bottom-left, bottom-centre, bottom-right, top-right) so the arc of buildings across the upper middle is never covered.
-
-**The Room Stays in View Rule.** Inside a room the camera's view offset frames the room in the space the reading room leaves free; the panel never sits over the room.
+- **Header and footer**: one flex row each, wrapping; name, nav, then controls. Under 640px the nav drops to its own full-width row.
+- **Essays**: a two-column grid. The 13rem left rail is sticky and holds the meta ("Essay · N min" in ink, the date in ink-3) and, below it, the outline; the 40rem text column holds the title, the "Filed under" line and the body, whose first paragraph opens with a 3.55em rust drop cap. Under 960px (and inside a world's reader) the rail becomes a one-line meta row under the title and the outline disappears.
+- **Archive**: an 8rem year column beside a 48rem list; stacks under 680px. List rows put title and date on one baseline, dates stack under titles on small screens.
+- **Library**: an auto-fill grid of 2:3 covers, minimum 7.5rem.
+- **Ways in**: an auto-fit grid, minimum 14rem, under a top rule.
+- **Forms**: a 1rem grid; two columns from 560px.
+- **World layer**: the stage is fixed full-screen; the HUD sits top-right; the reader docks right at min(46rem, 56vw) with an inset of clamp(0.75rem, 2vw, 1.25rem), and the HUD steps left to sit beside it. Under 760px the reader becomes a bottom sheet from 36% down and the HUD collapses to icons.
+- **Worlds frame around the reader**: each world reframes its camera, room or map into the space left of the open reader, so the reader never covers the place it came from.
 
 ## Elevation & Depth
 
-Depth comes from ink and from the world. Ordinary page furniture is flat, separated by hairlines and the surface tone; overlays on the town and content that deserves weight sit on a solid panel with a soft, negative-spread lift. The town itself is lit and layered: real-time sun and hemisphere light with cast shadows and fog on the street, and one warm point light (#ffe2b0) per room.
+Just Read is flat. Depth comes from hairline rules and the paper/surface step, never from shadows, with one exception: book covers sit on a small physical shadow so they read as objects. Elevation belongs to the world layer, where things genuinely float over a moving stage, and its shadows are soft, dark and drawn downward.
 
 ### Shadow Vocabulary
-- **Panel lift** (`box-shadow: 0 18px 44px -18px rgba(0, 0, 0, 0.55)`, the `--lift` token): impact items, Work cards and the contact form on the plain page; book covers in the Library grid.
-- **Overlay lift** (`box-shadow: 0 18px 44px -18px rgba(0, 0, 0, 0.7)`): intro card, guide card and street panel over the scene.
-- **Room lift** (`box-shadow: 0 24px 60px -24px rgba(0, 0, 0, 0.75)`): the reading room panel.
-- **Pill lift** (`box-shadow: 0 6px 14px -6px rgba(20, 22, 27, 0.55)`): floating name labels, Read without the tour, the round day/night switch.
-- **Field focus halo** (`box-shadow: 0 0 0 3px rgba(255, 138, 42, 0.25)`): fields in the contact form.
+- **Book cover** (`0 1px 2px rgba(0,0,0,.12), 0 10px 22px -14px rgba(0,0,0,.45)`): library covers only.
+- **HUD pill** (`0 6px 18px -8px rgba(0,0,0,.55)`): floating controls over a world.
+- **Music panel / toast** (`0 16px 36px -16px rgba(0,0,0,.7)` / `0 16px 40px -18px rgba(0,0,0,.7)`): small floating panels.
+- **Reader** (`0 24px 60px -24px rgba(0,0,0,.7)`): the docked reading panel.
+- **Dialog** (`0 40px 90px -30px rgba(0,0,0,.8)`) over a `rgba(10,10,14,.62)` backdrop.
+- **Atlas framed vellum** (`0 14px 30px -18px rgba(59,42,24,.8)` plus a double inset rule, 4px card colour then 1px framing brown at 45%): every atlas overlay; the reader takes a deeper version.
+- **Focus ring as glow** (`0 0 0 3px` rust wash): input focus.
 
 ### Named Rules
-**The Ink Carries Weight Rule.** Only ink panels, things floating over the town, and book covers (objects on the shelf) cast a shadow. Paper and night-sky surfaces on the plain page stay flat; inside the reading room, cards flatten (see Components).
+**The Flat Paper Rule.** Nothing on the Just Read page lifts except a book cover. Cards are rows divided by rules, not boxes.
+
+**The Floating Layer Rule.** Shadows exist for things that float over a world: HUD, reader, dialog, toast, world overlays. They are soft and downward, never coloured.
 
 ## Shapes
 
-Two shapes do almost all the work: full pills (999px) for every control (nav links, Take the tour, Back outside, theme toggles, buttons, tags, the town's labels, place buttons and guide actions) and 14px panels for every block (intro card, guide card, street panel, reading room, impact items, Work cards, contact form, code blocks, post figures). The reading room is the one bordered panel: a 1px theme-border edge, since it is a page-ground surface floating over the world. As a bottom sheet it keeps only its top corners (14px 14px 0 0). Small radii are kept for small things: 4px for kbd chips and Library book covers, 2px for focus rings and cover thumbnails. In the world, geometry is faceted primitives (four-sided cone roofs, stepped office blocks, low-segment trees) with flat shading and roughness 0.85; rooms are open-fronted boxes (14 by 10, 6.5 tall walls) on a path-coloured plinth.
+Just Read is mostly unboxed: content is divided by 1px rules, and where a container is needed it takes a gentle 8px radius (code blocks, inputs, figures, status messages). Every control, from the theme toggle to the submit button, and HUD controls, is a full pill (999px). Smaller radii are functional: 2px on focus outlines, 3px on book covers, 4px on inline code. Floating panels step up with their size: 10px toast, 12px music panel, 14px panorama and reader, 16px dialog.
 
-**The Flat Paths Rule.** The ring road, spokes and plaza are flat planes (ring, plane and circle geometry) laid just above the grass, never extruded slabs, so the character's feet and the shadows stay on one ground.
+The panorama is the one angular form in the shared layer: three slices cut on a diagonal (clip-path at 14% / 86%), overlapping by 2.2rem, that widen to 1.4x on hover or focus; under 820px they stack and the cut turns horizontal.
 
-**The Yard Rule.** Every room sits on a 30-unit grass yard just below its floor, so whatever the camera sees past the open front and beside the room is the island's own lawn, never the void.
+Each world sets its own reader corner: city 6px (hard-edged, with a yellow top band), apartment 18px (soft, inside a 6px purple frame), atlas 4px (a sheet of paper with a framed inner rule). City overlays are square-cornered; apartment props, labels and the remote are round; atlas overlays are square with ruled frames.
 
 ## Components
 
 ### Buttons
-- **Shape:** full pills.
-- **Primary and Submit:** ember ground, ink text, no border, 700 0.875rem, 0.65rem 1.1rem. Hover brightens 6%.
-- **Secondary:** transparent pill with a theme-border outline and primary text; hover turns the outline ember.
-- **Take the tour (intro card):** the street's main action, an ember pill above the place buttons, 700 0.9375rem, 0.65rem 1.1rem.
-- **Go inside (street panel):** ember pill, ink text, 700 0.9375rem, 0.6rem 1rem; hover brightens 6%.
-- **Town Place Button:** transparent pill with a translucent paper outline, 600 0.875rem; hover fills ember with ink text. Pressing one walks the character to the place.
-- **Focus:** outlines are ember everywhere (3px, offset 2px on the town). The canvas shows an inset 3px ember ring.
+- **Shape:** full pill (999px) for every button.
+- **Control pill** (Visit a world, theme toggle): transparent, hairline border, ink text, Inter 600 0.875rem, 2.25rem tall; the theme toggle is a 2.25rem circle. Hover turns the border rust.
+- **Submit:** ink fill, paper text, Inter 700 0.9375rem, padding 0.75rem 1.3rem; hover fills rust; disabled at 60% opacity with a progress cursor.
+- **World enter** (panorama): Inter 700 pill in the world's own colours (yellow on dusk, cream on curtain red, ink on parchment); hover lifts 1px; focus is a 3px white ring (ink in the atlas slice).
+- **Focus:** a 2px rust outline offset 3px everywhere in Just Read.
 
-### Chips
-- **Tags:** pills with a theme-border outline, 600 0.75rem, primary text; hover fills ember with ink text.
-- **Compact tags** beside list titles stay quiet: 500 0.75rem, secondary text, 0.15rem 0.55rem.
-- **Kbd chips** in the hint: 600 0.75rem on 16% paper, 4px radius.
+### Topic links
+- **Topics** (archive and topics index): a plain wrapping run of Inter 500 0.9375rem ink-2 links with a hairline underline and a smaller ink-3 tabular count; hover turns the underline rust and the text ink. No pills. On essays the topics read as a sentence: "Filed under X, Y and Z".
 
 ### Cards / Containers
-- **Ink panels (plain page):** impact items, Work cards and the contact form: town ink ground, paper text, Town Muted secondary text, no border, 14px corners, panel lift, about 1.1rem 1.2rem (24px for the form).
-- **Code blocks:** ink ground, paper text, 14px corners, no border, no shadow, in both the reading room and the plain page.
-- **Library grid:** covers at 2:3 in an auto-fill grid (min 7.5rem, gaps 1.25rem by 1rem), 4px corners and the panel lift; title 700 0.875rem, author 0.8125rem in secondary colour; the title underlines in ember on hover. Covers open Goodreads in a new tab.
+- **Work, project and library sections** are rows, not cards: 1.4rem vertical padding under a top rule. Book entries are a cover plus a serif title and an Inter author, with the rust underline on hover.
+- **Code blocks:** code-paper ground, 8px radius, 1rem 1.15rem padding.
+
+### Inputs / Fields
+- **Style:** paper-surface fill, hairline border, 8px radius, Inter 1rem, padding 0.7rem 0.8rem; ink-3 placeholders.
+- **Focus:** border turns rust and a 3px rust-wash ring appears; no outline.
+- **Status:** success sits on the rust wash; error is a rust border.
 
 ### Navigation
-- **Header (plain page):** pill links (600 0.875rem, 0.45rem 0.8rem, theme-border outline). Hover and the current page fill ember with ink text. The theme toggle is a 34px round pill with a 16px stroked sun/moon SVG.
-- **Take the tour (header):** shown only when the tour is off; a pill with an ember outline (600 0.875rem), filling ember on hover. It clears `tour` from localStorage and reloads into the tour.
-- **Street:** place buttons, floating labels and click-to-walk are the navigation. The foot controls hold the hint, a 34px round paper day/night switch (pill lift, ember on hover) and the Read without the tour paper pill.
+- **Site nav:** Inter 500 0.9375rem in ink-2, ink on hover. The current page is ink with a 2px rust underline offset 0.45em. No pills, no backgrounds.
+- **Essay outline:** a sticky list on a 2px rule; the active and hovered entries take a rust bar and ink text.
+- **Essay pager:** previous / next in serif with a small Inter ink-3 label; hover turns rust.
 
-### The Guide Card (signature)
-Bottom-centre ink panel (overlay lift, 1rem 1.2rem 1.1rem) for the guided tour; it replaces the intro card and the street panel while touring. The **place name is the heading** (800 1.125rem); the caption reads "Walking there…" until arrival, then the place's one-line description in paper. Actions are a row of pills: **Go inside** (ember, ink text), **Next stop** (paper outline) and **End tour**. The **stop count lives in the Next control** ("Next stop · 3 of 7"), never in a kicker above the title; the last stop's control reads "Finish the tour".
+### HUD (world layer)
+Pills on the world's `--hud-bg` with `--hud-fg` text, Inter 600 0.8125rem, 2.25rem tall: Change world, Music, theme, Just Read. Hover brightens by 12%; focus is a 3px ring in `--hud-accent`. The music pill shows four small equalizer bars in the accent while playing and opens a 15rem volume panel on hover, focus or tap. On phones the pills drop their labels.
 
-### The Street Panel (signature)
-Opens bottom-right when the character reaches a door (the character hops and turns to face it; the hop is skipped under reduced motion). It fades in and rises 12px over 0.35s with cubic-bezier(0.16, 1, 0.3, 1) and holds the building's name (800 1.25rem), one muted paragraph of facts from the site, and the ember Go inside pill. Enter on the canvas also goes inside.
+### Reader (world layer)
+The shared panel every world opens pages in. A bar with a "Back to the world" pill, the place name (in the world's display face and accent) and a "Just Read" link, then a scrolling area holding the page's own Just Read markup at the 40rem measure. It slides in from the right (0.45s) or up from the bottom on phones. Each world re-tokens it by setting `--reader-bg`, `--reader-ink`, `--reader-rule`, `--reader-accent` and `--reader-radius`, and maps Just Read's own tokens (`--bg`, `--ink`, `--ink-2`, `--ink-3`, `--rule`, `--accent`, `--surface`, `--code-bg`) onto them, so page content renders unchanged in the world's paper.
 
-### The Reading Room (signature)
-The page itself, opened beside its room. Right side on desktop, a bottom sheet from 34% on phones (760px and under). It uses the site's page tokens, not ink: theme ground and text, a **1px theme-border edge**, 14px corners and the room lift. A top bar (0.75rem 1rem, hairline under it) holds **Back outside** (a bordered pill with a 16px stroked arrow SVG, filling ember on hover) and the room's name (800 1rem). The page scrolls inside it (1.75rem padding, clamp(1.25rem, 3vw, 2.5rem) sides, content max 42rem). Focus moves to Back outside on arrival.
+### Change World dialog and panorama
+A stage-black dialog, 16px corners, a serif title, a close circle, the compact panorama and a "Just Read: no world, no music" outline pill. The panorama shows each world as a diagonal slice of its own SVG illustration with its name in its own lettering, a one-line description and an enter button; the current world's button reads "· you are here". On the homepage the panorama stands alone at clamp(22rem, 38vw, 32rem) tall.
 
-**The No Card on a Card Rule.** Inside the reading room, Work cards and the contact form flatten: no ink ground, no radius, no shadow, a hairline top rule, theme text and secondary colours, and fields on the theme surface with a theme border. The ink treatment belongs to the plain page.
+### Curtains
+Every switch passes through the destination's curtain (0.55s, cubic-bezier(0.65, 0, 0.35, 1)); with reduced motion the switch is instant.
+- **City:** a skewed slab of yellow and dusk hazard stripes slides across, followed by a solid dusk slab.
+- **Apartment:** two halves of striped red stage curtain close from the sides and reopen.
+- **Atlas:** parchment spreads from the centre as a growing circle.
+- **Just Read:** a fade to paper.
 
-### Room Furnishing (signature)
-Every room shares a shell: open front, back and side walls in Cream Wall (or the building's own), a skirting band in the building's colour, a back-wall window that glows at night, a warm point light, a path-coloured plinth and the grass yard. Furnished per building from the site's own data, with clickable objects leading to real pages:
-- **Print shop (writing):** a black press with a sheet on its bed, every essay (up to 14) pinned as a page on two drying lines (each opens that essay in the reading room), and a side desk with a stack of paper.
-- **Bookshop (library):** shelves holding every synced cover (9 per row) and the favourites standing on a front table; covers open Goodreads.
-- **Forge:** a stone hearth with glowing ember coals, firelight and a chimney, an anvil on a stump, a tool rack, and a workbench with a laptop whose ember-on-ink "forge" screen opens the GitHub repo.
-- **Offices (Booking.com, Postman, LinkedIn):** a white name plate and the role on the back wall in text, a desk with a monitor (glowing at night), a chair and a potted plant. Names only.
-- **Post office (contact):** a counter with letters, a wall of pigeonholes with paper slips, and a Post Red post box.
+### World modules
+Each world is an ES module (`static/js/worlds/<id>.js`) with a stylesheet (`static/css/worlds/<id>.css`), registered in `WORLDS` in `core.js` with a title, a place name per section and, for the city, a WebGL requirement. The default export implements:
+- `mount(stage, api)` builds the world inside the stage (may be async; the city waits for its display fonts).
+- `show(section, { instant, url })` moves to the place for `home`, `about`, `writing`, `work`, `projects`, `library` or `contact` and marks it active.
+- `setReading(open)` reframes around the reader and hides overlays that would collide.
+- `setTheme(theme)` relights the world for `light` (day) or `dark` (night).
+- `unmount()` runs every cleanup and removes the world's root.
 
-### The Fade (signature)
-Changing room or returning to the street fades a full-screen Night Sky (#0d1830) layer in over 0.25s, swaps the scene behind it, and fades out (about 260ms each way). Under reduced motion the swap is instant. Moving between pages of the same room (essay to essay) does not fade.
+The `api` gives a world `data` (sections, essays, favourite books, counts), `go(section)`, `navigate(url)`, `theme()`, `reduceMotion`, `coarse`, `sfx(name)`, `toggleMusic()`, `musicPlaying()`, `toast()`, `readerRect()` and `section()`. Worlds navigate only through `go` and `navigate`; the URL stays canonical and the reader shows the real page.
 
-### Opting Out and Fallback
-- **Read without the tour** (top-right paper pill) stores `tour=off` in localStorage and reloads into the plain pages; the town is not shown (`tour-off`). **Take the tour** in the header undoes it.
-- **No WebGL** (or a failed start): the town becomes the compact ink fallback card with Library and Forge links, and the plain page shows beneath it.
-- **Loading:** `tour-pending` holds the town over a hidden page for at most 3.5s; if the tour never starts, the plain page returns on its own.
+### Side Quest City
+A low-poly fictional Bangalore at dusk in Three.js, with game-HUD overlays in night glass.
+- **Navigation:** click a building or its floating tag; a "Quick travel" list (top-left, under the location readout) with a colour diamond per place; a circular minimap (170px, yellow ring) bottom-left; drag to orbit; WASD drives an auto-rickshaw, with a yellow "Press E to enter" prompt near a door. On phones the travel list becomes a horizontal strip along the bottom and the minimap and hint hide.
+- **Place tags:** night-glass labels with a 3px top border and leader line in the place's colour; hover and active fill with that colour and switch text to dusk.
+- **Motion:** the camera eases toward each building (closer for most, farther for the Business District); tags fade at 0.25s; instant under reduced motion.
+- **Night:** the dark theme lights the windows and lamps.
+- **Music:** "Night Bus to Nowhere Nagar", lo-fi jazz at 82 bpm, swung.
 
-### Floating Name Labels (signature)
-Paper pills (700 0.875rem) projected over each building like painted shop signs, turning ember when the character is near or on hover. Pointer click targets only (tabindex -1); keyboard users walk via the place buttons. Overlapping labels hide nearest-first.
+### Apartment 404
+An SVG sitcom set; every section is an object in the room (front door, writing desk, computer, workbench, bookshelf, telephone).
+- **Navigation:** hover or focus an object to raise a cream label with its Righteous name; click or press Enter to go. A TV remote, bottom-centre, carries a round coloured button per section with Inter labels; the current section's button sits on a lighter plum. On phones the set pans sideways like a camera and the remote wraps into rows of three.
+- **Objects:** on hover or focus they glow cream and do a small piece of business (the door swings, the phone rings, the flag lifts); the active object takes a gold outline, keyboard focus a dashed cream one.
+- **Motion:** springy overshoot (cubic-bezier(0.34, 1.56, 0.64, 1)) for objects and speech bubbles; the record spins while music plays.
+- **Night:** the window goes to dusk and the lamps come on.
+- **Music:** "Brushes on a Tuesday", a swung jazz trio at 132 bpm.
 
-### Imagery and Provenance
-- **Book covers** (content/images/library, listed in data/library.json) are sourced from the Goodreads RSS shelf by scripts/sync_library.py and appear as textures on the bookshop's shelves and front table and in the Library grid. Ikigai comes from Open Library (ISBN 9781786330895) and was hand-trimmed; its entry in COVER_OVERRIDES re-fetches the untrimmed cover if the covers are cleared.
-- **og.png** is a rendered HTML card, not a photograph or generated image.
-- Every shipped raster carries embedded provenance; covers added by a future sync need `impeccable embed-prompt`.
-
-### Runtime Hooks
-- Loading `?debug` exposes `window.__town` for stepped tests that advance the simulation without rendering.
-- Root classes: `tour-pending`, `tour-on`, `tour-off` on the document; `town--ready`, `town--night`, `town--fallback`, `has-panel`, `is-touring` and `in-room` on the town.
-- Page scripts survive room swaps: `window.initContactForm` binds the form once per element (`data-bound`), and the comments theme sync guards itself so repeated injection is harmless.
-
-### Known Drift (recorded, not part of the system)
-These ship today but are not rules for new surfaces:
-- The street's night sky renders about #071030 against the #0d1830 target, because ACES tone mapping darkens the scene background; the night fog (#2b4170) is pre-compensated, the sky is not.
-- The street panel's list-row and 28x42 cover-thumbnail styles remain in the stylesheet, but the panel now renders a single paragraph.
-- The contact status notes use Tailwind green #16a34a and red #dc2626 (with a 6px radius) outside the palette.
-- The homepage lede (1.0625rem), the uppercase "Open source" impact tag (0.6875rem, tracked) and figure credits (0.75rem) sit off the type ramp.
-- Inline code uses a 3px radius and the contact fields a 10px radius, both off the 2/4/14/pill set; the field fill #1d2028 is a one-off ink step.
-- The old slate ramp (--gray-100 to --gray-800) is still declared, used only by the scrollbar.
+### The Unfinished Atlas
+An illustrated SVG map of the traveller's world; every section is a place.
+- **Navigation:** drag to pan, scroll or pinch to zoom, plus/minus/fit buttons bottom-right. Click a place to unfold a vellum card with its name, a line of description and a go button; going walks a lantern along the red road. Visited places get a red stamp that persists. A cartouche top-left and a legend bottom-left (road, stamps, a visited count) step aside when the reader opens.
+- **Motion:** the road's dots march continuously; waves bob, a ship sails, fog lifts over unvisited regions; cards unfold in 0.3s; place icons spring to 1.5x on hover.
+- **Night:** a candlelight vignette and dimmer parchment; lamplight blends over the map.
+- **Music:** "Lantern Road", slow 12/8 at 66 bpm in D dorian.
 
 ## Do's and Don'ts
 
 ### Do:
-- **Do** give every new section a room: a route in the router, a furnished open-fronted room on the yard at the next ROOM_ORIGIN slot, and its page read in the reading room.
-- **Do** build every new surface from the town's materials: paper ground and ink text by day, the night sky (#0d1830) and paper text by night.
-- **Do** keep Forge Ember (#ff8a2a) as the single accent site-wide, for active, primary, focus and selection states.
-- **Do** put street overlays on solid ink panels (14px corners, overlay lift) and make every control a pill.
-- **Do** set the reading room in the site's page tokens with its 1px border, and flatten Work, Contact and any card inside it.
-- **Do** frame rooms into the free region with the camera's view offset so the panel never covers the room.
-- **Do** put the place name in the guide card's heading and the stop count in its Next control.
-- **Do** set headings in Inter 800 and subheads, labels and buttons in 700.
-- **Do** relight the town and rooms from `data-theme`: light is day, dark is night.
-- **Do** lay paths as flat planes and furnish rooms from flat-shaded primitives in the PALETTE, with the site's real data on the walls.
-- **Do** keep the plain page whole under every URL: Read without the tour, no WebGL and slow loads all land on it.
-- **Do** give every shipped raster embedded provenance. New Goodreads covers from a future sync need `impeccable embed-prompt`.
+- **Do** render every page completely in Just Read first; a world is a layer over the same HTML, never a replacement for it.
+- **Do** set anything read in Source Serif 4 and anything operated in Inter, inside worlds too.
+- **Do** keep Just Read's rust on links, markers, focus and state only (the One Rust Rule).
+- **Do** make every control a pill (999px) and divide Just Read content with 1px rules rather than boxes.
+- **Do** give a new world the full set: a module implementing mount / show / setReading / setTheme / unmount, a stylesheet that sets `--hud-*` and `--reader-*`, a curtain, a panorama slice, a place per section, a day and a night, and an original synthesized track.
+- **Do** open pages from a world in the shared reader and frame the world around it.
+- **Do** honour reduced motion: curtains skip, cameras jump, transitions collapse.
+- **Do** keep music off until pressed, and silent in Just Read.
+- **Do** name employers in the worlds by name only.
 
 ### Don't:
-- **Don't** bring back a separate slate site palette or a second accent; the site and the town are one world.
-- **Don't** fill headings or large backgrounds with ember; it marks state, not decoration.
-- **Don't** give plain-page paper or night-sky surfaces a drop shadow; only ink panels, town overlays, the reading room and book covers lift.
-- **Don't** put an ink card inside the reading room; it is page ground, not a card stack.
-- **Don't** put logos or brand colours on the employer buildings or offices; names only.
-- **Don't** add a place or room that doesn't map to a real section of the site.
-- **Don't** let a street overlay cover the buildings across the upper middle of the frame.
-- **Don't** add a kicker or step label above the guide card's place name; the count belongs in Next stop.
-- **Don't** make the tour the only way in: never remove the opt-out, the header Take the tour, or the no-WebGL path.
+- **Don't** put Just Read content behind a world, a WebGL check or an animation; without WebGL the city declines with a toast and the visitor stays reading.
+- **Don't** let one world's palette or display face appear in Just Read or in another world.
+- **Don't** add drop shadows to Just Read surfaces other than book covers.
+- **Don't** fill headings or large surfaces with the rust accent.
+- **Don't** add a place to a world that does not map to a real section of the site.
+- **Don't** put logos or brand colours on employer buildings or places.
+- **Don't** put small uppercase labels (kickers) above world names or headings; each world announces itself in its own lettering.
+- **Don't** use hard offset shadows; floating layers use soft, downward shadows only.

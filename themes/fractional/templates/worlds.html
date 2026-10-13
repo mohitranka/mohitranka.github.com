@@ -1,0 +1,78 @@
+{% from "world-previews.html" import panorama %}
+{# The world layer: hidden in Just Read, owned by the runtime (theme/js/site/core.js) otherwise. #}
+<div class="world-stage" id="world-stage" aria-hidden="true"></div>
+
+<section class="reader" id="reader" hidden aria-labelledby="reader-place">
+    <div class="reader-bar">
+        <button class="reader-close" type="button" data-reader-close>
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+            <span>Back to the world</span>
+        </button>
+        <p class="reader-place" id="reader-place"></p>
+        <a class="reader-plain" href="#" data-just-read>Just Read</a>
+    </div>
+    <div class="reader-scroll" tabindex="-1">
+        <div class="reader-content"></div>
+    </div>
+</section>
+
+<div class="world-hud" id="world-hud" hidden>
+    <button class="hud-pill hud-world" type="button" data-open-worlds aria-label="Change world">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.8 3 2.8 15 0 18M12 3c-2.8 3-2.8 15 0 18"/></svg>
+        <span class="hud-world-name">World</span>
+    </button>
+    <div class="music" id="music">
+        <button class="hud-pill music-toggle" type="button" aria-pressed="false" aria-describedby="music-track">
+            <svg class="music-icon music-icon--off" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/><path d="M3 3l18 18"/></svg>
+            <svg class="music-icon music-icon--on" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg>
+            <span class="music-bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+            <span class="music-label">Music off</span>
+        </button>
+        <div class="music-panel">
+            <p class="music-track" id="music-track"></p>
+            <label class="music-volume"><span>Volume</span><input type="range" min="0" max="100" step="1" value="35"></label>
+        </div>
+    </div>
+    <button class="hud-pill hud-theme" type="button" data-theme-toggle aria-label="Switch to dark mode">
+        <svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+    <a class="hud-pill hud-read" href="#" data-just-read>Just Read</a>
+</div>
+
+<dialog class="worlds-dialog" id="worlds-dialog" aria-labelledby="worlds-dialog-title">
+    <div class="worlds-dialog-head">
+        <p class="worlds-dialog-title" id="worlds-dialog-title">Choose your world</p>
+        <button class="worlds-dialog-close" type="button" data-close-worlds aria-label="Close">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+    </div>
+    {{ panorama(compact=true) }}
+    <div class="worlds-dialog-foot">
+        <button class="world-read" type="button" data-world-choose="read">Just Read: no world, no music</button>
+        <p>The page you are on comes with you.</p>
+    </div>
+</dialog>
+
+<div class="world-curtain" id="world-curtain" aria-hidden="true"></div>
+<p class="sr-only" id="world-status" role="status" aria-live="polite"></p>
+
+<script type="application/json" id="site-data">{
+    "root": {{ (SITEURL ~ '/')|tojson }},
+    "sections": {
+        "about": {{ (SITEURL ~ '/about/')|tojson }},
+        "writing": {{ (SITEURL ~ '/blog/')|tojson }},
+        "work": {{ (SITEURL ~ '/work/')|tojson }},
+        "projects": {{ (SITEURL ~ '/projects/')|tojson }},
+        "library": {{ (SITEURL ~ '/library/')|tojson }},
+        "contact": {{ (SITEURL ~ '/contact/')|tojson }}
+    },
+    "essays": [{% for a in (articles if articles else []) %}
+        {"title": {{ a.title|striptags|tojson }}, "url": {{ (SITEURL ~ '/' ~ a.url)|tojson }}, "date": {{ a.date.strftime('%b %Y')|tojson }}}{% if not loop.last %},{% endif %}{% endfor %}
+    ],
+    "books": [{% for book_id in LIBRARY.favourites %}{% set b = LIBRARY.by_id[book_id] %}
+        {"title": {{ b.title|tojson }}, "author": {{ b.author|tojson }}, "cover": {{ (SITEURL ~ '/' ~ b.cover)|tojson if b.cover else 'null' }}}{% if not loop.last %},{% endif %}{% endfor %}
+    ],
+    "bookCount": {{ LIBRARY.books|count }},
+    "assets": {{ (SITEURL ~ '/theme/')|tojson }}
+}</script>

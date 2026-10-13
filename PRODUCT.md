@@ -8,53 +8,60 @@ web
 
 ## Users
 
-**Engineers and engineering leaders reading the writing.** They come for essays on platforms, data, reliability and leadership, and many never look at the rest of the site. The writing is a product in its own right.
+**Readers of the writing.** Engineers, engineering leaders and curious generalists who arrive at an essay from a share, a feed or a search. Many never look at anything else. They need the essay to load fast, read well and stay out of the way.
 
-**People checking who Mohit is.** Peers, hiring managers, recruiters and collaborators who arrive from LinkedIn, GitHub, Forge or a shared link, and want a quick, credible picture of his experience and how he works. The site serves them by being clear about his background, not by pitching to them.
+**People getting to know Mohit.** Peers, collaborators and the occasionally curious who arrive from LinkedIn, GitHub, Forge or a link, and want a sense of who he is: what he works on, what he reads, how he thinks. They should leave thinking "this is an interesting person; I'd like to read more, follow what he builds, or talk to him."
+
+**Explorers.** Visitors who choose one of the three worlds and wander. For them the site is the experience; the content is what they find along the way.
 
 ## Product Purpose
 
-This is Mohit Ranka's personal site: who he is, the work he has done, and what he writes. Success is that readers find the writing worth their time and that anyone checking his background comes away with an accurate, specific picture of it. Getting in touch is available but never pushed.
+Mohit Ranka's personal site: one person, three worlds, many things worth exploring. The same content (About, Writing, Work, Projects, Library, Contact) can be read plainly in **Just Read** or explored through three interactive worlds: **Side Quest City** (an open-world fictional Bangalore at dusk), **Apartment 404** (a 1990s sitcom apartment) and **The Unfinished Atlas** (an illustrated fantasy map). Success is that readers find the writing worth their time, explorers enjoy the worlds, and nobody ever has to enter a world to read anything.
 
 ## Positioning
 
-A senior engineering leader whose record covers both architecture and delivery at scale. He built authentication and authorization infrastructure at Booking.com (~1M requests/second), led Runtime and core developer workflows at Postman, and led enterprise data-platform work at LinkedIn. He is also the creator of Forge, an open-source, terminal-native AI coding environment. The writing shows how he thinks about platforms, data contracts, reliability, on-call, and managing people.
+An engineer and engineering leader in Bangalore with fifteen-odd years across Booking.com, Postman, LinkedIn and Moveworks, who is also intellectually curious well beyond the job: philosophy and religion, psychology, systems thinking, strategy, economics, politics, technology. He builds software for curiosity, satisfaction, utility and learning (Forge is the current shipped example), and likes chess, music, sitcoms, movies, books and sports. The humour is dry, deadpan and occasionally absurd. His deeper thinking shows in the essays, not in a homepage manifesto.
 
-**No job-seeking or selling.** The site must not say he is looking for a role, seeking work, or available for engagements. No "hire me", availability lines, role-targeted CTAs, or recruiter-directed copy. (Decided 2026-10-12, replacing the earlier embedded-engagement pitch and then a short-lived hiring-first version.)
+**Not a portfolio, résumé, recruiting funnel or consulting page.** The site never says he is looking for a role or available for work. No "hire me", availability lines or recruiter-directed copy. (Decided 2026-10-12; reaffirmed in the 2026-10-13 multi-world brief.)
 
 ## Operating Context
 
-- Visitors usually arrive from a shared essay, RSS/Atom, LinkedIn, GitHub, or Forge.
-- The homepage is a profile, not a landing page. Writing is reached through the nav, the hero, the Work page and the footer; the homepage does not list posts (decided 2026-10-12).
-- The contact form is a general inbox: questions about the writing, Forge, or an engineering problem.
-- Answer engines and LLM crawlers are a deliberate channel. `llms.txt`, `llms-full.txt`, JSON-LD and the robots config are maintained on purpose.
-- Mohit is based in India. Do not state a work arrangement, region, or relocation preference.
+- Visitors usually arrive on a deep link (an essay, the Library, Work). Every URL renders a complete Just Read page first; a world only appears if the visitor chose one earlier (stored in `localStorage.world`) or picks one from the homepage panorama or the "Visit a world" control.
+- First-time visitors get Just Read. The homepage shows a short introduction, the three-world panorama, recent writing and the other sections.
+- Music is off until the visitor presses play, never autoplays, and is silent in Just Read.
+- Answer engines and LLM crawlers are a deliberate channel: `llms.txt`, `llms-full.txt`, JSON-LD, sitemap and robots config are maintained on purpose.
+- Mohit is based in Bangalore. Do not state a work arrangement or relocation preference.
 
 ## Capabilities and Constraints
 
-- Static site generated with Pelican (`pelicanconf.py`, `publishconf.py`) using the custom theme `themes/fractional`. Hosted on GitHub Pages at www.mohitranka.com (`CNAME`). Built with `make site` / `make serve`.
-- Pages: Home, Writing (`/blog/`), Work, Library (`/library/`), Contact, Tags. With WebGL the whole site runs as a virtual tour of the 3D town (themes/fractional/static/js/town.js): every section is a room and pages open in a reading room; "Read without the tour" switches to the plain pages. Articles are Markdown in `content/blog/`; pages are in `content/pages/`.
-- The contact form is configured in `contact-config.js`. Giscus comments on posts follow the site's selected theme. The site has a user-selectable light/dark theme.
-- Feeds: Atom and RSS. SEO/AEO: JSON-LD `Person`/`ProfilePage`/`WebSite`, `llms.txt`, `llms-full.txt`, sitemap.
-- Copy changes to positioning have to be made everywhere it appears: templates, page Markdown, `llms*.txt`, JSON-LD and meta descriptions.
+- Static site generated with Pelican (`pelicanconf.py`) using the custom theme `themes/fractional`. Hosted on GitHub Pages at www.mohitranka.com. `make site` builds and syncs the output into the repo root; publishing is a push.
+- Pages: Home, About (`/about/`), Writing (`/blog/`, tags), Work (`/work/`), Projects (`/projects/`), Library (`/library/`, synced from Goodreads by `make library`), Contact (`/contact/`). URLs are canonical and unchanged by worlds.
+- Runtime (`static/js/site/`): `core.js` (theme, essay outline, world switching, routing inside a world), `router.js`, `reader.js` (the shared reading panel), `music.js`, `prefs.js`. Worlds (`static/js/worlds/*.js` + `static/css/worlds/*.css`) and tracks (`static/js/music/*.js`) are loaded only when chosen. A world module implements `mount(stage, api)`, `show(section)`, `setReading(open)`, `setTheme(theme)`, `unmount()`.
+- Side Quest City needs WebGL (Three.js r160, vendored). Without it the visitor stays in Just Read with a short note. The apartment and atlas are SVG and work everywhere.
+- The music is original, synthesized in the browser with Web Audio from fixed seeds. No samples, no recordings, no borrowed melodies.
+- The contact form is configured in `contact-config.js`. Giscus comments follow the site theme.
+- Copy about Mohit must be consistent across templates, page Markdown, `llms*.txt`, JSON-LD and meta descriptions.
 
 ## Brand Commitments
 
-- Name: Mohit Ranka. First-person voice in pages ("I read everything myself. If it is not a fit, I will say so.").
-- The voice is direct, specific and understated. It makes concrete claims with scope ("roughly 1M requests per second") and avoids puffery.
-- Links: GitHub `mohitranka`, LinkedIn `mohit-ranka`, Forge at `github.com/NorviaLabs/forge`.
+- Name: Mohit Ranka. First-person voice on pages; the worlds may narrate in their own voice (the atlas calls him "the traveller").
+- Voice: direct, specific, understated, with dry humour carried by the environments (a flyover "opening soon since 2011", a "Grandmaster of snacks" poster) rather than by constant jokes in the copy.
+- Links: GitHub `mohitranka`, LinkedIn `mohit-ranka`, Goodreads, Forge at `github.com/NorviaLabs/forge`.
 
 ## Evidence on Hand
 
-- Four highlights, stated exactly as on the Work page: Booking.com (auth infrastructure, ~1M rps), Postman (Runtime and core developer workflows), LinkedIn (enterprise data platform), Forge (creator, open source).
+- Work, stated exactly as on the Work page: Booking.com (authentication and authorization infrastructure, ~1M rps), Postman (Runtime and core developer workflows), LinkedIn (enterprise data platform).
+- Projects: Forge only, until other projects are finished.
 - Education: B.Tech., Vellore Institute of Technology.
-- 14 published essays (2013–2026) in `content/blog/`, with diagrams in `content/images/blog/`.
-- **Absent, so never fabricate:** testimonials, client or employer quotes, logos used as endorsements, team-size or outcome metrics beyond those above, case studies, Forge adoption numbers, salary, availability or job-seeking claims.
+- 14 published essays (2013–2026) in `content/blog/`.
+- Library: books read, from Goodreads, with favourites.
+- **Absent, so never fabricate:** biographical details, opinions, anecdotes or achievements not in the content above; family or relationship details (keep private life off the site); testimonials, metrics beyond those stated, Forge adoption numbers, chess ratings, job-seeking claims; new essays.
 
 ## Product Principles
 
-1. **A profile, not a pitch.** Who he is and what he has done should be clear at a glance, with depth for anyone who keeps going. Nothing asks to be hired.
-2. **The writing is a product.** Reading quality matters as much as the hiring pitch. Never turn essays into a funnel.
-3. **Only real evidence.** Use specific, verifiable claims and add nothing that isn't on hand.
-4. **Plain, direct voice.** First person, concrete, no superlatives.
-5. **One story across every channel.** The page copy, structured data and LLM files must all tell the same story.
+1. **Content first, worlds second.** Every page is fully readable without JavaScript, WebGL or a world. A world is a way of browsing, never a gate.
+2. **One person, three genuinely different worlds.** Each world has its own palette, type, composition, navigation, motion and music. Not reskins.
+3. **The writing is a product.** Just Read is a first-class reading experience, not a fallback.
+4. **Only real evidence.** Specific, verifiable claims; nothing invented.
+5. **Quiet by default.** No autoplay, no forced tours, no walking across a city to read something.
+6. **One story across every channel.** Pages, structured data and LLM files tell the same story.

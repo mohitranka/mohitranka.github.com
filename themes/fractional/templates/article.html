@@ -96,39 +96,28 @@
 {% endblock %}
 
 {% block content %}
-<article>
-    <header class="article-header">
-        <h1 class="article-title">{{ article.title }}</h1>
-        <p class="article-meta">
-            <time datetime="{{ article.date.isoformat() }}">{{ article.date.strftime('%d %b %Y') }}</time>
-        </p>
+{% set minutes = ((article.content|striptags|wordcount) / 230)|round(0, 'ceil')|int %}
+<article class="essay">
+    <aside class="essay-aside">
+        <p class="essay-kind">Essay · {{ minutes }} min</p>
+        <p class="essay-date"><time datetime="{{ article.date.isoformat() }}">{{ article.date.strftime('%-d %B %Y') }}</time></p>
+        <nav class="essay-outline" aria-label="In this essay" data-outline hidden></nav>
+    </aside>
+    <header class="essay-head">
+        <h1 class="essay-title">{{ article.title }}</h1>
         {% if article.tags %}
-        <ul class="tag-list" aria-label="Tags">
-            {% for tag in article.tags %}
-            <li><a class="tag-chip" href="{{ SITEURL }}/{{ tag.url }}">{{ tag }}</a></li>
-            {% endfor %}
-        </ul>
+        <p class="essay-filed">Filed under {% for tag in article.tags %}{% if not loop.first %}{% if loop.last %} and {% else %}, {% endif %}{% endif %}<a href="{{ SITEURL }}/{{ tag.url }}">{{ tag|string|replace('-', ' ') }}</a>{% endfor %}</p>
         {% endif %}
     </header>
-
-    <div class="entry-content">
+    <div class="entry-content essay-body">
         {{ article.content }}
     </div>
-
-    <footer class="article-footer">
-        {% if article.tags %}
-        <p class="meta tag-footer-label">Tagged</p>
-        <ul class="tag-list" aria-label="Tags">
-            {% for tag in article.tags %}
-            <li><a class="tag-chip" href="{{ SITEURL }}/{{ tag.url }}">{{ tag }}</a></li>
-            {% endfor %}
-        </ul>
-        {% endif %}
-        <p class="meta">
-            <a href="{{ SITEURL }}/blog/">← All writing</a>
-            ·
-            <a href="{{ SITEURL }}/tags/">All tags</a>
-        </p>
+    <footer class="essay-foot">
+        <nav class="essay-nav" aria-label="More writing">
+            {% if article.prev_article %}<a class="essay-prev" href="{{ SITEURL }}/{{ article.prev_article.url }}"><span>Older</span>{{ article.prev_article.title }}</a>{% else %}<span></span>{% endif %}
+            {% if article.next_article %}<a class="essay-next" href="{{ SITEURL }}/{{ article.next_article.url }}"><span>Newer</span>{{ article.next_article.title }}</a>{% endif %}
+        </nav>
+        <p class="essay-all"><a href="{{ SITEURL }}/blog/">All writing</a> · <a href="{{ SITEURL }}/tags/">Topics</a></p>
     </footer>
 </article>
 {% include "comments.html" %}

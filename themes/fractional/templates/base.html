@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}{{ SITENAME }}{% endblock %}</title>
     {% block meta %}
-    <meta name="description" content="{% block description %}Engineering leader with 15+ years at Booking.com, Postman, LinkedIn, and Moveworks. Writing on platforms, data, reliability, and engineering leadership.{% endblock %}">
+    <meta name="description" content="{% block description %}Mohit Ranka — engineer and engineering leader in Bangalore. Writing on systems, platforms, people, and whatever he is reading.{% endblock %}">
     <meta name="author" content="{{ AUTHOR }}">
     <meta name="robots" content="index, follow">
     {% endblock %}
@@ -20,39 +20,45 @@
     <meta property="og:locale" content="en_US">
     <meta property="og:url" content="{% block og_url %}{{ SITE_ORIGIN }}/{% endblock %}">
     <meta property="og:title" content="{% block og_title %}{{ SITENAME }}{% endblock %}">
-    <meta property="og:description" content="{% block og_description %}Engineering leader with 15+ years at Booking.com, Postman, LinkedIn, and Moveworks. Writing on platforms, data, reliability, and engineering leadership.{% endblock %}">
-    <meta property="og:image" content="{% block og_image %}{{ SITE_ORIGIN }}/theme/images/og.png?v=2026-10-12b{% endblock %}">
-    <meta property="og:image:alt" content="{% block og_image_alt %}{{ SITENAME }} — Engineering Leader{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}Mohit Ranka — engineer and engineering leader in Bangalore. Writing on systems, platforms, people, and whatever he is reading.{% endblock %}">
+    <meta property="og:image" content="{% block og_image %}{{ SITE_ORIGIN }}/theme/images/og.png?v=2026-10-13{% endblock %}">
+    <meta property="og:image:alt" content="{% block og_image_alt %}{{ SITENAME }}{% endblock %}">
     <meta property="og:image:width" content="{% block og_image_width %}1200{% endblock %}">
     <meta property="og:image:height" content="{% block og_image_height %}630{% endblock %}">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{% block twitter_title %}{{ SITENAME }}{% endblock %}">
-    <meta name="twitter:description" content="{% block twitter_description %}Engineering leader with 15+ years at Booking.com, Postman, LinkedIn, and Moveworks. Writing on platforms, data, reliability, and engineering leadership.{% endblock %}">
-    <meta name="twitter:image" content="{% block twitter_image %}{{ SITE_ORIGIN }}/theme/images/og.png?v=2026-10-12b{% endblock %}">
-    <meta name="twitter:image:alt" content="{% block twitter_image_alt %}{{ SITENAME }} — Engineering Leader{% endblock %}">
+    <meta name="twitter:description" content="{% block twitter_description %}Mohit Ranka — engineer and engineering leader in Bangalore. Writing on systems, platforms, people, and whatever he is reading.{% endblock %}">
+    <meta name="twitter:image" content="{% block twitter_image %}{{ SITE_ORIGIN }}/theme/images/og.png?v=2026-10-13{% endblock %}">
+    <meta name="twitter:image:alt" content="{% block twitter_image_alt %}{{ SITENAME }}{% endblock %}">
     <script>
+        // Theme and world are decided before first paint so nothing jumps.
         (function () {
-            var theme = 'dark';
-            try { theme = localStorage.getItem('theme') || 'dark'; } catch (e) {}
-            document.documentElement.setAttribute('data-theme', theme);
+            var root = document.documentElement;
+            var theme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            var world = 'read';
+            try {
+                theme = localStorage.getItem('theme') || theme;
+                world = localStorage.getItem('world') || 'read';
+            } catch (e) {}
+            var asked = /[?&]world=([a-z]+)/.exec(location.search);
+            if (asked) world = asked[1];
+            if (!/^(read|city|apartment|atlas)$/.test(world)) world = 'read';
+            root.setAttribute('data-theme', theme);
+            root.setAttribute('data-world', world);
+            root.classList.add('js');
+            if (world !== 'read') {
+                root.classList.add('world-loading');
+                // if the runtime never arrives, show the page rather than a loading screen
+                setTimeout(function () {
+                    if (!root.classList.contains('world-on')) root.classList.remove('world-loading');
+                }, 6000);
+            }
         })();
     </script>
     <link rel="preload" href="{{ SITEURL }}/theme/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{{ SITEURL }}/theme/fonts/source-serif-4-normal-200-900.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="{{ SITEURL }}/theme/css/style.css">
-    <script>
-        // The tour takes over the page once it starts; until then the plain page stays hidden
-        // briefly, and comes back on its own if the tour never starts.
-        (function () {
-            var off = false;
-            try { off = localStorage.getItem('tour') === 'off'; } catch (e) {}
-            var root = document.documentElement;
-            if (off) { root.classList.add('tour-off'); return; }
-            root.classList.add('tour-pending');
-            setTimeout(function () { root.classList.remove('tour-pending'); }, 3500);
-        })();
-    </script>
-    <link rel="modulepreload" href="{{ SITEURL }}/theme/js/vendor/three.module.min.js">
-    <script type="module" src="{{ SITEURL }}/theme/js/town.js"></script>
+    <script type="module" src="{{ SITEURL }}/theme/js/site/core.js" onerror="document.documentElement.classList.remove('world-loading')"></script>
     {% if GOOGLE_ANALYTICS %}
     <script async src="https://www.googletagmanager.com/gtag/js?id={{ GOOGLE_ANALYTICS }}"></script>
     <script>
@@ -66,54 +72,50 @@
 </head>
 
 <body class="{% block body_class %}{% endblock %}">
-{% include "tour.html" %}
-    <main id="site">
-        <header class="site-header">
-            {% block site_brand %}
+    <a class="skip-link" href="#site">Skip to content</a>
+
+    <header class="site-header">
+        <div class="site-header-inner">
             <a class="site-logo" href="{{ SITEURL }}/">{{ SITENAME }}</a>
-            {% endblock %}
-            <nav class="site-nav" aria-label="Primary">
-                <a href="{{ SITEURL }}/blog/"{% if output_file is defined and output_file == 'blog/index.html' %} aria-current="page"{% endif %}>Writing</a>
-                <a href="{{ SITEURL }}/work/"{% if output_file is defined and output_file.startswith('work') %} aria-current="page"{% endif %}>Work</a>
-                <a href="{{ SITEURL }}/library/"{% if output_file is defined and output_file.startswith('library') %} aria-current="page"{% endif %}>Library</a>
-                <a href="{{ SITEURL }}/contact/"{% if output_file is defined and output_file.startswith('contact') %} aria-current="page"{% endif %}>Contact</a>
-                <button class="tour-resume" type="button" data-tour="on">Take the tour</button>
-                <button class="theme-toggle" id="theme-toggle" data-theme-toggle type="button" aria-label="Switch to light theme">
+            <nav class="site-nav" aria-label="Sections">
+                {% set here = output_file if output_file is defined else '' %}
+                <a href="{{ SITEURL }}/about/"{% if here.startswith('about') %} aria-current="page"{% endif %}>About</a>
+                <a href="{{ SITEURL }}/blog/"{% if here.startswith('blog') or here.startswith('tags') %} aria-current="page"{% endif %}>Writing</a>
+                <a href="{{ SITEURL }}/work/"{% if here.startswith('work') %} aria-current="page"{% endif %}>Work</a>
+                <a href="{{ SITEURL }}/projects/"{% if here.startswith('projects') %} aria-current="page"{% endif %}>Projects</a>
+                <a href="{{ SITEURL }}/library/"{% if here.startswith('library') %} aria-current="page"{% endif %}>Library</a>
+                <a href="{{ SITEURL }}/contact/"{% if here.startswith('contact') %} aria-current="page"{% endif %}>Contact</a>
+            </nav>
+            <div class="site-controls">
+                <button class="world-switch" type="button" data-open-worlds hidden>
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.8 3 2.8 15 0 18M12 3c-2.8 3-2.8 15 0 18"/></svg>
+                    <span>Visit a world</span>
+                </button>
+                <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch to dark mode">
                     <svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
                     <svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
                 </button>
-            </nav>
-        </header>
+            </div>
+        </div>
+    </header>
 
+    <main id="site" class="site-main" tabindex="-1">
         {% block content %}{% endblock %}
     </main>
-    <script>
-        (function () {
-            var root = document.documentElement;
-            var buttons = document.querySelectorAll('[data-theme-toggle]');
-            function sync() {
-                var dark = root.getAttribute('data-theme') !== 'light';
-                buttons.forEach(function (btn) {
-                    btn.setAttribute('aria-label', dark ? 'Switch to day' : 'Switch to night');
-                });
-            }
-            sync();
-            buttons.forEach(function (btn) {
-                btn.addEventListener('click', function () {
-                    var next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-                    root.setAttribute('data-theme', next);
-                    try { localStorage.setItem('theme', next); } catch (e) {}
-                    sync();
-                });
-            });
-            document.querySelectorAll('[data-tour="on"]').forEach(function (btn) {
-                btn.addEventListener('click', function () {
-                    try { localStorage.removeItem('tour'); } catch (e) {}
-                    window.location.reload();
-                });
-            });
-        })();
-    </script>
+
+    <footer class="site-footer">
+        <div class="site-footer-inner">
+            <p>Mohit Ranka · Bangalore</p>
+            <nav aria-label="Elsewhere">
+                <a href="https://github.com/mohitranka" rel="noopener noreferrer">GitHub</a>
+                <a href="https://www.linkedin.com/in/mohit-ranka" rel="noopener noreferrer">LinkedIn</a>
+                <a href="https://www.goodreads.com/user/show/49116640-mohit-ranka" rel="noopener noreferrer">Goodreads</a>
+                <a href="{{ SITE_ORIGIN }}/rss.xml">RSS</a>
+            </nav>
+        </div>
+    </footer>
+
+    {% include "worlds.html" %}
 </body>
 
 </html>
