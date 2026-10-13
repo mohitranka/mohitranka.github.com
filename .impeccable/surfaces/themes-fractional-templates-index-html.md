@@ -27,6 +27,6 @@ OWN-WORLD:
 - Just Read: paper #fbf8f2, ink #1d1c1a, accent #b54a17, with Source Serif 4 and Inter.
 - The world: parchment #efe2c4, iron-gall ink #3b2a18, road red #a83a2a, lettered in IM Fell English and SC.
 - The cottage: lime plaster, oak timber, field stone and hearth light, in the same lettering.
-STORY: A visitor lands on any URL as Just Read. If they unroll the map, they arrive on the map, or in the cottage when the page is About, Library or Contact. Traveler's Home zooms into the cottage; "Back to the map" or Escape returns. "Just Read" returns to the plain page.
+STORY: The homepage opens on the unrolled map (unless the visitor chose Just Read); any other URL lands as Just Read. Visitable places wear ribbons; their names, icons and whole cards are clickable. If they unroll the map, they arrive on the map, or in the cottage when the page is About, Library or Contact. Traveler's Home zooms into the cottage; "Back to the map" or Escape returns. "Just Read" returns to the plain page.
 MUSIC: eleven original tracks rotate (210 seconds each, 4-second crossfade), on by default in the world. Sound starts at the first click or tap. "Off" is remembered, and Just Read is silent. The songbook picks songs.
 FINISH: unreviewed and undocumented is unfinished. Nothing is pushed without explicit approval.

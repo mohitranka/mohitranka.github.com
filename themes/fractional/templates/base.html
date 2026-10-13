@@ -35,10 +35,11 @@
         (function () {
             var root = document.documentElement;
             var theme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-            var world = 'read';
+            // the homepage opens on the map unless the visitor chose Just Read before
+            var world = {% block opens_on_map %}false{% endblock %} ? 'atlas' : 'read';
             try {
                 theme = localStorage.getItem('theme') || theme;
-                world = localStorage.getItem('world') || 'read';
+                world = localStorage.getItem('world') || world;
             } catch (e) {}
             var asked = /[?&]world=([a-z]+)/.exec(location.search);
             if (asked) world = asked[1];

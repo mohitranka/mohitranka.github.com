@@ -120,9 +120,11 @@ function mapSvg(data) {
     .map(
       ([id, p]) => `
     <g class="at-place" data-section="${id}" transform="translate(${p.x} ${p.y})" tabindex="0" role="button" aria-label="${p.name}: ${id === 'writing' ? 'Writing' : id[0].toUpperCase() + id.slice(1)}">
-      <circle class="at-place-hit" r="74" cy="-24"/>
+      <rect class="at-place-hit" x="-140" y="-104" width="280" height="168" rx="28"/>
+      <circle class="at-beacon" r="62" cy="-24" style="--d:${ROAD_ORDER.indexOf(id) * 0.7}s"/>
       <circle class="at-stamp" r="64" cy="-24"/>
       <g class="at-icon" transform="scale(1.35)">${ICONS[p.icon]}</g>
+      <path class="at-ribbon"/>
       <text class="at-place-name" y="40" text-anchor="middle">${p.name}</text>
     </g>`
     )
@@ -181,7 +183,8 @@ function mapSvg(data) {
 
   <!-- the Minstrel's Camp: the songbook, out on the map -->
   <g class="at-camp" transform="translate(1000 960)" tabindex="0" role="button" aria-label="The Minstrel's Camp: open the songbook">
-    <circle class="at-place-hit" r="74" cy="-24"/>
+    <rect class="at-place-hit" x="-140" y="-104" width="280" height="168" rx="28"/>
+    <circle class="at-beacon" r="62" cy="-24" style="--d:2.1s"/>
     <g class="at-icon" transform="scale(1.35)">
       <path d="M-58 0 l26 -46 l26 46z"/><path d="M-32 -46 v46"/>
       <path d="M-6 0 l14 -8 M-6 -8 l14 8" />
@@ -190,6 +193,7 @@ function mapSvg(data) {
       <ellipse cx="34" cy="-10" rx="7" ry="5" transform="rotate(-30 34 -10)"/><path d="M38 -13 l10 -10"/>
     </g>
     <g class="at-notes"><path d="M20 -70 v-16 l10 -3 v14 M20 -70 a4 3 0 1 1 -0.1 0"/><path d="M44 -88 v-14 M44 -88 a4 3 0 1 1 -0.1 0"/></g>
+    <path class="at-ribbon"/>
     <text class="at-place-name" y="40" text-anchor="middle">Minstrel’s Camp</text>
   </g>
 
@@ -335,6 +339,26 @@ function placeCard() {
   const top = below + ch > h - 12 ? s.y - 80 / cam.z - ch : below;
   card.style.left = Math.min(w - cw - 12, Math.max(12, s.x - cw / 2)) + 'px';
   card.style.top = Math.max(80, top) + 'px';
+}
+
+/* — Ribbons: every place you can visit carries its name on an unfurled banner — */
+function drawRibbons() {
+  svg.querySelectorAll('.at-place-name').forEach((text) => {
+    const ribbon = text.previousElementSibling;
+    if (!ribbon || !ribbon.classList.contains('at-ribbon')) return;
+    const b = text.getBBox();
+    if (!b.width) return;
+    const x0 = b.x - 16;
+    const x1 = b.x + b.width + 16;
+    const y0 = b.y - 4;
+    const y1 = b.y + b.height + 2;
+    const mid = (y0 + y1) / 2;
+    const tail = 18;
+    ribbon.setAttribute(
+      'd',
+      `M${x0} ${y0} H${x1} L${x1 + tail} ${y0 + 3} L${x1 + 7} ${mid} L${x1 + tail} ${y1 + 3} L${x1} ${y1} H${x0} L${x0 - tail} ${y1 + 3} L${x0 - 7} ${mid} L${x0 - tail} ${y0 + 3}Z`
+    );
+  });
 }
 
 /* — Road, lantern, stamps — */
@@ -507,7 +531,11 @@ function bindInput() {
   el.querySelector('[data-zoom="in"]').addEventListener('click', () => zoomBy(1 / 1.4));
   el.querySelector('[data-zoom="out"]').addEventListener('click', () => zoomBy(1.4));
   el.querySelector('[data-zoom="fit"]').addEventListener('click', () => overview());
-  card.querySelector('.at-card-go').addEventListener('click', (e) => visit(e.currentTarget.dataset.go));
+  card.querySelector('.at-card-go').addEventListener('click', (e) => {
+    e.stopPropagation();
+    visit(e.currentTarget.dataset.go);
+  });
+  card.addEventListener('click', () => cardFor && visit(cardFor));
   on(window, 'resize', () => {
     const z = cam.z / fit;
     const { w, h } = size();
@@ -564,7 +592,7 @@ const world = {
         <p class="at-card-seen" hidden>Already visited.</p>
         <button type="button" class="at-card-go"></button>
       </aside>
-      <div class="at-legend"><p class="at-legend-title">Legend</p><p><span class="at-key at-key--road"></span>the road travelled</p><p><span class="at-key at-key--stamp"></span>places already visited</p><p class="at-legend-count"></p><p class="at-legend-hint">Drag to wander. Scroll or pinch to zoom.</p></div>
+      <div class="at-legend"><p class="at-legend-title">Legend</p><p class="at-legend-ribbon"><svg class="at-key at-key--ribbon" viewBox="0 0 46 16" aria-hidden="true"><path d="M8 2 H38 L45 3.5 L41 8 L45 12.5 L38 14 H8 L1 12.5 L5 8 L1 3.5Z"/></svg>a place you can visit</p><p><span class="at-key at-key--road"></span>the road travelled</p><p><span class="at-key at-key--stamp"></span>places already visited</p><p class="at-legend-count"></p><p class="at-legend-hint">Click any name on a ribbon to go there. Drag to wander; scroll or pinch to zoom.</p></div>
       <div class="at-zoom" role="group" aria-label="Zoom the map">
         <button type="button" data-zoom="in" aria-label="Zoom in"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
         <button type="button" data-zoom="out" aria-label="Zoom out"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg></button>
@@ -579,6 +607,8 @@ const world = {
     world.setTheme(api.theme());
     measureRoad();
     renderVisited();
+    drawRibbons();
+    document.fonts.load("30px 'IM Fell English SC'").then(() => svg && drawRibbons(), () => {});
     bindInput();
     overview({ instant: true });
   },

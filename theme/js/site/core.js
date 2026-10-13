@@ -194,7 +194,7 @@ function worldApi(id) {
   };
 }
 
-async function enterWorld(id, { initial = false } = {}) {
+async function enterWorld(id, { initial = false, remember = true } = {}) {
   const def = WORLDS[id];
   if (!def || busy) return;
   busy = true;
@@ -233,7 +233,7 @@ async function enterWorld(id, { initial = false } = {}) {
       return;
     }
     active = world;
-    prefs.set('world', id);
+    if (remember) prefs.set('world', id);
     music.setWorld(id);
     music.autostart();
     await show(location.href, { instant: true, scroll: readScroll, focus: !initial });
@@ -419,9 +419,14 @@ if (data) {
 
   const asked = new URLSearchParams(location.search).get('world');
   if (asked) prefs.set('world', prefs.normalise(asked));
-  const want = prefs.world();
+  // The homepage opens on the map for anyone who has not chosen otherwise; other pages
+  // open as plain pages unless the visitor chose the map before. Opening the map on the
+  // homepage is not recorded as a choice, so a shared essay still opens as a page.
+  const chosen = prefs.storedWorld();
+  const onHome = router.sectionFor(location.href) === 'home';
+  const want = chosen || (onHome ? 'atlas' : 'read');
   if (want !== 'read') {
-    enterWorld(want, { initial: true });
+    enterWorld(want, { initial: true, remember: Boolean(chosen) });
   } else {
     html.classList.remove('world-loading');
     const back = prefs.session('read-scroll');

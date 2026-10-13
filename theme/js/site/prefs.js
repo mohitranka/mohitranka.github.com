@@ -45,6 +45,16 @@ export function session(key, value) {
   return null;
 }
 
+// The world the visitor actually chose, or null if they never chose one.
+export function storedWorld() {
+  try {
+    const w = localStorage.getItem('world');
+    return w === null ? null : normalise(w);
+  } catch (e) {
+    return null;
+  }
+}
+
 export function world() {
   return normalise(get('world'));
 }

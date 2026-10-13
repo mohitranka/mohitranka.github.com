@@ -101,7 +101,41 @@
 .at-place.is-active .at-icon { transform: scale(1.5) translateY(-3px); }
 .at-place-name { font: 30px 'IM Fell English SC', Georgia, serif; fill: var(--ink); letter-spacing: 0.04em; paint-order: stroke; stroke: var(--parch); stroke-width: 6; stroke-linejoin: round; }
 .at-place:focus-visible .at-place-name,
-.at-place:hover .at-place-name { fill: var(--road); }
+.at-place:hover .at-place-name { fill: #f6ecd2; stroke: #a83a2a; }
+
+/* The ribbon: a visitable place's name rides on an unfurled banner; plain italic names
+   (mountains, lakes, seas) are just geography. */
+.at-ribbon {
+  fill: #f6ecd2;
+  stroke: var(--ink);
+  stroke-width: 1.8;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 3px 2px rgba(59, 42, 24, 0.28));
+  transition: fill 0.2s ease, stroke 0.2s ease;
+}
+.at-place .at-place-name,
+.at-camp .at-place-name { stroke: #f6ecd2; stroke-width: 0; transition: fill 0.2s ease; }
+.at-place:hover .at-ribbon,
+.at-place:focus-visible .at-ribbon,
+.at-place.is-active .at-ribbon,
+.at-camp:hover .at-ribbon,
+.at-camp:focus-visible .at-ribbon { fill: #a83a2a; stroke: #6b1d17; }
+.at-place.is-active .at-place-name { fill: #f6ecd2; }
+.at-camp:hover .at-place-name,
+.at-camp:focus-visible .at-place-name { fill: #f6ecd2; }
+
+/* A slow beacon on places not yet visited, so the eye finds what can be opened */
+.at-beacon { fill: none; stroke: #a83a2a; stroke-width: 2.5; opacity: 0; transform-box: fill-box; transform-origin: center; pointer-events: none; }
+.at-place:not(.is-visited) .at-beacon,
+.at-camp .at-beacon { animation: at-beacon 4.2s ease-out infinite; animation-delay: var(--d, 0s); }
+.atlas.is-reading .at-beacon { animation: none; }
+@keyframes at-beacon {
+  0% { opacity: 0.55; transform: scale(0.85); }
+  45%, 100% { opacity: 0; transform: scale(1.45); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .at-beacon { animation: none !important; }
+}
 .at-place:focus-visible .at-place-hit { stroke: var(--road); stroke-width: 3; stroke-dasharray: 6 6; }
 .at-stamp { fill: none; stroke: var(--road); stroke-width: 3; opacity: 0; transform: scale(1.3); transform-box: fill-box; transform-origin: center; transition: opacity 0.4s ease, transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); stroke-dasharray: 340 30; }
 .at-place.is-visited .at-stamp { opacity: 0.55; transform: none; }
@@ -113,8 +147,6 @@
 .at-camp { cursor: pointer; outline: none; }
 .at-camp:hover .at-icon,
 .at-camp:focus-visible .at-icon { transform: scale(1.5) translateY(-3px); }
-.at-camp:hover .at-place-name,
-.at-camp:focus-visible .at-place-name { fill: var(--road); }
 .at-camp:focus-visible .at-place-hit { stroke: var(--road); stroke-width: 3; stroke-dasharray: 6 6; }
 .at-notes { fill: none; stroke: var(--ink); stroke-width: 2.4; stroke-linecap: round; opacity: 0; }
 .atlas.is-playing .at-notes { animation: at-notes 2.8s ease-in-out infinite; }
@@ -159,8 +191,8 @@
 
 .at-card {
   position: absolute;
-  /* the card never blocks the map under it; only its button takes clicks */
-  pointer-events: none;
+  /* the whole card leads to its place */
+  cursor: pointer;
   z-index: 3;
   width: min(20rem, calc(100vw - 2rem));
   padding: 1rem 1.15rem 1.1rem;
@@ -173,7 +205,6 @@
 .at-card-text { margin-top: 0.4rem; font-size: 1.08rem; line-height: 1.4; color: #4a3622; }
 .at-card-seen { margin-top: 0.4rem; font-style: italic; color: #a83a2a; }
 .at-card-go {
-  pointer-events: auto;
   margin-top: 0.8rem;
   padding: 0.5rem 0.9rem;
   border: 1px solid #3b2a18;
@@ -182,7 +213,9 @@
   font: 600 0.8125rem/1 var(--font-ui);
   cursor: pointer;
 }
-.at-card-go:hover { background: #3b2a18; color: #f6ecd2; }
+.at-card-go:hover,
+.at-card:hover .at-card-go { background: #3b2a18; color: #f6ecd2; }
+.at-card:hover { border-color: #a83a2a; }
 .at-card-go:focus-visible,
 .at-zoom button:focus-visible { outline: 2px solid #a83a2a; outline-offset: 2px; }
 
@@ -196,10 +229,13 @@
   transition: opacity 0.4s ease;
 }
 .at-legend-title { font: 1.1rem 'IM Fell English SC', Georgia, serif; }
+.at-legend { max-width: 19rem; }
 .at-legend-count { font-style: italic; color: #6a4e30; }
 .at-legend-hint { margin-top: 0.2rem; font: 500 0.75rem var(--font-ui); color: #6a4e30; }
 .at-key { display: inline-block; vertical-align: middle; margin-right: 0.5rem; }
 .at-key--road { width: 26px; border-top: 3px dotted #a83a2a; }
+.at-key--ribbon { width: 34px; height: 13px; overflow: visible; }
+.at-key--ribbon path { fill: #f6ecd2; stroke: #3b2a18; stroke-width: 1.4; }
 .at-key--stamp { width: 14px; height: 14px; border: 2px solid #a83a2a; border-radius: 50%; opacity: 0.7; }
 
 .at-zoom {
@@ -239,7 +275,7 @@ html.world-atlas.reading .at-zoom { right: calc(min(46rem, 56vw) + clamp(1.5rem,
   .at-title { font-size: 1.3rem; }
   .at-sub { display: none; }
   .at-cartouche { top: 3.6rem; padding: 0.5rem 0.9rem; }
-  .at-legend p:not(.at-legend-title):not(.at-legend-count) { display: none; }
+  .at-legend p:not(.at-legend-title):not(.at-legend-count):not(.at-legend-ribbon) { display: none; }
   .at-legend { font-size: 0.9rem; padding: 0.5rem 0.75rem; }
   .at-card { left: 0.75rem !important; right: 0.75rem; top: auto !important; bottom: 4.5rem; width: auto; }
   html.world-atlas.reading .at-zoom { display: none; }
