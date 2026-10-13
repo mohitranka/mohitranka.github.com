@@ -136,7 +136,8 @@ function loadCss(hrefs) {
   return Promise.all([].concat(hrefs).map(loadOne));
 }
 function loadOne(href) {
-  const url = new URL('../../css/' + href, import.meta.url).href;
+  const v = data && data.cssVersions ? data.cssVersions['css/' + href] : '';
+  const url = new URL('../../css/' + href + (v ? '?v=' + v : ''), import.meta.url).href;
   if (document.querySelector(`link[href="${url}"]`)) return Promise.resolve();
   return new Promise((resolve, reject) => {
     const l = document.createElement('link');

@@ -112,3 +112,16 @@ from pathlib import Path as _Path
 _library = _Path(__file__).resolve().parent / 'data' / 'library.json'
 LIBRARY = _json.loads(_library.read_text()) if _library.exists() else {'books': [], 'favourites': [], 'profile': ''}
 LIBRARY['by_id'] = {book['id']: book for book in LIBRARY['books']}
+
+# Asset fingerprints — every stylesheet and script URL carries a hash of its contents
+# (?v=…), so a release never leaves a visitor's browser on a stale cached copy. Scripts
+# that are imported by other modules get theirs through an import map in base.html.
+import hashlib as _hashlib
+
+_static = _Path(__file__).resolve().parent / 'themes' / 'fractional' / 'static'
+ASSET_VERSIONS = {
+    str(_p.relative_to(_static)).replace('\\', '/'): _hashlib.sha1(_p.read_bytes()).hexdigest()[:10]
+    for _p in sorted(_static.rglob('*'))
+    if _p.is_file() and _p.suffix in ('.js', '.css')
+}
+JS_MODULES = [k for k in ASSET_VERSIONS if k.startswith(('js/site/', 'js/worlds/', 'js/music/'))]

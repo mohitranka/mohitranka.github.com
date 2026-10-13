@@ -56,5 +56,6 @@
         {"title": {{ b.title|tojson }}, "author": {{ b.author|tojson }}, "cover": {{ (SITEURL ~ '/' ~ b.cover)|tojson if b.cover else 'null' }}}{% if not loop.last %},{% endif %}{% endfor %}
     ],
     "bookCount": {{ LIBRARY.books|count }},
-    "assets": {{ (SITEURL ~ '/theme/')|tojson }}
+    "assets": {{ (SITEURL ~ '/theme/')|tojson }},
+    "cssVersions": { {%- for k, v in ASSET_VERSIONS.items() if k.startswith('css/') %}{{ k|tojson }}: {{ v|tojson }}{{ "," if not loop.last }}{% endfor -%} }
 }</script>

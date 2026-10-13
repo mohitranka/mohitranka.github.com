@@ -58,8 +58,10 @@
     </script>
     <link rel="preload" href="{{ SITEURL }}/theme/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="{{ SITEURL }}/theme/fonts/source-serif-4-normal-200-900.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="{{ SITEURL }}/theme/css/style.css">
-    <script type="module" src="{{ SITEURL }}/theme/js/site/core.js" onerror="document.documentElement.classList.remove('world-loading')"></script>
+    <link rel="stylesheet" href="{{ SITEURL }}/theme/css/style.css?v={{ ASSET_VERSIONS['css/style.css'] }}">
+    {# Every module import resolves to its fingerprinted URL, so caches never mix releases. #}
+    <script type="importmap">{"imports": { {%- for m in JS_MODULES %}"{{ SITEURL }}/theme/{{ m }}": "{{ SITEURL }}/theme/{{ m }}?v={{ ASSET_VERSIONS[m] }}"{{ "," if not loop.last }}{% endfor -%} }}</script>
+    <script type="module" src="{{ SITEURL }}/theme/js/site/core.js?v={{ ASSET_VERSIONS['js/site/core.js'] }}" onerror="document.documentElement.classList.remove('world-loading')"></script>
     {% if GOOGLE_ANALYTICS %}
     <script async src="https://www.googletagmanager.com/gtag/js?id={{ GOOGLE_ANALYTICS }}"></script>
     <script>
