@@ -1,12 +1,12 @@
 // The Unfinished Atlas, with Traveler's Home on it: one world, two scenes.
-// The map is the home screen and holds the outward sections (Writing, Work, Projects).
+// The map is the home screen and holds the outward sections (Writing, Work, Projects, Contact).
 // Traveler's Home is a cottage on the map; going in zooms the map into the house and the
-// cottage opens out of it, holding the personal sections (About, Library, Contact).
+// cottage opens out of it, holding the personal sections (About, Library).
 import map from './atlas.js';
 import cottage from './cottage.js';
 
-const INDOORS = new Set(['about', 'library', 'contact']);
-const OUTSIDE = new Set(['writing', 'work', 'projects']);
+const INDOORS = new Set(['about', 'library']);
+const OUTSIDE = new Set(['writing', 'work', 'projects', 'contact']);
 const MS = 950;
 const EASE = 'cubic-bezier(0.65, 0, 0.35, 1)';
 

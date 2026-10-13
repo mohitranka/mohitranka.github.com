@@ -32,7 +32,7 @@ export const WORLDS = {
       home: 'The Unfinished Atlas',
       about: 'The front door',
       library: 'The shelves',
-      contact: "The messenger's letterbox",
+      contact: "Messenger's Outpost",
       writing: 'Library of Stories',
       work: 'The Citadel',
       projects: "Craftsman's Forge",

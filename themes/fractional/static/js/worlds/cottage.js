@@ -7,7 +7,7 @@
 const PLACES = {
   about: { name: 'The front door', what: 'About' },
   library: { name: 'The shelves', what: 'Library' },
-  contact: { name: "The messenger's letterbox", what: 'Contact' },
+  contact: { name: "The messenger's letterbox", what: "Contact, out at the Messenger's Outpost" },
   writing: { name: 'The writing desk', what: 'Writing, out at the Library of Stories' },
   work: { name: 'A letter from the Citadel', what: 'Work, out at the Citadel' },
   projects: { name: 'The workbench', what: "Projects, out at the Craftsman's Forge" },
@@ -101,7 +101,7 @@ function svg() {
   </g>
 
   <!-- messenger's letterbox and the raven: Contact -->
-  <g class="ct-obj" data-section="contact" tabindex="0" role="button" aria-label="The messenger's letterbox: Contact">
+  <g class="ct-obj" data-section="contact" tabindex="0" role="button" aria-label="The messenger's letterbox: Contact, out at the Messenger's Outpost">
     <rect class="ct-hit" x="276" y="240" width="120" height="320"/>
     <rect x="290" y="300" width="92" height="96" rx="4" fill="#7a4a29"/>
     <path d="M286 300 h100 l-8 -22 h-84z" fill="#57361f"/>

@@ -1,5 +1,6 @@
 // The Unfinished Atlas: the site's home screen, drawn in SVG from a fixed seed. Its
-// landmarks are Writing, Work and Projects; Traveler's Home is the cottage you step into; the map pans and zooms by drag, wheel, pinch,
+// landmarks are Writing, Work, Projects and Contact; Traveler's Home is the cottage you
+// step into; the map pans and zooms by drag, wheel, pinch,
 // keys or buttons, remembers where you have been, and a lantern walks the road
 // between places. The fog in the north-east is the part that has not been written yet.
 
@@ -11,8 +12,9 @@ const PLACES = {
   writing: { name: 'Library of Stories', x: 860, y: 540, verb: 'Read the stories', icon: 'tower' },
   work: { name: 'The Citadel', x: 1250, y: 560, verb: 'Enter the Citadel', icon: 'castle' },
   projects: { name: "Craftsman's Forge", x: 1440, y: 830, verb: 'Visit the forge', icon: 'forge' },
+  contact: { name: "Messenger's Outpost", x: 700, y: 1040, verb: 'Send a message', icon: 'outpost' },
 };
-const ROAD_ORDER = ['about', 'writing', 'work', 'projects'];
+const ROAD_ORDER = ['about', 'writing', 'work', 'projects', 'contact'];
 
 function describe(section, data) {
   switch (section) {
@@ -22,6 +24,8 @@ function describe(section, data) {
       return `Essays on systems, platforms, people, and the occasional detour. ${data.essays.length} volumes so far.`;
     case 'work':
       return 'Where the day jobs live: Booking.com, Postman, LinkedIn. Well defended, mostly by on-call rotas.';
+    case 'contact':
+      return 'Leave a message with the rider. Every one is read by the traveller himself.';
     default:
       return 'Things built on his own time and actually finished. Forge is on the anvil.';
   }

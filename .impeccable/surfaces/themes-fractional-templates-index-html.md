@@ -15,8 +15,8 @@ User requests, verbatim (latest first):
 - Earlier: dropping the city, rotating the music, and the original multi-world brief.
 
 Content commitments: each section lives in one place.
-- Map: Writing (Library of Stories), Work (The Citadel), Projects (Craftsman's Forge).
-- Cottage: About (front door), Library (shelves), Contact (messenger's letterbox).
+- Map: Writing (Library of Stories), Work (The Citadel), Projects (Craftsman's Forge), Contact (Messenger's Outpost, added 2026-10-14 so visitors can write from the map).
+- Cottage: About (front door), Library (shelves). The messenger's letterbox is a shortcut out to the outpost.
 - Shortcuts in the cottage lead out to the map places: the writing desk, the letter from the Citadel, the workbench.
 - The Minstrel's Camp on the map and the lute in the cottage open the songbook.
 
