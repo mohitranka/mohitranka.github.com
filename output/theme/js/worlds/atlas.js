@@ -795,7 +795,7 @@ const world = {
     measureRoad();
     renderVisited();
     drawRibbons();
-    document.fonts.load("30px 'IM Fell English SC'").then(() => svg && drawRibbons(), () => {});
+    document.fonts.load("27px 'Uncial Antiqua'").then(() => svg && drawRibbons(), () => {});
     bindInput();
     overview({ instant: true });
   },

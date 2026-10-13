@@ -436,3 +436,94 @@
 .sb-n { color: #74263a; }
 .ct-bar button { font-family: 'Uncial Antiqua', Georgia, serif; text-transform: lowercase; }
 .sb-foot button { font-family: 'Uncial Antiqua', Georgia, serif; text-transform: lowercase; }
+
+/* ============================================================
+   The hall (2026-10-14). A candlelit stone-and-oak room rendered
+   as one plate (images/hall.jpg, scripts/render_hall.py). The
+   page lays the living things on top with the plate's camera:
+   flames that flicker and breathe, the fire, steam, dust in the
+   firelight, the raven, the lute; the clickable places glow warm
+   on hover and carry their names on the map's curled scrolls.
+   ============================================================ */
+.ct { background: #0e0905; }
+.ct-svg image { image-rendering: auto; }
+
+/* fire and flame */
+.ct-flame { transform-box: fill-box; transform-origin: 50% 100%; animation: ct-flicker 1.6s ease-in-out infinite; mix-blend-mode: screen; }
+.ct-halo { mix-blend-mode: screen; animation: ct-breathe 2.3s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+.ct-lights > :nth-child(3n) .ct-flame,
+.ct-lights .ct-halo:nth-of-type(3n) { animation-delay: -0.9s; }
+.ct-lights .ct-halo:nth-of-type(2n) { animation-duration: 3.1s; }
+@keyframes ct-breathe { 0%, 100% { opacity: 0.85; } 37% { opacity: 1; } 61% { opacity: 0.7; } }
+.ct-fire path { mix-blend-mode: screen; }
+.ct-fire-c { animation-duration: 1.45s; animation-delay: -0.5s; }
+.ct-hearth-glow { mix-blend-mode: screen; opacity: 0.35; }
+.ct.is-night .ct-hearth-glow { opacity: 0.6; }
+.ct-steam { animation: ct-steam 3s ease-in-out infinite; }
+
+/* dust in the firelight */
+.ct-motes circle { fill: #ffd9a0; opacity: 0; animation: ct-mote 14s linear infinite; mix-blend-mode: screen; }
+@keyframes ct-mote { 0% { opacity: 0; transform: translate(0, 0); } 20% { opacity: 0.55; } 80% { opacity: 0.4; } 100% { opacity: 0; transform: translate(18px, -60px); } }
+
+/* the window darkens with the night */
+.ct-window-night { fill: #0b1024; opacity: 0; transition: opacity 0.6s ease; mix-blend-mode: multiply; }
+.ct.is-night .ct-window-night { opacity: 0.85; }
+.ct-night { fill: #0a0614; opacity: 0; pointer-events: none; mix-blend-mode: multiply; transition: opacity 0.6s ease; }
+.ct.is-night .ct-night { opacity: 0.32; }
+.ct-night-glow { mix-blend-mode: screen; }
+
+/* the banner's embroidery */
+.ct-sampler-big { font: 15px 'Uncial Antiqua', Georgia, serif; fill: #e2b45a; letter-spacing: 0.02em; }
+.ct-sampler-small { font: italic 11px 'IM Fell English', Georgia, serif; fill: #e2b45a; }
+
+/* the clickable places: a warm light comes up on hover, and their names sit on scrolls */
+.ct-hit { fill: transparent; stroke: none; }
+.ct-obj:hover .ct-hit,
+.ct-obj:focus-visible .ct-hit,
+.ct-obj.is-active .ct-hit { fill: url(#ct-hover); mix-blend-mode: screen; }
+.ct-obj:focus-visible .ct-hit { stroke: #f2d29a; stroke-width: 2; stroke-dasharray: 8 6; }
+.ct-obj:hover > *:not(.ct-hit),
+.ct-obj:focus-visible > *:not(.ct-hit) { filter: none; }
+.ct-place-name {
+  font: 17px 'Uncial Antiqua', Georgia, serif;
+  letter-spacing: 0.04em;
+  fill: #74263a;
+  text-transform: lowercase;
+  transition: fill 0.2s ease;
+}
+.ct-ribbon {
+  fill: #e9d4a4;
+  stroke: #241710;
+  stroke-width: 1.3;
+  filter: drop-shadow(0 3px 3px rgba(0, 0, 0, 0.55));
+  transition: fill 0.2s ease;
+}
+.ct-obj:hover .ct-ribbon,
+.ct-obj:focus-visible .ct-ribbon,
+.ct-obj.is-active .ct-ribbon { fill: #74263a; }
+.ct-obj:hover .ct-place-name,
+.ct-obj:focus-visible .ct-place-name,
+.ct-obj.is-active .ct-place-name { fill: #f2e2b8; }
+.ct-raven-head { transform-box: fill-box; transform-origin: 0% 60%; }
+
+/* the title on a drawn scroll, like the map's cartouche */
+.ct-title {
+  padding: 1.3rem 2.4rem 1.35rem;
+  background: var(--orn-cartouche) center / 100% 100% no-repeat, radial-gradient(ellipse at 50% 50%, rgba(236, 220, 172, 0.95) 55%, rgba(236, 220, 172, 0) 75%);
+  box-shadow: none;
+  clip-path: none !important;
+  filter: drop-shadow(0 8px 14px rgba(0, 0, 0, 0.6));
+}
+.ct-title::before,
+.ct-title::after { display: none; }
+.ct-name { font-size: 1.9rem; text-transform: lowercase; letter-spacing: 0.04em; }
+.ct-bar { filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.65)); }
+
+@media (prefers-reduced-motion: reduce) {
+  .ct-flame, .ct-halo, .ct-motes circle, .ct-steam { animation: none; }
+  .ct-motes { display: none; }
+}
+@media (max-width: 760px) {
+  .ct-title { top: 92px; padding: 0.9rem 1.5rem 1rem; }
+  .ct-name { font-size: 1.35rem; }
+}

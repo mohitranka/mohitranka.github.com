@@ -1,6 +1,6 @@
 import { deckle } from './paper.js';
 
-// Traveler's Home: the cottage on the Unfinished Atlas, drawn in SVG. The personal
+// Traveler's Home: the cottage on the Unfinished Atlas, a candlelit hall. The personal
 // sections live here (front door, shelves, messenger's letterbox); the writing desk,
 // the letter from the Citadel and the workbench are shortcuts back out to their places
 // on the map. A few objects are just objects, with opinions. The wayfinder bar covers
@@ -28,270 +28,222 @@ function seeded(seed) {
   return () => ((s = (s * 16807) % 2147483647) - 1) / 2147483646;
 }
 
-// Leather tomes with gilt bands; one of them slides out on hover.
-function tomes() {
-  const r = seeded(1066);
-  const leather = ['#6b2a22', '#7a4a29', '#3f5a3a', '#2e3b55', '#8a5a2b', '#5a2f3f', '#9a7a4a'];
-  let out = '';
-  [228, 330, 432, 534, 632].forEach((shelf, row) => {
-    let x = 418;
-    while (x < 600) {
-      const w = 13 + Math.floor(r() * 12);
-      if (x + w > 604) break;
-      const h = 58 + Math.floor(r() * 28);
-      const c = leather[Math.floor(r() * leather.length)];
-      const pull = row === 1 && x > 470 && x < 500 && !out.includes('ct-pull');
-      const lean = row === 3 && x > 560 ? ` transform="rotate(-12 ${x} ${shelf})"` : '';
-      out += `<g${pull ? ' class="ct-pull"' : ''}${lean}><rect x="${x}" y="${shelf - h}" width="${w}" height="${h}" rx="2" fill="${c}"/><rect x="${x}" y="${shelf - h + 9}" width="${w}" height="2.5" fill="#d9b25a"/><rect x="${x}" y="${shelf - 13}" width="${w}" height="2.5" fill="#d9b25a"/></g>`;
-      x += w + (r() < 0.1 ? 9 : 1);
-    }
-  });
-  return out;
+// Traveler's Home is a candlelit hall, rendered as one plate (scripts/render_hall.py:
+// stone, oak, a woven rug, books, barrels, all lit by the hearth and the sconces). The
+// page draws on top of it, with the same camera, everything that moves or can be
+// clicked: the fire and every flame, the cauldron, the raven, the lute, the papers on
+// the table, the clickable places and their names on curled scrolls.
+
+// the plate's camera, in page units: eye 1.7m up, walls at x = +-5, the back wall at z = 9
+const pt = (X, Y, Z) => [800 + (800 * X) / Z, 430 - (800 * Y) / Z];
+const xy = (X, Y, Z) => pt(X, Y, Z).map((n) => n.toFixed(1)).join(' ');
+const poly = (pts) => pts.map((p) => xy(...p)).join(' ');
+// the screen rectangle that holds a box in the room
+function rectOf(lo, hi) {
+  const ps = [];
+  for (const X of [lo[0], hi[0]]) for (const Y of [lo[1], hi[1]]) for (const Z of [lo[2], hi[2]]) ps.push(pt(X, Y, Z));
+  const xs = ps.map((p) => p[0]);
+  const ys = ps.map((p) => p[1]);
+  const x = Math.min(...xs);
+  const y = Math.min(...ys);
+  return `x="${x.toFixed(0)}" y="${y.toFixed(0)}" width="${(Math.max(...xs) - x).toFixed(0)}" height="${(Math.max(...ys) - y).toFixed(0)}"`;
+}
+const hit = (lo, hi) => `<rect class="ct-hit" ${rectOf(lo, hi)} rx="10"/>`;
+
+// a flame: a teardrop with a hot core, and a halo that breathes
+function flame(X, Y, Z, size = 1, halo = true) {
+  const [x, y] = pt(X, Y, Z);
+  const s = (size * 800) / Z / 100;
+  const d = `M${x.toFixed(1)} ${y.toFixed(1)} c${(-3.2 * s).toFixed(1)} ${(-3 * s).toFixed(1)} ${(-2.6 * s).toFixed(1)} ${(-8 * s).toFixed(1)} 0 ${(-14 * s).toFixed(1)} c${(2.6 * s).toFixed(1)} ${(6 * s).toFixed(1)} ${(3.2 * s).toFixed(1)} ${(11 * s).toFixed(1)} 0 ${(14 * s).toFixed(1)}z`;
+  return `${halo ? `<ellipse class="ct-halo" cx="${x.toFixed(1)}" cy="${(y - 6 * s).toFixed(1)}" rx="${(34 * s).toFixed(1)}" ry="${(30 * s).toFixed(1)}" fill="url(#ct-halo)"/>` : ''}<path class="ct-flame" d="${d}" fill="url(#ct-flame)"/>`;
 }
 
-// Field stone, laid by hand: courses of uneven, rounded stones with their own tone.
-function stonePattern() {
-  const r = seeded(77);
-  let out = '';
-  let y = 0;
-  while (y < 120) {
-    const h = 15 + Math.floor(r() * 9);
-    let x = -Math.floor(r() * 30);
-    while (x < 240) {
-      const w = 26 + Math.floor(r() * 30);
-      const tone = ['#a69d8b', '#9c927e', '#b1a894', '#958b78', '#aaa08a'][Math.floor(r() * 5)];
-      out += `<rect x="${x + 1.5}" y="${y + 1.5}" width="${w - 3}" height="${h - 3}" rx="${4 + r() * 4}" fill="${tone}"/>`;
-      out += `<path d="M${x + 4} ${y + h - 4} q${w / 2} ${2 + r() * 2} ${w - 8} 0" fill="none" stroke="rgba(60,50,35,.35)" stroke-width="1.5"/>`;
-      x += w;
-    }
-    y += h;
-  }
-  return `<pattern id="ct-stone" width="240" height="${y}" patternUnits="userSpaceOnUse"><rect width="240" height="${y}" fill="#7d7464"/>${out}</pattern>`;
+// a candle standing at (X, Y, Z), `h` metres tall
+function candle(X, Y, Z, h = 0.16, r = 0.022) {
+  const [x0, y0] = pt(X - r, Y, Z);
+  const [x1, y1] = pt(X + r, Y + h, Z);
+  return `<rect x="${x0.toFixed(1)}" y="${y1.toFixed(1)}" width="${(x1 - x0).toFixed(1)}" height="${(y0 - y1).toFixed(1)}" fill="url(#ct-wax)"/>${flame(X, Y + h, Z, 0.55)}`;
 }
 
-// Oak: long grain lines with the odd knot.
-function woodPattern(id, base, w = 160, h = 48) {
-  const r = seeded(id.length * 31);
-  let lines = '';
-  for (let i = 0; i < 9; i++) {
-    const y = 3 + i * (h / 9) + r() * 3;
-    lines += `<path d="M0 ${y.toFixed(1)} C ${w * 0.3} ${(y + (r() - 0.5) * 6).toFixed(1)}, ${w * 0.6} ${(y + (r() - 0.5) * 6).toFixed(1)}, ${w} ${y.toFixed(1)}" fill="none" stroke="${r() < 0.5 ? 'rgba(20,10,4,.35)' : 'rgba(255,220,170,.12)'}" stroke-width="${(0.8 + r() * 1.4).toFixed(1)}"/>`;
-  }
-  const kx = 40 + r() * 80;
-  lines += `<ellipse cx="${kx.toFixed(0)}" cy="${(h / 2).toFixed(0)}" rx="7" ry="3.2" fill="none" stroke="rgba(20,10,4,.4)" stroke-width="1.2"/>`;
-  return `<pattern id="${id}" width="${w}" height="${h}" patternUnits="userSpaceOnUse"><rect width="${w}" height="${h}" fill="${base}"/>${lines}</pattern>`;
+// a box drawn from the room: its front face and its top, lit from the fire
+function prism(lo, hi, front, top) {
+  return `<polygon points="${poly([[lo[0], lo[1], lo[2]], [hi[0], lo[1], lo[2]], [hi[0], hi[1], lo[2]], [lo[0], hi[1], lo[2]]])}" fill="${front}"/><polygon points="${poly([[lo[0], hi[1], lo[2]], [hi[0], hi[1], lo[2]], [hi[0], hi[1], hi[2]], [lo[0], hi[1], hi[2]]])}" fill="${top}"/>`;
 }
+
+// the names of the places in the hall, lettered on small curled scrolls as on the map
+const tag = (X, Y, Z, text) => {
+  const [x, y] = pt(X, Y, Z);
+  return `<path class="ct-ribbon"/><text class="ct-place-name" x="${x.toFixed(0)}" y="${y.toFixed(0)}" text-anchor="middle">${text}</text>`;
+};
 
 function svg() {
+  const [fx, fy] = pt(0, -1.62, 8.4);
+  const [rx, ry] = pt(0, 1.95, 6.4);
+  const [, cy0] = pt(0, 3.3, 6.4);
+  const [ox, oy] = pt(0, -1.05, 8.32);
   return `
 <svg class="ct-svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" role="group" aria-label="Traveler's Home">
   <defs>
-    <pattern id="ct-plaster" width="120" height="120" patternUnits="userSpaceOnUse"><rect width="120" height="120" class="ct-wall"/><path d="M14 30 q20 -6 40 2 M70 88 q18 6 34 -2 M30 104 q10 -4 18 0" class="ct-crack"/></pattern>
-    ${stonePattern()}
-    ${woodPattern('ct-oak', '#4a3220')}
-    ${woodPattern('ct-boards', '#7a5236', 220, 40)}
-    <pattern id="ct-vellum" width="520" height="520" patternUnits="userSpaceOnUse"><image href="/theme/images/vellum.jpg" width="520" height="520"/></pattern>
-    <linearGradient id="ct-sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" class="ct-sky-top"/><stop offset="1" class="ct-sky-low"/></linearGradient>
+    <radialGradient id="ct-flame" cx="50%" cy="70%" r="60%"><stop offset="0" stop-color="#fffbe6"/><stop offset=".35" stop-color="#ffd76a"/><stop offset=".8" stop-color="#f08a2a"/><stop offset="1" stop-color="#c84a14" stop-opacity=".2"/></radialGradient>
+    <radialGradient id="ct-halo"><stop offset="0" stop-color="#ffc46a" stop-opacity=".55"/><stop offset=".4" stop-color="#ff9a3a" stop-opacity=".18"/><stop offset="1" stop-color="#ff8a2a" stop-opacity="0"/></radialGradient>
     <radialGradient id="ct-glow"><stop offset="0" stop-color="#ffb347" stop-opacity=".6"/><stop offset="1" stop-color="#ffb347" stop-opacity="0"/></radialGradient>
-    <clipPath id="ct-window-clip"><path d="M672 360 V200 Q760 110 848 200 V360Z"/></clipPath>
+    <radialGradient id="ct-hover"><stop offset="0" stop-color="#ffd59a" stop-opacity=".22"/><stop offset=".7" stop-color="#ffc070" stop-opacity=".08"/><stop offset="1" stop-color="#ffc070" stop-opacity="0"/></radialGradient>
+    <linearGradient id="ct-wax" x1="0" x2="1"><stop offset="0" stop-color="#8a6a44"/><stop offset=".45" stop-color="#f1dcae"/><stop offset="1" stop-color="#7a5a38"/></linearGradient>
+    <linearGradient id="ct-fireA" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#fff2b0"/><stop offset=".35" stop-color="#ffb43c"/><stop offset=".8" stop-color="#e2561a"/><stop offset="1" stop-color="#a02a10" stop-opacity="0"/></linearGradient>
+    <linearGradient id="ct-fireB" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#ffffff"/><stop offset=".4" stop-color="#ffe07a"/><stop offset="1" stop-color="#ff9a30" stop-opacity="0"/></linearGradient>
+    <linearGradient id="ct-iron" x1="0" x2="1"><stop offset="0" stop-color="#0c0a09"/><stop offset=".55" stop-color="#2a2420"/><stop offset=".8" stop-color="#5a3a20"/><stop offset="1" stop-color="#140f0c"/></linearGradient>
+    <linearGradient id="ct-lute" x1="0" x2="1"><stop offset="0" stop-color="#3a1e0c"/><stop offset=".5" stop-color="#a8682e"/><stop offset="1" stop-color="#4a260e"/></linearGradient>
+    <linearGradient id="ct-paper" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e9d2a0"/><stop offset="1" stop-color="#b8925a"/></linearGradient>
   </defs>
 
-  <rect width="1600" height="650" fill="url(#ct-plaster)"/>
-  <rect y="560" width="1600" height="90" fill="url(#ct-stone)"/>
-  <rect y="652" width="1600" height="248" class="ct-floor"/>
-  ${[0, 1, 2, 3, 4, 5].map((i) => `<path d="M0 ${690 + i * 40} H1600" class="ct-plank"/>`).join('')}
-  ${[0, 1, 2, 3, 4, 5].map((i) => `<path d="M${(i * 311 + (i % 2) * 150) % 1600} ${690 + i * 40} v40" class="ct-plank"/>`).join('')}
+  <image href="/theme/images/hall.jpg" width="1600" height="900" preserveAspectRatio="none"/>
 
-  <!-- the timber frame -->
-  <g class="ct-timber">
-    <rect width="1600" height="44"/>
-    <rect x="0" y="44" width="26" height="608"/>
-    <rect x="1574" y="44" width="26" height="608"/>
-    <rect x="626" y="44" width="22" height="516"/>
-    <rect x="1262" y="44" width="22" height="516"/>
-    <path d="M26 44 L190 150 L208 140 L48 44Z M1574 44 L1430 140 L1414 128 L1552 44Z"/>
-    <rect x="0" y="548" width="1600" height="14"/>
+  <!-- the window: dusk by day, night after dark -->
+  <g class="ct-obj ct-decor" data-quip="window" tabindex="0" role="button" aria-label="The window">
+    ${hit([-5, -0.1, 5.9], [-4.9, 1.6, 7.2])}
+    <polygon class="ct-window-night" points="${poly([[-5, 0.05, 6.05], [-5, 0.05, 7.05], [-5, 1.0, 7.05], ...[0.2, 0.4, 0.6, 0.8].map((k) => [-5, 1 + 0.5 * Math.sin(Math.PI * k), 6.55 + 0.5 * Math.cos(Math.PI * k)]), [-5, 1.0, 6.05]])}"/>
   </g>
 
-  <!-- iron candle ring -->
-  <path d="M960 44 V96" class="ct-chain"/>
-  <ellipse cx="960" cy="104" rx="70" ry="12" class="ct-iron-ring"/>
-  ${[-56, -20, 20, 56].map((dx) => `<rect x="${956 + dx}" y="80" width="8" height="18" fill="#efe2c4"/><path class="ct-flame" d="M${960 + dx} 66 q6 8 0 14 q-6 -6 0 -14Z"/>`).join('')}
-  <ellipse class="ct-night-glow" cx="960" cy="140" rx="300" ry="200" fill="url(#ct-glow)"/>
-
-  <!-- front door: About -->
-  <g class="ct-obj" data-section="about" tabindex="0" role="button" aria-label="The front door: About">
-    <rect class="ct-hit" x="44" y="170" width="220" height="490"/>
-    <path d="M52 650 V300 Q154 150 256 300 V650Z" fill="url(#ct-stone)" class="ct-arch"/>
-    <path d="M74 650 V310 Q154 190 234 310 V650Z" class="ct-hall"/>
-    <g class="ct-door">
-      <path d="M74 650 V310 Q154 190 234 310 V650Z" fill="#6b4428"/>
-      <path d="M100 640 V300 M128 640 V262 M156 640 V246 M184 640 V256 M212 640 V290" stroke="#57361f" stroke-width="3"/>
-      <rect x="74" y="360" width="160" height="14" fill="#2b2622"/><rect x="74" y="560" width="160" height="14" fill="#2b2622"/>
-      ${[92, 120, 148, 176, 204].map((x) => `<circle cx="${x}" cy="367" r="3" fill="#8a8174"/><circle cx="${x}" cy="567" r="3" fill="#8a8174"/>`).join('')}
-      <circle cx="210" cy="470" r="13" fill="none" stroke="#2b2622" stroke-width="5"/>
-      <rect x="203" y="452" width="14" height="8" fill="#2b2622"/>
+  <!-- the hearth: a log fire, and a cauldron on its chain -->
+  <g class="ct-obj ct-decor" data-action="soup" tabindex="0" role="button" aria-label="The cauldron">
+    ${hit([-0.9, -1.7, 8.4], [0.9, 0.2, 8.4])}
+    <ellipse class="ct-hearth-glow" cx="${fx.toFixed(0)}" cy="${(fy - 20).toFixed(0)}" rx="230" ry="150" fill="url(#ct-glow)"/>
+    <g class="ct-fire">
+      <path class="ct-fire-a" d="M${fx - 62} ${fy} q-6 -40 16 -66 q2 26 14 32 q6 -34 -4 -60 q34 26 30 76 q10 -14 6 -34 q26 26 10 52z" fill="url(#ct-fireA)"/>
+      <path class="ct-fire-a ct-fire-c" d="M${fx + 2} ${fy} q-4 -34 20 -58 q0 22 12 26 q10 -16 4 -40 q26 30 12 72z" fill="url(#ct-fireA)"/>
+      <path class="ct-fire-b" d="M${fx - 34} ${fy} q-2 -26 14 -42 q2 16 10 20 q6 -10 4 -26 q20 22 8 48z" fill="url(#ct-fireB)"/>
     </g>
+    <path d="M${ox} ${(oy - 92).toFixed(0)} V${(oy - 26).toFixed(0)}" stroke="#14100c" stroke-width="2.4"/>
+    <path d="M${ox - 30} ${(oy - 24).toFixed(0)} h60 q2 30 -30 36 q-32 -6 -30 -36z" fill="url(#ct-iron)"/>
+    <path d="M${ox - 32} ${(oy - 26).toFixed(0)} h64" stroke="#5a3a20" stroke-width="3" stroke-linecap="round"/>
+    <path class="ct-steam" d="M${ox - 10} ${(oy - 30).toFixed(0)} q-8 -12 2 -24 q8 -10 0 -22 M${ox + 10} ${(oy - 30).toFixed(0)} q8 -12 -2 -26" stroke="#f1e3c4" stroke-opacity=".45" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+  </g>
+
+  <!-- the banner over the mantel -->
+  <g class="ct-obj ct-decor" data-quip="sampler" tabindex="0" role="button" aria-label="An embroidered banner">
+    ${hit([-0.66, 1.0, 8.4], [0.66, 2.62, 8.4])}
+    <text x="800" y="${pt(0, 2.18, 8.4)[1].toFixed(0)}" text-anchor="middle" class="ct-sampler-big">grandmaster</text>
+    <text x="800" y="${pt(0, 1.98, 8.4)[1].toFixed(0)}" text-anchor="middle" class="ct-sampler-small">of</text>
+    <text x="800" y="${pt(0, 1.72, 8.4)[1].toFixed(0)}" text-anchor="middle" class="ct-sampler-big">snacks</text>
+  </g>
+
+  <!-- the sconces and the candle ring -->
+  <g class="ct-lights">
+    ${candle(-1.9, 0.92, 8.82, 0.14, 0.03)}${candle(1.9, 0.92, 8.82, 0.14, 0.03)}
+    ${candle(-4.82, 0.92, 7.45, 0.14, 0.03)}${candle(4.82, 0.92, 5.9, 0.14, 0.03)}
+    <path d="M${rx} ${cy0.toFixed(0)} V${(ry - 4).toFixed(0)}" stroke="#14100c" stroke-width="2"/>
+    <ellipse cx="${rx}" cy="${ry.toFixed(0)}" rx="${(800 * 0.62) / 6.4}" ry="10" fill="none" stroke="#1a1410" stroke-width="4"/>
+    ${[-0.5, -0.18, 0.18, 0.5].map((X) => candle(X, 1.95 + (Math.abs(X) > 0.3 ? -0.02 : 0.03), 6.4 + (Math.abs(X) > 0.3 ? 0 : 0.3), 0.16, 0.025)).join('')}
+    ${candle(-0.95, 0.58, 8.22, 0.12)}${candle(1.3, 0.58, 8.25, 0.1)}
+    ${candle(-2.42, -0.9, 3.0 + 2.1, 0.2, 0.026)}
+    ${candle(-2.62, -0.9, 3.0 + 1.95, 0.14, 0.026)}
+  </g>
+  <ellipse class="ct-night-glow" cx="${rx}" cy="${ry + 40}" rx="300" ry="200" fill="url(#ct-glow)"/>
+
+  <!-- the front door: About -->
+  <g class="ct-obj" data-section="about" tabindex="0" role="button" aria-label="The front door: About">
+    ${hit([2.0, -1.7, 9], [3.74, 1.12, 9])}
+    ${tag(2.86, -0.95, 9, 'the door')}
   </g>
   <g class="ct-obj ct-decor" data-quip="doormat" tabindex="0" role="button" aria-label="The doormat">
-    <path d="M70 664 h168 l16 30 h-200z" fill="#9a7a4a"/>
-    <text x="154" y="686" text-anchor="middle" class="ct-mat">WELCOME-ISH</text>
+    <polygon class="ct-hit" points="${poly([[2.35, -1.7, 8.2], [3.35, -1.7, 8.2], [3.35, -1.7, 8.78], [2.35, -1.7, 8.78]])}"/>
   </g>
 
-  <!-- messenger's letterbox and the raven: Contact -->
-  <g class="ct-obj" data-section="contact" tabindex="0" role="button" aria-label="The messenger's letterbox: Contact, out at the Messenger's Outpost">
-    <rect class="ct-hit" x="276" y="240" width="120" height="320"/>
-    <rect x="290" y="300" width="92" height="96" rx="4" fill="#7a4a29"/>
-    <path d="M286 300 h100 l-8 -22 h-84z" fill="#57361f"/>
-    <rect x="304" y="322" width="64" height="7" rx="3" fill="#2b2622"/>
-    <g class="ct-letters"><rect x="312" y="306" width="30" height="20" fill="#efe2c4" transform="rotate(-8 327 316)"/><circle cx="330" cy="318" r="4" fill="#a83a2a"/><rect x="336" y="304" width="26" height="18" fill="#f6ecd2" transform="rotate(6 349 313)"/></g>
-    <path d="M306 344 q30 12 60 0" stroke="#57361f" stroke-width="3" fill="none"/>
-    <rect x="286" y="470" width="100" height="10" fill="#57361f"/>
-    <path d="M298 480 l8 40 M374 480 l-8 40" stroke="#57361f" stroke-width="5"/>
-    <g class="ct-raven">
-      <path d="M318 470 q-8 -30 14 -46 q18 -10 30 4 l14 -2 l-12 10 q4 24 -12 34z" fill="#1d1c22"/>
-      <path class="ct-raven-head" d="M342 428 q12 -12 24 -2 l14 2 l-14 6 q-10 6 -24 -6z" fill="#1d1c22"/>
-      <circle cx="356" cy="428" r="2" fill="#efe2c4"/>
-    </g>
-    <path d="M300 470 l-6 -22 q0 -4 4 -2 l8 22" fill="#efe2c4"/>
-  </g>
-
-  <!-- shelves of tomes: Library -->
+  <!-- the bookcase: Library -->
   <g class="ct-obj" data-section="library" tabindex="0" role="button" aria-label="The shelves: Library">
-    <rect class="ct-hit" x="404" y="110" width="212" height="540"/>
-    <rect x="408" y="120" width="204" height="528" fill="#57361f"/>
-    <rect x="416" y="130" width="188" height="510" fill="#3a2414"/>
-    ${[228, 330, 432, 534, 632].map((y) => `<rect x="412" y="${y}" width="196" height="10" fill="#6b4428"/>`).join('')}
-    ${tomes()}
-    <rect x="430" y="96" width="14" height="24" fill="#efe2c4"/><path class="ct-flame" d="M437 82 q6 8 0 14 q-6 -6 0 -14Z"/>
-    <path d="M560 120 q8 -26 30 -26 q14 0 14 26z" fill="#8a8174"/>
+    ${hit([-4.62, -1.7, 8.42], [-2.2, 1.56, 9])}
+    ${tag(-3.41, 1.72, 8.42, 'the shelves')}
   </g>
 
-  <!-- arched window onto the map's country -->
-  <g class="ct-obj ct-decor" data-quip="window" tabindex="0" role="button" aria-label="The window">
-    <path d="M660 372 V198 Q760 92 860 198 V372Z" fill="#57361f"/>
-    <path d="M672 360 V200 Q760 110 848 200 V360Z" fill="url(#ct-sky)"/>
-    <g clip-path="url(#ct-window-clip)">
-      <circle class="ct-sun" cx="800" cy="190" r="18"/>
-      ${[0, 1, 2, 3, 4, 5].map((i) => `<circle class="ct-star" cx="${690 + i * 28}" cy="${170 + (i % 3) * 18}" r="1.6"/>`).join('')}
-      <path class="ct-hill-far" d="M660 300 Q720 250 780 276 T870 260 V372 H660Z"/>
-      <g class="ct-castle"><rect x="748" y="238" width="34" height="26"/><rect x="741" y="224" width="10" height="40"/><rect x="779" y="224" width="10" height="40"/><path d="M765 238 v-18 l11 4 l-11 4"/></g>
-      <rect class="ct-lit" x="762" y="248" width="5" height="7"/>
-      <path class="ct-hill-near" d="M660 330 Q730 296 800 322 T870 314 V372 H660Z"/>
-      <path class="ct-road" d="M700 372 Q730 340 768 330 T812 316"/>
-    </g>
-    <path d="M760 110 V360 M672 250 H848 M672 305 H848" class="ct-lead"/>
-    <path d="M672 200 L848 360 M848 200 L672 360" class="ct-lead ct-lead--thin"/>
-    <rect x="652" y="372" width="216" height="14" fill="#6b4428"/>
+  <!-- the letterbox on the wall, and the raven on its perch: Contact -->
+  <g class="ct-obj" data-section="contact" tabindex="0" role="button" aria-label="The messenger's letterbox: Contact, out at the Messenger's Outpost">
+    ${hit([-5, -0.8, 7.75], [-4.7, 0.85, 8.62])}
+    <g class="ct-letters"><polygon points="${poly([[-4.98, 0.17, 7.98], [-4.98, 0.17, 8.2], [-4.98, 0.33, 8.18], [-4.98, 0.31, 7.99]])}" fill="url(#ct-paper)"/></g>
+    ${(() => {
+      const [x, y] = pt(-4.9, -0.6, 8.2);
+      return `<g class="ct-raven" transform="translate(${x.toFixed(0)} ${y.toFixed(0)})">
+        <path d="M-6 0 q-6 -18 6 -28 q10 -6 16 2 l9 -1 l-7 6 q3 15 -6 21z" fill="#0d0b0b"/>
+        <path class="ct-raven-head" d="M8 -26 q7 -8 15 -1 l9 1 l-9 4 q-6 3 -15 -4z" fill="#0d0b0b"/>
+        <circle cx="16" cy="-26" r="1.3" fill="#e8b860"/>
+        <path d="M-4 0 l-2 7 M4 0 l1 7" stroke="#0d0b0b" stroke-width="1.4"/>
+      </g>`;
+    })()}
+    ${tag(-4.9, 1.02, 8.2, 'the letterbox')}
   </g>
 
-  <!-- writing desk: Writing (out at the Library of Stories) -->
+  <!-- the long table: Writing (out at the Library of Stories) -->
   <g class="ct-obj" data-section="writing" tabindex="0" role="button" aria-label="The writing desk: Writing, out at the Library of Stories">
-    <rect class="ct-hit" x="650" y="400" width="240" height="250"/>
-    <rect x="652" y="480" width="236" height="16" fill="#6b4428"/>
-    <path d="M664 496 v150 M876 496 v150 M664 600 h212" stroke="#57361f" stroke-width="10"/>
-    <g class="ct-page"><path d="M700 480 l6 -40 h70 l-6 40z" fill="#f6ecd2"/><path d="M714 452 h50 M712 462 h46 M710 472 h40" stroke="#9a8a6a" stroke-width="2"/></g>
-    <rect x="800" y="462" width="22" height="18" rx="4" fill="#2b2622"/>
-    <path class="ct-quill" d="M812 462 q10 -40 34 -62 q-8 30 -30 62z" fill="#efe2c4"/>
-    <rect x="846" y="446" width="12" height="34" fill="#efe2c4"/><path class="ct-flame" d="M852 430 q6 8 0 14 q-6 -6 0 -14Z"/>
-    <ellipse class="ct-candle-glow" cx="852" cy="440" rx="60" ry="44" fill="url(#ct-glow)"/>
-    <rect x="664" y="458" width="30" height="22" fill="#6b2a22"/><rect x="668" y="444" width="26" height="14" fill="#3f5a3a"/>
+    ${hit([-3.7, -1.7, 4.4], [-1.15, -0.55, 5.65])}
+    <g class="ct-page"><polygon points="${poly([[-2.25, -0.899, 4.62], [-1.62, -0.899, 4.6], [-1.58, -0.899, 5.08], [-2.2, -0.899, 5.12]])}" fill="url(#ct-paper)"/>
+      ${[0, 1, 2, 3].map((k) => `<polyline points="${poly([[-2.15, -0.899, 4.72 + k * 0.08], [-1.7, -0.899, 4.71 + k * 0.08]])}" stroke="#3a2412" stroke-width="1" opacity=".6"/>`).join('')}</g>
+    ${prism([-1.5, -0.9, 4.75], [-1.4, -0.82, 4.85], '#100c09', '#2a201a')}
+    <path class="ct-quill" d="M${xy(-1.45, -0.82, 4.8)} q8 -40 34 -58 q-8 30 -30 58z" fill="#eadfc8" stroke="#6a5a44" stroke-width=".8"/>
+    ${prism([-3.5, -0.9, 4.7], [-2.95, -0.8, 5.1], '#4a1414', '#7a5a3a')}
+    ${prism([-3.45, -0.8, 4.75], [-3.0, -0.72, 5.08], '#1c2a1a', '#8a6a44')}
+    ${prism([-3.42, -0.72, 4.78], [-3.05, -0.66, 5.05], '#5a3a14', '#9a7a52')}
+    <ellipse class="ct-candle-glow" ${(() => {
+      const [x, y] = pt(-2.5, -0.62, 5.0);
+      return `cx="${x.toFixed(0)}" cy="${y.toFixed(0)}"`;
+    })()} rx="120" ry="80" fill="url(#ct-glow)"/>
+    ${tag(-2.4, -1.3, 4.4, 'the writing desk')}
   </g>
 
-  <!-- the hearth, with a cauldron and an embroidered sampler above -->
-  <g class="ct-obj ct-decor" data-action="soup" tabindex="0" role="button" aria-label="The cauldron">
-    <path d="M930 650 V300 H1230 V650 H1160 V430 Q1080 360 1000 430 V650Z" fill="url(#ct-stone)" class="ct-hearth"/>
-    <rect x="916" y="290" width="328" height="20" fill="#6b4428"/>
-    <path d="M1000 650 V430 Q1080 360 1160 430 V650Z" fill="#1d1612"/>
-    <g class="ct-fire">
-      <path class="ct-fire-a" d="M1040 650 q-10 -50 20 -90 q4 30 20 40 q10 -30 0 -60 q40 30 30 110z" fill="#e86a2a"/>
-      <path class="ct-fire-b" d="M1056 650 q-4 -36 18 -58 q2 22 14 30 q10 -12 6 -30 q22 26 12 58z" fill="#f6b94a"/>
-    </g>
-    <ellipse class="ct-hearth-glow" cx="1080" cy="600" rx="200" ry="120" fill="url(#ct-glow)"/>
-    <path d="M1080 360 V470" stroke="#2b2622" stroke-width="4"/>
-    <path d="M1036 470 h88 q0 70 -44 70 q-44 0 -44 -70z" fill="#2b2622"/>
-    <path class="ct-steam" d="M1066 462 q-8 -14 2 -26 M1090 462 q8 -14 -2 -28" stroke="#d9cfb4" stroke-width="3" fill="none"/>
-  </g>
-  <g class="ct-obj ct-decor" data-quip="sampler" tabindex="0" role="button" aria-label="An embroidered sampler">
-    <rect x="1006" y="150" width="148" height="122" fill="#efe2c4" stroke="#6b4428" stroke-width="6"/>
-    <text x="1080" y="184" text-anchor="middle" class="ct-sampler-big">GRANDMASTER</text>
-    <text x="1080" y="202" text-anchor="middle" class="ct-sampler-small">of</text>
-    <text x="1080" y="224" text-anchor="middle" class="ct-sampler-big">SNACKS</text>
-    <path d="M1064 262 h22 l-3 -8 q6 -14 -3 -24 l-7 -3 l-8 6 l2 4 l6 -1 l-8 12 l3 8z" fill="#6b2a22"/>
-    <path d="M1014 158 h132 M1014 264 h132" stroke="#a83a2a" stroke-width="2" stroke-dasharray="4 4"/>
-  </g>
-
-  <!-- the lute: music -->
-  <g class="ct-obj ct-decor" data-action="music" tabindex="0" role="button" aria-label="The lute: open the songbook">
-    <rect class="ct-hit" x="1196" y="440" width="64" height="210"/>
-    <g class="ct-lute" transform="rotate(-10 1228 560)">
-      <ellipse cx="1228" cy="600" rx="30" ry="40" fill="#9a6a3a"/>
-      <circle cx="1228" cy="596" r="9" fill="#3a2414"/>
-      <rect x="1223" y="470" width="10" height="110" fill="#6b4428"/>
-      <path d="M1220 470 l8 -24 l8 24z" fill="#57361f"/>
-      <path class="ct-strings" d="M1225 480 V630 M1228 480 V632 M1231 480 V630" stroke="#efe2c4" stroke-width="0.8"/>
-    </g>
-  </g>
-
-  <!-- a letter from the Citadel, pinned to the beam: Work -->
+  <!-- a letter from the Citadel, nailed by the door: Work -->
   <g class="ct-obj" data-section="work" tabindex="0" role="button" aria-label="A letter from the Citadel: Work, out at the Citadel">
-    <rect class="ct-hit" x="1300" y="120" width="130" height="190"/>
-    <g class="ct-scroll">
-      <rect x="1318" y="140" width="96" height="140" fill="#f6ecd2"/>
-      <rect x="1312" y="132" width="108" height="14" rx="7" fill="#d9c69a"/><rect x="1312" y="274" width="108" height="14" rx="7" fill="#d9c69a"/>
-      <path d="M1340 170 h52 M1334 186 h64 M1334 200 h60 M1334 214 h48" stroke="#6a4e30" stroke-width="2.4"/>
-      <g fill="#6a4e30"><rect x="1350" y="230" width="32" height="22"/><rect x="1345" y="222" width="8" height="30"/><rect x="1379" y="222" width="8" height="30"/></g>
-      <circle cx="1400" cy="262" r="12" fill="#a83a2a"/>
-      <circle cx="1366" cy="128" r="5" fill="#8a8174"/>
-    </g>
+    ${hit([3.95, 0.12, 9], [4.66, 1.16, 9])}
+    ${tag(4.3, -0.05, 9, 'a letter')}
   </g>
 
   <!-- the workbench: Projects (out at the Craftsman's Forge) -->
   <g class="ct-obj" data-section="projects" tabindex="0" role="button" aria-label="The workbench: Projects, out at the Craftsman's Forge">
-    <rect class="ct-hit" x="1300" y="330" width="270" height="320"/>
-    <rect x="1310" y="340" width="250" height="170" fill="#8a6a3e" opacity=".35"/>
-    <path d="M1330 360 v80 M1326 352 h8 v12 h-8z" stroke="#57361f" stroke-width="6"/>
-    <path d="M1380 356 l10 0 l2 80 l-14 0z" fill="#6b4428"/><rect x="1378" y="436" width="16" height="16" fill="#8a8174"/>
-    <path d="M1430 360 h44 v14 h-44z M1446 374 v70 h12 v-70" fill="#57361f"/>
-    <path d="M1510 368 a16 16 0 1 0 0.1 0 M1510 398 v52" stroke="#8a8174" stroke-width="8" fill="none"/>
-    <rect x="1300" y="520" width="270" height="18" fill="#6b4428"/>
-    <path d="M1314 538 v108 M1556 538 v108 M1314 610 h242" stroke="#57361f" stroke-width="10"/>
-    <g class="ct-gears">
-      <g class="ct-gear ct-gear--a"><circle cx="1380" cy="490" r="24" fill="#b08a4a"/><circle cx="1380" cy="490" r="8" fill="#57361f"/>${[0, 45, 90, 135, 180, 225, 270, 315].map((a) => `<rect x="1376" y="460" width="8" height="10" fill="#b08a4a" transform="rotate(${a} 1380 490)"/>`).join('')}</g>
-      <g class="ct-gear ct-gear--b"><circle cx="1418" cy="506" r="14" fill="#8a6a3e"/><circle cx="1418" cy="506" r="5" fill="#57361f"/>${[0, 60, 120, 180, 240, 300].map((a) => `<rect x="1415" y="488" width="6" height="7" fill="#8a6a3e" transform="rotate(${a} 1418 506)"/>`).join('')}</g>
-    </g>
-    <path d="M1470 520 l50 -18" stroke="#2b2622" stroke-width="6" stroke-linecap="round"/>
+    ${hit([4.0, -1.7, 6.3], [5, 1.0, 8.25])}
+    ${tag(4.6, 1.22, 7.1, 'the workbench')}
   </g>
 
-  <!-- rug, table and chess -->
-  <ellipse cx="760" cy="850" rx="360" ry="44" fill="#6b2a22"/>
-  <ellipse cx="760" cy="850" rx="320" ry="34" fill="none" stroke="#d9b25a" stroke-width="4" stroke-dasharray="12 8"/>
+  <!-- chess on the little table -->
   <g class="ct-obj ct-decor" data-quip="chess" tabindex="0" role="button" aria-label="The chessboard">
-    <rect class="ct-hit" x="580" y="740" width="360" height="160"/>
-    <rect x="590" y="790" width="340" height="20" rx="4" fill="#6b4428"/>
-    <path d="M612 810 v70 M908 810 v70" stroke="#57361f" stroke-width="12"/>
-    <g transform="translate(690 762)">
-      <path d="M0 28 L18 0 H122 L140 28Z" fill="#efe2c4"/>
-      ${Array.from({ length: 32 }, (_, k) => {
-        const row = Math.floor(k / 8);
-        const col = k % 8;
-        if ((row + col) % 2 === 0) return '';
-        const inset = 18 - row * 4.5;
-        const w = (140 - 2 * inset) / 8;
-        return `<rect x="${inset + col * w}" y="${row * 7}" width="${w}" height="7" fill="#6b4428"/>`;
-      }).join('')}
-      <path d="M40 10 v-14 h6 v14z M44 -6 a5 5 0 1 0 0.1 0" fill="#1d1c22"/>
-      <path d="M92 18 v-16 h7 v16z M95 -1 l-6 -8 h12z" fill="#f6ecd2" stroke="#1d1c22" stroke-width="1.5"/>
-    </g>
-    <path d="M540 900 v-50 h50 v50 M930 900 v-50 h50 v50" fill="#57361f"/>
-    <rect x="532" y="840" width="66" height="14" rx="4" fill="#6b4428"/><rect x="922" y="840" width="66" height="14" rx="4" fill="#6b4428"/>
+    ${hit([1.55, -1.7, 4.55], [2.65, -0.85, 5.45])}
   </g>
 
-  <rect class="ct-grain" width="1600" height="900" fill="url(#ct-vellum)"/>
+  <!-- the lute, leaning on the barrel: music -->
+  <g class="ct-obj ct-decor" data-action="music" tabindex="0" role="button" aria-label="The lute: open the songbook">
+    ${(() => {
+      const [x, y] = pt(2.8, -1.7, 4.5);
+      return `<rect class="ct-hit" x="${(x - 40).toFixed(0)}" y="${(y - 210).toFixed(0)}" width="90" height="214" rx="10"/>
+      <g class="ct-lute" transform="translate(${x.toFixed(0)} ${y.toFixed(0)}) rotate(12)">
+        <path d="M0 -6 c-34 0 -40 -50 -26 -74 c10 -18 42 -18 52 0 c14 24 8 74 -26 74z" fill="url(#ct-lute)"/>
+        <circle cx="0" cy="-52" r="9" fill="#120a05"/><circle cx="0" cy="-52" r="12" fill="none" stroke="#d8b070" stroke-width="1" opacity=".6"/>
+        <rect x="-5" y="-170" width="10" height="96" fill="#2a1608"/>
+        <path d="M-6 -170 l6 -24 l6 24z" fill="#3a1e0c"/>
+        <path class="ct-strings" d="M-2 -168 V-18 M0 -168 V-16 M2 -168 V-18" stroke="#e8d8b0" stroke-width=".5" opacity=".8"/>
+        <path d="M-10 -20 h20" stroke="#1a0c04" stroke-width="3"/>
+      </g>`;
+    })()}
+  </g>
+
+  <!-- motes of dust drifting in the firelight -->
+  <g class="ct-motes">${Array.from({ length: 14 }, (_, k) => `<circle cx="${640 + ((k * 97) % 330)}" cy="${300 + ((k * 61) % 240)}" r="${(0.8 + (k % 3) * 0.5).toFixed(1)}" style="animation-delay:${-(k * 1.7).toFixed(1)}s"/>`).join('')}</g>
+
   <rect class="ct-night" width="1600" height="900"/>
-  <ellipse class="ct-night-glow" cx="1080" cy="560" rx="320" ry="220" fill="url(#ct-glow)"/>
-  <ellipse class="ct-night-glow" cx="852" cy="440" rx="120" ry="90" fill="url(#ct-glow)"/>
 </svg>`;
+}
+
+// Fit each scroll to its name once the lettering has its real width (as the map does).
+function drawRibbons(root) {
+  root.querySelectorAll('.ct-place-name').forEach((text) => {
+    const ribbon = text.previousElementSibling;
+    const b = text.getBBox();
+    if (!b.width) return;
+    const x0 = b.x - 12;
+    const x1 = b.x + b.width + 12;
+    const y0 = b.y - 2;
+    const y1 = b.y + b.height + 1;
+    const h = y1 - y0;
+    const band = `M${x0} ${y0} Q${(x0 + x1) / 2} ${y0 - 3} ${x1} ${y0} L${x1} ${y1} Q${(x0 + x1) / 2} ${y1 - 3} ${x0} ${y1} Z`;
+    const roll = (x, dir) =>
+      `M${x} ${y0} C${x + dir * 12} ${y0 - 2}, ${x + dir * 12} ${y1 + 2}, ${x} ${y1} C${x + dir * 5} ${y1 + 1}, ${x + dir * 7} ${y0 + h * 0.45}, ${x + dir * 3} ${y0 + h * 0.4} C${x - dir * 2} ${y0 + h * 0.35}, ${x - dir * 1} ${y0 + h * 0.62}, ${x + dir * 4} ${y0 + h * 0.6}`;
+    ribbon.setAttribute('d', band + roll(x0, -1) + roll(x1, 1));
+  });
 }
 
 let api;
@@ -429,7 +381,8 @@ const world = {
     label = el.querySelector('.ct-label');
     bubble = el.querySelector('.ct-bubble');
     bar = el.querySelector('.ct-bar');
-    deckle(el.querySelector('.ct-title'), { seed: 4 });
+    drawRibbons(room);
+    document.fonts.load("22px 'Uncial Antiqua'").then(() => el && drawRibbons(room), () => {});
     deckle(bar, { seed: 6, amp: 2.6 });
     world.setTheme(api.theme());
 
