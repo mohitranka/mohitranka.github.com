@@ -2,12 +2,17 @@
 // window or disabled site data just means the defaults, never a broken page.
 
 const DEFAULTS = {
-  world: 'read', // read | city | apartment | atlas
-  music: 'off', // off | on: whether the visitor last left music playing
+  world: 'read', // read | atlas
+  music: 'on', // on by default in the world; 'off' once the visitor turns it off
   volume: '0.35',
 };
 
-export const WORLD_IDS = ['read', 'city', 'apartment', 'atlas'];
+export const WORLD_IDS = ['read', 'atlas'];
+
+// Earlier versions had a city and an apartment; every world choice now opens the atlas.
+export function normalise(w) {
+  return w === 'city' || w === 'atlas' || w === 'apartment' ? 'atlas' : 'read';
+}
 
 export function get(key) {
   try {
@@ -41,6 +46,5 @@ export function session(key, value) {
 }
 
 export function world() {
-  const w = get('world');
-  return WORLD_IDS.includes(w) ? w : 'read';
+  return normalise(get('world'));
 }

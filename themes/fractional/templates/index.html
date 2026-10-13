@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% from "world-previews.html" import panorama %}
+{% from "world-previews.html" import invitation %}
 
 {% block title %}Mohit Ranka{% endblock %}
 {% block canonical %}{{ SITE_ORIGIN }}/{% endblock %}
@@ -65,11 +65,11 @@
 
 <section class="home-worlds" aria-labelledby="worlds-title">
     <div class="home-worlds-head">
-        <h2 id="worlds-title">One person, three worlds</h2>
-        <p>The same writing, work, and books, arranged as a city, an apartment, or an old map. Or skip the scenery and keep reading here.</p>
+        <h2 id="worlds-title">Or take the map</h2>
+        <p>The same pages, drawn as an old map: the writing, the work and the projects out in the country, and a cottage for everything else.</p>
     </div>
-    {{ panorama() }}
-    <noscript><p class="home-worlds-note">The worlds need JavaScript. Everything they contain is on the plain pages too.</p></noscript>
+    {{ invitation() }}
+    <noscript><p class="home-worlds-note">The map needs JavaScript. Everything on it is on the plain pages too.</p></noscript>
 </section>
 
 {% if articles %}

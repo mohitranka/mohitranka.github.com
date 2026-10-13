@@ -1,0 +1,324 @@
+/* Traveler's Home: the cottage on the Unfinished Atlas. Lime plaster, oak timber,
+   field stone, and the map's own parchment and IM Fell lettering for every label.
+   Daylight by default; by hearth and candle in dark mode. */
+
+.ct {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: #3a2414;
+  font-family: 'IM Fell English', Georgia, serif;
+}
+
+.ct-room {
+  position: absolute;
+  inset: 0;
+}
+
+.ct-svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Palette */
+.ct-wall { fill: #ebdfc4; }
+.ct-crack { fill: none; stroke: #d6c7a6; stroke-width: 2; }
+.ct-stone { fill: #a39b8b; }
+.ct-mortar { fill: none; stroke: #857c6c; stroke-width: 2; }
+.ct-floor { fill: #7a5236; }
+.ct-plank { stroke: #64412a; stroke-width: 2; }
+.ct-timber { fill: #4a3220; }
+.ct-chain { stroke: #2b2622; stroke-width: 3; }
+.ct-iron-ring { fill: none; stroke: #2b2622; stroke-width: 6; }
+.ct-hall { fill: #1d1612; }
+.ct-lead { fill: none; stroke: #3a2c20; stroke-width: 5; }
+.ct-lead--thin { stroke-width: 1.5; opacity: 0.6; }
+.ct-sky-top { stop-color: #9cc6d8; }
+.ct-sky-low { stop-color: #e6efe0; }
+.ct-sun { fill: #fff2b0; }
+.ct-star { fill: #fff8e0; opacity: 0; }
+.ct-hill-far { fill: #b8a678; }
+.ct-hill-near { fill: #8f8a55; }
+.ct-castle { fill: #6a4e30; }
+.ct-lit { fill: #ffcf5a; opacity: 0; }
+.ct-road { fill: none; stroke: #a83a2a; stroke-width: 2; stroke-dasharray: 3 5; opacity: 0.75; }
+.ct-flame { fill: #f6b94a; }
+.ct-night { fill: #160e1c; opacity: 0; pointer-events: none; transition: opacity 0.6s ease; }
+.ct-night-glow { opacity: 0; pointer-events: none; transition: opacity 0.6s ease; mix-blend-mode: screen; }
+.ct-candle-glow { opacity: 0; transition: opacity 0.3s ease; }
+.ct-hearth-glow { opacity: 0.45; mix-blend-mode: screen; pointer-events: none; }
+
+.ct.is-night .ct-wall { fill: #c9b896; }
+.ct.is-night .ct-sky-top { stop-color: #120e26; }
+.ct.is-night .ct-sky-low { stop-color: #3a2c4a; }
+.ct.is-night .ct-sun { fill: #f6f1d8; }
+.ct.is-night .ct-star { opacity: 1; }
+.ct.is-night .ct-hill-far { fill: #3a2c4a; }
+.ct.is-night .ct-hill-near { fill: #2a2038; }
+.ct.is-night .ct-castle { fill: #1b1328; }
+.ct.is-night .ct-lit { opacity: 1; }
+.ct.is-night .ct-night { opacity: 0.38; }
+.ct.is-night .ct-night-glow,
+.ct.is-night .ct-candle-glow { opacity: 1; }
+.ct.is-night .ct-hearth-glow { opacity: 1; }
+
+.ct-mat { font: 11px 'IM Fell English SC', Georgia, serif; fill: #3a2414; letter-spacing: 0.08em; }
+.ct-sampler-big { font: 17px 'IM Fell English SC', Georgia, serif; fill: #6b2a22; letter-spacing: 0.04em; }
+.ct-sampler-small { font: italic 13px 'IM Fell English', Georgia, serif; fill: #3a2414; }
+
+/* Living things: fire, candles, steam, the raven */
+.ct-flame { transform-box: fill-box; transform-origin: 50% 100%; animation: ct-flicker 1.8s ease-in-out infinite; }
+.ct-flame:nth-of-type(2n) { animation-delay: -0.7s; }
+@keyframes ct-flicker { 50% { transform: scale(0.85, 1.1); } }
+.ct-fire-a, .ct-fire-b { transform-box: fill-box; transform-origin: 50% 100%; animation: ct-blaze 1.2s ease-in-out infinite; }
+.ct-fire-b { animation-duration: 0.9s; animation-delay: -0.3s; }
+@keyframes ct-blaze { 50% { transform: scale(0.92, 1.08) skewX(2deg); } }
+.ct-steam { animation: ct-steam 3s ease-in-out infinite; }
+@keyframes ct-steam { 50% { transform: translateY(-5px); opacity: 0.4; } }
+.ct-room.is-stirred .ct-steam { animation: ct-stir 0.9s ease-out; }
+@keyframes ct-stir { 40% { transform: translateY(-14px) scale(1.3); opacity: 1; } }
+
+/* Objects: lift, outline and a small piece of business on hover or focus. */
+.ct-hit { fill: transparent; }
+.ct-obj { cursor: pointer; outline: none; }
+.ct-obj > *:not(.ct-hit) { transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.25s ease; }
+.ct-obj:hover > *:not(.ct-hit),
+.ct-obj:focus-visible > *:not(.ct-hit) {
+  filter: drop-shadow(0 0 0.5px #f6ecd2) drop-shadow(0 0 6px rgba(255, 214, 140, 0.8));
+}
+.ct-obj:focus-visible .ct-hit { stroke: #f6ecd2; stroke-width: 4; stroke-dasharray: 12 8; rx: 12; }
+.ct-obj.is-active .ct-hit { stroke: #a83a2a; stroke-width: 4; stroke-dasharray: 3 9; stroke-linecap: round; rx: 14; }
+
+.ct-door { transform-box: fill-box; transform-origin: left center; transition: transform 0.5s cubic-bezier(0.34, 1.4, 0.64, 1); }
+.ct-obj:hover .ct-door,
+.ct-obj:focus-visible .ct-door,
+.ct-obj.is-active .ct-door { transform: perspective(600px) rotateY(-30deg); }
+
+.ct-raven-head { transform-box: fill-box; transform-origin: 0% 60%; transition: transform 0.3s ease; }
+.ct-obj:hover .ct-raven-head,
+.ct-obj:focus-visible .ct-raven-head,
+.ct-obj.is-active .ct-raven-head { transform: rotate(-16deg); }
+.ct-letters { transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1); }
+.ct-obj:hover .ct-letters,
+.ct-obj.is-active .ct-letters { transform: translateY(-10px); }
+
+.ct-pull { transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1); }
+.ct-obj:hover .ct-pull,
+.ct-obj:focus-visible .ct-pull,
+.ct-obj.is-active .ct-pull { transform: translateY(-22px); }
+
+.ct-page, .ct-quill { transition: transform 0.4s ease; transform-box: fill-box; }
+.ct-obj:hover .ct-page,
+.ct-obj.is-active .ct-page { transform: translateY(-8px); }
+.ct-obj:hover .ct-quill,
+.ct-obj.is-active .ct-quill { transform: rotate(-8deg); }
+.ct-obj:hover .ct-candle-glow,
+.ct-obj.is-active .ct-candle-glow { opacity: 1; }
+
+.ct-scroll { transform-box: fill-box; transform-origin: 50% 0; transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); }
+.ct-obj:hover .ct-scroll,
+.ct-obj:focus-visible .ct-scroll,
+.ct-obj.is-active .ct-scroll { transform: rotate(3deg); }
+
+.ct-gear { transform-box: fill-box; transform-origin: center; }
+.ct-obj:hover .ct-gear--a,
+.ct-obj.is-active .ct-gear--a { animation: ct-turn 3s linear infinite; }
+.ct-obj:hover .ct-gear--b,
+.ct-obj.is-active .ct-gear--b { animation: ct-turn 2s linear infinite reverse; }
+@keyframes ct-turn { to { transform: rotate(360deg); } }
+
+.ct-lute { transform-box: fill-box; }
+.ct-room.is-playing .ct-strings { animation: ct-strum 0.25s ease-in-out infinite alternate; }
+@keyframes ct-strum { to { transform: translateX(0.6px); } }
+
+/* Title cartouche, labels and speech, all on the map's parchment */
+.ct-title,
+.ct-label,
+.ct-bubble,
+.ct-bar {
+  background: #f6ecd2;
+  border: 1px solid #8a6a3e;
+  color: #3b2a18;
+  box-shadow: 0 14px 30px -18px rgba(59, 42, 24, 0.85), inset 0 0 0 4px #f6ecd2, inset 0 0 0 5px rgba(138, 106, 62, 0.45);
+}
+
+.ct-title {
+  position: absolute;
+  left: clamp(0.75rem, 2vw, 1.5rem);
+  top: clamp(0.75rem, 2vw, 1.25rem);
+  padding: 0.7rem 1.3rem 0.75rem;
+  text-align: center;
+  transition: opacity 0.4s ease;
+}
+.ct-name { font: 1.8rem/1 'IM Fell English SC', Georgia, serif; }
+.ct-tag { margin-top: 0.3rem; font-style: italic; font-size: 0.98rem; color: #6a4e30; }
+
+.ct-label {
+  position: fixed;
+  z-index: 15;
+  transform: translate(-50%, calc(-100% - 10px));
+  padding: 0.5rem 0.85rem;
+  font-size: 1rem;
+  white-space: nowrap;
+  pointer-events: none;
+}
+.ct-label b { display: block; font: 400 1.2rem/1.1 'IM Fell English SC', Georgia, serif; color: #a83a2a; }
+.ct-label[hidden],
+.ct-bubble[hidden] { display: none; }
+
+.ct-bubble {
+  position: fixed;
+  z-index: 16;
+  max-width: 20rem;
+  transform: translate(-50%, calc(-100% - 14px));
+  padding: 0.8rem 1rem;
+  font-size: 1.1rem;
+  font-style: italic;
+  line-height: 1.35;
+  pointer-events: none;
+}
+.ct-bubble.is-on { animation: ct-unfold 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+@keyframes ct-unfold { from { transform: translate(-50%, calc(-100% - 6px)); opacity: 0; } }
+
+/* The wayfinder: every destination, big and thumb-friendly */
+.ct-bar {
+  position: absolute;
+  left: 50%;
+  bottom: clamp(0.75rem, 2vw, 1.25rem);
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.25rem;
+  padding: 0.45rem;
+  transition: opacity 0.3s ease, left 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.ct-bar button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.55rem 0.85rem;
+  border: 0;
+  background: transparent;
+  color: #3b2a18;
+  font: 600 0.875rem/1 var(--font-ui);
+  cursor: pointer;
+}
+.ct-bar button:hover { background: #efe2c4; }
+.ct-bar button[aria-current] { background: #3b2a18; color: #f6ecd2; }
+.ct-bar button:focus-visible { outline: 2px solid #a83a2a; outline-offset: 1px; }
+
+.ct.is-reading .ct-bar { left: calc((100vw - min(46rem, 56vw) - 2.5rem) / 2); }
+.ct.is-reading .ct-title { opacity: 0; pointer-events: none; }
+
+/* Phones: the cottage is wider than the screen, so it pans sideways */
+@media (max-width: 760px) {
+  .ct-room {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    overscroll-behavior-x: contain;
+  }
+  .ct-room::-webkit-scrollbar { display: none; }
+  .ct-svg { width: auto; height: 100%; aspect-ratio: 16 / 9; transition: none; }
+  .ct.is-reading .ct-room { bottom: 64%; }
+  .ct-title { top: 3.6rem; padding: 0.45rem 0.8rem 0.5rem; }
+  .ct-name { font-size: 1.3rem; }
+  .ct-tag { font-size: 0.8rem; }
+  .ct-bar {
+    left: 0.5rem;
+    right: 0.5rem;
+    transform: none;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .ct-bar button { flex: 1 1 40%; justify-content: center; padding: 0.7rem 0.4rem; }
+  .ct.is-reading .ct-bar,
+  .ct.is-reading .ct-title { opacity: 0; pointer-events: none; }
+}
+
+/* The composite world: map and cottage stacked, one visible at a time. */
+.home-world,
+.home-scene {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+.home-world[data-scene="map"]:not(.is-moving) .home-cottage,
+.home-world[data-scene="cottage"]:not(.is-moving) .home-map {
+  visibility: hidden;
+}
+.home-world.is-moving { pointer-events: none; }
+
+/* The songbook: a parchment leaf listing every tune, opened by the lute or the minstrel */
+.songbook {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 25;
+  width: min(30rem, calc(100vw - 2rem));
+  max-height: min(40rem, calc(100vh - 6rem));
+  display: flex;
+  flex-direction: column;
+  transform: translate(-50%, -50%);
+  background: #f6ecd2;
+  border: 1px solid #8a6a3e;
+  color: #3b2a18;
+  font-family: 'IM Fell English', Georgia, serif;
+  box-shadow: 0 30px 70px -30px rgba(40, 25, 10, 0.9), inset 0 0 0 5px #f6ecd2, inset 0 0 0 6px rgba(138, 106, 62, 0.45);
+  animation: sb-open 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.songbook[hidden] { display: none; }
+@keyframes sb-open { from { opacity: 0; transform: translate(-50%, -46%); } }
+
+.sb-head { padding: 1.1rem 1.4rem 0.6rem; text-align: center; border-bottom: 1px solid #d8c49a; }
+.sb-title { font: 1.7rem/1 'IM Fell English SC', Georgia, serif; }
+
+.sb-list {
+  list-style: none;
+  margin: 0;
+  padding: 0.4rem 0.6rem;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+.sb-list button {
+  display: grid;
+  grid-template-columns: 2.4rem 1fr auto;
+  grid-template-rows: auto auto;
+  column-gap: 0.4rem;
+  width: 100%;
+  padding: 0.55rem 0.6rem;
+  border: 0;
+  border-left: 2px solid transparent;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.sb-list button:hover { background: #efe2c4; }
+.sb-list button:focus-visible { outline: 2px solid #a83a2a; outline-offset: -2px; }
+.sb-list button[aria-current] { border-left-color: #a83a2a; background: #efe2c4; }
+.sb-n { grid-row: 1 / span 2; align-self: center; font: 1rem 'IM Fell English SC', Georgia, serif; color: #8a6a3e; }
+.sb-t { font: 1.15rem/1.2 'IM Fell English SC', Georgia, serif; }
+.sb-b { grid-column: 2; font-size: 0.98rem; font-style: italic; color: #6a4e30; }
+.sb-now { grid-column: 3; grid-row: 1; align-self: center; font: 600 0.72rem/1 var(--font-ui); letter-spacing: 0.04em; color: #a83a2a; }
+
+.sb-foot { display: flex; flex-wrap: wrap; gap: 0.5rem; padding: 0.8rem 1.2rem 1rem; border-top: 1px solid #d8c49a; }
+.sb-foot button {
+  padding: 0.55rem 0.95rem;
+  border: 1px solid #3b2a18;
+  border-radius: 999px;
+  background: transparent;
+  color: #3b2a18;
+  font: 600 0.8125rem/1 var(--font-ui);
+  cursor: pointer;
+}
+.sb-foot .sb-toggle { background: #3b2a18; color: #f6ecd2; }
+.sb-foot button:hover { background: #efe2c4; color: #3b2a18; }
+.sb-foot .sb-close { margin-left: auto; }
+.sb-foot button:focus-visible { outline: 2px solid #a83a2a; outline-offset: 2px; }
+
+@media (max-width: 760px) {
+  .songbook { top: auto; bottom: 0; left: 0; width: 100%; max-height: 80vh; transform: none; animation-name: sb-up; }
+  @keyframes sb-up { from { opacity: 0; transform: translateY(20px); } }
+}

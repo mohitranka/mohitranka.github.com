@@ -280,10 +280,11 @@ export function woodblock(ctx, out, t, vel = 0.5, pitch = 880) {
 
 // Plucked string by Karplus–Strong, rendered once per pitch and reused.
 const ksCache = new WeakMap();
-export function pluckBuffer(ctx, midi, { seconds = 2.6, damp = 0.996 } = {}) {
+export function pluckBuffer(ctx, midi, { seconds = 2.6, damp = 0.996, bright = 0.5 } = {}) {
   let byPitch = ksCache.get(ctx);
   if (!byPitch) ksCache.set(ctx, (byPitch = new Map()));
-  if (byPitch.has(midi)) return byPitch.get(midi);
+  const key = `${midi}|${damp}|${bright}`;
+  if (byPitch.has(key)) return byPitch.get(key);
   const sr = ctx.sampleRate;
   const n = Math.max(2, Math.round(sr / mtof(midi)));
   const len = Math.floor(sr * seconds);
@@ -293,7 +294,7 @@ export function pluckBuffer(ctx, midi, { seconds = 2.6, damp = 0.996 } = {}) {
   let prev = 0;
   for (let i = 0; i < n; i++) {
     // soften the excitation so the pluck sounds like gut, not wire
-    prev = prev * 0.5 + (Math.random() * 2 - 1) * 0.5;
+    prev = prev * (1 - bright) + (Math.random() * 2 - 1) * bright;
     line[i] = prev;
   }
   let idx = 0;
@@ -304,12 +305,12 @@ export function pluckBuffer(ctx, midi, { seconds = 2.6, damp = 0.996 } = {}) {
     line[idx] = damp * 0.5 * (cur + nx);
     idx = (idx + 1) % n;
   }
-  byPitch.set(midi, buf);
+  byPitch.set(key, buf);
   return buf;
 }
-export function pluck(ctx, out, t, midi, vel = 0.5, pan = 0) {
+export function pluck(ctx, out, t, midi, vel = 0.5, pan = 0, opts = {}) {
   const src = ctx.createBufferSource();
-  src.buffer = pluckBuffer(ctx, midi);
+  src.buffer = pluckBuffer(ctx, midi, opts);
   const g = ctx.createGain();
   g.gain.value = 0.42 * vel;
   src.connect(g).connect(panner(ctx, pan)).connect(out);
@@ -429,4 +430,107 @@ export function hum(ctx, out, level = 0.02, cutoff = 260) {
     src.stop();
     lfo.stop();
   };
+}
+
+/* — Voices added for the larger playlist — */
+
+// A struck bell or celesta: inharmonic FM with a long ring.
+export function bell(ctx, out, t, midi, vel = 0.5, { ratio = 3.5, ring = 1.4, pan = 0 } = {}) {
+  const f = mtof(midi);
+  const car = ctx.createOscillator();
+  car.frequency.value = f;
+  const mod = ctx.createOscillator();
+  mod.frequency.value = f * ratio;
+  const depth = ctx.createGain();
+  depth.gain.setValueAtTime(f * 2.2, t);
+  depth.gain.setTargetAtTime(f * 0.1, t, 0.4);
+  mod.connect(depth).connect(car.frequency);
+  const g = ctx.createGain();
+  env(g.gain, t, 0.12 * vel, 0.003, ring);
+  car.connect(g).connect(panner(ctx, pan)).connect(out);
+  [car, mod].forEach((o) => {
+    o.start(t);
+    o.stop(t + ring * 6);
+  });
+}
+
+// An anvil: a few inharmonic partials and a sharp click.
+const ANVIL = [1, 2.76, 5.4, 8.93];
+export function anvil(ctx, out, t, vel = 0.6, base = 820) {
+  ANVIL.forEach((k, i) => {
+    const o = ctx.createOscillator();
+    o.frequency.value = base * k;
+    const g = ctx.createGain();
+    env(g.gain, t, (0.09 / (i + 1)) * vel, 0.001, 0.18 / (i * 0.6 + 1));
+    o.connect(g).connect(panner(ctx, 0.3)).connect(out);
+    o.start(t);
+    o.stop(t + 1.2);
+  });
+  const n = noiseSource(ctx, t);
+  const hp = filter(ctx, 'highpass', 3000);
+  const ng = ctx.createGain();
+  env(ng.gain, t, 0.12 * vel, 0.001, 0.01);
+  n.connect(hp).connect(ng).connect(out);
+  n.stop(t + 0.1);
+}
+
+// A reedy drone, like the bass pipes of a small bagpipe.
+export function drone(ctx, out, t, midis, dur, vel = 0.4) {
+  const g = ctx.createGain();
+  const peak = 0.035 * vel;
+  g.gain.setValueAtTime(0.0001, t);
+  g.gain.linearRampToValueAtTime(peak, t + 0.8);
+  g.gain.setValueAtTime(peak, t + dur);
+  g.gain.linearRampToValueAtTime(0.0001, t + dur + 0.8);
+  const lp = filter(ctx, 'lowpass', 1400, 0.5);
+  midis.forEach((m) => {
+    const o = ctx.createOscillator();
+    o.type = 'sawtooth';
+    o.frequency.value = mtof(m);
+    const bp = filter(ctx, 'bandpass', mtof(m) * 3, 3);
+    const mix = ctx.createGain();
+    mix.gain.value = 0.6;
+    o.connect(bp).connect(lp);
+    o.connect(mix).connect(lp);
+    o.start(t);
+    o.stop(t + dur + 1);
+  });
+  lp.connect(g).connect(out);
+}
+
+// A chanter: a bright reed melody voice with a little vibrato.
+export function chanter(ctx, out, t, midi, dur, vel = 0.5) {
+  const f = mtof(midi);
+  const o = ctx.createOscillator();
+  o.type = 'square';
+  o.frequency.value = f;
+  const vib = ctx.createOscillator();
+  vib.frequency.value = 5.5;
+  const vg = ctx.createGain();
+  vg.gain.value = f * 0.006;
+  vib.connect(vg).connect(o.frequency);
+  const bp = filter(ctx, 'bandpass', f * 2.2, 1.4);
+  const lp = filter(ctx, 'lowpass', 3200, 0.5);
+  const g = ctx.createGain();
+  const peak = 0.07 * vel;
+  g.gain.setValueAtTime(0.0001, t);
+  g.gain.linearRampToValueAtTime(peak, t + 0.03);
+  g.gain.setValueAtTime(peak * 0.9, t + dur);
+  g.gain.linearRampToValueAtTime(0.0001, t + dur + 0.06);
+  o.connect(bp).connect(lp).connect(g).connect(out);
+  [o, vib].forEach((x) => {
+    x.start(t);
+    x.stop(t + dur + 0.2);
+  });
+}
+
+// A short melodic idea from a scale: step positions, scale degrees and lengths.
+export function motif(r, { slots, span, start = 2, moves = [-2, -1, -1, 1, 1, 2], lens = [1, 2, 2, 3], keep = 0.55 }) {
+  let d = start;
+  return slots
+    .filter(() => r() < keep)
+    .map((at) => {
+      d = Math.max(0, Math.min(span - 1, d + pick(r, moves)));
+      return { at, d, len: pick(r, lens) };
+    });
 }

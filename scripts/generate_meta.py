@@ -102,7 +102,7 @@ def write_llms_txt(posts: list[dict]) -> None:
         "",
         "## Pages",
         "",
-        f"- [Home]({BASE}/): A short introduction, recent writing, and three optional interactive ways to browse the site",
+        f"- [Home]({BASE}/): A short introduction, recent writing, and an optional illustrated map of the site with a cottage and original music",
         f"- [About]({BASE}/about/): Who Mohit is, briefly, in his own words",
         f"- [Writing]({BASE}/blog/): Essays on systems, platforms, data, reliability, and leadership",
         f"- [Work]({BASE}/work/): Selected work at Booking.com, Postman, and LinkedIn",

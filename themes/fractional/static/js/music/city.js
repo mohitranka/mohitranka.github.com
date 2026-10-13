@@ -1,4 +1,4 @@
-// "Night Bus to Nowhere Nagar": Side Quest City's track. Lo-fi jazz at 82 bpm:
+// "Night Bus to Nowhere Nagar", one of three tracks in the rotation. Lo-fi jazz at 82 bpm:
 // a ii–V–I turnaround in F on a soft electric piano, a round bass, lazy swung drums,
 // vinyl dust and the city humming under it. The melody is generated from a fixed
 // seed inside each chord's own notes, so it is the same tune every evening.

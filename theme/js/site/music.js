@@ -1,20 +1,35 @@
-// Music: off until the visitor presses play. One AudioContext, created on that press;
-// each world's track loads only when it is needed, crossfades when the world changes,
-// dips while a page is open in the reader, and pauses while the tab is hidden.
+// Music: eleven original tracks, synthesized in the browser, played as a rotating
+// playlist. It is on by default in the world (browsers only allow sound after a click
+// or tap, so it begins at the first one), remembers if the visitor turns it off, and is
+// always silent in Just Read. Each track plays for a few minutes, then crossfades into
+// the next; the songbook in the world and the HUD panel can pick or skip. Music dips
+// while a page is open in the reader and pauses while the tab is hidden.
 import * as prefs from './prefs.js';
 
-const TRACKS = {
-  city: () => import('../music/city.js'),
-  apartment: () => import('../music/apartment.js'),
-  atlas: () => import('../music/atlas.js'),
-};
-const FADE = 1.6;
+const L = (name) => () => import(`../music/${name}.js`);
+export const PLAYLIST = [
+  { id: 'atlas', title: 'Lantern Road', blurb: 'Plucked strings and a wooden flute, slow and walking.', load: L('atlas') },
+  { id: 'market', title: 'Market Day at the Citadel', blurb: 'A quick dance with drones, drum and reed.', load: L('market') },
+  { id: 'candle', title: 'Candle Hours', blurb: 'A solo lute, late, with the candles low.', load: L('candle') },
+  { id: 'apartment', title: 'Brushes on a Tuesday', blurb: 'A small jazz trio, brushes and walking bass.', load: L('apartment') },
+  { id: 'ferry', title: 'The Ferryman’s Waltz', blurb: 'An unhurried waltz on plucked strings and flute.', load: L('ferry') },
+  { id: 'forge', title: 'Forge Rhythm', blurb: 'Anvil, hammered strings, and a reed now and then.', load: L('forge') },
+  { id: 'fog', title: 'Fog over Mount Backlog', blurb: 'No beat at all: pads, bells and wind.', load: L('fog') },
+  { id: 'raven', title: 'The Raven’s Errand', blurb: 'A sneaking tune in pizzicato and woodblock.', load: L('raven') },
+  { id: 'city', title: 'Night Bus to Nowhere Nagar', blurb: 'Lo-fi jazz: soft keys, round bass, vinyl dust.', load: L('city') },
+  { id: 'nocturne', title: 'Hearthside Nocturne', blurb: 'Soft keys by the fire.', load: L('nocturne') },
+  { id: 'march', title: 'The Long Road North', blurb: 'A walking march with drones and a chanter.', load: L('march') },
+];
+const FADE = 1.6; // seconds, for play, stop and skip
+const CROSSFADE = 4; // seconds, when the rotation moves on by itself
+const TURN = 210; // seconds each track plays before the next one
 
 export function createMusic({ hud }) {
   const box = hud && hud.querySelector('#music');
   const button = box && box.querySelector('.music-toggle');
   const label = box && box.querySelector('.music-label');
   const trackEl = box && box.querySelector('.music-track');
+  const nextBtn = box && box.querySelector('.music-next');
   const slider = box && box.querySelector('input[type="range"]');
   const bars = box ? [...box.querySelectorAll('.music-bars i')] : [];
 
@@ -22,12 +37,17 @@ export function createMusic({ hud }) {
   let master, duck, analyser;
   let playing = false;
   let world = 'read';
-  let voice = null; // { world, gain, stop }
-  let titles = {};
-  let volume = Math.min(1, Math.max(0, Number(prefs.get('volume')) || 0.35));
+  let index = 0;
+  let voice = null; // { id, gain, stop, started }
+  let token = 0; // guards against a slow track load arriving after a skip
+  let clock = 0;
   let raf = 0;
+  let waitingForGesture = false;
+  let volume = Math.min(1, Math.max(0, Number(prefs.get('volume')) || 0.35));
 
   const gainFor = (v) => Math.pow(v, 1.6) * 0.9;
+  const current = () => PLAYLIST[index];
+  const upNext = () => PLAYLIST[(index + 1) % PLAYLIST.length];
 
   function ensureContext() {
     if (ctx) return;
@@ -38,48 +58,79 @@ export function createMusic({ hud }) {
     duck = ctx.createGain();
     analyser = ctx.createAnalyser();
     analyser.fftSize = 64;
-    duck.connect(master).connect(analyser).connect(ctx.destination);
+    // a gentle limiter so no track, however lively, peaks harshly
+    const limiter = ctx.createDynamicsCompressor();
+    limiter.threshold.value = -10;
+    limiter.knee.value = 8;
+    limiter.ratio.value = 6;
+    limiter.attack.value = 0.004;
+    limiter.release.value = 0.2;
+    duck.connect(limiter).connect(master).connect(analyser).connect(ctx.destination);
   }
 
-  async function startVoice(id) {
-    if (!TRACKS[id]) return;
-    const mod = await TRACKS[id]();
-    titles[id] = mod.title;
-    renderLabel();
-    if (!playing || world !== id || (voice && voice.world === id)) return;
+  // Browsers keep audio suspended until the visitor clicks, taps or types; wait for it.
+  function unlockOnGesture() {
+    if (!ctx || ctx.state === 'running' || waitingForGesture) return;
+    waitingForGesture = true;
+    const resume = () => {
+      ['pointerdown', 'keydown', 'touchend'].forEach((t) => document.removeEventListener(t, resume, true));
+      waitingForGesture = false;
+      if (playing && !document.hidden) ctx.resume();
+      renderLabel();
+    };
+    ['pointerdown', 'keydown', 'touchend'].forEach((t) => document.addEventListener(t, resume, true));
+  }
+
+  async function startVoice(fade = FADE) {
+    const my = ++token;
+    const track = current();
+    const mod = await track.load();
+    if (my !== token || !playing) return;
     const gain = ctx.createGain();
     gain.gain.setValueAtTime(0.0001, ctx.currentTime);
-    gain.gain.linearRampToValueAtTime(1, ctx.currentTime + FADE);
+    gain.gain.linearRampToValueAtTime(1, ctx.currentTime + fade);
     gain.connect(duck);
-    voice = { world: id, gain, stop: mod.play(ctx, gain) };
+    voice = { id: track.id, gain, stop: mod.play(ctx, gain), started: ctx.currentTime };
   }
 
-  function stopVoice() {
+  function stopVoice(fade = FADE) {
     if (!voice) return;
     const v = voice;
     voice = null;
     const now = ctx.currentTime;
     v.gain.gain.cancelScheduledValues(now);
     v.gain.gain.setValueAtTime(v.gain.gain.value, now);
-    v.gain.gain.linearRampToValueAtTime(0.0001, now + FADE);
+    v.gain.gain.linearRampToValueAtTime(0.0001, now + fade);
     setTimeout(() => {
       v.stop();
       v.gain.disconnect();
-    }, FADE * 1000 + 100);
+    }, fade * 1000 + 150);
+  }
+
+  function changeTo(i, fade) {
+    index = (i + PLAYLIST.length) % PLAYLIST.length;
+    if (playing && ctx) {
+      stopVoice(fade);
+      startVoice(fade);
+    }
+    renderLabel();
   }
 
   function renderLabel() {
+    const name = current().title;
+    document.dispatchEvent(new CustomEvent('site:music', { detail: { playing, id: current().id, title: name } }));
     if (!box) return;
     box.classList.toggle('is-on', playing);
-    document.dispatchEvent(new CustomEvent('site:music', { detail: { playing } }));
     button.setAttribute('aria-pressed', String(playing));
-    const name = titles[world];
-    label.textContent = playing ? name || 'Music' : 'Music off';
-    button.setAttribute('aria-label', playing ? `Stop the music (now playing ${name || 'this world’s track'})` : 'Play this world’s music');
+    const pending = playing && ctx && ctx.state !== 'running';
+    label.textContent = playing ? name : 'Music off';
+    button.setAttribute('aria-label', playing ? `Stop the music (now playing ${name})` : 'Play music');
     trackEl.innerHTML = '';
     const b = document.createElement('b');
-    b.textContent = name ? `“${name}”` : 'This world’s track';
-    trackEl.append(b, 'Original, played live by your browser. Nothing is recorded.');
+    b.textContent = `“${name}”`;
+    trackEl.append(b);
+    if (pending) trackEl.append('Starts at your first click or tap.');
+    if (nextBtn) nextBtn.textContent = `Next: ${upNext().title}`;
   }
 
   function meter() {
@@ -93,31 +144,49 @@ export function createMusic({ hud }) {
     raf = requestAnimationFrame(meter);
   }
 
-  async function play() {
-    if (world === 'read' || !TRACKS[world]) return;
+  // The rotation runs on the audio clock, which stops while the tab is hidden.
+  function watchTurn() {
+    clearInterval(clock);
+    clock = setInterval(() => {
+      if (playing && voice && ctx.currentTime - voice.started > TURN) changeTo(index + 1, CROSSFADE);
+    }, 1000);
+  }
+
+  function play() {
+    if (world === 'read') return;
     ensureContext();
-    await ctx.resume();
     playing = true;
-    prefs.set('music', 'on');
+    ctx.resume().catch(() => {});
+    unlockOnGesture();
     renderLabel();
     cancelAnimationFrame(raf);
     meter();
-    await startVoice(world);
+    watchTurn();
+    if (!voice) return startVoice();
   }
 
-  function pause() {
+  // stop sounding; `remember` records the visitor's choice for next time
+  function stop(remember) {
     playing = false;
-    prefs.set('music', 'off');
+    token++;
+    clearInterval(clock);
+    if (remember) prefs.set('music', 'off');
     if (ctx) stopVoice();
     renderLabel();
   }
 
+  function userPlay() {
+    prefs.set('music', 'on');
+    return play();
+  }
+
   if (button) {
-    button.addEventListener('click', () => (playing ? pause() : play()));
+    button.addEventListener('click', () => (playing ? stop(true) : userPlay()));
     box.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') box.classList.remove('is-open');
     });
   }
+  if (nextBtn) nextBtn.addEventListener('click', () => changeTo(index + 1, FADE));
   if (slider) {
     slider.value = Math.round(volume * 100);
     slider.addEventListener('input', () => {
@@ -131,33 +200,19 @@ export function createMusic({ hud }) {
     if (document.hidden) ctx.suspend();
     else ctx.resume();
   });
-
-  // Track names are known before anything plays, so the panel can say what is waiting.
-  async function learnTitle(id) {
-    if (!TRACKS[id] || titles[id]) return;
-    try {
-      titles[id] = (await TRACKS[id]()).title;
-    } catch (e) {
-      /* the label falls back to a generic name */
-    }
-    renderLabel();
-  }
+  renderLabel();
 
   return {
     setWorld(id) {
       if (id === world) return;
       world = id;
+      // Just Read is always silent, without forgetting that music was wanted
+      if (id === 'read' && playing) stop(false);
       renderLabel();
-      learnTitle(id);
-      if (!ctx || !playing) return;
-      stopVoice();
-      if (id === 'read') {
-        // Just Read is silent; the visitor chose music for a world, not for reading
-        playing = false;
-        renderLabel();
-        return;
-      }
-      startVoice(id);
+    },
+    // On by default in the world, unless the visitor turned it off before.
+    autostart() {
+      if (world !== 'read' && !playing && prefs.get('music') !== 'off') play();
     },
     setReading(open) {
       if (duck) duck.gain.setTargetAtTime(open ? 0.5 : 1, ctx.currentTime, 0.4);
@@ -181,10 +236,32 @@ export function createMusic({ hud }) {
       });
     },
     toggle() {
-      return playing ? pause() : play();
+      return playing ? stop(true) : userPlay();
+    },
+    next() {
+      changeTo(index + 1, FADE);
+    },
+    // Play a particular song from the songbook.
+    playTrack(id) {
+      const i = PLAYLIST.findIndex((t) => t.id === id);
+      if (i < 0) return;
+      if (!playing) {
+        index = i;
+        return userPlay();
+      }
+      if (i !== index) changeTo(i, FADE);
+    },
+    list() {
+      return PLAYLIST.map(({ id, title, blurb }) => ({ id, title, blurb }));
     },
     get playing() {
       return playing;
+    },
+    get title() {
+      return current().title;
+    },
+    get id() {
+      return current().id;
     },
   };
 }

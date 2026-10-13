@@ -42,7 +42,8 @@
             } catch (e) {}
             var asked = /[?&]world=([a-z]+)/.exec(location.search);
             if (asked) world = asked[1];
-            if (!/^(read|city|apartment|atlas)$/.test(world)) world = 'read';
+            // the city and the apartment are gone; every old world choice opens the atlas
+            world = /^(apartment|city|atlas)$/.test(world) ? 'atlas' : 'read';
             root.setAttribute('data-theme', theme);
             root.setAttribute('data-world', world);
             root.classList.add('js');
@@ -87,9 +88,9 @@
                 <a href="{{ SITEURL }}/contact/"{% if here.startswith('contact') %} aria-current="page"{% endif %}>Contact</a>
             </nav>
             <div class="site-controls">
-                <button class="world-switch" type="button" data-open-worlds hidden>
-                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.8 3 2.8 15 0 18M12 3c-2.8 3-2.8 15 0 18"/></svg>
-                    <span>Visit a world</span>
+                <button class="world-switch" type="button" data-world-choose="atlas" hidden>
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2z"/><path d="M9 4v14M15 6v14"/></svg>
+                    <span>Open the map</span>
                 </button>
                 <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch to dark mode">
                     <svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>

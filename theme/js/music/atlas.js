@@ -1,4 +1,4 @@
-// "Lantern Road": the Unfinished Atlas's track. Slow 12/8 at 66 bpm in D dorian:
+// "Lantern Road", one of three tracks in the rotation. Slow 12/8 at 66 bpm in D dorian:
 // plucked strings (Karplus–Strong, rendered in the browser), a low pad, a frame
 // drum that arrives late, and a wooden flute that wanders in on the second pass.
 // Original; generated from a fixed seed.

@@ -40,7 +40,8 @@
             } catch (e) {}
             var asked = /[?&]world=([a-z]+)/.exec(location.search);
             if (asked) world = asked[1];
-            if (!/^(read|city|apartment|atlas)$/.test(world)) world = 'read';
+            // the city and the apartment are gone; every old world choice opens the atlas
+            world = /^(apartment|city|atlas)$/.test(world) ? 'atlas' : 'read';
             root.setAttribute('data-theme', theme);
             root.setAttribute('data-world', world);
             root.classList.add('js');
@@ -153,9 +154,9 @@
                 <a href="../../contact/">Contact</a>
             </nav>
             <div class="site-controls">
-                <button class="world-switch" type="button" data-open-worlds hidden>
-                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.8 3 2.8 15 0 18M12 3c-2.8 3-2.8 15 0 18"/></svg>
-                    <span>Visit a world</span>
+                <button class="world-switch" type="button" data-world-choose="atlas" hidden>
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2z"/><path d="M9 4v14M15 6v14"/></svg>
+                    <span>Open the map</span>
                 </button>
                 <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch to dark mode">
                     <svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
@@ -332,10 +333,6 @@
 </section>
 
 <div class="world-hud" id="world-hud" hidden>
-    <button class="hud-pill hud-world" type="button" data-open-worlds aria-label="Change world">
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.8 3 2.8 15 0 18M12 3c-2.8 3-2.8 15 0 18"/></svg>
-        <span class="hud-world-name">World</span>
-    </button>
     <div class="music" id="music">
         <button class="hud-pill music-toggle" type="button" aria-pressed="false" aria-describedby="music-track">
             <svg class="music-icon music-icon--off" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/><path d="M3 3l18 18"/></svg>
@@ -345,6 +342,7 @@
         </button>
         <div class="music-panel">
             <p class="music-track" id="music-track"></p>
+            <button class="music-next" type="button">Next track</button>
             <label class="music-volume"><span>Volume</span><input type="range" min="0" max="100" step="1" value="35"></label>
         </div>
     </div>
@@ -354,73 +352,6 @@
     </button>
     <a class="hud-pill hud-read" href="#" data-just-read>Just Read</a>
 </div>
-
-<dialog class="worlds-dialog" id="worlds-dialog" aria-labelledby="worlds-dialog-title">
-    <div class="worlds-dialog-head">
-        <p class="worlds-dialog-title" id="worlds-dialog-title">Choose your world</p>
-        <button class="worlds-dialog-close" type="button" data-close-worlds aria-label="Close">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
-        </button>
-    </div>
-    <div class="worlds-pano worlds-pano--compact" role="list">
-  <div class="world-slice world-slice--city" role="listitem">
-    <svg class="world-art" viewBox="0 0 600 520" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-      <defs><linearGradient id="pv-dusk-c" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a1b4f"/><stop offset=".55" stop-color="#a8457a"/><stop offset="1" stop-color="#ff9e5e"/></linearGradient></defs>
-      <rect width="600" height="520" fill="url(#pv-dusk-c)"/>
-      <circle cx="470" cy="130" r="34" fill="#ffd38a" opacity=".9"/>
-      <g fill="#1a0f2e"><rect x="20" y="230" width="70" height="290"/><rect x="95" y="180" width="54" height="340"/><rect x="155" y="260" width="90" height="260"/><rect x="250" y="150" width="60" height="370"/><rect x="315" y="220" width="96" height="300"/><rect x="420" y="270" width="70" height="250"/><rect x="495" y="200" width="90" height="320"/></g>
-      <g fill="#ffcf5a"><rect x="34" y="250" width="8" height="10"/><rect x="60" y="280" width="8" height="10"/><rect x="108" y="200" width="8" height="10"/><rect x="126" y="240" width="8" height="10"/><rect x="170" y="290" width="8" height="10"/><rect x="200" y="320" width="8" height="10"/><rect x="262" y="180" width="8" height="10"/><rect x="286" y="230" width="8" height="10"/><rect x="330" y="250" width="8" height="10"/><rect x="380" y="300" width="8" height="10"/><rect x="510" y="230" width="8" height="10"/><rect x="550" y="280" width="8" height="10"/></g>
-      <rect x="244" y="122" width="72" height="26" fill="#ff3d7f"/>
-      <path d="M0 470 Q300 430 600 470 L600 520 L0 520Z" fill="#2b2140"/>
-      <path d="M0 492 L600 492" stroke="#ffe066" stroke-width="4" stroke-dasharray="26 18"/>
-      <g transform="translate(330 455)"><rect width="48" height="26" rx="8" fill="#ffd400"/><rect y="12" width="48" height="14" fill="#1b5e3b"/><circle cx="10" cy="28" r="6" fill="#111"/><circle cx="40" cy="28" r="6" fill="#111"/></g>
-    </svg>
-    <div class="world-copy">
-      <p class="world-name">Side Quest City</p>
-      <p class="world-desc">A small Bangalore of the mind. Traffic is realistic; parking is not.</p>
-      <button class="world-enter" type="button" data-world-choose="city">Enter the city</button>
-    </div>
-  </div>
-  <div class="world-slice world-slice--apartment" role="listitem">
-    <svg class="world-art" viewBox="0 0 600 520" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-      <rect width="600" height="520" fill="#6b3a5c"/>
-      <rect width="600" height="380" fill="#c9a24a"/>
-      <rect y="380" width="600" height="140" fill="#7a4b2e"/>
-      <rect x="60" y="70" width="150" height="190" fill="#7fb6c9" stroke="#fff4d6" stroke-width="10"/><path d="M135 70 V260 M60 165 H210" stroke="#fff4d6" stroke-width="6"/>
-      <rect x="380" y="60" width="150" height="290" fill="#3d6b6a"/>
-      <g><rect x="395" y="90" width="18" height="60" fill="#e8553f"/><rect x="415" y="96" width="14" height="54" fill="#f2c14e"/><rect x="431" y="88" width="20" height="62" fill="#fff4d6"/><rect x="453" y="100" width="12" height="50" fill="#4f7ac9"/><rect x="467" y="92" width="18" height="58" fill="#7a2e3a"/><rect x="390" y="150" width="130" height="8" fill="#2a4a49"/><rect x="398" y="170" width="16" height="56" fill="#f2c14e"/><rect x="416" y="176" width="22" height="50" fill="#e8553f"/><rect x="440" y="166" width="14" height="60" fill="#4f7ac9"/></g>
-      <path d="M120 380 Q120 300 200 300 H420 Q500 300 500 380 Z" fill="#a83f4f"/><rect x="110" y="370" width="400" height="60" rx="18" fill="#c4505e"/>
-      <rect x="250" y="440" width="120" height="16" fill="#5b3420"/>
-      <rect x="30" y="300" width="70" height="56" rx="6" fill="#2a2a2a"/><rect x="36" y="306" width="58" height="40" fill="#9fd3e6"/>
-    </svg>
-    <div class="world-copy">
-      <p class="world-name">Apartment 404</p>
-      <p class="world-desc">The apartment that could not be found. Please wipe your feet anyway.</p>
-      <button class="world-enter" type="button" data-world-choose="apartment">Knock</button>
-    </div>
-  </div>
-  <div class="world-slice world-slice--atlas" role="listitem">
-    <svg class="world-art" viewBox="0 0 600 520" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-      <rect width="600" height="520" fill="#efe2c4"/>
-      <path d="M40 300 Q120 230 200 260 T380 240 T560 300 L560 520 L40 520Z" fill="#e3d1a6" stroke="#4a3622" stroke-width="2"/>
-      <g fill="none" stroke="#4a3622" stroke-width="2"><path d="M150 230 l20-40 l20 40"/><path d="M180 230 l26-56 l26 56"/><path d="M220 230 l18-34 l18 34"/></g>
-      <g fill="#4a3622"><path d="M70 150 l6 -14 l6 14z"/><path d="M86 160 l6 -14 l6 14z"/><path d="M78 138 l6 -14 l6 14z"/></g>
-      <path d="M120 400 C200 360 260 420 330 380 S470 360 520 410" fill="none" stroke="#a83a2a" stroke-width="2.5" stroke-dasharray="6 7"/>
-      <circle cx="120" cy="400" r="8" fill="#a83a2a"/>
-      <g transform="translate(470 120)" stroke="#4a3622" fill="none"><circle r="42" stroke-width="1.5"/><path d="M0 -50 L8 0 L0 50 L-8 0Z" fill="#4a3622"/><path d="M-50 0 L0 -6 L50 0 L0 6Z"/></g>
-    </svg>
-    <div class="world-copy">
-      <p class="world-name">The Unfinished Atlas</p>
-      <p class="world-desc">A map of ideas, partly surveyed. The cartographer is still out walking.</p>
-      <button class="world-enter" type="button" data-world-choose="atlas">Unroll the map</button>
-    </div>
-  </div>
-</div>
-    <div class="worlds-dialog-foot">
-        <button class="world-read" type="button" data-world-choose="read">Just Read: no world, no music</button>
-        <p>The page you are on comes with you.</p>
-    </div>
-</dialog>
 
 <div class="world-curtain" id="world-curtain" aria-hidden="true"></div>
 <p class="sr-only" id="world-status" role="status" aria-live="polite"></p>

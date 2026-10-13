@@ -1,7 +1,7 @@
 // The site runtime. Every page is a complete Just Read page first; this module adds
-// the theme toggle, the essay outline, and, when the visitor asks for one, a world
-// that shows the same pages through its own places. Worlds, their styles and their
-// music load only when chosen.
+// the theme toggle, the essay outline, and, when the visitor opens it, the Unfinished
+// Atlas: the same pages shown as places on a map, with a cottage on it for the
+// personal ones. The world, its styles and its music load only when chosen.
 import * as prefs from './prefs.js';
 import { createRouter } from './router.js';
 import { createReader, cleanHtml } from './reader.js';
@@ -24,24 +24,19 @@ if (data) {
 }
 
 export const WORLDS = {
-  city: {
-    title: 'Side Quest City',
-    module: '../worlds/city.js',
-    css: 'worlds/city.css',
-    webgl: true,
-    places: { home: 'Side Quest City', about: 'My Apartment', writing: 'The Daily Commit', work: 'Business District', projects: 'The Garage', library: 'Bookstore', contact: 'Post Office' },
-  },
-  apartment: {
-    title: 'Apartment 404',
-    module: '../worlds/apartment.js',
-    css: 'worlds/apartment.css',
-    places: { home: 'Apartment 404', about: 'The front door', writing: 'The writing desk', work: 'The computer', projects: 'The workbench', library: 'The bookshelf', contact: 'The telephone' },
-  },
   atlas: {
     title: 'The Unfinished Atlas',
-    module: '../worlds/atlas.js',
-    css: 'worlds/atlas.css',
-    places: { home: 'The Unfinished Atlas', about: "Traveler's Home", writing: 'Library of Stories', work: 'The Citadel', projects: "Craftsman's Forge", library: 'Ancient Archives', contact: "Messenger's Outpost" },
+    module: '../worlds/home.js',
+    css: ['worlds/atlas.css', 'worlds/cottage.css'],
+    places: {
+      home: 'The Unfinished Atlas',
+      about: 'The front door',
+      library: 'The shelves',
+      contact: "The messenger's letterbox",
+      writing: 'Library of Stories',
+      work: 'The Citadel',
+      projects: "Craftsman's Forge",
+    },
   },
 };
 
@@ -116,19 +111,9 @@ function toast(msg) {
   toastTimer = setTimeout(() => t.classList.remove('is-on'), 5200);
 }
 
-function webglAvailable() {
-  try {
-    const c = document.createElement('canvas');
-    return !!(window.WebGLRenderingContext && (c.getContext('webgl2') || c.getContext('webgl')));
-  } catch (e) {
-    return false;
-  }
-}
-
 /* — Worlds — */
 const stage = document.getElementById('world-stage');
 const hud = document.getElementById('world-hud');
-const dialog = document.getElementById('worlds-dialog');
 const curtain = document.getElementById('world-curtain');
 const statusEl = document.getElementById('world-status');
 const siteMain = document.getElementById('site');
@@ -147,7 +132,10 @@ let shownSection = 'home';
 const loadedUrl = location.href.split('#')[0];
 let originalHtml = null; // the page this document was loaded with, kept for Just Read
 
-function loadCss(href) {
+function loadCss(hrefs) {
+  return Promise.all([].concat(hrefs).map(loadOne));
+}
+function loadOne(href) {
   const url = new URL('../../css/' + href, import.meta.url).href;
   if (document.querySelector(`link[href="${url}"]`)) return Promise.resolve();
   return new Promise((resolve, reject) => {
@@ -197,6 +185,8 @@ function worldApi(id) {
     sfx: (name) => music.sfx(name),
     toggleMusic: () => music.toggle(),
     musicPlaying: () => music.playing,
+    musicTitle: () => music.title,
+    music,
     toast,
     readerRect: () => (reader.isOpen ? reader.el.getBoundingClientRect() : null),
     section: () => router.sectionFor(location.href),
@@ -206,13 +196,6 @@ function worldApi(id) {
 async function enterWorld(id, { initial = false } = {}) {
   const def = WORLDS[id];
   if (!def || busy) return;
-  if (def.webgl && !webglAvailable()) {
-    html.classList.remove('world-loading');
-    if (current === 'read') html.setAttribute('data-world', 'read');
-    toast(`${def.title} needs WebGL, which this browser has turned off. Try the apartment or the atlas.`);
-    if (initial) prefs.set('world', 'read');
-    return;
-  }
   busy = true;
   const my = ++seq;
   const fromRead = current === 'read';
@@ -234,14 +217,12 @@ async function enterWorld(id, { initial = false } = {}) {
       router.remember({ url: loadedUrl, title: document.title, html: cleanHtml(originalHtml), headScripts: [] });
       siteMain.replaceChildren();
     }
-    html.classList.remove('world-loading', 'world-city', 'world-apartment', 'world-atlas');
+    html.classList.remove('world-loading', 'world-atlas');
     html.classList.add('world-on', 'world-' + id);
     html.setAttribute('data-world', id);
     hud.hidden = false;
     stage.removeAttribute('aria-hidden');
     stage.inert = false;
-    hud.querySelector('.hud-world-name').textContent = def.title;
-    hud.querySelector('.hud-world').setAttribute('aria-label', `${def.title}: change world`);
     current = id;
     const world = mod.default;
     await world.mount(stage, worldApi(id));
@@ -253,6 +234,7 @@ async function enterWorld(id, { initial = false } = {}) {
     active = world;
     prefs.set('world', id);
     music.setWorld(id);
+    music.autostart();
     await show(location.href, { instant: true, scroll: readScroll, focus: !initial });
     statusEl.textContent = `Now in ${def.title}.`;
     if (!initial) {
@@ -293,7 +275,7 @@ async function leaveToRead({ silent = false } = {}) {
   stage.inert = true;
   reader && reader.reset();
   hud.hidden = true;
-  html.classList.remove('world-on', 'world-loading', 'reading', 'world-city', 'world-apartment', 'world-atlas');
+  html.classList.remove('world-on', 'world-loading', 'reading', 'world-atlas');
   html.setAttribute('data-world', 'read');
   if (originalHtml !== null) {
     siteMain.innerHTML = cleanHtml(originalHtml);
@@ -324,10 +306,12 @@ function narrow() {
 
 // Put keyboard focus on the place in the world that stands for a section.
 function focusPlace(section) {
+  // only what is on screen: the room and the map are both mounted, one is inert
+  const visible = (sel) => [...stage.querySelectorAll(sel)].find((el) => !el.closest('[inert]'));
   const el =
     section === 'home'
-      ? stage.querySelector('[data-go][aria-current], [data-go], .atlas')
-      : stage.querySelector(`[data-go="${section}"]`) || stage.querySelector(`[data-section="${section}"]`);
+      ? visible('[data-go][aria-current]') || visible('[data-go]') || visible('.atlas')
+      : visible(`[data-section="${section}"]`) || visible(`[data-go="${section}"]`);
   if (el) el.focus({ preventScroll: true });
 }
 
@@ -359,6 +343,8 @@ async function show(url, { instant = false, scroll = null, focus = true } = {}) 
   // a later navigation may have overtaken this one
   if (my !== navSeq || current === 'read' || !active) return;
   shownSection = section;
+  // each kind of page takes its own form in the world: a scroll, a charter, a ledger…
+  reader.el.dataset.section = section;
   await reader.open(page, { url, label: WORLDS[current].places[section], scroll, focus });
   // on phones the reader is a sheet over the world: keep the hidden half out of the tab order
   stage.inert = narrow();
@@ -397,20 +383,14 @@ if (router) {
     else if (current === 'read' && location.href.split('#')[0] !== loadedUrl) location.reload();
   });
   document.addEventListener('keydown', (e) => {
-    if (e.key !== 'Escape' || current === 'read' || dialog.open) return;
+    if (e.key !== 'Escape' || current === 'read') return;
     if (e.target.closest && e.target.closest('input, textarea, select')) return;
     if (reader.isOpen) navigate(data.root, { push: true });
   });
 }
 
-/* — Choosing a world — */
-function markCurrent() {
-  dialog.querySelectorAll('.world-slice').forEach((s) => s.classList.toggle('is-current', s.querySelector(`[data-world-choose="${current}"]`) !== null));
-  dialog.querySelector('.world-read').toggleAttribute('aria-current', current === 'read');
-}
-
+/* — Stepping inside, and back out to Just Read — */
 function choose(id) {
-  if (dialog.open) dialog.close();
   if (id === current || busy) return;
   if (id === 'read') leaveToRead();
   else enterWorld(id);
@@ -418,18 +398,10 @@ function choose(id) {
 
 function bindChoosers(scope) {
   scope.querySelectorAll('[data-world-choose]').forEach((b) => {
+    b.hidden = false;
     if (b.dataset.boundChoose) return;
     b.dataset.boundChoose = '1';
     b.addEventListener('click', () => choose(b.dataset.worldChoose));
-  });
-  scope.querySelectorAll('[data-open-worlds]').forEach((b) => {
-    b.hidden = false;
-    if (b.dataset.boundOpen) return;
-    b.dataset.boundOpen = '1';
-    b.addEventListener('click', () => {
-      markCurrent();
-      dialog.showModal();
-    });
   });
   scope.querySelectorAll('[data-just-read]').forEach((a) => {
     if (a.dataset.boundRead) return;
@@ -441,15 +413,11 @@ function bindChoosers(scope) {
   });
 }
 
-if (data && dialog) {
+if (data) {
   bindChoosers(document);
-  dialog.querySelector('[data-close-worlds]').addEventListener('click', () => dialog.close());
-  dialog.addEventListener('click', (e) => {
-    if (e.target === dialog) dialog.close();
-  });
 
   const asked = new URLSearchParams(location.search).get('world');
-  if (asked && prefs.WORLD_IDS.includes(asked)) prefs.set('world', asked);
+  if (asked) prefs.set('world', prefs.normalise(asked));
   const want = prefs.world();
   if (want !== 'read') {
     enterWorld(want, { initial: true });

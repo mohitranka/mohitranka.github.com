@@ -1,4 +1,4 @@
-// "Brushes on a Tuesday": Apartment 404's track. A small jazz trio at 132 bpm, swung:
+// "Brushes on a Tuesday", one of three tracks in the rotation. A jazz trio at 132 bpm, swung:
 // a walking upright bass, brushes and ride, and piano comping on rootless voicings in
 // B-flat. Every other chorus the right hand finds a short tune, and the end of each
 // phrase gets a little grace-note shrug. Original; generated from a fixed seed.

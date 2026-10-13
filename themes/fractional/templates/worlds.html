@@ -1,4 +1,3 @@
-{% from "world-previews.html" import panorama %}
 {# The world layer: hidden in Just Read, owned by the runtime (theme/js/site/core.js) otherwise. #}
 <div class="world-stage" id="world-stage" aria-hidden="true"></div>
 
@@ -17,10 +16,6 @@
 </section>
 
 <div class="world-hud" id="world-hud" hidden>
-    <button class="hud-pill hud-world" type="button" data-open-worlds aria-label="Change world">
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.8 3 2.8 15 0 18M12 3c-2.8 3-2.8 15 0 18"/></svg>
-        <span class="hud-world-name">World</span>
-    </button>
     <div class="music" id="music">
         <button class="hud-pill music-toggle" type="button" aria-pressed="false" aria-describedby="music-track">
             <svg class="music-icon music-icon--off" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/><path d="M3 3l18 18"/></svg>
@@ -30,6 +25,7 @@
         </button>
         <div class="music-panel">
             <p class="music-track" id="music-track"></p>
+            <button class="music-next" type="button">Next track</button>
             <label class="music-volume"><span>Volume</span><input type="range" min="0" max="100" step="1" value="35"></label>
         </div>
     </div>
@@ -39,20 +35,6 @@
     </button>
     <a class="hud-pill hud-read" href="#" data-just-read>Just Read</a>
 </div>
-
-<dialog class="worlds-dialog" id="worlds-dialog" aria-labelledby="worlds-dialog-title">
-    <div class="worlds-dialog-head">
-        <p class="worlds-dialog-title" id="worlds-dialog-title">Choose your world</p>
-        <button class="worlds-dialog-close" type="button" data-close-worlds aria-label="Close">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
-        </button>
-    </div>
-    {{ panorama(compact=true) }}
-    <div class="worlds-dialog-foot">
-        <button class="world-read" type="button" data-world-choose="read">Just Read: no world, no music</button>
-        <p>The page you are on comes with you.</p>
-    </div>
-</dialog>
 
 <div class="world-curtain" id="world-curtain" aria-hidden="true"></div>
 <p class="sr-only" id="world-status" role="status" aria-live="polite"></p>

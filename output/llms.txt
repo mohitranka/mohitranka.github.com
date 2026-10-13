@@ -17,7 +17,7 @@ Site: https://www.mohitranka.com
 
 ## Pages
 
-- [Home](https://www.mohitranka.com/): A short introduction, recent writing, and three optional interactive ways to browse the site
+- [Home](https://www.mohitranka.com/): A short introduction, recent writing, and an optional illustrated map of the site with a cottage and original music
 - [About](https://www.mohitranka.com/about/): Who Mohit is, briefly, in his own words
 - [Writing](https://www.mohitranka.com/blog/): Essays on systems, platforms, data, reliability, and leadership
 - [Work](https://www.mohitranka.com/work/): Selected work at Booking.com, Postman, and LinkedIn

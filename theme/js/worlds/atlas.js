@@ -1,5 +1,5 @@
-// The Unfinished Atlas: the site as an illustrated map, drawn in SVG from a fixed seed.
-// Six landmarks are the six sections; the map pans and zooms by drag, wheel, pinch,
+// The Unfinished Atlas: the site's home screen, drawn in SVG from a fixed seed. Its
+// landmarks are Writing, Work and Projects; Traveler's Home is the cottage you step into; the map pans and zooms by drag, wheel, pinch,
 // keys or buttons, remembers where you have been, and a lantern walks the road
 // between places. The fog in the north-east is the part that has not been written yet.
 
@@ -11,25 +11,19 @@ const PLACES = {
   writing: { name: 'Library of Stories', x: 860, y: 540, verb: 'Read the stories', icon: 'tower' },
   work: { name: 'The Citadel', x: 1250, y: 560, verb: 'Enter the Citadel', icon: 'castle' },
   projects: { name: "Craftsman's Forge", x: 1440, y: 830, verb: 'Visit the forge', icon: 'forge' },
-  library: { name: 'Ancient Archives', x: 1000, y: 960, verb: 'Open the archives', icon: 'temple' },
-  contact: { name: "Messenger's Outpost", x: 640, y: 1040, verb: 'Send a message', icon: 'outpost' },
 };
-const ROAD_ORDER = ['about', 'writing', 'work', 'projects', 'library', 'contact'];
+const ROAD_ORDER = ['about', 'writing', 'work', 'projects'];
 
 function describe(section, data) {
   switch (section) {
     case 'about':
-      return 'Where the traveller keeps his boots and his opinions. Who he is, briefly.';
+      return 'A cottage with shelves of books, a letterbox for messages and a fire that is usually lit. Who lives here, briefly.';
     case 'writing':
       return `Essays on systems, platforms, people, and the occasional detour. ${data.essays.length} volumes so far.`;
     case 'work':
       return 'Where the day jobs live: Booking.com, Postman, LinkedIn. Well defended, mostly by on-call rotas.';
-    case 'projects':
-      return 'Things built on his own time and actually finished. Forge is on the anvil.';
-    case 'library':
-      return `${data.bookCount} books read and shelved. The favourites are kept nearest the door.`;
     default:
-      return 'Leave a message with the rider. Every one is read by the traveller himself.';
+      return 'Things built on his own time and actually finished. Forge is on the anvil.';
   }
 }
 
@@ -185,6 +179,20 @@ function mapSvg(data) {
 
   ${landmarks}
 
+  <!-- the Minstrel's Camp: the songbook, out on the map -->
+  <g class="at-camp" transform="translate(1000 960)" tabindex="0" role="button" aria-label="The Minstrel's Camp: open the songbook">
+    <circle class="at-place-hit" r="74" cy="-24"/>
+    <g class="at-icon" transform="scale(1.35)">
+      <path d="M-58 0 l26 -46 l26 46z"/><path d="M-32 -46 v46"/>
+      <path d="M-6 0 l14 -8 M-6 -8 l14 8" />
+      <path class="at-ember" d="M1 -6 q4 -8 0 -16 q-4 8 0 16z"/>
+      <circle cx="26" cy="-22" r="5"/><path d="M26 -17 v14 M20 0 l6 -3 l6 3"/>
+      <ellipse cx="34" cy="-10" rx="7" ry="5" transform="rotate(-30 34 -10)"/><path d="M38 -13 l10 -10"/>
+    </g>
+    <g class="at-notes"><path d="M20 -70 v-16 l10 -3 v14 M20 -70 a4 3 0 1 1 -0.1 0"/><path d="M44 -88 v-14 M44 -88 a4 3 0 1 1 -0.1 0"/></g>
+    <text class="at-place-name" y="40" text-anchor="middle">Minstrel’s Camp</text>
+  </g>
+
   <g class="at-compass" transform="translate(1800 1060)">
     <circle r="62" class="at-compass-ring"/><circle r="50" class="at-compass-ring"/>
     <path d="M0 -76 L11 0 L0 76 L-11 0Z" class="at-compass-n"/><path d="M-76 0 L0 -9 L76 0 L0 9Z" class="at-compass-e"/>
@@ -320,9 +328,13 @@ function placeCard() {
   const s = toScreen(p.x, p.y);
   const { w } = size();
   const cw = card.offsetWidth || 300;
-  const left = s.x + 70 + cw > w - 12 ? s.x - 70 - cw : s.x + 70;
-  card.style.left = Math.max(12, left) + 'px';
-  card.style.top = Math.max(80, s.y - 90) + 'px';
+  const { h } = size();
+  const ch = card.offsetHeight || 160;
+  // below the place's name, centred on it; above it if there is no room below
+  const below = s.y + 30 / cam.z + 34;
+  const top = below + ch > h - 12 ? s.y - 80 / cam.z - ch : below;
+  card.style.left = Math.min(w - cw - 12, Math.max(12, s.x - cw / 2)) + 'px';
+  card.style.top = Math.max(80, top) + 'px';
 }
 
 /* — Road, lantern, stamps — */
@@ -373,10 +385,11 @@ function walkLantern(to) {
 }
 
 function renderVisited() {
+  const out = ROAD_ORDER.filter((s) => s !== 'about');
   svg.querySelectorAll('.at-place').forEach((g) => g.classList.toggle('is-visited', visited.has(g.dataset.section)));
   // the fog thins a little for every place explored
-  svg.querySelector('.at-fog').style.opacity = String(Math.max(0.45, 1 - visited.size * 0.08));
-  el.querySelector('.at-legend-count').textContent = `${visited.size} of 6 places visited`;
+  svg.querySelector('.at-fog').style.opacity = String(Math.max(0.45, 1 - out.filter((s) => visited.has(s)).length * 0.16));
+  el.querySelector('.at-legend-count').textContent = `${out.filter((s) => visited.has(s)).length} of ${out.length} places visited`;
 }
 
 /* — Input — */
@@ -385,10 +398,13 @@ function bindInput() {
   let drag = null;
   let pinch = null;
   let moved = false;
+  let pressed = null; // what was under the pointer when it went down
 
   on(svg, 'pointerdown', (e) => {
     pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
-    svg.setPointerCapture(e.pointerId);
+    // capture only once a drag starts: capturing on press would retarget the release to
+    // the whole map, and a click on a landmark would never reach the landmark
+    pressed = e.target;
     moved = false;
     cancelAnimationFrame(anim);
     if (pointers.size === 1) drag = { x: e.clientX, y: e.clientY, cam: { ...cam } };
@@ -411,7 +427,14 @@ function bindInput() {
     if (!drag) return;
     const dx = e.clientX - drag.x;
     const dy = e.clientY - drag.y;
-    if (Math.abs(dx) + Math.abs(dy) > 5) moved = true;
+    if (!moved && Math.abs(dx) + Math.abs(dy) > 5) {
+      moved = true;
+      try {
+        svg.setPointerCapture(e.pointerId);
+      } catch (err) {
+        /* the pointer already left; the drag still works while it is over the map */
+      }
+    }
     if (moved) {
       el.classList.add('is-dragging');
       cam = clampCam({ x: drag.cam.x - dx * cam.z, y: drag.cam.y - dy * cam.z, z: cam.z });
@@ -428,18 +451,22 @@ function bindInput() {
   };
   on(svg, 'pointerup', (e) => {
     const wasMoved = moved;
+    const target = pressed || e.target;
+    pressed = null;
     end(e);
     if (wasMoved) return;
-    const place = e.target.closest('.at-place');
+    const place = target.closest('.at-place');
     if (place) {
       const id = place.dataset.section;
       // touch: the first tap shows the card, the second goes in
       if (e.pointerType === 'touch' && cardFor !== id) return showCard(id);
       api.sfx('select');
-      api.go(id);
+      visit(id);
       return;
     }
-    if (e.target.closest('.at-serpent')) return serpent();
+    if (target.closest('.at-serpent')) return serpent();
+    const camp = target.closest('.at-camp');
+    if (camp) return api.openSongbook && api.openSongbook(camp);
     if (e.pointerType === 'touch') hideCard();
   });
   on(svg, 'pointercancel', end);
@@ -451,15 +478,18 @@ function bindInput() {
 
   svg.querySelectorAll('.at-place').forEach((g) => {
     on(g, 'pointerenter', (e) => e.pointerType !== 'touch' && showCard(g.dataset.section));
-    on(g, 'pointerleave', (e) => e.pointerType !== 'touch' && setTimeout(() => !card.matches(':hover') && cardFor === g.dataset.section && hideCard(), 250));
+    on(g, 'pointerleave', (e) => e.pointerType !== 'touch' && setTimeout(() => !card.matches(':hover') && cardFor === g.dataset.section && hideCard(), 700));
     on(g, 'focus', () => showCard(g.dataset.section));
     on(g, 'keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
-        api.go(g.dataset.section);
+        visit(g.dataset.section);
       }
     });
   });
+  const camp = svg.querySelector('.at-camp');
+  on(camp, 'keydown', (e) => (e.key === 'Enter' || e.key === ' ') && (e.preventDefault(), api.openSongbook && api.openSongbook(camp)));
+  on(document, 'site:music', (e) => el.classList.toggle('is-playing', e.detail.playing));
   const egg = svg.querySelector('.at-serpent');
   on(egg, 'keydown', (e) => (e.key === 'Enter' || e.key === ' ') && (e.preventDefault(), serpent()));
   on(card, 'pointerleave', () => setTimeout(() => !card.matches(':hover') && hideCard(), 250));
@@ -477,7 +507,7 @@ function bindInput() {
   el.querySelector('[data-zoom="in"]').addEventListener('click', () => zoomBy(1 / 1.4));
   el.querySelector('[data-zoom="out"]').addEventListener('click', () => zoomBy(1.4));
   el.querySelector('[data-zoom="fit"]').addEventListener('click', () => overview());
-  card.querySelector('.at-card-go').addEventListener('click', (e) => api.go(e.currentTarget.dataset.go));
+  card.querySelector('.at-card-go').addEventListener('click', (e) => visit(e.currentTarget.dataset.go));
   on(window, 'resize', () => {
     const z = cam.z / fit;
     const { w, h } = size();
@@ -485,6 +515,11 @@ function bindInput() {
     cam = clampCam({ ...cam, z: fit * z });
     apply();
   });
+}
+
+function visit(id) {
+  if (id === 'about' && api.enterHome) api.enterHome();
+  else api.go(id);
 }
 
 function zoomAt(sx, sy, z, base) {
