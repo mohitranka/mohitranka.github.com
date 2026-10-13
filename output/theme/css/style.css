@@ -32,6 +32,7 @@
 /* The map's own lettering. */
 @font-face { font-family: 'IM Fell English'; src: url('../fonts/im-fell-normal-400.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
 @font-face { font-family: 'IM Fell English'; src: url('../fonts/im-fell-italic-400.woff2') format('woff2'); font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: 'Uncial Antiqua'; src: url('../fonts/uncial-antiqua-400.woff2') format('woff2'); font-weight: 400; font-display: swap; }
 @font-face { font-family: 'IM Fell English SC'; src: url('../fonts/im-fell-sc-normal-400.woff2') format('woff2'); font-weight: 400; font-display: swap; }
 
 /* — Tokens — */
@@ -416,9 +417,9 @@ ol {
   position: relative;
   aspect-ratio: 12 / 5;
   min-height: 20rem;
-  border-radius: 14px;
+  border-radius: 2px;
   overflow: hidden;
-  background: #dccaa0;
+  background: #2a1a0e;
 }
 
 .invite-art {
@@ -428,21 +429,43 @@ ol {
   height: 100%;
 }
 
+/* the invitation is a corner of the map: the same grain, the same charred edge */
+.invite::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: url("../images/vellum.jpg") 0 0 / 460px;
+  mix-blend-mode: multiply;
+  opacity: 0.55;
+}
+.invite::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border: 30px solid transparent;
+  border-image: url("../images/burnt.png") 112 / 30px round;
+}
+
 /* the same parchment cartouche the map greets you with */
 .invite-card {
   position: absolute;
-  right: clamp(1rem, 3vw, 2rem);
-  top: clamp(1rem, 3vw, 2rem);
-  max-width: 25rem;
+  right: 2.75rem;
+  top: 2.75rem;
+  max-width: 21rem;
   padding: 1rem 1.3rem 1.15rem;
-  border: 1px solid #8a6a3e;
-  background: #f6ecd2;
-  color: #3b2a18;
-  box-shadow: 0 14px 30px -18px rgba(59, 42, 24, 0.8), inset 0 0 0 4px #f6ecd2, inset 0 0 0 5px rgba(138, 106, 62, 0.45);
+  z-index: 1;
+  border: 0;
+  background: #efe0ba url("../images/vellum.jpg") 0 0 / 420px;
+  background-blend-mode: multiply;
+  color: #2b1d10;
+  box-shadow: 0 14px 30px -18px rgba(59, 42, 24, 0.8), inset 0 0 24px rgba(120, 78, 32, 0.42), inset 0 0 0 1px rgba(80, 50, 20, 0.5);
 }
 
 .invite-name {
-  font: 400 2rem/1 'IM Fell English SC', var(--font-read);
+  font: 400 2rem/1.05 'Uncial Antiqua', var(--font-read);
+  color: #74263a;
 }
 
 .invite-desc {
@@ -455,10 +478,11 @@ ol {
   margin-top: 0.9rem;
   padding: 0.65rem 1.1rem;
   border: 0;
-  border-radius: 999px;
-  background: #3b2a18;
-  color: #f6ecd2;
-  font: 700 0.9375rem/1 var(--font-ui);
+  border-radius: 3px;
+  background: #2b1d10;
+  color: #f1e3bf;
+  font: 400 1.08rem/1 'IM Fell English SC', var(--font-read);
+  letter-spacing: 0.02em;
   cursor: pointer;
   transition: transform 0.2s var(--ease);
 }
@@ -1370,6 +1394,11 @@ html.world-on .reader:not([hidden]) {
   to { opacity: 1; transform: none; }
 }
 
+/* a world may lay the page on its own sheet; Just Read never shows it */
+.reader-sheet {
+  display: none;
+}
+
 .reader-bar {
   display: flex;
   align-items: center;
@@ -1546,7 +1575,8 @@ html.world-switching .world-curtain {
 
 /* The Unfinished Atlas: parchment unrolls from the middle, ringed in ink. */
 .world-curtain[data-style="atlas"]::before {
-  background: radial-gradient(circle at 50% 50%, #efe2c4 0 60%, #d8c49a 100%);
+  background: url("../images/vellum.jpg") 0 0 / 520px, radial-gradient(circle at 50% 50%, #efe2c4 0 60%, #d8c49a 100%);
+  background-blend-mode: multiply;
   clip-path: circle(0% at 50% 50%);
 }
 .world-curtain[data-style="atlas"].is-in::before { clip-path: circle(75% at 50% 50%); }

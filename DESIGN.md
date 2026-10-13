@@ -443,6 +443,16 @@ An SVG half-timbered interior. The arched front door (About), the shelves of tom
 - **Living things:** candle and hearth flames flicker, steam rises.
 - **Night:** plaster darkens under a violet wash, the hearth and candles glow, the window goes to dusk with stars and lit windows on the hill.
 
+### Materials: the hand-inked map (2026-10-14)
+The world is drawn like an old hand-inked map: one stained sheet, iron-gall ink, oxblood lettering in an uncial hand, a charred edge. Colour belongs to the paper and the rubric; everything drawn is ink. Sources: `static/css/worlds/materials.css` (from `scripts/make_ornaments.py`), `static/images/stains.jpg` and `burnt.png` (from `scripts/make_stains.py`), `static/images/vellum.jpg` (from `scripts/make_vellum.py`), `static/js/worlds/paper.js`.
+- **The sheet:** a non-repeating stained parchment (`stains.jpg`: ochre ground, grey-green and rose watercolour blooms, umber mottling, handled edges) laid under the whole map as an SVG pattern that moves and scales with it; drawings use the same pattern as their fill so they hide what is behind them without a flat patch. The fine `vellum.jpg` grain multiplies over everything.
+- **The frame:** a charred edge (`burnt.png`, CSS `border-image` so the burn keeps its scale), then a band between double ink rules lettered round all four sides in Uncial Antiqua with the atlas's own words, with star roundels at the corners. Everything laid on the map sits inside the band; the HUD and the reader move in with it.
+- **Line work (ink `#241710`):** coasts carry dense hachures standing off the shore; mountains are pen-hatched ranges with dark shadowed flanks; woods are crowds of round-crowned trees with the odd pine; hills are humps with a few strokes; rivers carry tributaries; buildings are ink with hatched roofs. A slight tremble filter runs while the map is still and switches off while it moves.
+- **Lettering:** **Uncial Antiqua** (self-hosted, OFL) in oxblood `#74263a`, lower-case, widely spaced for regions (34–44px) and seas; place names on small curled paper scrolls (the clickable ones only); hover fills the scroll oxblood with paper-coloured letters. The title cartouche is a drawn scroll; the compass is an original four-arrow compass with petals, a star and "north".
+- **The rest of the world** takes the same hand: reader titles, headings and place names, the songbook, the cottage title and wayfinder, and the HUD use Uncial Antiqua in oxblood; the essay's initial is an oxblood uncial capital in a double ink frame. Body text stays in Source Serif 4 for reading.
+- **Kept from the realism layer:** deckled sheet edges, the separate reader sheet that casts the torn shadow, oak scroll rollers, wax seals, leather HUD tags, the cottage's stone and oak.
+- **Not borrowed:** the style follows hand-inked fantasy maps generally; no names, scripts (no Tengwar), emblems or artwork from any particular one.
+
 ## Do's and Don'ts
 
 ### Do:

@@ -322,3 +322,117 @@
   .songbook { top: auto; bottom: 0; left: 0; width: 100%; max-height: 80vh; transform: none; animation-name: sb-up; }
   @keyframes sb-up { from { opacity: 0; transform: translateY(20px); } }
 }
+
+/* ============================================================
+   Materials. Oak with grain, hand-laid field stone, plaster with
+   the vellum's tooth, firelight that never quite settles, and
+   torn vellum for every label and the wayfinder.
+   ============================================================ */
+.ct-timber { fill: url(#ct-oak); }
+.ct-floor { fill: url(#ct-boards); }
+.ct-plank { stroke: rgba(40, 22, 10, 0.55); }
+.ct-wall { fill: #eadcbd; }
+.ct-grain { pointer-events: none; mix-blend-mode: multiply; opacity: 0.6; }
+.ct.is-night .ct-grain { opacity: 0.8; }
+
+/* firelight flickers irregularly, and the room breathes with it at night */
+.ct-hearth-glow { animation: ct-firelight 3.7s steps(1, end) infinite; }
+@keyframes ct-firelight {
+  0% { opacity: 0.45; }
+  11% { opacity: 0.6; }
+  19% { opacity: 0.42; }
+  33% { opacity: 0.55; }
+  47% { opacity: 0.38; }
+  58% { opacity: 0.62; }
+  71% { opacity: 0.47; }
+  86% { opacity: 0.57; }
+}
+.ct.is-night .ct-hearth-glow { animation-name: ct-firelight-night; }
+@keyframes ct-firelight-night {
+  0% { opacity: 0.85; }
+  13% { opacity: 1; }
+  27% { opacity: 0.8; }
+  41% { opacity: 0.95; }
+  56% { opacity: 0.78; }
+  69% { opacity: 1; }
+  84% { opacity: 0.86; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ct-hearth-glow { animation: none; }
+}
+
+.ct-title,
+.ct-label,
+.ct-bubble,
+.ct-bar {
+  background: #efe0ba var(--vellum-tex) 0 0 / 420px;
+  background-blend-mode: multiply;
+  border: 0;
+  color: var(--iron-gall);
+  box-shadow: inset 0 0 24px rgba(120, 78, 32, 0.42), inset 0 0 4px rgba(80, 50, 20, 0.55);
+}
+.ct-label,
+.ct-bubble { filter: drop-shadow(0 10px 12px rgba(30, 15, 5, 0.45)); box-shadow: inset 0 0 18px rgba(120, 78, 32, 0.4), inset 0 0 0 1px rgba(80, 50, 20, 0.45); }
+.ct-title { padding: 0.9rem 2.4rem 1rem; }
+.ct-title::before,
+.ct-title::after {
+  content: "";
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background: var(--orn-corner) center / contain no-repeat;
+}
+.ct-title::before { left: 5px; top: 5px; }
+.ct-title::after { right: 5px; bottom: 5px; transform: scale(-1, -1); }
+.ct-bar { padding: 0.55rem 0.7rem; }
+.ct-bar button { font: 400 1rem/1 'IM Fell English SC', Georgia, serif; color: var(--iron-gall); border-radius: 2px; }
+.ct-bar button[aria-current] { background: var(--iron-gall); color: #f1e3bf; }
+.ct-bar button:hover { background: rgba(43, 29, 16, 0.09); }
+
+/* — the songbook: a torn leaf of vellum, gilt corners, rubricated numerals — */
+.songbook {
+  background: #f1e3bf var(--vellum-tex) 0 0 / 520px;
+  background-blend-mode: multiply;
+  border: 0;
+  color: var(--iron-gall);
+  box-shadow: inset 0 0 60px rgba(122, 80, 34, 0.45), inset 0 0 6px rgba(90, 56, 22, 0.6);
+}
+.songbook::before,
+.songbook::after {
+  content: "";
+  position: absolute;
+  width: 46px;
+  height: 46px;
+  pointer-events: none;
+  background: var(--orn-corner) center / contain no-repeat;
+}
+.songbook::before { left: 8px; top: 8px; }
+.songbook::after { right: 8px; bottom: 8px; transform: scale(-1, -1); }
+.sb-head { border-bottom: 0; padding-top: 1.4rem; }
+.sb-head::after {
+  content: "";
+  display: block;
+  width: 12rem;
+  height: 18px;
+  margin: 0.55rem auto 0;
+  background: var(--orn-divider) center / contain no-repeat;
+}
+.sb-n { color: var(--vermilion); }
+.sb-list button[aria-current] { border-left-color: var(--vermilion); background: rgba(176, 52, 31, 0.07); }
+.sb-list button:hover { background: rgba(43, 29, 16, 0.06); }
+.sb-foot { border-top: 0; background: linear-gradient(rgba(90, 60, 30, 0.35), rgba(90, 60, 30, 0.35)) top center / 86% 1px no-repeat; }
+.sb-foot button { border-radius: 3px; font: 400 0.98rem/1 'IM Fell English SC', Georgia, serif; border-color: var(--iron-gall); color: var(--iron-gall); }
+.sb-foot .sb-toggle { background: var(--iron-gall); color: #f1e3bf; }
+.sb-list button { font: inherit; }
+.sb-b { font-family: 'IM Fell English', Georgia, serif; font-size: 1rem; }
+.songbook::after { right: 6px; bottom: 6px; width: 34px; height: 34px; }
+.sb-foot { padding-right: 3.2rem; }
+
+/* the cottage's labels and the songbook take the map's hand: uncial titles in oxblood */
+.ct-name,
+.sb-title { font-family: 'Uncial Antiqua', Georgia, serif; color: #74263a; letter-spacing: 0.02em; }
+.ct-label b,
+.sb-t { font-family: 'Uncial Antiqua', Georgia, serif; color: #74263a; }
+.sb-n { color: #74263a; }
+.ct-bar button { font-family: 'Uncial Antiqua', Georgia, serif; text-transform: lowercase; }
+.sb-foot button { font-family: 'Uncial Antiqua', Georgia, serif; text-transform: lowercase; }

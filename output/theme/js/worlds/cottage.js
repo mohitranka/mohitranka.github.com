@@ -1,3 +1,5 @@
+import { deckle } from './paper.js';
+
 // Traveler's Home: the cottage on the Unfinished Atlas, drawn in SVG. The personal
 // sections live here (front door, shelves, messenger's letterbox); the writing desk,
 // the letter from the Citadel and the workbench are shortcuts back out to their places
@@ -47,12 +49,48 @@ function tomes() {
   return out;
 }
 
+// Field stone, laid by hand: courses of uneven, rounded stones with their own tone.
+function stonePattern() {
+  const r = seeded(77);
+  let out = '';
+  let y = 0;
+  while (y < 120) {
+    const h = 15 + Math.floor(r() * 9);
+    let x = -Math.floor(r() * 30);
+    while (x < 240) {
+      const w = 26 + Math.floor(r() * 30);
+      const tone = ['#a69d8b', '#9c927e', '#b1a894', '#958b78', '#aaa08a'][Math.floor(r() * 5)];
+      out += `<rect x="${x + 1.5}" y="${y + 1.5}" width="${w - 3}" height="${h - 3}" rx="${4 + r() * 4}" fill="${tone}"/>`;
+      out += `<path d="M${x + 4} ${y + h - 4} q${w / 2} ${2 + r() * 2} ${w - 8} 0" fill="none" stroke="rgba(60,50,35,.35)" stroke-width="1.5"/>`;
+      x += w;
+    }
+    y += h;
+  }
+  return `<pattern id="ct-stone" width="240" height="${y}" patternUnits="userSpaceOnUse"><rect width="240" height="${y}" fill="#7d7464"/>${out}</pattern>`;
+}
+
+// Oak: long grain lines with the odd knot.
+function woodPattern(id, base, w = 160, h = 48) {
+  const r = seeded(id.length * 31);
+  let lines = '';
+  for (let i = 0; i < 9; i++) {
+    const y = 3 + i * (h / 9) + r() * 3;
+    lines += `<path d="M0 ${y.toFixed(1)} C ${w * 0.3} ${(y + (r() - 0.5) * 6).toFixed(1)}, ${w * 0.6} ${(y + (r() - 0.5) * 6).toFixed(1)}, ${w} ${y.toFixed(1)}" fill="none" stroke="${r() < 0.5 ? 'rgba(20,10,4,.35)' : 'rgba(255,220,170,.12)'}" stroke-width="${(0.8 + r() * 1.4).toFixed(1)}"/>`;
+  }
+  const kx = 40 + r() * 80;
+  lines += `<ellipse cx="${kx.toFixed(0)}" cy="${(h / 2).toFixed(0)}" rx="7" ry="3.2" fill="none" stroke="rgba(20,10,4,.4)" stroke-width="1.2"/>`;
+  return `<pattern id="${id}" width="${w}" height="${h}" patternUnits="userSpaceOnUse"><rect width="${w}" height="${h}" fill="${base}"/>${lines}</pattern>`;
+}
+
 function svg() {
   return `
 <svg class="ct-svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" role="group" aria-label="Traveler's Home">
   <defs>
     <pattern id="ct-plaster" width="120" height="120" patternUnits="userSpaceOnUse"><rect width="120" height="120" class="ct-wall"/><path d="M14 30 q20 -6 40 2 M70 88 q18 6 34 -2 M30 104 q10 -4 18 0" class="ct-crack"/></pattern>
-    <pattern id="ct-stone" width="60" height="34" patternUnits="userSpaceOnUse"><rect width="60" height="34" class="ct-stone"/><path d="M0 17 H60 M30 0 V17 M0 17 V34 M60 17 V34" class="ct-mortar"/></pattern>
+    ${stonePattern()}
+    ${woodPattern('ct-oak', '#4a3220')}
+    ${woodPattern('ct-boards', '#7a5236', 220, 40)}
+    <pattern id="ct-vellum" width="520" height="520" patternUnits="userSpaceOnUse"><image href="/theme/images/vellum.jpg" width="520" height="520"/></pattern>
     <linearGradient id="ct-sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" class="ct-sky-top"/><stop offset="1" class="ct-sky-low"/></linearGradient>
     <radialGradient id="ct-glow"><stop offset="0" stop-color="#ffb347" stop-opacity=".6"/><stop offset="1" stop-color="#ffb347" stop-opacity="0"/></radialGradient>
     <clipPath id="ct-window-clip"><path d="M672 360 V200 Q760 110 848 200 V360Z"/></clipPath>
@@ -249,6 +287,7 @@ function svg() {
     <rect x="532" y="840" width="66" height="14" rx="4" fill="#6b4428"/><rect x="922" y="840" width="66" height="14" rx="4" fill="#6b4428"/>
   </g>
 
+  <rect class="ct-grain" width="1600" height="900" fill="url(#ct-vellum)"/>
   <rect class="ct-night" width="1600" height="900"/>
   <ellipse class="ct-night-glow" cx="1080" cy="560" rx="320" ry="220" fill="url(#ct-glow)"/>
   <ellipse class="ct-night-glow" cx="852" cy="440" rx="120" ry="90" fill="url(#ct-glow)"/>
@@ -390,6 +429,8 @@ const world = {
     label = el.querySelector('.ct-label');
     bubble = el.querySelector('.ct-bubble');
     bar = el.querySelector('.ct-bar');
+    deckle(el.querySelector('.ct-title'), { seed: 4 });
+    deckle(bar, { seed: 6, amp: 2.6 });
     world.setTheme(api.theme());
 
     room.querySelectorAll('.ct-obj').forEach((obj) => {

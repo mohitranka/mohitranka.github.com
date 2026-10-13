@@ -4,3 +4,4 @@ except Inter (see INTER-LICENSE.txt, also OFL 1.1).
 
 Source Serif 4 — Copyright 2014-2023 Adobe (https://github.com/adobe-fonts/source-serif)
 IM Fell English / IM Fell English SC — Copyright 2010 Igino Marini (http://iginomarini.com/fell)
+Uncial Antiqua — Copyright 2011 Astigmatic (AOETI), with Reserved Font Name "Uncial Antiqua". SIL Open Font License 1.1. https://fonts.google.com/specimen/Uncial+Antiqua

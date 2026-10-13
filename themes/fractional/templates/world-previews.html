@@ -1,46 +1,63 @@
-{# The invitation onto the Unfinished Atlas: the map, with Traveler's Home lit up on it. #}
+{# The invitation onto the Unfinished Atlas: a corner of the map, inked in its own hand. #}
 {% macro invitation() -%}
 <div class="invite">
   <svg class="invite-art" viewBox="0 0 1200 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
     <defs>
-      <pattern id="inv-sea" width="12" height="12" patternUnits="userSpaceOnUse" patternTransform="rotate(28)"><path d="M0 0 V12" stroke="#a3875a" stroke-width="1" opacity=".45"/></pattern>
-      <radialGradient id="inv-glow"><stop offset="0" stop-color="#ffc46b" stop-opacity=".7"/><stop offset="1" stop-color="#ffc46b" stop-opacity="0"/></radialGradient>
+      <pattern id="inv-paper" patternUnits="userSpaceOnUse" width="1200" height="780"><image href="{{ SITEURL }}/theme/images/stains.jpg" width="1200" height="780" preserveAspectRatio="none"/></pattern>
+      <pattern id="inv-hatch" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0 V5" stroke="#241710" stroke-width="1.1"/></pattern>
+      <radialGradient id="inv-glow"><stop offset="0" stop-color="#ffc46b" stop-opacity=".5"/><stop offset="1" stop-color="#ffc46b" stop-opacity="0"/></radialGradient>
     </defs>
-    <rect width="1200" height="500" fill="#dccaa0"/>
-    <rect width="1200" height="500" fill="url(#inv-sea)"/>
-    <path d="M150 120 C300 50 520 90 640 70 C800 50 980 80 1100 140 C1180 190 1170 300 1120 380 C1060 460 900 480 760 470 C600 470 480 500 340 470 C200 440 110 380 120 280 C126 210 120 160 150 120Z" fill="none" stroke="#3b2a18" stroke-width="1.2" opacity=".4" transform="translate(-20 -14) scale(1.03)"/>
-    <path d="M150 120 C300 50 520 90 640 70 C800 50 980 80 1100 140 C1180 190 1170 300 1120 380 C1060 460 900 480 760 470 C600 470 480 500 340 470 C200 440 110 380 120 280 C126 210 120 160 150 120Z" fill="#efe2c4" stroke="#3b2a18" stroke-width="3"/>
+    <rect width="1200" height="500" fill="url(#inv-paper)"/>
 
-<g transform="translate(-170 10)">
-    <!-- mountains, forest, river -->
-    <g fill="#efe2c4" stroke="#3b2a18" stroke-width="2.2" stroke-linejoin="round"><path d="M560 190 l28 -56 l28 56"/><path d="M596 190 l36 -74 l36 74"/><path d="M650 190 l26 -50 l26 50"/><path d="M690 190 l30 -60 l30 60"/><path d="M736 190 l24 -46 l24 46"/></g>
-    <g fill="#3b2a18"><path d="M860 380 l8 -20 l8 20z"/><path d="M880 390 l8 -20 l8 20z"/><path d="M900 376 l8 -20 l8 20z"/><path d="M872 404 l8 -20 l8 20z"/><path d="M896 410 l8 -20 l8 20z"/><path d="M920 396 l8 -20 l8 20z"/></g>
-    <path d="M700 190 C690 250 740 280 730 330 C720 380 770 420 780 480" fill="none" stroke="#5a7d8a" stroke-width="4"/>
+    <!-- the coast: a fine dashed stroke under the land reads as hachures standing off the shore -->
+    <path d="M160 120 C320 50 520 90 640 70 C800 50 980 80 1100 140 C1180 190 1170 300 1120 380 C1060 460 900 480 760 470 C600 470 480 500 340 470 C200 440 110 380 120 280 C126 210 130 160 160 120Z" fill="none" stroke="#241710" stroke-width="22" stroke-dasharray="1.2 5.5" opacity=".85"/>
+    <path d="M160 120 C320 50 520 90 640 70 C800 50 980 80 1100 140 C1180 190 1170 300 1120 380 C1060 460 900 480 760 470 C600 470 480 500 340 470 C200 440 110 380 120 280 C126 210 130 160 160 120Z" fill="url(#inv-paper)" stroke="#241710" stroke-width="2.4"/>
 
-    <!-- the red road between the places -->
-    <path d="M500 330 C560 300 600 250 650 250 C720 250 760 220 840 220 C910 220 960 280 1000 320" fill="none" stroke="#a83a2a" stroke-width="3" stroke-dasharray="2 9" stroke-linecap="round"/>
+    <g transform="translate(-270 10)">
+      <!-- a short range, hatched down its shadowed flanks -->
+      <g fill="url(#inv-paper)" stroke="#241710" stroke-width="1.6" stroke-linejoin="round">
+        <path d="M540 196 L566 150 L574 142 L586 162 L600 196Z"/><path d="M566 196 L598 128 L610 118 L626 150 L650 196Z"/>
+        <path d="M618 196 L640 156 L648 148 L660 168 L676 196Z"/><path d="M650 196 L684 132 L694 122 L708 150 L730 196Z"/>
+        <path d="M700 196 L720 162 L728 154 L740 172 L756 196Z"/>
+      </g>
+      <path d="M612 126 l-6 13 M617 134 l-8 17 M622 144 l-9 20 M628 156 l-9 20 M634 168 l-8 18 M690 128 l-6 14 M696 138 l-8 17 M702 148 l-9 20 M709 160 l-9 20 M716 172 l-8 18 M576 148 l-5 11 M582 158 l-7 15 M588 170 l-7 15 M652 156 l-5 11 M658 166 l-6 13 M732 162 l-5 10 M738 172 l-6 13" stroke="#241710" stroke-width="1" fill="none" stroke-linecap="round"/>
 
-    <!-- Library of Stories, The Citadel, Craftsman's Forge -->
-    <g fill="#efe2c4" stroke="#3b2a18" stroke-width="2.2" stroke-linejoin="round">
-      <g transform="translate(650 250)"><path d="M-14 0 v-42 h28 v42z"/><path d="M-18 -42 l18 -20 l18 20z"/><rect x="-5" y="-14" width="10" height="14"/></g>
-      <g transform="translate(840 220)"><path d="M-30 0 v-32 h60 v32z"/><path d="M-38 0 v-52 h14 v52z M24 0 v-52 h14 v52z"/><path d="M-6 0 v-14 a6 6 0 0 1 12 0 v14"/><path d="M0 -32 v-24 l13 5 l-13 5"/></g>
-      <g transform="translate(1000 320)"><path d="M-24 0 v-26 h48 v26z"/><path d="M-28 -26 l28 -16 l28 16z"/><path d="M10 -34 v-22 h10 v28"/><circle cx="0" cy="-8" r="5" fill="#d8572a" stroke="none"/></g>
+      <!-- the river and a wood of round-crowned trees -->
+      <path d="M700 200 C690 250 740 280 730 330 C720 380 770 420 780 470" fill="none" stroke="#241710" stroke-width="2"/>
+      <g fill="url(#inv-paper)" stroke="#241710" stroke-width="1.2">
+        <circle cx="860" cy="372" r="8"/><circle cx="876" cy="380" r="9"/><circle cx="892" cy="370" r="8"/><circle cx="868" cy="392" r="9"/><circle cx="886" cy="396" r="8"/><circle cx="904" cy="386" r="9"/><circle cx="850" cy="386" r="7"/>
+      </g>
+
+      <!-- the road, and the places on it -->
+      <path d="M500 330 C560 300 600 250 650 250 C720 250 760 220 840 220 C910 220 960 280 1000 320" fill="none" stroke="#74263a" stroke-width="2.2" stroke-dasharray="7 6"/>
+      <g fill="url(#inv-paper)" stroke="#241710" stroke-width="2.2" stroke-linejoin="round">
+        <g transform="translate(650 250)"><path d="M-14 0 v-42 h28 v42z"/><path d="M-18 -42 l18 -20 l18 20z" fill="url(#inv-hatch)"/><rect x="-5" y="-14" width="10" height="14" fill="#241710"/></g>
+        <g transform="translate(840 220)"><path d="M-30 0 v-32 h60 v32z"/><path d="M-38 0 v-52 h14 v52z M24 0 v-52 h14 v52z"/><path d="M-6 0 v-14 a6 6 0 0 1 12 0 v14" fill="#241710"/><path d="M0 -32 v-24"/><path d="M0 -56 l13 5 l-13 5z" fill="#74263a"/></g>
+        <g transform="translate(1000 320)"><path d="M-24 0 v-26 h48 v26z"/><path d="M-28 -26 l28 -16 l28 16z" fill="url(#inv-hatch)"/><path d="M10 -34 v-22 h10 v28"/><circle cx="0" cy="-8" r="5" fill="#d8572a" stroke="none"/></g>
+      </g>
+
+      <!-- Traveler's Home, lit, with smoke: the way in -->
+      <ellipse cx="500" cy="318" rx="110" ry="74" fill="url(#inv-glow)"/>
+      <g transform="translate(500 336)" fill="url(#inv-paper)" stroke="#241710" stroke-width="2.6" stroke-linejoin="round">
+        <path d="M-40 0 v-44 l40 -32 l40 32 v44z"/>
+        <path d="M-44 -42 l44 -36 l44 36z" fill="url(#inv-hatch)"/>
+        <rect x="-10" y="-26" width="20" height="26" fill="#241710"/>
+        <rect x="14" y="-36" width="16" height="14" fill="#ffc46b"/>
+        <path d="M18 -66 v-20 h12 v32"/>
+        <path d="M24 -92 q-10 -12 2 -24 q12 -12 0 -24" fill="none" stroke-width="1.6" stroke-dasharray="4 5"/>
+      </g>
+      <text x="500" y="378" text-anchor="middle" font-family="Uncial Antiqua, Georgia, serif" font-size="25" fill="#74263a">traveler’s home</text>
+      <text x="840" y="296" text-anchor="middle" font-family="Uncial Antiqua, Georgia, serif" font-size="26" letter-spacing="4" fill="#74263a">the citadel</text>
     </g>
+    <text x="230" y="452" text-anchor="middle" font-family="Uncial antiqua, Georgia, serif" font-size="28" letter-spacing="10" fill="#74263a" transform="rotate(-4 230 452)">sea of open tabs</text>
 
-    <!-- Traveler's Home, lit, with smoke: the way in -->
-    <ellipse cx="500" cy="318" rx="120" ry="80" fill="url(#inv-glow)"/>
-    <g transform="translate(500 336)" fill="#efe2c4" stroke="#3b2a18" stroke-width="2.6" stroke-linejoin="round">
-      <path d="M-40 0 v-44 l40 -32 l40 32 v44z"/>
-      <rect x="-10" y="-26" width="20" height="26" fill="#6b4428"/>
-      <rect x="14" y="-36" width="16" height="14" fill="#ffc46b"/>
-      <path d="M18 -66 v-20 h12 v32"/>
-      <path d="M24 -92 q-10 -12 2 -24 q12 -12 0 -24" fill="none" stroke-width="1.6" stroke-dasharray="4 5"/>
+    <!-- the compass -->
+    <g transform="translate(118 140) scale(0.5)" stroke="#241710" fill="none">
+      <circle r="74" stroke-width="2.4"/><circle r="66" stroke-width="1.2"/>
+      <path d="M0 -24 V-112 M0 24 V112 M-24 0 H-112 M24 0 H112" stroke-width="2"/>
+      <path d="M0 -132 L11 -108 L0 -114 L-11 -108Z M0 132 L11 108 L0 114 L-11 108Z M-132 0 L-108 11 L-114 0 L-108 -11Z M132 0 L108 11 L114 0 L108 -11Z" fill="#241710"/>
+      <circle r="22" stroke-width="2"/><path d="M0 -17 L5 -5 L17 0 L5 5 L0 17 L-5 5 L-17 0 L-5 -5Z" fill="#241710"/>
     </g>
-    <text x="500" y="368" text-anchor="middle" font-family="IM Fell English SC, Georgia, serif" font-size="22" fill="#3b2a18" stroke="#efe2c4" stroke-width="5" paint-order="stroke">Traveler’s Home</text>
-
-</g>
-    <!-- compass -->
-    <g transform="translate(110 400)" stroke="#3b2a18" fill="none"><circle r="34" stroke-width="1.4"/><path d="M0 -42 L7 0 L0 42 L-7 0Z" fill="#3b2a18"/><path d="M-42 0 L0 -5 L42 0 L0 5Z" fill="#efe2c4"/></g>
   </svg>
   <div class="invite-card">
     <p class="invite-name">The Unfinished Atlas</p>

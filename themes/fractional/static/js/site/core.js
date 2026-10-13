@@ -27,7 +27,7 @@ export const WORLDS = {
   atlas: {
     title: 'The Unfinished Atlas',
     module: '../worlds/home.js',
-    css: ['worlds/atlas.css', 'worlds/cottage.css'],
+    css: ['worlds/materials.css', 'worlds/atlas.css', 'worlds/cottage.css'],
     places: {
       home: 'The Unfinished Atlas',
       about: 'The front door',

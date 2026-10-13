@@ -1,3 +1,5 @@
+import { deckle } from './paper.js';
+
 // The Unfinished Atlas: the site's home screen, drawn in SVG from a fixed seed. Its
 // landmarks are Writing, Work, Projects and Contact; Traveler's Home is the cottage you
 // step into; the map pans and zooms by drag, wheel, pinch,
@@ -12,7 +14,7 @@ const PLACES = {
   writing: { name: 'Library of Stories', x: 860, y: 540, verb: 'Read the stories', icon: 'tower' },
   work: { name: 'The Citadel', x: 1250, y: 560, verb: 'Enter the Citadel', icon: 'castle' },
   projects: { name: "Craftsman's Forge", x: 1440, y: 830, verb: 'Visit the forge', icon: 'forge' },
-  contact: { name: "Messenger's Outpost", x: 700, y: 1040, verb: 'Send a message', icon: 'outpost' },
+  contact: { name: "Messenger's Outpost", x: 770, y: 1050, verb: 'Send a message', icon: 'outpost' },
 };
 const ROAD_ORDER = ['about', 'writing', 'work', 'projects', 'contact'];
 
@@ -61,50 +63,145 @@ function blob(cx, cy, rx, ry, seed, n = 120, rough = 1) {
     const k = 1 + rough * (0.11 * Math.sin(3 * a + ph[0]) + 0.07 * Math.sin(5 * a + ph[1]) + 0.04 * Math.sin(9 * a + ph[2]) + 0.025 * Math.sin(17 * a + ph[3]) + 0.012 * Math.sin(31 * a + ph[4]));
     pts.push([cx + Math.cos(a) * rx * k, cy + Math.sin(a) * ry * k]);
   }
-  return smooth(pts, true);
+  return { d: smooth(pts, true), pts, cx, cy };
 }
 
-function mountains(r) {
-  let out = '';
+const f = (n) => n.toFixed(1);
+
+// The coast's hachures: short pen strokes standing off the shore into the sea, as an
+// engraver shaded a coastline. Even spacing along the outline, outward normals, a
+// little variation in length so it reads as drawn.
+function hachures(shape, seed, { gap = 6.5, min = 5, max = 15 } = {}) {
+  const r = rng(seed);
+  const { pts, cx, cy } = shape;
+  let d = '';
+  for (let i = 0; i < pts.length; i++) {
+    const a = pts[i];
+    const b = pts[(i + 1) % pts.length];
+    const dx = b[0] - a[0];
+    const dy = b[1] - a[1];
+    const seg = Math.hypot(dx, dy);
+    let nx = dy / seg;
+    let ny = -dx / seg;
+    const mx = (a[0] + b[0]) / 2;
+    const my = (a[1] + b[1]) / 2;
+    if ((mx - cx) * nx + (my - cy) * ny < 0) (nx = -nx), (ny = -ny);
+    const steps = Math.max(1, Math.floor(seg / gap));
+    for (let s = 0; s < steps; s++) {
+      const t = (s + r() * 0.6) / steps;
+      const x = a[0] + dx * t;
+      const y = a[1] + dy * t;
+      const len = min + r() * (max - min) * (r() < 0.12 ? 1.6 : 1);
+      const tilt = (r() - 0.5) * 0.25;
+      d += `M${f(x + nx * 2.5)} ${f(y + ny * 2.5)}l${f((nx + tilt * ny) * len)} ${f((ny - tilt * nx) * len)}`;
+    }
+  }
+  return d;
+}
+
+// A pen-drawn peak: a jagged outline, the paper showing through, and close hatching
+// down the shadowed flank so the range reads dark on one side.
+function peak(r, x, y, h, w) {
+  const ax = x + (r() - 0.5) * w * 0.3;
+  const ay = y - h;
+  const lx = x - w;
+  const rx = x + w * 0.9;
+  const kl = [ax - w * 0.3, ay + h * 0.32];
+  const kr = [ax + w * 0.28, ay + h * 0.28];
+  const ridge = `M${f(lx)} ${f(y)} L${f(kl[0])} ${f(kl[1])} L${f(ax - w * 0.1)} ${f(ay + h * 0.12)} L${f(ax)} ${f(ay)} L${f(kr[0])} ${f(kr[1])} L${f(rx)} ${f(y)}`;
+  let hatch = '';
+  const n = Math.max(4, Math.round(h / 4.2));
+  for (let i = 1; i < n; i++) {
+    const t = i / n;
+    const px = ax + (rx - ax) * t;
+    const py = ay + (y - ay) * t;
+    const room = y - py;
+    const len = Math.min(room / 0.95, w * (0.65 - t * 0.35));
+    if (len > 2) hatch += `M${f(px - 1)} ${f(py + 1)}l${f(-len * 0.42)} ${f(len * 0.92)}`;
+  }
+  // a few short strokes on the lit side, and the foot of the slope
+  for (let i = 1; i < 3; i++) {
+    const t = 0.35 + i * 0.2;
+    hatch += `M${f(ax - (ax - lx) * t + 3)} ${f(ay + (y - ay) * t)}l${f(4 + r() * 3)} ${f(5 + r() * 4)}`;
+  }
+  return `<path class="at-mtn-fill" d="${ridge}Z"/><path class="at-mtn" d="${ridge}"/><path class="at-mtn-hatch" d="${hatch}"/>`;
+}
+
+// A range: peaks scattered along a spine, big in the middle, with foothills at the ends.
+function range(r, spine, count, hmin, hmax, spread = 30) {
   const peaks = [];
-  for (let i = 0; i < 22; i++) {
-    const t = i / 21;
-    const x = 690 + t * 520 + (r() - 0.5) * 30;
-    const y = 380 + Math.sin(t * Math.PI) * -40 + (r() - 0.5) * 50;
-    const h = 46 + r() * 50;
-    peaks.push([x, y, h, 24 + r() * 16]);
+  for (let i = 0; i < count; i++) {
+    const t = i / (count - 1);
+    const seg = Math.min(spine.length - 2, Math.floor(t * (spine.length - 1)));
+    const lt = t * (spine.length - 1) - seg;
+    const [ax, ay] = spine[seg];
+    const [bx, by] = spine[seg + 1];
+    const x = ax + (bx - ax) * lt + (r() - 0.5) * 18;
+    const y = ay + (by - ay) * lt + (r() - 0.5) * spread;
+    const mid = Math.sin(t * Math.PI);
+    const h = hmin + (hmax - hmin) * (0.35 + 0.65 * mid) * (0.7 + r() * 0.5);
+    peaks.push([x, y, h, h * (0.55 + r() * 0.25)]);
   }
   peaks.sort((a, b) => a[1] - b[1]);
-  peaks.forEach(([x, y, h, w]) => {
-    out += `<path class="at-mtn" d="M${x - w} ${y} L${x - w * 0.15} ${y - h} Q${x} ${y - h - 6} ${x + w * 0.1} ${y - h + 2} L${x + w} ${y}"/>`;
-    for (let k = 1; k <= 3; k++) out += `<path class="at-hatch" d="M${x + w * 0.1 + k * 6} ${y - h + 8 + k * 8} l${8 + k * 2} ${12 + k * 4}"/>`;
-  });
-  return out;
+  return peaks.map(([x, y, h, w]) => peak(r, x, y, h, w)).join('');
 }
 
-function trees(r, cx, cy, rx, ry, count) {
+// Woods: crowds of round-crowned trees, each inked with a shaded side, with the odd pine.
+function forest(r, cx, cy, rx, ry, count) {
   const pts = [];
   for (let i = 0; i < count; i++) {
     const a = r() * Math.PI * 2;
     const d = Math.sqrt(r());
-    pts.push([cx + Math.cos(a) * rx * d, cy + Math.sin(a) * ry * d]);
+    pts.push([cx + Math.cos(a) * rx * d, cy + Math.sin(a) * ry * d, r()]);
   }
   pts.sort((a, b) => a[1] - b[1]);
-  return pts.map(([x, y]) => `<path class="at-tree" d="M${x.toFixed(0)} ${y.toFixed(0)} l-9 0 l9 -24 l9 24z M${x.toFixed(0)} ${y.toFixed(0)} v6"/>`).join('');
+  return pts
+    .map(([x, y, k]) => {
+      if (k < 0.18) return `<path class="at-pine" d="M${f(x)} ${f(y)} l-8 0 l8 -22 l8 22z M${f(x)} ${f(y)} v5"/>`;
+      const rr = 6 + k * 5;
+      return `<g class="at-tree"><circle class="at-crown" cx="${f(x)}" cy="${f(y - rr)}" r="${f(rr)}"/><path class="at-crown-shade" d="M${f(x + rr * 0.15)} ${f(y - rr * 0.12)} a${f(rr)} ${f(rr)} 0 0 0 ${f(rr * 0.8)} ${f(-rr * 0.75)} M${f(x + rr * 0.25)} ${f(y - rr * 0.5)} l${f(rr * 0.35)} ${f(-rr * 0.3)}"/><path class="at-trunk" d="M${f(x)} ${f(y)} v4"/></g>`;
+    })
+    .join('');
 }
 
+// Hills: low humps, each shaded with a few strokes on its far side.
 function hills(r, list) {
-  return list.map(([x, y]) => `<path class="at-hill" d="M${x - 22} ${y} q22 -${18 + r() * 8} 44 0 M${x - 6} ${y - 6} l5 6"/>`).join('');
+  return list
+    .map(([x, y]) => {
+      const h = 16 + r() * 10;
+      return `<path class="at-hill-fill" d="M${x - 24} ${y} q24 -${f(h * 1.9)} 48 0Z"/><path class="at-hill" d="M${x - 24} ${y} q24 -${f(h * 1.9)} 48 0 M${x + 6} ${y - h * 0.55} l7 ${f(h * 0.5)} M${x + 12} ${y - h * 0.32} l5 ${f(h * 0.3)} M${x + 1} ${y - h * 0.75} l7 ${f(h * 0.65)}"/>`;
+    })
+    .join('');
 }
 
 const ICONS = {
-  home: '<path d="M-22 0 v-26 l22 -18 l22 18 v26z"/><rect x="-6" y="-15" width="12" height="15"/><path d="M8 -38 v-12 h7 v18" /><path class="at-smoke" d="M12 -54 q-6 -8 2 -16 q8 -8 0 -16"/>',
-  tower: '<path d="M-16 0 v-50 h32 v50z"/><path d="M-20 -50 l20 -24 l20 24z"/><rect x="-6" y="-16" width="12" height="16"/><path d="M-9 -40 h18 M-9 -32 h18"/><path d="M28 -6 h22 v-14 h-22z M30 -20 v14 M36 -20 v14 M42 -20 v14"/>',
-  castle: '<path d="M-36 0 v-40 h72 v40z"/><path d="M-46 0 v-66 h18 v66z M28 0 v-66 h18 v66z"/><path d="M-46 -66 v-8 h6 v6 h6 v-6 h6 v8 M28 -66 v-8 h6 v6 h6 v-6 h6 v8"/><path d="M-8 0 v-18 a8 8 0 0 1 16 0 v18"/><path d="M0 -40 v-30 l16 6 l-16 6"/>',
-  forge: '<path d="M-28 0 v-30 h56 v30z"/><path d="M-32 -30 l32 -18 l32 18z"/><path d="M12 -40 v-26 h12 v32"/><rect x="-10" y="-18" width="20" height="18"/><circle class="at-ember" cx="0" cy="-8" r="5"/><path class="at-smoke" d="M18 -70 q-8 -10 2 -20 q10 -10 0 -20"/>',
+  home: '<path d="M-22 0 v-26 l22 -18 l22 18 v26z"/><path class="at-roof" d="M-25 -25 l25 -21 l25 21 z"/><rect class="at-door" x="-6" y="-15" width="12" height="15"/><path d="M8 -38 v-12 h7 v18" /><path class="at-smoke" d="M12 -54 q-6 -8 2 -16 q8 -8 0 -16"/>',
+  tower: '<path class="at-stone" d="M-16 0 v-50 h32 v50z"/><path class="at-roof" d="M-20 -50 l20 -24 l20 24z"/><rect class="at-door" x="-6" y="-16" width="12" height="16"/><path d="M-9 -40 h18 M-9 -32 h18"/><path class="at-book" d="M28 -6 h22 v-14 h-22z M30 -20 v14 M36 -20 v14 M42 -20 v14"/>',
+  castle: '<path class="at-stone" d="M-36 0 v-40 h72 v40z"/><path class="at-stone" d="M-46 0 v-66 h18 v66z M28 0 v-66 h18 v66z"/><path d="M-46 -66 v-8 h6 v6 h6 v-6 h6 v8 M28 -66 v-8 h6 v6 h6 v-6 h6 v8"/><path class="at-door" d="M-8 0 v-18 a8 8 0 0 1 16 0 v18"/><path d="M0 -40 v-30"/><path class="at-flag" d="M0 -70 l16 6 l-16 6z"/>',
+  forge: '<path d="M-28 0 v-30 h56 v30z"/><path class="at-roof" d="M-32 -30 l32 -18 l32 18z"/><path class="at-stone" d="M12 -40 v-26 h12 v32"/><rect class="at-door" x="-10" y="-18" width="20" height="18"/><circle class="at-ember" cx="0" cy="-8" r="5"/><path class="at-smoke" d="M18 -70 q-8 -10 2 -20 q10 -10 0 -20"/>',
   temple: '<path d="M-34 0 h68 v-6 h-68z M-30 -6 v-30 h60 v30"/><path d="M-38 -36 h76 l-38 -22z"/><path d="M-20 -6 v-30 M-7 -6 v-30 M7 -6 v-30 M20 -6 v-30"/>',
-  outpost: '<path d="M-12 0 l4 -56 h16 l4 56z"/><path d="M-18 -56 h36 v-10 h-36z"/><path d="M0 -66 v-22 l18 6 l-18 6"/><path d="M14 0 h40 M18 0 v10 M30 0 v10 M42 0 v10"/><path class="at-bird" d="M34 -50 q6 -6 12 0 q6 -6 12 0"/>',
+  outpost: '<path class="at-stone" d="M-12 0 l4 -56 h16 l4 56z"/><path class="at-stone" d="M-18 -56 h36 v-10 h-36z"/><path d="M0 -66 v-22"/><path class="at-flag" d="M0 -88 l18 6 l-18 6z"/><path d="M14 0 h40 M18 0 v10 M30 0 v10 M42 0 v10"/><path class="at-bird" d="M34 -50 q6 -6 12 0 q6 -6 12 0"/>',
 };
+
+// The compass: double rings, four barbed arrows, flame-like petals between them and a
+// star at the heart, with "North" lettered above. An original drawing in the manner of
+// hand-inked maps.
+function compass() {
+  let arrows = '';
+  let petals = '';
+  for (let i = 0; i < 4; i++) {
+    const a = i * 90;
+    arrows += `<g transform="rotate(${a})"><path class="at-c-shaft" d="M0 -24 V-112 M-3 -24 V-104"/><path class="at-c-head" d="M0 -132 L11 -108 L0 -114 L-11 -108 Z"/><path class="at-c-barb" d="M-8 -74 L0 -84 L8 -74 M-6 -62 L0 -70 L6 -62"/></g>`;
+    petals += `<g transform="rotate(${a + 45})"><path class="at-c-petal" d="M0 -26 C 14 -38, -4 -52, 10 -70 C -10 -62, -16 -44, 0 -26 Z"/><path class="at-c-petal-line" d="M0 -30 C 6 -40, -2 -52, 7 -64"/></g>`;
+  }
+  let star = '';
+  for (let i = 0; i < 16; i++) {
+    const rr = i % 2 ? 7 : 17;
+    const ang = (i * Math.PI) / 8;
+    star += `${i ? 'L' : 'M'}${f(Math.sin(ang) * rr)} ${f(-Math.cos(ang) * rr)}`;
+  }
+  return `<circle r="74" class="at-c-ring"/><circle r="68" class="at-c-ring at-c-ring--thin"/>${petals}${arrows}<circle r="24" class="at-c-hub"/><circle r="20" class="at-c-ring at-c-ring--thin"/><path class="at-c-star" d="${star}Z"/><circle r="3.5" class="at-c-pin"/><text class="at-c-north" y="-146" text-anchor="middle">North</text>`;
+}
 
 function mapSvg(data) {
   const r = rng(1066);
@@ -119,6 +216,13 @@ function mapSvg(data) {
   const coast = blob(1000, 700, 780, 520, 7);
   const isle1 = blob(1760, 1080, 90, 50, 11, 60);
   const isle2 = blob(230, 330, 110, 70, 23, 60);
+  const river = smooth([[1010, 410], [990, 500], [1060, 600], [1030, 700], [1110, 800], [1150, 930], [1240, 1060], [1260, 1215]]);
+  const tribs = [
+    smooth([[820, 430], [860, 520], [930, 560], [990, 590], [1046, 604]]),
+    smooth([[1440, 560], [1380, 640], [1300, 700], [1200, 760], [1112, 806]]),
+    smooth([[1560, 760], [1470, 860], [1380, 930], [1250, 960], [1160, 950]]),
+    smooth([[1120, 440], [1080, 520], [1060, 580]]),
+  ];
 
   const landmarks = Object.entries(PLACES)
     .map(
@@ -137,51 +241,74 @@ function mapSvg(data) {
   return `
 <svg class="at-svg" viewBox="0 0 ${W} ${H}" role="group" aria-label="The Unfinished Atlas: a map of the site">
   <defs>
-    <pattern id="at-sea" width="14" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(28)"><path d="M0 0 V14" class="at-sea-line"/></pattern>
+    <filter id="at-tremble" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="2" seed="11" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <!-- the sheet: one stained parchment under the whole map, also used to let drawings hide what is behind them -->
+    <pattern id="at-paper" patternUnits="userSpaceOnUse" x="-260" y="-200" width="2520" height="1700"><image href="/theme/images/stains.jpg" width="2520" height="1700" preserveAspectRatio="none"/></pattern>
+    <pattern id="at-vellum" width="560" height="560" patternUnits="userSpaceOnUse"><image href="/theme/images/vellum.jpg" width="560" height="560"/></pattern>
+    <pattern id="at-hatch" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0 V5" stroke="#2b1d10" stroke-width="1.15"/></pattern>
     <radialGradient id="at-fog"><stop offset="0" class="at-fog-in"/><stop offset=".7" class="at-fog-in" stop-opacity=".85"/><stop offset="1" class="at-fog-in" stop-opacity="0"/></radialGradient>
     <radialGradient id="at-lamp"><stop offset="0" stop-color="#ffcf7a" stop-opacity=".55"/><stop offset="1" stop-color="#ffcf7a" stop-opacity="0"/></radialGradient>
-    <path id="at-sea-name" d="M120 1180 Q 420 1240 760 1215"/>
-    <path id="at-bay-name" d="M1580 170 Q 1760 150 1900 230"/>
-    <path id="at-range-name" d="M720 205 Q 950 178 1180 205"/>
+    <path id="at-sea-name" d="M90 1190 Q 420 1250 780 1222"/>
+    <path id="at-bay-name" d="M1560 150 Q 1760 130 1930 220"/>
+    <path id="at-range-name" d="M690 196 Q 950 168 1230 196"/>
+    <path id="at-hills-name" d="M250 560 Q 400 520 560 548"/>
+    <path id="at-wood-name" d="M1080 1112 Q 1240 1140 1420 1108"/>
   </defs>
-  <rect x="-3000" y="-3000" width="${W + 6000}" height="${H + 6000}" class="at-sea"/>
-  <rect x="-3000" y="-3000" width="${W + 6000}" height="${H + 6000}" fill="url(#at-sea)"/>
-  ${[1.07, 1.13, 1.2].map((s, i) => `<path class="at-ripple" style="opacity:${0.5 - i * 0.14}" transform="translate(${1000 * (1 - s)} ${700 * (1 - s)}) scale(${s})" d="${coast}"/>`).join('')}
-  <path class="at-land" d="${coast}"/>
-  <path class="at-land" d="${isle1}"/><path class="at-land" d="${isle2}"/>
-  <path class="at-coast-inner" d="${coast}" transform="translate(${1000 * 0.025} ${700 * 0.025}) scale(0.975)"/>
+  <rect class="at-sheet" x="-3000" y="-3000" width="${W + 6000}" height="${H + 6000}"/>
+  <rect x="-260" y="-200" width="2520" height="1700" fill="url(#at-paper)"/>
 
-  <path class="at-river" d="${smooth([[1010, 410], [990, 500], [1060, 600], [1030, 700], [1110, 800], [1150, 930], [1240, 1060], [1260, 1215]])}"/>
-  <ellipse class="at-lake" cx="1052" cy="604" rx="40" ry="22"/>
-  ${hills(r, [[380, 640], [430, 610], [470, 650], [600, 660], [360, 720], [700, 860], [760, 820], [1560, 640], [1620, 700], [1520, 980], [860, 1120], [920, 1160], [300, 900]])}
-  <g>${mountains(r)}</g>
-  <g>${trees(r, 1240, 1000, 120, 70, 46)}${trees(r, 700, 720, 70, 50, 18)}${trees(r, 380, 1000, 80, 60, 22)}</g>
+  <g class="at-ink">
+    <path class="at-hachure" d="${hachures(coast, 3)}"/>
+    <path class="at-hachure" d="${hachures(isle1, 5, { gap: 5.5, max: 11 })}"/>
+    <path class="at-hachure" d="${hachures(isle2, 9, { gap: 5.5, max: 11 })}"/>
+    <path class="at-land" d="${coast.d}"/>
+    <path class="at-land" d="${isle1.d}"/><path class="at-land" d="${isle2.d}"/>
+
+    ${tribs.map((d) => `<path class="at-river at-river--trib" d="${d}"/>`).join('')}
+    <path class="at-river" d="${river}"/>
+    <ellipse class="at-lake" cx="1052" cy="604" rx="40" ry="22"/>
+    ${hills(r, [[380, 640], [430, 610], [470, 650], [600, 660], [360, 720], [520, 700], [700, 860], [760, 820], [1520, 980], [860, 1120], [920, 1160], [300, 900], [260, 860]])}
+    <g>${range(r, [[640, 410], [760, 360], [900, 330], [1040, 350], [1180, 340], [1260, 380]], 46, 34, 104, 36)}</g>
+    <g>${range(r, [[520, 1150], [600, 1170], [700, 1160]], 9, 20, 44, 16)}</g>
+    <g>${forest(r, 1240, 1010, 140, 80, 120)}${forest(r, 700, 720, 80, 56, 40)}${forest(r, 380, 1010, 95, 66, 52)}${forest(r, 1520, 870, 60, 40, 22)}</g>
+  </g>
 
   <path class="at-road" d="${road}"/>
   <path class="at-road-travelled" d="${road}"/>
   <circle class="at-lamplight" r="140" fill="url(#at-lamp)" cx="${PLACES.about.x}" cy="${PLACES.about.y - 20}"/>
 
-  <text class="at-region"><textPath href="#at-range-name" startOffset="50%" text-anchor="middle">Mount Backlog</textPath></text>
-  <text class="at-region" x="1240" y="1110" text-anchor="middle">Forest of Half-Read Books</text>
-  <text class="at-region" x="400" y="560" text-anchor="middle">The Quiet Hills</text>
-  <text class="at-region at-region--sea"><textPath href="#at-sea-name" startOffset="50%" text-anchor="middle">Sea of Open Tabs</textPath></text>
-  <text class="at-region at-region--sea"><textPath href="#at-bay-name" startOffset="50%" text-anchor="middle">Bay of Small Talk</textPath></text>
+  <text class="at-region at-region--great" x="1180" y="226" text-anchor="middle" transform="rotate(3 1180 226)">Mount Backlog</text>
+  <text class="at-region" x="1250" y="1140" text-anchor="middle" transform="rotate(2 1250 1140)">Forest of Half-Read Books</text>
+  <text class="at-region" x="420" y="578" text-anchor="middle" transform="rotate(-6 420 578)">The Quiet Hills</text>
+  <text class="at-region at-region--sea" x="660" y="1244" text-anchor="middle" transform="rotate(2 660 1244)">Sea of Open Tabs</text>
+  <text class="at-region at-region--sea at-region--bay" x="1640" y="1262" text-anchor="middle" transform="rotate(-3 1640 1262)">Bay of Small Talk</text>
   <text class="at-region at-region--small" x="1060" y="650" text-anchor="middle">Lake Later</text>
 
   <g class="at-fog">
-    <ellipse cx="1600" cy="380" rx="300" ry="190" fill="url(#at-fog)"/>
-    <ellipse cx="1760" cy="300" rx="220" ry="150" fill="url(#at-fog)"/>
-    <ellipse cx="1480" cy="300" rx="200" ry="120" fill="url(#at-fog)"/>
-    <text x="1620" y="380" text-anchor="middle" class="at-fog-text">here be unfinished thoughts</text>
+    <ellipse cx="1720" cy="390" rx="260" ry="180" fill="url(#at-fog)"/>
+    <ellipse cx="1860" cy="300" rx="200" ry="140" fill="url(#at-fog)"/>
+    <ellipse cx="1620" cy="330" rx="170" ry="110" fill="url(#at-fog)"/>
+    <text x="1700" y="372" text-anchor="middle" class="at-fog-text">here be unfinished thoughts</text>
   </g>
 
-  <g class="at-ship"><path d="M-30 0 q30 16 60 0 z M0 -4 v-46 M0 -48 q22 18 0 40 M0 -44 q-18 16 0 34" /></g>
+  <g class="at-ship">
+    <path class="at-hull" d="M-44 -6 Q -40 14 -18 16 H 26 Q 44 12 50 -8 L 38 -6 L 34 -2 H -30 L -36 -8 Z"/>
+    <path class="at-hull-line" d="M-38 4 H 40 M-34 9 H 34"/>
+    <path class="at-mast" d="M-6 -2 V -64 M20 -2 V -46 M-30 -6 V -34"/>
+    <path class="at-sail" d="M-24 -58 Q -6 -48 12 -58 Q 16 -40 12 -22 Q -6 -14 -24 -22 Q -28 -40 -24 -58 Z"/>
+    <path class="at-sail" d="M8 -42 Q 20 -36 32 -42 Q 35 -30 32 -18 Q 20 -13 8 -18 Q 5 -30 8 -42 Z"/>
+    <path class="at-sail" d="M-30 -32 L -46 -10 L -30 -10 Z"/>
+    <path class="at-flag" d="M-6 -64 l14 4 l-14 4z"/>
+  </g>
   <g class="at-serpent" tabindex="0" role="button" aria-label="Something in the water">
     <circle class="at-place-hit" cx="1850" cy="1200" r="60"/>
     <path class="at-serpent-body" d="M1800 1210 q15 -30 30 0 q15 30 30 0 q15 -30 30 0 M1890 1210 q12 -40 30 -36 q10 2 4 12"/>
     <path class="at-wave" d="M1790 1214 q10 -6 20 0 t20 0 t20 0 t20 0 t20 0 t20 0"/>
   </g>
-  ${[[300, 1100], [180, 760], [1800, 820], [1700, 1240], [1880, 520], [520, 200], [880, 140], [1300, 160]].map(([x, y]) => `<path class="at-wave at-wave--bob" d="M${x} ${y} q8 -6 16 0 t16 0"/>`).join('')}
+  ${[[300, 1100], [180, 760], [1800, 820], [1700, 1240], [1880, 520], [520, 200], [880, 140], [1300, 160]].map(([x, y]) => `<path class="at-wave at-wave--bob" d="M${x} ${y} q8 -6 16 0 t16 0 M${x + 8} ${y + 8} q8 -6 16 0"/>`).join('')}
 
   ${landmarks}
 
@@ -190,7 +317,7 @@ function mapSvg(data) {
     <rect class="at-place-hit" x="-140" y="-104" width="280" height="168" rx="28"/>
     <circle class="at-beacon" r="62" cy="-24" style="--d:2.1s"/>
     <g class="at-icon" transform="scale(1.35)">
-      <path d="M-58 0 l26 -46 l26 46z"/><path d="M-32 -46 v46"/>
+      <path class="at-roof" d="M-58 0 l26 -46 l26 46z"/><path d="M-32 -46 v46"/>
       <path d="M-6 0 l14 -8 M-6 -8 l14 8" />
       <path class="at-ember" d="M1 -6 q4 -8 0 -16 q-4 8 0 16z"/>
       <circle cx="26" cy="-22" r="5"/><path d="M26 -17 v14 M20 0 l6 -3 l6 3"/>
@@ -201,12 +328,11 @@ function mapSvg(data) {
     <text class="at-place-name" y="40" text-anchor="middle">Minstrel’s Camp</text>
   </g>
 
-  <g class="at-compass" transform="translate(1800 1060)">
-    <circle r="62" class="at-compass-ring"/><circle r="50" class="at-compass-ring"/>
-    <path d="M0 -76 L11 0 L0 76 L-11 0Z" class="at-compass-n"/><path d="M-76 0 L0 -9 L76 0 L0 9Z" class="at-compass-e"/>
-    <text y="-84" text-anchor="middle" class="at-compass-text">N</text>
+  <g class="at-compass" transform="translate(1640 640) scale(0.7)">
+    ${compass()}
   </g>
   <circle class="at-lantern" r="9" cx="${PLACES.about.x}" cy="${PLACES.about.y + 6}"/>
+  <rect class="at-grain" x="-3000" y="-3000" width="${W + 6000}" height="${H + 6000}" fill="url(#at-vellum)"/>
 </svg>`;
 }
 
@@ -270,6 +396,15 @@ function apply() {
   placeCard();
 }
 
+let stillTimer = 0;
+// The ink's tremble is a filter; while the camera moves it is switched off so panning
+// and zooming stay smooth, then it settles back once the map is still.
+function moving() {
+  el.classList.add('is-camming');
+  clearTimeout(stillTimer);
+  stillTimer = setTimeout(() => el && el.classList.remove('is-camming'), 220);
+}
+
 function setCam(next, { instant = false, ms = 950 } = {}) {
   cancelAnimationFrame(anim);
   const to = clampCam(next);
@@ -286,6 +421,7 @@ function setCam(next, { instant = false, ms = 950 } = {}) {
     const k = ease(t);
     cam = { x: from.x + (to.x - from.x) * k, y: from.y + (to.y - from.y) * k, z: from.z * Math.pow(to.z / from.z, k) };
     apply();
+    moving();
     if (t < 1) anim = requestAnimationFrame(step);
   };
   anim = requestAnimationFrame(step);
@@ -293,7 +429,9 @@ function setCam(next, { instant = false, ms = 950 } = {}) {
 
 function overview(opts) {
   const { w, h } = size();
-  fit = Math.max((W * 0.92) / w, (H * 0.92) / h);
+  // fit the whole map inside the charred edge and the lettered band
+  const inset = w > 760 ? 150 : 70;
+  fit = Math.max(W / Math.max(200, w - inset), H / Math.max(200, h - inset));
   // portrait phones: fill the height and let the visitor pan, rather than a postage stamp
   const z = w < 760 && h > w ? Math.min(fit, (H * 0.85) / h) : fit;
   setCam({ x: W / 2, y: H / 2 + 20, z }, opts);
@@ -334,15 +472,41 @@ function placeCard() {
   if (!cardFor || card.hidden) return;
   const p = PLACES[cardFor];
   const s = toScreen(p.x, p.y);
-  const { w } = size();
+  const { w, h } = size();
   const cw = card.offsetWidth || 300;
-  const { h } = size();
   const ch = card.offsetHeight || 160;
-  // below the place's name, centred on it; above it if there is no room below
+  const box = el.getBoundingClientRect();
+  // the other places on screen: the card must never sit on top of one
+  const others = [...svg.querySelectorAll('.at-place, .at-camp')]
+    .filter((g) => g.dataset.section !== cardFor)
+    .map((g) => {
+      const r = g.querySelector('.at-place-hit').getBoundingClientRect();
+      return { l: r.left - box.left, t: r.top - box.top, r: r.right - box.left, b: r.bottom - box.top };
+    });
+  // how much of the other places a card at (l, t) would hide
+  const covers = (l, t) =>
+    others.reduce((sum, o) => sum + Math.max(0, Math.min(l + cw, o.r) - Math.max(l, o.l)) * Math.max(0, Math.min(t + ch, o.b) - Math.max(t, o.t)), 0);
+  const clamp = (l, t) => [Math.min(w - cw - 16, Math.max(16, l)), Math.min(h - ch - 16, Math.max(80, t))];
   const below = s.y + 30 / cam.z + 34;
-  const top = below + ch > h - 12 ? s.y - 80 / cam.z - ch : below;
-  card.style.left = Math.min(w - cw - 12, Math.max(12, s.x - cw / 2)) + 'px';
-  card.style.top = Math.max(80, top) + 'px';
+  const above = s.y - 80 / cam.z - ch;
+  const right = s.x + 150 / cam.z;
+  const left = s.x - 150 / cam.z - cw;
+  const middle = s.y - ch / 2;
+  // in order of preference: below its name, above its icon, beside it, then the diagonals
+  const options = [
+    [s.x - cw / 2, below], [s.x - cw / 2, above], [right, middle], [left, middle],
+    [right, below], [left, below], [right, above], [left, above],
+  ].map(([l, t]) => clamp(l, t));
+  let best = options[0];
+  let least = Infinity;
+  for (const o of options) {
+    const c = covers(o[0], o[1]);
+    if (c < least - 1) (least = c), (best = o);
+    if (c === 0) break;
+  }
+  const [cl, ct] = best;
+  card.style.left = cl + 'px';
+  card.style.top = ct + 'px';
 }
 
 /* — Ribbons: every place you can visit carries its name on an unfurled banner — */
@@ -352,16 +516,18 @@ function drawRibbons() {
     if (!ribbon || !ribbon.classList.contains('at-ribbon')) return;
     const b = text.getBBox();
     if (!b.width) return;
-    const x0 = b.x - 16;
-    const x1 = b.x + b.width + 16;
-    const y0 = b.y - 4;
-    const y1 = b.y + b.height + 2;
-    const mid = (y0 + y1) / 2;
-    const tail = 18;
-    ribbon.setAttribute(
-      'd',
-      `M${x0} ${y0} H${x1} L${x1 + tail} ${y0 + 3} L${x1 + 7} ${mid} L${x1 + tail} ${y1 + 3} L${x1} ${y1} H${x0} L${x0 - tail} ${y1 + 3} L${x0 - 7} ${mid} L${x0 - tail} ${y0 + 3}Z`
-    );
+    const x0 = b.x - 14;
+    const x1 = b.x + b.width + 14;
+    const y0 = b.y - 3;
+    const y1 = b.y + b.height + 1;
+    const h = y1 - y0;
+    const sag = 3;
+    // the unrolled band, its top and bottom edges gently waved
+    const band = `M${x0} ${y0} Q${(x0 + x1) / 2} ${y0 - sag} ${x1} ${y0} L${x1} ${y1} Q${(x0 + x1) / 2} ${y1 - sag} ${x0} ${y1} Z`;
+    // each end rolled up: a cylinder of paper with a curl showing its turns
+    const roll = (x, dir) =>
+      `M${x} ${y0} C${x + dir * 14} ${y0 - 2}, ${x + dir * 14} ${y1 + 2}, ${x} ${y1} C${x + dir * 6} ${y1 + 1}, ${x + dir * 8} ${y0 + h * 0.45}, ${x + dir * 3} ${y0 + h * 0.4} C${x - dir * 2} ${y0 + h * 0.35}, ${x - dir * 1} ${y0 + h * 0.62}, ${x + dir * 4} ${y0 + h * 0.6}`;
+    ribbon.setAttribute('d', band + roll(x0, -1) + roll(x1, 1));
   });
 }
 
@@ -467,6 +633,7 @@ function bindInput() {
       el.classList.add('is-dragging');
       cam = clampCam({ x: drag.cam.x - dx * cam.z, y: drag.cam.y - dy * cam.z, z: cam.z });
       apply();
+      moving();
     }
   });
   const end = (e) => {
@@ -561,6 +728,7 @@ function zoomAt(sx, sy, z, base) {
   const nz = clampCam({ ...base, z }).z;
   cam = clampCam({ x: mx - (sx - w / 2) * nz, y: my - (sy - h / 2) * nz, z: nz });
   apply();
+  moving();
 }
 function zoomBy(f) {
   setCam({ ...cam, z: cam.z * f }, { ms: 300 });
@@ -589,6 +757,14 @@ const world = {
     el.tabIndex = -1;
     el.innerHTML = `
       ${mapSvg(api.data)}
+      <div class="at-sheet-frame" aria-hidden="true">
+        <div class="at-band at-band--top"><span></span></div>
+        <div class="at-band at-band--bottom"><span></span></div>
+        <div class="at-band at-band--left"><span></span></div>
+        <div class="at-band at-band--right"><span></span></div>
+        <i class="at-roundel"></i><i class="at-roundel"></i><i class="at-roundel"></i><i class="at-roundel"></i>
+        <div class="at-burn"></div>
+      </div>
       <header class="at-cartouche"><p class="at-title">The Unfinished Atlas</p><p class="at-sub">being a survey of one person’s interests, partly complete</p></header>
       <aside class="at-card" hidden>
         <p class="at-card-name"></p>
@@ -609,6 +785,13 @@ const world = {
     svg = el.querySelector('.at-svg');
     card = el.querySelector('.at-card');
     world.setTheme(api.theme());
+    // the border band is lettered with the atlas's own words, round all four sides
+    const verse = 'being a survey of one person’s interests, partly complete · drawn from life in Bangalore · here be unfinished thoughts · the road goes on, and the map with it · ';
+    el.querySelectorAll('.at-band span').forEach((s) => (s.textContent = verse.repeat(6)));
+    // every sheet laid on the map has a torn edge (the cartouche is a drawn scroll instead)
+    deckle(el.querySelector('.at-legend'), { seed: 5 });
+    deckle(card, { seed: 9, amp: 2.6 });
+    deckle(el.querySelector('.at-note'), { seed: 13, amp: 2.4 });
     measureRoad();
     renderVisited();
     drawRibbons();
@@ -647,6 +830,7 @@ const world = {
   },
 
   unmount() {
+    clearTimeout(stillTimer);
     cancelAnimationFrame(anim);
     cancelAnimationFrame(lanternAnim);
     cleanup.forEach((fn) => fn());

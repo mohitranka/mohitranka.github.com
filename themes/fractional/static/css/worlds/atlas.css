@@ -533,3 +533,550 @@ html.world-atlas.world-on .reader:not([hidden]) {
 }
 /* the charter marks each entry once, with the fleuron above it */
 html.world-atlas .reader[data-section="work"] .entry-content h2::before { content: none; }
+
+/* ============================================================
+   Materials. The map is ink and watercolour on vellum: the grain
+   moves with the map, the ink trembles slightly as if drawn by hand,
+   a colourist has washed the land, and every sheet laid on top is
+   torn rather than cut.
+   ============================================================ */
+.atlas {
+  --parch: #ecdcb4;
+  --parch-2: #e1cd9f;
+  --ink: #2b1d10;
+  --ink-2: #5e4328;
+  --sea: #cdcaa4;
+  --sea-line: #8d8a63;
+  --road: #a8321f;
+  --water: #3f6470;
+  background: #c9c39c;
+}
+.atlas.is-night {
+  --parch: #c9b385;
+  --parch-2: #b79d6b;
+  --sea: #8b8460;
+  --sea-line: #5d5638;
+}
+
+.at-grain { pointer-events: none; mix-blend-mode: multiply; opacity: 0.85; }
+.atlas.is-night .at-grain { opacity: 1; }
+
+/* the ink trembles a little, as hand-drawn line does; still only while the map is still */
+.at-ink { filter: url(#at-tremble); }
+.atlas.is-dragging .at-ink,
+.atlas.is-camming .at-ink { filter: none; }
+
+.at-sea-line { opacity: 0.32; }
+.at-land { fill: var(--parch); stroke: var(--ink); stroke-width: 3; }
+.at-shallows { fill: none; stroke: #9fb1a1; stroke-width: 74; stroke-linejoin: round; opacity: 0.38; }
+.at-coastwash { fill: none; stroke: #9aab5e; stroke-width: 48; stroke-linejoin: round; opacity: 0.42; }
+.atlas.is-night .at-coastwash { opacity: 0.25; }
+.at-river { stroke: var(--water); stroke-width: 3.6; }
+.at-river--bank { stroke: #9cb6b6; stroke-width: 12; opacity: 0.55; }
+.at-lake { fill: #a9bcb6; stroke: var(--water); }
+.at-mtn { fill: var(--parch); fill-opacity: 0.92; }
+.at-tree { fill: #3b3a1e; stroke: #2b2512; }
+
+/* the buildings, washed the way a map's colourist would: tile roofs, grey stone, red pennants */
+.at-icon { fill: #efe0bb; }
+.at-icon .at-roof { fill: #b55a3c; }
+.at-icon .at-stone { fill: #cfc5aa; }
+.at-icon .at-door { fill: #5a3d24; }
+.at-icon .at-flag { fill: var(--road); }
+.at-icon .at-book { fill: #8a5a2b; }
+
+/* the carrack */
+.at-ship { fill: none; stroke: none; }
+.at-hull { fill: #7a4f2c; stroke: var(--ink); stroke-width: 1.6; stroke-linejoin: round; }
+.at-hull-line { fill: none; stroke: #3b2a18; stroke-width: 1; }
+.at-mast { fill: none; stroke: var(--ink); stroke-width: 2.2; }
+.at-sail { fill: #f1e3bf; stroke: var(--ink); stroke-width: 1.4; stroke-linejoin: round; }
+.at-ship .at-flag { fill: var(--road); }
+
+/* the compass rose: engraved points, vermilion half-winds, a gilt boss and fleur */
+.at-rose-light { fill: #f3e6c4; stroke: var(--ink); stroke-width: 1; stroke-linejoin: round; }
+.at-rose-dark { fill: var(--ink); stroke: var(--ink); stroke-width: 1; stroke-linejoin: round; }
+.at-rose-short { fill: var(--road); stroke: var(--ink); stroke-width: 0.8; }
+.at-rose-ring { fill: none; stroke: var(--ink); stroke-width: 1.4; }
+.at-rose-ring--thin { stroke-width: 0.8; stroke-dasharray: 2 3; }
+.at-rose-ticks { fill: none; stroke: var(--ink); stroke-width: 1; }
+.at-rose-boss { fill: #b8862e; stroke: var(--ink); stroke-width: 1.2; }
+.at-rose-pin { fill: var(--ink); }
+.at-rose-fleur { fill: #b8862e; stroke: var(--ink); stroke-width: 1.1; stroke-linejoin: round; }
+
+/* the neatline: a ruled frame round the whole map, gilt flourishes in the corners */
+.at-frame {
+  position: absolute;
+  inset: 8px;
+  z-index: 1;
+  pointer-events: none;
+  border: 2px solid rgba(43, 29, 16, 0.85);
+  box-shadow: inset 0 0 0 5px rgba(236, 220, 180, 0.35), inset 0 0 0 6px rgba(43, 29, 16, 0.55);
+}
+.at-frame i {
+  position: absolute;
+  width: 58px;
+  height: 58px;
+  background: var(--orn-corner) center / contain no-repeat;
+}
+.at-frame i:nth-child(1) { left: -2px; top: -2px; }
+.at-frame i:nth-child(2) { right: -2px; top: -2px; transform: scaleX(-1); }
+.at-frame i:nth-child(3) { left: -2px; bottom: -2px; transform: scaleY(-1); }
+.at-frame i:nth-child(4) { right: -2px; bottom: -2px; transform: scale(-1, -1); }
+
+/* sheets on the map: vellum with grain, scorched edges, torn (see paper.js) */
+.at-cartouche,
+.at-card,
+.at-legend,
+.at-zoom button,
+.at-note {
+  background: #efe0ba var(--vellum-tex) 0 0 / 420px;
+  background-blend-mode: multiply;
+  border: 0;
+  color: var(--iron-gall);
+  box-shadow: inset 0 0 26px rgba(120, 78, 32, 0.42), inset 0 0 4px rgba(80, 50, 20, 0.55);
+}
+.at-zoom button { border-radius: 2px; box-shadow: inset 0 0 0 1px rgba(43, 29, 16, 0.55), inset 0 0 12px rgba(120, 78, 32, 0.4); }
+.at-zoom button:hover { background-color: #f6e9c8; }
+.at-cartouche { padding: 1.05rem 3rem 1.35rem; }
+.at-cartouche::before,
+.at-cartouche::after {
+  content: "";
+  position: absolute;
+  width: 34px;
+  height: 34px;
+  background: var(--orn-corner) center / contain no-repeat;
+}
+.at-cartouche::before { left: 6px; top: 6px; }
+.at-cartouche::after { right: 6px; bottom: 6px; transform: scale(-1, -1); }
+.at-title { color: var(--iron-gall); }
+.at-card { padding: 1.1rem 1.3rem 1.2rem; }
+.at-card-name { color: var(--vermilion); }
+.at-card-go { border-color: var(--iron-gall); color: var(--iron-gall); border-radius: 2px; font-family: 'IM Fell English SC', Georgia, serif; font-size: 1rem; font-weight: 400; }
+.at-card-go:hover,
+.at-card:hover .at-card-go { background: var(--iron-gall); color: #f3e6c4; }
+.at-card:hover { border: 0; }
+.at-legend { padding: 0.9rem 1.15rem 1rem; }
+
+/* the ribbons pick up the sheet colour */
+.at-ribbon { fill: #f0e1bb; }
+
+/* the controls in the world: tooled leather tags with gilt lettering and stitching */
+html.world-atlas {
+  --hud-bg: #3a2414;
+  --hud-fg: #ecd398;
+  --hud-accent: #e2b45c;
+}
+html.world-atlas .hud-pill {
+  border-radius: 5px;
+  background: #3a2414 var(--vellum-tex) 0 0 / 260px;
+  background-blend-mode: multiply;
+  color: #ecd398;
+  font-family: 'IM Fell English SC', Georgia, serif;
+  font-size: 0.98rem;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  box-shadow: inset 0 0 0 1px rgba(236, 211, 152, 0.18), 0 8px 16px -8px rgba(20, 10, 4, 0.75);
+  outline: 1px dashed rgba(236, 211, 152, 0.42);
+  outline-offset: -5px;
+}
+html.world-atlas .hud-pill:focus-visible { outline: 2px solid #e2b45c; outline-offset: 2px; }
+html.world-atlas .music-panel {
+  border-radius: 4px;
+  background: #3a2414 var(--vellum-tex) 0 0 / 260px;
+  background-blend-mode: multiply;
+  color: #ecd398;
+  font-family: 'IM Fell English', Georgia, serif;
+}
+html.world-atlas .music-track b { font-family: 'IM Fell English SC', Georgia, serif; font-weight: 400; }
+html.world-atlas .music-next { border-radius: 3px; border-color: rgba(236, 211, 152, 0.5); font-family: 'IM Fell English SC', Georgia, serif; font-weight: 400; font-size: 0.9rem; }
+
+@media (max-width: 760px) {
+  .at-frame { inset: 4px; }
+  .at-frame i { width: 40px; height: 40px; }
+  .at-cartouche { padding: 0.55rem 1.6rem 0.6rem; }
+  .at-cartouche::before,
+  .at-cartouche::after { width: 22px; height: 22px; }
+}
+
+/* ============================================================
+   The reader, made of real things. The page sits on its own torn
+   sheet of vellum (.reader-sheet, edge cut in paper.js), so the
+   torn shape casts the shadow. Ornaments are drawings, not glyphs.
+   ============================================================ */
+html.world-atlas.world-on .reader:not([hidden]) {
+  background: none;
+  box-shadow: none;
+  filter: drop-shadow(0 22px 26px rgba(30, 15, 5, 0.5)) drop-shadow(0 2px 3px rgba(30, 15, 5, 0.35));
+}
+html.world-atlas .reader-sheet {
+  display: block;
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: #f1e3bf var(--vellum-tex) 0 0 / 520px;
+  background-blend-mode: multiply;
+  box-shadow: inset 0 0 70px rgba(122, 80, 34, 0.42), inset 0 0 6px rgba(90, 56, 22, 0.6);
+}
+html.world-atlas .reader-bar,
+html.world-atlas .reader-scroll { position: relative; z-index: 1; }
+html.world-atlas .reader-bar { border-bottom: 0; background: linear-gradient(transparent calc(100% - 1px), rgba(90, 60, 30, 0.35) calc(100% - 1px)); }
+html.world-atlas .reader-close {
+  border: 1px solid rgba(43, 29, 16, 0.55);
+  border-radius: 3px;
+  font: 400 0.98rem/1 'IM Fell English SC', Georgia, serif;
+  color: var(--iron-gall);
+}
+html.world-atlas .reader-close:hover { background: rgba(43, 29, 16, 0.08); }
+html.world-atlas .reader-plain { font-family: 'IM Fell English', Georgia, serif; font-style: italic; font-weight: 400; font-size: 0.98rem; }
+html.world-atlas .reader {
+  --ink: var(--iron-gall);
+  --rubric: var(--vermilion);
+}
+
+/* the drawn ornaments replace the font glyphs used before */
+html.world-atlas .reader .entry-content h2::before {
+  content: "";
+  display: inline-block;
+  width: 1.5em;
+  height: 0.95em;
+  margin-right: 0.35em;
+  vertical-align: -0.05em;
+  background: var(--orn-fleuron) center / contain no-repeat;
+}
+html.world-atlas .reader .page-head h1::after,
+html.world-atlas .reader .essay-head::after {
+  width: 15rem;
+  max-width: 80%;
+  height: 22px;
+  background: var(--orn-divider) center / contain no-repeat;
+}
+html.world-atlas .reader .section-label::before,
+html.world-atlas .reader .section-label::after {
+  content: "";
+  display: inline-block;
+  width: 1.6em;
+  height: 1em;
+  margin: 0 0.4em;
+  vertical-align: -0.1em;
+  background: var(--orn-fleuron) center / contain no-repeat;
+}
+html.world-atlas .reader .section-label::before { transform: scaleX(-1); }
+
+/* — the scroll: turned-oak rollers with grain and knobs — */
+html.world-atlas .reader[data-section="writing"]::before,
+html.world-atlas .reader[data-section="writing"]::after {
+  left: -20px;
+  right: -20px;
+  height: 26px;
+  border-radius: 6px;
+  background:
+    radial-gradient(circle at 11px 50%, #f0c987 0 2.5px, #a8743f 5px, #5a3519 10px, #2e1a0b 12px, transparent 13px),
+    radial-gradient(circle at calc(100% - 11px) 50%, #f0c987 0 2.5px, #a8743f 5px, #5a3519 10px, #2e1a0b 12px, transparent 13px),
+    repeating-linear-gradient(90deg, rgba(60, 33, 12, 0.18) 0 1.5px, transparent 1.5px 7px, rgba(255, 220, 160, 0.08) 7px 8px, transparent 8px 13px),
+    linear-gradient(180deg, #4a2b12 0%, #9b6634 26%, #d6a764 46%, #b07a40 62%, #6b4220 84%, #3a210c 100%);
+  box-shadow: 0 7px 12px -4px rgba(30, 15, 5, 0.6), inset 24px 0 0 -12px rgba(0, 0, 0, 0), inset 0 0 0 1px rgba(40, 20, 6, 0.6);
+}
+
+/* — the illuminated initial: lapis ground with white penwork, gold letter, double gilt frame — */
+html.world-atlas .reader .essay-body > p:first-of-type::first-letter {
+  margin: 0.05em 0.16em 0 0;
+  padding: 0.16em 0.2em 0.08em;
+  font-family: 'IM Fell English', Georgia, serif;
+  font-size: 3.5em;
+  line-height: 0.8;
+  color: #e6c46e;
+  background:
+    radial-gradient(rgba(255, 255, 255, 0.32) 0.7px, transparent 1.1px) 0 0 / 7px 7px,
+    radial-gradient(circle at 30% 25%, #34508f, #23386b 60%, #172548);
+  border: 3px double #b8862e;
+  box-shadow: none;
+}
+
+/* — the charter: gilt corners, an engraved rule between grants, and the seal — */
+html.world-atlas .reader[data-section="work"] .reader-content {
+  border: 2px solid rgba(43, 29, 16, 0.7);
+  outline: 1px solid rgba(43, 29, 16, 0.4);
+  outline-offset: 5px;
+  background:
+    var(--orn-corner) left 4px top 4px / 46px no-repeat,
+    var(--orn-corner-tr) right 4px top 4px / 46px no-repeat,
+    var(--orn-corner-bl) left 4px bottom 4px / 46px no-repeat,
+    var(--orn-corner-br) right 4px bottom 4px / 46px no-repeat;
+  padding: 2.4rem clamp(1.4rem, 3.5vw, 2.6rem) 2.6rem;
+}
+html.world-atlas .reader[data-section="work"] .work-card::before {
+  content: "";
+  display: block;
+  width: 11rem;
+  height: 18px;
+  margin: 0 auto 0.9rem;
+  background: var(--orn-divider) center / contain no-repeat;
+}
+html.world-atlas .reader[data-section="work"] .reader-content::after {
+  width: 104px;
+  height: 104px;
+  margin: 2.2rem auto 0.2rem;
+  border-radius: 0;
+  background: var(--orn-seal) center / contain no-repeat;
+  box-shadow: none;
+  filter: drop-shadow(0 5px 5px rgba(50, 10, 5, 0.45));
+}
+
+/* — the ledger: faded blue rules, a double red margin, entries ticked in vermilion — */
+html.world-atlas .reader[data-section="projects"] .reader-content {
+  background-image:
+    linear-gradient(90deg, transparent 2.1rem, rgba(176, 52, 31, 0.5) 2.1rem, rgba(176, 52, 31, 0.5) calc(2.1rem + 1px), transparent calc(2.1rem + 1px), transparent calc(2.1rem + 4px), rgba(176, 52, 31, 0.5) calc(2.1rem + 4px), rgba(176, 52, 31, 0.5) calc(2.1rem + 5px), transparent calc(2.1rem + 5px)),
+    repeating-linear-gradient(transparent 0, transparent calc(2.1rem - 1px), rgba(70, 105, 128, 0.26) calc(2.1rem - 1px), rgba(70, 105, 128, 0.26) 2.1rem);
+}
+
+/* — the letters (About, Contact): fold creases, and a quill above the form — */
+html.world-atlas .reader .contact-form-card::before {
+  content: "";
+  width: 44px;
+  height: 44px;
+  margin: 0 auto 0.6rem;
+  background: var(--orn-quill) center / contain no-repeat;
+}
+html.world-atlas .reader .btn-submit {
+  min-width: 9.5rem;
+  padding: 1.05rem 1.6rem;
+  border-radius: 46% 54% 52% 48% / 58% 48% 52% 42%;
+  background:
+    radial-gradient(circle at 34% 28%, rgba(255, 255, 255, 0.22), transparent 38%),
+    radial-gradient(circle at 50% 50%, #b8382c, #8e2219 62%, #5e1610);
+  box-shadow: 0 6px 10px rgba(50, 10, 5, 0.4), inset 0 0 0 5px rgba(94, 22, 16, 0.35), inset 0 0 0 7px rgba(232, 138, 124, 0.25);
+  text-shadow: 0 1px 0 rgba(60, 10, 5, 0.6);
+}
+
+/* — the tomes: tooled leather edges and a gilt fillet — */
+html.world-atlas .reader .book-cover {
+  border: 3px solid #4a2b16;
+  box-shadow: inset 8px 0 10px -5px rgba(0, 0, 0, 0.6), inset 0 0 0 1px rgba(230, 196, 110, 0.55), 0 0 0 1px #b8862e, 0 12px 20px -10px rgba(40, 25, 10, 0.8);
+}
+
+/* ============================================================
+   The hand-inked map (2026-10-14). One stained sheet, monochrome
+   iron-gall ink, oxblood lettering in an uncial hand, a charred
+   edge, a lettered border band. Colour belongs to the paper and
+   the rubric; everything drawn is ink.
+   ============================================================ */
+.atlas {
+  --ink: #241710;
+  --ink-2: #4a3523;
+  --oxblood: #74263a;
+  --road: #74263a;
+  --water: #241710;
+  --paper: #e6d29c;
+  --frame-m: 34px;  /* how far the charred edge reaches in */
+  --frame-b: 24px;  /* the lettered band */
+  background: #2a1a0e;
+  font-family: 'Uncial Antiqua', 'IM Fell English', Georgia, serif;
+}
+.atlas.is-night { --fog: #9c8a64; }
+.atlas.is-night .at-svg { filter: brightness(0.82) sepia(0.15); }
+.atlas::after { background: radial-gradient(ellipse at 50% 50%, transparent 60%, rgba(60, 35, 12, 0.28) 100%); }
+
+.at-sheet { fill: #b89a5e; }
+.at-grain { opacity: 0.5; }
+
+/* line work */
+.at-hachure { fill: none; stroke: var(--ink); stroke-width: 1.15; stroke-linecap: round; opacity: 0.9; }
+.at-land { fill: none; stroke: var(--ink); stroke-width: 2.4; stroke-linejoin: round; }
+.at-ripple, .at-coast-inner { display: none; }
+.at-river { fill: none; stroke: var(--ink); stroke-width: 2; stroke-linecap: round; }
+.at-river--trib { stroke-width: 1.2; }
+.at-lake { fill: rgba(140, 150, 130, 0.25); stroke: var(--ink); stroke-width: 1.6; }
+.at-mtn-fill { fill: url(#at-paper); stroke: none; }
+.at-mtn { fill: none; stroke: var(--ink); stroke-width: 1.7; stroke-linejoin: round; }
+.at-mtn-hatch { fill: none; stroke: var(--ink); stroke-width: 1; stroke-linecap: round; }
+.at-hill-fill { fill: url(#at-paper); stroke: none; }
+.at-hill { fill: none; stroke: var(--ink); stroke-width: 1.4; stroke-linecap: round; opacity: 0.9; }
+.at-crown { fill: url(#at-paper); stroke: var(--ink); stroke-width: 1.2; }
+.at-crown-shade { fill: none; stroke: var(--ink); stroke-width: 1.1; stroke-linecap: round; }
+.at-trunk { stroke: var(--ink); stroke-width: 1.4; }
+.at-pine { fill: var(--ink); stroke: var(--ink); stroke-width: 1.4; }
+.at-wave { stroke: var(--ink); opacity: 0.7; }
+
+/* the road: a fine dashed track, in the rubric */
+.at-road { stroke: var(--oxblood); stroke-width: 2.2; stroke-dasharray: 7 6; stroke-linecap: butt; opacity: 0.85; }
+
+/* lettering: regions in a wide-spaced uncial, in oxblood */
+.at-region {
+  font: 34px 'Uncial Antiqua', Georgia, serif;
+  font-style: normal;
+  letter-spacing: 0.32em;
+  fill: var(--oxblood);
+  stroke: none;
+  text-transform: lowercase;
+}
+.at-region--great { font-size: 44px; letter-spacing: 0.42em; }
+.at-region--sea { font-size: 40px; letter-spacing: 0.45em; fill: var(--oxblood); stroke: none; }
+.at-region--small { font-size: 18px; letter-spacing: 0.12em; fill: var(--ink); }
+.at-fog-text { font: 22px 'Uncial Antiqua', Georgia, serif; fill: var(--ink-2); letter-spacing: 0.08em; text-transform: lowercase; }
+
+/* buildings: ink only, roofs hatched, flags in the rubric */
+.at-icon { fill: url(#at-paper); stroke: var(--ink); stroke-width: 2.1; }
+.at-icon .at-roof { fill: url(#at-hatch); }
+.at-icon .at-stone { fill: url(#at-paper); }
+.at-icon .at-door,
+.at-icon .at-book { fill: var(--ink); }
+.at-icon .at-flag,
+.at-ship .at-flag { fill: var(--oxblood); }
+.at-hull { fill: url(#at-hatch); }
+.at-sail { fill: url(#at-paper); }
+
+/* place names: the clickable places sit on small curled scrolls */
+.at-place-name {
+  font: 27px 'Uncial Antiqua', Georgia, serif;
+  letter-spacing: 0.06em;
+  fill: var(--oxblood);
+  text-transform: lowercase;
+}
+.at-ribbon {
+  fill: url(#at-paper);
+  stroke: var(--ink);
+  stroke-width: 1.5;
+  filter: drop-shadow(0 2px 1.5px rgba(36, 23, 16, 0.3));
+}
+.at-place:hover .at-ribbon,
+.at-place:focus-visible .at-ribbon,
+.at-place.is-active .at-ribbon,
+.at-camp:hover .at-ribbon,
+.at-camp:focus-visible .at-ribbon { fill: var(--oxblood); stroke: var(--ink); }
+.at-place:hover .at-place-name,
+.at-place:focus-visible .at-place-name,
+.at-place.is-active .at-place-name,
+.at-camp:hover .at-place-name,
+.at-camp:focus-visible .at-place-name { fill: #f2e2b8; }
+.at-beacon, .at-stamp { stroke: var(--oxblood); }
+
+/* the compass */
+.at-c-ring { fill: none; stroke: var(--ink); stroke-width: 1.8; }
+.at-c-ring--thin { stroke-width: 0.9; }
+.at-c-hub { fill: url(#at-paper); stroke: var(--ink); stroke-width: 1.4; }
+.at-c-shaft { fill: none; stroke: var(--ink); stroke-width: 1.4; }
+.at-c-head { fill: var(--ink); stroke: var(--ink); stroke-width: 1; stroke-linejoin: round; }
+.at-c-barb { fill: none; stroke: var(--ink); stroke-width: 1.3; stroke-linejoin: round; }
+.at-c-petal { fill: url(#at-paper); stroke: var(--ink); stroke-width: 1.3; }
+.at-c-petal-line { fill: none; stroke: var(--ink); stroke-width: 0.8; }
+.at-c-star { fill: var(--ink); }
+.at-c-pin { fill: url(#at-paper); }
+.at-c-north { font: 30px 'Uncial Antiqua', Georgia, serif; fill: var(--ink); letter-spacing: 0.1em; text-transform: lowercase; }
+
+/* — the sheet's frame: charred edge, a lettered band between rules, roundels — */
+.at-frame { display: none; }
+.at-sheet-frame { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+.at-burn {
+  position: absolute;
+  inset: 0;
+  border: 46px solid transparent;
+  border-image: url("/theme/images/burnt.png") 112 / 46px round;
+}
+.at-band {
+  position: absolute;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  background: #e2cb93 var(--vellum-tex) 0 0 / 360px;
+  background-blend-mode: multiply;
+  color: var(--ink);
+  font: 12px/1 'Uncial Antiqua', Georgia, serif;
+  letter-spacing: 0.16em;
+  text-transform: lowercase;
+  white-space: nowrap;
+}
+.at-band span { display: block; padding: 0 0.6rem; opacity: 0.85; }
+.at-band--top,
+.at-band--bottom { left: var(--frame-m); right: var(--frame-m); height: var(--frame-b); border-block: 1.5px solid var(--ink); }
+.at-band--top { top: var(--frame-m); }
+.at-band--bottom { bottom: var(--frame-m); }
+.at-band--left,
+.at-band--right { top: var(--frame-m); bottom: var(--frame-m); width: var(--frame-b); border-inline: 1.5px solid var(--ink); writing-mode: vertical-rl; }
+.at-band--left { left: var(--frame-m); transform: rotate(180deg); }
+.at-band--right { right: var(--frame-m); }
+.at-roundel {
+  position: absolute;
+  width: calc(var(--frame-b) + 6px);
+  height: calc(var(--frame-b) + 6px);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, var(--ink) 0 2.2px, transparent 2.6px),
+    conic-gradient(from 22.5deg, transparent 0 12.5%, rgba(36, 23, 16, 0.85) 12.5% 13.5%, transparent 13.5% 25%, rgba(36, 23, 16, 0.85) 25% 26%, transparent 26% 37.5%, rgba(36, 23, 16, 0.85) 37.5% 38.5%, transparent 38.5% 50%, rgba(36, 23, 16, 0.85) 50% 51%, transparent 51% 62.5%, rgba(36, 23, 16, 0.85) 62.5% 63.5%, transparent 63.5% 75%, rgba(36, 23, 16, 0.85) 75% 76%, transparent 76% 87.5%, rgba(36, 23, 16, 0.85) 87.5% 88.5%, transparent 88.5%),
+    #e2cb93;
+  border: 1.5px solid var(--ink);
+  box-shadow: inset 0 0 0 3px #e2cb93, inset 0 0 0 4px var(--ink);
+}
+.at-roundel:nth-of-type(1) { left: calc(var(--frame-m) - 3px); top: calc(var(--frame-m) - 3px); }
+.at-roundel:nth-of-type(2) { right: calc(var(--frame-m) - 3px); top: calc(var(--frame-m) - 3px); }
+.at-roundel:nth-of-type(3) { left: calc(var(--frame-m) - 3px); bottom: calc(var(--frame-m) - 3px); }
+.at-roundel:nth-of-type(4) { right: calc(var(--frame-m) - 3px); bottom: calc(var(--frame-m) - 3px); }
+
+/* everything laid on the map sits inside the band */
+.at-cartouche,
+.at-legend { left: calc(var(--frame-m) + var(--frame-b) + 16px); }
+.at-cartouche { top: calc(var(--frame-m) + var(--frame-b) + 14px); }
+.at-legend { bottom: calc(var(--frame-m) + var(--frame-b) + 14px); }
+.at-zoom { right: calc(var(--frame-m) + var(--frame-b) + 16px); bottom: calc(var(--frame-m) + var(--frame-b) + 14px); }
+html.world-atlas .world-hud { top: calc(var(--frame-m, 34px) + 34px); right: calc(34px + 24px + 16px); }
+html.world-atlas.reading .world-hud { right: calc(min(46rem, 56vw) + 34px + 24px + 2rem); }
+@media (min-width: 761px) {
+  html.world-atlas.world-on .reader:not([hidden]) { top: 74px; right: 74px; bottom: 74px; }
+}
+
+/* the title cartouche: a drawn scroll */
+.at-cartouche {
+  padding: 1.55rem 2.6rem 1.6rem;
+  background: var(--orn-cartouche) center / 100% 100% no-repeat, radial-gradient(ellipse at 50% 50%, rgba(236, 220, 172, 0.92) 55%, rgba(236, 220, 172, 0) 75%);
+  box-shadow: none;
+  clip-path: none !important;
+}
+.at-cartouche::before,
+.at-cartouche::after { display: none; }
+.at-title { font: 2.1rem/1.05 'Uncial Antiqua', Georgia, serif; color: var(--oxblood); letter-spacing: 0.04em; text-transform: lowercase; }
+.at-sub { font-family: 'IM Fell English', Georgia, serif; color: var(--ink-2); }
+
+.at-legend-title,
+.at-card-name { font-family: 'Uncial Antiqua', Georgia, serif; color: var(--oxblood); text-transform: lowercase; letter-spacing: 0.04em; }
+.at-key--ribbon path { fill: #efe0b8; }
+.at-card-go { font-family: 'Uncial Antiqua', Georgia, serif; text-transform: lowercase; }
+
+@media (max-width: 760px) {
+  .atlas { --frame-m: 12px; --frame-b: 18px; }
+  .at-burn { border-width: 22px; border-image-width: 22px; }
+  .at-band { font-size: 9px; }
+  html.world-atlas .world-hud { top: 40px; right: 38px; }
+  .at-cartouche { padding: 0.9rem 1.5rem 1rem; top: 86px !important; }
+  .at-title { font-size: 1.35rem; }
+}
+
+.at-region--bay { font-size: 30px; letter-spacing: 0.3em; }
+.at-fog-in { stop-color: #cdbf98; }
+.at-fog { opacity: 0.8; }
+.at-icon .at-book { fill: url(#at-hatch); }
+
+/* — the rest of the world takes the same hand: uncial titles, oxblood rubrics — */
+html.world-atlas .reader .page-head h1,
+html.world-atlas .reader .essay-title { font-family: 'Uncial Antiqua', Georgia, serif; color: var(--oxblood, #74263a); letter-spacing: 0.02em; }
+html.world-atlas .reader-place { font-family: 'Uncial Antiqua', Georgia, serif; color: #74263a; letter-spacing: 0.03em; }
+html.world-atlas .reader .entry-content h2,
+html.world-atlas .reader .entry-content h3,
+html.world-atlas .reader .section-label,
+html.world-atlas .reader .contact-form-heading { font-family: 'Uncial Antiqua', Georgia, serif; color: #74263a; }
+html.world-atlas .reader .work-card h2,
+html.world-atlas .reader .project h2 { font-family: 'Uncial Antiqua', Georgia, serif; }
+/* the initial: an oxblood uncial capital in a fine double ink frame, as a scribe would letter it */
+html.world-atlas .reader .essay-body > p:first-of-type::first-letter {
+  font-family: 'Uncial Antiqua', Georgia, serif;
+  color: #74263a;
+  background: radial-gradient(rgba(36, 23, 16, 0.18) 0.7px, transparent 1.1px) 0 0 / 6px 6px, rgba(236, 220, 172, 0.6);
+  border: 3px double #241710;
+  padding: 0.14em 0.18em 0.06em;
+}
+html.world-atlas .hud-pill { font-family: 'Uncial Antiqua', Georgia, serif; font-size: 0.92rem; text-transform: lowercase; letter-spacing: 0.03em; }
+html.world-atlas .music-track b { font-family: 'Uncial Antiqua', Georgia, serif; }
+
+.at-legend { max-width: 15.5rem; font-size: 0.92rem; padding: 0.7rem 0.95rem 0.8rem; }
+.at-legend-hint { font-size: 0.72rem; }
+.at-card { width: min(17.5rem, calc(100vw - 2rem)); padding: 0.9rem 1.1rem 1rem; }
+.at-card-text { font-size: 1rem; }

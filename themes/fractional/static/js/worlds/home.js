@@ -4,6 +4,7 @@
 // cottage opens out of it, holding the personal sections (About, Library).
 import map from './atlas.js';
 import cottage from './cottage.js';
+import { deckle, undeckle } from './paper.js';
 
 const INDOORS = new Set(['about', 'library']);
 const OUTSIDE = new Set(['writing', 'work', 'projects', 'contact']);
@@ -162,6 +163,9 @@ const world = {
     await map.mount(mapEl, sub);
     await cottage.mount(homeEl, sub);
     settle();
+    // pages open on a torn sheet of vellum, and the songbook is a torn leaf
+    deckle(document.querySelector('#reader .reader-sheet'), { seed: 21, amp: 4, points: 34 });
+    deckle(book, { seed: 17, amp: 3.4 });
 
     // Escape in the cottage (no page open) steps back out to the map.
     // Escape closes the songbook first, before anything else hears it.
@@ -216,6 +220,7 @@ const world = {
     cleanup = [];
     map.unmount();
     cottage.unmount();
+    undeckle(document.querySelector('#reader .reader-sheet'));
     el.remove();
   },
 };
