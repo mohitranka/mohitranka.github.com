@@ -3,81 +3,51 @@ Date: 2023-03-08 10:00
 Category: Blog
 Slug: identity-systems-fail-socially
 Tags: identity, security, distributed-systems
+Modified: 2026-10-14 14:30
 
-When people talk about identity and SSO, they reach for algorithms: token lifetimes, key rotation, SAML vs OIDC, session fixation. Those details matter. In systems I have built and operated, the outages and near-misses that hurt most started earlier — as **social and product failures** wearing security clothing.
+An identity system can validate every token correctly and still leave the wrong person with access.
+
+The protocol matters. So do the decisions around it: who counts as the same person, who can grant access, what logout means, and who removes privileges when someone's role changes.
+
+My work on identity infrastructure made me wary of designs that spend all their attention on tokens and leave those workflows implicit.
 
 <figure class="post-figure">
   <img src="{static}/images/blog/identity-systems-fail-socially.jpg" alt="Illustration of keys, badges, and people connected in a trust network" loading="lazy" width="1200" height="675">
   <figcaption>
-    <span class="fig-caption">Identity systems often fail first as ownership and session-semantics problems, not as crypto bugs.</span>
+    <span class="fig-caption">Identity workflows need explicit owners and session semantics.</span>
   </figcaption>
 </figure>
 
 <!--more-->
 
-## Identity is a dependency graph of humans
+## Start with the person, not the token
 
-An identity platform is not only a service. It is:
+Enterprise identities come from HR systems, directories, partner identity providers, and application databases. Those records will not always agree.
 
-- Who is allowed to grant access  
-- How contractors, partners, and acquisitions show up  
-- What "logout" means across devices and apps  
-- Which team gets paged when login breaks on a Sunday  
-- How quickly a leaver loses access in reality, not in policy PDFs
+Define the subject identifier and who can change it. Account linking, splitting, and recovery need explicit procedures. Otherwise reconciliation scripts gradually become the place where your identity model actually lives.
 
-Crypto bugs are rare relative to **misowned workflows**. The system can be textbook-correct and still fail the organization.
+SSO gives applications a common authentication path. It does not repair an ambiguous account model.
 
-## Failure mode 1: Ambiguous system of record for "who is this person?"
+## Temporary access needs an end
 
-Enterprises collect identities the way rivers collect silt: HRIS, directories, partner IdPs, legacy user tables, support tools that mint exceptions. If you cannot answer "what is the canonical identifier, and who can change it?" you will eventually:
+Demo accounts, support impersonation, integration users, and emergency access all have legitimate uses. They also create paths around normal controls.
 
-- Duplicate humans  
-- Orphan entitlements  
-- Merge the wrong accounts  
-- Build reconciliation jobs that become the real product
+Give exceptions an owner, expiry, and audit trail. Make removal a normal operation. A temporary bypass with no removal mechanism is simply a permanent bypass with optimistic documentation.
 
-SSO does not fix identity entropy. It multiplies whatever model you already have. **Design move:** pick a primary subject key strategy, document merge/split procedures, and make account recovery a first-class flow — not a Zendesk folklore.
+Break-glass access should remain usable during an incident. Its use should also be visible and reviewed afterwards.
 
-## Failure mode 2: Special cases without expiry
+## Specify what logout and revocation mean
 
-Sales needs a demo tenant. Support needs impersonation. A partner needs a long-lived integration user. Security accepts a temporary bypass. Temporary becomes permanent. Permanent becomes unmonitored. Unmonitored becomes the breach path. **Design move:** every exception has an owner, an expiry, metrics, and a removal plan. Impersonation and break-glass are products with audit trails, not Slack approvals.
+A user may end one application session while an identity-provider session or another application's refresh token remains valid. Whether that is a bug depends on the promised behaviour.
 
-## Failure mode 3: Logout and session mental models differ by app
+Define that behaviour across applications and devices. Distinguish local logout, global logout, token expiry, and access revocation. Test shared-device and account-recovery scenarios, not just a successful login.
 
-Users think "I logged out." Your distributed sessions think "two refresh tokens and a cache entry are still valid." Mobile thinks something else. A partner app never got the memo. This is not merely UX. It is an access-control bug with a friendly face. **Design move:** define session lifecycle as an explicit cross-app contract. Test logout like you test login. Include shared devices and support scenarios.
+For revocation, include downstream caches and propagation delay. Saying access was removed is incomplete if another service can still honour it for an hour.
 
-## Failure mode 4: Rollouts that treat auth like a feature flag toy
+## Treat the login path as production infrastructure
 
-Identity changes have asymmetric risk. A broken profile color is annoying. A broken token validation is company-wide stoppage. Yet teams still ship auth changes like UI tweaks: wide rollouts, thin dashboards, no rehearsal of rollback. **Design move:** progressive exposure, synthetic login journeys per IdP, clear rollback that does not require a hero, and change freezes around known peak login events.
+Auth changes can prevent users from reaching everything else. Use progressive rollout, synthetic journeys, and rollback procedures that have been exercised.
 
-## Failure mode 5: Ownership is "security and also platform and also the app"
+Assign an operational owner for the end-to-end path. Security policy, identity-provider availability, application sessions, DNS, and recovery email may involve different teams. The incident still needs someone responsible for coordinating the response.
 
-When login fails, three teams page each other. When it works, nobody funds hardening. Diffused ownership produces brittle reliability. **Design move:** a single operational owner for the login path, with written dependencies on IdP, DNS, email, device services, and app session layers. Security sets policy; platform runs the path; apps integrate against a stable interface. Blurry RACI is an availability risk.
-
-## What good looks like
-
-Strong identity programs I have seen share a few traits:
-
-1. **Boring standards on the outside** (OIDC/SAML done plainly)  
-2. **Strict internal models** for subjects, credentials, devices, and grants  
-3. **Auditability as a product feature**  
-4. **Recovery and leaver flows tested**, not assumed  
-5. **Customer-visible status** when auth is degraded  
-6. **Load and failure testing of login**, not only of core APIs
-
-Notice how little of that is "pick the trendy token format."
-
-## Questions before you add another identity feature
-
-- Who is the human-level source of truth?  
-- What is the break-glass path, and who audits it?  
-- How does a user understand their sessions?  
-- What happens to downstream caches on revoke?  
-- Which team’s error budget does login reliability consume?  
-- Can we re-run last quarter’s incidents as game days?
-
-If those answers are soft, new federation features will add surface area, not safety.
-
-## Closing
-
-Identity systems do fail cryptographically — and you should hire people who care about that deeply. But if you only harden tokens while leaving ownership, exceptions, session semantics, and rollout discipline vague, you will still fail. They fail socially first: unclear truth, unowned edges, temporary forever, and teams that cannot coordinate under stress. Build the social protocol as carefully as the crypto protocol. Users feel both. Attackers only need one to be weak.
+I would review cryptography and organisational workflows together. Neither compensates for the other. Correct token validation is little comfort when the entitlement was granted to the wrong account.

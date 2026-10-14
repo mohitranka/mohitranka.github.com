@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>GTM datasets need data contracts — Mohit Ranka</title>
-    <meta name="description" content="When a go-to-market dashboard is wrong, nobody says “the warehouse is eventually consistent.” They say the number is wrong — and they stop trusting the...">
+    <meta name="description" content="When two revenue dashboards disagree, nobody is comforted by the fact that both pipelines succeeded. The missing agreement is usually fairly basic: what...">
     <meta name="author" content="Mohit Ranka">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://www.mohitranka.com/blog/gtm-datasets-need-data-contracts/">
@@ -18,14 +18,14 @@
     <meta property="og:locale" content="en_US">
     <meta property="og:url" content="https://www.mohitranka.com/blog/gtm-datasets-need-data-contracts/">
     <meta property="og:title" content="GTM datasets need data contracts">
-    <meta property="og:description" content="When a go-to-market dashboard is wrong, nobody says “the warehouse is eventually consistent.” They say the number is wrong — and they stop trusting the...">
+    <meta property="og:description" content="When two revenue dashboards disagree, nobody is comforted by the fact that both pipelines succeeded. The missing agreement is usually fairly basic: what...">
     <meta property="og:image" content="https://www.mohitranka.com/images/blog/gtm-datasets-need-data-contracts.jpg">
     <meta property="og:image:alt" content="GTM datasets need data contracts">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="GTM datasets need data contracts">
-    <meta name="twitter:description" content="When a go-to-market dashboard is wrong, nobody says “the warehouse is eventually consistent.” They say the number is wrong — and they stop trusting the...">
+    <meta name="twitter:description" content="When two revenue dashboards disagree, nobody is comforted by the fact that both pipelines succeeded. The missing agreement is usually fairly basic: what...">
     <meta name="twitter:image" content="https://www.mohitranka.com/images/blog/gtm-datasets-need-data-contracts.jpg">
     <meta name="twitter:image:alt" content="GTM datasets need data contracts">
     <script>
@@ -78,7 +78,7 @@
             "@type": "BlogPosting",
             "@id": "https://www.mohitranka.com/blog/gtm-datasets-need-data-contracts/#article",
             "headline": "GTM datasets need data contracts",
-            "description": "When a go-to-market dashboard is wrong, nobody says \u201cthe warehouse is eventually consistent.\u201d They say the number is wrong \u2014 and they stop trusting the...",
+            "description": "When two revenue dashboards disagree, nobody is comforted by the fact that both pipelines succeeded. The missing agreement is usually fairly basic: what...",
             "url": "https://www.mohitranka.com/blog/gtm-datasets-need-data-contracts/",
             "image": "https://www.mohitranka.com/images/blog/gtm-datasets-need-data-contracts.jpg",
             "mainEntityOfPage": {
@@ -86,7 +86,7 @@
                 "@id": "https://www.mohitranka.com/blog/gtm-datasets-need-data-contracts/"
             },
             "datePublished": "2020-07-01T10:00:00+05:30",
-            "dateModified": "2020-07-01T10:00:00+05:30",
+            "dateModified": "2026-10-14T14:30:00+05:30",
             "author": {
                 "@type": "Person",
                 "@id": "https://www.mohitranka.com/#person",
@@ -171,7 +171,7 @@
     <main id="site" class="site-main" tabindex="-1">
 <article class="essay">
     <aside class="essay-aside">
-        <p class="essay-kind">Essay · 4 min</p>
+        <p class="essay-kind">Essay · 2 min</p>
         <p class="essay-date"><time datetime="2020-07-01T10:00:00+05:30">1 July 2020</time></p>
         <nav class="essay-outline" aria-label="In this essay" data-outline hidden></nav>
     </aside>
@@ -180,93 +180,40 @@
         <p class="essay-filed">Filed under <a href="../../tags/data-platforms/">data platforms</a>, <a href="../../tags/platforms/">platforms</a> and <a href="../../tags/product/">product</a></p>
     </header>
     <div class="entry-content essay-body">
-        <p>When a go-to-market dashboard is wrong, nobody says “the warehouse is eventually consistent.” They say the number is wrong — and they stop trusting the platform. On LinkedIn’s Enterprise Data Platform (EDP) work, the failure mode was rarely a missing chart type. It was <strong>informal truth</strong>: datasets without clear producers, consumers, freshness expectations, or a path that BI could rely on when Hadoop-era pipelines still “worked.” That is a data-contract problem, whether or not you use the word contract.</p>
+        <p>When two revenue dashboards disagree, nobody is comforted by the fact that both pipelines succeeded.</p>
+<p>The missing agreement is usually fairly basic: what does this number mean, who owns it, and which dataset should we trust?</p>
+<p>Working on LinkedIn's Enterprise Data Platform (EDP) made those questions difficult to avoid. The platform was supposed to become the governed path for go-to-market data, while BI teams still had working Hadoop-based feeds. Adding another source did not automatically settle which one was right.</p>
 <figure class="post-figure">
   <img src="../../images/blog/gtm-datasets-need-data-contracts.jpg" alt="Illustration of two parties exchanging a contract over data folders" loading="lazy" width="1200" height="675">
   <figcaption>
-    <span class="fig-caption">GTM datasets become trustworthy when producers and consumers share explicit contracts—not informal folklore.</span>
+    <span class="fig-caption">Agree on meaning, ownership, and readiness before widening access.</span>
   </figcaption>
 </figure>
 
 <!--more-->
 
-<h2>The contract is the product boundary</h2>
-<p>A data contract is a written agreement between people who produce a dataset and people who depend on it:</p>
+<h2>Agree on meaning before exposing the table</h2>
+<p>A data contract should explain what consumers are allowed to depend on. It needs more than field names and types.</p>
+<p>For an important dataset, I want to know:</p>
 <ul>
-<li>What the dataset means (grain, keys, critical fields)</li>
-<li>Who owns changes</li>
-<li>How fresh and complete it must be for its main consumers</li>
-<li>Who may use it, and for what</li>
-<li>What happens when the shape changes</li>
-<li>Which path is the system of record when two feeds disagree</li>
+<li>What one row represents, and which keys identify it.</li>
+<li>What critical fields mean, including allowed nulls.</li>
+<li>Who produces it and who uses it in production.</li>
+<li>When it should be ready, and how complete it should be.</li>
+<li>Who can change it, with what notice.</li>
+<li>Which path is authoritative during migration.</li>
+<li>Who responds when the agreement breaks.</li>
 </ul>
-<p>Without that, you have tables and jobs — not a product interface. EDP’s strategic job was to become the governed center for GTM data. BI teams on Power BI and Tableau did not move because a platform existed; they moved when the <strong>interface of getting trustworthy data</strong> became clearer, cheaper, and eventually mandatory as legacy paths aged out.</p>
-<h2>Which GTM datasets need contracts (almost all that matter)</h2>
-<p><strong>Definitely:</strong></p>
-<ul>
-<li>Pipeline and revenue metrics that show up in leadership reviews  </li>
-<li>Account, lead, and opportunity-shaped datasets used across tools  </li>
-<li>Any feed BI materializes into workbooks that drive weekly motions  </li>
-<li>Datasets used for access decisions, eligibility, or customer-facing ops  </li>
-<li>Shared “golden” entities multiple teams join in different ways</li>
-</ul>
-<p><strong>Lighter-weight is fine for:</strong></p>
-<ul>
-<li>Truly exploratory sandboxes with no production consumers  </li>
-<li>One-off extracts with an explicit expiry</li>
-</ul>
-<p>If a number can start an argument in a QBR, it deserves a contract.</p>
-<h2>What we needed in practice (not a 40-page template)</h2>
-<p>Keep contracts short enough that producers and BI partners will actually read them:</p>
-<ol>
-<li><strong>Dataset name</strong> and owning team  </li>
-<li><strong>Grain</strong> (what one row means)  </li>
-<li><strong>Critical fields</strong> and allowed null behavior  </li>
-<li><strong>Primary consumers</strong> (e.g. Power BI / Tableau paths, sales analytics)  </li>
-<li><strong>Freshness / readiness expectation</strong> — even if it starts as “available on EDP before legacy deprecation,” not a perfect percentile  </li>
-<li><strong>Change policy</strong> — notice, versioning, who approves breaking changes  </li>
-<li><strong>System of record</strong> during dual-run periods  </li>
-<li><strong>Support path</strong> — where breakages go (not a random Slack thread)</li>
-</ol>
-<p>On EDP, connectors, migration staffing, and deprecation dates were how contracts became real. A wiki table alone does not change incentives.</p>
-<h2>Why platform adoption without contracts fails</h2>
-<p>BI’s rational objection was: “We can already get the data.” Informal sources always feel free until:</p>
-<ul>
-<li>Two dashboards disagree  </li>
-<li>A legacy pipeline is turned off  </li>
-<li>A field changes meaning and nobody tells the workbook owner  </li>
-<li>Query performance after cutover becomes “the platform’s problem” with no owner</li>
-</ul>
-<p>Contracts force those conversations <strong>before</strong> the incident. They also make deprecation fair: you cannot retire a path nobody documented as non-authoritative.</p>
-<h2>Evaluation is part of the contract</h2>
-<p>Do not separate “data quality” from “dashboard quality.” Ship and migration gates should include:</p>
-<ul>
-<li>Consumer path checks (does the BI workflow still resolve?)  </li>
-<li>Row-count / null-rate sanity on critical fields  </li>
-<li>Explicit dual-run comparisons while both paths live  </li>
-<li>A named human who can freeze a bad publish</li>
-</ul>
-<p>When the contract breaks, something visible should fail before the QBR does.</p>
-<h2>Organizational pattern that worked</h2>
-<ul>
-<li><strong>Producers</strong> own correctness and change communication  </li>
-<li><strong>Platform (EDP)</strong> owns enforcement, discovery, access patterns, and migration leverage  </li>
-<li><strong>BI / analytics partners</strong> own consumer semantics and workbook impact  </li>
-<li><strong>Leadership</strong> owns deprecation as continuity policy, not a style preference</li>
-</ul>
-<p>Shared Slack channels are not a substitute for ownership. Funded migration and executive sponsorship were how EDP contracts left the slide deck.</p>
-<h2>A sequence I recommend for new GTM datasets</h2>
-<ol>
-<li>Write the decision the dataset supports in one sentence.  </li>
-<li>Name the first production consumer (often a BI path).  </li>
-<li>Draft the contract <em>before</em> scaling access.  </li>
-<li>Put the dataset on the governed platform path.  </li>
-<li>Dual-run only with an end date.  </li>
-<li>Turn off the informal path.</li>
-</ol>
-<p>Teams love to start at “expose the table.” Steps 1–3 are where trust is designed.</p>
-<h2>Closing</h2>
-<p>EDP did not earn “source of truth” status by existing. It earned it when GTM consumers — especially BI — could depend on <strong>named datasets with owners, expectations, and an end to competing pipelines</strong>. Call that a data contract, a product interface, or an operating promise. Just do not ship GTM data as folklore and hope governance appears later.</p>
+<p>This can fit in a short document. Length is not enforcement.</p>
+<p>A field that retains its type but changes its meaning can break a dashboard more quietly than a schema change. Contracts need to cover semantics as well as syntax.</p>
+<h2>Make the agreement affect delivery</h2>
+<p>On EDP, connectors, migration support, and deprecation dates mattered because they made the governed path practical for BI consumers. A contract hidden in a wiki would not have moved their workbooks.</p>
+<p>Validate the consumer path before cutover. Compare critical values during dual running. Check row counts and null rates, while recognising that those checks will not catch every semantic error. Give someone authority to stop a bad publish.</p>
+<p>Producers own the meaning and correctness of their data. The platform provides discovery, access, and checks. BI partners own how the dataset is interpreted in their workflows. Shared responsibility still needs named people at each boundary.</p>
+<h2>Match the contract to the consequence</h2>
+<p>A temporary exploratory extract does not need the same process as a revenue metric used in leadership reviews. It does need an expiry if it is supposed to be temporary.</p>
+<p>Start with the decision the dataset supports and the first production consumer. Write their expectations before widening access. End the old path when migration is complete.</p>
+<p>Tables are easy to publish. A number that people can agree on takes more work.</p>
     </div>
     <footer class="essay-foot">
         <nav class="essay-nav" aria-label="More writing">
@@ -369,7 +316,7 @@
         "library": "../../library/",
         "contact": "../../contact/"
     },
-    "essays": [        {"title": "How Forge Structures Requests for Prompt Cache Reuse", "url": "../../blog/how-forge-structures-requests-for-prompt-cache-reuse/", "date": "Sep 2026"},        {"title": "The line manager role is disappearing faster than you think", "url": "../../blog/line-manager-role-is-disappearing/", "date": "Jul 2026"},        {"title": "Near-real-time is a product promise, not a Kafka cluster", "url": "../../blog/near-real-time-is-a-product-promise/", "date": "Jul 2026"},        {"title": "The platform team\u2019s real job is interfaces", "url": "../../blog/platform-teams-real-job-is-interfaces/", "date": "Nov 2025"},        {"title": "When I still choose a relational database", "url": "../../blog/when-i-still-choose-a-relational-database/", "date": "Mar 2025"},        {"title": "Freshness SLOs: the metric product teams actually feel", "url": "../../blog/freshness-slos-the-metric-product-teams-feel/", "date": "Jul 2024"},        {"title": "Saying no as a platform EM without becoming the villain", "url": "../../blog/saying-no-as-a-platform-em/", "date": "Nov 2023"},        {"title": "Identity systems fail socially before they fail cryptographically", "url": "../../blog/identity-systems-fail-socially/", "date": "Mar 2023"},        {"title": "What \u201cled the web launch\u201d taught me about constraints", "url": "../../blog/web-launch-constraints/", "date": "Jul 2022"},        {"title": "Incubating 0\u21921 beside a mature product", "url": "../../blog/postman-labs-0-to-1/", "date": "Jun 2021"},        {"title": "How I review a distributed design in 45 minutes", "url": "../../blog/how-i-review-a-distributed-design/", "date": "Mar 2021"},        {"title": "Introducing on-call without burning the team", "url": "../../blog/introducing-on-call-without-burnout/", "date": "Nov 2020"},        {"title": "GTM datasets need data contracts", "url": "../../blog/gtm-datasets-need-data-contracts/", "date": "Jul 2020"},        {"title": "RDBMS vs. NOSQL?", "url": "../../blog/rdbms-vs-nosql/", "date": "Jun 2013"}    ],
+    "essays": [        {"title": "How Forge Structures Requests for Prompt Cache Reuse", "url": "../../blog/how-forge-structures-requests-for-prompt-cache-reuse/", "date": "Sep 2026"},        {"title": "What engineering managers need to own as AI changes delivery", "url": "../../blog/line-manager-role-is-disappearing/", "date": "Jul 2026"},        {"title": "Near-real-time is a product promise, not a Kafka cluster", "url": "../../blog/near-real-time-is-a-product-promise/", "date": "Jul 2026"},        {"title": "The platform team\u2019s real job is interfaces", "url": "../../blog/platform-teams-real-job-is-interfaces/", "date": "Nov 2025"},        {"title": "When I still choose a relational database", "url": "../../blog/when-i-still-choose-a-relational-database/", "date": "Mar 2025"},        {"title": "Freshness SLOs: the metric product teams actually feel", "url": "../../blog/freshness-slos-the-metric-product-teams-feel/", "date": "Jul 2024"},        {"title": "Saying no as a platform EM without becoming the villain", "url": "../../blog/saying-no-as-a-platform-em/", "date": "Nov 2023"},        {"title": "Identity systems fail socially before they fail cryptographically", "url": "../../blog/identity-systems-fail-socially/", "date": "Mar 2023"},        {"title": "What \u201cled the web launch\u201d taught me about constraints", "url": "../../blog/web-launch-constraints/", "date": "Jul 2022"},        {"title": "Incubating 0\u21921 beside a mature product", "url": "../../blog/postman-labs-0-to-1/", "date": "Jun 2021"},        {"title": "How I review a distributed design in 45 minutes", "url": "../../blog/how-i-review-a-distributed-design/", "date": "Mar 2021"},        {"title": "Introducing on-call without burning the team", "url": "../../blog/introducing-on-call-without-burnout/", "date": "Nov 2020"},        {"title": "GTM datasets need data contracts", "url": "../../blog/gtm-datasets-need-data-contracts/", "date": "Jul 2020"},        {"title": "RDBMS vs. NOSQL?", "url": "../../blog/rdbms-vs-nosql/", "date": "Jun 2013"}    ],
     "books": [        {"title": "Flow", "author": "Mih\u00e1ly Cs\u00edkszentmih\u00e1lyi", "cover": "../../images/library/117101.jpg"},        {"title": "The Little Prince", "author": "Antoine de Saint-Exup\u00e9ry", "cover": "../../images/library/157993.jpg"},        {"title": "Thinking In Systems", "author": "Donella H. Meadows", "cover": "../../images/library/3828902.jpg"},        {"title": "Sapiens", "author": "Yuval Noah Harari", "cover": "../../images/library/23692271.jpg"},        {"title": "The Martian", "author": "Andy Weir", "cover": "../../images/library/18401393.jpg"},        {"title": "Atomic Habits", "author": "James Clear", "cover": "../../images/library/40121378.jpg"},        {"title": "Ikigai", "author": "H\u00e9ctor Garc\u00eda", "cover": "../../images/library/40534545.jpg"}    ],
     "bookCount": 28,
     "assets": "../../theme/",

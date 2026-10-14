@@ -1,65 +1,55 @@
-Title: The line manager role is disappearing faster than you think
+Title: What engineering managers need to own as AI changes delivery
 Date: 2026-07-21 10:00
 Category: Blog
 Slug: line-manager-role-is-disappearing
 Tags: engineering-leadership, management, product
+Modified: 2026-10-14 14:30
 
-The line manager role is disappearing faster than most career plans assume. Meta has already moved toward one senior manager for roughly every fifty developers. That is not a distant forecast. It is an operating choice already in the market. If you lead engineers — or want to — the useful question is not “will this happen?” It is **what kind of leader still has a job when the org chart gets that thin.**
+I think engineering management built mainly around status tracking is becoming harder to justify.
+
+That is narrower than saying managers are disappearing. Someone still has to set priorities, develop people, resolve disagreements, and take responsibility when a technically successful project produces little business value.
+
+AI-assisted development changes some of that work. It does not tell us how many engineers one manager can responsibly support.
 
 <figure class="post-figure">
   <img src="{static}/images/blog/line-manager-role-is-disappearing.jpg" alt="Abstract illustration of a flattened org lattice with AI agent nodes around a central leadership figure" loading="lazy" width="1200" height="675">
   <figcaption>
-    <span class="fig-caption">Flatter orgs do not remove leadership — they remove room for leaders who only schedule work.</span>
+    <span class="fig-caption">Faster implementation still needs judgment and people leadership.</span>
   </figcaption>
 </figure>
 
 <!--more-->
 
-## Where this is going
+## More output creates different constraints
 
-I see three moves landing at once:
+Agents can reduce the effort of some implementation tasks. The benefit depends on the work, the tools, and how much verification it needs.
 
-**A. AI agents write most of the code.** One senior developer directing a swarm of agents is not science fiction. It is the near-term shape of delivery: humans own intent, constraints, and review; machines own volume. Span of control for *output* rises even when headcount does not.
+When implementation becomes faster, selecting the right work and evaluating the result matter more. Producing another service is not useful if nobody needs it or the team cannot operate it.
 
-**B. The middle manager who mainly runs one-on-ones and tracks tickets will struggle to justify the seat.** Coordination theater does not survive a world where execution bandwidth is cheap and coordination tools are better. If your value is status meetings and a dashboard of green/yellow/red, you are competing with software that does that without a skip-level.
+I expect leaders who understand those constraints to remain valuable. A manager whose main contribution is collecting updates has a weaker case.
 
-**C. The leader who thrives will look different from the leader who thrived in the last decade.** Not “more soft skills” as a slogan. A different job: **business outcomes with technical teeth**, not people-process as the product.
+That is an interpretation of where the work is going, not a reliable forecast of an org chart.
 
-Those three reinforce each other. When coding throughput jumps, the bottleneck moves to judgment — what to build, what to kill, what interface to freeze, what risk is acceptable. Judgment is leadership work. Ticket wrangling is not.
+## People management is real work
 
-## What the surviving leader actually owns
+It is easy to dismiss one-on-ones as meetings until an engineer needs feedback, a conflict is blocking delivery, or someone is being quietly overloaded.
 
-The leaders I would hire into a flatter org share a pattern:
+Automation may improve coordination. It does not make trust, coaching, or fair evaluation free. Increasing spans of control without reducing that burden can simply leave people with less support.
 
-- **They own business outcomes, not just a people inventory.** Headcount is an input. Revenue, reliability, adoption, and cost of delay are the scoreboard.
-- **They understand product, engineering, operations, and how sales actually sells.** Enough to argue tradeoffs in the same language as partners — not as a translator who only ships Jira.
-- **They think in systems, not only sprints.** Feedback loops, failure domains, platform interfaces, incentive design. Sprint hygiene still matters; it is not the strategy.
-- **They keep enough technical depth that returning to IC tomorrow is credible.** Not day-one expert on every stack — but not a spectator in design reviews either.
+A flatter organisation can make decisions faster. It can also concentrate authority and leave ambiguity unresolved for longer. Fewer layers is not automatically a better design.
 
-The old clean split — pure management track vs pure IC track — is already leaking. Hybrid value is the default. Specialization remains; **pure process ownership without domain force** does not.
+## The kind of leadership I would invest in
 
-## If I stepped into an EM role tomorrow
+I would keep enough technical depth to challenge designs, inspect agent-generated work, and understand operational risks. That does not require being the best programmer in the team. It does require more than following a dashboard.
 
-I would do three things immediately, and keep doing them:
+I would also learn how the company makes money, which customers shape the roadmap, and where engineering effort changes the outcome. Technical quality matters, but it needs a connection to something the business is trying to achieve.
 
-1. **Stay technically current.** Read designs. Ship small things. Touch the tools agents use. You cannot review what you cannot feel.
-2. **Invest hard in strategic and business thinking.** How the company makes money, where margin dies, which customers actually drive the roadmap. Engineering leadership without that is interior decoration.
-3. **Do not sit on laurels.** Title and past scope depreciate faster when the production function changes. Relevance is a practice, not a plaque.
+Finally, I would examine the system around the team: incentives, dependencies, ownership, and how decisions get made. Some delivery problems cannot be fixed inside a sprint.
 
-None of that is glamorous. All of it is insurance against becoming the middle layer the spreadsheet deletes first.
+## What remains uncertain
 
-## The org shape that follows
+One company's management ratio would not establish what works across engineering organisations. Staffing targets tell us what a company intends to change, not whether that change improves delivery or support.
 
-I expect organizations that work under AI-heavy delivery to look roughly like this:
+AI may change the balance between implementation, review, and coordination. Team maturity, product risk, and organisational complexity will still matter.
 
-- **Executives at the top owning strategy** — fewer, clearer bets.
-- **A lean middle layer owning specific business goals** — not generic “people management” for its own sake.
-- **Highly productive ICs (and agent fleets) supported by real tooling** — platforms, evals, review culture, operational ownership.
-
-That is dramatically flatter than the multi-layer manager stacks many companies still run. Flatter is not kinder by default. It is **less room for ambiguity about who owns the outcome.** If your role only exists to pass information up and down, the system will route around you.
-
-## The question that matters
-
-The question is not whether this shift is coming. Parts of it are already priced into how aggressive companies staff management. The question is whether you are preparing: technical depth, business literacy, and systems judgment — or optimizing for a job description that is evaporating.
-
-What are you doing right now to stay relevant as the middle of the org chart thins?
+My position is simpler: technical judgment, business understanding, and people leadership are worth developing together. A title will not do that work for you.

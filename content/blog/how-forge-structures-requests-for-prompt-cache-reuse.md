@@ -3,23 +3,15 @@ Date: 2026-09-24 10:00
 Category: Blog
 Slug: how-forge-structures-requests-for-prompt-cache-reuse
 Tags: developer-tooling, architecture, reliability
+Modified: 2026-10-14 14:30
 
-## Introduction
+I am building [Forge](https://github.com/NorviaLabs/forge), an open-source coding environment that brings agent conversations, editing, repository navigation, a terminal, and Git into one workspace.
 
+An early problem was cost. The OpenCode Go weekly allowance would barely last a day of coding. On a self-funded project, that was difficult to sustain.
 
-For the last couple of months, we have been working on building an [open-source](https://www.github.com/norvialabs/forge) terminal-first AI IDE, [Forge](https://forge.norvialabs.com/).
-It is built for Vim/terminal power users, who want to do AI-assisted programming without doing context switches.
-The idea of Forge is to bring the software from idea to production, without leaving the terminal workspace. 
-Think of Forge as a mix of Vim + Claude Code + terminal + Git, all running from your terminal.
+Coding requests repeatedly send instructions and conversation history. If the provider can reuse a cached prefix, that repeated input can cost less. The harness cannot decide what the provider caches, but it can avoid changing content unnecessarily.
 
-A core part of Forge is its AI-assisted coding harness, which takes the user's natural language prompt to research, design and build the software. 
-In its first version, the OpenCode Go subscription's weekly limit would hardly last a single day for coding, even with careful use of models. 
-For a self-funded project, this put pressure on the budget and threatened sustained product use. 
-
-OpenCode Go accounts for usage in dollar terms, and cached input can cost less than uncached input, usually by an order of magnitude.
-This made prompt caching a promising way to stretch the available usage.  
-
-This article is a deep dive into how prompt caching was implemented and tested in Forge to achieve 99%+ cache hit ratio.
+This article explains how Forge constructs requests for that reuse and presents the results of a controlled evaluation. The reported cache-hit ratios are results for those workloads, not a guarantee for every coding session.
 
 <!--more-->
 
@@ -43,16 +35,16 @@ Cache eligibility and reuse depend on the provider's caching strategy. A coding 
   </figcaption>
 </figure>
 
-In 2026, the top coding harnesses [average around 90%](https://www.requesty.ai/data/coding-agent-cache-hit-rate-apr-2026) for their cache-hit ratios. For Forge we set an internal target of 95% cache-hit ratio.
+We set an internal target of 95% cache-hit ratio. Comparisons with other harnesses require comparable workloads, providers, and measurement methods; a single aggregate number would not tell us whether our request construction was working.
 
 ## How Forge Constructs Requests
 
-In order to keep the prefix stable, Forge keeps the static content at the beginning and dynamic content at the end of the request.
+Forge puts stable content first and new content last. Changing an early instruction can invalidate reuse for everything after it.
 
 Forge's request path has two layers.
 
-* A canonical message: Forge's `ModelRequest` object, which is provider agnostic.
-* A provider-specific wire request: `ModelRequest` object is formatted as per specific provider API before making the network request. 
+* A canonical request: Forge's provider-neutral `ModelRequest` object.
+* A wire request: a provider adapter serializes `ModelRequest` for the selected API.
 
 <figure class="post-figure forge-cache-diagram">
   <img class="diagram-dark" src="{static}/images/blog/forge-request-construction.svg?v=45747a7" alt="Forge request flow from system prompt, journaled history, new turn and tool schemas through preparation into a provider-neutral ModelRequest, then into provider-specific serializers" loading="lazy" width="1080" height="540">
@@ -62,18 +54,18 @@ Forge's request path has two layers.
   </figcaption>
 </figure>
 
-In order to create the canonical message, Forge:
+To build the canonical request, Forge:
 
  * Starts by creating the system message: It contains system prompt, workspace's `AGENTS.md`, and discovered Skills. Before being added to the system message, Skills are sorted by name, and the session's scratch directory is inserted in the system prompt.
  * Keeps the system message in conversation history. On resumption of a prior session, Forge replays the journal, and uses the stored system message. This ensures that the cache is not invalidated on the resumption of an old session with a different system message.
  * Appends the user message, assistant replies and tool results to the end of the message.
- * Before each Model step, it repairs and compacts the history, if required. Compaction rewrites the context, and starts a new cache epoch, because the old prefix no longer describes the prompt.
+ * Before each model step, it repairs and compacts the history, if required. Compaction rewrites the context, and starts a new cache epoch, because the old prefix no longer describes the prompt.
  * Finally creates a `ModelRequest`. This bundles the transcript, selected tools and model, workspace root, route and session IDs, reasoning settings, and `prompt_cache: true`.
 
-Once the canonical message is ready, Forge converts it into a provider-specific wire request. 
+The provider adapter then constructs the wire request.
 
-* Anthropic: It places cache markers at useful boundaries. Forge marks the last system block, the last tool definition, and current conversation tail. As the conversation grows, the conversation marker moves to the new tail; the system and tool markers remain at their ends. 
-* OpenAI-compatible APIs: It sends the conversation as messages containing system, user, assistant replies and tools in order. Forge converts each tool into function schemas, and adds a workspace-derived `prompt_cache_key` 
+* Anthropic: It places cache markers at useful boundaries. Forge marks the last system block, the last tool definition, and current conversation tail. As the conversation grows, the conversation marker moves to the new tail; the system and tool markers remain at their ends.
+* OpenAI-compatible APIs: It sends the conversation as messages containing system, user, assistant replies and tools in order. Forge converts each tool into function schemas, and adds a workspace-derived `prompt_cache_key`
 
 ### How Forge Keeps the Prefix Stable
 
@@ -82,14 +74,14 @@ To keep the prefix stable, Forge implements:
 * Intact prior history: New user turns and tool results extend the transcript, preserving earlier messages.
 * Sorted variable lists: Tool names and Skills are sorted to prevent incidental map or filesystem order from changing the prompt.
 * Frozen content: Image snapshots and frozen tool outputs prevent later file changes from altering old transcript entries.
-* Preserved system instructions: The journaled system message is kept rather than regenerated from whatever instructions happen to exist now. 
+* Preserved system instructions: The journaled system message is kept rather than regenerated from whatever instructions happen to exist now.
 * Cache routing: Forge hashes the workspace path into `prompt_cache_key`, which helps the provider caching algorithm with routing affinity across all the sessions of the same workspace.
 
 ## How We Measured Cache Hits
 
 For each model response, Forge reads the provider-reported cached-input token count and normalises it.
 
-* Anthropic: Reports `cache_read_input_tokens` 
+* Anthropic: Reports `cache_read_input_tokens`
 * OpenAI-compatible APIs: Provides `cached_tokens` in token-details fields.
 
 Forge adds the cached and uncached input tokens across the model calls. It normalises total prompt tokens across providers, since Anthropic reports uncached input separately while OpenAI includes cached tokens in its total.
@@ -121,14 +113,16 @@ Token totals are summed across the 10 runs for each case. Uncached input is the 
 | Conversation grows | 1,284,763 | 1,279,623 | 2,743 | 2,397 |
 | Only the ending changes | 1,115,482 | 1,109,682 | 3,271 | 2,529 |
 | An early instruction changes | 963,247 | 913,159 | 17,633 | 32,455 |
- 
+
 
 * Appending messages or changing only the last message resulted in improved cache-hit ratios, as reflected by 99.60% and 99.48% mean cache-hit ratios for the first two use cases.
-* Changing the instruction, which is in the early part of the message, drops the cache hit ratio by ~5 percentage points compared to the other use cases, and ~30k uncached input tokens compared to ~2.5k input tokens of the first two use cases.
+* Changing the instruction, which is in the early part of the message, drops the cache-hit ratio by about 5 percentage points compared to the other use cases, and leaves about 32,000 uncached input tokens, compared with about 2,500 in each of the first two cases.
 * The early change use case varies more (~1 pp standard deviation) between runs compared to the other use cases (~0.2-0.25 pp standard deviation), indicating caching is more sensitive to the early message changes.
 
-## Final Notes
+## What this establishes
 
-Prompt caching is a request-design problem shared by the harness and provider. The harness controls request ordering, history persistence, and cache hints; the provider determines which prefixes it retains and reuses. 
-Tracking usage alongside serialized request snapshots connects cache behavior to the prefix that produced it. The main lesson here is to design request construction and cache observability together while writing an agentic harness.
+Prompt caching is a request-design problem shared by the harness and provider. The harness controls request ordering, history persistence, and cache hints; the provider determines which prefixes it retains and reuses.
+Tracking usage alongside serialized request snapshots connects cache behavior to the prefix that produced it. These results describe controlled request sequences on one provider/model route. They do not establish the same hit ratio across providers or ordinary interactive sessions. Cache expiry, concurrency, changing tools, and compaction can all affect reuse.
+
+Design request construction and cache observability together. Otherwise you can preserve the prefix carefully and still have no way to tell whether the provider reused it.
 

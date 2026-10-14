@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Incubating 0→1 beside a mature product — Mohit Ranka</title>
-    <meta name="description" content="When I was at Postman, the core product was already the default API client for a huge HTTP/HTTPS world — on the order of tens of millions of developers on...">
+    <meta name="description" content="A mature product gives you users, distribution, and a backlog large enough to bury most experiments. At Postman, we wanted to explore protocols and...">
     <meta name="author" content="Mohit Ranka">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://www.mohitranka.com/blog/postman-labs-0-to-1/">
@@ -18,14 +18,14 @@
     <meta property="og:locale" content="en_US">
     <meta property="og:url" content="https://www.mohitranka.com/blog/postman-labs-0-to-1/">
     <meta property="og:title" content="Incubating 0→1 beside a mature product">
-    <meta property="og:description" content="When I was at Postman, the core product was already the default API client for a huge HTTP/HTTPS world — on the order of tens of millions of developers on...">
+    <meta property="og:description" content="A mature product gives you users, distribution, and a backlog large enough to bury most experiments. At Postman, we wanted to explore protocols and...">
     <meta property="og:image" content="https://www.mohitranka.com/images/blog/postman-labs-0-to-1.jpg">
     <meta property="og:image:alt" content="Incubating 0→1 beside a mature product">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Incubating 0→1 beside a mature product">
-    <meta name="twitter:description" content="When I was at Postman, the core product was already the default API client for a huge HTTP/HTTPS world — on the order of tens of millions of developers on...">
+    <meta name="twitter:description" content="A mature product gives you users, distribution, and a backlog large enough to bury most experiments. At Postman, we wanted to explore protocols and...">
     <meta name="twitter:image" content="https://www.mohitranka.com/images/blog/postman-labs-0-to-1.jpg">
     <meta name="twitter:image:alt" content="Incubating 0→1 beside a mature product">
     <script>
@@ -78,7 +78,7 @@
             "@type": "BlogPosting",
             "@id": "https://www.mohitranka.com/blog/postman-labs-0-to-1/#article",
             "headline": "Incubating 0\u21921 beside a mature product",
-            "description": "When I was at Postman, the core product was already the default API client for a huge HTTP/HTTPS world \u2014 on the order of tens of millions of developers on...",
+            "description": "A mature product gives you users, distribution, and a backlog large enough to bury most experiments. At Postman, we wanted to explore protocols and...",
             "url": "https://www.mohitranka.com/blog/postman-labs-0-to-1/",
             "image": "https://www.mohitranka.com/images/blog/postman-labs-0-to-1.jpg",
             "mainEntityOfPage": {
@@ -86,7 +86,7 @@
                 "@id": "https://www.mohitranka.com/blog/postman-labs-0-to-1/"
             },
             "datePublished": "2021-06-15T10:00:00+05:30",
-            "dateModified": "2021-06-15T10:00:00+05:30",
+            "dateModified": "2026-10-14T14:30:00+05:30",
             "author": {
                 "@type": "Person",
                 "@id": "https://www.mohitranka.com/#person",
@@ -171,7 +171,7 @@
     <main id="site" class="site-main" tabindex="-1">
 <article class="essay">
     <aside class="essay-aside">
-        <p class="essay-kind">Essay · 5 min</p>
+        <p class="essay-kind">Essay · 2 min</p>
         <p class="essay-date"><time datetime="2021-06-15T10:00:00+05:30">15 June 2021</time></p>
         <nav class="essay-outline" aria-label="In this essay" data-outline hidden></nav>
     </aside>
@@ -180,87 +180,35 @@
         <p class="essay-filed">Filed under <a href="../../tags/engineering-leadership/">engineering leadership</a>, <a href="../../tags/product/">product</a> and <a href="../../tags/developer-tooling/">developer tooling</a></p>
     </header>
     <div class="entry-content essay-body">
-        <p>When I was at Postman, the core product was already the default API client for a huge HTTP/HTTPS world — on the order of tens of millions of developers on desktop. That success created a sharp problem: <strong>how do you explore what comes after HTTP without slowing the product everyone already depends on?</strong> Postman Labs was our answer: a small unit with a charter to incubate 0→1 work — new protocols and paradigms — without turning every experiment into a core-roadmap hostage situation.</p>
+        <p>A mature product gives you users, distribution, and a backlog large enough to bury most experiments.</p>
+<p>At Postman, we wanted to explore protocols and workflows beyond the established HTTP client without taking capacity away from the product people already depended on. Postman Labs gave that work a separate place to develop.</p>
+<p>The separation mattered. So did having a route back into the main product.</p>
 <figure class="post-figure">
   <img src="../../images/blog/postman-labs-0-to-1.jpg" alt="Illustration of a small lab greenhouse beside a solid product building" loading="lazy" width="1200" height="675">
   <figcaption>
-    <span class="fig-caption">0→1 incubation works when it sits beside a mature product with a real graduation path—not as endless side quests.</span>
+    <span class="fig-caption">Give experiments room to develop and a clear graduation path.</span>
   </figcaption>
 </figure>
 
 <!--more-->
 
-<h2>The challenge: the market moved past “REST in a GUI”</h2>
-<p>Developers were increasingly living with:</p>
-<ul>
-<li><strong>WebSockets</strong> for persistent, bidirectional sessions  </li>
-<li><strong>gRPC</strong> for efficient, schema-driven service APIs  </li>
-<li><strong>GraphQL</strong> and other non-CRUD shapes of interface</li>
-</ul>
-<p>Internally we had ideas. What we lacked was a structured way to <strong>validate, build, and kill or graduate</strong> them while the core team stayed focused on the desktop product’s quality and scale. Putting every bet into the main feature factory would have meant either:</p>
-<ul>
-<li>starving core reliability and UX, or  </li>
-<li>shipping “innovation” at the speed of a mature backlog.</li>
-</ul>
-<p>Labs existed to refuse that false choice.</p>
-<h2>Structure for speed (and containment)</h2>
-<p>We did not invent another feature team with the same process tax as core. Labs was intentionally different:</p>
-<ol>
-<li><strong>Smaller team</strong> drawn from engineers who already knew Postman’s product DNA.  </li>
-<li><strong>Less process theater</strong> — lean experiments instead of full SDLC cosplay for every spike.  </li>
-<li><strong>One North Star metric per initiative</strong> — a single definition of success so debates stayed grounded.  </li>
-<li><strong>Explicit separation</strong> from core delivery so a failed experiment did not become a multi-quarter core commitment by accident.</li>
-</ol>
-<p>Charter in two axes:</p>
-<ul>
-<li><strong>Breadth</strong> — protocols and shapes beyond HTTP.  </li>
-<li><strong>Depth</strong> — personas and workflows (testing, automation, CI-shaped use) that the HTTP client alone did not own.</li>
-</ul>
-<p>Independence was not isolation from users. It was isolation from the wrong kind of backlog pressure.</p>
-<h2>A three-phase model that de-risked 0→1</h2>
-<p>Every Labs initiative had to earn the next phase:</p>
-<h3>Phase 1 — Feasibility and market validation</h3>
-<p>Customer conversations, lightweight proofs, honest “who hurts without this?” If the answer was only “it would be cool,” it did not proceed.</p>
-<h3>Phase 2 — MVP and dogfooding</h3>
-<p>Internal builds used by Postman’s own engineers. Usability and correctness issues showed up before a public audience.</p>
-<h3>Phase 3 — Limited beta and public validation</h3>
-<p>Constrained rollout, measure adoption and engagement, then decide: graduate into the main product, iterate, or stop.</p>
-<p>That sequence sounds obvious. The discipline is stopping between phases. Core roadmaps often skip phase 1 and call a half-built feature a launch.</p>
-<h2>WebSockets: persistent sessions are not “requests with extra steps”</h2>
-<p>WebSockets were an early Labs bet because real-time systems (chat, feeds, IoT-style control planes, live tooling) do not fit the request/response mental model Postman had optimized for. <strong>Hard parts:</strong></p>
-<ul>
-<li>Long-lived bidirectional connections instead of discrete calls  </li>
-<li>Auth flows that must hold for a session, not only a single hit  </li>
-<li>UX for streams of events over time, not one response panel</li>
-</ul>
-<p><strong>What we built toward:</strong> a first-class WebSocket client experience — connect, send/receive, inspect event history, support practical auth patterns. <strong>Outcome:</strong> WebSockets did not stay a lab toy; support graduated into Postman’s broader API development surface. That graduation path was the point of Labs.</p>
-<h2>gRPC: schemas and streams in a product trained on text HTTP</h2>
-<p>gRPC was growing fast in backend-heavy environments. Postman’s muscle memory was text-centric HTTP. gRPC forced different questions:</p>
-<ul>
-<li>How do users work with <strong>Protobuf</strong> contracts inside the product?  </li>
-<li>How do unary and streaming calls show up in a composer UX?  </li>
-<li>How do serialization mistakes become debuggable instead of opaque binary pain?</li>
-</ul>
-<p><strong>Execution themes:</strong> schema-aware composition, streaming-aware request/response handling, and making “what did I just send?” inspectable for developers who live in Postman daily. <strong>Outcome:</strong> gRPC testing/debugging became a real product capability in the same family as REST workflows — not a separate science project users had to leave Postman for.</p>
-<h2>What scaled beyond the first bets</h2>
-<p>When early graduates worked, Labs stopped being only a temporary squad. The incubation pattern — validate, dogfood, beta, graduate — became a reusable company muscle. Later product bets (including automation-shaped work such as Flows-class ideas) could reuse the same organizational shape: <strong>explore beside core, then merge what earns users.</strong> Eventually Labs-shaped work attracted clearer funding and leadership attention. That is the healthy end state: not a permanent rebel base, but a proven path for 0→1 inside a company that also has to protect a mature product.</p>
-<h2>What I would repeat as an EM</h2>
-<ol>
-<li><strong>Separate exploration capacity from core SLA capacity</strong> — or core always wins and innovation becomes slideware.  </li>
-<li><strong>One success metric per bet</strong> — multi-metric dashboards hide kill decisions.  </li>
-<li><strong>Dogfood before marketing</strong> — especially for developer tools; your engineers are harsh, useful users.  </li>
-<li><strong>Graduation criteria in writing</strong> — “done in Labs” must mean something operationally.  </li>
-<li><strong>Protect the team from identity crisis</strong> — Labs is not “the people who do side quests”; it is a product strategy role.</li>
-</ol>
-<h2>What I would avoid</h2>
-<ul>
-<li>Innovation theater with no kill switch  </li>
-<li>Hiding Labs work so core is surprised at graduation  </li>
-<li>Measuring success only by launches, not by retained use  </li>
-<li>Staffing Labs only with people core “can spare” forever</li>
-</ul>
-<h2>Closing</h2>
-<p>Incubating 0→1 beside a mature product is a leadership design problem: process, incentives, and graduation rules — not only prototype velocity. Postman Labs worked when it had a <strong>narrow charter</strong>, <strong>phased validation</strong>, and a path for WebSockets, gRPC, and similar bets to become real product surfaces without forcing the entire company to pretend it was still a startup with nothing to lose. If your core product is already loved, that is not a reason to stop exploring. It is a reason to explore <strong>on purpose</strong>.</p>
+<h2>Protect exploration without disconnecting it</h2>
+<p>Labs used a small team familiar with Postman, lighter processes for experiments, and a clear success measure for each initiative.</p>
+<p>The charter covered both new protocols and deeper workflows such as testing and automation. It gave the team permission to investigate without making every prototype a core-roadmap commitment.</p>
+<p>That permission should include stopping. Otherwise you have created a feature team whose unfinished work is unusually difficult to question.</p>
+<h2>Make each phase earn the next</h2>
+<p>The sequence was feasibility and market validation, then an MVP used internally, then a limited beta.</p>
+<p>Each phase answered a different question. Is there a problem worth solving? Can we build a usable solution? Does it remain useful to people outside the team?</p>
+<p>A prototype proves that something can be demonstrated. It does not prove demand, supportability, or a reason to graduate it.</p>
+<p>Dogfooding helped expose usability and correctness issues before public rollout. Developer-tool teams have a convenient supply of demanding users sitting nearby. It is sensible to use them.</p>
+<h2>New protocols change the workflow</h2>
+<p>WebSockets required persistent connections, bidirectional traffic, and an event history. Treating them as ordinary HTTP requests would have missed the reason developers wanted the capability.</p>
+<p>gRPC brought Protobuf contracts, binary serialization, and unary and streaming calls. Users needed to compose requests and inspect what happened without leaving the tool.</p>
+<p>Both required changes to the interaction model as well as network support. Their eventual place in Postman's broader product was the useful outcome of incubation.</p>
+<h2>Plan the graduation</h2>
+<p>A successful experiment needs owners for maintenance, reliability, documentation, and support. Core teams should be involved before that transfer becomes urgent.</p>
+<p>Reserve exploration capacity, define a success measure, and write the graduation criteria. Review retained use rather than counting launches alone.</p>
+<p>Too much process can kill an experiment early. Too little accountability can keep it alive forever. Labs needs room to discover something useful and enough discipline to recognise when it has not.</p>
     </div>
     <footer class="essay-foot">
         <nav class="essay-nav" aria-label="More writing">
@@ -363,7 +311,7 @@
         "library": "../../library/",
         "contact": "../../contact/"
     },
-    "essays": [        {"title": "How Forge Structures Requests for Prompt Cache Reuse", "url": "../../blog/how-forge-structures-requests-for-prompt-cache-reuse/", "date": "Sep 2026"},        {"title": "The line manager role is disappearing faster than you think", "url": "../../blog/line-manager-role-is-disappearing/", "date": "Jul 2026"},        {"title": "Near-real-time is a product promise, not a Kafka cluster", "url": "../../blog/near-real-time-is-a-product-promise/", "date": "Jul 2026"},        {"title": "The platform team\u2019s real job is interfaces", "url": "../../blog/platform-teams-real-job-is-interfaces/", "date": "Nov 2025"},        {"title": "When I still choose a relational database", "url": "../../blog/when-i-still-choose-a-relational-database/", "date": "Mar 2025"},        {"title": "Freshness SLOs: the metric product teams actually feel", "url": "../../blog/freshness-slos-the-metric-product-teams-feel/", "date": "Jul 2024"},        {"title": "Saying no as a platform EM without becoming the villain", "url": "../../blog/saying-no-as-a-platform-em/", "date": "Nov 2023"},        {"title": "Identity systems fail socially before they fail cryptographically", "url": "../../blog/identity-systems-fail-socially/", "date": "Mar 2023"},        {"title": "What \u201cled the web launch\u201d taught me about constraints", "url": "../../blog/web-launch-constraints/", "date": "Jul 2022"},        {"title": "Incubating 0\u21921 beside a mature product", "url": "../../blog/postman-labs-0-to-1/", "date": "Jun 2021"},        {"title": "How I review a distributed design in 45 minutes", "url": "../../blog/how-i-review-a-distributed-design/", "date": "Mar 2021"},        {"title": "Introducing on-call without burning the team", "url": "../../blog/introducing-on-call-without-burnout/", "date": "Nov 2020"},        {"title": "GTM datasets need data contracts", "url": "../../blog/gtm-datasets-need-data-contracts/", "date": "Jul 2020"},        {"title": "RDBMS vs. NOSQL?", "url": "../../blog/rdbms-vs-nosql/", "date": "Jun 2013"}    ],
+    "essays": [        {"title": "How Forge Structures Requests for Prompt Cache Reuse", "url": "../../blog/how-forge-structures-requests-for-prompt-cache-reuse/", "date": "Sep 2026"},        {"title": "What engineering managers need to own as AI changes delivery", "url": "../../blog/line-manager-role-is-disappearing/", "date": "Jul 2026"},        {"title": "Near-real-time is a product promise, not a Kafka cluster", "url": "../../blog/near-real-time-is-a-product-promise/", "date": "Jul 2026"},        {"title": "The platform team\u2019s real job is interfaces", "url": "../../blog/platform-teams-real-job-is-interfaces/", "date": "Nov 2025"},        {"title": "When I still choose a relational database", "url": "../../blog/when-i-still-choose-a-relational-database/", "date": "Mar 2025"},        {"title": "Freshness SLOs: the metric product teams actually feel", "url": "../../blog/freshness-slos-the-metric-product-teams-feel/", "date": "Jul 2024"},        {"title": "Saying no as a platform EM without becoming the villain", "url": "../../blog/saying-no-as-a-platform-em/", "date": "Nov 2023"},        {"title": "Identity systems fail socially before they fail cryptographically", "url": "../../blog/identity-systems-fail-socially/", "date": "Mar 2023"},        {"title": "What \u201cled the web launch\u201d taught me about constraints", "url": "../../blog/web-launch-constraints/", "date": "Jul 2022"},        {"title": "Incubating 0\u21921 beside a mature product", "url": "../../blog/postman-labs-0-to-1/", "date": "Jun 2021"},        {"title": "How I review a distributed design in 45 minutes", "url": "../../blog/how-i-review-a-distributed-design/", "date": "Mar 2021"},        {"title": "Introducing on-call without burning the team", "url": "../../blog/introducing-on-call-without-burnout/", "date": "Nov 2020"},        {"title": "GTM datasets need data contracts", "url": "../../blog/gtm-datasets-need-data-contracts/", "date": "Jul 2020"},        {"title": "RDBMS vs. NOSQL?", "url": "../../blog/rdbms-vs-nosql/", "date": "Jun 2013"}    ],
     "books": [        {"title": "Flow", "author": "Mih\u00e1ly Cs\u00edkszentmih\u00e1lyi", "cover": "../../images/library/117101.jpg"},        {"title": "The Little Prince", "author": "Antoine de Saint-Exup\u00e9ry", "cover": "../../images/library/157993.jpg"},        {"title": "Thinking In Systems", "author": "Donella H. Meadows", "cover": "../../images/library/3828902.jpg"},        {"title": "Sapiens", "author": "Yuval Noah Harari", "cover": "../../images/library/23692271.jpg"},        {"title": "The Martian", "author": "Andy Weir", "cover": "../../images/library/18401393.jpg"},        {"title": "Atomic Habits", "author": "James Clear", "cover": "../../images/library/40121378.jpg"},        {"title": "Ikigai", "author": "H\u00e9ctor Garc\u00eda", "cover": "../../images/library/40534545.jpg"}    ],
     "bookCount": 28,
     "assets": "../../theme/",

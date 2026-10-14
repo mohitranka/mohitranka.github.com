@@ -3,89 +3,47 @@ Date: 2024-07-11 10:00
 Category: Blog
 Slug: freshness-slos-the-metric-product-teams-feel
 Tags: data-platforms, reliability, observability
+Modified: 2026-10-14 14:30
 
-API latency SLOs changed how we run services. GTM data work taught me the sibling idea the hard way: product teams do not experience your job-success chart. They experience a dashboard that is late, wrong, or disagrees with another “official” number. At LinkedIn, BI teams on Power BI and Tableau could already pull data from Hadoop-era batch paths while the Enterprise Data Platform (EDP) was supposed to become the governed center for GTM datasets. Pipelines can be “green” while the business still feels stale or fragmented truth. That feeling is a freshness and trust problem — even when nobody is paging on consumer lag.
+A pipeline can be green while the dashboard is wrong. Or late. Or showing a different number from the other dashboard everyone also calls official.
+
+At LinkedIn, the Enterprise Data Platform (EDP) was intended to become the governed source for go-to-market data. BI teams could already get data through Hadoop-based pipelines. Moving them onto EDP meant dealing with the entire path to a usable dashboard, including the parts outside our platform.
+
+That is why I care about freshness separately from request latency.
 
 <figure class="post-figure">
   <img src="{static}/images/blog/freshness-slos-the-metric-product-teams-feel.jpg" alt="Illustration of a freshness gauge on an operations dashboard" loading="lazy" width="1200" height="675">
   <figcaption>
-    <span class="fig-caption">Product teams feel freshness as trust in the number—not as job-success charts on a platform dashboard.</span>
+    <span class="fig-caption">Measure data age where the consumer uses it.</span>
   </figcaption>
 </figure>
 
 <!--more-->
 
-## Latency is not freshness
+## A fast query can return old data
 
-A fast dashboard query can still serve an extract that is hours old. A successful batch job can still leave sales and marketing acting on last night’s world. Latency asks: how long did this request take?  
-Freshness asks: **how old is the truth this decision used?** If you only measure the serving API, you will celebrate the wrong layer.
+Latency measures how long a request takes. Freshness measures how old the data is when someone uses it.
 
-## Define freshness in the consumer’s language
+An API can respond in 100 milliseconds with yesterday's data. Its latency SLO is doing fine. The person making a decision may be doing considerably worse.
 
-For EDP-shaped work, a useful definition was: for a named GTM dataset and a named BI consumer, how old is the data at the moment someone uses it in a dashboard decision — and is it the governed path? That forces specifics:
+For a useful freshness target, name the dataset, consumer, acceptable age, and owner. For example: a sales dataset available in a particular BI workflow within an agreed interval. The interval should come from the decision being supported, rather than whichever number looks impressive on the platform dashboard.
 
-- **Dataset** — a sales or GTM entity people recognize.
-- **Consumer** — a Power BI or Tableau workflow, not “analytics.”
-- **Usable** — on the platform you claim is source of truth, not a leftover pipeline.
-- **Age** — including batch boundaries and BI-side refresh behavior, not only platform ingest time.
+Measure the whole path: source delay, ingestion, validation, dataset readiness, BI refresh, and caches. Otherwise a fast ingestion service can conceal a slow extract schedule.
 
-You can formalize that into an SLO later. First you need a sentence a BI lead and a platform EM would both underline.
+## Freshness needs correctness beside it
 
-## Promises that change behavior (not charts for their own sake)
+Making the wrong number arrive sooner is not an improvement.
 
-On the BI migration, the promises that changed behavior were not abstract percentiles on a poster. They looked like:
+During migration, two recent datasets can disagree because they come from different paths. Before tightening the time bound, establish which path is authoritative, who owns critical fields, and how consumers learn about changes.
 
-- **Continuity:** legacy Hadoop paths had deprecation dates — staying put was a risk posture, not a neutral default.
-- **Funded cutover:** EDP engineers helped migrate; adopters were not asked to donate a quarter of calendar alone.
-- **Acceptable query performance after switch** — so “governed” did not mean “slower dashboards.”
-- **Finite dual-running** — two truths were a migration window, not a lifestyle.
+Check completeness as well as age. A dataset can have a recent timestamp and still be missing the records that matter.
 
-Call those SLOs if your org has the discipline. Call them **operating promises** if you are still early. Either way, something has to hurt when the promise breaks — attention, prioritization, or the ability to keep the old path alive. I will not pretend every dataset had a polished error budget. What we had was executive visibility, migration milestones, and a definition of done that included turning legacy paths off.
+## Start with a promise you can keep
 
-## What to measure along a real path
+On the EDP migration, the practical commitments included migration support, acceptable query performance, deprecation dates, and a finite period of running both paths. Those commitments changed behaviour. A polished SLO document on its own would not have done that.
 
-For a BI consumer, time and trust hide in stages:
+I would not describe every migration milestone as an SLO. A measured reliability target and a delivery commitment are different things. Both need owners, but only the former tells you how often an ongoing service promise is being met.
 
-1. Source systems and upstream delay  
-2. Platform ingest and validation on EDP  
-3. Dataset readiness / governance checks  
-4. BI tool refresh or extract behavior  
-5. Cache and workbook-level assumptions
+Start with one important consumer journey. Agree on the bound, measure breaches, and decide what changes when you miss it. If repeated misses never affect priorities, the target is decorative.
 
-Teams often discover the villain is not the fanciest processor. It is an extract schedule, a dual pipeline, or a cutover that never finished. Instrument the path your consumers actually use.
-
-## Correctness sits beside freshness
-
-Fresh wrong data is worse than slightly stale right data. During migration, dual sources create a special failure mode: two numbers, both “recent,” different owners. Correctness signals that mattered in practice:
-
-- Is this dataset on the governed path?  
-- Are legacy feeds still quietly serving production workbooks?  
-- Do critical fields null out or drift after cutover?  
-- Can someone name the system of record when a QBR fights itself?
-
-Freshness without governance optimizes for speed of confusion.
-
-## How we introduced the promise for BI
-
-The sequence that worked was not “roll out SLO framework company-wide”:
-
-1. Pick the consumer class already on the critical path (BI for GTM).  
-2. Make adoption a leadership priority with a continuity narrative.  
-3. Staff the migration so the new path is cheaper than it looks.  
-4. Put dates on deprecation.  
-5. Fix performance issues as platform bugs, not user error.  
-6. Only then talk about tightening time bounds dataset by dataset.
-
-If you start with twenty datasets and a perfect taxonomy, you will get a wiki. If you start with one embarrassing consumer journey, you might get a habit.
-
-## The objection we actually heard
-
-**“We can already get the data.”**  
-Yes. That is why platform-only arguments fail. Answer with end-of-life for the old path, labor for the new one, and proof that cutover does not degrade the dashboard.
-
-**“Batch is fine.”**  
-Sometimes it is. Then write a batch promise (“available by time T for the weekly motion”) and still own correctness and deprecation. Batch without a promise is how shadow pipelines live forever.
-
-## Closing
-
-Product teams feel freshness as trust in the number. Platforms earn that trust when named consumers run on a governed path, old paths can die, and someone is accountable when the age of truth is wrong. Whether you brand it SLO or operating promise matters less than whether the company can point to **dataset + consumer + bound + owner** — and whether missing it changes next week’s work.
+Product teams experience the number they can use. Measure that, even when the slowest part belongs to someone else.

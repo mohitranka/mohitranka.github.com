@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Freshness SLOs: the metric product teams actually feel — Mohit Ranka</title>
-    <meta name="description" content="API latency SLOs changed how we run services. GTM data work taught me the sibling idea the hard way: product teams do not experience your job-success chart....">
+    <meta name="description" content="A pipeline can be green while the dashboard is wrong. Or late. Or showing a different number from the other dashboard everyone also calls official. At...">
     <meta name="author" content="Mohit Ranka">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://www.mohitranka.com/blog/freshness-slos-the-metric-product-teams-feel/">
@@ -18,14 +18,14 @@
     <meta property="og:locale" content="en_US">
     <meta property="og:url" content="https://www.mohitranka.com/blog/freshness-slos-the-metric-product-teams-feel/">
     <meta property="og:title" content="Freshness SLOs: the metric product teams actually feel">
-    <meta property="og:description" content="API latency SLOs changed how we run services. GTM data work taught me the sibling idea the hard way: product teams do not experience your job-success chart....">
+    <meta property="og:description" content="A pipeline can be green while the dashboard is wrong. Or late. Or showing a different number from the other dashboard everyone also calls official. At...">
     <meta property="og:image" content="https://www.mohitranka.com/images/blog/freshness-slos-the-metric-product-teams-feel.jpg">
     <meta property="og:image:alt" content="Freshness SLOs: the metric product teams actually feel">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Freshness SLOs: the metric product teams actually feel">
-    <meta name="twitter:description" content="API latency SLOs changed how we run services. GTM data work taught me the sibling idea the hard way: product teams do not experience your job-success chart....">
+    <meta name="twitter:description" content="A pipeline can be green while the dashboard is wrong. Or late. Or showing a different number from the other dashboard everyone also calls official. At...">
     <meta name="twitter:image" content="https://www.mohitranka.com/images/blog/freshness-slos-the-metric-product-teams-feel.jpg">
     <meta name="twitter:image:alt" content="Freshness SLOs: the metric product teams actually feel">
     <script>
@@ -78,7 +78,7 @@
             "@type": "BlogPosting",
             "@id": "https://www.mohitranka.com/blog/freshness-slos-the-metric-product-teams-feel/#article",
             "headline": "Freshness SLOs: the metric product teams actually feel",
-            "description": "API latency SLOs changed how we run services. GTM data work taught me the sibling idea the hard way: product teams do not experience your job-success chart....",
+            "description": "A pipeline can be green while the dashboard is wrong. Or late. Or showing a different number from the other dashboard everyone also calls official. At...",
             "url": "https://www.mohitranka.com/blog/freshness-slos-the-metric-product-teams-feel/",
             "image": "https://www.mohitranka.com/images/blog/freshness-slos-the-metric-product-teams-feel.jpg",
             "mainEntityOfPage": {
@@ -86,7 +86,7 @@
                 "@id": "https://www.mohitranka.com/blog/freshness-slos-the-metric-product-teams-feel/"
             },
             "datePublished": "2024-07-11T10:00:00+05:30",
-            "dateModified": "2024-07-11T10:00:00+05:30",
+            "dateModified": "2026-10-14T14:30:00+05:30",
             "author": {
                 "@type": "Person",
                 "@id": "https://www.mohitranka.com/#person",
@@ -171,7 +171,7 @@
     <main id="site" class="site-main" tabindex="-1">
 <article class="essay">
     <aside class="essay-aside">
-        <p class="essay-kind">Essay · 4 min</p>
+        <p class="essay-kind">Essay · 2 min</p>
         <p class="essay-date"><time datetime="2024-07-11T10:00:00+05:30">11 July 2024</time></p>
         <nav class="essay-outline" aria-label="In this essay" data-outline hidden></nav>
     </aside>
@@ -180,74 +180,32 @@
         <p class="essay-filed">Filed under <a href="../../tags/data-platforms/">data platforms</a>, <a href="../../tags/reliability/">reliability</a> and <a href="../../tags/observability/">observability</a></p>
     </header>
     <div class="entry-content essay-body">
-        <p>API latency SLOs changed how we run services. GTM data work taught me the sibling idea the hard way: product teams do not experience your job-success chart. They experience a dashboard that is late, wrong, or disagrees with another “official” number. At LinkedIn, BI teams on Power BI and Tableau could already pull data from Hadoop-era batch paths while the Enterprise Data Platform (EDP) was supposed to become the governed center for GTM datasets. Pipelines can be “green” while the business still feels stale or fragmented truth. That feeling is a freshness and trust problem — even when nobody is paging on consumer lag.</p>
+        <p>A pipeline can be green while the dashboard is wrong. Or late. Or showing a different number from the other dashboard everyone also calls official.</p>
+<p>At LinkedIn, the Enterprise Data Platform (EDP) was intended to become the governed source for go-to-market data. BI teams could already get data through Hadoop-based pipelines. Moving them onto EDP meant dealing with the entire path to a usable dashboard, including the parts outside our platform.</p>
+<p>That is why I care about freshness separately from request latency.</p>
 <figure class="post-figure">
   <img src="../../images/blog/freshness-slos-the-metric-product-teams-feel.jpg" alt="Illustration of a freshness gauge on an operations dashboard" loading="lazy" width="1200" height="675">
   <figcaption>
-    <span class="fig-caption">Product teams feel freshness as trust in the number—not as job-success charts on a platform dashboard.</span>
+    <span class="fig-caption">Measure data age where the consumer uses it.</span>
   </figcaption>
 </figure>
 
 <!--more-->
 
-<h2>Latency is not freshness</h2>
-<p>A fast dashboard query can still serve an extract that is hours old. A successful batch job can still leave sales and marketing acting on last night’s world. Latency asks: how long did this request take?<br>
-Freshness asks: <strong>how old is the truth this decision used?</strong> If you only measure the serving API, you will celebrate the wrong layer.</p>
-<h2>Define freshness in the consumer’s language</h2>
-<p>For EDP-shaped work, a useful definition was: for a named GTM dataset and a named BI consumer, how old is the data at the moment someone uses it in a dashboard decision — and is it the governed path? That forces specifics:</p>
-<ul>
-<li><strong>Dataset</strong> — a sales or GTM entity people recognize.</li>
-<li><strong>Consumer</strong> — a Power BI or Tableau workflow, not “analytics.”</li>
-<li><strong>Usable</strong> — on the platform you claim is source of truth, not a leftover pipeline.</li>
-<li><strong>Age</strong> — including batch boundaries and BI-side refresh behavior, not only platform ingest time.</li>
-</ul>
-<p>You can formalize that into an SLO later. First you need a sentence a BI lead and a platform EM would both underline.</p>
-<h2>Promises that change behavior (not charts for their own sake)</h2>
-<p>On the BI migration, the promises that changed behavior were not abstract percentiles on a poster. They looked like:</p>
-<ul>
-<li><strong>Continuity:</strong> legacy Hadoop paths had deprecation dates — staying put was a risk posture, not a neutral default.</li>
-<li><strong>Funded cutover:</strong> EDP engineers helped migrate; adopters were not asked to donate a quarter of calendar alone.</li>
-<li><strong>Acceptable query performance after switch</strong> — so “governed” did not mean “slower dashboards.”</li>
-<li><strong>Finite dual-running</strong> — two truths were a migration window, not a lifestyle.</li>
-</ul>
-<p>Call those SLOs if your org has the discipline. Call them <strong>operating promises</strong> if you are still early. Either way, something has to hurt when the promise breaks — attention, prioritization, or the ability to keep the old path alive. I will not pretend every dataset had a polished error budget. What we had was executive visibility, migration milestones, and a definition of done that included turning legacy paths off.</p>
-<h2>What to measure along a real path</h2>
-<p>For a BI consumer, time and trust hide in stages:</p>
-<ol>
-<li>Source systems and upstream delay  </li>
-<li>Platform ingest and validation on EDP  </li>
-<li>Dataset readiness / governance checks  </li>
-<li>BI tool refresh or extract behavior  </li>
-<li>Cache and workbook-level assumptions</li>
-</ol>
-<p>Teams often discover the villain is not the fanciest processor. It is an extract schedule, a dual pipeline, or a cutover that never finished. Instrument the path your consumers actually use.</p>
-<h2>Correctness sits beside freshness</h2>
-<p>Fresh wrong data is worse than slightly stale right data. During migration, dual sources create a special failure mode: two numbers, both “recent,” different owners. Correctness signals that mattered in practice:</p>
-<ul>
-<li>Is this dataset on the governed path?  </li>
-<li>Are legacy feeds still quietly serving production workbooks?  </li>
-<li>Do critical fields null out or drift after cutover?  </li>
-<li>Can someone name the system of record when a QBR fights itself?</li>
-</ul>
-<p>Freshness without governance optimizes for speed of confusion.</p>
-<h2>How we introduced the promise for BI</h2>
-<p>The sequence that worked was not “roll out SLO framework company-wide”:</p>
-<ol>
-<li>Pick the consumer class already on the critical path (BI for GTM).  </li>
-<li>Make adoption a leadership priority with a continuity narrative.  </li>
-<li>Staff the migration so the new path is cheaper than it looks.  </li>
-<li>Put dates on deprecation.  </li>
-<li>Fix performance issues as platform bugs, not user error.  </li>
-<li>Only then talk about tightening time bounds dataset by dataset.</li>
-</ol>
-<p>If you start with twenty datasets and a perfect taxonomy, you will get a wiki. If you start with one embarrassing consumer journey, you might get a habit.</p>
-<h2>The objection we actually heard</h2>
-<p><strong>“We can already get the data.”</strong><br>
-Yes. That is why platform-only arguments fail. Answer with end-of-life for the old path, labor for the new one, and proof that cutover does not degrade the dashboard.</p>
-<p><strong>“Batch is fine.”</strong><br>
-Sometimes it is. Then write a batch promise (“available by time T for the weekly motion”) and still own correctness and deprecation. Batch without a promise is how shadow pipelines live forever.</p>
-<h2>Closing</h2>
-<p>Product teams feel freshness as trust in the number. Platforms earn that trust when named consumers run on a governed path, old paths can die, and someone is accountable when the age of truth is wrong. Whether you brand it SLO or operating promise matters less than whether the company can point to <strong>dataset + consumer + bound + owner</strong> — and whether missing it changes next week’s work.</p>
+<h2>A fast query can return old data</h2>
+<p>Latency measures how long a request takes. Freshness measures how old the data is when someone uses it.</p>
+<p>An API can respond in 100 milliseconds with yesterday's data. Its latency SLO is doing fine. The person making a decision may be doing considerably worse.</p>
+<p>For a useful freshness target, name the dataset, consumer, acceptable age, and owner. For example: a sales dataset available in a particular BI workflow within an agreed interval. The interval should come from the decision being supported, rather than whichever number looks impressive on the platform dashboard.</p>
+<p>Measure the whole path: source delay, ingestion, validation, dataset readiness, BI refresh, and caches. Otherwise a fast ingestion service can conceal a slow extract schedule.</p>
+<h2>Freshness needs correctness beside it</h2>
+<p>Making the wrong number arrive sooner is not an improvement.</p>
+<p>During migration, two recent datasets can disagree because they come from different paths. Before tightening the time bound, establish which path is authoritative, who owns critical fields, and how consumers learn about changes.</p>
+<p>Check completeness as well as age. A dataset can have a recent timestamp and still be missing the records that matter.</p>
+<h2>Start with a promise you can keep</h2>
+<p>On the EDP migration, the practical commitments included migration support, acceptable query performance, deprecation dates, and a finite period of running both paths. Those commitments changed behaviour. A polished SLO document on its own would not have done that.</p>
+<p>I would not describe every migration milestone as an SLO. A measured reliability target and a delivery commitment are different things. Both need owners, but only the former tells you how often an ongoing service promise is being met.</p>
+<p>Start with one important consumer journey. Agree on the bound, measure breaches, and decide what changes when you miss it. If repeated misses never affect priorities, the target is decorative.</p>
+<p>Product teams experience the number they can use. Measure that, even when the slowest part belongs to someone else.</p>
     </div>
     <footer class="essay-foot">
         <nav class="essay-nav" aria-label="More writing">
@@ -350,7 +308,7 @@ Sometimes it is. Then write a batch promise (“available by time T for the week
         "library": "../../library/",
         "contact": "../../contact/"
     },
-    "essays": [        {"title": "How Forge Structures Requests for Prompt Cache Reuse", "url": "../../blog/how-forge-structures-requests-for-prompt-cache-reuse/", "date": "Sep 2026"},        {"title": "The line manager role is disappearing faster than you think", "url": "../../blog/line-manager-role-is-disappearing/", "date": "Jul 2026"},        {"title": "Near-real-time is a product promise, not a Kafka cluster", "url": "../../blog/near-real-time-is-a-product-promise/", "date": "Jul 2026"},        {"title": "The platform team\u2019s real job is interfaces", "url": "../../blog/platform-teams-real-job-is-interfaces/", "date": "Nov 2025"},        {"title": "When I still choose a relational database", "url": "../../blog/when-i-still-choose-a-relational-database/", "date": "Mar 2025"},        {"title": "Freshness SLOs: the metric product teams actually feel", "url": "../../blog/freshness-slos-the-metric-product-teams-feel/", "date": "Jul 2024"},        {"title": "Saying no as a platform EM without becoming the villain", "url": "../../blog/saying-no-as-a-platform-em/", "date": "Nov 2023"},        {"title": "Identity systems fail socially before they fail cryptographically", "url": "../../blog/identity-systems-fail-socially/", "date": "Mar 2023"},        {"title": "What \u201cled the web launch\u201d taught me about constraints", "url": "../../blog/web-launch-constraints/", "date": "Jul 2022"},        {"title": "Incubating 0\u21921 beside a mature product", "url": "../../blog/postman-labs-0-to-1/", "date": "Jun 2021"},        {"title": "How I review a distributed design in 45 minutes", "url": "../../blog/how-i-review-a-distributed-design/", "date": "Mar 2021"},        {"title": "Introducing on-call without burning the team", "url": "../../blog/introducing-on-call-without-burnout/", "date": "Nov 2020"},        {"title": "GTM datasets need data contracts", "url": "../../blog/gtm-datasets-need-data-contracts/", "date": "Jul 2020"},        {"title": "RDBMS vs. NOSQL?", "url": "../../blog/rdbms-vs-nosql/", "date": "Jun 2013"}    ],
+    "essays": [        {"title": "How Forge Structures Requests for Prompt Cache Reuse", "url": "../../blog/how-forge-structures-requests-for-prompt-cache-reuse/", "date": "Sep 2026"},        {"title": "What engineering managers need to own as AI changes delivery", "url": "../../blog/line-manager-role-is-disappearing/", "date": "Jul 2026"},        {"title": "Near-real-time is a product promise, not a Kafka cluster", "url": "../../blog/near-real-time-is-a-product-promise/", "date": "Jul 2026"},        {"title": "The platform team\u2019s real job is interfaces", "url": "../../blog/platform-teams-real-job-is-interfaces/", "date": "Nov 2025"},        {"title": "When I still choose a relational database", "url": "../../blog/when-i-still-choose-a-relational-database/", "date": "Mar 2025"},        {"title": "Freshness SLOs: the metric product teams actually feel", "url": "../../blog/freshness-slos-the-metric-product-teams-feel/", "date": "Jul 2024"},        {"title": "Saying no as a platform EM without becoming the villain", "url": "../../blog/saying-no-as-a-platform-em/", "date": "Nov 2023"},        {"title": "Identity systems fail socially before they fail cryptographically", "url": "../../blog/identity-systems-fail-socially/", "date": "Mar 2023"},        {"title": "What \u201cled the web launch\u201d taught me about constraints", "url": "../../blog/web-launch-constraints/", "date": "Jul 2022"},        {"title": "Incubating 0\u21921 beside a mature product", "url": "../../blog/postman-labs-0-to-1/", "date": "Jun 2021"},        {"title": "How I review a distributed design in 45 minutes", "url": "../../blog/how-i-review-a-distributed-design/", "date": "Mar 2021"},        {"title": "Introducing on-call without burning the team", "url": "../../blog/introducing-on-call-without-burnout/", "date": "Nov 2020"},        {"title": "GTM datasets need data contracts", "url": "../../blog/gtm-datasets-need-data-contracts/", "date": "Jul 2020"},        {"title": "RDBMS vs. NOSQL?", "url": "../../blog/rdbms-vs-nosql/", "date": "Jun 2013"}    ],
     "books": [        {"title": "Flow", "author": "Mih\u00e1ly Cs\u00edkszentmih\u00e1lyi", "cover": "../../images/library/117101.jpg"},        {"title": "The Little Prince", "author": "Antoine de Saint-Exup\u00e9ry", "cover": "../../images/library/157993.jpg"},        {"title": "Thinking In Systems", "author": "Donella H. Meadows", "cover": "../../images/library/3828902.jpg"},        {"title": "Sapiens", "author": "Yuval Noah Harari", "cover": "../../images/library/23692271.jpg"},        {"title": "The Martian", "author": "Andy Weir", "cover": "../../images/library/18401393.jpg"},        {"title": "Atomic Habits", "author": "James Clear", "cover": "../../images/library/40121378.jpg"},        {"title": "Ikigai", "author": "H\u00e9ctor Garc\u00eda", "cover": "../../images/library/40534545.jpg"}    ],
     "bookCount": 28,
     "assets": "../../theme/",

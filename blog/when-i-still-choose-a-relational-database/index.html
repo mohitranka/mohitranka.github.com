@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>When I still choose a relational database — Mohit Ranka</title>
-    <meta name="description" content="In 2013 I wrote RDBMS vs. NOSQL? as a pushback against fashion. The fashion changed costumes — document stores, wide-column, NewSQL, "Postgres is fine,"...">
+    <meta name="description" content="In 2013, I wrote RDBMS vs. NOSQL? because database advice was getting ahead of database requirements. I still start with a relational database for many...">
     <meta name="author" content="Mohit Ranka">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://www.mohitranka.com/blog/when-i-still-choose-a-relational-database/">
@@ -18,14 +18,14 @@
     <meta property="og:locale" content="en_US">
     <meta property="og:url" content="https://www.mohitranka.com/blog/when-i-still-choose-a-relational-database/">
     <meta property="og:title" content="When I still choose a relational database">
-    <meta property="og:description" content="In 2013 I wrote RDBMS vs. NOSQL? as a pushback against fashion. The fashion changed costumes — document stores, wide-column, NewSQL, "Postgres is fine,"...">
+    <meta property="og:description" content="In 2013, I wrote RDBMS vs. NOSQL? because database advice was getting ahead of database requirements. I still start with a relational database for many...">
     <meta property="og:image" content="https://www.mohitranka.com/images/blog/when-i-still-choose-a-relational-database.jpg">
     <meta property="og:image:alt" content="When I still choose a relational database">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="When I still choose a relational database">
-    <meta name="twitter:description" content="In 2013 I wrote RDBMS vs. NOSQL? as a pushback against fashion. The fashion changed costumes — document stores, wide-column, NewSQL, "Postgres is fine,"...">
+    <meta name="twitter:description" content="In 2013, I wrote RDBMS vs. NOSQL? because database advice was getting ahead of database requirements. I still start with a relational database for many...">
     <meta name="twitter:image" content="https://www.mohitranka.com/images/blog/when-i-still-choose-a-relational-database.jpg">
     <meta name="twitter:image:alt" content="When I still choose a relational database">
     <script>
@@ -78,7 +78,7 @@
             "@type": "BlogPosting",
             "@id": "https://www.mohitranka.com/blog/when-i-still-choose-a-relational-database/#article",
             "headline": "When I still choose a relational database",
-            "description": "In 2013 I wrote RDBMS vs. NOSQL? as a pushback against fashion. The fashion changed costumes \u2014 document stores, wide-column, NewSQL, \"Postgres is fine,\"...",
+            "description": "In 2013, I wrote RDBMS vs. NOSQL? because database advice was getting ahead of database requirements. I still start with a relational database for many...",
             "url": "https://www.mohitranka.com/blog/when-i-still-choose-a-relational-database/",
             "image": "https://www.mohitranka.com/images/blog/when-i-still-choose-a-relational-database.jpg",
             "mainEntityOfPage": {
@@ -86,7 +86,7 @@
                 "@id": "https://www.mohitranka.com/blog/when-i-still-choose-a-relational-database/"
             },
             "datePublished": "2025-03-13T10:00:00+05:30",
-            "dateModified": "2025-03-13T10:00:00+05:30",
+            "dateModified": "2026-10-14T14:30:00+05:30",
             "author": {
                 "@type": "Person",
                 "@id": "https://www.mohitranka.com/#person",
@@ -171,7 +171,7 @@
     <main id="site" class="site-main" tabindex="-1">
 <article class="essay">
     <aside class="essay-aside">
-        <p class="essay-kind">Essay · 5 min</p>
+        <p class="essay-kind">Essay · 3 min</p>
         <p class="essay-date"><time datetime="2025-03-13T10:00:00+05:30">13 March 2025</time></p>
         <nav class="essay-outline" aria-label="In this essay" data-outline hidden></nav>
     </aside>
@@ -180,86 +180,43 @@
         <p class="essay-filed">Filed under <a href="../../tags/data-platforms/">data platforms</a>, <a href="../../tags/databases/">databases</a> and <a href="../../tags/architecture/">architecture</a></p>
     </header>
     <div class="entry-content essay-body">
-        <p>In 2013 I wrote <a href="../../blog/rdbms-vs-nosql/">RDBMS vs. NOSQL?</a> as a pushback against fashion. The fashion changed costumes — document stores, wide-column, NewSQL, "Postgres is fine," "everything in the lakehouse" — but the underlying mistake did not: <strong>picking a datastore from a blog post instead of from access patterns and failure modes.</strong></p>
+        <p>In 2013, I wrote <a href="../../blog/rdbms-vs-nosql/">RDBMS vs. NOSQL?</a> because database advice was getting ahead of database requirements.</p>
+<p>I still start with a relational database for many product backends. Users, accounts, permissions, orders, and configuration usually have relationships and invariants that fit the model well.</p>
+<p>That is a default, not a loyalty programme. A different workload can justify a different store.</p>
 <figure class="post-figure">
   <img src="../../images/blog/when-i-still-choose-a-relational-database.jpg" alt="Illustration of an ordered data table foundation beside scattered documents" loading="lazy" width="1200" height="675">
   <figcaption>
-    <span class="fig-caption">A relational spine is often the boring default until access patterns and failure modes force a different shape.</span>
+    <span class="fig-caption">Keep the source of truth clear when adding specialised stores.</span>
   </figcaption>
 </figure>
 
 <!--more-->
 
-<p>This is the sequel I would write to myself: when I still choose a relational database in 2026, and when I do not.</p>
-<h2>The default remains boring on purpose</h2>
-<p>My default for a new product backend is still a managed relational database (usually PostgreSQL) with:</p>
-<ul>
-<li>Clear schema ownership</li>
-<li>Migrations as code</li>
-<li>Backups and point-in-time recovery you have actually restored</li>
-<li>Connection pooling and boring observability</li>
-<li>A plan for read scale that is not "wishful replicas"</li>
-</ul>
-<p>Why? Because most products are <strong>transactional workflows with relationships</strong>: users, accounts, permissions, orders, configurations, audit trails. Relational databases are extraordinarily good at that shape. They also match how humans reason about correctness. If your primary problems are multi-row invariants, ad hoc query flexibility, and operational maturity, starting elsewhere is often self-inflicted difficulty.</p>
-<h2>When relational is the right call</h2>
-<p>I lean relational when several of these are true:</p>
-<p><strong>1. Strong invariants matter more than infinite write scale.</strong><br>
-Money, entitlements, identity bindings, "exactly one active X per Y." If the business invariant is relational, fighting the model is expensive.</p>
-<p><strong>2. Query patterns are still evolving.</strong><br>
-Early products change questions weekly. A well-modeled schema with indexes beats a write-optimized store that makes new questions painful.</p>
-<p><strong>3. The team’s operational muscle is SQL-shaped.</strong><br>
-A perfect paper architecture with zero operators is worse than a known system with runbooks. Skills are part of architecture.</p>
-<p><strong>4. Multi-entity transactions simplify the product.</strong><br>
-Saga forests can be correct. They are also a tax. If a single-node or lightly clustered RDBMS can hold the transactional core, keep the core small and sharp.</p>
-<p><strong>5. You need ecosystem gravity.</strong><br>
-ORMs, migration tools, BI access, hiring, incident folklore — relational ecosystems are deep. That is not marketing; it is time-to-recovery.</p>
-<h2>When relational becomes the wrong center</h2>
-<p>I move work <em>out</em> of the primary OLTP database when:</p>
-<p><strong>1. Write throughput or state size exceeds honest vertical + read-replica plans.</strong><br>
-Not vanity metrics — measured saturation, vacuum pain, replica lag that product feels, backup windows that scare you.</p>
-<p><strong>2. Access patterns are append-heavy and query-narrow.</strong><br>
-Event logs, high-volume telemetry, massive multi-tenant time series. Different stores exist for reasons.</p>
-<p><strong>3. Fan-out reads need specialized shapes.</strong><br>
-Search, graph traversal at scale, feature stores, geospatial at high QPS — often better as <strong>derived systems</strong> fed from a transactional core.</p>
-<p><strong>4. Availability topology requirements outgrow your relational operator model.</strong><br>
-Some multi-region active-active stories are possible with modern relational systems; many are still research projects wearing production clothes. Be honest about the topology you can run.</p>
-<p><strong>5. Schema flexibility is real, not aesthetic.</strong><br>
-Truly heterogeneous documents with little shared query structure can be a poor fit. "We might need flexibility later" is not a requirement.</p>
-<h2>The architecture that aged best for me</h2>
-<p>The pattern I trust:</p>
+<h2>Start with the things that must stay correct</h2>
+<p>If the product needs several records to change together, transactions can make correctness much easier to reason about. Moving that responsibility into application code is a choice with an ongoing cost.</p>
+<p>I also value the ability to evolve queries. Early products change their questions. A relational schema with appropriate indexes often accommodates that more easily than a store built around a narrow access pattern.</p>
+<p>Operational familiarity matters. A team that knows how to diagnose, restore, and run a database has an advantage over a team operating its theoretically ideal store for the first time.</p>
+<p>None of this excuses ignoring load. Measure the workload and test the recovery path.</p>
+<h2>Move specialised work out when it earns its place</h2>
+<p>The primary database does not need to answer every question.</p>
+<p>Search, analytics, high-volume telemetry, and some graph or time-series workloads may benefit from separate systems. Treat those as deliberate read models or specialist stores, with a clear source of truth and a way to rebuild them.</p>
+<p>Before moving the transactional core, I want evidence of the limit: write saturation, state size, contention, unacceptable recovery time, or a topology requirement the current system cannot meet.</p>
+<p>Read replicas help read capacity. They do not remove every write or consistency constraint. A bigger machine is also a plan with a limit, not an insult to distributed systems.</p>
+<h2>The seams become your responsibility</h2>
+<p>Once data moves between stores, you need change propagation, replay, failure handling, and a definition of acceptable lag.</p>
+<p>Avoid casual dual writes. If one write succeeds and the other fails, somebody must know how to detect and repair the difference. Derived systems simplify the primary workload only if their recovery is designed.</p>
+<p>The same reasoning applies to service boundaries. Keep capabilities together where shared invariants dominate. Split them where independent operation or deployment pays for the additional coordination.</p>
+<h2>Ask before adding a primary store</h2>
 <ol>
-<li><strong>Transactional system of record</strong> in relational (or something with equal invariant strength).</li>
-<li><strong>Explicit integration events</strong> when other systems must react — versioned, owned, documented.</li>
-<li><strong>Derived read models</strong> for specialized query paths.</li>
-<li><strong>Analytical systems</strong> for heavy aggregation — do not abuse OLTP as a warehouse.</li>
-<li><strong>Clear rules for dual writes</strong> — preferably avoid them; if not, make correctness visible.</li>
+<li>Which queries and invariants does the product need?</li>
+<li>What data volume and throughput do we expect, with headroom?</li>
+<li>Where will multi-record correctness be enforced?</li>
+<li>How will access patterns and schemas change?</li>
+<li>Who will operate it and restore it after failure?</li>
+<li>Which measured requirement rules out the simpler option?</li>
 </ol>
-<p>The relational database is not the universe. It is often the <strong>spine</strong>.</p>
-<h2>A related lesson from platform service boundaries</h2>
-<p>Not every “monolith vs microservices” fight is a datastore fight — but the same judgment applies. On an EDP self-serve portal, we had a month-long freeze over whether new UI workflows had to live entirely in a monolithic backend or split early for independent iteration. The useful answer was hybrid: keep <strong>core platform capabilities</strong> where integration and invariants dominate; split <strong>fast-changing workflows</strong> where deploy independence pays for the seam cost; put <strong>metadata</strong> in a system designed for lifecycle, not in accidental dual writes. That is the same muscle as choosing a relational spine: <strong>optimize for ownership and correctness at the center, derive or split at the edges, refuse fashion-driven rewrites that stop delivery.</strong></p>
-<h2>What changed since 2013</h2>
-<p>A few updates to my older self:</p>
-<ul>
-<li><strong>Managed Postgres (and peers) are much better.</strong> Failover, backups, and scaling knobs improved. That raises the bar for "we need NoSQL to be reliable."</li>
-<li><strong>JSON columns done carefully</strong> cover many former document-store arguments — without abandoning transactions.</li>
-<li><strong>CDC became mainstream.</strong> Turning relational truth into streams is a product pattern, not a science fair.</li>
-<li><strong>Distributed SQL exists</strong> and can be right — but it is still a specialist choice with specialist costs.</li>
-<li><strong>Lakehouses ate a chunk of analytics</strong>, which is good: stop pretending your OLTP DB is a lake.</li>
-</ul>
-<p>What did <em>not</em> change: <strong>NoSQL is not a personality.</strong> It is a set of tradeoffs around consistency, query power, operational complexity, and scale.</p>
-<h2>Decision checklist I actually use</h2>
-<p>Before approving a non-relational primary store:</p>
-<ol>
-<li>Which queries and invariants are first-class in v1?</li>
-<li>What is the 12-month data size and QPS with ugly margins?</li>
-<li>What does multi-row correctness look like, and who enforces it?</li>
-<li>How do we migrate schema or access patterns six months in?</li>
-<li>Who is on-call, and what have they operated before?</li>
-<li>Can we explain the choice in one paragraph without vendor slogans?</li>
-</ol>
-<p>If step 6 requires a conference talk, the choice may still be right — but it needs more proof.</p>
-<h2>Closing</h2>
-<p>I still choose a relational database when I want <strong>correctness, evolvable queries, and operational boredom</strong> around the core of a product. I choose other systems when the access pattern or scale curve makes that boredom impossible. The winning move is rarely "pick a side." It is <strong>keep a sharp system of record, derive aggressively, and refuse to let fashion rename your requirements.</strong> If you want the older, more argumentative version of this stance, it is still here: <a href="../../blog/rdbms-vs-nosql/">RDBMS vs. NOSQL?</a>. The industry moved. The need for judgment did not.</p>
+<p>NoSQL covers many different systems and trade-offs. It is not a single alternative to SQL, much less a sign that the architecture has become serious.</p>
+<p>Use the system that fits the work. Prefer the one your team can explain and recover.</p>
     </div>
     <footer class="essay-foot">
         <nav class="essay-nav" aria-label="More writing">
@@ -362,7 +319,7 @@ Truly heterogeneous documents with little shared query structure can be a poor f
         "library": "../../library/",
         "contact": "../../contact/"
     },
-    "essays": [        {"title": "How Forge Structures Requests for Prompt Cache Reuse", "url": "../../blog/how-forge-structures-requests-for-prompt-cache-reuse/", "date": "Sep 2026"},        {"title": "The line manager role is disappearing faster than you think", "url": "../../blog/line-manager-role-is-disappearing/", "date": "Jul 2026"},        {"title": "Near-real-time is a product promise, not a Kafka cluster", "url": "../../blog/near-real-time-is-a-product-promise/", "date": "Jul 2026"},        {"title": "The platform team\u2019s real job is interfaces", "url": "../../blog/platform-teams-real-job-is-interfaces/", "date": "Nov 2025"},        {"title": "When I still choose a relational database", "url": "../../blog/when-i-still-choose-a-relational-database/", "date": "Mar 2025"},        {"title": "Freshness SLOs: the metric product teams actually feel", "url": "../../blog/freshness-slos-the-metric-product-teams-feel/", "date": "Jul 2024"},        {"title": "Saying no as a platform EM without becoming the villain", "url": "../../blog/saying-no-as-a-platform-em/", "date": "Nov 2023"},        {"title": "Identity systems fail socially before they fail cryptographically", "url": "../../blog/identity-systems-fail-socially/", "date": "Mar 2023"},        {"title": "What \u201cled the web launch\u201d taught me about constraints", "url": "../../blog/web-launch-constraints/", "date": "Jul 2022"},        {"title": "Incubating 0\u21921 beside a mature product", "url": "../../blog/postman-labs-0-to-1/", "date": "Jun 2021"},        {"title": "How I review a distributed design in 45 minutes", "url": "../../blog/how-i-review-a-distributed-design/", "date": "Mar 2021"},        {"title": "Introducing on-call without burning the team", "url": "../../blog/introducing-on-call-without-burnout/", "date": "Nov 2020"},        {"title": "GTM datasets need data contracts", "url": "../../blog/gtm-datasets-need-data-contracts/", "date": "Jul 2020"},        {"title": "RDBMS vs. NOSQL?", "url": "../../blog/rdbms-vs-nosql/", "date": "Jun 2013"}    ],
+    "essays": [        {"title": "How Forge Structures Requests for Prompt Cache Reuse", "url": "../../blog/how-forge-structures-requests-for-prompt-cache-reuse/", "date": "Sep 2026"},        {"title": "What engineering managers need to own as AI changes delivery", "url": "../../blog/line-manager-role-is-disappearing/", "date": "Jul 2026"},        {"title": "Near-real-time is a product promise, not a Kafka cluster", "url": "../../blog/near-real-time-is-a-product-promise/", "date": "Jul 2026"},        {"title": "The platform team\u2019s real job is interfaces", "url": "../../blog/platform-teams-real-job-is-interfaces/", "date": "Nov 2025"},        {"title": "When I still choose a relational database", "url": "../../blog/when-i-still-choose-a-relational-database/", "date": "Mar 2025"},        {"title": "Freshness SLOs: the metric product teams actually feel", "url": "../../blog/freshness-slos-the-metric-product-teams-feel/", "date": "Jul 2024"},        {"title": "Saying no as a platform EM without becoming the villain", "url": "../../blog/saying-no-as-a-platform-em/", "date": "Nov 2023"},        {"title": "Identity systems fail socially before they fail cryptographically", "url": "../../blog/identity-systems-fail-socially/", "date": "Mar 2023"},        {"title": "What \u201cled the web launch\u201d taught me about constraints", "url": "../../blog/web-launch-constraints/", "date": "Jul 2022"},        {"title": "Incubating 0\u21921 beside a mature product", "url": "../../blog/postman-labs-0-to-1/", "date": "Jun 2021"},        {"title": "How I review a distributed design in 45 minutes", "url": "../../blog/how-i-review-a-distributed-design/", "date": "Mar 2021"},        {"title": "Introducing on-call without burning the team", "url": "../../blog/introducing-on-call-without-burnout/", "date": "Nov 2020"},        {"title": "GTM datasets need data contracts", "url": "../../blog/gtm-datasets-need-data-contracts/", "date": "Jul 2020"},        {"title": "RDBMS vs. NOSQL?", "url": "../../blog/rdbms-vs-nosql/", "date": "Jun 2013"}    ],
     "books": [        {"title": "Flow", "author": "Mih\u00e1ly Cs\u00edkszentmih\u00e1lyi", "cover": "../../images/library/117101.jpg"},        {"title": "The Little Prince", "author": "Antoine de Saint-Exup\u00e9ry", "cover": "../../images/library/157993.jpg"},        {"title": "Thinking In Systems", "author": "Donella H. Meadows", "cover": "../../images/library/3828902.jpg"},        {"title": "Sapiens", "author": "Yuval Noah Harari", "cover": "../../images/library/23692271.jpg"},        {"title": "The Martian", "author": "Andy Weir", "cover": "../../images/library/18401393.jpg"},        {"title": "Atomic Habits", "author": "James Clear", "cover": "../../images/library/40121378.jpg"},        {"title": "Ikigai", "author": "H\u00e9ctor Garc\u00eda", "cover": "../../images/library/40534545.jpg"}    ],
     "bookCount": 28,
     "assets": "../../theme/",

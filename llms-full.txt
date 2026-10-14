@@ -83,7 +83,7 @@ Use the contact form at https://www.mohitranka.com/contact/. LinkedIn: https://w
 ## Writing archive
 
 - How Forge Structures Requests for Prompt Cache Reuse (2026-09-24) [Tags: developer-tooling, architecture, reliability]
-- The line manager role is disappearing faster than you think (2026-07-21) [Tags: engineering-leadership, management, product]
+- What engineering managers need to own as AI changes delivery (2026-07-21) [Tags: engineering-leadership, management, product]
 - Near-real-time is a product promise, not a Kafka cluster (2026-07-16) [Tags: data-platforms, distributed-systems, reliability]
 - The platform team’s real job is interfaces (2025-11-13) [Tags: engineering-leadership, platforms, developer-tooling]
 - When I still choose a relational database (2025-03-13) [Tags: data-platforms, databases, architecture]
@@ -104,21 +104,13 @@ URL: https://www.mohitranka.com/blog/how-forge-structures-requests-for-prompt-ca
 Date: 2026-09-24
 Tags: developer-tooling, architecture, reliability
 
-Introduction
+I am building Forge, an open-source coding environment that brings agent conversations, editing, repository navigation, a terminal, and Git into one workspace.
 
-For the last couple of months, we have been working on building an open-source terminal-first AI IDE, Forge.
-It is built for Vim/terminal power users, who want to do AI-assisted programming without doing context switches.
-The idea of Forge is to bring the software from idea to production, without leaving the terminal workspace. 
-Think of Forge as a mix of Vim + Claude Code + terminal + Git, all running from your terminal.
+An early problem was cost. The OpenCode Go weekly allowance would barely last a day of coding. On a self-funded project, that was difficult to sustain.
 
-A core part of Forge is its AI-assisted coding harness, which takes the user's natural language prompt to research, design and build the software. 
-In its first version, the OpenCode Go subscription's weekly limit would hardly last a single day for coding, even with careful use of models. 
-For a self-funded project, this put pressure on the budget and threatened sustained product use. 
+Coding requests repeatedly send instructions and conversation history. If the provider can reuse a cached prefix, that repeated input can cost less. The harness cannot decide what the provider caches, but it can avoid changing content unnecessarily.
 
-OpenCode Go accounts for usage in dollar terms, and cached input can cost less than uncached input, usually by an order of magnitude.
-This made prompt caching a promising way to stretch the available usage.  
-
-This article is a deep dive into how prompt caching was implemented and tested in Forge to achieve 99%+ cache hit ratio.
+This article explains how Forge constructs requests for that reuse and presents the results of a controlled evaluation. The reported cache-hit ratios are results for those workloads, not a guarantee for every coding session.
 
 Why Prompt Caching
 
@@ -130,29 +122,29 @@ Cache eligibility and reuse depend on the provider's caching strategy. A coding 
 :root[data-theme="light"] .forge-cache-diagram .diagram-dark { display: none; }
 :root[data-theme="light"] .forge-cache-diagram .diagram-light { display: block; }
 
-In 2026, the top coding harnesses average around 90% for their cache-hit ratios. For Forge we set an internal target of 95% cache-hit ratio.
+We set an internal target of 95% cache-hit ratio. Comparisons with other harnesses require comparable workloads, providers, and measurement methods; a single aggregate number would not tell us whether our request construction was working.
 
 How Forge Constructs Requests
 
-In order to keep the prefix stable, Forge keeps the static content at the beginning and dynamic content at the end of the request.
+Forge puts stable content first and new content last. Changing an early instruction can invalidate reuse for everything after it.
 
 Forge's request path has two layers.
 
- A canonical message: Forge's ModelRequest object, which is provider agnostic.
- A provider-specific wire request: ModelRequest object is formatted as per specific provider API before making the network request. 
+ A canonical request: Forge's provider-neutral ModelRequest object.
+ A wire request: a provider adapter serializes ModelRequest for the selected API.
 
-In order to create the canonical message, Forge:
+To build the canonical request, Forge:
 
   Starts by creating the system message: It contains system prompt, workspace's AGENTS.md, and discovered Skills. Before being added to the system message, Skills are sorted by name, and the session's scratch directory is inserted in the system prompt.
   Keeps the system message in conversation history. On resumption of a prior session, Forge replays the journal, and uses the stored system message. This ensures that the cache is not invalidated on the resumption of an old session with a different system message.
   Appends the user message, assistant replies and tool results to the end of the message.
-  Before each Model step, it repairs and compacts the history, if required. Compaction rewrites the context, and starts a new cache epoch, because the old prefix no longer describes the prompt.
+  Before each model step, it repairs and compacts the history, if required. Compaction rewrites the context, and starts a new cache epoch, because the old prefix no longer describes the prompt.
   Finally creates a ModelRequest. This bundles the transcript, selected tools and model, workspace root, route and session IDs, reasoning settings, and prompt_cache: true.
 
-Once the canonical message is ready, Forge converts it into a provider-specific wire request. 
+The provider adapter then constructs the wire request.
 
- Anthropic: It places cache markers at useful boundaries. Forge marks the last system block, the last tool definition, and current conversation tail. As the conversation grows, the conversation marker moves to the new tail; the system and tool markers remain at their ends. 
- OpenAI-compatible APIs: It sends the conversation as messages containing system, user, assistant replies and tools in order. Forge converts each tool into function schemas, and adds a workspace-derived prompt_cache_key 
+ Anthropic: It places cache markers at useful boundaries. Forge marks the last system block, the last tool definition, and current conversation tail. As the conversation grows, the conversation marker moves to the new tail; the system and tool markers remain at their ends.
+ OpenAI-compatible APIs: It sends the conversation as messages containing system, user, assistant replies and tools in order. Forge converts each tool into function schemas, and adds a workspace-derived prompt_cache_key
 
 How Forge Keeps the Prefix Stable
 
@@ -161,14 +153,14 @@ To keep the prefix stable, Forge implements:
  Intact prior history: New user turns and tool results extend the transcript, preserving earlier messages.
  Sorted variable lists: Tool names and Skills are sorted to prevent incidental map or filesystem order from changing the prompt.
  Frozen content: Image snapshots and frozen tool outputs prevent later file changes from altering old transcript entries.
- Preserved system instructions: The journaled system message is kept rather than regenerated from whatever instructions happen to exist now. 
+ Preserved system instructions: The journaled system message is kept rather than regenerated from whatever instructions happen to exist now.
  Cache routing: Forge hashes the workspace path into prompt_cache_key, which helps the provider caching algorithm with routing affinity across all the sessions of the same workspace.
 
 How We Measured Cache Hits
 
 For each model response, Forge reads the provider-reported cached-input token count and normalises it.
 
- Anthropic: Reports cache_read_input_tokens 
+ Anthropic: Reports cache_read_input_tokens
  OpenAI-compatible APIs: Provides cached_tokens in token-details fields.
 
 Forge adds the cached and uncached input tokens across the model calls. It normalises total prompt tokens across providers, since Anthropic reports uncached input separately while OpenAI includes cached tokens in its total.
@@ -200,73 +192,63 @@ Token totals are summed across the 10 runs for each case. Uncached input is the 
 | Conversation grows | 1,284,763 | 1,279,623 | 2,743 | 2,397 |
 | Only the ending changes | 1,115,482 | 1,109,682 | 3,271 | 2,529 |
 | An early instruction changes | 963,247 | 913,159 | 17,633 | 32,455 |
- 
 
  Appending messages or changing only the last message resulted in improved cache-hit ratios, as reflected by 99.60% and 99.48% mean cache-hit ratios for the first two use cases.
- Changing the instruction, which is in the early part of the message, drops the cache hit ratio by ~5 percentage points compared to the other use cases, and ~30k uncached input tokens compared to ~2.5k input tokens of the first two use cases.
+ Changing the instruction, which is in the early part of the message, drops the cache-hit ratio by about 5 percentage points compared to the other use cases, and leaves about 32,000 uncached input tokens, compared with about 2,500 in each of the first two cases.
 * The early change use case varies more (~1 pp standard deviation) between runs compared to the other use cases (~0.2-0.25 pp standard deviation), indicating caching is more sensitive to the early message changes.
 
-Final Notes
+What this establishes
 
-Prompt caching is a request-design problem shared by the harness and provider. The harness controls request ordering, history persistence, and cache hints; the provider determines which prefixes it retains and reuses. 
-Tracking usage alongside serialized request snapshots connects cache behavior to the prefix that produced it. The main lesson here is to design request construction and cache observability together while writing an agentic harness.
+Prompt caching is a request-design problem shared by the harness and provider. The harness controls request ordering, history persistence, and cache hints; the provider determines which prefixes it retains and reuses.
+Tracking usage alongside serialized request snapshots connects cache behavior to the prefix that produced it. These results describe controlled request sequences on one provider/model route. They do not establish the same hit ratio across providers or ordinary interactive sessions. Cache expiry, concurrency, changing tools, and compaction can all affect reuse.
+
+Design request construction and cache observability together. Otherwise you can preserve the prefix carefully and still have no way to tell whether the provider reused it.
 
 
-### The line manager role is disappearing faster than you think
+### What engineering managers need to own as AI changes delivery
 URL: https://www.mohitranka.com/blog/line-manager-role-is-disappearing/
 Date: 2026-07-21
 Tags: engineering-leadership, management, product
 
-The line manager role is disappearing faster than most career plans assume. Meta has already moved toward one senior manager for roughly every fifty developers. That is not a distant forecast. It is an operating choice already in the market. If you lead engineers — or want to — the useful question is not “will this happen?” It is what kind of leader still has a job when the org chart gets that thin.
+I think engineering management built mainly around status tracking is becoming harder to justify.
 
-Where this is going
+That is narrower than saying managers are disappearing. Someone still has to set priorities, develop people, resolve disagreements, and take responsibility when a technically successful project produces little business value.
 
-I see three moves landing at once:
+AI-assisted development changes some of that work. It does not tell us how many engineers one manager can responsibly support.
 
-A. AI agents write most of the code. One senior developer directing a swarm of agents is not science fiction. It is the near-term shape of delivery: humans own intent, constraints, and review; machines own volume. Span of control for output rises even when headcount does not.
+More output creates different constraints
 
-B. The middle manager who mainly runs one-on-ones and tracks tickets will struggle to justify the seat. Coordination theater does not survive a world where execution bandwidth is cheap and coordination tools are better. If your value is status meetings and a dashboard of green/yellow/red, you are competing with software that does that without a skip-level.
+Agents can reduce the effort of some implementation tasks. The benefit depends on the work, the tools, and how much verification it needs.
 
-C. The leader who thrives will look different from the leader who thrived in the last decade. Not “more soft skills” as a slogan. A different job: business outcomes with technical teeth, not people-process as the product.
+When implementation becomes faster, selecting the right work and evaluating the result matter more. Producing another service is not useful if nobody needs it or the team cannot operate it.
 
-Those three reinforce each other. When coding throughput jumps, the bottleneck moves to judgment — what to build, what to kill, what interface to freeze, what risk is acceptable. Judgment is leadership work. Ticket wrangling is not.
+I expect leaders who understand those constraints to remain valuable. A manager whose main contribution is collecting updates has a weaker case.
 
-What the surviving leader actually owns
+That is an interpretation of where the work is going, not a reliable forecast of an org chart.
 
-The leaders I would hire into a flatter org share a pattern:
+People management is real work
 
-- They own business outcomes, not just a people inventory. Headcount is an input. Revenue, reliability, adoption, and cost of delay are the scoreboard.
-- They understand product, engineering, operations, and how sales actually sells. Enough to argue tradeoffs in the same language as partners — not as a translator who only ships Jira.
-- They think in systems, not only sprints. Feedback loops, failure domains, platform interfaces, incentive design. Sprint hygiene still matters; it is not the strategy.
-- They keep enough technical depth that returning to IC tomorrow is credible. Not day-one expert on every stack — but not a spectator in design reviews either.
+It is easy to dismiss one-on-ones as meetings until an engineer needs feedback, a conflict is blocking delivery, or someone is being quietly overloaded.
 
-The old clean split — pure management track vs pure IC track — is already leaking. Hybrid value is the default. Specialization remains; pure process ownership without domain force does not.
+Automation may improve coordination. It does not make trust, coaching, or fair evaluation free. Increasing spans of control without reducing that burden can simply leave people with less support.
 
-If I stepped into an EM role tomorrow
+A flatter organisation can make decisions faster. It can also concentrate authority and leave ambiguity unresolved for longer. Fewer layers is not automatically a better design.
 
-I would do three things immediately, and keep doing them:
+The kind of leadership I would invest in
 
-1. Stay technically current. Read designs. Ship small things. Touch the tools agents use. You cannot review what you cannot feel.
-2. Invest hard in strategic and business thinking. How the company makes money, where margin dies, which customers actually drive the roadmap. Engineering leadership without that is interior decoration.
-3. Do not sit on laurels. Title and past scope depreciate faster when the production function changes. Relevance is a practice, not a plaque.
+I would keep enough technical depth to challenge designs, inspect agent-generated work, and understand operational risks. That does not require being the best programmer in the team. It does require more than following a dashboard.
 
-None of that is glamorous. All of it is insurance against becoming the middle layer the spreadsheet deletes first.
+I would also learn how the company makes money, which customers shape the roadmap, and where engineering effort changes the outcome. Technical quality matters, but it needs a connection to something the business is trying to achieve.
 
-The org shape that follows
+Finally, I would examine the system around the team: incentives, dependencies, ownership, and how decisions get made. Some delivery problems cannot be fixed inside a sprint.
 
-I expect organizations that work under AI-heavy delivery to look roughly like this:
+What remains uncertain
 
-- Executives at the top owning strategy — fewer, clearer bets.
-- A lean middle layer owning specific business goals — not generic “people management” for its own sake.
-- Highly productive ICs (and agent fleets) supported by real tooling — platforms, evals, review culture, operational ownership.
+One company's management ratio would not establish what works across engineering organisations. Staffing targets tell us what a company intends to change, not whether that change improves delivery or support.
 
-That is dramatically flatter than the multi-layer manager stacks many companies still run. Flatter is not kinder by default. It is less room for ambiguity about who owns the outcome. If your role only exists to pass information up and down, the system will route around you.
+AI may change the balance between implementation, review, and coordination. Team maturity, product risk, and organisational complexity will still matter.
 
-The question that matters
-
-The question is not whether this shift is coming. Parts of it are already priced into how aggressive companies staff management. The question is whether you are preparing: technical depth, business literacy, and systems judgment — or optimizing for a job description that is evaporating.
-
-What are you doing right now to stay relevant as the middle of the org chart thins?
+My position is simpler: technical judgment, business understanding, and people leadership are worth developing together. A title will not do that work for you.
 
 
 ### Near-real-time is a product promise, not a Kafka cluster
@@ -274,84 +256,45 @@ URL: https://www.mohitranka.com/blog/near-real-time-is-a-product-promise/
 Date: 2026-07-16
 Tags: data-platforms, distributed-systems, reliability
 
-“Near-real-time” is often used as a synonym for “we bought a streaming stack.” On GTM data platforms, that confusion is expensive. The product promise is about whether a decision-maker can trust a number in time — not whether an event log is busy. At LinkedIn, the Enterprise Data Platform (EDP) was intended as the governed center for GTM datasets. BI teams on Power BI and Tableau still ran on Hadoop-era batch paths. They already had data. What they did not have was a reason to treat EDP as the path that made GTM analytics true, timely, and durable as legacy pipelines were marked for deprecation. That gap is a product-promise gap.
+Before building a streaming pipeline, I want to know which decision improves when the data arrives sooner.
 
-What consumers actually bought
+“Near-real-time” can mean seconds to one team and an updated dashboard before a morning meeting to another. Neither meaning tells you to buy a Kafka cluster.
 
-When sales, marketing, or BI stakeholders ask for better data timing, they rarely mean “please introduce a new consumer group.” They mean things like:
+On LinkedIn's Enterprise Data Platform (EDP), BI consumers already had working batch paths. The useful discussion was about trustworthy data in their actual workflows, and what it would take to migrate them.
 
-- The dashboard does not contradict the operational truth for long.
-- A GTM metric used in a weekly motion is not secretly a stale extract.
-- There is one place to stand when two numbers disagree.
+Put a bound on usable data
 
-Those are promises to named consumers. For us, the critical early consumers included BI engineering and the GTM partners who lived in their dashboards. If those consumers do not move, the platform’s internal latency graphs are cosplay.
+Name the dataset, consumer, and maximum acceptable age at the point of use. Define the normal operating conditions and what happens when the bound is missed.
 
-A definition that forces honesty
+“Usable” matters. An event arriving at ingestion is not the same as a validated record available in a dashboard. BI extracts and caches can erase the benefit of a fast upstream pipeline.
 
-I use a boring definition: for dataset D and consumer C, the promise is that the age of usable data at the moment C acts stays inside an agreed bound — under normal conditions — with a clear story when it does not. Unpack it in platform language:
+Measure source-to-consumer delay before choosing the architecture. If an hourly extract dominates it, shaving milliseconds off processing will not deliver the promised experience.
 
-- Named dataset — a sales or GTM entity teams recognize, not “the lake.”
-- Named consumer — Power BI workbook owners, Tableau extracts, revenue analytics — not “downstream.”
-- Usable — passes the governance and correctness bar, not merely “row arrived.”
-- Agreed bound — may start as a milestone (“on EDP before deprecation date, with acceptable query latency”) before it becomes a polished SLO.
-- Failure story — what the business does when the path is wrong: freeze a pipeline, pin a version, staff a war room — not “we’ll check the dashboard Monday.”
+Check whether faster is worth the cost
 
-If you cannot name D and C, you are not ready to sell near-real-time.
+A weekly reporting workflow may be well served by a reliable batch delivery. A decision that becomes invalid after minutes needs a different design.
 
-Why “we can already get the data” kills platform promises
+The cost is broader than infrastructure. Streaming introduces ordering, replay, late events, state, and recovery work. You need operators who can explain what consumers see during catch-up, not just while the pipeline is healthy.
 
-The BI objection was rational: existing Hadoop-based jobs still produced outputs. From their seat, migration was risk without immediate upside. So the competing product was not another vendor. It was the legacy batch path that still worked. Near-real-time platforms lose to “good enough yesterday” until:
+Choose the bound first. Then work out the least complicated system that can keep it.
 
-1. the old path has an end date,
-2. the new path is staffed for adopters,
-3. query performance after cutover is somebody’s on-call problem.
+Migration is part of delivery
 
-We treated those as part of the promise design. EDP engineers helped migrate. Connectors reduced friction into Power BI and Tableau. Deprecation deadlines made dual-running finite. Performance work made “governed” not mean “slower.” Streaming could have been part of some paths. It was not the adoption strategy.
+For BI teams using Power BI and Tableau, moving to EDP meant taking on migration effort and performance risk. Their existing path still produced data. Resistance was understandable.
 
-Hidden decisions that are actually the product
+EDP engineers helped with migration. Connectors reduced integration work. Performance after cutover became our responsibility. Deprecation milestones gave dual running an end.
 
-Where is the system of record?
+Those choices made adoption practical. Faster infrastructure alone would not have done it.
 
-If EDP and a legacy pipeline disagree, which number is allowed to win in a QBR deck? Until that is explicit, faster pipelines just produce faster arguments.
+Define disagreement and failure
 
-Is the promise contractual or best-effort?
+During cutover, which source wins if old and new numbers differ? Who can pause a bad publish? How do consumers know the data is late or incomplete?
 
-Deprecating Hadoop paths is a contractual move: the company is choosing a continuity posture. Best-effort “please try EDP” will lose to local convenience forever.
+A migration milestone is not a freshness SLO. Once the consumer is on the new path, measure the continuing time and correctness promise separately.
 
-Who pays for fan-out?
+I would start with high-value datasets, prove the path with named consumers, and expand from there. A platform does not need to stream everything to be useful.
 
-Every BI team and every GTM dataset multiplies support surface. Platforms that treat every new consumer as free eventually stop being able to keep any promise.
-
-What happens during catch-up and cutover?
-
-Migrations create windows where two truths coexist. The product promise must cover the dual-run period — or you will invent tribal knowledge in Slack.
-
-The shape that worked: phases, not a big-bang bus
-
-The useful architecture picture was organizational as much as technical:
-
-0. Executive buy-in — GTM data consolidation as strategy, not a side project.  
-1. MVP on high-value sales datasets — prove the promise where pain is visible.  
-2. Expand across sales and revenue consumers — widen the interface only after the path works.  
-3. Broader GTM standardization — reduce snowflake pipelines.  
-4. Governance and optimization — make the default path the boring path.
-
-That sequence is how you keep a freshness/correctness promise while the org is still learning to trust the platform. “Put everything on a stream in quarter one” is usually a way to buy complexity before you have consumers.
-
-Questions I ask before approving “let’s go real-time”
-
-- Which decision improves if this dataset gets younger — and who makes that decision?
-- What is the current path’s delay, really (including BI extracts and cache TTLs)?
-- What dies when we succeed — the legacy job, or only our spare time?
-- Who is staffed to migrate the first consumers?
-- What query latency is acceptable in the tools people actually use?
-- What do we measure weekly that a VP would recognize?
-
-If the answers are all technology choices, the promise is not ready.
-
-Closing
-
-Near-real-time is not a badge for an architecture review. It is a promise about time, truth, and behavior when truth is late. EDP’s lesson was blunt: the company does not get that promise when a platform exists. It gets that promise when critical consumers — here, BI on GTM data — run on the governed path, and the old batch defaults are allowed to end. Build streams when they earn their keep. Build the consumer promise first.
+The achievement is a better decision made in time. A busy event log is supporting evidence at best.
 
 
 ### The platform team’s real job is interfaces
@@ -359,79 +302,43 @@ URL: https://www.mohitranka.com/blog/platform-teams-real-job-is-interfaces/
 Date: 2025-11-13
 Tags: engineering-leadership, platforms, developer-tooling
 
-At LinkedIn, the Enterprise Data Platform (EDP) was meant to be the centralized way GTM teams managed and consumed datasets. On paper, that is a clear platform charter. In practice, a platform is only real when its interfaces get adopted — including by teams that already have a path that “works.” The hard case was BI. Power BI and Tableau teams were still living on Hadoop-based pipelines scheduled for deprecation. They could already get data. EDP was strategically important and still optional in their week. Without them, EDP could not become the source of truth for GTM analytics no matter how good the internals looked. That is an interface problem, not a cluster problem.
+A platform can be strategically important and still be irrelevant to the team asked to adopt it.
 
-The interface was “how BI gets governed data”
+At LinkedIn, the Enterprise Data Platform (EDP) was intended to be the governed path for go-to-market datasets. BI teams using Power BI and Tableau already had Hadoop-based pipelines. Those pipelines worked well enough for their current needs.
 
-When platform teams say interface, they often mean API shape or event schema. Here the consumer-facing interface was broader:
+From their perspective, migration was more work with a chance of making dashboards slower. We had to solve that problem before our platform strategy could mean anything.
 
-- How does a BI engineer get a trusted dataset into a dashboard workflow?
-- Who pays the migration cost?
-- What happens to the old path, and when?
-- Is query performance acceptable the week after cutover?
+The API was only part of the interface
 
-EDP’s storage format and pipeline elegance did not answer those questions. Until they were answered, BI had no reason to reorder priorities. Lesson: product teams do not consume your architecture diagrams. They consume time-to-success, predictability, and whether the platform team shows up when the path is rocky.
+The practical interface included getting a dataset into a BI workflow, understanding its meaning, obtaining access, migrating an existing workbook, and finding help when something failed.
 
-Adoption failed as an org problem first
+Storage and processing choices mattered internally. Consumers needed a predictable way to finish their work.
 
-This was easy to misread as stubbornness. It was incentives.
+This is where platform teams can misread adoption. A team declining a migration may be responding sensibly to its delivery commitments. Asking it to absorb your platform's cost does not make the cost disappear.
 
-- BI teams were measured on analytics delivery, not on platform migration.
-- Legacy pipelines still produced outputs.
-- Migration looked like unfunded work with downside risk (latency, rework, surprise breakage).
-- EDP’s long-term governance story was real — and still abstract compared to this quarter’s dashboards.
+Fund the transition
 
-Engineering alignment inside the data org was necessary and insufficient. Without a business framing, “please adopt EDP” is a favor request.
+We worked with leadership to make adoption a priority and legacy deprecation an explicit continuity concern.
 
-Executive sponsorship changed the type of conversation
+Then EDP engineers took on migration work: connectors, pairing, tooling, and query performance. Office hours gave partners a regular place to resolve blockers.
 
-I partnered with senior leaders on the data and BI side so EDP adoption was not a side quest. The useful reframe was not “modernize for us.” It was:
+The sponsorship and the capacity were both necessary. A mandate without support would have transferred the problem to BI. Support without prioritisation would have left it competing indefinitely with their existing roadmap.
 
-- Hadoop paths were going away.
-- Continuing to depend on them was a continuity risk, not a neutral default.
-- EDP was the consolidation path for governed GTM analytics — not a nice-to-have alternate store.
+Finish the migration
 
-That shift moved the discussion from technical preference to operating risk. Platforms that cannot get that sentence said out loud usually stall in permanent pilot mode.
+Our definition of done included moving the scoped GTM paths onto EDP and decommissioning redundant pipelines. The concentrated BI effort took roughly a quarter.
 
-We lowered the price of yes
+Dual running was useful while validating the new path. Leaving both sources alive indefinitely would have preserved the ambiguity we were trying to remove.
 
-Even with sponsorship, asking BI to self-fund a migration would have failed slowly. The decision that mattered operationally: EDP engineers would take migration load — connectors, pairing, performance work — not only publish docs and wish for pull requests. Concretely, that meant:
+Deprecation needs dates, owners, and exit criteria. Extensions sometimes make sense. Each one should have a reason and a revised plan, rather than becoming a quiet default.
 
-- Pre-built paths into Power BI and Tableau so “get data from EDP” was not a research project.
-- Shared work on query performance so cutover did not mean slower dashboards.
-- A migration toolkit and recurring office hours to kill blockers in public, early.
-- Alignment with sales and marketing stakeholders who depended on the outputs, not only the producers.
+Own the experience after adoption
 
-This is platform-as-product without the theater: the job-to-be-done was “keep GTM analytics working on a governed foundation,” and we priced the platform to make that job rational.
+If a dashboard becomes slower after cutover, the platform team cannot declare success because the connector works. Adoption is a promise about the workflow, including support and performance.
 
-Deprecation is part of the interface
+I would judge a platform by whether consumers can succeed on it, whether their costs are visible, and whether the old paths can actually end.
 
-Enabling a new path without disabling the old one is how companies collect platforms. The adoption plan included the unglamorous half:
-
-- Clear deprecation milestones for legacy Hadoop pipelines.
-- Time-bound dual running where needed.
-- A definition of done that included turning things off, not only turning EDP on.
-
-Governance is not a slide about ownership. Governance is whether the abandoned path still quietly feeds production dashboards six months later.
-
-What changed
-
-Within a concentrated push — on the order of a quarter for the BI migration motion — Power BI and Tableau usage moved onto EDP for the scoped GTM paths we targeted. Redundant pipeline surface area could be decommissioned. Freshness and governance improved because fewer competing “sources of truth” were allowed to linger. I care less about the trophy phrasing than about the mechanism: sponsorship + funded migration + forced deprecation + BI-shaped interfaces.
-
-Where EMs earn their keep on platform teams
-
-The technical work was real. The EM job showed up in places that never appear in a system design doc:
-
-- Spending team capacity on someone else’s migration so the company’s data model could converge.
-- Holding a deprecation line when temporary extensions would have been easier.
-- Making sure performance issues after cutover were our problem, not a gotcha that punished adopters.
-- Translating platform risk into language executives will prioritize.
-
-Special cases still existed — BI tools always have them — but they were absorbed into connectors and support rituals, not infinite private forks.
-
-Closing
-
-Platform teams love infrastructure. Infrastructure is not the job. The job is to define, evolve, and defend interfaces other teams can build on — including the incentives, migration labor, and deprecation schedule that make those interfaces real. EDP did not become the GTM source of truth when it launched. It became the source of truth when BI could succeed on it, and the old paths were allowed to die.
+Infrastructure provides the capability. The interface determines whether anyone can use it.
 
 
 ### When I still choose a relational database
@@ -439,104 +346,52 @@ URL: https://www.mohitranka.com/blog/when-i-still-choose-a-relational-database/
 Date: 2025-03-13
 Tags: data-platforms, databases, architecture
 
-In 2013 I wrote RDBMS vs. NOSQL? as a pushback against fashion. The fashion changed costumes — document stores, wide-column, NewSQL, "Postgres is fine," "everything in the lakehouse" — but the underlying mistake did not: picking a datastore from a blog post instead of from access patterns and failure modes.
+In 2013, I wrote RDBMS vs. NOSQL? because database advice was getting ahead of database requirements.
 
-This is the sequel I would write to myself: when I still choose a relational database in 2026, and when I do not.
+I still start with a relational database for many product backends. Users, accounts, permissions, orders, and configuration usually have relationships and invariants that fit the model well.
 
-The default remains boring on purpose
+That is a default, not a loyalty programme. A different workload can justify a different store.
 
-My default for a new product backend is still a managed relational database (usually PostgreSQL) with:
+Start with the things that must stay correct
 
-- Clear schema ownership
-- Migrations as code
-- Backups and point-in-time recovery you have actually restored
-- Connection pooling and boring observability
-- A plan for read scale that is not "wishful replicas"
+If the product needs several records to change together, transactions can make correctness much easier to reason about. Moving that responsibility into application code is a choice with an ongoing cost.
 
-Why? Because most products are transactional workflows with relationships: users, accounts, permissions, orders, configurations, audit trails. Relational databases are extraordinarily good at that shape. They also match how humans reason about correctness. If your primary problems are multi-row invariants, ad hoc query flexibility, and operational maturity, starting elsewhere is often self-inflicted difficulty.
+I also value the ability to evolve queries. Early products change their questions. A relational schema with appropriate indexes often accommodates that more easily than a store built around a narrow access pattern.
 
-When relational is the right call
+Operational familiarity matters. A team that knows how to diagnose, restore, and run a database has an advantage over a team operating its theoretically ideal store for the first time.
 
-I lean relational when several of these are true:
+None of this excuses ignoring load. Measure the workload and test the recovery path.
 
-1. Strong invariants matter more than infinite write scale.  
-Money, entitlements, identity bindings, "exactly one active X per Y." If the business invariant is relational, fighting the model is expensive.
+Move specialised work out when it earns its place
 
-2. Query patterns are still evolving.  
-Early products change questions weekly. A well-modeled schema with indexes beats a write-optimized store that makes new questions painful.
+The primary database does not need to answer every question.
 
-3. The team’s operational muscle is SQL-shaped.  
-A perfect paper architecture with zero operators is worse than a known system with runbooks. Skills are part of architecture.
+Search, analytics, high-volume telemetry, and some graph or time-series workloads may benefit from separate systems. Treat those as deliberate read models or specialist stores, with a clear source of truth and a way to rebuild them.
 
-4. Multi-entity transactions simplify the product.  
-Saga forests can be correct. They are also a tax. If a single-node or lightly clustered RDBMS can hold the transactional core, keep the core small and sharp.
+Before moving the transactional core, I want evidence of the limit: write saturation, state size, contention, unacceptable recovery time, or a topology requirement the current system cannot meet.
 
-5. You need ecosystem gravity.  
-ORMs, migration tools, BI access, hiring, incident folklore — relational ecosystems are deep. That is not marketing; it is time-to-recovery.
+Read replicas help read capacity. They do not remove every write or consistency constraint. A bigger machine is also a plan with a limit, not an insult to distributed systems.
 
-When relational becomes the wrong center
+The seams become your responsibility
 
-I move work out of the primary OLTP database when:
+Once data moves between stores, you need change propagation, replay, failure handling, and a definition of acceptable lag.
 
-1. Write throughput or state size exceeds honest vertical + read-replica plans.  
-Not vanity metrics — measured saturation, vacuum pain, replica lag that product feels, backup windows that scare you.
+Avoid casual dual writes. If one write succeeds and the other fails, somebody must know how to detect and repair the difference. Derived systems simplify the primary workload only if their recovery is designed.
 
-2. Access patterns are append-heavy and query-narrow.  
-Event logs, high-volume telemetry, massive multi-tenant time series. Different stores exist for reasons.
+The same reasoning applies to service boundaries. Keep capabilities together where shared invariants dominate. Split them where independent operation or deployment pays for the additional coordination.
 
-3. Fan-out reads need specialized shapes.  
-Search, graph traversal at scale, feature stores, geospatial at high QPS — often better as derived systems fed from a transactional core.
+Ask before adding a primary store
 
-4. Availability topology requirements outgrow your relational operator model.  
-Some multi-region active-active stories are possible with modern relational systems; many are still research projects wearing production clothes. Be honest about the topology you can run.
+1. Which queries and invariants does the product need?
+2. What data volume and throughput do we expect, with headroom?
+3. Where will multi-record correctness be enforced?
+4. How will access patterns and schemas change?
+5. Who will operate it and restore it after failure?
+6. Which measured requirement rules out the simpler option?
 
-5. Schema flexibility is real, not aesthetic.  
-Truly heterogeneous documents with little shared query structure can be a poor fit. "We might need flexibility later" is not a requirement.
+NoSQL covers many different systems and trade-offs. It is not a single alternative to SQL, much less a sign that the architecture has become serious.
 
-The architecture that aged best for me
-
-The pattern I trust:
-
-1. Transactional system of record in relational (or something with equal invariant strength).
-2. Explicit integration events when other systems must react — versioned, owned, documented.
-3. Derived read models for specialized query paths.
-4. Analytical systems for heavy aggregation — do not abuse OLTP as a warehouse.
-5. Clear rules for dual writes — preferably avoid them; if not, make correctness visible.
-
-The relational database is not the universe. It is often the spine.
-
-A related lesson from platform service boundaries
-
-Not every “monolith vs microservices” fight is a datastore fight — but the same judgment applies. On an EDP self-serve portal, we had a month-long freeze over whether new UI workflows had to live entirely in a monolithic backend or split early for independent iteration. The useful answer was hybrid: keep core platform capabilities where integration and invariants dominate; split fast-changing workflows where deploy independence pays for the seam cost; put metadata in a system designed for lifecycle, not in accidental dual writes. That is the same muscle as choosing a relational spine: optimize for ownership and correctness at the center, derive or split at the edges, refuse fashion-driven rewrites that stop delivery.
-
-What changed since 2013
-
-A few updates to my older self:
-
-- Managed Postgres (and peers) are much better. Failover, backups, and scaling knobs improved. That raises the bar for "we need NoSQL to be reliable."
-- JSON columns done carefully cover many former document-store arguments — without abandoning transactions.
-- CDC became mainstream. Turning relational truth into streams is a product pattern, not a science fair.
-- Distributed SQL exists and can be right — but it is still a specialist choice with specialist costs.
-- Lakehouses ate a chunk of analytics, which is good: stop pretending your OLTP DB is a lake.
-
-What did not change: NoSQL is not a personality. It is a set of tradeoffs around consistency, query power, operational complexity, and scale.
-
-Decision checklist I actually use
-
-Before approving a non-relational primary store:
-
-1. Which queries and invariants are first-class in v1?
-2. What is the 12-month data size and QPS with ugly margins?
-3. What does multi-row correctness look like, and who enforces it?
-4. How do we migrate schema or access patterns six months in?
-5. Who is on-call, and what have they operated before?
-6. Can we explain the choice in one paragraph without vendor slogans?
-
-If step 6 requires a conference talk, the choice may still be right — but it needs more proof.
-
-Closing
-
-I still choose a relational database when I want correctness, evolvable queries, and operational boredom around the core of a product. I choose other systems when the access pattern or scale curve makes that boredom impossible. The winning move is rarely "pick a side." It is keep a sharp system of record, derive aggressively, and refuse to let fashion rename your requirements. If you want the older, more argumentative version of this stance, it is still here: RDBMS vs. NOSQL?. The industry moved. The need for judgment did not.
+Use the system that fits the work. Prefer the one your team can explain and recover.
 
 
 ### Freshness SLOs: the metric product teams actually feel
@@ -544,82 +399,39 @@ URL: https://www.mohitranka.com/blog/freshness-slos-the-metric-product-teams-fee
 Date: 2024-07-11
 Tags: data-platforms, reliability, observability
 
-API latency SLOs changed how we run services. GTM data work taught me the sibling idea the hard way: product teams do not experience your job-success chart. They experience a dashboard that is late, wrong, or disagrees with another “official” number. At LinkedIn, BI teams on Power BI and Tableau could already pull data from Hadoop-era batch paths while the Enterprise Data Platform (EDP) was supposed to become the governed center for GTM datasets. Pipelines can be “green” while the business still feels stale or fragmented truth. That feeling is a freshness and trust problem — even when nobody is paging on consumer lag.
+A pipeline can be green while the dashboard is wrong. Or late. Or showing a different number from the other dashboard everyone also calls official.
 
-Latency is not freshness
+At LinkedIn, the Enterprise Data Platform (EDP) was intended to become the governed source for go-to-market data. BI teams could already get data through Hadoop-based pipelines. Moving them onto EDP meant dealing with the entire path to a usable dashboard, including the parts outside our platform.
 
-A fast dashboard query can still serve an extract that is hours old. A successful batch job can still leave sales and marketing acting on last night’s world. Latency asks: how long did this request take?  
-Freshness asks: how old is the truth this decision used? If you only measure the serving API, you will celebrate the wrong layer.
+That is why I care about freshness separately from request latency.
 
-Define freshness in the consumer’s language
+A fast query can return old data
 
-For EDP-shaped work, a useful definition was: for a named GTM dataset and a named BI consumer, how old is the data at the moment someone uses it in a dashboard decision — and is it the governed path? That forces specifics:
+Latency measures how long a request takes. Freshness measures how old the data is when someone uses it.
 
-- Dataset — a sales or GTM entity people recognize.
-- Consumer — a Power BI or Tableau workflow, not “analytics.”
-- Usable — on the platform you claim is source of truth, not a leftover pipeline.
-- Age — including batch boundaries and BI-side refresh behavior, not only platform ingest time.
+An API can respond in 100 milliseconds with yesterday's data. Its latency SLO is doing fine. The person making a decision may be doing considerably worse.
 
-You can formalize that into an SLO later. First you need a sentence a BI lead and a platform EM would both underline.
+For a useful freshness target, name the dataset, consumer, acceptable age, and owner. For example: a sales dataset available in a particular BI workflow within an agreed interval. The interval should come from the decision being supported, rather than whichever number looks impressive on the platform dashboard.
 
-Promises that change behavior (not charts for their own sake)
+Measure the whole path: source delay, ingestion, validation, dataset readiness, BI refresh, and caches. Otherwise a fast ingestion service can conceal a slow extract schedule.
 
-On the BI migration, the promises that changed behavior were not abstract percentiles on a poster. They looked like:
+Freshness needs correctness beside it
 
-- Continuity: legacy Hadoop paths had deprecation dates — staying put was a risk posture, not a neutral default.
-- Funded cutover: EDP engineers helped migrate; adopters were not asked to donate a quarter of calendar alone.
-- Acceptable query performance after switch — so “governed” did not mean “slower dashboards.”
-- Finite dual-running — two truths were a migration window, not a lifestyle.
+Making the wrong number arrive sooner is not an improvement.
 
-Call those SLOs if your org has the discipline. Call them operating promises if you are still early. Either way, something has to hurt when the promise breaks — attention, prioritization, or the ability to keep the old path alive. I will not pretend every dataset had a polished error budget. What we had was executive visibility, migration milestones, and a definition of done that included turning legacy paths off.
+During migration, two recent datasets can disagree because they come from different paths. Before tightening the time bound, establish which path is authoritative, who owns critical fields, and how consumers learn about changes.
 
-What to measure along a real path
+Check completeness as well as age. A dataset can have a recent timestamp and still be missing the records that matter.
 
-For a BI consumer, time and trust hide in stages:
+Start with a promise you can keep
 
-1. Source systems and upstream delay  
-2. Platform ingest and validation on EDP  
-3. Dataset readiness / governance checks  
-4. BI tool refresh or extract behavior  
-5. Cache and workbook-level assumptions
+On the EDP migration, the practical commitments included migration support, acceptable query performance, deprecation dates, and a finite period of running both paths. Those commitments changed behaviour. A polished SLO document on its own would not have done that.
 
-Teams often discover the villain is not the fanciest processor. It is an extract schedule, a dual pipeline, or a cutover that never finished. Instrument the path your consumers actually use.
+I would not describe every migration milestone as an SLO. A measured reliability target and a delivery commitment are different things. Both need owners, but only the former tells you how often an ongoing service promise is being met.
 
-Correctness sits beside freshness
+Start with one important consumer journey. Agree on the bound, measure breaches, and decide what changes when you miss it. If repeated misses never affect priorities, the target is decorative.
 
-Fresh wrong data is worse than slightly stale right data. During migration, dual sources create a special failure mode: two numbers, both “recent,” different owners. Correctness signals that mattered in practice:
-
-- Is this dataset on the governed path?  
-- Are legacy feeds still quietly serving production workbooks?  
-- Do critical fields null out or drift after cutover?  
-- Can someone name the system of record when a QBR fights itself?
-
-Freshness without governance optimizes for speed of confusion.
-
-How we introduced the promise for BI
-
-The sequence that worked was not “roll out SLO framework company-wide”:
-
-1. Pick the consumer class already on the critical path (BI for GTM).  
-2. Make adoption a leadership priority with a continuity narrative.  
-3. Staff the migration so the new path is cheaper than it looks.  
-4. Put dates on deprecation.  
-5. Fix performance issues as platform bugs, not user error.  
-6. Only then talk about tightening time bounds dataset by dataset.
-
-If you start with twenty datasets and a perfect taxonomy, you will get a wiki. If you start with one embarrassing consumer journey, you might get a habit.
-
-The objection we actually heard
-
-“We can already get the data.”  
-Yes. That is why platform-only arguments fail. Answer with end-of-life for the old path, labor for the new one, and proof that cutover does not degrade the dashboard.
-
-“Batch is fine.”  
-Sometimes it is. Then write a batch promise (“available by time T for the weekly motion”) and still own correctness and deprecation. Batch without a promise is how shadow pipelines live forever.
-
-Closing
-
-Product teams feel freshness as trust in the number. Platforms earn that trust when named consumers run on a governed path, old paths can die, and someone is accountable when the age of truth is wrong. Whether you brand it SLO or operating promise matters less than whether the company can point to dataset + consumer + bound + owner — and whether missing it changes next week’s work.
+Product teams experience the number they can use. Measure that, even when the slowest part belongs to someone else.
 
 
 ### Saying no as a platform EM without becoming the villain
@@ -627,80 +439,41 @@ URL: https://www.mohitranka.com/blog/saying-no-as-a-platform-em/
 Date: 2023-11-08
 Tags: engineering-leadership, platforms, management
 
-Platform engineering managers do not run out of good ideas. They run out of capacity to say yes to every reasonable request without wrecking the shared system. The skill is not blunt refusal. It is no with a path — specific enough that partners can actually execute, firm enough that your team is not a free consulting desk. Two nos from EDP work at LinkedIn taught me more than any generic prioritization framework.
+A platform team can say yes to every request and still disappoint everyone. The work gets queued, exceptions accumulate, and the same engineers become responsible for more than they can operate.
 
-Why platform “no” feels personal
+As a platform EM, I found the useful part of saying no was making the alternative concrete: what we could support, what it would cost, and who could change the priority.
 
-Product and BI partners are graded on what ships this quarter. Platform teams are graded on leverage, reliability, and whether the company still has one coherent data model next year. So when you decline an unfunded migration or a rewrite dressed up as a preference, it can sound like you do not care. Sometimes that critique is fair. Often the real problem is that you said no without offering a way through. A villain blocks silently. A partner names the constraint and funds a path.
+Two situations from LinkedIn's Enterprise Data Platform (EDP) illustrate that.
 
-Principles I actually use
+No to an unfunded migration
 
-1. Company throughput beats local speed. A one-week special case that creates a permanent support branch is not kindness.
-2. A delayed honest yes beats a fake yes. A Jira ticket with no staffing is a lie.
-3. Tradeoffs go in writing the same day. Memory is political; notes are kinder.
+BI teams using Power BI and Tableau already had Hadoop-based data paths. Asking them to adopt EDP because it was strategic did not give them time to migrate or reduce the risk to their dashboards.
 
-Everything below is those three principles in concrete form. If you cannot show how a decision shows up in ownership, metrics, and day-to-day work, it will not survive the next roadmap fight.
+The useful decision was to fund the transition. EDP engineers helped with connectors, migration, and performance. Leadership made deprecation a priority, with dates for ending the old paths.
 
-Case A — No to “just adopt the platform”
+That was more expensive than issuing a mandate. It also addressed the actual objection.
 
-Request (implied): BI teams on Power BI and Tableau should move to EDP because it is the strategic GTM data platform. Reality: They could already get data from Hadoop-based pipelines. Migration looked like unfunded risk. And EDP could not become the source of truth without them. The no: No to a pure mandate without labor — “adopt EDP” as a favor to the platform team. The path:
+A platform cannot become the source of truth while treating the work of moving consumers onto it as somebody else's problem.
 
-- Executive sponsorship that framed legacy pipeline deprecation as continuity risk, not taste.
-- EDP engineers assigned to migration work, not only documentation.
-- Connectors into Power BI and Tableau.
-- Query performance work so cutover did not punish adopters.
-- Tooling, office hours, and hard deprecation milestones so dual-running actually ended.
+No to an indefinite architecture argument
 
-That package is a no to magical adoption and a yes to an expensive but real interface change. Within a concentrated push — about a quarter for the BI motion we scoped — the migration stuck, and legacy surface area could shrink. Pattern: If the consumer has no incentive, your “no” is to unfunded asks; your “yes” is to change incentives and put a price on the work.
+On the self-serve portal, disagreement over monoliths and microservices held up execution for about a month. There were credible technical concerns on both sides, but no effective path to a decision.
 
-Case B — No to both pure extremes in an architecture fight
+We wrote evaluation criteria, time-boxed proofs of the alternatives, and brought in a neutral senior engineer. I also worked with the engineers on ownership and how they challenged each other.
 
-Request (implied): Pick monolith or microservices for an EDP self-serve portal — each side sure the other choice was malpractice. Reality: The disagreement went public, ownership collapsed, and delivery froze for roughly a month. The no: No to a binary holy war. No to indefinite debate. No to “loudest critique wins.” The path:
+The decision was hybrid: keep tightly integrated capabilities close to EDP, separate workflows where independent iteration helped, and centralise metadata with DataHub.
 
-- Structured design review with written criteria (scalability, maintainability, speed, ownership).
-- Time-boxed POCs from both approaches instead of slide wars.
-- A neutral senior engineer in the room.
-- Explicit coaching on ownership and influence in 1:1s — not only technical arbitration.
-- A hybrid decision: core platform capabilities stayed integrated with the EDP backend; more dynamic portal workflows could be separate services; metadata lifecycle centralized (we used DataHub) rather than reinvented.
+The point was not to find a compromise halfway between two preferences. It was to evaluate different needs separately and get the project moving again.
 
-Execution resumed about a week after the decision landed. The portal itself took months, with real adoption along the way. Pattern: Sometimes the EM’s no is to false dichotomies. The funded path is a hybrid with proofs, not a victory lap for one camp.
+Put a price on exceptions
 
-Make yes expensive in the right way
+Temporary branches and dual pipelines may be necessary. Give each an owner, expiry, support cost, and removal condition.
 
-Temporary exceptions will exist — dual pipelines during migration, transitional architecture branches. Price them:
+An exception without those things is a permanent commitment nobody has budgeted for.
 
-- Time-bounded (a deprecation date, not vibes)
-- Owned (a named team for breakage)
-- Visible (on a list leadership can see)
-- Removable (exit criteria written down)
+When declining new work, show the existing commitments and what would move if the request became a priority. Give partners an escalation path. “The team is busy” explains very little; a visible trade-off gives them something to decide.
 
-Free, quiet exceptions are how platforms drown.
-
-Roadmaps are how you say no at scale
-
-One-off negotiation does not survive GTM scope. The EDP sales/GTM program needed an explicit sequence:
-
-0. Buy-in and prioritization  
-1. MVP on high-value sales datasets  
-2. Expand across sales/revenue consumers  
-3. Broader GTM standardization  
-4. Governance and optimization
-
-That roadmap is a machine for “not yet.” Without it, every dataset is an emergency, and every emergency becomes a yes.
-
-Protect the team without hiding behind them
-
-“The team is busy” is weak if you cannot show the math. Better:
-
-- Here is committed platform work (migration staffing, deprecation, portal seams).
-- Here is what we will not staff this quarter.
-- Here is the escalation if the business wants to reorder.
-
-Take heat in partner forums so individual engineers are not negotiating company priority alone.
-
-Closing
-
-Saying no as a platform EM is stewardship of shared constraints. On EDP, the nos that mattered were: no unfunded adoption, and no architecture theater that freezes delivery. The yeses were expensive on purpose — engineers on migration, connectors, deprecation, POCs, hybrid seams. If partners can see the path, you are not the villain. You are how the company keeps one platform instead of twelve.
+A yes with no capacity is not kinder than a no. It just delays the disagreement until there is less time to resolve it.
 
 
 ### Identity systems fail socially before they fail cryptographically
@@ -708,74 +481,43 @@ URL: https://www.mohitranka.com/blog/identity-systems-fail-socially/
 Date: 2023-03-08
 Tags: identity, security, distributed-systems
 
-When people talk about identity and SSO, they reach for algorithms: token lifetimes, key rotation, SAML vs OIDC, session fixation. Those details matter. In systems I have built and operated, the outages and near-misses that hurt most started earlier — as social and product failures wearing security clothing.
+An identity system can validate every token correctly and still leave the wrong person with access.
 
-Identity is a dependency graph of humans
+The protocol matters. So do the decisions around it: who counts as the same person, who can grant access, what logout means, and who removes privileges when someone's role changes.
 
-An identity platform is not only a service. It is:
+My work on identity infrastructure made me wary of designs that spend all their attention on tokens and leave those workflows implicit.
 
-- Who is allowed to grant access  
-- How contractors, partners, and acquisitions show up  
-- What "logout" means across devices and apps  
-- Which team gets paged when login breaks on a Sunday  
-- How quickly a leaver loses access in reality, not in policy PDFs
+Start with the person, not the token
 
-Crypto bugs are rare relative to misowned workflows. The system can be textbook-correct and still fail the organization.
+Enterprise identities come from HR systems, directories, partner identity providers, and application databases. Those records will not always agree.
 
-Failure mode 1: Ambiguous system of record for "who is this person?"
+Define the subject identifier and who can change it. Account linking, splitting, and recovery need explicit procedures. Otherwise reconciliation scripts gradually become the place where your identity model actually lives.
 
-Enterprises collect identities the way rivers collect silt: HRIS, directories, partner IdPs, legacy user tables, support tools that mint exceptions. If you cannot answer "what is the canonical identifier, and who can change it?" you will eventually:
+SSO gives applications a common authentication path. It does not repair an ambiguous account model.
 
-- Duplicate humans  
-- Orphan entitlements  
-- Merge the wrong accounts  
-- Build reconciliation jobs that become the real product
+Temporary access needs an end
 
-SSO does not fix identity entropy. It multiplies whatever model you already have. Design move: pick a primary subject key strategy, document merge/split procedures, and make account recovery a first-class flow — not a Zendesk folklore.
+Demo accounts, support impersonation, integration users, and emergency access all have legitimate uses. They also create paths around normal controls.
 
-Failure mode 2: Special cases without expiry
+Give exceptions an owner, expiry, and audit trail. Make removal a normal operation. A temporary bypass with no removal mechanism is simply a permanent bypass with optimistic documentation.
 
-Sales needs a demo tenant. Support needs impersonation. A partner needs a long-lived integration user. Security accepts a temporary bypass. Temporary becomes permanent. Permanent becomes unmonitored. Unmonitored becomes the breach path. Design move: every exception has an owner, an expiry, metrics, and a removal plan. Impersonation and break-glass are products with audit trails, not Slack approvals.
+Break-glass access should remain usable during an incident. Its use should also be visible and reviewed afterwards.
 
-Failure mode 3: Logout and session mental models differ by app
+Specify what logout and revocation mean
 
-Users think "I logged out." Your distributed sessions think "two refresh tokens and a cache entry are still valid." Mobile thinks something else. A partner app never got the memo. This is not merely UX. It is an access-control bug with a friendly face. Design move: define session lifecycle as an explicit cross-app contract. Test logout like you test login. Include shared devices and support scenarios.
+A user may end one application session while an identity-provider session or another application's refresh token remains valid. Whether that is a bug depends on the promised behaviour.
 
-Failure mode 4: Rollouts that treat auth like a feature flag toy
+Define that behaviour across applications and devices. Distinguish local logout, global logout, token expiry, and access revocation. Test shared-device and account-recovery scenarios, not just a successful login.
 
-Identity changes have asymmetric risk. A broken profile color is annoying. A broken token validation is company-wide stoppage. Yet teams still ship auth changes like UI tweaks: wide rollouts, thin dashboards, no rehearsal of rollback. Design move: progressive exposure, synthetic login journeys per IdP, clear rollback that does not require a hero, and change freezes around known peak login events.
+For revocation, include downstream caches and propagation delay. Saying access was removed is incomplete if another service can still honour it for an hour.
 
-Failure mode 5: Ownership is "security and also platform and also the app"
+Treat the login path as production infrastructure
 
-When login fails, three teams page each other. When it works, nobody funds hardening. Diffused ownership produces brittle reliability. Design move: a single operational owner for the login path, with written dependencies on IdP, DNS, email, device services, and app session layers. Security sets policy; platform runs the path; apps integrate against a stable interface. Blurry RACI is an availability risk.
+Auth changes can prevent users from reaching everything else. Use progressive rollout, synthetic journeys, and rollback procedures that have been exercised.
 
-What good looks like
+Assign an operational owner for the end-to-end path. Security policy, identity-provider availability, application sessions, DNS, and recovery email may involve different teams. The incident still needs someone responsible for coordinating the response.
 
-Strong identity programs I have seen share a few traits:
-
-1. Boring standards on the outside (OIDC/SAML done plainly)  
-2. Strict internal models for subjects, credentials, devices, and grants  
-3. Auditability as a product feature  
-4. Recovery and leaver flows tested, not assumed  
-5. Customer-visible status when auth is degraded  
-6. Load and failure testing of login, not only of core APIs
-
-Notice how little of that is "pick the trendy token format."
-
-Questions before you add another identity feature
-
-- Who is the human-level source of truth?  
-- What is the break-glass path, and who audits it?  
-- How does a user understand their sessions?  
-- What happens to downstream caches on revoke?  
-- Which team’s error budget does login reliability consume?  
-- Can we re-run last quarter’s incidents as game days?
-
-If those answers are soft, new federation features will add surface area, not safety.
-
-Closing
-
-Identity systems do fail cryptographically — and you should hire people who care about that deeply. But if you only harden tokens while leaving ownership, exceptions, session semantics, and rollout discipline vague, you will still fail. They fail socially first: unclear truth, unowned edges, temporary forever, and teams that cannot coordinate under stress. Build the social protocol as carefully as the crypto protocol. Users feel both. Attackers only need one to be weak.
+I would review cryptography and organisational workflows together. Neither compensates for the other. Correct token validation is little comfort when the entitlement was granted to the wrong account.
 
 
 ### What “led the web launch” taught me about constraints
@@ -783,84 +525,51 @@ URL: https://www.mohitranka.com/blog/web-launch-constraints/
 Date: 2022-07-06
 Tags: engineering-leadership, product, developer-tooling
 
-At Postman, “put the product on the web” was not a greenfield rewrite. It was a constraint problem: a desktop-native API tool used by millions of developers, enterprise pressure for browser access, browser security that blocked the old execution model, and a conference date that would not move. I was the engineering manager accountable for cross-functional delivery — architecture choices, security and infra dependencies, product scope, and keeping the team focused when the path was still uncertain. What follows is what that launch actually taught me.
+Putting Postman on the web meant moving a familiar desktop workflow into an environment with different rules.
 
-We were borrowing trust, not inventing it
+Users expected collections, environments, and request execution to behave like Postman. Browsers restricted what we could do. Security, infrastructure, product scope, and a conference deadline all affected the design.
 
-Postman already had a reputation. Developers had muscle memory for collections, environments, and the desktop workflow. A weak web surface would not be judged as “v1 of a new product.” It would be judged as Postman getting worse. That constraint changed prioritization:
+As the engineering manager responsible for coordinating delivery, I spent as much time resolving those dependencies as discussing the implementation.
 
-- Core workflow parity beat architectural purity.
-- Predictable behavior beat clever browser tricks.
-- Explicit “not on web yet” beat silent missing features.
+Familiar behaviour was a requirement
 
-Trust is spendable once. We treated every launch-day gap as a brand risk, not a backlog curiosity.
+Developers already knew the desktop product. They would compare the web version with that experience, rather than treat missing capabilities as charming evidence of a new product.
 
-The existing system was a stakeholder
+We had to decide what to reuse, what to isolate, and which gaps to make explicit. Core workflow parity mattered more than having a clean rewrite.
 
-Greenfield essays assume you choose the stack. We inherited runtimes, sync assumptions, offline collaboration expectations, and a large surface area of API tooling behavior. The desktop app was not legacy to be embarrassed about — it was the system of record for how users worked. The hard question was never “can we draw a web architecture?” It was:
+The existing product carried knowledge about how users worked. Ignoring it would have meant learning the same lessons again, publicly.
 
-- What must be reused so results stay correct?
-- What must be isolated so the browser can ship?
-- What bugs will the web amplify because usage patterns change?
+Execution could not stay implicit
 
-Treating the existing product as a stakeholder forced interface thinking: web was a new client of a product system, not a parallel fantasy product.
+The desktop app could make network requests that a browser could not. CORS and access to private networks affected the basic Send workflow.
 
-Browser security forced a hybrid execution model
+The product needed distinct execution paths:
 
-Desktop Postman could talk to the network like a normal app. Browsers cannot. CORS, sandboxing, and the lack of unrestricted local network access were not edge cases — they were the product. We ended up with multiple execution paths, each owning a real constraint:
+- A browser path for requests the browser could make.
+- A cloud path for supported requests executed outside the browser.
+- A desktop agent to reach local or private-network resources from the web UI.
 
-- Browser Agent — run requests directly when the browser is allowed to.
-- Cloud Agent — execute in a cloud-hosted environment when the browser cannot reach the target cleanly (cross-origin and related limits).
-- Desktop Agent — bridge the web UI to a local/on-prem network when the user’s world is not reachable from the public cloud.
+Those paths had different reachability and security constraints. A cloud agent did not make every private target accessible, and a desktop bridge introduced its own dependency.
 
-That hybrid model was the architectural heart of the launch. It was also an organizational heart: security, infra, and product had to agree on what “send request” meant in three different trust domains. If there is one technical lesson I would keep from the project, it is this: when the environment cannot support your old runtime assumptions, make the execution model explicit. Hiding three behaviors behind one button without a design is how you get support chaos.
+The architecture had to make those differences understandable without turning every request into a lesson on browser security.
 
-Launch day is a reliability event
+Scope and rollout belonged together
 
-Postman on the Web was announced at POSTCON. Missing the date was not a soft failure mode. That does not mean we shipped fantasy scope. It means readiness was defined as:
+We hit the conference launch window by phasing capability. The announcement did not mean every execution path and feature was equally mature.
 
-- a user journey that worked under real constraints,
-- a rollout plan that could expand,
-- and a team that knew what was deliberately later.
+A launch plan needs a working journey, explicit limits, a rollout sequence, and owners for the work afterwards. The first public version is when real traffic starts teaching you things the demo did not.
 
-We phased capability instead of pretending the first public cut was the end state: start with constrained access patterns, then enable richer API execution, with the cloud execution path continuing to mature after the headline launch. Marketing owns the keynote. Engineering owns the degradation and expansion story. A launch is not a timestamp. It is a reliability event with an audience.
+Cross-functional coordination was part of that plan. Dedicated capacity, regular unblock discussions, and written scope decisions helped prevent dependencies from drifting between teams.
 
-Cross-team coordination was the critical path
+Real workspaces reveal different problems
 
-The longest pole was rarely a single function. Security, infrastructure, performance, and product had legitimate, conflicting optimization targets. In that environment, “the engineers will figure it out in Slack” is not a plan. What worked in practice:
+Large collections and histories made performance a product requirement. Efficient state handling, lazy loading, and virtualised lists mattered because developers brought existing work into the browser.
 
-- Executive air cover for dedicated capacity — without it, every dependency team optimizes for their prior roadmap.
-- A weekly cross-functional sync whose job was unblocking, not status theater.
-- Written scope decisions — what was in for conference day, what was explicit debt, who owned the follow-through.
+A small demo workspace is a poor benchmark for an established developer tool.
 
-My calendar was part of the architecture. Ambiguity multiplies under deadline pressure; decision logs shrink it.
+I would repeat the emphasis on explicit non-goals, journey-level instrumentation, partial-failure rehearsals, and capacity after launch. I would avoid betting a public date on a rewrite that was nearly ready.
 
-Performance was a product constraint, not polish
-
-API collections can be huge. A desktop WebView habit does not automatically become a good browser experience. Large histories and large collections will punish naive rendering. We invested in boring, necessary work: more efficient history/state handling, lazy loading, virtualized UI for large lists. That work is easy to dismiss as polish until a power user loads a real workspace and the tab melts. Developer products have an unforgiving feedback loop. Users can tell when the runtime is lying, when the UI is papering over cost, and when error messages are decorative. They will also write about it publicly. That is part of the market.
-
-What I would repeat
-
-1. Write non-goals as carefully as goals. Conference-day success needs a spine, not a vision deck.
-2. Instrument journeys, not only services. “Request failed” is incomplete without which agent path and which constraint.
-3. Rehearse partial failure — auth issues, agent unavailability, dependency brownouts — not only happy-path demos.
-4. Staff the week after launch like it is part of launch. The real traffic pattern arrives after the keynote.
-5. Protect engineers from thrash by batching stakeholder input; panic multiplies bad architectural shortcuts.
-
-What I would avoid
-
-- Betting the public launch on an unfinished platform rewrite that is “almost ready.”
-- Hiding scope cuts inside the word “polish.”
-- Success metrics only a marketing team can love.
-- Hero culture that makes the second week impossible to staff.
-
-Impact, carefully stated
-
-We hit the conference launch window. The web surface became a real product path, not a demo — with cloud execution continuing to land on its own schedule. Adoption afterward made the strategic point obvious: users wanted Postman without installing a desktop app first, and the company was no longer only a local-first tool. Exact figures belong in contexts where they can be sourced and defended. The leadership lesson does not depend on a screenshot of a dashboard: the hybrid execution model plus phased delivery was the only way to respect browser constraints without abandoning the desktop product’s trust.
-
-Closing
-
-“Led the web launch” sounds like a milestone. The work was constraint management: borrowed trust, inherited systems, browser security, conference time, cross-team conflict, and performance under real collections. Code expressed the answers. The answers were the constraints we were willing to name early — and the execution model we built so users did not have to understand them all at once.
+The main lesson was to name the constraints early. The execution model and phased rollout followed from them. Drawing the web UI was the comparatively easy part.
 
 
 ### Incubating 0→1 beside a mature product
@@ -868,99 +577,45 @@ URL: https://www.mohitranka.com/blog/postman-labs-0-to-1/
 Date: 2021-06-15
 Tags: engineering-leadership, product, developer-tooling
 
-When I was at Postman, the core product was already the default API client for a huge HTTP/HTTPS world — on the order of tens of millions of developers on desktop. That success created a sharp problem: how do you explore what comes after HTTP without slowing the product everyone already depends on? Postman Labs was our answer: a small unit with a charter to incubate 0→1 work — new protocols and paradigms — without turning every experiment into a core-roadmap hostage situation.
+A mature product gives you users, distribution, and a backlog large enough to bury most experiments.
 
-The challenge: the market moved past “REST in a GUI”
+At Postman, we wanted to explore protocols and workflows beyond the established HTTP client without taking capacity away from the product people already depended on. Postman Labs gave that work a separate place to develop.
 
-Developers were increasingly living with:
+The separation mattered. So did having a route back into the main product.
 
-- WebSockets for persistent, bidirectional sessions  
-- gRPC for efficient, schema-driven service APIs  
-- GraphQL and other non-CRUD shapes of interface
+Protect exploration without disconnecting it
 
-Internally we had ideas. What we lacked was a structured way to validate, build, and kill or graduate them while the core team stayed focused on the desktop product’s quality and scale. Putting every bet into the main feature factory would have meant either:
+Labs used a small team familiar with Postman, lighter processes for experiments, and a clear success measure for each initiative.
 
-- starving core reliability and UX, or  
-- shipping “innovation” at the speed of a mature backlog.
+The charter covered both new protocols and deeper workflows such as testing and automation. It gave the team permission to investigate without making every prototype a core-roadmap commitment.
 
-Labs existed to refuse that false choice.
+That permission should include stopping. Otherwise you have created a feature team whose unfinished work is unusually difficult to question.
 
-Structure for speed (and containment)
+Make each phase earn the next
 
-We did not invent another feature team with the same process tax as core. Labs was intentionally different:
+The sequence was feasibility and market validation, then an MVP used internally, then a limited beta.
 
-1. Smaller team drawn from engineers who already knew Postman’s product DNA.  
-2. Less process theater — lean experiments instead of full SDLC cosplay for every spike.  
-3. One North Star metric per initiative — a single definition of success so debates stayed grounded.  
-4. Explicit separation from core delivery so a failed experiment did not become a multi-quarter core commitment by accident.
+Each phase answered a different question. Is there a problem worth solving? Can we build a usable solution? Does it remain useful to people outside the team?
 
-Charter in two axes:
+A prototype proves that something can be demonstrated. It does not prove demand, supportability, or a reason to graduate it.
 
-- Breadth — protocols and shapes beyond HTTP.  
-- Depth — personas and workflows (testing, automation, CI-shaped use) that the HTTP client alone did not own.
+Dogfooding helped expose usability and correctness issues before public rollout. Developer-tool teams have a convenient supply of demanding users sitting nearby. It is sensible to use them.
 
-Independence was not isolation from users. It was isolation from the wrong kind of backlog pressure.
+New protocols change the workflow
 
-A three-phase model that de-risked 0→1
+WebSockets required persistent connections, bidirectional traffic, and an event history. Treating them as ordinary HTTP requests would have missed the reason developers wanted the capability.
 
-Every Labs initiative had to earn the next phase:
+gRPC brought Protobuf contracts, binary serialization, and unary and streaming calls. Users needed to compose requests and inspect what happened without leaving the tool.
 
-Phase 1 — Feasibility and market validation
+Both required changes to the interaction model as well as network support. Their eventual place in Postman's broader product was the useful outcome of incubation.
 
-Customer conversations, lightweight proofs, honest “who hurts without this?” If the answer was only “it would be cool,” it did not proceed.
+Plan the graduation
 
-Phase 2 — MVP and dogfooding
+A successful experiment needs owners for maintenance, reliability, documentation, and support. Core teams should be involved before that transfer becomes urgent.
 
-Internal builds used by Postman’s own engineers. Usability and correctness issues showed up before a public audience.
+Reserve exploration capacity, define a success measure, and write the graduation criteria. Review retained use rather than counting launches alone.
 
-Phase 3 — Limited beta and public validation
-
-Constrained rollout, measure adoption and engagement, then decide: graduate into the main product, iterate, or stop.
-
-That sequence sounds obvious. The discipline is stopping between phases. Core roadmaps often skip phase 1 and call a half-built feature a launch.
-
-WebSockets: persistent sessions are not “requests with extra steps”
-
-WebSockets were an early Labs bet because real-time systems (chat, feeds, IoT-style control planes, live tooling) do not fit the request/response mental model Postman had optimized for. Hard parts:
-
-- Long-lived bidirectional connections instead of discrete calls  
-- Auth flows that must hold for a session, not only a single hit  
-- UX for streams of events over time, not one response panel
-
-What we built toward: a first-class WebSocket client experience — connect, send/receive, inspect event history, support practical auth patterns. Outcome: WebSockets did not stay a lab toy; support graduated into Postman’s broader API development surface. That graduation path was the point of Labs.
-
-gRPC: schemas and streams in a product trained on text HTTP
-
-gRPC was growing fast in backend-heavy environments. Postman’s muscle memory was text-centric HTTP. gRPC forced different questions:
-
-- How do users work with Protobuf contracts inside the product?  
-- How do unary and streaming calls show up in a composer UX?  
-- How do serialization mistakes become debuggable instead of opaque binary pain?
-
-Execution themes: schema-aware composition, streaming-aware request/response handling, and making “what did I just send?” inspectable for developers who live in Postman daily. Outcome: gRPC testing/debugging became a real product capability in the same family as REST workflows — not a separate science project users had to leave Postman for.
-
-What scaled beyond the first bets
-
-When early graduates worked, Labs stopped being only a temporary squad. The incubation pattern — validate, dogfood, beta, graduate — became a reusable company muscle. Later product bets (including automation-shaped work such as Flows-class ideas) could reuse the same organizational shape: explore beside core, then merge what earns users. Eventually Labs-shaped work attracted clearer funding and leadership attention. That is the healthy end state: not a permanent rebel base, but a proven path for 0→1 inside a company that also has to protect a mature product.
-
-What I would repeat as an EM
-
-1. Separate exploration capacity from core SLA capacity — or core always wins and innovation becomes slideware.  
-2. One success metric per bet — multi-metric dashboards hide kill decisions.  
-3. Dogfood before marketing — especially for developer tools; your engineers are harsh, useful users.  
-4. Graduation criteria in writing — “done in Labs” must mean something operationally.  
-5. Protect the team from identity crisis — Labs is not “the people who do side quests”; it is a product strategy role.
-
-What I would avoid
-
-- Innovation theater with no kill switch  
-- Hiding Labs work so core is surprised at graduation  
-- Measuring success only by launches, not by retained use  
-- Staffing Labs only with people core “can spare” forever
-
-Closing
-
-Incubating 0→1 beside a mature product is a leadership design problem: process, incentives, and graduation rules — not only prototype velocity. Postman Labs worked when it had a narrow charter, phased validation, and a path for WebSockets, gRPC, and similar bets to become real product surfaces without forcing the entire company to pretend it was still a startup with nothing to lose. If your core product is already loved, that is not a reason to stop exploring. It is a reason to explore on purpose.
+Too much process can kill an experiment early. Too little accountability can keep it alive forever. Labs needs room to discover something useful and enough discipline to recognise when it has not.
 
 
 ### How I review a distributed design in 45 minutes
@@ -968,106 +623,51 @@ URL: https://www.mohitranka.com/blog/how-i-review-a-distributed-design/
 Date: 2021-03-03
 Tags: distributed-systems, engineering-leadership, architecture
 
-The most expensive design reviews I have run were not missing a box on a diagram. They were missing a decision. One of them froze delivery on an EDP self-serve portal for about a month while two strong engineers disagreed in public about monolith versus microservices — and ownership quietly collapsed. This is how I run a distributed design review when time is short, using that conflict as the worked example. The forty-five minutes are a filter for danger and indecision, not a substitute for deep design.
+A design review can end with everyone understanding the diagram and nobody knowing what to do next.
 
-The situation the review had to unstick
+On an EDP self-serve portal, disagreement over monoliths and microservices held up delivery for about a month. Both approaches had reasonable arguments. The discussion also undermined ownership, and the project stopped moving.
 
-We needed a self-serve portal on top of the Enterprise Data Platform: dataset registration, governance controls, access workflows, metadata — so teams could manage lifecycle without filing tickets into oblivion. Two credible positions formed:
+A short review will not finish a distributed design. It can expose the assumptions and decisions that need more work. This is the structure I use when I have about forty-five minutes.
 
-- Stay close to the monolithic EDP backend — simpler integration, less duplication, faster delivery on shared infra.
-- Split into microservices early — independent iteration on portal features without waiting on the monolith.
+First, establish the promise
 
-Both sides had technical merit. The failure mode was social: critique moved into open forums in a way that undermined the owner, the owner disengaged, and execution stopped. Stakeholders saw silence. That is a design-process failure, not only an architecture debate.
+Spend the first five minutes on the user journey, scope, and non-goals.
 
-Minutes 0–5: What user promise are we keeping?
+For the portal, the job was dataset registration, access, governance, and metadata management. It was not an opportunity to rebuild the entire platform. That distinction removed quite a lot of architecture from the conversation.
 
-Before hexagons, I want one paragraph:
+Ask someone to walk through one real action. A sequence through the system tells me more than another diagram of service boxes.
 
-- Who uses the portal?
-- What can they do without a human intermediary?
-- What is explicitly out of scope for v1?
+Find the state that must be correct
 
-For us: GTM/data producers and consumers managing dataset lifecycle — registration, access, metadata — not “rebuild EDP as microservices.” If the promise is fuzzy, stop. Architecture will invent scope.
+For the next ten minutes, identify the system of record and the invariants.
 
-Minutes 5–15: Where does truth live?
+Which operation must be atomic? What can be delayed? Where does metadata live? If two services disagree, which one wins, and how does the other recover?
 
-I care about systems of record more than service count. Questions that mattered on the portal:
+For the portal, core capabilities depended closely on the existing EDP backend. Other workflows needed more independent iteration. Metadata lifecycle belonged in a shared catalog; we used DataHub.
 
-- Which actions must be consistent with core EDP backend behavior on day one?
-- Which workflows change weekly and need independent deploy cadence?
-- Where does dataset metadata live so the portal is not a second brain?
+Those were different needs. There was no reason they all had to get the same deployment model.
 
-We eventually used a hybrid truth model: core platform capabilities stayed integrated with the existing EDP backend; more dynamic workflows (access requests, tagging-style features) could stand as separate services; metadata was centralized with a system fit for dataset lifecycle (in our case, Apache DataHub) so the portal was not inventing yet another catalog. Red flags in any review:
+Walk through failure
 
-- “Both systems will stay in sync” with no mechanism.
-- Every feature forced into one deployability story.
-- Metadata treated as a UI detail.
+Use another ten minutes for timeouts, retries, partial writes, replay, and dependency failure. Identify how the user sees a partial success and how an operator repairs it.
 
-Minutes 15–25: What fails—technically and organizationally?
+Also check ownership. Who can decide? Who runs the service? Who owns a failed interaction between teams? A technically sound design can still sit untouched if those answers are missing.
 
-Classic distributed questions still apply: timeouts, dual writes, partial deploy, replay. On this project the binding failure was different:
+Decide what needs evidence
 
-- What happens if the owning engineer stops driving?
-- What happens if disagreement becomes a public referendum every week?
-- What happens if leadership hears only one side’s framing?
+We used written criteria covering scalability, maintainability, delivery speed, and ownership. Both approaches got time-boxed proofs, with a neutral senior engineer helping evaluate them.
 
-A design review that ignores ownership and decision rights will produce a beautiful diagram and a still project. I schedule the technical argument inside a structured forum with criteria — not in drive-by threads. If you need blame-free space, create it deliberately.
+A proof should test the disputed assumption. It should not become a smaller implementation of each person's preferred architecture.
 
-Minutes 25–35: How will we choose without infinite debate?
+In parallel, I worked with the engineers on how disagreement was being handled. Restoring ownership was necessary for the technical decision to stick.
 
-Opinion without evidence burns weeks. The intervention that worked:
+Leave with a decision and its limits
 
-1. Write evaluation criteria before picking a winner: scalability, maintainability, delivery speed, long-term ownership.
-2. Force small proofs — both approaches get a time-boxed spike/POC against the criteria.
-3. Bring a neutral senior engineer into the room to pressure-test both sides without owning either ego.
-4. Time-box the decision — the review ends with a path, not a sequel meeting.
+The result was a hybrid: keep tightly integrated core capabilities close to EDP, allow separate services where independent iteration justified them, and centralise metadata.
 
-This is operability of the decision, not only of the service.
+Write down the decision, owner, conditions, and what would cause a review. Reserve the final minutes for that record.
 
-Minutes 35–40: People side (do not skip)
-
-Distributed design is done by humans with status and career goals. In parallel with the technical path:
-
-- Rebuild ownership with the engineer who had stepped back — silence is not an acceptable escalation strategy.
-- Coach the critic on influence: staff-level impact includes how you challenge, not only that you are right.
-- Make expectations explicit in 1:1s so the project is not a proxy war.
-
-Skip this and the hybrid architecture will still die in the next disagreement.
-
-Minutes 40–45: Decision and conditions
-
-We did not pick a pure monolith or a pure microservice rewrite. We picked a hybrid:
-
-- Core platform features (registration, governance controls tightly bound to EDP) stayed where integration cost dominated.
-- Dynamic portal features that needed independent iteration moved toward separate services.
-- Metadata lifecycle was centralized rather than re-implemented.
-
-Approve with conditions, in writing: what is in v1, what is explicitly later, who owns the seams, when the next review is if assumptions fail. Verbal “sounds good” evaporates. Written conditions survive contact with calendars.
-
-The diagram I want if I only get one
-
-Trade three layered architecture posters for either:
-
-- a sequence of one user action through registration → metadata → access, or  
-- a side-by-side POC scorecard against the agreed criteria.
-
-Sequence diagrams and scorecards reveal lies that box diagrams hide.
-
-Anti-patterns this freeze taught me
-
-- Public architecture criticism that bypasses the owner.
-- Binary holy wars (monolith vs microservices) without workload specifics.
-- Design review as spectator sport for leadership without a decision owner.
-- EM waiting too long to facilitate because “they’re seniors, they’ll figure it out.”
-- Approving to end discomfort rather than risk.
-
-What unblocked looked like
-
-Once criteria, POCs, and a hybrid decision landed, the freeze broke quickly — on the order of a week to resume real execution — and the portal shipped on a timeline measured in months with meaningful adoption. The architecture mattered. The restored ownership mattered more.
-
-Closing
-
-In forty-five minutes you will not finish a distributed design. You can learn whether the team has a clear promise, a coherent truth model, a way to decide, and a human ownership path. On platform work, the last item is not soft. It is how delivery fails first.
+Forty-five minutes is a triage window, not an approval guarantee. If a critical invariant or recovery path remains unclear, the useful outcome is a named investigation. Approving a design just to finish the meeting is an expensive way to save five minutes.
 
 
 ### Introducing on-call without burning the team
@@ -1075,96 +675,45 @@ URL: https://www.mohitranka.com/blog/introducing-on-call-without-burnout/
 Date: 2020-11-10
 Tags: reliability, engineering-leadership, platforms
 
-At Postman, my team owned a large-scale platform surface used by millions of developers. What we did not own — formally — was a predictable operational response. Production issues and public GitHub noise were handled ad hoc. Someone jumped in, or everyone hesitated. Retrospectives lacked a clear accountable role. The system worked until it did not, and then it worked by heroics. We needed on-call. We also needed engineers who still wanted to build product after the rotation.
+Before we introduced a formal rotation at Postman, production issues were handled by whoever noticed and stepped in. Public GitHub reports added another route for problems to reach the team.
 
-What was broken before process
+That arrangement looked flexible. In practice, ownership was unclear and the same people kept getting interrupted.
 
-Without a rotation, four things piled up:
+We needed predictable incident response without making reliability depend on a few engineers being permanently available.
 
-1. Unclear ownership — incidents waited on “who feels responsible today.”  
-2. Context-switch tax — feature work and firefighting shared the same brains without boundaries.  
-3. Uneven load — the same people always raised their hands.  
-4. Weak learning loops — retros had symptoms, not a role that carried fixes week to week.
+Assign the work, then make room for it
 
-For a developer-facing platform, user-visible breakage is not a side channel. It is the product. Treating ops as optional was a product decision, whether we admitted it or not.
+We used primary and secondary roles.
 
-Design goals
+The primary handled monitoring, incident response, and triage. Feature expectations dropped during that period. The secondary provided backup for major incidents, rather than becoming another primary for every message.
 
-I wanted a system that was:
+This capacity decision is easy to skip. If an engineer has the same delivery commitments plus operational responsibility, the schedule has not become more efficient. It has become fictional.
 
-- Explicit — someone is primary, always.  
-- Fair — load rotates; it does not stick to volunteers.  
-- Bounded — on-call is a job for a window, not a personality type.  
-- Educational — the whole team sees production, not only a martyr subset.  
-- Humane — no permanent page-from-bed culture dressed up as commitment.
+Our rotation used two-week windows, with a primary-to-secondary pattern to carry context forward. That cadence was a choice for our team, not a universal recommendation. Team size, incident frequency, and the demands outside working hours should determine the schedule.
 
-Reliability that depends on burnout is just deferred attrition.
+Make the handoff useful
 
-The model we ran
+Weekly team time included incidents, resolutions, support themes, adjacent risks, and follow-ups. The outgoing primary explained what the next person needed to know.
 
-Primary and secondary
+Major incidents got retrospectives. Recurring problems got playbooks so the next engineer did not have to rediscover the same recovery steps.
 
-- Primary — dedicated to monitoring, incident response, and triage (including GitHub-facing noise). Feature delivery expectations drop for that window on purpose.  
-- Secondary — backup for major incidents; not a stealth second primary for every ping.
+A handoff should transfer unresolved work to an owner. It should not transfer a pile of links and hope.
 
-If primary is still expected to hit the same sprint commitments, you do not have on-call. You have theater.
+Measure the burden as well as the service
 
-Two-week shifts with a handoff pattern
+The rotation made triage more systematic and spread production knowledge across the team. I would not attribute a precise response-time improvement to the rotation without a comparable baseline and incident mix.
 
-Engineers rotated on a two-week cadence. A common pattern was primary one window, then secondary the next — so knowledge transferred and no one lived forever in the blast radius. Back-to-back primary stretches were treated as a smell, not a badge.
+For a new rotation, measure response time, alert volume, repeat incidents, after-hours interruptions, and how the work is distributed. Faster response is useful. Faster response achieved by repeatedly waking the same two people is not a sustainable result.
 
-Handoff as a team ritual
+Noisy alerts need fixing. Repeated incidents need engineering time. Neither becomes acceptable because there is now a name on the rota.
 
-Weekly team time included an on-call handoff, not only standup status. Primary walked through:
+Protect it after the launch
 
-- Incidents and resolutions  
-- Adjacent system issues that might hit us next  
-- Notable GitHub / support themes  
-- Follow-ups that needed owners beyond the shift
+Avoid consecutive primary stretches where possible. Do not let the secondary become free extra capacity. Give retrospective actions owners and time to complete them.
 
-That ritual turned private pager pain into shared product knowledge.
+The manager's job includes defending that capacity when feature deadlines arrive. Otherwise the old volunteer system returns, wearing a new calendar.
 
-Retros and playbooks
-
-Major incidents got structured retros. Recurring issues earned playbooks — step-by-step paths so the next primary was not rediscovering folklore at 1 a.m. Playbooks are how on-call becomes a team asset instead of tribal knowledge in one engineer’s head.
-
-Psychological safety and load management
-
-- No expectation of endless consecutive primaries.  
-- Balance with feature work across the quarter so people are not typed as “ops only.”  
-- Managers (me included) treated page load and fairness as staffing concerns, not only engineer grit.
-
-What improved
-
-With clear ownership:
-
-- Faster response — we saw on the order of a ~40% reduction in incident response time once roles were unambiguous (directionally; treat it as an order-of-magnitude win from process, not a lab result).  
-- More systematic triage — fewer “is anyone looking at this?” gaps.  
-- Better morale — predictable pain beats random pain.  
-- Broader operational skill — more engineers touched production reality.  
-- Earlier fixes — primaries had space to chip at known sharp edges before they became SEVs.
-
-Stability improved because response became a designed system, not a personality contest.
-
-What I would tell another EM before day one
-
-1. Write who is primary in a place the team actually looks.  
-2. Cut feature load for primary or you will train people to ignore the pager.  
-3. Ship handoff and playbooks in the first month, not after the third outage.  
-4. Measure response and fairness, not only uptime.  
-5. Defend the rotation against “just this once” exceptions from leadership — exceptions are how volunteers reappear.
-
-Failure modes to avoid
-
-- On-call as punishment for the least political engineers  
-- Secondary as free extra primary  
-- Retros without owners or due dates  
-- Alert noise so high that everyone mutes everything  
-- Celebrating heroes instead of fixing the systems that required them
-
-Closing
-
-Introducing on-call is not a tooling purchase. It is a product and staffing decision: user trust requires an accountable human path, and that path must be sustainable. At Postman, primary/secondary roles, two-week rotations, handoffs, retros, and playbooks turned operational ownership from ad hoc heroics into something the team could carry — and still ship. If your platform is already large and your response is still “whoever notices,” you do not have a reliability gap only. You have a leadership design gap. Close it on purpose.
+On-call made responsibility clearer for us. Keeping it useful required treating operational load as real work, every planning cycle.
 
 
 ### GTM datasets need data contracts
@@ -1172,98 +721,45 @@ URL: https://www.mohitranka.com/blog/gtm-datasets-need-data-contracts/
 Date: 2020-07-01
 Tags: data-platforms, platforms, product
 
-When a go-to-market dashboard is wrong, nobody says “the warehouse is eventually consistent.” They say the number is wrong — and they stop trusting the platform. On LinkedIn’s Enterprise Data Platform (EDP) work, the failure mode was rarely a missing chart type. It was informal truth: datasets without clear producers, consumers, freshness expectations, or a path that BI could rely on when Hadoop-era pipelines still “worked.” That is a data-contract problem, whether or not you use the word contract.
+When two revenue dashboards disagree, nobody is comforted by the fact that both pipelines succeeded.
 
-The contract is the product boundary
+The missing agreement is usually fairly basic: what does this number mean, who owns it, and which dataset should we trust?
 
-A data contract is a written agreement between people who produce a dataset and people who depend on it:
+Working on LinkedIn's Enterprise Data Platform (EDP) made those questions difficult to avoid. The platform was supposed to become the governed path for go-to-market data, while BI teams still had working Hadoop-based feeds. Adding another source did not automatically settle which one was right.
 
-- What the dataset means (grain, keys, critical fields)
-- Who owns changes
-- How fresh and complete it must be for its main consumers
-- Who may use it, and for what
-- What happens when the shape changes
-- Which path is the system of record when two feeds disagree
+Agree on meaning before exposing the table
 
-Without that, you have tables and jobs — not a product interface. EDP’s strategic job was to become the governed center for GTM data. BI teams on Power BI and Tableau did not move because a platform existed; they moved when the interface of getting trustworthy data became clearer, cheaper, and eventually mandatory as legacy paths aged out.
+A data contract should explain what consumers are allowed to depend on. It needs more than field names and types.
 
-Which GTM datasets need contracts (almost all that matter)
+For an important dataset, I want to know:
 
-Definitely:
+- What one row represents, and which keys identify it.
+- What critical fields mean, including allowed nulls.
+- Who produces it and who uses it in production.
+- When it should be ready, and how complete it should be.
+- Who can change it, with what notice.
+- Which path is authoritative during migration.
+- Who responds when the agreement breaks.
 
-- Pipeline and revenue metrics that show up in leadership reviews  
-- Account, lead, and opportunity-shaped datasets used across tools  
-- Any feed BI materializes into workbooks that drive weekly motions  
-- Datasets used for access decisions, eligibility, or customer-facing ops  
-- Shared “golden” entities multiple teams join in different ways
+This can fit in a short document. Length is not enforcement.
 
-Lighter-weight is fine for:
+A field that retains its type but changes its meaning can break a dashboard more quietly than a schema change. Contracts need to cover semantics as well as syntax.
 
-- Truly exploratory sandboxes with no production consumers  
-- One-off extracts with an explicit expiry
+Make the agreement affect delivery
 
-If a number can start an argument in a QBR, it deserves a contract.
+On EDP, connectors, migration support, and deprecation dates mattered because they made the governed path practical for BI consumers. A contract hidden in a wiki would not have moved their workbooks.
 
-What we needed in practice (not a 40-page template)
+Validate the consumer path before cutover. Compare critical values during dual running. Check row counts and null rates, while recognising that those checks will not catch every semantic error. Give someone authority to stop a bad publish.
 
-Keep contracts short enough that producers and BI partners will actually read them:
+Producers own the meaning and correctness of their data. The platform provides discovery, access, and checks. BI partners own how the dataset is interpreted in their workflows. Shared responsibility still needs named people at each boundary.
 
-1. Dataset name and owning team  
-2. Grain (what one row means)  
-3. Critical fields and allowed null behavior  
-4. Primary consumers (e.g. Power BI / Tableau paths, sales analytics)  
-5. Freshness / readiness expectation — even if it starts as “available on EDP before legacy deprecation,” not a perfect percentile  
-6. Change policy — notice, versioning, who approves breaking changes  
-7. System of record during dual-run periods  
-8. Support path — where breakages go (not a random Slack thread)
+Match the contract to the consequence
 
-On EDP, connectors, migration staffing, and deprecation dates were how contracts became real. A wiki table alone does not change incentives.
+A temporary exploratory extract does not need the same process as a revenue metric used in leadership reviews. It does need an expiry if it is supposed to be temporary.
 
-Why platform adoption without contracts fails
+Start with the decision the dataset supports and the first production consumer. Write their expectations before widening access. End the old path when migration is complete.
 
-BI’s rational objection was: “We can already get the data.” Informal sources always feel free until:
-
-- Two dashboards disagree  
-- A legacy pipeline is turned off  
-- A field changes meaning and nobody tells the workbook owner  
-- Query performance after cutover becomes “the platform’s problem” with no owner
-
-Contracts force those conversations before the incident. They also make deprecation fair: you cannot retire a path nobody documented as non-authoritative.
-
-Evaluation is part of the contract
-
-Do not separate “data quality” from “dashboard quality.” Ship and migration gates should include:
-
-- Consumer path checks (does the BI workflow still resolve?)  
-- Row-count / null-rate sanity on critical fields  
-- Explicit dual-run comparisons while both paths live  
-- A named human who can freeze a bad publish
-
-When the contract breaks, something visible should fail before the QBR does.
-
-Organizational pattern that worked
-
-- Producers own correctness and change communication  
-- Platform (EDP) owns enforcement, discovery, access patterns, and migration leverage  
-- BI / analytics partners own consumer semantics and workbook impact  
-- Leadership owns deprecation as continuity policy, not a style preference
-
-Shared Slack channels are not a substitute for ownership. Funded migration and executive sponsorship were how EDP contracts left the slide deck.
-
-A sequence I recommend for new GTM datasets
-
-1. Write the decision the dataset supports in one sentence.  
-2. Name the first production consumer (often a BI path).  
-3. Draft the contract before scaling access.  
-4. Put the dataset on the governed platform path.  
-5. Dual-run only with an end date.  
-6. Turn off the informal path.
-
-Teams love to start at “expose the table.” Steps 1–3 are where trust is designed.
-
-Closing
-
-EDP did not earn “source of truth” status by existing. It earned it when GTM consumers — especially BI — could depend on named datasets with owners, expectations, and an end to competing pipelines. Call that a data contract, a product interface, or an operating promise. Just do not ship GTM data as folklore and hope governance appears later.
+Tables are easy to publish. A number that people can agree on takes more work.
 
 
 ### RDBMS vs. NOSQL?
@@ -1271,34 +767,36 @@ URL: https://www.mohitranka.com/blog/rdbms-vs-nosql/
 Date: 2013-06-29
 Tags: data-platforms, databases, architecture
 
-From our own experience designing and operating a highly available, highly scalable ecommerce platform, we have come to realize that relational databases should only be used when an application really needs the complex query, table join and transaction capabilities of a full-blown relational database. In all other cases, when such relational features are not needed, a NoSQL database service like DynamoDB offers a simpler, more available, more scalable and ultimately a lower cost solution.
+I came across Werner Vogels' article on DynamoDB while researching the database. His argument was that applications without a need for joins, complex queries, or transactions could be better served by a NoSQL store.
 
-            — Werner Vogels, CTO Amazon.com on when to use RDBMS
+I respect Werner. I would still take that advice with a pinch of salt. Amazon also has a database to sell.
 
-I came across this quote in an article while researching DynamoDB. I respect Werner a lot, but take his database-selection advice with a pinch of salt — he has a database to sell.
+Most applications never reach the scale at which a relational database becomes their main problem. They do need a schema, queries, backups, monitoring, and people who know how to operate the system. Relational databases have a fairly good head start on all of those.
 
-Most products never hit the kind of scale that relational databases cannot serve. RDBMSs have been around for decades and still work fine, including at large scale. There are mature open source options, well-understood schemas, solid support for filtering and aggregation, big communities, plenty of people who already know the tools, default framework integrations, and a deep ecosystem of operational tooling.
+My starting point is a relational database unless a requirement makes that a poor fit. These are the requirements I would examine.
 
-RDBMS are great for almost everything, unless…
+Availability beyond one server
 
-Relational systems are easy to work with. Monitoring, backup, and ops tooling is strong (and often free). They cover most use cases, help is easy to find, and — best of all — you probably already know them. Unless I have one of the requirements below, I would start with a single-node relational database.
+A single database process is a point of failure. A crash or maintenance event can make the application unavailable.
 
-Super high availability
+If the availability target cannot tolerate that, evaluate replication, failover, or a distributed setup. That may be relational or non-relational. Choosing NoSQL does not by itself establish an availability guarantee.
 
-The database server process is a single point of failure. If it crashes, or if you take it down for planned or unplanned maintenance, the system goes with it.
+Be explicit about the consistency you need during failures. “Always available” is not a useful requirement until you explain what answers the application is allowed to return.
 
-If you need something close to 100% availability, look at clustered relational setups or distributed databases that trade consistency for availability — Cassandra, for example. Until that requirement is real and written down, stick with the boring option.
+Data that does not fit the model
 
-Flexible schema
+Schemas help you express relationships and constraints. They also allow queries you did not anticipate on day one.
 
-One of the great strengths of relational databases is the schema itself — modelling, normalization, and related ideas. You can design a solid model without knowing every query pattern up front, and it usually holds up. That said, not all data maps cleanly to tables and joins. Postgres has some help via hstore and JSON, but relational engines still prefer fixed schemas that play nicely with normalization. Flexible / EAV-style shapes tend to go badly in an RDBMS.
+Some data does not fit that model neatly. Highly varied documents can justify a different store. Relational systems can accommodate some of this with features such as PostgreSQL's hstore and JSON support, but that does not mean every shape becomes pleasant to query.
 
-If you genuinely need a flexible schema — and it is worth asking twice — look at NoSQL options. Do not pick them just because the schema feels slightly awkward on day one.
+Ask whether schema flexibility is a real need or simply a wish to avoid deciding what the data means. A database without a fixed schema does not remove that question from the application.
 
-Horizontal scaling
+Growth beyond one machine
 
-If you expect data and traffic to grow beyond one machine, a single-node relational database will not be enough forever. There is only so much RAM and CPU you can throw at one box. Eventually you hit that wall, and then the choice is either a NoSQL system or a relational cluster.
+There is a limit to how much CPU, memory, and storage you can put on one server. If the expected workload exceeds it, you need a scaling plan.
 
-Epilogue
+That could involve partitioning, a relational cluster, or a non-relational store designed around the access pattern. Each choice adds operational and correctness work. Compare that cost with the workload you actually expect.
 
-NoSQL is not a panacea, and RDBMSs are still the right default for most applications. Unless you have a clear reason not to use a relational database, stick with one. Prefer the boring system until a real requirement forces something else — and write that requirement down so the next person does not re-open the debate from scratch.
+Most of the time, I would start with the system the team knows and can recover. Change it when a concrete requirement earns the extra complexity.
+
+NoSQL is useful. So are relational databases. Neither needs you to join a side.
