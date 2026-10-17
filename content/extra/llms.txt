@@ -5,12 +5,13 @@
 Mohit Ranka is an engineer and engineering leader with 18+ years across Booking.com, Postman, LinkedIn, and Moveworks, and the founder of Norvia Labs. Outside work his interests run to philosophy and religion, psychology, systems thinking, strategy, economics, politics, and technology, plus chess, music, sitcoms, movies, books, and sports.
 
 Experience highlights:
-- Booking.com (2017-2019): led the team of 5 that built account.booking.com, the identity and access management platform for 300M+ guest and 10M+ partner accounts, including a service-to-service agent handling 1.2M requests a second
-- Postman (2020-2022): led the Runtime team, the engine behind every request in the Postman app and Newman, and led Postman on the web to 13M monthly active users in six months
-- LinkedIn (2022-2023): led adoption of the Enterprise Data Platform, migrating 1,500 sales datasets and 25+ go-to-market teams and cutting P95 data freshness from 72 hours to 6
-- Moveworks (2024-2025): led 17 engineers across analytics and real-time integrations for an agentic AI assistant used at 350+ enterprises
-- Norvia Labs (2025-present): founder; open-source infrastructure for putting AI agents to work inside limits people set
-- Forge: an open-source terminal AI coding environment in Rust he built solo at Norvia Labs (https://github.com/NorviaLabs/forge)
+- Norvia Labs (2025 - present): founder; building open-source infrastructure for AI agents, starting with Forge, a terminal AI coding environment in Rust (https://github.com/NorviaLabs/forge)
+- Moveworks (2024 - 2025): engineering manager for two teams, 17 engineers in all, for an agentic AI assistant used at 350+ enterprises: analytics, the Data API and the Surya platform, and the real-time integrations system that keeps customer data in sync
+- LinkedIn (2022 - 2023): engineering manager for two teams of 14 engineers on the enterprise data platform; moved 1,500 sales datasets and 25+ go-to-market teams onto it, cutting P95 data freshness from 72 hours to 6 and data errors from over 10% to 0.5%
+- Postman (2020 - 2022): engineering manager for the Runtime team (5 to 11 engineers); took Postman to the browser (13M monthly active users in six months) and beyond HTTP with WebSocket, Socket.IO and gRPC
+- Booking.com (2017 - 2019): led the team of 5 that built account.booking.com, the authentication and authorization infrastructure for 300M+ guest and 10M+ partner accounts, including a service-to-service agent at 1.2M requests per second
+- Before 2017: Principal Developer at Seynse (loansingh.com), independent consultant, Qyuki and Serendio
+- pydgraph (2016): wrote the first Python client for the Dgraph graph database, now Dgraph Labs' official client
 
 Location and background: Bangalore, India; B.Tech. from Vellore Institute of Technology.
 
@@ -22,8 +23,8 @@ Site: https://www.mohitranka.com
 - [Home](https://www.mohitranka.com/): A short introduction, recent writing, and an optional illustrated map of the site with a cottage and original music
 - [About](https://www.mohitranka.com/about/): Who Mohit is, briefly, in his own words
 - [Writing](https://www.mohitranka.com/blog/): Essays on systems, platforms, data, reliability, and leadership
-- [Work](https://www.mohitranka.com/work/): Selected work at Booking.com, Postman, LinkedIn, Moveworks, and Norvia Labs
-- [Projects](https://www.mohitranka.com/projects/): Things Mohit has built on his own time and shipped, currently Forge
+- [Work](https://www.mohitranka.com/work/): Selected work at Norvia Labs, Moveworks, LinkedIn, Postman, and Booking.com
+- [Projects](https://www.mohitranka.com/projects/): Things Mohit has built on his own time and shipped: Forge and pydgraph
 - [Library](https://www.mohitranka.com/library/): Books Mohit has read, synced from Goodreads, favourites first
 - [Contact](https://www.mohitranka.com/contact/): Send Mohit a message
 - [Tags](https://www.mohitranka.com/tags/): Browse writing by topic tag

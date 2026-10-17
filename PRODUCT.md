@@ -20,7 +20,7 @@ Mohit Ranka's personal site. The same content (About, Writing, Work, Projects, L
 
 ## Positioning
 
-An engineer and engineering leader in Bangalore with fifteen-odd years across Booking.com, Postman, LinkedIn and Moveworks, who is also intellectually curious well beyond the job: philosophy and religion, psychology, systems thinking, strategy, economics, politics, technology. He builds software for curiosity, satisfaction, utility and learning (Forge is the current shipped example), and likes chess, music, sitcoms, movies, books and sports. The humour is dry, deadpan and occasionally absurd. His deeper thinking shows in the essays, not in a homepage manifesto.
+An engineer and engineering leader in Bangalore with eighteen-odd years across Booking.com, Postman, LinkedIn and Moveworks, now founder of Norvia Labs, who is also intellectually curious well beyond the job: philosophy and religion, psychology, systems thinking, strategy, economics, politics, technology. He builds software for curiosity, satisfaction, utility and learning (Forge is the current shipped example), and likes chess, music, sitcoms, movies, books and sports. The humour is dry, deadpan and occasionally absurd. His deeper thinking shows in the essays, not in a homepage manifesto.
 
 **Not a portfolio, résumé, recruiting funnel or consulting page.** The site never says he is looking for a role or available for work. No "hire me", availability lines or recruiter-directed copy. (Decided 2026-10-12; reaffirmed in the 2026-10-13 multi-world brief.)
 
@@ -50,8 +50,8 @@ An engineer and engineering leader in Bangalore with fifteen-odd years across Bo
 
 ## Evidence on Hand
 
-- Work, stated exactly as on the Work page: Booking.com (authentication and authorization infrastructure, ~1M rps), Postman (Runtime and core developer workflows), LinkedIn (enterprise data platform).
-- Projects: Forge only, until other projects are finished.
+- Work, stated exactly as on the Work page: Norvia Labs (founder, Forge), Moveworks (350+ customers; analytics, Data API, Surya and real-time integrations; two teams, 17 engineers), LinkedIn (enterprise data platform; 1,500 datasets, 25+ GTM teams, P95 freshness 72 h to 6 h, errors 10%+ to 0.5%), Postman (Runtime, 5 to 11 engineers, Postman on the web at 13M MAU, WebSocket/Socket.IO/gRPC), Booking.com (account.booking.com, team of 5; identity for 300M+ guests and 10M+ partners, 1.2M rps), and earlier roles 2008 – 2016.
+- Projects: Forge and pydgraph (2016). Others appear only when finished.
 - Education: B.Tech., Vellore Institute of Technology.
 - 14 published essays (2013–2026) in `content/blog/`.
 - Library: books read, from Goodreads, with favourites.
