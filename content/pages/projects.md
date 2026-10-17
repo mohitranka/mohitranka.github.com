@@ -1,6 +1,6 @@
 Title: Projects
 Slug: projects
-Summary: Things Mohit Ranka has built and shipped, starting with Forge.
+Summary: Things Mohit Ranka has built and shipped: Forge, and pydgraph before it.
 
 Things I've built on my own time and actually shipped. More will turn up here when they're done, not before.
 
@@ -9,4 +9,10 @@ Things I've built on my own time and actually shipped. More will turn up here wh
   <p class="project-meta">Open source · Norvia Labs</p>
   <p>A terminal-native AI coding environment. It puts agent conversation, repository navigation, editing, shell execution, diffs, approvals, and durable sessions in one workspace, for people who would rather not leave the terminal.</p>
   <p>I wrote about how it keeps provider prompt caches warm in <a href="/blog/how-forge-structures-requests-for-prompt-cache-reuse/">How Forge structures requests for prompt cache reuse</a>.</p>
+</section>
+
+<section class="project" id="pydgraph">
+  <h2><a href="https://github.com/dgraph-io/pydgraph" rel="noopener noreferrer">pydgraph</a></h2>
+  <p class="project-meta">Open source · 2016</p>
+  <p>The first Python client for the Dgraph graph database. I wrote the first versions and packaged it for pip; Dgraph Labs later took it over, and it is now their official Python client.</p>
 </section>
