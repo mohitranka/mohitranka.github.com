@@ -2,13 +2,15 @@
 
 > Engineer and engineering leader in Bangalore. Writes about systems, platforms, people, and whatever he is reading.
 
-Mohit Ranka is an engineer and engineering leader with fifteen-odd years across Booking.com, Postman, LinkedIn, and Moveworks. Outside work his interests run to philosophy and religion, psychology, systems thinking, strategy, economics, politics, and technology, plus chess, music, sitcoms, movies, books, and sports.
+Mohit Ranka is an engineer and engineering leader with 18+ years across Booking.com, Postman, LinkedIn, and Moveworks, and the founder of Norvia Labs. Outside work his interests run to philosophy and religion, psychology, systems thinking, strategy, economics, politics, and technology, plus chess, music, sitcoms, movies, books, and sports.
 
 Experience highlights:
-- Booking.com: built authentication and authorization infrastructure for multiple portfolio products at roughly 1M requests per second
-- Postman: led engineering around Runtime and core developer workflows for one of the world's most widely used API platforms
-- LinkedIn: led enterprise data-platform work supporting major business functions and improving how quickly teams could access and act on data
-- Forge: an open-source project he built on his own time (https://github.com/NorviaLabs/forge)
+- Booking.com (2017-2019): led the team of 5 that built account.booking.com, the identity and access management platform for 300M+ guest and 10M+ partner accounts, including a service-to-service agent handling 1.2M requests a second
+- Postman (2020-2022): led the Runtime team, the engine behind every request in the Postman app and Newman, and led Postman on the web to 13M monthly active users in six months
+- LinkedIn (2022-2023): led adoption of the Enterprise Data Platform, migrating 1,500 sales datasets and 25+ go-to-market teams and cutting P95 data freshness from 72 hours to 6
+- Moveworks (2024-2025): led 17 engineers across analytics and real-time integrations for an agentic AI assistant used at 350+ enterprises
+- Norvia Labs (2025-present): founder; open-source infrastructure for putting AI agents to work inside limits people set
+- Forge: an open-source terminal AI coding environment in Rust he built solo at Norvia Labs (https://github.com/NorviaLabs/forge)
 
 Location and background: Bangalore, India; B.Tech. from Vellore Institute of Technology.
 
@@ -20,7 +22,7 @@ Site: https://www.mohitranka.com
 - [Home](https://www.mohitranka.com/): A short introduction, recent writing, and an optional illustrated map of the site with a cottage and original music
 - [About](https://www.mohitranka.com/about/): Who Mohit is, briefly, in his own words
 - [Writing](https://www.mohitranka.com/blog/): Essays on systems, platforms, data, reliability, and leadership
-- [Work](https://www.mohitranka.com/work/): Selected work at Booking.com, Postman, and LinkedIn
+- [Work](https://www.mohitranka.com/work/): Selected work at Booking.com, Postman, LinkedIn, Moveworks, and Norvia Labs
 - [Projects](https://www.mohitranka.com/projects/): Things Mohit has built on his own time and shipped, currently Forge
 - [Library](https://www.mohitranka.com/library/): Books Mohit has read, synced from Goodreads, favourites first
 - [Contact](https://www.mohitranka.com/contact/): Send Mohit a message
@@ -34,13 +36,13 @@ Site: https://www.mohitranka.com
 - [The platform team’s real job is interfaces](https://www.mohitranka.com/blog/platform-teams-real-job-is-interfaces/) (2025-11-13)
 - [When I still choose a relational database](https://www.mohitranka.com/blog/when-i-still-choose-a-relational-database/) (2025-03-13)
 - [Freshness SLOs: the metric product teams actually feel](https://www.mohitranka.com/blog/freshness-slos-the-metric-product-teams-feel/) (2024-07-11)
+- [GTM datasets need data contracts](https://www.mohitranka.com/blog/gtm-datasets-need-data-contracts/) (2024-03-12)
 - [Saying no as a platform EM without becoming the villain](https://www.mohitranka.com/blog/saying-no-as-a-platform-em/) (2023-11-08)
 - [Identity systems fail socially before they fail cryptographically](https://www.mohitranka.com/blog/identity-systems-fail-socially/) (2023-03-08)
 - [What “led the web launch” taught me about constraints](https://www.mohitranka.com/blog/web-launch-constraints/) (2022-07-06)
 - [Incubating 0→1 beside a mature product](https://www.mohitranka.com/blog/postman-labs-0-to-1/) (2021-06-15)
 - [How I review a distributed design in 45 minutes](https://www.mohitranka.com/blog/how-i-review-a-distributed-design/) (2021-03-03)
 - [Introducing on-call without burning the team](https://www.mohitranka.com/blog/introducing-on-call-without-burnout/) (2020-11-10)
-- [GTM datasets need data contracts](https://www.mohitranka.com/blog/gtm-datasets-need-data-contracts/) (2020-07-01)
 - [RDBMS vs. NOSQL?](https://www.mohitranka.com/blog/rdbms-vs-nosql/) (2013-06-29)
 
 ## Optional

@@ -4,7 +4,7 @@ Summary: Builds software, thinks about systems, writes about what interests him.
 
 I’m Mohit. I live in Bangalore, where I’ve spent most of my adult life and made most of my friends.
 
-I build software and think about systems. Professionally, that has meant distributed systems, data platforms, developer tools, and engineering leadership. These days, I’m building things under NorviaLabs, including [Forge](/projects/), a terminal-based AI coding environment.
+I build software and think about systems. Professionally, that has meant distributed systems, data platforms, developer tools, and engineering leadership. These days, I’m building things under Norvia Labs, including [Forge](/projects/), a terminal-based AI coding environment.
 
 My interests tend to escape the job description. Philosophy, religion, psychology, economics, politics. Why people believe what they believe. How we make decisions. What makes a life worth living.
 

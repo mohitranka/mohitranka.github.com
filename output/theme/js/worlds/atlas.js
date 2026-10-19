@@ -25,7 +25,7 @@ function describe(section, data) {
     case 'writing':
       return `Essays on systems, platforms, people, and the occasional detour. ${data.essays.length} volumes so far.`;
     case 'work':
-      return 'Where the day jobs live: Booking.com, Postman, LinkedIn. Well defended, mostly by on-call rotas.';
+      return 'Where the day jobs live: Booking.com, Postman, LinkedIn, Moveworks. Well defended, mostly by on-call rotas.';
     case 'contact':
       return 'Leave a message with the rider. Every one is read by the traveller himself.';
     default:

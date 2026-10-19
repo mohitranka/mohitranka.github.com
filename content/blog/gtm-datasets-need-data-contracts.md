@@ -1,5 +1,5 @@
 Title: GTM datasets need data contracts
-Date: 2020-07-01 10:00
+Date: 2024-03-12 10:00
 Category: Blog
 Slug: gtm-datasets-need-data-contracts
 Tags: data-platforms, platforms, product
