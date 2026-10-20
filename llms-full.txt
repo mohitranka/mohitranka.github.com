@@ -37,6 +37,12 @@ Things I've built on my own time and actually shipped. More will turn up here wh
 
   I wrote about how it keeps provider prompt caches warm in How Forge structures requests for prompt cache reuse.
 
+  OpenLemma
+
+  Open source · Norvia Labs
+
+  Teaches complex concepts visually. Ask about a concept, or bring a paper, article or chapter, and it builds a short, hands-on lesson: a live model for each idea, an explanation with an exact quote from a real source, and a chance to try it yourself. The source is on GitHub.
+
   pydgraph
 
   Open source · 2016
@@ -52,7 +58,7 @@ Selected work from 18+ years of hands-on engineering and engineering leadership,
 
   Founder · 2025 – Present
 
-  Building open-source infrastructure for putting AI agents to work inside limits people set. The first product is Forge, a terminal AI coding environment in Rust with sandboxed tool execution, approvals, durable sessions and isolated Git worktrees. I built it on my own: 1,500+ commits and 21 releases so far.
+  Building open-source infrastructure for putting AI agents to work inside limits people set. The first product is Forge, a terminal AI coding environment in Rust with sandboxed tool execution, approvals, durable sessions and isolated Git worktrees. I built it on my own: 1,500+ commits and 21 tagged versions so far.
 
   Moveworks
 

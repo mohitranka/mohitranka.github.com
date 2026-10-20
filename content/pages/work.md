@@ -7,7 +7,7 @@ Selected work from 18+ years of hands-on engineering and engineering leadership,
 <section class="work-card" id="norvia-labs">
   <h2><a href="https://norvialabs.com" rel="noopener noreferrer">Norvia Labs</a></h2>
   <p class="work-role">Founder · 2025 – Present</p>
-  <p class="work-outcome">Building open-source infrastructure for putting AI agents to work inside limits people set. The first product is <a href="https://github.com/NorviaLabs/forge" rel="noopener noreferrer">Forge</a>, a terminal AI coding environment in Rust with sandboxed tool execution, approvals, durable sessions and isolated Git worktrees. I built it on my own: 1,500+ commits and 21 releases so far.</p>
+  <p class="work-outcome">Building open-source infrastructure for putting AI agents to work inside limits people set. The first product is <a href="https://github.com/NorviaLabs/forge" rel="noopener noreferrer">Forge</a>, a terminal AI coding environment in Rust with sandboxed tool execution, approvals, durable sessions and isolated Git worktrees. I built it on my own: 1,500+ commits and 21 tagged versions so far.</p>
 </section>
 
 <section class="work-card" id="moveworks">

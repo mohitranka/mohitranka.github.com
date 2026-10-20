@@ -1,6 +1,6 @@
 Title: Projects
 Slug: projects
-Summary: Things Mohit Ranka has built and shipped: Forge, and pydgraph before it.
+Summary: Things Mohit Ranka has built and shipped: Forge, OpenLemma, and pydgraph before them.
 
 Things I've built on my own time and actually shipped. More will turn up here when they're done, not before.
 
@@ -9,6 +9,12 @@ Things I've built on my own time and actually shipped. More will turn up here wh
   <p class="project-meta">Open source · Norvia Labs</p>
   <p>A terminal-native AI coding environment. It puts agent conversation, repository navigation, editing, shell execution, diffs, approvals, and durable sessions in one workspace, for people who would rather not leave the terminal.</p>
   <p>I wrote about how it keeps provider prompt caches warm in <a href="/blog/how-forge-structures-requests-for-prompt-cache-reuse/">How Forge structures requests for prompt cache reuse</a>.</p>
+</section>
+
+<section class="project" id="openlemma">
+  <h2><a href="https://openlemma.org" rel="noopener noreferrer">OpenLemma</a></h2>
+  <p class="project-meta">Open source · Norvia Labs</p>
+  <p>Teaches complex concepts visually. Ask about a concept, or bring a paper, article or chapter, and it builds a short, hands-on lesson: a live model for each idea, an explanation with an exact quote from a real source, and a chance to try it yourself. The <a href="https://github.com/NorviaLabs/lemma" rel="noopener noreferrer">source</a> is on GitHub.</p>
 </section>
 
 <section class="project" id="pydgraph">

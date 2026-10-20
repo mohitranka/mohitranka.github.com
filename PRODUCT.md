@@ -51,7 +51,7 @@ An engineer and engineering leader in Bangalore with eighteen-odd years across B
 ## Evidence on Hand
 
 - Work, stated exactly as on the Work page: Norvia Labs (founder, Forge), Moveworks (350+ customers; analytics, Data API, Surya and real-time integrations; two teams, 17 engineers), LinkedIn (enterprise data platform; 1,500 datasets, 25+ GTM teams, P95 freshness 72 h to 6 h, errors 10%+ to 0.5%), Postman (Runtime, 5 to 11 engineers, Postman on the web at 13M MAU, WebSocket/Socket.IO/gRPC), Booking.com (account.booking.com, team of 5; identity for 300M+ guests and 10M+ partners, 1.2M rps), and earlier roles 2008 – 2016.
-- Projects: Forge and pydgraph (2016). Others appear only when finished.
+- Projects: Forge, OpenLemma and pydgraph (2016). Others appear only when finished.
 - Education: B.Tech., Vellore Institute of Technology.
 - 14 published essays (2013–2026) in `content/blog/`.
 - Library: books read, from Goodreads, with favourites.

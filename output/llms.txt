@@ -24,7 +24,7 @@ Site: https://www.mohitranka.com
 - [About](https://www.mohitranka.com/about/): Who Mohit is, briefly, in his own words
 - [Writing](https://www.mohitranka.com/blog/): Essays on systems, platforms, data, reliability, and leadership
 - [Work](https://www.mohitranka.com/work/): Selected work at Norvia Labs, Moveworks, LinkedIn, Postman, and Booking.com
-- [Projects](https://www.mohitranka.com/projects/): Things Mohit has built on his own time and shipped: Forge and pydgraph
+- [Projects](https://www.mohitranka.com/projects/): Things Mohit has built on his own time and shipped: Forge, OpenLemma and pydgraph
 - [Library](https://www.mohitranka.com/library/): Books Mohit has read, synced from Goodreads, favourites first
 - [Contact](https://www.mohitranka.com/contact/): Send Mohit a message
 - [Tags](https://www.mohitranka.com/tags/): Browse writing by topic tag
