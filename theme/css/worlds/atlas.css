@@ -45,12 +45,19 @@
   background: radial-gradient(ellipse at 50% 45%, rgba(255, 200, 120, 0.08) 30%, rgba(30, 18, 8, 0.62) 100%);
 }
 
+/* drawn a little past the stage on every side, so a pan or zoom-out moves it as one
+   layer (see apply() in atlas.js) without showing its edge */
 .at-svg {
-  display: block;
-  width: 100%;
-  height: 100%;
+  position: absolute;
+  left: -15%;
+  top: -15%;
+  width: 130%;
+  height: 130%;
+  transform-origin: 50% 50%;
+  will-change: transform;
   cursor: grab;
 }
+.atlas.is-camming .at-svg * { animation-play-state: paused; }
 .atlas.is-dragging .at-svg { cursor: grabbing; }
 
 .at-sea { fill: var(--sea); }
@@ -561,10 +568,9 @@ html.world-atlas .reader[data-section="work"] .entry-content h2::before { conten
 .at-grain { pointer-events: none; mix-blend-mode: multiply; opacity: 0.85; }
 .atlas.is-night .at-grain { opacity: 1; }
 
-/* the ink trembles a little, as hand-drawn line does; still only while the map is still */
+/* the ink trembles a little, as hand-drawn line does; dropped for redraws mid-move */
 .at-ink { filter: url(#at-tremble); }
-.atlas.is-dragging .at-ink,
-.atlas.is-camming .at-ink { filter: none; }
+.atlas.is-sketchy .at-ink { filter: none; }
 
 .at-sea-line { opacity: 0.32; }
 .at-land { fill: var(--parch); stroke: var(--ink); stroke-width: 3; }

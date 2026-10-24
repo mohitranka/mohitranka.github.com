@@ -366,9 +366,11 @@ function saveVisited() {
   }
 }
 
+// Measured once and again on resize: reading layout on every frame of a drag stalls it.
+let stageSize = null;
 function size() {
-  const r = el.getBoundingClientRect();
-  return { w: r.width || innerWidth, h: r.height || innerHeight };
+  if (!stageSize) stageSize = { w: el.clientWidth || innerWidth, h: el.clientHeight || innerHeight };
+  return stageSize;
 }
 
 // The part of the screen the map can use: beside the reader, or above it on a phone.
@@ -390,19 +392,52 @@ function clampCam(c) {
   return { x, y, z };
 }
 
+// Redrawing the SVG is the expensive part, so moving the camera only slides and scales
+// the drawing already on screen (a compositor transform); the map is redrawn at the new
+// camera once it is still, or sooner if the move would show the drawing's edge or blur it.
+const PAD = 0.15; // the drawing reaches this far past each edge of the stage
+let drawn = null; // the camera the SVG was last drawn at
+
 function apply() {
+  if (!drawn) return draw();
   const { w, h } = size();
-  svg.setAttribute('viewBox', `${(cam.x - (w * cam.z) / 2).toFixed(1)} ${(cam.y - (h * cam.z) / 2).toFixed(1)} ${(w * cam.z).toFixed(1)} ${(h * cam.z).toFixed(1)}`);
-  placeCard();
+  const k = drawn.z / cam.z;
+  const tx = (drawn.x - cam.x) / cam.z;
+  const ty = (drawn.y - cam.y) / cam.z;
+  // the drawing spans -PAD..1+PAD of the stage, scaled about its centre; it must still cover 0..1
+  const covers = (t, n) => t + k * (-0.5 - PAD) * n + n / 2 <= 0 && t + k * (0.5 + PAD) * n + n / 2 >= n;
+  if (k > 1.6 || !covers(tx, w) || !covers(ty, h)) {
+    // drawn mid-move: skip the tremble so the redraw is quick; it returns when still
+    if (el.classList.contains('is-camming')) el.classList.add('is-sketchy');
+    return draw();
+  }
+  svg.style.transform = `translate(${tx.toFixed(1)}px, ${ty.toFixed(1)}px) scale(${k.toFixed(4)})`;
+  queueCard();
+}
+
+function draw() {
+  const { w, h } = size();
+  const vw = w * (1 + 2 * PAD) * cam.z;
+  const vh = h * (1 + 2 * PAD) * cam.z;
+  svg.setAttribute('viewBox', `${(cam.x - vw / 2).toFixed(1)} ${(cam.y - vh / 2).toFixed(1)} ${vw.toFixed(1)} ${vh.toFixed(1)}`);
+  svg.style.transform = '';
+  drawn = { ...cam };
+  queueCard();
 }
 
 let stillTimer = 0;
-// The ink's tremble is a filter; while the camera moves it is switched off so panning
-// and zooming stay smooth, then it settles back once the map is still.
+// While the camera moves the map's own animations pause, so the moving drawing is never
+// repainted; once it is still it is drawn sharp at the new camera and they resume.
 function moving() {
-  el.classList.add('is-camming');
+  if (!el.classList.contains('is-camming')) el.classList.add('is-camming');
   clearTimeout(stillTimer);
-  stillTimer = setTimeout(() => el && el.classList.remove('is-camming'), 220);
+  stillTimer = setTimeout(settle, 160);
+}
+
+function settle() {
+  if (!el) return;
+  if (!drawn || drawn.x !== cam.x || drawn.y !== cam.y || drawn.z !== cam.z) draw();
+  el.classList.remove('is-camming', 'is-sketchy');
 }
 
 function setCam(next, { instant = false, ms = 950 } = {}) {
@@ -410,7 +445,7 @@ function setCam(next, { instant = false, ms = 950 } = {}) {
   const to = clampCam(next);
   if (instant || api.reduceMotion) {
     cam = to;
-    apply();
+    draw();
     return;
   }
   const from = { ...cam };
@@ -452,6 +487,15 @@ function toScreen(x, y) {
 
 /* — Card — */
 let cardFor = null;
+let cardFrame = 0;
+// placing the card measures the places on screen, so it waits for the frame, once
+function queueCard() {
+  if (!cardFor || cardFrame) return;
+  cardFrame = requestAnimationFrame(() => {
+    cardFrame = 0;
+    placeCard();
+  });
+}
 function showCard(section) {
   cardFor = section;
   const p = PLACES[section];
@@ -708,11 +752,12 @@ function bindInput() {
   });
   card.addEventListener('click', () => cardFor && visit(cardFor));
   on(window, 'resize', () => {
+    stageSize = null;
     const z = cam.z / fit;
     const { w, h } = size();
     fit = Math.max((W * 0.92) / w, (H * 0.92) / h);
     cam = clampCam({ ...cam, z: fit * z });
-    apply();
+    draw();
   });
 }
 
@@ -751,6 +796,8 @@ const world = {
   async mount(stage, worldApi) {
     api = worldApi;
     cleanup = [];
+    drawn = null;
+    stageSize = null;
     loadVisited();
     el = document.createElement('div');
     el.className = 'atlas';
@@ -832,6 +879,8 @@ const world = {
   unmount() {
     clearTimeout(stillTimer);
     cancelAnimationFrame(anim);
+    cancelAnimationFrame(cardFrame);
+    cardFrame = 0;
     cancelAnimationFrame(lanternAnim);
     cleanup.forEach((fn) => fn());
     cleanup = [];
