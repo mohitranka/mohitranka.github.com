@@ -1,8 +1,8 @@
 Title: Projects
 Slug: projects
-Summary: Things Mohit Ranka has built and shipped: Forge, OpenLemma, and pydgraph before them.
+Summary: What Mohit Ranka is building: Norvia Labs and Forge. His other open source is at opensource.mohitranka.com; games are coming to games.mohitranka.com.
 
-Things I've built on my own time and actually shipped. More will turn up here when they're done, not before.
+What I'm building is [Norvia Labs](https://norvialabs.com): open-source infrastructure for putting AI agents to work inside limits people set.
 
 <section class="project" id="forge">
   <h2><a href="https://github.com/NorviaLabs/forge" rel="noopener noreferrer">Forge</a></h2>
@@ -11,14 +11,8 @@ Things I've built on my own time and actually shipped. More will turn up here wh
   <p>I wrote about how it keeps provider prompt caches warm in <a href="/blog/how-forge-structures-requests-for-prompt-cache-reuse/">How Forge structures requests for prompt cache reuse</a>.</p>
 </section>
 
-<section class="project" id="openlemma">
-  <h2><a href="https://openlemma.org" rel="noopener noreferrer">OpenLemma</a></h2>
-  <p class="project-meta">Open source · Norvia Labs</p>
-  <p>Teaches complex concepts visually. Ask about a concept, or bring a paper, article or chapter, and it builds a short, hands-on lesson: a live model for each idea, an explanation with an exact quote from a real source, and a chance to try it yourself. The <a href="https://github.com/NorviaLabs/lemma" rel="noopener noreferrer">source</a> is on GitHub.</p>
-</section>
-
-<section class="project" id="pydgraph">
-  <h2><a href="https://github.com/dgraph-io/pydgraph" rel="noopener noreferrer">pydgraph</a></h2>
-  <p class="project-meta">Open source · 2016</p>
-  <p>The first Python client for the Dgraph graph database. I wrote the first versions and packaged it for pip; Dgraph Labs later took it over, and it is now their official Python client.</p>
+<section class="project" id="elsewhere">
+  <h2>Elsewhere</h2>
+  <p><a href="https://opensource.mohitranka.com/" rel="noopener">Open source</a>: everything else I've given away, from OpenLemma to pydgraph and older experiments.</p>
+  <p><a href="https://games.mohitranka.com/" rel="noopener">Games</a>: small games I'm making for fun. Coming soon.</p>
 </section>

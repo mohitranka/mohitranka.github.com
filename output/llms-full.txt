@@ -27,7 +27,7 @@ This site is where I write about what interests me and share what I build. Some 
 ### Projects
 URL: https://www.mohitranka.com/projects/
 
-Things I've built on my own time and actually shipped. More will turn up here when they're done, not before.
+What I'm building is Norvia Labs: open-source infrastructure for putting AI agents to work inside limits people set.
 
   Forge
 
@@ -37,17 +37,11 @@ Things I've built on my own time and actually shipped. More will turn up here wh
 
   I wrote about how it keeps provider prompt caches warm in How Forge structures requests for prompt cache reuse.
 
-  OpenLemma
+  Elsewhere
 
-  Open source · Norvia Labs
+  Open source: everything else I've given away, from OpenLemma to pydgraph and older experiments.
 
-  Teaches complex concepts visually. Ask about a concept, or bring a paper, article or chapter, and it builds a short, hands-on lesson: a live model for each idea, an explanation with an exact quote from a real source, and a chance to try it yourself. The source is on GitHub.
-
-  pydgraph
-
-  Open source · 2016
-
-  The first Python client for the Dgraph graph database. I wrote the first versions and packaged it for pip; Dgraph Labs later took it over, and it is now their official Python client.
+  Games: small games I'm making for fun. Coming soon.
 
 ### Work
 URL: https://www.mohitranka.com/work/
@@ -92,7 +86,7 @@ Selected work from 18+ years of hands-on engineering and engineering leadership,
 
 I write about what this work taught me — platforms, data, reliability, and leading teams — on the writing page.
 
-Things I've built on my own time are on the Projects page.
+What I'm building now is on the Projects page; the rest of my open source is at opensource.mohitranka.com.
 
 ### Library
 URL: https://www.mohitranka.com/library/
