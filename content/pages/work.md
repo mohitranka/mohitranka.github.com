@@ -43,4 +43,4 @@ Selected work from 18+ years of hands-on engineering and engineering leadership,
 
 I write about what this work taught me — platforms, data, reliability, and leading teams — on the [writing](/blog/) page.
 
-Things I've built on my own time are on the [Projects](/projects/) page.
+What I'm building now is on the [Projects](/projects/) page; the rest of my open source is at [opensource.mohitranka.com](https://opensource.mohitranka.com/).
